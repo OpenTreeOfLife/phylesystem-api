@@ -8,3 +8,11 @@ install:
    - pip install -r requirements.txt --use-mirrors
 
 script: nosetests
+
+notifications:
+  recipients:
+    - duke@leto.net
+  email:
+    on_success: change
+    on_failure: always
+#env:
