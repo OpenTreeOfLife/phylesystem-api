@@ -1,7 +1,7 @@
 from nose       import with_setup
 from nose.tools import assert_equals
 
-import otol_api
+import otol
 
 def setup_module(module):
     ...
