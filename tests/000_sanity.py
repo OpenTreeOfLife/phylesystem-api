@@ -1,20 +1,17 @@
 from nose       import with_setup
-from nose.tools import assert_equals
+from nose.tools import *
 
-import otol
+import requests
 
-def setup_module(module):
-    ...
-
-def teardown_module(module):
-    ...
-
-def setup_test():
-    ...
-
-def teardown_test():
-    ...
-
-@with_setup(setup_test, teardown_test)
 def test_basic_api_call():
-    assert_equals( 1, 1 )
+    protocol = 'http://'
+    host     = 'localhost'
+    port     = 8000
+    url      = protocol + host + ":" + port + '/v1/study/10.json'
+
+    # ask the API for the NexSON for study 10
+    r        = requests.get(url)
+
+    ok_(r.status_code == requests.codes.ok, url + " returns a successful status code")
+
+    json = r.json()
