@@ -1,6 +1,3 @@
-from gluon.contrib.redis_cache import RedisCache
-cache.redis = RedisCache('localhost:6379',db=None, debug=True)
-
 @request.restful()
 
 def api():
