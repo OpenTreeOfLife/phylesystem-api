@@ -10,6 +10,8 @@ install:
 script: nosetests
 
 notifications:
+  irc:
+    channels: "chat.freenode.net#otol"
   recipients:
     - duke@leto.net
   email:
