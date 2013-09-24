@@ -8,9 +8,9 @@ install:
    - pip install -r requirements.txt --use-mirrors
 
 before_script:
-    - cd web2py; python web2py.py --nogui --debug=0 --port 9999 &
+    - cd web2py; python web2py.py --nogui --debug=0 --port 9999 -a 'supersekret' &
     - cd ..
-    - sleep 2 # give the webserver time to startup
+    - sleep 3 # give the webserver time to startup
 
 script: nosetests tests/
 
