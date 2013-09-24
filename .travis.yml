@@ -8,7 +8,8 @@ install:
    - pip install -r requirements.txt --use-mirrors
 
 before_script:
-    - python web2py.py --nogui --debug=0 &
+    - cd web2py; python web2py.py --nogui --debug=0 &
+    - cd ..
     - sleep 2 # give the webserver time to startup
 
 script: nosetests tests/
