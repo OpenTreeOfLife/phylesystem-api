@@ -8,7 +8,7 @@ def test_basic_api_get():
     # Currently the URL http://localhost:8000/welcome/default/api/study/10.json works
 
     protocol = 'http://'
-    host     = 'localhost'
+    host     = '127.0.0.1'
     port     = os.environ['OTOL_API_PORT'] or "8000"
     prefix   = "/welcome/default/api"
     url      = protocol + host + ":" + port + prefix + '/study/10.json'
@@ -34,7 +34,7 @@ def test_basic_api_get():
 
 def test_basic_api_post():
     protocol = 'http://'
-    host     = 'localhost'
+    host     = '127.0.0.1'
     port     = os.environ['OTOL_API_PORT'] or "8000"
     prefix   = "/welcome/default/api"
     url      = protocol + host + ":" + port + prefix + '/study/10.json'
