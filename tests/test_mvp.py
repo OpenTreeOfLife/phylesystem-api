@@ -18,7 +18,7 @@ def test_basic_api_get():
 
     nexson = r.json()
 
-    assert( len(json) > 3, "Returned NexSON is non-empty" )
+    assert len(json) > 3, "Returned NexSON is non-empty"
 
 def test_basic_api_post():
     protocol = 'http://'
@@ -39,4 +39,4 @@ def test_basic_api_post():
 
     json = r.json()
 
-    assert( len(json) > 3, "Returned NexSON is non-empty" )
+    assert len(json) > 3, "Returned NexSON is non-empty"
