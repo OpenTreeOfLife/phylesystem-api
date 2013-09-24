@@ -1,1 +1,0 @@
-def index(): return "hello"

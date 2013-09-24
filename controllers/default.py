@@ -1,5 +1,9 @@
 @request.restful()
 
+def index():
+    def GET():
+        return locals()
+
 def api():
     response.view = 'generic.json'
     def GET(resource,resource_id):
