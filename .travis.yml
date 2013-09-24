@@ -7,6 +7,10 @@ python:
 install:
    - pip install -r requirements.txt --use-mirrors
 
+before_script:
+    - python web2py.py --nogui --debug=0 &
+    - sleep 2 # give the webserver time to startup
+
 script: nosetests tests/
 
 notifications:
