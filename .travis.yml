@@ -24,3 +24,6 @@ notifications:
     on_failure: always
 env:
     - export OTOL_API_PORT=9999
+
+services:
+    - redis-server
