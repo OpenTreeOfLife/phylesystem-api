@@ -29,6 +29,10 @@ def test_basic_api_get():
 
     assert len(str(nexson)) > 3, "Returned NexSON is non-empty "
 
+    assert nexson['nexml'], "nexml key exists"
+
+    eq_(nexson['nexml']['@xmlns']['nex'], 'http://www.nexml.org/2009', 'nex key == http://www.nexml.org/2009')
+
 def test_basic_api_post():
     protocol = 'http://'
     host     = '127.0.0.1'
