@@ -1,3 +1,5 @@
+import os
+
 def index():
     def GET():
         return locals()
@@ -24,6 +26,11 @@ def api():
 
 def _get_nexson(study_id):
     # the internal file structure will change soon to study_id/study_id-N.json, where N=0,1,2,3...
-    nexson_file = file.open("treenexus/study/0/" + study_id + ".json")
-    return nexson_file.contents()
+    try:
+        filename    = "../treenexus/study/0/" + study_id + ".json"
+        nexson_file = open(filename,'r')
+    except IOError:
+        return '{}'
+
+    return nexson_file.readlines()
 

@@ -18,19 +18,16 @@ def test_basic_api_get():
 
     eq_(r.status_code, requests.codes.ok, url + " returns a successful status code")
 
-
-    # http://www.ietf.org/rfc/rfc4627.txt states that the mime type for JSON should be "application/json"
-    # but web2py defaults to text/json
-    expected_content_type = 'text/json'
+    expected_content_type = 'application/json'
     eq_(r.headers.get('content-type'), expected_content_type, r.headers.get('content-type') + "== " + expected_content_type)
 
     try:
         nexson = r.json()
         assert 1, "Valid JSON"
     except:
-        assert 0, "Invalid JSON : " + nexson
+        assert 0, "Invalid JSON : "
 
-    assert len(nexson) > 3, "Returned NexSON is non-empty"
+    assert len(str(nexson)) > 3, "Returned NexSON is non-empty "
 
 def test_basic_api_post():
     protocol = 'http://'
@@ -48,15 +45,13 @@ def test_basic_api_post():
 
     eq_(r.status_code, requests.codes.ok, url + " returns a successful status code")
 
-    # http://www.ietf.org/rfc/rfc4627.txt states that the mime type for JSON should be "application/json"
-    # but web2py defaults to text/json
-    expected_content_type = 'text/json'
+    expected_content_type = 'application/json'
     eq_(r.headers.get('content-type'), expected_content_type, r.headers.get('content-type') + "== " + expected_content_type)
 
     try:
-        nexson = r.json()
+        returned_nexson = str(r.json())
         assert 1, "Valid JSON"
     except:
         assert 0, "Invalid JSON : " + nexson
 
-    assert len(nexson) > 3, "Returned NexSON is non-empty"
+    assert len(str(returned_nexson)) > 3, "Returned NexSON is non-empty:"
