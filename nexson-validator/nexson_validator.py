@@ -16,27 +16,30 @@ class WarningCodes():
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
 
-def write_warning(out, prefix, wc, data):
+def write_warning(out, prefix, wc, data, context=None):
     if not out:
         return
     if wc == WarningCodes.MISSING_MANDATORY_KEY:
-        out.write('{p}Missing required key "{k}"\n'.format(p=prefix, k=data))
+        out.write('{p}Missing required key "{k}"'.format(p=prefix, k=data))
     elif wc == WarningCodes.MISSING_OPTIONAL_KEY:
-        out.write('{p}Missing optional key "{k}"\n'.format(p=prefix, k=data))
+        out.write('{p}Missing optional key "{k}"'.format(p=prefix, k=data))
     elif wc == WarningCodes.UNRECOGNIZED_KEY:
-        out.write('{p}Unrecognized key "{k}"\n'.format(p=prefix, k=data))
+        out.write('{p}Unrecognized key "{k}"'.format(p=prefix, k=data))
     else:
         assert(False)
+    if context is not None:
+        out.write(' in "{el}"'.format(el=context))
+    out.write('\n')
 
 class DefaultRichLogger(object):
     def __init__(self):
         self.out = sys.stderr
         self.prefix = ''
-    def warn(self, warning_code, data):
-        write_warning(self.out, self.prefix, warning_code, data)
-    def error(self, warning_code, data):
+    def warn(self, warning_code, data, context=None):
+        write_warning(self.out, self.prefix, warning_code, data, context)
+    def error(self, warning_code, data, context=None):
         s = StringIO()
-        write_warning(s, self.prefix, warning_code, data)
+        write_warning(s, self.prefix, warning_code, data, context)
         raise NexSONError(s.getvalue())
 
 class ValidationLogger(DefaultRichLogger):
@@ -44,16 +47,26 @@ class ValidationLogger(DefaultRichLogger):
         DefaultRichLogger.__init__(self)
         self.warnings = []
         self.errors = []
-    def warn(self, warning_code, data):
+    def warn(self, warning_code, data, context=None):
         s = StringIO()
-        write_warning(s, self.prefix, warning_code, data)
+        write_warning(s, self.prefix, warning_code, data, context)
         self.warnings.append(s.getvalue())
-    def error(self, warning_code, data):
+    def error(self, warning_code, data, context=None):
         s = StringIO()
-        write_warning(s, self.prefix, warning_code, data)
+        write_warning(s, self.prefix, warning_code, data, context)
         self.errors.append(s.getvalue())
 
 class NexSON(object):
+    EXPECTED_KEYS = ("@about",
+                     "@generator",
+                     "@id",
+                     "@nexmljson",
+                     "@version",
+                     "@xmlns",
+                     "otus",
+                     "trees",
+                     "meta",
+                     )
     def __init__(self, o, rich_logger=None):
         '''Creates an object that validates `o` as a dictionary
         that represents a valid NexSON object.
@@ -63,11 +76,17 @@ class NexSON(object):
         if rich_logger is None:
             rich_logger = DefaultRichLogger()
         self._raw = o
-        if 'nexml' not in o:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml')
         for k in o.keys():
             if k not in ['nexml']:
                 rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k)
+        self._nexml = None
+        if 'nexml' not in o:
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml')
+        else:
+            self._nexml = o['nexml']
+            for k in self._nexml.keys():
+                if k not in NexSON.EXPECTED_KEYS:
+                    rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='nexml')
 
 def indented_keys(out, o, indentation='', indent=2):
     next_indentation = indentation + (' '*indent)
