@@ -8,11 +8,12 @@ upon it, nor does it depend on the rest of api.opentreeoflife.org
 # Goal
 
 This code base is intended
-    1. to provide validation of objects as legal NexSON structures,
 
-    2. detection of the differences between NexSON blob and it ancestor.
+  1. to provide validation of objects as legal NexSON structures,
 
-    3. categorization of merge operations on 2 NexSON blobs which share a
+  2. detection of the differences between NexSON blob and it ancestor.
+
+  3. categorization of merge operations on 2 NexSON blobs which share a
 common ancestor as "fast-forward merges", "safe merges", "conflicting edits,"
 or "potentially conflicting merges". This will require the caller to supply the
 two objects to be merged as well as their common ancestor. 
@@ -25,8 +26,8 @@ Running the script:
 
     $ sh test.sh
 
-will trigger the running of integration tests (currently run_single_file_tests.sh)
-and unittest (currently none, but they'll go in test_nexson_validator.py)
+will trigger the running of integration tests (currently <code>run_single_file_tests.sh</code>)
+and unittest (currently none, but they'll go in <code>test_nexson_validator.py</code>)
 
 # Notes
 
