@@ -2,10 +2,15 @@
 import sys
 SCRIPT_NAME = __name__  #@TODO replace with logger...
 ERR_STREAM = sys.stderr #@TODO replace with logger...
+from nexson_validator import NexSON, NexSONError
 
 def error(msg):
     global SCRIPT_NAME, ERR_STREAM
     ERR_STREAM.write('{n}: ERROR: {m}\n'.format(n=SCRIPT_NAME,
+                                                m=msg))
+def info(msg):
+    global SCRIPT_NAME, ERR_STREAM
+    ERR_STREAM.write('{n}: {m}\n'.format(n=SCRIPT_NAME,
                                                 m=msg))
 
 if __name__ == '__main__':
@@ -24,4 +29,9 @@ if __name__ == '__main__':
     except ValueError as vx:
         error('Not valid JSON.')
         sys.exit(1)
-    print obj
+    try:
+        n = NexSON(obj)
+    except NexSONError as nx:
+        error(nx.value)
+        sys.exit(1)
+    info('Valid')
