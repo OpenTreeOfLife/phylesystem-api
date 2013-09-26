@@ -11,7 +11,8 @@ class NexSONError(Exception):
 # An enum of WARNING_CODES
 class WarningCodes():
     facets = ['MISSING_MANDATORY_KEY',
-              'MISSING_OPTIONAL_KEY']
+              'MISSING_OPTIONAL_KEY',
+              'UNRECOGNIZED_KEY']
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
 
@@ -19,9 +20,11 @@ def write_warning(out, prefix, wc, data):
     if not out:
         return
     if wc == WarningCodes.MISSING_MANDATORY_KEY:
-        out.write('{p}Missing required key "{k}"'.format(p=prefix, k=data))
+        out.write('{p}Missing required key "{k}"\n'.format(p=prefix, k=data))
     elif wc == WarningCodes.MISSING_OPTIONAL_KEY:
-        out.write('{p}Missing optional key "{k}"'.format(p=prefix, k=data))
+        out.write('{p}Missing optional key "{k}"\n'.format(p=prefix, k=data))
+    elif wc == WarningCodes.UNRECOGNIZED_KEY:
+        out.write('{p}Unrecognized key "{k}"\n'.format(p=prefix, k=data))
     else:
         assert(False)
 
@@ -37,7 +40,18 @@ class DefaultRichLogger(object):
         raise NexSONError(s.getvalue())
 
 class ValidationLogger(DefaultRichLogger):
-    pass
+    def __init__(self):
+        DefaultRichLogger.__init__(self)
+        self.warnings = []
+        self.errors = []
+    def warn(self, warning_code, data):
+        s = StringIO()
+        write_warning(s, self.prefix, warning_code, data)
+        self.warnings.append(s.getvalue())
+    def error(self, warning_code, data):
+        s = StringIO()
+        write_warning(s, self.prefix, warning_code, data)
+        self.errors.append(s.getvalue())
 
 class NexSON(object):
     def __init__(self, o, rich_logger=None):
@@ -51,6 +65,9 @@ class NexSON(object):
         self._raw = o
         if 'nexml' not in o:
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml')
+        for k in o.keys():
+            if k not in ['nexml']:
+                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k)
 
 def indented_keys(out, o, indentation='', indent=2):
     next_indentation = indentation + (' '*indent)
