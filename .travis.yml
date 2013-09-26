@@ -1,18 +1,32 @@
 language: python
 python:
-    - "3.2"
+    - "2.7"
     - "3.3"
     - "pypy"
+
+before_install:
+     - git submodule update --init --recursive
 
 install:
    - pip install -r requirements.txt --use-mirrors
 
-script: nosetests
+before_script:
+    - cd web2py; python web2py.py --nogui --debug=0 --port 9999 -a 'supersekret' &
+    - cd ..
+    - sleep 3 # give the webserver time to startup
+
+script: nosetests tests/
 
 notifications:
+  irc:
+    channels: "chat.freenode.net#otol"
   recipients:
     - duke@leto.net
   email:
     on_success: change
     on_failure: always
-#env:
+env:
+    - export OTOL_API_PORT=9999
+
+services:
+    - redis-server
