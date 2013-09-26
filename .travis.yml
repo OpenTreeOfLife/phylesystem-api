@@ -15,7 +15,9 @@ before_script:
     - cd ..
     - sleep 3 # give the webserver time to startup
 
-script: nosetests tests/
+script:
+    - cd nexson-validator && ./test.sh
+    - nosetests tests/
 
 notifications:
   irc:
