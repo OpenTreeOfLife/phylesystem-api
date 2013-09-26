@@ -19,8 +19,17 @@ two objects to be merged as well as their common ancestor.
 
 For info on NexSON, consult https://opentree.wikispaces.com/NexSON
 
+# Testing
+
+Running the script:
+
+    $ sh test.sh
+
+will trigger the running of integration tests (currently run_single_file_tests.sh)
+and unittest (currently none, but they'll go in test_nexson_validator.py)
+
 # Notes
 
-This may not end up on PyPI, but I followed the procedures outlined on
+This may never end up on PyPI, but I followed the procedures outlined on
     http://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
 for the creation of the setup.py
