@@ -17,6 +17,7 @@ before_script:
 
 script:
     - cd nexson-validator && ./test.sh
+    - cd ..
     - nosetests tests/
 
 notifications:
