@@ -86,14 +86,42 @@ class NexsonDictWrapper(object):
     EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = tuple()
     TAG_CONTEXT = ''
-    def __init__(self, o, container=None):
+    def __init__(self, o, rich_logger=None, container=None):
         self._raw = o
         self._container = container
+        if rich_logger is None:
+            self._logger = DefaultRichLogger()
+        else:
+            self._logger = rich_logger
     def get_nexson_id(self):
         return self._raw.get('@id')
     nexson_id = property(get_nexson_id)
     def get_tag_context(self):
         return '{f}(id={i})'.format(f=self.TAG_CONTEXT, i=self.nexson_id)
+    def _consume_meta(self, o):
+        '''Looks for a `meta` key to list in `o` (warns if not a list, but does not warn if absent)
+        Converts each meta object to a Meta instance.
+        adds 3 attributes to "self"
+            _meta_list  - list of all Meta objects (in input order)
+            _meta2value - dict mapping property_name  to value or property_name to MetaValueList of MetaValueList
+            _meta2list  - dict mapping property_name to list of Meta items
+             
+        '''
+        ml, mv, mld = _read_meta_list(o, self, self._logger)
+        assert(not getattr(self, '_meta_list', None))
+        assert(not getattr(self, '_meta2value', None))
+        assert(not getattr(self, '_meta2list', None))
+        self._meta_list = ml
+        self._meta2value = mv
+        self._meta2list = mld
+
+    def get_singelton_meta(self, property_name):
+        v = self._meta2value.get(property_name)
+        if v is None:
+            self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+        elif isinstance(v, MetaValueList):
+            self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+        return v
 
 class MetaValueList(list):
     pass
@@ -103,7 +131,7 @@ class Meta(NexsonDictWrapper):
     EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = REQUIRED_KEYS
     def __init__(self, o, rich_logger, container=None):
-        NexsonDictWrapper.__init__(self, o, container)
+        NexsonDictWrapper.__init__(self, o, rich_logger, container)
     def get_property_name(self):
         return self._raw.get('@property')
     property_name = property(get_property_name)
@@ -115,7 +143,7 @@ OTUMeta = Meta
 
 def _read_meta_list(o, container, rich_logger):
     '''Looks for a `meta` key to list in `o` (warns if not a list, but does not warn if absent)
-    Converts each meta objec to a Meta instance.
+    Converts each meta object to a Meta instance.
     returns a tuple of 3 elements:
         list of all Meta objects (in input order)
         dict mapping property_name  to value or property_name to MetaValueList of MetaValueList
@@ -136,7 +164,7 @@ def _read_meta_list(o, container, rich_logger):
             v = meta_el.value
             cv = to_meta_value.setdefault(mk, v)
             if cv is not v:
-                if not isinstance(cv, MetaList):
+                if not isinstance(cv, MetaValueList):
                     to_meta_value[mk] = MetaValueList([cv, v])
                 else:
                     to_meta_value.append(v)
@@ -149,17 +177,11 @@ class OTU(NexsonDictWrapper):
     PERMISSIBLE_KEYS = ('@id', '@about', '@label', 'meta')
     TAG_CONTEXT = 'otu'
     def __init__(self, o, rich_logger, container=None):
-        NexsonDictWrapper.__init__(self, o, container)
+        NexsonDictWrapper.__init__(self, o, rich_logger, container)
         check_key_presence(o, self, rich_logger)
-        ml, mv, mld = _read_meta_list(o, self, rich_logger)
-        self._meta_list = ml
-        self._prop2meta_value = mv
-        self._prop2meta_list = mld
-        self._ott_id = mv.get('ot:ottolid')
-        if self._ott_id is None:
-            rich_logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=ot:ottolid', context='meta in ' + self.get_tag_context())
-        elif isinstance(self._ott_id, MetaValueList):
-            rich_logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=ot:ottolid', context='meta in ' + self.get_tag_context())
+        self._consume_meta(o)
+        self._ott_id = self.get_singelton_meta('ot:ottolid')
+        self._original_label = self.get_singelton_meta('ot:originalLabel')
 
 class OTUSet(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
@@ -167,10 +189,11 @@ class OTUSet(NexsonDictWrapper):
     PERMISSIBLE_KEYS = ('@id', 'otu')
     TAG_CONTEXT = 'otus'
     def __init__(self, o, rich_logger, container):
-        NexsonDictWrapper.__init__(self, o, container)
+        NexsonDictWrapper.__init__(self, o, rich_logger, container)
         self._as_list = []
         self._as_dict = {}
         check_key_presence(o, self, rich_logger)
+        self._consume_meta(o)
         v = o.get('otu', [])
         if not isinstance(v, list):
             rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='otu in ' + self.get_tag_context())
@@ -207,7 +230,7 @@ class NexSON(NexsonDictWrapper):
         '''
         if rich_logger is None:
             rich_logger = DefaultRichLogger()
-        NexsonDictWrapper.__init__(self, o, None)
+        NexsonDictWrapper.__init__(self, o, rich_logger, None)
         for k in o.keys():
             if k not in ['nexml']:
                 rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k)
@@ -217,6 +240,8 @@ class NexSON(NexsonDictWrapper):
         else:
             self._nexml = o['nexml']
             check_key_presence(self._nexml, self, rich_logger)
+            self._consume_meta(self._nexml)
+            self._study_id = self.get_singelton_meta('ot:studyId')
             v = self._nexml.get('otus')
             if v is None:
                 rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
