@@ -184,8 +184,8 @@ class OTU(NexsonDictWrapper):
         self._original_label = self.get_singelton_meta('ot:originalLabel')
 
 class OTUSet(NexsonDictWrapper):
-    REQUIRED_KEYS = ('@id',)
-    EXPECETED_KEYS = ('@id', 'otu')
+    REQUIRED_KEYS = ('@id', 'otu')
+    EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = ('@id', 'otu')
     TAG_CONTEXT = 'otus'
     def __init__(self, o, rich_logger, container):
