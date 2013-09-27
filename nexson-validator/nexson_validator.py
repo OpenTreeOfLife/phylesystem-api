@@ -14,6 +14,7 @@ class WarningCodes():
               'MISSING_OPTIONAL_KEY',
               'UNRECOGNIZED_KEY',
               'MISSING_LIST_EXPECTED',
+              'DUPLICATING_SINGLETON_KEY'
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -29,6 +30,8 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}Unrecognized key "{k}"'.format(p=prefix, k=data))
     elif wc == WarningCodes.MISSING_LIST_EXPECTED:
         out.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(data)))
+    elif wc == WarningCodes.DUPLICATING_SINGLETON_KEY:
+        out.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=data))
     else:
         assert(False)
     if context is not None:
@@ -60,55 +63,120 @@ class ValidationLogger(DefaultRichLogger):
         write_warning(s, self.prefix, warning_code, data, context)
         self.errors.append(s.getvalue())
 
-class OTU(object):
-    REQUIRED_KEYS = ('@id',)
-    EXPECTED_KEYS = ('@id', 'otu')
-    def __init__(self, o, rich_logger=None):
-        if rich_logger is None:
-            rich_logger = DefaultRichLogger()
-        self._raw = o
-        self._as_list = []
-        self._as_dict = {}
-        for k in o.keys():
-            if k not in OTUSet.EXPECTED_KEYS:
-                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='otus')
+def check_key_presence(d, schema, rich_logger):
+    '''Issues errors if `d` does not contain keys in the schema.PERMISSIBLE_KEYS iterable,
+    warnings if `d` lacks keys listed in schema.EXPECETED_KEYS, or if `d` contains
+    keys not listed in schema.PERMISSIBLE_KEYS.
+    schema.get_tag_context() is used to tag any warning/errors
+    '''
+    for k in d.keys():
+        if k not in schema.PERMISSIBLE_KEYS:
+            rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context=schema.get_tag_context())
+    for k in schema.EXPECETED_KEYS:
+        if k not in d:
+            rich_logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, k, context=schema.get_tag_context())
+    for k in schema.REQUIRED_KEYS:
+        if k not in d:
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, k, context=schema.get_tag_context())
+
 
 class NexsonDictWrapper(object):
+    '''Base class adding the nexson_id property'''
+    REQUIRED_KEYS = tuple()
+    EXPECETED_KEYS = tuple()
+    PERMISSIBLE_KEYS = tuple()
+    TAG_CONTEXT = ''
+    def __init__(self, o, container=None):
+        self._raw = o
+        self._container = container
     def get_nexson_id(self):
         return self._raw.get('@id')
     nexson_id = property(get_nexson_id)
+    def get_tag_context(self):
+        return '{f}(id={i})'.format(f=self.TAG_CONTEXT, i=self.nexson_id)
+
+class MetaValueList(list):
+    pass
+
+class Meta(NexsonDictWrapper):
+    REQUIRED_KEYS = ('$', '@property', '@xsi.type')
+    EXPECETED_KEYS = tuple()
+    PERMISSIBLE_KEYS = REQUIRED_KEYS
+    def __init__(self, o, rich_logger, container=None):
+        NexsonDictWrapper.__init__(self, o, container)
+    def get_property_name(self):
+        return self._raw.get('@property')
+    property_name = property(get_property_name)
+    def get_property_value(self):
+        return self._raw.get('$')
+    value = property(get_property_value)
+
+OTUMeta = Meta
+
+def _read_meta_list(o, container, rich_logger):
+    '''Looks for a `meta` key to list in `o` (warns if not a list, but does not warn if absent)
+    Converts each meta objec to a Meta instance.
+    returns a tuple of 3 elements:
+        list of all Meta objects (in input order)
+        dict mapping property_name  to value or property_name to MetaValueList of MetaValueList
+        dict mapping property_name to list of Meta items
+         
+    '''
+    meta_list = []
+    to_meta_value = {}
+    to_meta_list = {}
+    m = o.get('meta', [])
+    if not isinstance(m, list):
+        rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='meta in ' + container.get_tag_context())
+    else:
+        for el in m:
+            meta_el = Meta(el, rich_logger, container=container)
+            meta_list.append(meta_el)
+            mk = meta_el.property_name
+            v = meta_el.value
+            cv = to_meta_value.setdefault(mk, v)
+            if cv is not v:
+                if not isinstance(cv, MetaList):
+                    to_meta_value[mk] = MetaValueList([cv, v])
+                else:
+                    to_meta_value.append(v)
+            to_meta_list.setdefault(mk, []).append(meta_el)
+    return (meta_list, to_meta_value, to_meta_list)
 
 class OTU(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
-    EXPECTED_KEYS = ('@id', '@about', '@label', 'meta')
-    def __init__(self, o, rich_logger=None):
-        if rich_logger is None:
-            rich_logger = DefaultRichLogger()
-        self._raw = o
-        for k in o.keys():
-            if k not in OTU.EXPECTED_KEYS:
-                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='otus')
+    EXPECETED_KEYS = ('@id',)
+    PERMISSIBLE_KEYS = ('@id', '@about', '@label', 'meta')
+    TAG_CONTEXT = 'otu'
+    def __init__(self, o, rich_logger, container=None):
+        NexsonDictWrapper.__init__(self, o, container)
+        check_key_presence(o, self, rich_logger)
+        ml, mv, mld = _read_meta_list(o, self, rich_logger)
+        self._meta_list = ml
+        self._prop2meta_value = mv
+        self._prop2meta_list = mld
+        self._ott_id = mv.get('ot:ottolid')
+        if self._ott_id is None:
+            rich_logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=ot:ottolid', context='meta in ' + self.get_tag_context())
+        elif isinstance(self._ott_id, MetaValueList):
+            rich_logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=ot:ottolid', context='meta in ' + self.get_tag_context())
 
 class OTUSet(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
-    EXPECTED_KEYS = ('@id', 'otu')
-    def __init__(self, o, rich_logger=None):
-        if rich_logger is None:
-            rich_logger = DefaultRichLogger()
-        self._raw = o
+    EXPECETED_KEYS = ('@id', 'otu')
+    PERMISSIBLE_KEYS = ('@id', 'otu')
+    TAG_CONTEXT = 'otus'
+    def __init__(self, o, rich_logger, container):
+        NexsonDictWrapper.__init__(self, o, container)
         self._as_list = []
         self._as_dict = {}
-        for k in o.keys():
-            if k not in OTUSet.EXPECTED_KEYS:
-                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='otus')
-        v = o.get('otu')
-        if v is None:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otu', context='otus')
-        elif not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='otu')
+        check_key_presence(o, self, rich_logger)
+        v = o.get('otu', [])
+        if not isinstance(v, list):
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='otu in ' + self.get_tag_context())
         else:
             for el in v:
-                n_otu = OTU(el, rich_logger)
+                n_otu = OTU(el, rich_logger, container=self)
                 nid = n_otu.nexson_id
                 if nid:
                     if nid in self._as_dict:
@@ -119,7 +187,8 @@ class OTUSet(NexsonDictWrapper):
 
 class NexSON(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
-    EXPECTED_KEYS = ("@about",
+    EXPECETED_KEYS = ('@id', 'otus', 'trees', 'meta')
+    PERMISSIBLE_KEYS = ("@about",
                      "@generator",
                      "@id",
                      "@nexmljson",
@@ -129,6 +198,7 @@ class NexSON(NexsonDictWrapper):
                      "trees",
                      "meta",
                      )
+    TAG_CONTEXT = 'nexml'
     def __init__(self, o, rich_logger=None):
         '''Creates an object that validates `o` as a dictionary
         that represents a valid NexSON object.
@@ -137,7 +207,7 @@ class NexSON(NexsonDictWrapper):
         '''
         if rich_logger is None:
             rich_logger = DefaultRichLogger()
-        self._raw = o
+        NexsonDictWrapper.__init__(self, o, None)
         for k in o.keys():
             if k not in ['nexml']:
                 rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k)
@@ -146,17 +216,12 @@ class NexSON(NexsonDictWrapper):
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml')
         else:
             self._nexml = o['nexml']
-            for k in self._nexml.keys():
-                if k not in NexSON.EXPECTED_KEYS:
-                    rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='nexml')
-            for k in NexSON.REQUIRED_KEYS:
-                if k not in self._nexml:
-                    rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, k, context='nexml')
+            check_key_presence(self._nexml, self, rich_logger)
             v = self._nexml.get('otus')
             if v is None:
                 rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
             else:
-                self.otus = OTUSet(v, rich_logger)
+                self.otus = OTUSet(v, rich_logger, container=self)
 
 def indented_keys(out, o, indentation='', indent=2):
     next_indentation = indentation + (' '*indent)

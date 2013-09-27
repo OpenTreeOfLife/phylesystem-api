@@ -29,10 +29,14 @@ if __name__ == '__main__':
     import json
     import os
     import codecs
-
+    import argparse
+    parser = argparse.ArgumentParser(description='Validate a json file as Open Tree of Life NexSON')
+    parser.add_argument('--verbose', dest='verbose', action='store_true', default=False, help='verbose output')
+    parser.add_argument('input', metavar='filepath', type=unicode, nargs=1, help='filename')
+    args = parser.parse_args()
     SCRIPT_NAME = os.path.split(sys.argv[0])[-1]
     try:
-        inp_filepath = sys.argv[1]
+        inp_filepath = args.input[0]
     except:
         sys.exit('Expecting a filepath to a NexSON file as the only argument.\n')
     inp = codecs.open(inp_filepath, 'rU', encoding='utf-8')
@@ -40,7 +44,10 @@ if __name__ == '__main__':
         obj = json.load(inp)
     except ValueError as vx:
         error('Not valid JSON.')
-        sys.exit(1)
+        if args.verbose:
+            raise vx
+        else:
+            sys.exit(1)
     v = ValidationLogger()
     try:
         n = NexSON(obj, v)
