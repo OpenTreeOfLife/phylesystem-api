@@ -28,9 +28,8 @@ def _get_nexson(study_id):
 
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # the internal file structure will change soon to study/study_id/study_id-N.json, where N=0,1,2,3...
     try:
-        filename    = this_dir + "/../treenexus/study/0/" + study_id + ".json"
+        filename    = this_dir + "/../treenexus/study/" + study_id + "/" + study_id + ".json"
         nexson_file = open(filename,'r')
     except IOError:
         return '{}'
