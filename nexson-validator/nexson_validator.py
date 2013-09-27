@@ -12,7 +12,9 @@ class NexSONError(Exception):
 class WarningCodes():
     facets = ['MISSING_MANDATORY_KEY',
               'MISSING_OPTIONAL_KEY',
-              'UNRECOGNIZED_KEY']
+              'UNRECOGNIZED_KEY',
+              'MISSING_LIST_EXPECTED',
+              ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
 
@@ -25,6 +27,8 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}Missing optional key "{k}"'.format(p=prefix, k=data))
     elif wc == WarningCodes.UNRECOGNIZED_KEY:
         out.write('{p}Unrecognized key "{k}"'.format(p=prefix, k=data))
+    elif wc == WarningCodes.MISSING_LIST_EXPECTED:
+        out.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(data)))
     else:
         assert(False)
     if context is not None:
@@ -56,7 +60,65 @@ class ValidationLogger(DefaultRichLogger):
         write_warning(s, self.prefix, warning_code, data, context)
         self.errors.append(s.getvalue())
 
-class NexSON(object):
+class OTU(object):
+    REQUIRED_KEYS = ('@id',)
+    EXPECTED_KEYS = ('@id', 'otu')
+    def __init__(self, o, rich_logger=None):
+        if rich_logger is None:
+            rich_logger = DefaultRichLogger()
+        self._raw = o
+        self._as_list = []
+        self._as_dict = {}
+        for k in o.keys():
+            if k not in OTUSet.EXPECTED_KEYS:
+                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='otus')
+
+class NexsonDictWrapper(object):
+    def get_nexson_id(self):
+        return self._raw.get('@id')
+    nexson_id = property(get_nexson_id)
+
+class OTU(NexsonDictWrapper):
+    REQUIRED_KEYS = ('@id',)
+    EXPECTED_KEYS = ('@id', '@about', '@label', 'meta')
+    def __init__(self, o, rich_logger=None):
+        if rich_logger is None:
+            rich_logger = DefaultRichLogger()
+        self._raw = o
+        for k in o.keys():
+            if k not in OTU.EXPECTED_KEYS:
+                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='otus')
+
+class OTUSet(NexsonDictWrapper):
+    REQUIRED_KEYS = ('@id',)
+    EXPECTED_KEYS = ('@id', 'otu')
+    def __init__(self, o, rich_logger=None):
+        if rich_logger is None:
+            rich_logger = DefaultRichLogger()
+        self._raw = o
+        self._as_list = []
+        self._as_dict = {}
+        for k in o.keys():
+            if k not in OTUSet.EXPECTED_KEYS:
+                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='otus')
+        v = o.get('otu')
+        if v is None:
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otu', context='otus')
+        elif not isinstance(v, list):
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='otu')
+        else:
+            for el in v:
+                n_otu = OTU(el, rich_logger)
+                nid = n_otu.nexson_id
+                if nid:
+                    if nid in self._as_dict:
+                        rich_logger.error(WarningCodes.REPEATED_ID, nid, context='otu')
+                    else:
+                        self._as_dict[nid] = n_otu
+                self._as_list.append(n_otu)
+
+class NexSON(NexsonDictWrapper):
+    REQUIRED_KEYS = ('@id',)
     EXPECTED_KEYS = ("@about",
                      "@generator",
                      "@id",
@@ -87,6 +149,14 @@ class NexSON(object):
             for k in self._nexml.keys():
                 if k not in NexSON.EXPECTED_KEYS:
                     rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context='nexml')
+            for k in NexSON.REQUIRED_KEYS:
+                if k not in self._nexml:
+                    rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, k, context='nexml')
+            v = self._nexml.get('otus')
+            if v is None:
+                rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
+            else:
+                self.otus = OTUSet(v, rich_logger)
 
 def indented_keys(out, o, indentation='', indent=2):
     next_indentation = indentation + (' '*indent)
