@@ -14,7 +14,8 @@ class WarningCodes():
               'MISSING_OPTIONAL_KEY',
               'UNRECOGNIZED_KEY',
               'MISSING_LIST_EXPECTED',
-              'DUPLICATING_SINGLETON_KEY'
+              'DUPLICATING_SINGLETON_KEY',
+              'REPEATED_ID'
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -32,6 +33,8 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(data)))
     elif wc == WarningCodes.DUPLICATING_SINGLETON_KEY:
         out.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=data))
+    elif wc == WarningCodes.REPEATED_ID:
+        out.write('{p}An ID ("{k}") was repeated'.format(p=prefix, k=data))
     else:
         assert(False)
     if context is not None:
