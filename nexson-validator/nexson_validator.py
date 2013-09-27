@@ -201,7 +201,7 @@ class OTUSet(NexsonDictWrapper):
             for el in v:
                 n_otu = OTU(el, rich_logger, container=self)
                 nid = n_otu.nexson_id
-                if nid:
+                if nid is not None:
                     if nid in self._as_dict:
                         rich_logger.error(WarningCodes.REPEATED_ID, nid, context='otu')
                     else:
