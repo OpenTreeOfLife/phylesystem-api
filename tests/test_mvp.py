@@ -44,7 +44,13 @@ def test_basic_api_post():
     nexson   = '{ "foo": "bar" }'
 
     # ask the API to overwrite the NexSON for study 10
-    payload = {'key': api_key , 'nexson': nexson}
+
+    payload = {
+        'key': api_key,
+        'author': 'OTOL API <api@opentreeoflife.org>',
+        'nexson': nexson
+    }
+
     r        = requests.post(url, data=payload)
 
     eq_(r.status_code, requests.codes.ok, url + " returns a successful status code")
