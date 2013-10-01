@@ -1,4 +1,6 @@
 import os
+from pygit2 import Repository
+from pygit2 import Signature
 
 def index():
     def GET():
@@ -13,6 +15,31 @@ def api():
         return _get_nexson(resource_id)
     def POST(resource,resource_id):
         if not resource=='study': raise HTTP(400)
+
+        if resource_id < 0 : raise HTTP(400)
+
+        if not isinstance(resource_id, int) : raise HTTP(400)
+
+        # which branch in treenexus should we use?
+
+        repo      = Repository('./treenexus/.git')
+        branch    = repo.lookup_branch('master')
+
+        # grab the latest commit SHA1 on master
+        last_commit = branch.target.hex
+
+        encoding    = 'utf-8'
+        committer   = Signature('OTOL API', 'api@opentreeoflife.org', 12346, 0, encoding)
+        author      = Signature( 'Author Name', 'testing@testing.com', 12345, 0, encoding)
+        message     = "New OTOL API commit\n"
+        tree_prefix = 'deadbeef'
+        parents     = [ last_commit.parents ]
+
+        # actually create a new commit
+        sha         = repo.create_commit(None, author, committer, message,
+                                        tree_prefix, parents, encoding)
+        new_commit  = repo[sha]
+
         # overwrite the nexson of study_id with the POSTed data
         # 1) verify that it is valid json
         # 2) Update local treenexus git submodule at ./treenexus
