@@ -1,5 +1,6 @@
 import os
 import time
+from gluon.tools import Auth
 
 def index():
     def GET():
@@ -12,17 +13,16 @@ def api():
         if not resource=='study': raise HTTP(400)
         # return the correct nexson of study_id
         return _get_nexson(resource_id)
-    def POST(resource,resource_id):
-        if not resource=='study': raise HTTP(400)
 
-        if resource_id < 0 : raise HTTP(400)
+    def POST(resource,resource_id, **kwargs):
+        if not resource=='study': raise HTTP(400, 'resource != study')
 
-        if not isinstance(resource_id, int) : raise HTTP(400)
+        if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
         # TODO: validate
-        nexson       = request.post_vars['nexson']
-        author_name  = request.post_vars['author_name']
-        author_email = request.post_vars['author_email']
+        nexson       = kwargs.get('nexson','{}')
+        author_name  = kwargs.get('author_name','')
+        author_email = kwargs.get('author_email','')
 
         # overwrite the nexson of study_id with the POSTed data
         # 1) verify that it is valid json
