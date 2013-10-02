@@ -54,7 +54,7 @@ def test_basic_api_post():
 
     r        = requests.post(url, data=payload)
 
-    eq_(r.status_code, requests.codes.ok, url + " returns a successful status code")
+    eq_(r.status_code, requests.codes.ok, url + " returns a successful status code="+str(r.status_code))
 
     expected_content_type = 'application/json'
     eq_(r.headers.get('content-type'), expected_content_type, r.headers.get('content-type') + "== " + expected_content_type)
