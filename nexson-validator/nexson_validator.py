@@ -15,6 +15,7 @@ class WarningCodes():
               'UNRECOGNIZED_KEY',
               'MISSING_LIST_EXPECTED',
               'DUPLICATING_SINGLETON_KEY',
+              'REFERENCED_ID_NOT_FOUND',
               'REPEATED_ID'
               ]
 for _n, _f in enumerate(WarningCodes.facets):
@@ -35,6 +36,8 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=data))
     elif wc == WarningCodes.REPEATED_ID:
         out.write('{p}An ID ("{k}") was repeated'.format(p=prefix, k=data))
+    elif wc == WarningCodes.REFERENCED_ID_NOT_FOUND:
+        out.write('{p}An ID Reference did not match a previous ID ("{k}": "{v}")'.format(p=prefix, k=data['key'], v=data['value']))
     else:
         assert(False)
     if context is not None:
@@ -233,6 +236,15 @@ class TreeCollection(NexsonDictWrapper):
         self._as_dict = {}
         check_key_presence(o, self, rich_logger)
         self._consume_meta(o)
+        v = o.get('@otus')
+        if v is not None:
+            if container is None \
+               or container.otus is None \
+               or v != container.otus.nexson_id:
+                rich_logger.error(WarningCodes.REFERENCED_ID_NOT_FOUND,
+                                  {'key': '@otus',
+                                   'value': v},
+                                  context='trees')
         v = o.get('tree', [])
         if not isinstance(v, list):
             rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='tree in ' + self.get_tag_context())
@@ -284,6 +296,7 @@ class NexSON(NexsonDictWrapper):
         v = self._nexml.get('otus')
         if v is None:
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
+            self.otus = None
         else:
             self.otus = OTUCollection(v, rich_logger, container=self)
         v = self._nexml.get('trees')
