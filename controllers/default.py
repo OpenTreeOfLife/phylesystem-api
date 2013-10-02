@@ -1,6 +1,6 @@
 import os
 import time
-from gluon.tools import Auth
+import json
 
 def index():
     def GET():
@@ -19,8 +19,14 @@ def api():
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
-        # TODO: validate
-        nexson       = kwargs.get('nexson','{}')
+        try:
+            nexson        = json.loads( kwargs.get('nexson','{}') )
+        except:
+            raise HTTP(400, 'NexSON must be valid JSON')
+
+        # sort the keys of the POSTed NexSON and indent 4 spaces
+        nexson = json.dumps(nexson, sort_keys=True, indent=4)
+
         author_name  = kwargs.get('author_name','')
         author_email = kwargs.get('author_email','')
 
