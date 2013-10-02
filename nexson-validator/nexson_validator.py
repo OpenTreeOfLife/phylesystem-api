@@ -186,7 +186,18 @@ class OTU(NexsonDictWrapper):
         self._ott_id = self.get_singelton_meta('ot:ottolid')
         self._original_label = self.get_singelton_meta('ot:originalLabel')
 
-class OTUSet(NexsonDictWrapper):
+class Tree(NexsonDictWrapper):
+    REQUIRED_KEYS = ('@id', 'edge', 'node')
+    EXPECETED_KEYS = ('@id',)
+    PERMISSIBLE_KEYS = ('@id', '@about', 'node', 'edge', 'meta')
+    TAG_CONTEXT = 'tree'
+    def __init__(self, o, rich_logger, container=None):
+        NexsonDictWrapper.__init__(self, o, rich_logger, container)
+        check_key_presence(o, self, rich_logger)
+        self._consume_meta(o)
+        self._ott_id = self.get_singelton_meta('ot:inGroupClade')
+
+class OTUCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'otu')
     EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = ('@id', 'otu')
@@ -210,6 +221,31 @@ class OTUSet(NexsonDictWrapper):
                     else:
                         self._as_dict[nid] = n_otu
                 self._as_list.append(n_otu)
+
+class TreeCollection(NexsonDictWrapper):
+    REQUIRED_KEYS = ('@id', 'tree', '@otus')
+    EXPECETED_KEYS = tuple()
+    PERMISSIBLE_KEYS = ('@id', 'tree', '@otus')
+    TAG_CONTEXT = 'trees'
+    def __init__(self, o, rich_logger, container):
+        NexsonDictWrapper.__init__(self, o, rich_logger, container)
+        self._as_list = []
+        self._as_dict = {}
+        check_key_presence(o, self, rich_logger)
+        self._consume_meta(o)
+        v = o.get('tree', [])
+        if not isinstance(v, list):
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='tree in ' + self.get_tag_context())
+        else:
+            for el in v:
+                tree = Tree(el, rich_logger, container=self)
+                tid = tree.nexson_id
+                if tid is not None:
+                    if tid in self._as_dict:
+                        rich_logger.error(WarningCodes.REPEATED_ID, nid, context='tree')
+                    else:
+                        self._as_dict[tid] = tree
+                self._as_list.append(tree)
 
 class NexSON(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
@@ -240,16 +276,22 @@ class NexSON(NexsonDictWrapper):
         self._nexml = None
         if 'nexml' not in o:
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml')
+            return ## EARLY EXIT!!
+        self._nexml = o['nexml']
+        check_key_presence(self._nexml, self, rich_logger)
+        self._consume_meta(self._nexml)
+        self._study_id = self.get_singelton_meta('ot:studyId')
+        v = self._nexml.get('otus')
+        if v is None:
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
         else:
-            self._nexml = o['nexml']
-            check_key_presence(self._nexml, self, rich_logger)
-            self._consume_meta(self._nexml)
-            self._study_id = self.get_singelton_meta('ot:studyId')
-            v = self._nexml.get('otus')
-            if v is None:
-                rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
-            else:
-                self.otus = OTUSet(v, rich_logger, container=self)
+            self.otus = OTUCollection(v, rich_logger, container=self)
+        v = self._nexml.get('trees')
+        if v is None:
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'tree', context='nexml')
+        else:
+            self.trees = TreeCollection(v, rich_logger, container=self)
+
 
 def indented_keys(out, o, indentation='', indent=2):
     next_indentation = indentation + (' '*indent)
