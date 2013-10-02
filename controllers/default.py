@@ -21,8 +21,12 @@ def api():
 
         if not isinstance(resource_id, int) : raise HTTP(400)
 
-        # which branch in treenexus should we use?
+        # TODO: validate
+        nexson       = request.post_vars['nexson']
+        author_name  = request.post_vars['author_name']
+        author_email = request.post_vars['author_email']
 
+        # which branch in treenexus should we use?
         repo      = Repository('./treenexus/.git')
         branch    = repo.lookup_branch('master')
 
@@ -31,14 +35,14 @@ def api():
 
         encoding    = 'utf-8'
         committer   = Signature('OTOL API', 'api@opentreeoflife.org', 12346, 0, encoding)
-        author      = Signature( 'Author Name', 'testing@testing.com', 12345, 0, encoding)
+        author      = Signature( author_name, author_email, 12345, 0, encoding)
         message     = "New OTOL API commit\n"
-        tree_prefix = 'deadbeef'
+        tree        = repo.TreeBuilder().write()
         parents     = [ last_commit.parents ]
 
         # actually create a new commit
         sha         = repo.create_commit(None, author, committer, message,
-                                        tree_prefix, parents, encoding)
+                                        tree, parents, encoding)
         new_commit  = repo[sha]
 
         # overwrite the nexson of study_id with the POSTed data
