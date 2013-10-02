@@ -47,7 +47,8 @@ def test_basic_api_post():
 
     payload = {
         'key': api_key,
-        'author': 'OTOL API <api@opentreeoflife.org>',
+        'author_name': 'OTOL API',
+        'author_email': 'api@opentreeoflife.org',
         'nexson': nexson
     }
 
