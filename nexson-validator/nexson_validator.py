@@ -18,7 +18,8 @@ class WarningCodes():
               'REFERENCED_ID_NOT_FOUND',
               'REPEATED_ID',
               'MULTIPLE_ROOT_NODES',
-              'NO_ROOT_NODE'
+              'NO_ROOT_NODE',
+              'MULTIPLE_EDGES_FOR_NODES',
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -44,6 +45,13 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}Multiple nodes in a tree were flagged as being the root node ("{k}" was not the first)'.format(p=prefix, k=data))
     elif wc == WarningCodes.NO_ROOT_NODE:
         out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
+    elif wc == WarningCodes.MULTIPLE_EDGES_FOR_NODES:
+        nd = data['node']
+        ed = data['edge']
+        out.write('{p}A node ("{n}") has multiple edges to parents ("{f}" and "{s}")'.format(p=prefix,
+                                                                                n=nd.nexson_id,
+                                                                                f=nd._edge.nexson_id,
+                                                                                s=ed.nexson_id))
     else:
         assert(False)
     if context is not None:
@@ -221,6 +229,15 @@ class Edge(NexsonDictWrapper):
                                   {'key': '@target',
                                    'value': tid},
                                   context=self.get_tag_context())
+            elif self._target._edge is not None:
+                rich_logger.error(WarningCodes.MULTIPLE_EDGES_FOR_NODES, 
+                                  {'node': self._target,
+                                  'edge': self
+                                  }, 
+                                  context=self.get_tag_context())
+            else:
+                self._target._edge = self
+
 
 class Node(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
@@ -231,6 +248,7 @@ class Node(NexsonDictWrapper):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         check_key_presence(o, self, rich_logger)
         self._is_root = o.get('@root', False)
+        self._edge = None
 
 class Tree(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'edge', 'node')
