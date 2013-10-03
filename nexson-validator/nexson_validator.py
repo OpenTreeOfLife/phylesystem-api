@@ -16,7 +16,9 @@ class WarningCodes():
               'MISSING_LIST_EXPECTED',
               'DUPLICATING_SINGLETON_KEY',
               'REFERENCED_ID_NOT_FOUND',
-              'REPEATED_ID'
+              'REPEATED_ID',
+              'MULTIPLE_ROOT_NODES',
+              'NO_ROOT_NODE'
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -38,6 +40,10 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}An ID ("{k}") was repeated'.format(p=prefix, k=data))
     elif wc == WarningCodes.REFERENCED_ID_NOT_FOUND:
         out.write('{p}An ID Reference did not match a previous ID ("{k}": "{v}")'.format(p=prefix, k=data['key'], v=data['value']))
+    elif wc == WarningCodes.MULTIPLE_ROOT_NODES:
+        out.write('{p}Multiple nodes in a tree were flagged as being the root node "{k}")'.format(p=prefix, k=data))
+    elif wc == WarningCodes.NO_ROOT_NODE:
+        out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
     else:
         assert(False)
     if context is not None:
@@ -206,6 +212,7 @@ class Node(NexsonDictWrapper):
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         check_key_presence(o, self, rich_logger)
+        self._is_root = o.get('@root', False)
 
 class Tree(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'edge', 'node')
@@ -222,6 +229,7 @@ class Tree(NexsonDictWrapper):
         self._edge_dict = {}
         self._edge_list = []
         v = o.get('node', [])
+        self._root_node = None
         if not isinstance(v, list):
             rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='node in ' + self.get_tag_context())
         else:
@@ -230,10 +238,17 @@ class Tree(NexsonDictWrapper):
                 nid = n_node.nexson_id
                 if nid is not None:
                     if nid in self._node_dict:
-                        rich_logger.error(WarningCodes.REPEATED_ID, eid, context='node' + self.get_tag_context())
+                        rich_logger.error(WarningCodes.REPEATED_ID, nid, context='node in ' + self.get_tag_context())
                     else:
                         self._node_dict[nid] = n_node
                 self._node_list.append(n_node)
+                if n_node._is_root:
+                    if self._root_node is None:
+                        self._root_node = n_node
+                    else:
+                        rich_logger.error(WarningCodes.MULTIPLE_ROOT_NODES, nid, context='node in ' + self.get_tag_context())
+        if self._root_node is None:
+            rich_logger.warn(WarningCodes.NO_ROOT_NODE, None, self.get_tag_context())
         v = o.get('edge', [])
         if not isinstance(v, list):
             rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='edge in ' + self.get_tag_context())
@@ -243,7 +258,7 @@ class Tree(NexsonDictWrapper):
                 eid = n_edge.nexson_id
                 if eid is not None:
                     if eid in self._edge_dict:
-                        rich_logger.error(WarningCodes.REPEATED_ID, eid, context='edge' + self.get_tag_context())
+                        rich_logger.error(WarningCodes.REPEATED_ID, eid, context='edge in ' + self.get_tag_context())
                     else:
                         self._edge_dict[eid] = n_edge
                 self._edge_list.append(n_edge)
