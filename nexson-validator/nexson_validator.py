@@ -41,7 +41,7 @@ def write_warning(out, prefix, wc, data, context=None):
     elif wc == WarningCodes.REFERENCED_ID_NOT_FOUND:
         out.write('{p}An ID Reference did not match a previous ID ("{k}": "{v}")'.format(p=prefix, k=data['key'], v=data['value']))
     elif wc == WarningCodes.MULTIPLE_ROOT_NODES:
-        out.write('{p}Multiple nodes in a tree were flagged as being the root node "{k}")'.format(p=prefix, k=data))
+        out.write('{p}Multiple nodes in a tree were flagged as being the root node ("{k}" was not the first)'.format(p=prefix, k=data))
     elif wc == WarningCodes.NO_ROOT_NODE:
         out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
     else:
