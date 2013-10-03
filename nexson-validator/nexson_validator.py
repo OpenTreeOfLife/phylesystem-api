@@ -189,6 +189,24 @@ class OTU(NexsonDictWrapper):
         self._ott_id = self.get_singelton_meta('ot:ottolid')
         self._original_label = self.get_singelton_meta('ot:originalLabel')
 
+class Edge(NexsonDictWrapper):
+    REQUIRED_KEYS = ('@id', '@source', '@target')
+    EXPECETED_KEYS = tuple()
+    PERMISSIBLE_KEYS = REQUIRED_KEYS
+    TAG_CONTEXT = 'edge'
+    def __init__(self, o, rich_logger, nodes, container=None):
+        NexsonDictWrapper.__init__(self, o, rich_logger, container)
+        check_key_presence(o, self, rich_logger)
+
+class Node(NexsonDictWrapper):
+    REQUIRED_KEYS = ('@id',)
+    EXPECETED_KEYS = tuple()
+    PERMISSIBLE_KEYS = ('@id', '@otu', '@root')
+    TAG_CONTEXT = 'node'
+    def __init__(self, o, rich_logger, container=None):
+        NexsonDictWrapper.__init__(self, o, rich_logger, container)
+        check_key_presence(o, self, rich_logger)
+
 class Tree(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'edge', 'node')
     EXPECETED_KEYS = ('@id',)
@@ -198,7 +216,37 @@ class Tree(NexsonDictWrapper):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         check_key_presence(o, self, rich_logger)
         self._consume_meta(o)
-        self._ott_id = self.get_singelton_meta('ot:inGroupClade')
+        self._ingroup= self.get_singelton_meta('ot:inGroupClade')
+        self._node_dict = {}
+        self._node_list = []
+        self._edge_dict = {}
+        self._edge_list = []
+        v = o.get('node', [])
+        if not isinstance(v, list):
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='node in ' + self.get_tag_context())
+        else:
+            for el in v:
+                n_node = Node(el, rich_logger, container=self)
+                nid = n_node.nexson_id
+                if nid is not None:
+                    if nid in self._node_dict:
+                        rich_logger.error(WarningCodes.REPEATED_ID, eid, context='node' + self.get_tag_context())
+                    else:
+                        self._node_dict[nid] = n_node
+                self._node_list.append(n_node)
+        v = o.get('edge', [])
+        if not isinstance(v, list):
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='edge in ' + self.get_tag_context())
+        else:
+            for el in v:
+                n_edge = Edge(el, rich_logger, nodes=self._node_dict, container=self)
+                eid = n_edge.nexson_id
+                if eid is not None:
+                    if eid in self._edge_dict:
+                        rich_logger.error(WarningCodes.REPEATED_ID, eid, context='edge' + self.get_tag_context())
+                    else:
+                        self._edge_dict[eid] = n_edge
+                self._edge_list.append(n_edge)
 
 class OTUCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'otu')
