@@ -33,6 +33,29 @@ def test_basic_api_get():
 
     eq_(nexson['nexml']['@xmlns']['nex'], 'http://www.nexml.org/2009', 'nex key == http://www.nexml.org/2009')
 
+def test_basic_api_post_with_invalid_nexson():
+    protocol = 'http://'
+    host     = '127.0.0.1'
+    port     = os.environ.get('OTOL_API_PORT',"8000")
+    prefix   = "/welcome/default/api"
+    url      = protocol + host + ":" + port + prefix + '/study/10.json'
+
+    api_key  = 'deadbeef'
+    nexson   = 'NOT VALID JSON{'
+
+    # ask the API to overwrite the NexSON for study 10
+
+    payload = {
+        'key': api_key,
+        'author_name': 'OTOL API',
+        'author_email': 'api@opentreeoflife.org',
+        'nexson': nexson
+    }
+
+    r        = requests.post(url, data=payload)
+
+    eq_(r.status_code, 400, url + " returns a 400 status code due to invalid NexSON, code="+str(r.status_code))
+
 def test_basic_api_post():
     protocol = 'http://'
     host     = '127.0.0.1'
@@ -41,19 +64,20 @@ def test_basic_api_post():
     url      = protocol + host + ":" + port + prefix + '/study/10.json'
 
     api_key  = 'deadbeef'
-    nexson   = '{ "foo": "bar" }'
+    nexson   = '{ "nexml": {"@xmlns": {"xsd": "stuff"} } }';
 
     # ask the API to overwrite the NexSON for study 10
 
     payload = {
         'key': api_key,
-        'author': 'OTOL API <api@opentreeoflife.org>',
+        'author_name': 'OTOL API',
+        'author_email': 'api@opentreeoflife.org',
         'nexson': nexson
     }
 
     r        = requests.post(url, data=payload)
 
-    eq_(r.status_code, requests.codes.ok, url + " returns a successful status code")
+    eq_(r.status_code, requests.codes.ok, url + " returns a successful status code="+str(r.status_code))
 
     expected_content_type = 'application/json'
     eq_(r.headers.get('content-type'), expected_content_type, r.headers.get('content-type') + "== " + expected_content_type)
