@@ -6,6 +6,7 @@ python:
 
 before_install:
      - git submodule update --init --recursive
+     - "./.travis.sh"
 
 install:
    - pip install -r requirements.txt --use-mirrors
@@ -29,7 +30,7 @@ notifications:
     on_success: change
     on_failure: always
 env:
-    - export OTOL_API_PORT=9999
+    - OTOL_API_PORT=9999 LD_LIBRARY_PATH=~/libgit2/_install/lib
 
 services:
     - redis-server
