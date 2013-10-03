@@ -203,6 +203,24 @@ class Edge(NexsonDictWrapper):
     def __init__(self, o, rich_logger, nodes, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         check_key_presence(o, self, rich_logger)
+        self._source = None
+        self._target = None
+        sid = o.get('@source')
+        if sid is not None:
+            self._source = nodes.get(sid)
+            if self._source is None:
+                rich_logger.error(WarningCodes.REFERENCED_ID_NOT_FOUND,
+                                  {'key': '@source',
+                                   'value': sid},
+                                  context=self.get_tag_context())
+        tid = o.get('@target')
+        if tid is not None:
+            self._target = nodes.get(tid)
+            if self._target is None:
+                rich_logger.error(WarningCodes.REFERENCED_ID_NOT_FOUND,
+                                  {'key': '@target',
+                                   'value': tid},
+                                  context=self.get_tag_context())
 
 class Node(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
