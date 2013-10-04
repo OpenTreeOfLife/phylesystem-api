@@ -1,1 +1,7 @@
 validate_ot_nexson.py: ERROR: Missing required key "@otus" in "trees(id=trees2)"
+validate_ot_nexson.py: ERROR: An ID Reference did not match a previous ID ("@otu": "otu1") in "node(id=node2)"
+validate_ot_nexson.py: ERROR: An ID Reference did not match a previous ID ("@otu": "otu2") in "node(id=node3)"
+validate_ot_nexson.py: ERROR: An ID Reference did not match a previous ID ("@otu": "otu3") in "node(id=node4)"
+validate_ot_nexson.py: ERROR: Tip node ("node2") without a valid @otu value in "tree(id=tree1)"
+validate_ot_nexson.py: ERROR: Tip node ("node3") without a valid @otu value in "tree(id=tree1)"
+validate_ot_nexson.py: ERROR: Tip node ("node4") without a valid @otu value in "tree(id=tree1)"
