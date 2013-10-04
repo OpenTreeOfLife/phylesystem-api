@@ -23,6 +23,7 @@ class WarningCodes():
               'CYCLE_DETECTED',
               'DISCONNECTED_GRAPH_DETECTED',
               'INCORRECT_ROOT_NODE_LABEL',
+              'TIP_WITHOUT_OTU',
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -48,6 +49,8 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}Multiple nodes in a tree were flagged as being the root node ("{k}" was not the first)'.format(p=prefix, k=data))
     elif wc == WarningCodes.NO_ROOT_NODE:
         out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
+    elif wc == WarningCodes.TIP_WITHOUT_OTU:
+        out.write('{p}Tip node ("{n}") without a valid @otu value'.format(p=prefix, n=data.nexson_id))
     elif wc == WarningCodes.MULTIPLE_EDGES_FOR_NODES:
         nd = data['node']
         ed = data['edge']
@@ -239,6 +242,8 @@ class Edge(NexsonDictWrapper):
                                   {'key': '@source',
                                    'value': sid},
                                   context=self.get_tag_context())
+            else:
+                self._source._children.append(self)
         tid = o.get('@target')
         if tid is not None:
             self._target = nodes.get(tid)
@@ -262,11 +267,22 @@ class Node(NexsonDictWrapper):
     EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = ('@id', '@otu', '@root')
     TAG_CONTEXT = 'node'
-    def __init__(self, o, rich_logger, container=None):
+    def __init__(self, o, rich_logger, otu_dict, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         check_key_presence(o, self, rich_logger)
         self._is_root = o.get('@root', False)
         self._edge = None
+        self._children = []
+        self._otu = None
+        v = o.get('@otu')
+        if v is not None:
+            self._otu = otu_dict.get(v)
+            if self._otu is None:
+                rich_logger.error(WarningCodes.REFERENCED_ID_NOT_FOUND,
+                                  {'key': '@otu',
+                                   'value': v},
+                                  context=self.get_tag_context())
+
     def construct_path_to_root(self, encountered_nodes):
         n = self
         p = []
@@ -300,13 +316,20 @@ class Tree(NexsonDictWrapper):
         self._node_list = []
         self._edge_dict = {}
         self._edge_list = []
+        otu_collection = None
+        if container is not None:
+            otu_collection = container._otu_collection
+        if otu_collection is None:
+            otu_dict = {}
+        else:
+            otu_dict = otu_collection._as_dict
         v = o.get('node', [])
         self._root_node = None
         if not isinstance(v, list):
             rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='node in ' + self.get_tag_context())
         else:
             for el in v:
-                n_node = Node(el, rich_logger, container=self)
+                n_node = Node(el, rich_logger, otu_dict, container=self)
                 nid = n_node.nexson_id
                 if nid is not None:
                     if nid in self._node_dict:
@@ -343,6 +366,8 @@ class Tree(NexsonDictWrapper):
                 rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, context='node in ' + self.get_tag_context())
             if path_to_root:
                 lowest_node_set.add(path_to_root[-1])
+            if len(nd._children) == 0 and nd._otu is None:
+                rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, context=self.get_tag_context())
         if len(lowest_node_set) > 1:
             lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
             lowest_node_set.sort()
@@ -392,6 +417,7 @@ class TreeCollection(NexsonDictWrapper):
         self._as_dict = {}
         check_key_presence(o, self, rich_logger)
         self._consume_meta(o)
+        self._otu_collection = None
         v = o.get('@otus')
         if v is not None:
             if container is None \
@@ -401,6 +427,8 @@ class TreeCollection(NexsonDictWrapper):
                                   {'key': '@otus',
                                    'value': v},
                                   context='trees')
+            else:
+                self._otu_collection = container.otus
         v = o.get('tree', [])
         if not isinstance(v, list):
             rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='tree in ' + self.get_tag_context())

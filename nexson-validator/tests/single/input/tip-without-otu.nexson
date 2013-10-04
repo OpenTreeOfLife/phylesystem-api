@@ -28,17 +28,32 @@
 ]
 },
 {
-"@about": "#otu374433", 
-"@id": "otu1", 
-"@label": "Potamogeton panormitanus", 
+"@id": "otu2",
+"@label": "Potamogeton foliosus Raf.",
 "meta": [
 {
-"$": 30681, 
+"$": 1024525, 
 "@property": "ot:ottolid", 
 "@xsi:type": "nex:LiteralMeta"
 }, 
 {
-"$": "Potamogeton pusillus DQ840296", 
+"$": "Potamogeton foliosus MtHigby.CT", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+},
+{
+"@id": "otu3", 
+"@label": "Potamogeton gemmiparus", 
+"meta": [
+{
+"$": 161393, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Potamogeton gemmiparus Pickerel.06.014.8", 
 "@property": "ot:originalLabel", 
 "@xsi:type": "nex:LiteralMeta"
 }
@@ -95,11 +110,10 @@
 },
 {
 "@id": "node3",
-"@otu": "otu1"
+"@otu": "otu2"
 },
 {
-"@id": "node4",
-"@otu": "otu1"
+"@id": "node4"
 }
 ]
 }
