@@ -25,6 +25,7 @@ class WarningCodes():
               'INCORRECT_ROOT_NODE_LABEL',
               'TIP_WITHOUT_OTU',
               'TIP_WITHOUT_OTT_ID',
+              'MULTIPLE_TIPS_MAPPED_TO_OTT_ID',
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -52,6 +53,14 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
     elif wc == WarningCodes.TIP_WITHOUT_OTU:
         out.write('{p}Tip node ("{n}") without a valid @otu value'.format(p=prefix, n=data.nexson_id))
+    elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
+        id_list = [i.nexson_id for i in data['node_list']]
+        id_list.sort()
+        s = ', '.join(['"{i}"'.format(i=i) for i in id_list])
+        out.write('{p}Multiple nodes ({s}) are mapped to the OTT ID "{o}"'.format(p=prefix,
+                                                                            s=s,
+                                                                            o=data['ott_id'],
+                                                                            ))
     elif wc == WarningCodes.TIP_WITHOUT_OTT_ID:
         out.write('{p}Tip node ("{n}") mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
                                                         n=data.nexson_id,
@@ -365,6 +374,8 @@ class Tree(NexsonDictWrapper):
         # check the tree structure...
         lowest_node_set = set()
         encountered_nodes = set()
+        ott_id2node = {}
+        multi_labelled_ott_id = set()
         for nd in self._node_list:
             cycle_node, path_to_root = nd.construct_path_to_root(encountered_nodes)
             #print cycle_node, [i.nexson_id for i in path_to_root], [i.nexson_id for i in encountered_nodes], [i.nexson_id for i in lowest_node_set]
@@ -377,7 +388,16 @@ class Tree(NexsonDictWrapper):
                     rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, context=self.get_tag_context())
                 elif nd._otu._ott_id is None:
                     rich_logger.warn(WarningCodes.TIP_WITHOUT_OTT_ID, nd, context=self.get_tag_context())
-
+                else:
+                    nl = ott_id2node.setdefault(nd._otu._ott_id, [])
+                    if len(nl) == 1:
+                        multi_labelled_ott_id.add(nd._otu._ott_id)
+                    nl.append(nd)
+        for ott_id in multi_labelled_ott_id:
+            rich_logger.warn(WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, 
+                             {'ott_id': ott_id,
+                              'node_list': ott_id2node.get(ott_id)},
+                              context=self.get_tag_context())
         if len(lowest_node_set) > 1:
             lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
             lowest_node_set.sort()
