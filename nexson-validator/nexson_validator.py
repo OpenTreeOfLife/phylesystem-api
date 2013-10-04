@@ -22,6 +22,7 @@ class WarningCodes():
               'MULTIPLE_EDGES_FOR_NODES',
               'CYCLE_DETECTED',
               'DISCONNECTED_GRAPH_DETECTED',
+              'INCORRECT_ROOT_NODE_LABEL',
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -54,6 +55,12 @@ def write_warning(out, prefix, wc, data, context=None):
                                                                                 n=nd.nexson_id,
                                                                                 f=nd._edge.nexson_id,
                                                                                 s=ed.nexson_id))
+    elif wc == WarningCodes.INCORRECT_ROOT_NODE_LABEL:
+        nd = data['tagged']
+        node_without_parent = data['node_without_parent']
+        out.write('{p}The node flagged as the root ("{t}") is not the node without a parent ("{r}")'.format(p=prefix,
+                                                                                t=nd.nexson_id,
+                                                                                r=node_without_parent.nexson_id))
     elif wc == WarningCodes.CYCLE_DETECTED:
         out.write('{p}Cycle in a tree detected passing througn node "{n}"'.format(p=prefix, n=data.nexson_id))
     elif wc == WarningCodes.DISCONNECTED_GRAPH_DETECTED:
@@ -341,7 +348,13 @@ class Tree(NexsonDictWrapper):
             lowest_node_set.sort()
             lowest_node_set = [i[1] for i in lowest_node_set]
             rich_logger.error(WarningCodes.DISCONNECTED_GRAPH_DETECTED, lowest_node_set, context=self.get_tag_context())
-        
+        elif len(lowest_node_set) == 1:
+            ln = list(lowest_node_set)[0]
+            if self._root_node is not None and self._root_node is not ln:
+                rich_logger.error(WarningCodes.INCORRECT_ROOT_NODE_LABEL,
+                                  {'tagged': self._root_node,
+                                   'node_without_parent': ln},
+                                  context=self.get_tag_context())
 
 class OTUCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'otu')
