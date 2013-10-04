@@ -20,6 +20,8 @@ class WarningCodes():
               'MULTIPLE_ROOT_NODES',
               'NO_ROOT_NODE',
               'MULTIPLE_EDGES_FOR_NODES',
+              'CYCLE_DETECTED',
+              'DISCONNECTED_GRAPH_DETECTED',
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -52,6 +54,15 @@ def write_warning(out, prefix, wc, data, context=None):
                                                                                 n=nd.nexson_id,
                                                                                 f=nd._edge.nexson_id,
                                                                                 s=ed.nexson_id))
+    elif wc == WarningCodes.CYCLE_DETECTED:
+        out.write('{p}Cycle in a tree detected passing througn node "{n}"'.format(p=prefix, n=data.nexson_id))
+    elif wc == WarningCodes.DISCONNECTED_GRAPH_DETECTED:
+        out.write('{p}Disconnected graph found instead of tree including root nodes:'.format(p=prefix))
+        for index, el in enumerate(data):
+            if index ==0:
+                out.write('"{i}"'.format(i=el.nexson_id))
+            else:
+                out.write(', "{i}"'.format(i=el.nexson_id))
     else:
         assert(False)
     if context is not None:
@@ -249,6 +260,24 @@ class Node(NexsonDictWrapper):
         check_key_presence(o, self, rich_logger)
         self._is_root = o.get('@root', False)
         self._edge = None
+    def construct_path_to_root(self, encountered_nodes):
+        n = self
+        p = []
+        s = set()
+        while n:
+            #print 'cp2r ', n.nexson_id
+            if n in s:
+                return n, p
+            if n in encountered_nodes:
+                return None, []
+            p.append(n)
+            s.add(n)
+            encountered_nodes.add(n)
+            if n._edge:
+                n = n._edge._source
+            else:
+                break
+        return None, p
 
 class Tree(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'edge', 'node')
@@ -298,6 +327,21 @@ class Tree(NexsonDictWrapper):
                     else:
                         self._edge_dict[eid] = n_edge
                 self._edge_list.append(n_edge)
+        lowest_node_set = set()
+        encountered_nodes = set()
+        for nd in self._node_list:
+            cycle_node, path_to_root = nd.construct_path_to_root(encountered_nodes)
+            #print cycle_node, [i.nexson_id for i in path_to_root], [i.nexson_id for i in encountered_nodes], [i.nexson_id for i in lowest_node_set]
+            if cycle_node:
+                rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, context='node in ' + self.get_tag_context())
+            if path_to_root:
+                lowest_node_set.add(path_to_root[-1])
+        if len(lowest_node_set) > 1:
+            lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
+            lowest_node_set.sort()
+            lowest_node_set = [i[1] for i in lowest_node_set]
+            rich_logger.error(WarningCodes.DISCONNECTED_GRAPH_DETECTED, lowest_node_set, context=self.get_tag_context())
+        
 
 class OTUCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'otu')
