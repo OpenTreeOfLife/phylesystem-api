@@ -24,6 +24,7 @@ class WarningCodes():
               'DISCONNECTED_GRAPH_DETECTED',
               'INCORRECT_ROOT_NODE_LABEL',
               'TIP_WITHOUT_OTU',
+              'TIP_WITHOUT_OTT_ID',
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -51,6 +52,10 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
     elif wc == WarningCodes.TIP_WITHOUT_OTU:
         out.write('{p}Tip node ("{n}") without a valid @otu value'.format(p=prefix, n=data.nexson_id))
+    elif wc == WarningCodes.TIP_WITHOUT_OTT_ID:
+        out.write('{p}Tip node ("{n}") mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
+                                                        n=data.nexson_id,
+                                                        o=data._otu.nexson_id))
     elif wc == WarningCodes.MULTIPLE_EDGES_FOR_NODES:
         nd = data['node']
         ed = data['edge']
@@ -357,6 +362,7 @@ class Tree(NexsonDictWrapper):
                     else:
                         self._edge_dict[eid] = n_edge
                 self._edge_list.append(n_edge)
+        # check the tree structure...
         lowest_node_set = set()
         encountered_nodes = set()
         for nd in self._node_list:
@@ -366,8 +372,12 @@ class Tree(NexsonDictWrapper):
                 rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, context='node in ' + self.get_tag_context())
             if path_to_root:
                 lowest_node_set.add(path_to_root[-1])
-            if len(nd._children) == 0 and nd._otu is None:
-                rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, context=self.get_tag_context())
+            if len(nd._children) == 0:
+                if nd._otu is None:
+                    rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, context=self.get_tag_context())
+                elif nd._otu._ott_id is None:
+                    rich_logger.warn(WarningCodes.TIP_WITHOUT_OTT_ID, nd, context=self.get_tag_context())
+
         if len(lowest_node_set) > 1:
             lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
             lowest_node_set.sort()
