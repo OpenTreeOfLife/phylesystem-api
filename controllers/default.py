@@ -10,10 +10,16 @@ def index():
 @request.restful()
 def api():
     response.view = 'generic.json'
-    def GET(resource,resource_id):
-        if not resource=='study': raise HTTP(400)
-        # return the correct nexson of study_id
-        return _get_nexson(resource_id)
+
+    def GET(resource,resource_id,jsoncallback=None,callback=None,_=None):
+        if not resource=='study': raise HTTP(400, 'resource != study [GET]')
+
+        # support JSONP request from another domain
+        if jsoncallback or callback:
+            response.view = 'generic.jsonp'
+
+        # return the correct nexson of study_id, using the specified view
+        return dict(FULL_RESPONSE=_get_nexson(resource_id))
 
     def POST(resource,resource_id, **kwargs):
         if not resource=='study': raise HTTP(400, 'resource != study')

@@ -1,0 +1,19 @@
+{{
+# adds support for cross-domain requests via JSONP
+try:
+    from gluon.serializers import json
+    cb_func_name = request.vars['jsoncallback'] or request.vars['callback']
+     
+    # web2py view expects a dict, but we might have a single JSON response ready
+    full_response = response._vars.get('FULL_RESPONSE', None)
+    if full_response:
+        cb_func_call = "%s(%s)" % (cb_func_name, json(full_response))
+    else:
+        cb_func_call = "%s(%s)" % (cb_func_name, json(response._vars))
+    pass
+
+    response.write(cb_func_call,escape=False)
+    response.headers['Content-Type']='application/jsonp'
+except:
+    raise HTTP(405,'no json')
+}}
