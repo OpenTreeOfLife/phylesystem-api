@@ -5,7 +5,12 @@ try:
     # web2py view expects a dict, but we might have a single JSON response ready
     full_response = response._vars.get('FULL_RESPONSE', None)
     if full_response:
-        response.write(json(full_response),escape=False)
+        # handle a large file passed as list-of-lines (or iterator?)
+        if type(full_response) == list:
+            for line in full_reponse:
+                response.write(line,escape=False)
+        else:
+            response.write(json(full_response),escape=False)
     else:
         response.write(json(response._vars),escape=False)
     pass
