@@ -52,7 +52,7 @@ if __name__ == '__main__':
     if not args.meta:
         v = FilteringLogger(codes_to_skip=[WarningCodes.UNVALIDATED_ANNOTATION])
     else:
-        v = ValidationLogger(WarningCodes.numeric_codes_registered)
+        v = ValidationLogger()
     try:
         n = NexSON(obj, v)
     except NexSONError as nx:
