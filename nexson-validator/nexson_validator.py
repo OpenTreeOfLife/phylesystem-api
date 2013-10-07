@@ -26,6 +26,9 @@ class WarningCodes():
               'TIP_WITHOUT_OTU',
               'TIP_WITHOUT_OTT_ID',
               'MULTIPLE_TIPS_MAPPED_TO_OTT_ID',
+              'INVALID_PROPERTY_VALUE',
+              'PROPERTY_VALUE_NOT_USEFUL',
+              'UNRECOGNIZED_PROPERTY_VALUE'
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -53,6 +56,15 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
     elif wc == WarningCodes.TIP_WITHOUT_OTU:
         out.write('{p}Tip node ("{n}") without a valid @otu value'.format(p=prefix, n=data.nexson_id))
+    elif wc == WarningCodes.PROPERTY_VALUE_NOT_USEFUL:
+        k, v = data['key'], data['value']
+        out.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
+    elif wc == WarningCodes.UNRECOGNIZED_PROPERTY_VALUE:
+        k, v = data['key'], data['value']
+        out.write('{p}Unrecognized value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
+    elif wc == WarningCodes.INVALID_PROPERTY_VALUE:
+        k, v = data['key'], data['value']
+        out.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
     elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
         id_list = [i.nexson_id for i in data['node_list']]
         id_list.sort()
@@ -170,10 +182,11 @@ class NexsonDictWrapper(object):
         self._meta2value = mv
         self._meta2list = mld
 
-    def get_singelton_meta(self, property_name):
+    def get_singelton_meta(self, property_name, warn_if_missing=True):
         v = self._meta2value.get(property_name)
         if v is None:
-            self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+            if warn_if_missing:
+                self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
         elif isinstance(v, MetaValueList):
             self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
         return v
@@ -326,6 +339,23 @@ class Tree(NexsonDictWrapper):
         check_key_presence(o, self, rich_logger)
         self._consume_meta(o)
         self._ingroup= self.get_singelton_meta('ot:inGroupClade')
+        self._branch_len_mode = self.get_singelton_meta('ot:branchLengthMode', warn_if_missing=False)
+        if self._branch_len_mode is not None:
+            if self._branch_len_mode not in ['ot:substitutionCount',
+                                             'ot:changeCount',
+                                             'ot:time',
+                                             'ot:bootstrapValues',
+                                             'ot:posteriorSupport']:
+                if self._branch_len_mode in ['ot:other', 'ot:undefined']:
+                    rich_logger.warn(WarningCodes.PROPERTY_VALUE_NOT_USEFUL,
+                                     {'key': 'ot:branchLengthMode',
+                                      'value': self._branch_len_mode},
+                                      contex='meta in ' + self.get_tag_context())
+                else:
+                    rich_logger.error(WarningCodes.UNRECOGNIZED_PROPERTY_VALUE,
+                                     {'key': 'ot:branchLengthMode',
+                                      'value': self._branch_len_mode},
+                                      contex='meta in ' + self.get_tag_context())
         self._node_dict = {}
         self._node_list = []
         self._edge_dict = {}
@@ -476,15 +506,15 @@ class TreeCollection(NexsonDictWrapper):
 class NexSON(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
     EXPECETED_KEYS = ('@id', 'otus', 'trees', 'meta')
-    PERMISSIBLE_KEYS = ("@about",
-                     "@generator",
-                     "@id",
-                     "@nexmljson",
-                     "@version",
-                     "@xmlns",
-                     "otus",
-                     "trees",
-                     "meta",
+    PERMISSIBLE_KEYS = ('@about',
+                     '@generator',
+                     '@id',
+                     '@nexmljson',
+                     '@version',
+                     '@xmlns',
+                     'otus',
+                     'trees',
+                     'meta',
                      )
     TAG_CONTEXT = 'nexml'
     def __init__(self, o, rich_logger=None):
