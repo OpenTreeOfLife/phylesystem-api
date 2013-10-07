@@ -2,7 +2,7 @@
 import sys
 SCRIPT_NAME = __name__  #@TODO replace with logger...
 ERR_STREAM = sys.stderr #@TODO replace with logger...
-from nexson_validator import NexSON, NexSONError, ValidationLogger
+from nexson_validator import NexSON, NexSONError, ValidationLogger, FilteringLogger, WarningCodes
 
 def error(msg):
     global SCRIPT_NAME, ERR_STREAM
@@ -32,6 +32,7 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='Validate a json file as Open Tree of Life NexSON')
     parser.add_argument('--verbose', dest='verbose', action='store_true', default=False, help='verbose output')
+    parser.add_argument('--meta', dest='meta', action='store_true', default=False, help='warn about unvalidated meta elements')
     parser.add_argument('input', metavar='filepath', type=unicode, nargs=1, help='filename')
     args = parser.parse_args()
     SCRIPT_NAME = os.path.split(sys.argv[0])[-1]
@@ -48,7 +49,10 @@ if __name__ == '__main__':
             raise vx
         else:
             sys.exit(1)
-    v = ValidationLogger()
+    if not args.meta:
+        v = FilteringLogger(codes_to_skip=[WarningCodes.UNVALIDATED_ANNOTATION])
+    else:
+        v = ValidationLogger(WarningCodes.numeric_codes_registered)
     try:
         n = NexSON(obj, v)
     except NexSONError as nx:

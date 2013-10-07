@@ -32,8 +32,10 @@ class WarningCodes():
               'MULTIPLE_TREES',
               'UNVALIDATED_ANNOTATION',
               ]
+    numeric_codes_registered = []
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
+    WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, context=None):
     if not out:
@@ -138,14 +140,31 @@ class ValidationLogger(DefaultRichLogger):
         self.errors.append(s.getvalue())
 
 class FilteringLogger(ValidationLogger):
-    def __init__(self, warning_codes):
+    def __init__(self, codes_to_register=None, codes_to_skip=None):
         ValidationLogger.__init__(self)
-        self.warning_code_list = warning_codes
+        self.codes_to_skip = set()
+        if codes_to_register:
+            self.registered = set(codes_to_register)
+            if codes_to_skip:
+                for el in codes_to_skip:
+                    self.codes_to_skip.add(el)
+                    assert el not in self.registered
+        else:
+            assert codes_to_skip
+            self.registered = set(WarningCodes.numeric_codes_registered)
+            for el in codes_to_skip:
+                self.codes_to_skip.add(el)
+                self.registered.remove(el)
+
     def warn(self, warning_code, data, context=None):
-        if warning_code in self.warning_code_list:
+        if warning_code in self.codes_to_skip:
+            return
+        if warning_code in self.registered:
             ValidationLogger.warn(self, warning_code, data, context)
     def error(self, warning_code, data, context=None):
-        if warning_code in self.warning_code_list:
+        if warning_code in self.codes_to_skip:
+            return
+        if warning_code in self.registered:
             ValidationLogger.error(self, warning_code, data, context)
 
 def check_key_presence(d, schema, rich_logger):
@@ -163,7 +182,7 @@ def check_key_presence(d, schema, rich_logger):
     for k in schema.REQUIRED_KEYS:
         if k not in d:
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, k, context=schema.get_tag_context())
-
+    
 
 class NexsonDictWrapper(object):
     '''Base class adding the nexson_id property'''
@@ -183,7 +202,8 @@ class NexsonDictWrapper(object):
     nexson_id = property(get_nexson_id)
     def get_tag_context(self):
         return '{f}(id={i})'.format(f=self.TAG_CONTEXT, i=self.nexson_id)
-    def _consume_meta(self, o):
+
+    def _consume_meta(self, o, rich_logger=None, expected_keys=None):
         '''Looks for a `meta` key to list in `o` (warns if not a list, but does not warn if absent)
         Converts each meta object to a Meta instance.
         adds 3 attributes to "self"
@@ -199,7 +219,10 @@ class NexsonDictWrapper(object):
         self._meta_list = ml
         self._meta2value = mv
         self._meta2list = mld
-
+        if (expected_keys is not None) and (rich_logger is not None):
+            for k, v in mv.iteritems():
+                if k not in expected_keys:
+                    rich_logger.warn(WarningCodes.UNVALIDATED_ANNOTATION, {'key':k, 'value': v}, context='meta in ' + self.get_tag_context())
     def get_singelton_meta(self, property_name, warn_if_missing=True):
         v = self._meta2value.get(property_name)
         if v is None:
@@ -208,6 +231,11 @@ class NexsonDictWrapper(object):
         elif isinstance(v, MetaValueList):
             self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
         return v
+    def consume_meta_and_check_keys(self, d, rich_logger):
+        '''calls check_key_presence and _consume_meta
+        '''
+        check_key_presence(d, self, rich_logger)
+        self._consume_meta(d, rich_logger, self.EXPECTED_META_KEYS)
 
 class MetaValueList(list):
     pass
@@ -261,11 +289,11 @@ class OTU(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
     EXPECETED_KEYS = ('@id',)
     PERMISSIBLE_KEYS = ('@id', '@about', '@label', 'meta')
+    EXPECTED_META_KEYS = ('ot:ottolid', 'ot:originalLabel')
     TAG_CONTEXT = 'otu'
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
-        check_key_presence(o, self, rich_logger)
-        self._consume_meta(o)
+        self.consume_meta_and_check_keys(o, rich_logger)
         self._ott_id = self.get_singelton_meta('ot:ottolid')
         self._original_label = self.get_singelton_meta('ot:originalLabel')
 
@@ -273,10 +301,11 @@ class Edge(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', '@source', '@target')
     EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = tuple(['@length'] + list(REQUIRED_KEYS))
+    EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'edge'
     def __init__(self, o, rich_logger, nodes, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
-        check_key_presence(o, self, rich_logger)
+        self.consume_meta_and_check_keys(o, rich_logger)
         self._source = None
         self._target = None
         sid = o.get('@source')
@@ -311,10 +340,11 @@ class Node(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
     EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = ('@id', '@otu', '@root')
+    EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'node'
     def __init__(self, o, rich_logger, otu_dict, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
-        check_key_presence(o, self, rich_logger)
+        self.consume_meta_and_check_keys(o, rich_logger)
         self._is_root = o.get('@root', False)
         self._edge = None
         self._children = []
@@ -351,13 +381,14 @@ class Tree(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'edge', 'node')
     EXPECETED_KEYS = ('@id',)
     PERMISSIBLE_KEYS = ('@id', '@about', 'node', 'edge', 'meta')
+    EXPECTED_META_KEYS = ('ot:inGroupClade', 'ot:branchLengthMode')
     TAG_CONTEXT = 'tree'
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
-        check_key_presence(o, self, rich_logger)
-        self._consume_meta(o)
+        self.consume_meta_and_check_keys(o, rich_logger)
         self._ingroup= self.get_singelton_meta('ot:inGroupClade')
-        self._branch_len_mode = self.get_singelton_meta('ot:branchLengthMode', warn_if_missing=False)
+        k = 'ot:branchLengthMode'
+        self._branch_len_mode = self.get_singelton_meta(k, warn_if_missing=False)
         if self._branch_len_mode is not None:
             if self._branch_len_mode not in ['ot:substitutionCount',
                                              'ot:changeCount',
@@ -366,12 +397,12 @@ class Tree(NexsonDictWrapper):
                                              'ot:posteriorSupport']:
                 if self._branch_len_mode in ['ot:other', 'ot:undefined']:
                     rich_logger.warn(WarningCodes.PROPERTY_VALUE_NOT_USEFUL,
-                                     {'key': 'ot:branchLengthMode',
+                                     {'key': k,
                                       'value': self._branch_len_mode},
                                       contex='meta in ' + self.get_tag_context())
                 else:
                     rich_logger.error(WarningCodes.UNRECOGNIZED_PROPERTY_VALUE,
-                                     {'key': 'ot:branchLengthMode',
+                                     {'key': k,
                                       'value': self._branch_len_mode},
                                       contex='meta in ' + self.get_tag_context())
         self._node_dict = {}
@@ -463,13 +494,13 @@ class OTUCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'otu')
     EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = ('@id', 'otu')
+    EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'otus'
     def __init__(self, o, rich_logger, container):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         self._as_list = []
         self._as_dict = {}
-        check_key_presence(o, self, rich_logger)
-        self._consume_meta(o)
+        self.consume_meta_and_check_keys(o, rich_logger)
         v = o.get('otu', [])
         if not isinstance(v, list):
             rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='otu in ' + self.get_tag_context())
@@ -488,13 +519,13 @@ class TreeCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'tree', '@otus')
     EXPECETED_KEYS = tuple()
     PERMISSIBLE_KEYS = ('@id', 'tree', '@otus')
+    EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'trees'
     def __init__(self, o, rich_logger, container):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         self._as_list = []
         self._as_dict = {}
-        check_key_presence(o, self, rich_logger)
-        self._consume_meta(o)
+        self.consume_meta_and_check_keys(o, rich_logger)
         self._otu_collection = None
         v = o.get('@otus')
         if v is not None:
@@ -534,6 +565,7 @@ class NexSON(NexsonDictWrapper):
                      'trees',
                      'meta',
                      )
+    EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'nexml'
     def __init__(self, o, rich_logger=None):
         '''Creates an object that validates `o` as a dictionary
@@ -553,7 +585,7 @@ class NexSON(NexsonDictWrapper):
             return ## EARLY EXIT!!
         self._nexml = o['nexml']
         check_key_presence(self._nexml, self, rich_logger)
-        self._consume_meta(self._nexml)
+        self._consume_meta(self._nexml, rich_logger, self.EXPECTED_META_KEYS)
         self._study_id = self.get_singelton_meta('ot:studyId')
         v = self._nexml.get('otus')
         if v is None:
