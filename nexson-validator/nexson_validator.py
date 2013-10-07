@@ -241,7 +241,7 @@ class OTU(NexsonDictWrapper):
 class Edge(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', '@source', '@target')
     EXPECETED_KEYS = tuple()
-    PERMISSIBLE_KEYS = REQUIRED_KEYS
+    PERMISSIBLE_KEYS = tuple(['@length'] + list(REQUIRED_KEYS))
     TAG_CONTEXT = 'edge'
     def __init__(self, o, rich_logger, nodes, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
