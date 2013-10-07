@@ -28,7 +28,8 @@ class WarningCodes():
               'MULTIPLE_TIPS_MAPPED_TO_OTT_ID',
               'INVALID_PROPERTY_VALUE',
               'PROPERTY_VALUE_NOT_USEFUL',
-              'UNRECOGNIZED_PROPERTY_VALUE'
+              'UNRECOGNIZED_PROPERTY_VALUE',
+              'MULTIPLE_TREES',
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -65,6 +66,8 @@ def write_warning(out, prefix, wc, data, context=None):
     elif wc == WarningCodes.INVALID_PROPERTY_VALUE:
         k, v = data['key'], data['value']
         out.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
+    elif wc == WarningCodes.MULTIPLE_TREES:
+        out.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
     elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
         id_list = [i.nexson_id for i in data['node_list']]
         id_list.sort()
@@ -548,6 +551,9 @@ class NexSON(NexsonDictWrapper):
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'tree', context='nexml')
         else:
             self.trees = TreeCollection(v, rich_logger, container=self)
+            if len(self.trees._as_list) > 1:
+                # should check for whether one tree is flagged to be used or all but one are flagged as to be deleted.
+                rich_logger.warn(WarningCodes.MULTIPLE_TREES, self.trees._as_list, context=self.trees.get_tag_context())
 
 
 def indented_keys(out, o, indentation='', indent=2):
