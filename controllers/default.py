@@ -21,7 +21,11 @@ def api():
         # return the correct nexson of study_id, using the specified view
         return dict(FULL_RESPONSE=_get_nexson(resource_id))
 
-    def POST(resource,resource_id, **kwargs):
+    def POST(resource, resource_id, **kwargs):
+        # support JSONP request from another domain
+        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
+            response.view = 'generic.jsonp'
+
         if not resource=='study': raise HTTP(400, 'resource != study')
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
@@ -36,6 +40,8 @@ def api():
 
         author_name  = kwargs.get('author_name','')
         author_email = kwargs.get('author_email','')
+        auth_token   = kwargs.get('auth_token','')  
+        # this is the GitHub API auth-token for a logged-in curator
 
         # overwrite the nexson of study_id with the POSTed data
         # 1) verify that it is valid json
