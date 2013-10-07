@@ -30,6 +30,7 @@ class WarningCodes():
               'PROPERTY_VALUE_NOT_USEFUL',
               'UNRECOGNIZED_PROPERTY_VALUE',
               'MULTIPLE_TREES',
+              'UNVALIDATED_ANNOTATION',
               ]
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
@@ -66,6 +67,9 @@ def write_warning(out, prefix, wc, data, context=None):
     elif wc == WarningCodes.INVALID_PROPERTY_VALUE:
         k, v = data['key'], data['value']
         out.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
+    elif wc == WarningCodes.UNVALIDATED_ANNOTATION:
+        k, v = data['key'], data['value']
+        out.write('{p}Annotation found, but not validated: "{k}" -> "{v}"'.format(p=prefix, k=k, v=v))
     elif wc == WarningCodes.MULTIPLE_TREES:
         out.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
     elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
@@ -132,6 +136,17 @@ class ValidationLogger(DefaultRichLogger):
         s = StringIO()
         write_warning(s, self.prefix, warning_code, data, context)
         self.errors.append(s.getvalue())
+
+class FilteringLogger(ValidationLogger):
+    def __init__(self, warning_codes):
+        ValidationLogger.__init__(self)
+        self.warning_code_list = warning_codes
+    def warn(self, warning_code, data, context=None):
+        if warning_code in self.warning_code_list:
+            ValidationLogger.warn(self, warning_code, data, context)
+    def error(self, warning_code, data, context=None):
+        if warning_code in self.warning_code_list:
+            ValidationLogger.error(self, warning_code, data, context)
 
 def check_key_presence(d, schema, rich_logger):
     '''Issues errors if `d` does not contain keys in the schema.PERMISSIBLE_KEYS iterable,
