@@ -30,8 +30,8 @@ if __name__ == '__main__':
     import os
     import codecs
     import argparse
-    sys.stdout = codecs.getwriter(sys.stdout.encoding)(sys.stdout)
-    sys.stderr = codecs.getwriter(sys.stdout.encoding)(sys.stderr)
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr)
 
     parser = argparse.ArgumentParser(description='Validate a json file as Open Tree of Life NexSON')
     parser.add_argument('--verbose', dest='verbose', action='store_true', default=False, help='verbose output')
