@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+import codecs
 from cStringIO import StringIO
 
 class NexSONError(Exception):
@@ -71,7 +72,8 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
     elif wc == WarningCodes.UNVALIDATED_ANNOTATION:
         k, v = data['key'], data['value']
-        out.write('{p}Annotation found, but not validated: "{k}" -> "{v}"'.format(p=prefix, k=k, v=v))
+        m = u'{p}Annotation found, but not validated: "{k}" -> "{v}"'.format(p=prefix, k=k, v=v)
+        out.write(m)
     elif wc == WarningCodes.MULTIPLE_TREES:
         out.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
     elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
@@ -131,11 +133,15 @@ class ValidationLogger(DefaultRichLogger):
         self.warnings = []
         self.errors = []
     def warn(self, warning_code, data, context=None):
-        s = StringIO()
+        b = StringIO()
+        ci = codecs.lookup('utf8')
+        s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
         write_warning(s, self.prefix, warning_code, data, context)
         self.warnings.append(s.getvalue())
     def error(self, warning_code, data, context=None):
-        s = StringIO()
+        b = StringIO()
+        ci = codecs.lookup('utf8')
+        s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
         write_warning(s, self.prefix, warning_code, data, context)
         self.errors.append(s.getvalue())
 
