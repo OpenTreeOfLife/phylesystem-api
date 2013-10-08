@@ -274,8 +274,10 @@ def _read_meta_list(o, container, rich_logger):
     to_meta_value = {}
     to_meta_list = {}
     m = o.get('meta', [])
+    if isinstance(m, dict):
+        m = [m]
     if not isinstance(m, list):
-        rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='meta in ' + container.get_tag_context())
+        rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, m, context='meta in ' + container.get_tag_context())
     else:
         for el in m:
             meta_el = Meta(el, rich_logger, container=container)
@@ -287,7 +289,7 @@ def _read_meta_list(o, container, rich_logger):
                 if not isinstance(cv, MetaValueList):
                     to_meta_value[mk] = MetaValueList([cv, v])
                 else:
-                    to_meta_value.append(v)
+                    to_meta_value[mk].append(v)
             to_meta_list.setdefault(mk, []).append(meta_el)
     return (meta_list, to_meta_value, to_meta_list)
 
@@ -410,7 +412,7 @@ class Tree(NexsonDictWrapper):
                     rich_logger.error(WarningCodes.UNRECOGNIZED_PROPERTY_VALUE,
                                      {'key': k,
                                       'value': self._branch_len_mode},
-                                      contex='meta in ' + self.get_tag_context())
+                                      context='meta in ' + self.get_tag_context())
         self._node_dict = {}
         self._node_list = []
         self._edge_dict = {}
