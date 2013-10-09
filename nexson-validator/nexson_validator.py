@@ -78,7 +78,7 @@ def write_warning(out, prefix, wc, data, context=None):
     elif wc == WarningCodes.MULTIPLE_TREES:
         out.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
     elif wc == WarningCodes.UNRECOGNIZED_TAG:
-        out.write('{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=data))
+        out.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=data))
     elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
         id_list = [i.nexson_id for i in data['node_list']]
         id_list.sort()
