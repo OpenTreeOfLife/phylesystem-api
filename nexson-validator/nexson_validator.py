@@ -39,7 +39,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
     WarningCodes.numeric_codes_registered.append(_n)
 
-def write_warning(out, prefix, wc, data, context=None):
+def write_warning(out, prefix, wc, data, container, subelement):
     if not out:
         return
     if wc == WarningCodes.MISSING_MANDATORY_KEY:
@@ -115,19 +115,21 @@ def write_warning(out, prefix, wc, data, context=None):
                 out.write(', "{i}"'.format(i=el.nexson_id))
     else:
         assert(False)
-    if context is not None:
-        out.write(' in "{el}"'.format(el=context))
+    if subelement:
+        out.write(' in "{el}"'.format(el=subelement))
+    if container is not None:
+        out.write(' in "{el}"'.format(el=container.get_tag_context()))
     out.write('\n')
 
 class DefaultRichLogger(object):
     def __init__(self):
         self.out = sys.stderr
         self.prefix = ''
-    def warn(self, warning_code, data, context=None):
-        write_warning(self.out, self.prefix, warning_code, data, context)
-    def error(self, warning_code, data, context=None):
+    def warn(self, warning_code, data, container, subelement=''):
+        write_warning(self.out, self.prefix, warning_code, data, container, subelement)
+    def error(self, warning_code, data, container, subelement=''):
         s = StringIO()
-        write_warning(s, self.prefix, warning_code, data, context)
+        write_warning(s, self.prefix, warning_code, data, container, subelement)
         raise NexSONError(s.getvalue())
 
 class ValidationLogger(DefaultRichLogger):
@@ -135,17 +137,17 @@ class ValidationLogger(DefaultRichLogger):
         DefaultRichLogger.__init__(self)
         self.warnings = []
         self.errors = []
-    def warn(self, warning_code, data, context=None):
+    def warn(self, warning_code, data, container, subelement=''):
         b = StringIO()
         ci = codecs.lookup('utf8')
         s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
-        write_warning(s, self.prefix, warning_code, data, context)
+        write_warning(s, self.prefix, warning_code, data, container, subelement)
         self.warnings.append(s.getvalue())
-    def error(self, warning_code, data, context=None):
+    def error(self, warning_code, data, container, subelement=''):
         b = StringIO()
         ci = codecs.lookup('utf8')
         s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
-        write_warning(s, self.prefix, warning_code, data, context)
+        write_warning(s, self.prefix, warning_code, data, container, subelement)
         self.errors.append(s.getvalue())
 
 class FilteringLogger(ValidationLogger):
@@ -165,16 +167,16 @@ class FilteringLogger(ValidationLogger):
                 self.codes_to_skip.add(el)
                 self.registered.remove(el)
 
-    def warn(self, warning_code, data, context=None):
+    def warn(self, warning_code, data, container, subelement=''):
         if warning_code in self.codes_to_skip:
             return
         if warning_code in self.registered:
-            ValidationLogger.warn(self, warning_code, data, context)
-    def error(self, warning_code, data, context=None):
+            ValidationLogger.warn(self, warning_code, data, container, subelement)
+    def error(self, warning_code, data, container, subelement=''):
         if warning_code in self.codes_to_skip:
             return
         if warning_code in self.registered:
-            ValidationLogger.error(self, warning_code, data, context)
+            ValidationLogger.error(self, warning_code, data, container, subelement)
 
 def check_key_presence(d, schema, rich_logger):
     '''Issues errors if `d` does not contain keys in the schema.PERMISSIBLE_KEYS iterable,
@@ -184,13 +186,13 @@ def check_key_presence(d, schema, rich_logger):
     '''
     for k in d.keys():
         if k not in schema.PERMISSIBLE_KEYS:
-            rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, context=schema.get_tag_context())
+            rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, container=schema)
     for k in schema.EXPECETED_KEYS:
         if k not in d:
-            rich_logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, k, context=schema.get_tag_context())
+            rich_logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, k, container=schema)
     for k in schema.REQUIRED_KEYS:
         if k not in d:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, k, context=schema.get_tag_context())
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, k, container=schema)
     
 
 class NexsonDictWrapper(object):
@@ -231,21 +233,21 @@ class NexsonDictWrapper(object):
         if (expected_keys is not None) and (rich_logger is not None):
             for k, v in mv.iteritems():
                 if k not in expected_keys:
-                    rich_logger.warn(WarningCodes.UNVALIDATED_ANNOTATION, {'key':k, 'value': v}, context='meta in ' + self.get_tag_context())
+                    rich_logger.warn(WarningCodes.UNVALIDATED_ANNOTATION, {'key':k, 'value': v}, container=self, subelement='meta')
     def get_singelton_meta(self, property_name, default=None, warn_if_missing=True):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
-                self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+                self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, container=self, subelement='meta')
             v = default
         elif isinstance(v, MetaValueList):
-            self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+            self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, container=self, subelement='meta')
         return v
     def get_list_meta(self, property_name, warn_if_missing=True):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
-                self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+                self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, container=self, subelement='meta')
             v = []
         return v
     def consume_meta_and_check_keys(self, d, rich_logger):
@@ -291,7 +293,7 @@ def _read_meta_list(o, container, rich_logger):
     if isinstance(m, dict):
         m = [m]
     if not isinstance(m, list):
-        rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, m, context='meta in ' + container.get_tag_context())
+        rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, m, container=container, subelement='meta')
     else:
         for el in m:
             meta_el = Meta(el, rich_logger, container=container)
@@ -337,7 +339,7 @@ class Edge(NexsonDictWrapper):
                 rich_logger.error(WarningCodes.REFERENCED_ID_NOT_FOUND,
                                   {'key': '@source',
                                    'value': sid},
-                                  context=self.get_tag_context())
+                                  container=self)
             else:
                 self._source._children.append(self)
         tid = o.get('@target')
@@ -347,13 +349,13 @@ class Edge(NexsonDictWrapper):
                 rich_logger.error(WarningCodes.REFERENCED_ID_NOT_FOUND,
                                   {'key': '@target',
                                    'value': tid},
-                                  context=self.get_tag_context())
+                                  container=self)
             elif self._target._edge is not None:
                 rich_logger.error(WarningCodes.MULTIPLE_EDGES_FOR_NODES, 
                                   {'node': self._target,
                                   'edge': self
                                   }, 
-                                  context=self.get_tag_context())
+                                  container=self)
             else:
                 self._target._edge = self
 
@@ -378,7 +380,7 @@ class Node(NexsonDictWrapper):
                 rich_logger.error(WarningCodes.REFERENCED_ID_NOT_FOUND,
                                   {'key': '@otu',
                                    'value': v},
-                                  context=self.get_tag_context())
+                                  container=self)
 
     def construct_path_to_root(self, encountered_nodes):
         n = self
@@ -422,18 +424,20 @@ class Tree(NexsonDictWrapper):
                     rich_logger.warn(WarningCodes.PROPERTY_VALUE_NOT_USEFUL,
                                      {'key': k,
                                       'value': self._branch_len_mode},
-                                      contex='meta in ' + self.get_tag_context())
+                                     container=self,
+                                     subelement='meta')
                 else:
                     rich_logger.error(WarningCodes.UNRECOGNIZED_PROPERTY_VALUE,
                                      {'key': k,
                                       'value': self._branch_len_mode},
-                                      context='meta in ' + self.get_tag_context())
+                                      container=self,
+                                      subelement='meta')
         self._tag_list = self.get_list_meta('ot:tag', warn_if_missing=False)
         if isinstance(self._tag_list, str) or isinstance(self._tag_list, unicode):
             self._tag_list = [self._tag_list]
         unexpected_tags = [i for i in self._tag_list if i not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
-            rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, context='meta in ' + self.get_tag_context())
+            rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, container=self, subelement='meta')
         self._tagged_for_deletion = 'delete' in self._tag_list
         self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
 
@@ -451,14 +455,14 @@ class Tree(NexsonDictWrapper):
         v = o.get('node', [])
         self._root_node = None
         if not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='node in ' + self.get_tag_context())
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, container=self, subelement='node')
         else:
             for el in v:
                 n_node = Node(el, rich_logger, otu_dict, container=self)
                 nid = n_node.nexson_id
                 if nid is not None:
                     if nid in self._node_dict:
-                        rich_logger.error(WarningCodes.REPEATED_ID, nid, context='node in ' + self.get_tag_context())
+                        rich_logger.error(WarningCodes.REPEATED_ID, nid, container=self, subelement='node')
                     else:
                         self._node_dict[nid] = n_node
                 self._node_list.append(n_node)
@@ -466,19 +470,19 @@ class Tree(NexsonDictWrapper):
                     if self._root_node is None:
                         self._root_node = n_node
                     else:
-                        rich_logger.error(WarningCodes.MULTIPLE_ROOT_NODES, nid, context='node in ' + self.get_tag_context())
+                        rich_logger.error(WarningCodes.MULTIPLE_ROOT_NODES, nid, container=self, subelement='node')
         if self._root_node is None:
-            rich_logger.warn(WarningCodes.NO_ROOT_NODE, None, self.get_tag_context())
+            rich_logger.warn(WarningCodes.NO_ROOT_NODE, None, container=self)
         v = o.get('edge', [])
         if not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='edge in ' + self.get_tag_context())
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, container=self, subelement='edge')
         else:
             for el in v:
                 n_edge = Edge(el, rich_logger, nodes=self._node_dict, container=self)
                 eid = n_edge.nexson_id
                 if eid is not None:
                     if eid in self._edge_dict:
-                        rich_logger.error(WarningCodes.REPEATED_ID, eid, context='edge in ' + self.get_tag_context())
+                        rich_logger.error(WarningCodes.REPEATED_ID, eid, container=self, subelement='edge')
                     else:
                         self._edge_dict[eid] = n_edge
                 self._edge_list.append(n_edge)
@@ -491,14 +495,14 @@ class Tree(NexsonDictWrapper):
             cycle_node, path_to_root = nd.construct_path_to_root(encountered_nodes)
             #print cycle_node, [i.nexson_id for i in path_to_root], [i.nexson_id for i in encountered_nodes], [i.nexson_id for i in lowest_node_set]
             if cycle_node:
-                rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, context='node in ' + self.get_tag_context())
+                rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, container=self, subelement='node')
             if path_to_root:
                 lowest_node_set.add(path_to_root[-1])
             if len(nd._children) == 0:
                 if nd._otu is None:
-                    rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, context=self.get_tag_context())
+                    rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, container=self)
                 elif nd._otu._ott_id is None:
-                    rich_logger.warn(WarningCodes.TIP_WITHOUT_OTT_ID, nd, context=self.get_tag_context())
+                    rich_logger.warn(WarningCodes.TIP_WITHOUT_OTT_ID, nd, container=self)
                 else:
                     nl = ott_id2node.setdefault(nd._otu._ott_id, [])
                     if len(nl) == 1:
@@ -508,19 +512,19 @@ class Tree(NexsonDictWrapper):
             rich_logger.warn(WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, 
                              {'ott_id': ott_id,
                               'node_list': ott_id2node.get(ott_id)},
-                              context=self.get_tag_context())
+                              container=self)
         if len(lowest_node_set) > 1:
             lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
             lowest_node_set.sort()
             lowest_node_set = [i[1] for i in lowest_node_set]
-            rich_logger.error(WarningCodes.DISCONNECTED_GRAPH_DETECTED, lowest_node_set, context=self.get_tag_context())
+            rich_logger.error(WarningCodes.DISCONNECTED_GRAPH_DETECTED, lowest_node_set, container=self)
         elif len(lowest_node_set) == 1:
             ln = list(lowest_node_set)[0]
             if self._root_node is not None and self._root_node is not ln:
                 rich_logger.error(WarningCodes.INCORRECT_ROOT_NODE_LABEL,
                                   {'tagged': self._root_node,
                                    'node_without_parent': ln},
-                                  context=self.get_tag_context())
+                                  container=self)
 
 class OTUCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'otu')
@@ -535,14 +539,14 @@ class OTUCollection(NexsonDictWrapper):
         self.consume_meta_and_check_keys(o, rich_logger)
         v = o.get('otu', [])
         if not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='otu in ' + self.get_tag_context())
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, container=self, subelement='otu')
         else:
             for el in v:
                 n_otu = OTU(el, rich_logger, container=self)
                 nid = n_otu.nexson_id
                 if nid is not None:
                     if nid in self._as_dict:
-                        rich_logger.error(WarningCodes.REPEATED_ID, nid, context='otu')
+                        rich_logger.error(WarningCodes.REPEATED_ID, nid, container=self, subelement='otu')
                     else:
                         self._as_dict[nid] = n_otu
                 self._as_list.append(n_otu)
@@ -567,19 +571,19 @@ class TreeCollection(NexsonDictWrapper):
                 rich_logger.error(WarningCodes.REFERENCED_ID_NOT_FOUND,
                                   {'key': '@otus',
                                    'value': v},
-                                  context='trees')
+                                  container=self)
             else:
                 self._otu_collection = container.otus
         v = o.get('tree', [])
         if not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, context='tree in ' + self.get_tag_context())
+            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, container=self, subelement='tree')
         else:
             for el in v:
                 tree = Tree(el, rich_logger, container=self)
                 tid = tree.nexson_id
                 if tid is not None:
                     if tid in self._as_dict:
-                        rich_logger.error(WarningCodes.REPEATED_ID, nid, context='tree')
+                        rich_logger.error(WarningCodes.REPEATED_ID, nid, container=self, subelement='tree')
                     else:
                         self._as_dict[tid] = tree
                 self._as_list.append(tree)
@@ -617,10 +621,10 @@ class NexSON(NexsonDictWrapper):
         NexsonDictWrapper.__init__(self, o, rich_logger, None)
         for k in o.keys():
             if k not in ['nexml']:
-                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k)
+                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, container=self)
         self._nexml = None
         if 'nexml' not in o:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml')
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml', container=self)
             return ## EARLY EXIT!!
         self._nexml = o['nexml']
 
@@ -637,21 +641,21 @@ class NexSON(NexsonDictWrapper):
             self._tags = [self._tags]
         unexpected_tags = [i for i in self._tags if i not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
-            rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, context='meta in ' + self.get_tag_context())
+            rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, container=self, subelement='meta')
         v = self._nexml.get('otus')
         if v is None:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', container=self)
             self.otus = None
         else:
             self.otus = OTUCollection(v, rich_logger, container=self)
         v = self._nexml.get('trees')
         if v is None:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'tree', context='nexml')
+            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'tree', container=self)
         else:
             self.trees = TreeCollection(v, rich_logger, container=self)
             possible_trees = [t for t in self.trees._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)]
             if len(possible_trees) > 1:
-                rich_logger.warn(WarningCodes.MULTIPLE_TREES, self.trees._as_list, context=self.trees.get_tag_context())
+                rich_logger.warn(WarningCodes.MULTIPLE_TREES, self.trees._as_list, container=self.trees)
 
 
 def indented_keys(out, o, indentation='', indent=2):
