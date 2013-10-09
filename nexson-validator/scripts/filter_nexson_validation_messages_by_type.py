@@ -32,8 +32,15 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='Validate a json file as Open Tree of Life NexSON')
     parser.add_argument('--verbose', dest='verbose', action='store_true', default=False, help='verbose output')
+    parser.add_argument('--filter', dest='filter', type=str, default='', help='type of Warning Code to emit')
     parser.add_argument('input', metavar='filepath', type=unicode, nargs=1, help='filename')
     args = parser.parse_args()
+    c = list(WarningCodes.facets)
+    c.sort()
+
+    if not args.filter:
+        m = 'The --filter option must be used to specify a warning code which should be one of:\n {x}'.format(x='\n '.join(c))
+        sys.exit(m)
     SCRIPT_NAME = os.path.split(sys.argv[0])[-1]
     try:
         inp_filepath = args.input[0]
@@ -48,7 +55,7 @@ if __name__ == '__main__':
             raise vx
         else:
             sys.exit(1)
-    v = FilteringLogger([WarningCodes.UNVALIDATED_ANNOTATION])
+    v = FilteringLogger([WarningCodes.facets.index(args.filter)])
     try:
         n = NexSON(obj, v)
     except NexSONError as nx:
