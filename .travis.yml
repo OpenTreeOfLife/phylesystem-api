@@ -14,6 +14,7 @@ before_script:
     - cd web2py; python web2py.py --nogui --debug=0 --port 9999 -a 'supersekret' &
     - cd ..
     - sleep 3 # give the webserver time to startup
+    - cd nexson-validator; python setup.py develop ; cd --
 
 script:
     - cd nexson-validator && ./test.sh
