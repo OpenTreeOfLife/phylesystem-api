@@ -32,6 +32,7 @@ class WarningCodes():
               'UNRECOGNIZED_PROPERTY_VALUE',
               'MULTIPLE_TREES',
               'UNVALIDATED_ANNOTATION',
+              'UNRECOGNIZED_TAG',
               ]
     numeric_codes_registered = []
 for _n, _f in enumerate(WarningCodes.facets):
@@ -76,6 +77,8 @@ def write_warning(out, prefix, wc, data, context=None):
         out.write(m)
     elif wc == WarningCodes.MULTIPLE_TREES:
         out.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
+    elif wc == WarningCodes.UNRECOGNIZED_TAG:
+        out.write('{p}Unrecognized value(s) for a tag: "{s}"'.format(p=prefix, s='", "'.join(data)))
     elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
         id_list = [i.nexson_id for i in data['node_list']]
         id_list.sort()
@@ -401,6 +404,7 @@ class Tree(NexsonDictWrapper):
     EXPECETED_KEYS = ('@id',)
     PERMISSIBLE_KEYS = ('@id', '@about', 'node', 'edge', 'meta')
     EXPECTED_META_KEYS = ('ot:inGroupClade', 'ot:branchLengthMode', 'ot:tag')
+    EXPECTED_TAGS = tuple()
     TAG_CONTEXT = 'tree'
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
@@ -427,6 +431,9 @@ class Tree(NexsonDictWrapper):
         self._tag_list = self.get_list_meta('ot:tag', warn_if_missing=False)
         if isinstance(self._tag_list, str) or isinstance(self._tag_list, unicode):
             self._tag_list = [self._tag_list]
+        unexpected_tags = [i for i in self._tag_list if i not in self.EXPECTED_TAGS]
+        if len(unexpected_tags) > 0:
+            rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, unexpected_tags, context='meta in ' + self.get_tag_context())
         self._tagged_for_deletion = 'delete' in self._tag_list
         self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
 
@@ -597,6 +604,7 @@ class NexSON(NexsonDictWrapper):
                           'ot:curatorName', 
                           'ot:studyPublicationReference', 
                           'ot:tag')
+    EXPECTED_TAGS = tuple()
     TAG_CONTEXT = 'nexml'
     def __init__(self, o, rich_logger=None):
         '''Creates an object that validates `o` as a dictionary
@@ -624,9 +632,12 @@ class NexSON(NexsonDictWrapper):
         self._study_year = self.get_singelton_meta('ot:studyYear')
         self._curator_name = self.get_singelton_meta('ot:curatorName')
         self._study_publication_reference = self.get_singelton_meta('ot:studyPublicationReference')
-        self._study_tag = self.get_list_meta('ot:tag', warn_if_missing=False)
-        if isinstance(self._study_tag, str) or isinstance(self._study_tag, unicode):
+        self._tags = self.get_list_meta('ot:tag', warn_if_missing=False)
+        if isinstance(self._tags, str) or isinstance(self._tags, unicode):
             self._tags = [self._tags]
+        unexpected_tags = [i for i in self._tags if i not in self.EXPECTED_TAGS]
+        if len(unexpected_tags) > 0:
+            rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, unexpected_tags, context='meta in ' + self.get_tag_context())
         v = self._nexml.get('otus')
         if v is None:
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
