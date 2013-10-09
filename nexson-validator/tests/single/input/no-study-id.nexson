@@ -2,6 +2,31 @@
 "nexml": {
 "@id": "some-id",
 "meta":[
+{
+"$": "Public, J. Q.. 2009. Some Bogus Title Here. Journal of Made-up Titles, 1(2): 3-12.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1600/036364409790139727", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Mark Holder", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2009, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1786733, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
 ],
 "otus":{
 "@id": "otus1",

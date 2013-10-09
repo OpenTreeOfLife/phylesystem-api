@@ -229,13 +229,21 @@ class NexsonDictWrapper(object):
             for k, v in mv.iteritems():
                 if k not in expected_keys:
                     rich_logger.warn(WarningCodes.UNVALIDATED_ANNOTATION, {'key':k, 'value': v}, context='meta in ' + self.get_tag_context())
-    def get_singelton_meta(self, property_name, warn_if_missing=True):
+    def get_singelton_meta(self, property_name, default=None, warn_if_missing=True):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
                 self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+            v = default
         elif isinstance(v, MetaValueList):
             self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+        return v
+    def get_list_meta(self, property_name, warn_if_missing=True):
+        v = self._meta2value.get(property_name)
+        if v is None:
+            if warn_if_missing:
+                self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, context='meta in ' + self.get_tag_context())
+            v = []
         return v
     def consume_meta_and_check_keys(self, d, rich_logger):
         '''calls check_key_presence and _consume_meta
@@ -256,6 +264,9 @@ class Meta(NexsonDictWrapper):
         return self._raw.get('@property')
     property_name = property(get_property_name)
     def get_property_value(self):
+        v = self._raw.get('@xsi:type')
+        if v == 'nex:ResourceMeta':
+            return self._raw.get('@href')
         return self._raw.get('$')
     value = property(get_property_value)
 
@@ -389,7 +400,7 @@ class Tree(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'edge', 'node')
     EXPECETED_KEYS = ('@id',)
     PERMISSIBLE_KEYS = ('@id', '@about', 'node', 'edge', 'meta')
-    EXPECTED_META_KEYS = ('ot:inGroupClade', 'ot:branchLengthMode')
+    EXPECTED_META_KEYS = ('ot:inGroupClade', 'ot:branchLengthMode', 'ot:tag')
     TAG_CONTEXT = 'tree'
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
@@ -413,6 +424,12 @@ class Tree(NexsonDictWrapper):
                                      {'key': k,
                                       'value': self._branch_len_mode},
                                       context='meta in ' + self.get_tag_context())
+        self._tag_list = self.get_list_meta('ot:tag', warn_if_missing=False)
+        if isinstance(self._tag_list, str) or isinstance(self._tag_list, unicode):
+            self._tag_list = [self._tag_list]
+        self._tagged_for_deletion = 'delete' in self._tag_list
+        self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
+
         self._node_dict = {}
         self._node_list = []
         self._edge_dict = {}
@@ -573,7 +590,13 @@ class NexSON(NexsonDictWrapper):
                      'trees',
                      'meta',
                      )
-    EXPECTED_META_KEYS = tuple()
+    EXPECTED_META_KEYS = ('ot:studyId', 
+                          'ot:focalClade',
+                          'ot:studyPublication',
+                          'ot:studyYear',
+                          'ot:curatorName', 
+                          'ot:studyPublicationReference', 
+                          'ot:tag')
     TAG_CONTEXT = 'nexml'
     def __init__(self, o, rich_logger=None):
         '''Creates an object that validates `o` as a dictionary
@@ -592,9 +615,18 @@ class NexSON(NexsonDictWrapper):
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml')
             return ## EARLY EXIT!!
         self._nexml = o['nexml']
+
         check_key_presence(self._nexml, self, rich_logger)
         self._consume_meta(self._nexml, rich_logger, self.EXPECTED_META_KEYS)
         self._study_id = self.get_singelton_meta('ot:studyId')
+        self._focal_clade_id = self.get_singelton_meta('ot:focalClade')
+        self._study_publication = self.get_singelton_meta('ot:studyPublication')
+        self._study_year = self.get_singelton_meta('ot:studyYear')
+        self._curator_name = self.get_singelton_meta('ot:curatorName')
+        self._study_publication_reference = self.get_singelton_meta('ot:studyPublicationReference')
+        self._study_tag = self.get_list_meta('ot:tag', warn_if_missing=False)
+        if isinstance(self._study_tag, str) or isinstance(self._study_tag, unicode):
+            self._tags = [self._tags]
         v = self._nexml.get('otus')
         if v is None:
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', context='nexml')
@@ -606,8 +638,8 @@ class NexSON(NexsonDictWrapper):
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'tree', context='nexml')
         else:
             self.trees = TreeCollection(v, rich_logger, container=self)
-            if len(self.trees._as_list) > 1:
-                # should check for whether one tree is flagged to be used or all but one are flagged as to be deleted.
+            possible_trees = [t for t in self.trees._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)]
+            if len(possible_trees) > 1:
                 rich_logger.warn(WarningCodes.MULTIPLE_TREES, self.trees._as_list, context=self.trees.get_tag_context())
 
 
