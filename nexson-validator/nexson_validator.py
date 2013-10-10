@@ -454,7 +454,7 @@ class Tree(NexsonDictWrapper):
         self._branch_len_mode = self.get_singelton_meta(k, warn_if_missing=False)
         if self._branch_len_mode is not None:
             if self._branch_len_mode not in ['ot:substitutionCount',
-                                             'ot:changeCount',
+                                             'ot:changesCount',
                                              'ot:time',
                                              'ot:bootstrapValues',
                                              'ot:posteriorSupport']:
