@@ -120,39 +120,77 @@ def write_warning(out, prefix, wc, data, container, subelement):
     if container is not None:
         out.write(' in "{el}"'.format(el=container.get_tag_context()))
     out.write('\n')
+class SeverityCodes(object):
+    ERROR, WARNING = range(2)
+
+class WarningMessage(object):
+    def __init__(self,
+                 warning_code,
+                 data,
+                 container,
+                 subelement='',
+                 source_identifier=None,
+                 severity=SeverityCodes.WARNING):
+        self.warning_code = warning_code
+        self.warning_data = data
+        self.container = container
+        self.subelement = subelement
+        self.source_identifier = source_identifier
+        self.severity = severity
+    def write(self, outstream, prefix):
+        write_warning(outstream,
+                      prefix,
+                      self.warning_code,
+                      self.warning_data,
+                      self.container,
+                      self.subelement)
+    def __unicode__(self, prefix=''):
+        b = StringIO()
+        ci = codecs.lookup('utf8')
+        s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
+        self.write(s, prefix)
+        return s.getvalue()
+    def getvalue(self, prefix=''):
+        return self.__unicode__(prefix=prefix)
 
 class DefaultRichLogger(object):
-    def __init__(self):
+    def __init__(self, store_messages=False):
         self.out = sys.stderr
-        self.prefix = ''
-    def warn(self, warning_code, data, container, subelement=''):
-        write_warning(self.out, self.prefix, warning_code, data, container, subelement)
-    def error(self, warning_code, data, container, subelement=''):
-        s = StringIO()
-        write_warning(s, self.prefix, warning_code, data, container, subelement)
-        raise NexSONError(s.getvalue())
-
-class ValidationLogger(DefaultRichLogger):
-    def __init__(self):
-        DefaultRichLogger.__init__(self)
+        self.source_identifier = None
+        self.store_messages_as_obj = store_messages
         self.warnings = []
         self.errors = []
+        self.prefix = ''
     def warn(self, warning_code, data, container, subelement=''):
-        b = StringIO()
-        ci = codecs.lookup('utf8')
-        s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
-        write_warning(s, self.prefix, warning_code, data, container, subelement)
-        self.warnings.append(s.getvalue())
+        m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.WARNING)
+        if self.store_messages_as_obj:
+            self.warnings.append(m)
+        else:
+            m.write(self.out, self.prefix)
     def error(self, warning_code, data, container, subelement=''):
-        b = StringIO()
-        ci = codecs.lookup('utf8')
-        s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
-        write_warning(s, self.prefix, warning_code, data, container, subelement)
-        self.errors.append(s.getvalue())
+        m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.ERROR)
+        if self.store_messages_as_obj:
+            self.errors.append(m)
+        else:
+            raise NexSONError(m.getvalue(self.prefix))
+
+class ValidationLogger(DefaultRichLogger):
+    def __init__(self, store_messages=False):
+        DefaultRichLogger.__init__(self, store_messages=store_messages)
+    def warn(self, warning_code, data, container, subelement=''):
+        m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.WARNING)
+        if not self.store_messages_as_obj:
+            m = m.getvalue(self.prefix)
+        self.warnings.append(m)
+    def error(self, warning_code, data, container, subelement=''):
+        m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.ERROR)
+        if not self.store_messages_as_obj:
+            m = m.getvalue(self.prefix)
+        self.errors.append(m)
 
 class FilteringLogger(ValidationLogger):
-    def __init__(self, codes_to_register=None, codes_to_skip=None):
-        ValidationLogger.__init__(self)
+    def __init__(self, codes_to_register=None, codes_to_skip=None, store_messages=False):
+        ValidationLogger.__init__(self, store_messages=store_messages)
         self.codes_to_skip = set()
         if codes_to_register:
             self.registered = set(codes_to_register)
