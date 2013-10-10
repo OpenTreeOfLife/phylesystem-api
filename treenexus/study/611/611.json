@@ -1,0 +1,1966 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Manos P., Soltis P., Soltis D., Manchester S., Oh S., Bell C., Dilcher D., & Stone D. 2006. Phylogeny of Extant and Fossil Juglandaceae Inferred from the Integration of Molecular and Morphological Data Sets. Systematic Biology, 56(3): 412-430.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1080/10635150701408523", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1715", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "611", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2006, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 921628, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "fossil taxa don't map", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus611", 
+"otu": [
+{
+"@about": "#otu176892", 
+"@id": "otu176892", 
+"@label": "Juglans nigra", 
+"meta": [
+{
+"$": 1072887, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Juglans nigra", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176893", 
+"@id": "otu176893", 
+"@label": "Juglans regia", 
+"meta": [
+{
+"$": 138717, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Juglans regia uc151", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176894", 
+"@id": "otu176894", 
+"@label": "Palaeoplatycarya", 
+"meta": {
+"$": "Palaeoplatycarya", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu176895", 
+"@id": "otu176895", 
+"@label": "Cyclocarya paliurus", 
+"meta": [
+{
+"$": 1091658, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cyclocarya paliurus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176896", 
+"@id": "otu176896", 
+"@label": "Engelhardia roxburghiana", 
+"meta": [
+{
+"$": 722586, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Engelhardia roxburghiana C", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176897", 
+"@id": "otu176897", 
+"@label": "Palaeooreomunnea stoneana", 
+"meta": {
+"$": "Palaeooreomunnea stoneana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu176898", 
+"@id": "otu176898", 
+"@label": "Engelhardia roxburghiana", 
+"meta": [
+{
+"$": 722586, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Engelhardia roxburghiana B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176899", 
+"@id": "otu176899", 
+"@label": "Carya cordiformis", 
+"meta": [
+{
+"$": 199032, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carya cordiformis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176900", 
+"@id": "otu176900", 
+"@label": "Oreomunnea mexicana", 
+"meta": [
+{
+"$": 722596, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oreomunnea mexicana C", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176901", 
+"@id": "otu176901", 
+"@label": "Oreomunnea pterocarpa", 
+"meta": [
+{
+"$": 351762, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oreomunnea pterocarpa A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176902", 
+"@id": "otu176902", 
+"@label": "Engelhardia roxburghiana", 
+"meta": [
+{
+"$": 722586, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Engelhardia roxburghiana D", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176903", 
+"@id": "otu176903", 
+"@label": "Carya illinoinensis", 
+"meta": [
+{
+"$": 259040, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carya illinoinensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176904", 
+"@id": "otu176904", 
+"@label": "Carya glabra", 
+"meta": [
+{
+"$": 899017, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carya glabra", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176905", 
+"@id": "otu176905", 
+"@label": "Alfaroa manningii", 
+"meta": [
+{
+"$": 199049, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alfaroa manningii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176906", 
+"@id": "otu176906", 
+"@label": "Engelhardia roxburghiana", 
+"meta": [
+{
+"$": 722586, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Engelhardia roxburghiana A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176907", 
+"@id": "otu176907", 
+"@label": "Alfaroa guanacastensis", 
+"meta": [
+{
+"$": 199043, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alfaroa guanacastensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176908", 
+"@id": "otu176908", 
+"@label": "Carya tomentosa", 
+"meta": [
+{
+"$": 591062, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carya tomentosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176909", 
+"@id": "otu176909", 
+"@label": "Carya cathayensis", 
+"meta": [
+{
+"$": 199047, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carya cathayensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176910", 
+"@id": "otu176910", 
+"@label": "Oreomunnea pterocarpa", 
+"meta": [
+{
+"$": 351762, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oreomunnea pterocarpa B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176911", 
+"@id": "otu176911", 
+"@label": "Pterocarya stenoptera", 
+"meta": [
+{
+"$": 591068, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pterocarya stenopteraA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176912", 
+"@id": "otu176912", 
+"@label": "Oreomunnea mexicana", 
+"meta": [
+{
+"$": 722596, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oreomunnea mexicana B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176913", 
+"@id": "otu176913", 
+"@label": "Carya ovata", 
+"meta": [
+{
+"$": 1064112, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carya ovata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176914", 
+"@id": "otu176914", 
+"@label": "Pterocarya macroptera", 
+"meta": [
+{
+"$": 722594, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pterocarya macroptera", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176915", 
+"@id": "otu176915", 
+"@label": "Annamocarya sinensis", 
+"meta": [
+{
+"$": 199045, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Annamocarya sinensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176916", 
+"@id": "otu176916", 
+"@label": "Engelhardia serrata", 
+"meta": [
+{
+"$": 514172, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Engelhardia serrata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176917", 
+"@id": "otu176917", 
+"@label": "Juglans cinerea", 
+"meta": [
+{
+"$": 70111, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Juglans cinerea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176918", 
+"@id": "otu176918", 
+"@label": "Carya myristiciformis", 
+"meta": [
+{
+"$": 199037, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carya myristiciformis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176919", 
+"@id": "otu176919", 
+"@label": "Juglans mandshurica", 
+"meta": [
+{
+"$": 70093, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Juglans mandschurica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176920", 
+"@id": "otu176920", 
+"@label": "Rhoiptelea chiliantha", 
+"meta": [
+{
+"$": 71508, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rhoiptelia chiliantha", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176921", 
+"@id": "otu176921", 
+"@label": "Cruciptera", 
+"meta": [
+{
+"$": 4729919, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cruciptera schaarsc", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176922", 
+"@id": "otu176922", 
+"@label": "Platycarya americana", 
+"meta": [
+{
+"$": 5146874, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Platycarya americana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176923", 
+"@id": "otu176923", 
+"@label": "Juglans microcarpa", 
+"meta": [
+{
+"$": 70096, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Juglans microcarpa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176924", 
+"@id": "otu176924", 
+"@label": "Polyptera manningii", 
+"meta": {
+"$": "Polyptera manningii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu176925", 
+"@id": "otu176925", 
+"@label": "Carya tonkinensis", 
+"meta": [
+{
+"$": 722580, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carya tonkinensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176926", 
+"@id": "otu176926", 
+"@label": "Alfaroa costaricensis", 
+"meta": [
+{
+"$": 199041, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alfaroa costaricensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176927", 
+"@id": "otu176927", 
+"@label": "Oreomunnea mexicana", 
+"meta": [
+{
+"$": 722596, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oreomunnea mexicana A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176928", 
+"@id": "otu176928", 
+"@label": "Alfaroa williamsii", 
+"meta": [
+{
+"$": 1064109, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alfaroa williamsii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176929", 
+"@id": "otu176929", 
+"@label": "Platycarya strobilacea", 
+"meta": [
+{
+"$": 264610, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Platycarya strobilacea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176930", 
+"@id": "otu176930", 
+"@label": "Engelhardia spicata", 
+"meta": [
+{
+"$": 722583, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Engelhardia spicata A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176931", 
+"@id": "otu176931", 
+"@label": "Juglans regia", 
+"meta": [
+{
+"$": 138717, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Juglans regia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees611", 
+"@otus": "otus611", 
+"tree": [
+{
+"@id": "tree962", 
+"edge": [
+{
+"@id": "edge385452", 
+"@source": "node385451", 
+"@target": "node385452"
+}, 
+{
+"@id": "edge385453", 
+"@source": "node385451", 
+"@target": "node385453"
+}, 
+{
+"@id": "edge385454", 
+"@source": "node385453", 
+"@target": "node385454"
+}, 
+{
+"@id": "edge385455", 
+"@source": "node385454", 
+"@target": "node385455"
+}, 
+{
+"@id": "edge385456", 
+"@source": "node385455", 
+"@target": "node385456"
+}, 
+{
+"@id": "edge385457", 
+"@source": "node385456", 
+"@target": "node385457"
+}, 
+{
+"@id": "edge385458", 
+"@source": "node385457", 
+"@target": "node385458"
+}, 
+{
+"@id": "edge385459", 
+"@source": "node385458", 
+"@target": "node385459"
+}, 
+{
+"@id": "edge385460", 
+"@source": "node385458", 
+"@target": "node385460"
+}, 
+{
+"@id": "edge385461", 
+"@source": "node385457", 
+"@target": "node385461"
+}, 
+{
+"@id": "edge385462", 
+"@source": "node385456", 
+"@target": "node385462"
+}, 
+{
+"@id": "edge385463", 
+"@source": "node385455", 
+"@target": "node385463"
+}, 
+{
+"@id": "edge385464", 
+"@source": "node385463", 
+"@target": "node385464"
+}, 
+{
+"@id": "edge385465", 
+"@source": "node385464", 
+"@target": "node385465"
+}, 
+{
+"@id": "edge385466", 
+"@source": "node385464", 
+"@target": "node385466"
+}, 
+{
+"@id": "edge385467", 
+"@source": "node385463", 
+"@target": "node385467"
+}, 
+{
+"@id": "edge385468", 
+"@source": "node385467", 
+"@target": "node385468"
+}, 
+{
+"@id": "edge385469", 
+"@source": "node385468", 
+"@target": "node385469"
+}, 
+{
+"@id": "edge385470", 
+"@source": "node385468", 
+"@target": "node385470"
+}, 
+{
+"@id": "edge385471", 
+"@source": "node385470", 
+"@target": "node385471"
+}, 
+{
+"@id": "edge385472", 
+"@source": "node385470", 
+"@target": "node385472"
+}, 
+{
+"@id": "edge385473", 
+"@source": "node385467", 
+"@target": "node385473"
+}, 
+{
+"@id": "edge385474", 
+"@source": "node385473", 
+"@target": "node385474"
+}, 
+{
+"@id": "edge385475", 
+"@source": "node385474", 
+"@target": "node385475"
+}, 
+{
+"@id": "edge385476", 
+"@source": "node385474", 
+"@target": "node385476"
+}, 
+{
+"@id": "edge385477", 
+"@source": "node385473", 
+"@target": "node385477"
+}, 
+{
+"@id": "edge385478", 
+"@source": "node385477", 
+"@target": "node385478"
+}, 
+{
+"@id": "edge385479", 
+"@source": "node385477", 
+"@target": "node385479"
+}, 
+{
+"@id": "edge385480", 
+"@source": "node385454", 
+"@target": "node385480"
+}, 
+{
+"@id": "edge385481", 
+"@source": "node385480", 
+"@target": "node385481"
+}, 
+{
+"@id": "edge385482", 
+"@source": "node385480", 
+"@target": "node385482"
+}, 
+{
+"@id": "edge385483", 
+"@source": "node385453", 
+"@target": "node385483"
+}, 
+{
+"@id": "edge385484", 
+"@source": "node385483", 
+"@target": "node385484"
+}, 
+{
+"@id": "edge385485", 
+"@source": "node385483", 
+"@target": "node385485"
+}, 
+{
+"@id": "edge385486", 
+"@source": "node385485", 
+"@target": "node385486"
+}, 
+{
+"@id": "edge385487", 
+"@source": "node385486", 
+"@target": "node385487"
+}, 
+{
+"@id": "edge385488", 
+"@source": "node385487", 
+"@target": "node385488"
+}, 
+{
+"@id": "edge385489", 
+"@source": "node385488", 
+"@target": "node385489"
+}, 
+{
+"@id": "edge385490", 
+"@source": "node385489", 
+"@target": "node385490"
+}, 
+{
+"@id": "edge385491", 
+"@source": "node385490", 
+"@target": "node385491"
+}, 
+{
+"@id": "edge385492", 
+"@source": "node385490", 
+"@target": "node385492"
+}, 
+{
+"@id": "edge385493", 
+"@source": "node385489", 
+"@target": "node385493"
+}, 
+{
+"@id": "edge385494", 
+"@source": "node385493", 
+"@target": "node385494"
+}, 
+{
+"@id": "edge385495", 
+"@source": "node385493", 
+"@target": "node385495"
+}, 
+{
+"@id": "edge385496", 
+"@source": "node385488", 
+"@target": "node385496"
+}, 
+{
+"@id": "edge385497", 
+"@source": "node385496", 
+"@target": "node385497"
+}, 
+{
+"@id": "edge385498", 
+"@source": "node385496", 
+"@target": "node385498"
+}, 
+{
+"@id": "edge385499", 
+"@source": "node385487", 
+"@target": "node385499"
+}, 
+{
+"@id": "edge385500", 
+"@source": "node385499", 
+"@target": "node385500"
+}, 
+{
+"@id": "edge385501", 
+"@source": "node385499", 
+"@target": "node385501"
+}, 
+{
+"@id": "edge385502", 
+"@source": "node385486", 
+"@target": "node385502"
+}, 
+{
+"@id": "edge385503", 
+"@source": "node385485", 
+"@target": "node385503"
+}, 
+{
+"@id": "edge385504", 
+"@source": "node385503", 
+"@target": "node385504"
+}, 
+{
+"@id": "edge385505", 
+"@source": "node385504", 
+"@target": "node385505"
+}, 
+{
+"@id": "edge385506", 
+"@source": "node385504", 
+"@target": "node385506"
+}, 
+{
+"@id": "edge385507", 
+"@source": "node385506", 
+"@target": "node385507"
+}, 
+{
+"@id": "edge385508", 
+"@source": "node385506", 
+"@target": "node385508"
+}, 
+{
+"@id": "edge385509", 
+"@source": "node385503", 
+"@target": "node385509"
+}, 
+{
+"@id": "edge385510", 
+"@source": "node385509", 
+"@target": "node385510"
+}, 
+{
+"@id": "edge385511", 
+"@source": "node385510", 
+"@target": "node385511"
+}, 
+{
+"@id": "edge385512", 
+"@source": "node385510", 
+"@target": "node385512"
+}, 
+{
+"@id": "edge385513", 
+"@source": "node385509", 
+"@target": "node385513"
+}, 
+{
+"@id": "edge385514", 
+"@source": "node385513", 
+"@target": "node385514"
+}, 
+{
+"@id": "edge385515", 
+"@source": "node385513", 
+"@target": "node385515"
+}, 
+{
+"@id": "edge385516", 
+"@source": "node385513", 
+"@target": "node385516"
+}, 
+{
+"@id": "edge385517", 
+"@source": "node385513", 
+"@target": "node385517"
+}
+], 
+"node": [
+{
+"@id": "node385451", 
+"@root": "true"
+}, 
+{
+"@id": "node385452", 
+"@otu": "otu176920"
+}, 
+{
+"@id": "node385453"
+}, 
+{
+"@id": "node385454"
+}, 
+{
+"@id": "node385455"
+}, 
+{
+"@id": "node385456"
+}, 
+{
+"@id": "node385457"
+}, 
+{
+"@id": "node385458"
+}, 
+{
+"@id": "node385459", 
+"@otu": "otu176906"
+}, 
+{
+"@id": "node385460", 
+"@otu": "otu176898"
+}, 
+{
+"@id": "node385461", 
+"@otu": "otu176902"
+}, 
+{
+"@id": "node385462", 
+"@otu": "otu176896"
+}, 
+{
+"@id": "node385463"
+}, 
+{
+"@id": "node385464"
+}, 
+{
+"@id": "node385465", 
+"@otu": "otu176901"
+}, 
+{
+"@id": "node385466", 
+"@otu": "otu176910"
+}, 
+{
+"@id": "node385467"
+}, 
+{
+"@id": "node385468"
+}, 
+{
+"@id": "node385469", 
+"@otu": "otu176927"
+}, 
+{
+"@id": "node385470"
+}, 
+{
+"@id": "node385471", 
+"@otu": "otu176912"
+}, 
+{
+"@id": "node385472", 
+"@otu": "otu176900"
+}, 
+{
+"@id": "node385473"
+}, 
+{
+"@id": "node385474"
+}, 
+{
+"@id": "node385475", 
+"@otu": "otu176926"
+}, 
+{
+"@id": "node385476", 
+"@otu": "otu176928"
+}, 
+{
+"@id": "node385477"
+}, 
+{
+"@id": "node385478", 
+"@otu": "otu176907"
+}, 
+{
+"@id": "node385479", 
+"@otu": "otu176905"
+}, 
+{
+"@id": "node385480"
+}, 
+{
+"@id": "node385481", 
+"@otu": "otu176916"
+}, 
+{
+"@id": "node385482", 
+"@otu": "otu176930"
+}, 
+{
+"@id": "node385483"
+}, 
+{
+"@id": "node385484", 
+"@otu": "otu176929"
+}, 
+{
+"@id": "node385485"
+}, 
+{
+"@id": "node385486"
+}, 
+{
+"@id": "node385487"
+}, 
+{
+"@id": "node385488"
+}, 
+{
+"@id": "node385489"
+}, 
+{
+"@id": "node385490"
+}, 
+{
+"@id": "node385491", 
+"@otu": "otu176893"
+}, 
+{
+"@id": "node385492", 
+"@otu": "otu176931"
+}, 
+{
+"@id": "node385493"
+}, 
+{
+"@id": "node385494", 
+"@otu": "otu176919"
+}, 
+{
+"@id": "node385495", 
+"@otu": "otu176917"
+}, 
+{
+"@id": "node385496"
+}, 
+{
+"@id": "node385497", 
+"@otu": "otu176892"
+}, 
+{
+"@id": "node385498", 
+"@otu": "otu176923"
+}, 
+{
+"@id": "node385499"
+}, 
+{
+"@id": "node385500", 
+"@otu": "otu176914"
+}, 
+{
+"@id": "node385501", 
+"@otu": "otu176911"
+}, 
+{
+"@id": "node385502", 
+"@otu": "otu176895"
+}, 
+{
+"@id": "node385503"
+}, 
+{
+"@id": "node385504"
+}, 
+{
+"@id": "node385505", 
+"@otu": "otu176915"
+}, 
+{
+"@id": "node385506"
+}, 
+{
+"@id": "node385507", 
+"@otu": "otu176909"
+}, 
+{
+"@id": "node385508", 
+"@otu": "otu176925"
+}, 
+{
+"@id": "node385509"
+}, 
+{
+"@id": "node385510"
+}, 
+{
+"@id": "node385511", 
+"@otu": "otu176899"
+}, 
+{
+"@id": "node385512", 
+"@otu": "otu176903"
+}, 
+{
+"@id": "node385513"
+}, 
+{
+"@id": "node385514", 
+"@otu": "otu176918"
+}, 
+{
+"@id": "node385515", 
+"@otu": "otu176913"
+}, 
+{
+"@id": "node385516", 
+"@otu": "otu176904"
+}, 
+{
+"@id": "node385517", 
+"@otu": "otu176908"
+}
+]
+}, 
+{
+"@id": "tree963", 
+"edge": [
+{
+"@id": "edge385519", 
+"@source": "node385518", 
+"@target": "node385519"
+}, 
+{
+"@id": "edge385520", 
+"@source": "node385518", 
+"@target": "node385520"
+}, 
+{
+"@id": "edge385521", 
+"@source": "node385520", 
+"@target": "node385521"
+}, 
+{
+"@id": "edge385522", 
+"@source": "node385521", 
+"@target": "node385522"
+}, 
+{
+"@id": "edge385523", 
+"@source": "node385522", 
+"@target": "node385523"
+}, 
+{
+"@id": "edge385524", 
+"@source": "node385523", 
+"@target": "node385524"
+}, 
+{
+"@id": "edge385525", 
+"@source": "node385524", 
+"@target": "node385525"
+}, 
+{
+"@id": "edge385526", 
+"@source": "node385525", 
+"@target": "node385526"
+}, 
+{
+"@id": "edge385527", 
+"@source": "node385525", 
+"@target": "node385527"
+}, 
+{
+"@id": "edge385528", 
+"@source": "node385524", 
+"@target": "node385528"
+}, 
+{
+"@id": "edge385529", 
+"@source": "node385523", 
+"@target": "node385529"
+}, 
+{
+"@id": "edge385530", 
+"@source": "node385522", 
+"@target": "node385530"
+}, 
+{
+"@id": "edge385531", 
+"@source": "node385530", 
+"@target": "node385531"
+}, 
+{
+"@id": "edge385532", 
+"@source": "node385531", 
+"@target": "node385532"
+}, 
+{
+"@id": "edge385533", 
+"@source": "node385531", 
+"@target": "node385533"
+}, 
+{
+"@id": "edge385534", 
+"@source": "node385530", 
+"@target": "node385534"
+}, 
+{
+"@id": "edge385535", 
+"@source": "node385534", 
+"@target": "node385535"
+}, 
+{
+"@id": "edge385536", 
+"@source": "node385535", 
+"@target": "node385536"
+}, 
+{
+"@id": "edge385537", 
+"@source": "node385535", 
+"@target": "node385537"
+}, 
+{
+"@id": "edge385538", 
+"@source": "node385537", 
+"@target": "node385538"
+}, 
+{
+"@id": "edge385539", 
+"@source": "node385537", 
+"@target": "node385539"
+}, 
+{
+"@id": "edge385540", 
+"@source": "node385534", 
+"@target": "node385540"
+}, 
+{
+"@id": "edge385541", 
+"@source": "node385540", 
+"@target": "node385541"
+}, 
+{
+"@id": "edge385542", 
+"@source": "node385541", 
+"@target": "node385542"
+}, 
+{
+"@id": "edge385543", 
+"@source": "node385541", 
+"@target": "node385543"
+}, 
+{
+"@id": "edge385544", 
+"@source": "node385540", 
+"@target": "node385544"
+}, 
+{
+"@id": "edge385545", 
+"@source": "node385544", 
+"@target": "node385545"
+}, 
+{
+"@id": "edge385546", 
+"@source": "node385544", 
+"@target": "node385546"
+}, 
+{
+"@id": "edge385547", 
+"@source": "node385521", 
+"@target": "node385547"
+}, 
+{
+"@id": "edge385548", 
+"@source": "node385547", 
+"@target": "node385548"
+}, 
+{
+"@id": "edge385549", 
+"@source": "node385547", 
+"@target": "node385549"
+}, 
+{
+"@id": "edge385550", 
+"@source": "node385520", 
+"@target": "node385550"
+}, 
+{
+"@id": "edge385551", 
+"@source": "node385550", 
+"@target": "node385551"
+}, 
+{
+"@id": "edge385552", 
+"@source": "node385551", 
+"@target": "node385552"
+}, 
+{
+"@id": "edge385553", 
+"@source": "node385552", 
+"@target": "node385553"
+}, 
+{
+"@id": "edge385554", 
+"@source": "node385552", 
+"@target": "node385554"
+}, 
+{
+"@id": "edge385555", 
+"@source": "node385554", 
+"@target": "node385555"
+}, 
+{
+"@id": "edge385556", 
+"@source": "node385554", 
+"@target": "node385556"
+}, 
+{
+"@id": "edge385557", 
+"@source": "node385551", 
+"@target": "node385557"
+}, 
+{
+"@id": "edge385558", 
+"@source": "node385557", 
+"@target": "node385558"
+}, 
+{
+"@id": "edge385559", 
+"@source": "node385558", 
+"@target": "node385559"
+}, 
+{
+"@id": "edge385560", 
+"@source": "node385559", 
+"@target": "node385560"
+}, 
+{
+"@id": "edge385561", 
+"@source": "node385560", 
+"@target": "node385561"
+}, 
+{
+"@id": "edge385562", 
+"@source": "node385561", 
+"@target": "node385562"
+}, 
+{
+"@id": "edge385563", 
+"@source": "node385562", 
+"@target": "node385563"
+}, 
+{
+"@id": "edge385564", 
+"@source": "node385562", 
+"@target": "node385564"
+}, 
+{
+"@id": "edge385565", 
+"@source": "node385561", 
+"@target": "node385565"
+}, 
+{
+"@id": "edge385566", 
+"@source": "node385565", 
+"@target": "node385566"
+}, 
+{
+"@id": "edge385567", 
+"@source": "node385565", 
+"@target": "node385567"
+}, 
+{
+"@id": "edge385568", 
+"@source": "node385560", 
+"@target": "node385568"
+}, 
+{
+"@id": "edge385569", 
+"@source": "node385568", 
+"@target": "node385569"
+}, 
+{
+"@id": "edge385570", 
+"@source": "node385568", 
+"@target": "node385570"
+}, 
+{
+"@id": "edge385571", 
+"@source": "node385559", 
+"@target": "node385571"
+}, 
+{
+"@id": "edge385572", 
+"@source": "node385571", 
+"@target": "node385572"
+}, 
+{
+"@id": "edge385573", 
+"@source": "node385572", 
+"@target": "node385573"
+}, 
+{
+"@id": "edge385574", 
+"@source": "node385572", 
+"@target": "node385574"
+}, 
+{
+"@id": "edge385575", 
+"@source": "node385571", 
+"@target": "node385575"
+}, 
+{
+"@id": "edge385576", 
+"@source": "node385559", 
+"@target": "node385576"
+}, 
+{
+"@id": "edge385577", 
+"@source": "node385558", 
+"@target": "node385577"
+}, 
+{
+"@id": "edge385578", 
+"@source": "node385577", 
+"@target": "node385578"
+}, 
+{
+"@id": "edge385579", 
+"@source": "node385578", 
+"@target": "node385579"
+}, 
+{
+"@id": "edge385580", 
+"@source": "node385578", 
+"@target": "node385580"
+}, 
+{
+"@id": "edge385581", 
+"@source": "node385580", 
+"@target": "node385581"
+}, 
+{
+"@id": "edge385582", 
+"@source": "node385580", 
+"@target": "node385582"
+}, 
+{
+"@id": "edge385583", 
+"@source": "node385577", 
+"@target": "node385583"
+}, 
+{
+"@id": "edge385584", 
+"@source": "node385583", 
+"@target": "node385584"
+}, 
+{
+"@id": "edge385585", 
+"@source": "node385584", 
+"@target": "node385585"
+}, 
+{
+"@id": "edge385586", 
+"@source": "node385584", 
+"@target": "node385586"
+}, 
+{
+"@id": "edge385587", 
+"@source": "node385583", 
+"@target": "node385587"
+}, 
+{
+"@id": "edge385588", 
+"@source": "node385587", 
+"@target": "node385588"
+}, 
+{
+"@id": "edge385589", 
+"@source": "node385588", 
+"@target": "node385589"
+}, 
+{
+"@id": "edge385590", 
+"@source": "node385588", 
+"@target": "node385590"
+}, 
+{
+"@id": "edge385591", 
+"@source": "node385588", 
+"@target": "node385591"
+}, 
+{
+"@id": "edge385592", 
+"@source": "node385587", 
+"@target": "node385592"
+}, 
+{
+"@id": "edge385593", 
+"@source": "node385557", 
+"@target": "node385593"
+}, 
+{
+"@id": "edge385594", 
+"@source": "node385550", 
+"@target": "node385594"
+}
+], 
+"node": [
+{
+"@id": "node385518", 
+"@root": "true"
+}, 
+{
+"@id": "node385519", 
+"@otu": "otu176920"
+}, 
+{
+"@id": "node385520"
+}, 
+{
+"@id": "node385521"
+}, 
+{
+"@id": "node385522"
+}, 
+{
+"@id": "node385523"
+}, 
+{
+"@id": "node385524"
+}, 
+{
+"@id": "node385525"
+}, 
+{
+"@id": "node385526", 
+"@otu": "otu176906"
+}, 
+{
+"@id": "node385527", 
+"@otu": "otu176898"
+}, 
+{
+"@id": "node385528", 
+"@otu": "otu176902"
+}, 
+{
+"@id": "node385529", 
+"@otu": "otu176896"
+}, 
+{
+"@id": "node385530"
+}, 
+{
+"@id": "node385531"
+}, 
+{
+"@id": "node385532", 
+"@otu": "otu176901"
+}, 
+{
+"@id": "node385533", 
+"@otu": "otu176910"
+}, 
+{
+"@id": "node385534"
+}, 
+{
+"@id": "node385535"
+}, 
+{
+"@id": "node385536", 
+"@otu": "otu176927"
+}, 
+{
+"@id": "node385537"
+}, 
+{
+"@id": "node385538", 
+"@otu": "otu176912"
+}, 
+{
+"@id": "node385539", 
+"@otu": "otu176900"
+}, 
+{
+"@id": "node385540"
+}, 
+{
+"@id": "node385541"
+}, 
+{
+"@id": "node385542", 
+"@otu": "otu176926"
+}, 
+{
+"@id": "node385543", 
+"@otu": "otu176928"
+}, 
+{
+"@id": "node385544"
+}, 
+{
+"@id": "node385545", 
+"@otu": "otu176907"
+}, 
+{
+"@id": "node385546", 
+"@otu": "otu176905"
+}, 
+{
+"@id": "node385547"
+}, 
+{
+"@id": "node385548", 
+"@otu": "otu176916"
+}, 
+{
+"@id": "node385549", 
+"@otu": "otu176930"
+}, 
+{
+"@id": "node385550"
+}, 
+{
+"@id": "node385551"
+}, 
+{
+"@id": "node385552"
+}, 
+{
+"@id": "node385553", 
+"@otu": "otu176929"
+}, 
+{
+"@id": "node385554"
+}, 
+{
+"@id": "node385555", 
+"@otu": "otu176894"
+}, 
+{
+"@id": "node385556", 
+"@otu": "otu176922"
+}, 
+{
+"@id": "node385557"
+}, 
+{
+"@id": "node385558"
+}, 
+{
+"@id": "node385559"
+}, 
+{
+"@id": "node385560"
+}, 
+{
+"@id": "node385561"
+}, 
+{
+"@id": "node385562"
+}, 
+{
+"@id": "node385563", 
+"@otu": "otu176893"
+}, 
+{
+"@id": "node385564", 
+"@otu": "otu176931"
+}, 
+{
+"@id": "node385565"
+}, 
+{
+"@id": "node385566", 
+"@otu": "otu176892"
+}, 
+{
+"@id": "node385567", 
+"@otu": "otu176923"
+}, 
+{
+"@id": "node385568"
+}, 
+{
+"@id": "node385569", 
+"@otu": "otu176919"
+}, 
+{
+"@id": "node385570", 
+"@otu": "otu176917"
+}, 
+{
+"@id": "node385571"
+}, 
+{
+"@id": "node385572"
+}, 
+{
+"@id": "node385573", 
+"@otu": "otu176914"
+}, 
+{
+"@id": "node385574", 
+"@otu": "otu176911"
+}, 
+{
+"@id": "node385575", 
+"@otu": "otu176895"
+}, 
+{
+"@id": "node385576", 
+"@otu": "otu176921"
+}, 
+{
+"@id": "node385577"
+}, 
+{
+"@id": "node385578"
+}, 
+{
+"@id": "node385579", 
+"@otu": "otu176915"
+}, 
+{
+"@id": "node385580"
+}, 
+{
+"@id": "node385581", 
+"@otu": "otu176909"
+}, 
+{
+"@id": "node385582", 
+"@otu": "otu176925"
+}, 
+{
+"@id": "node385583"
+}, 
+{
+"@id": "node385584"
+}, 
+{
+"@id": "node385585", 
+"@otu": "otu176899"
+}, 
+{
+"@id": "node385586", 
+"@otu": "otu176903"
+}, 
+{
+"@id": "node385587"
+}, 
+{
+"@id": "node385588"
+}, 
+{
+"@id": "node385589", 
+"@otu": "otu176918"
+}, 
+{
+"@id": "node385590", 
+"@otu": "otu176904"
+}, 
+{
+"@id": "node385591", 
+"@otu": "otu176908"
+}, 
+{
+"@id": "node385592", 
+"@otu": "otu176913"
+}, 
+{
+"@id": "node385593", 
+"@otu": "otu176924"
+}, 
+{
+"@id": "node385594", 
+"@otu": "otu176897"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,359 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Cui, Bao-Kai, Li-Ping Tang, and Yu-Cheng Dai. \"Morphological and molecular evidences for a new species of Lignosus (Polyporales, Basidiomycota) from tropical China.\" Mycological Progress 10.3 (2011): 267-271.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s11557-010-0697-y", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "1145", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2011, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 550312, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1145", 
+"otu": [
+{
+"@about": "#otu227311", 
+"@id": "otu227311", 
+"@label": "Daedaleopsis sinensis", 
+"meta": [
+{
+"$": 802419, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "out FJ627256 Daedaleopsis sine", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227312", 
+"@id": "otu227312", 
+"@label": "Daedaleopsis confragosa", 
+"meta": [
+{
+"$": 1077893, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "out FJ81017 Daedaleopsis confr", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227313", 
+"@id": "otu227313", 
+"@label": "Lignosus", 
+"meta": [
+{
+"$": 697840, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lignosus hainanensis fruitbody", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227314", 
+"@id": "otu227314", 
+"@label": "Lignosus", 
+"meta": [
+{
+"$": 697840, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lignosus hannanensis Sclerotiu", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227315", 
+"@id": "otu227315", 
+"@label": "Lignosus rhinocerus", 
+"meta": [
+{
+"$": 1036932, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "FJ899143 Lignosus rhinocerus M", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227316", 
+"@id": "otu227316", 
+"@label": "Lignosus rhinocerus", 
+"meta": [
+{
+"$": 1036932, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "FJ380871 Lignosus rhinocerus J", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227317", 
+"@id": "otu227317", 
+"@label": "Lignosus sacer", 
+"meta": [
+{
+"$": 642300, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "GU001675 Lignosus sacer Kenya", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227318", 
+"@id": "otu227318", 
+"@label": "Lignosus sacer", 
+"meta": [
+{
+"$": 642300, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "GU001674 Lignosus sacer Zimbab", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1145", 
+"@otus": "otus1145", 
+"tree": [
+{
+"@about": "#tree2325", 
+"@id": "tree2325", 
+"edge": [
+{
+"@id": "edge552156", 
+"@length": 0.030723, 
+"@source": "node552155", 
+"@target": "node552156"
+}, 
+{
+"@id": "edge552157", 
+"@length": 0.00245, 
+"@source": "node552155", 
+"@target": "node552157"
+}, 
+{
+"@id": "edge552158", 
+"@length": 0.122016, 
+"@source": "node552155", 
+"@target": "node552158"
+}, 
+{
+"@id": "edge552159", 
+"@length": 0.015342, 
+"@source": "node552158", 
+"@target": "node552159"
+}, 
+{
+"@id": "edge552160", 
+"@length": 0.034888, 
+"@source": "node552159", 
+"@target": "node552160"
+}, 
+{
+"@id": "edge552161", 
+"@length": 0.0018, 
+"@source": "node552160", 
+"@target": "node552161"
+}, 
+{
+"@id": "edge552162", 
+"@length": 0.001551, 
+"@source": "node552160", 
+"@target": "node552162"
+}, 
+{
+"@id": "edge552163", 
+"@length": 0.033772, 
+"@source": "node552159", 
+"@target": "node552163"
+}, 
+{
+"@id": "edge552164", 
+"@length": 0.001433, 
+"@source": "node552163", 
+"@target": "node552164"
+}, 
+{
+"@id": "edge552165", 
+"@length": 0.001448, 
+"@source": "node552163", 
+"@target": "node552165"
+}, 
+{
+"@id": "edge552166", 
+"@length": 0.025376, 
+"@source": "node552158", 
+"@target": "node552166"
+}, 
+{
+"@id": "edge552167", 
+"@length": 0.001897, 
+"@source": "node552166", 
+"@target": "node552167"
+}, 
+{
+"@id": "edge552168", 
+"@length": 0.002891, 
+"@source": "node552166", 
+"@target": "node552168"
+}
+], 
+"meta": [
+{
+"$": "node552158", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node552155", 
+"@root": "true"
+}, 
+{
+"@id": "node552156", 
+"@otu": "otu227311"
+}, 
+{
+"@id": "node552157", 
+"@otu": "otu227312"
+}, 
+{
+"@id": "node552158"
+}, 
+{
+"@id": "node552159"
+}, 
+{
+"@id": "node552160"
+}, 
+{
+"@id": "node552161", 
+"@otu": "otu227313"
+}, 
+{
+"@id": "node552162", 
+"@otu": "otu227314"
+}, 
+{
+"@id": "node552163"
+}, 
+{
+"@id": "node552164", 
+"@otu": "otu227315"
+}, 
+{
+"@id": "node552165", 
+"@otu": "otu227316"
+}, 
+{
+"@id": "node552166"
+}, 
+{
+"@id": "node552167", 
+"@otu": "otu227317"
+}, 
+{
+"@id": "node552168", 
+"@otu": "otu227318"
+}
+]
+}
+]
+}
+}
+}

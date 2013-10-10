@@ -1,0 +1,721 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Slippers, Bernard, Gerda Fourie, Pedro W. Crous, Teresa A. Coutinho, Brenda D. Wingfield, and Michael J. Wingfield. \"Multiple gene sequences delimit Botryosphaeria australis sp. nov. from B. lutea.\" Mycologia 96, no. 5 (2004): 1030-1041.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2307/3762087", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1103", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "376", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2004, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1342643, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus376", 
+"otu": [
+{
+"@about": "#otu76514", 
+"@id": "otu76514", 
+"@label": "Botryosphaeria dothidea", 
+"meta": [
+{
+"$": 859795, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria dothidea CMW7999", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76515", 
+"@id": "otu76515", 
+"@label": "Botryosphaeria lutea", 
+"meta": [
+{
+"$": 958340, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria lutea CMW9076", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76516", 
+"@id": "otu76516", 
+"@label": "Botryosphaeria obtusa", 
+"meta": [
+{
+"$": 134178, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria obtusa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76517", 
+"@id": "otu76517", 
+"@label": "Botryosphaeria stevensii", 
+"meta": [
+{
+"$": 305447, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria stevensii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76518", 
+"@id": "otu76518", 
+"@label": "Botryosphaeria ribis", 
+"meta": [
+{
+"$": 33907, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria ribis CMW7054", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76519", 
+"@id": "otu76519", 
+"@label": "Botryosphaeria rhodina", 
+"meta": [
+{
+"$": 33894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria rhodina", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76520", 
+"@id": "otu76520", 
+"@label": "Botryosphaeria australis", 
+"meta": [
+{
+"$": 26868, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria australis CMW9072", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76521", 
+"@id": "otu76521", 
+"@label": "Botryosphaeria dothidea", 
+"meta": [
+{
+"$": 859795, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria dothidea CMW9075", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76522", 
+"@id": "otu76522", 
+"@label": "Botryosphaeria ribis", 
+"meta": [
+{
+"$": 33907, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria ribis CMW7772", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76523", 
+"@id": "otu76523", 
+"@label": "Botryosphaeria lutea", 
+"meta": [
+{
+"$": 958340, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria lutea CMW10309", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76524", 
+"@id": "otu76524", 
+"@label": "Botryosphaeria parva", 
+"meta": [
+{
+"$": 648285, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria parva CMW9081", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76525", 
+"@id": "otu76525", 
+"@label": "Botryosphaeria lutea", 
+"meta": [
+{
+"$": 958340, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria lutea CMW992", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76526", 
+"@id": "otu76526", 
+"@label": "Botryosphaeria australis", 
+"meta": [
+{
+"$": 26868, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria australis CMW6837", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76527", 
+"@id": "otu76527", 
+"@label": "Botryosphaeria parva", 
+"meta": [
+{
+"$": 648285, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria parva CMW9078", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76528", 
+"@id": "otu76528", 
+"@label": "Botryosphaeria eucalyptorum", 
+"meta": [
+{
+"$": 435694, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria eucalytorum CMW10125", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76529", 
+"@id": "otu76529", 
+"@label": "Botryosphaeria australis", 
+"meta": [
+{
+"$": 26868, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria australis CMW9073", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76530", 
+"@id": "otu76530", 
+"@label": "Botryosphaeria eucalyptorum", 
+"meta": [
+{
+"$": 435694, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria eucalytorum CMW11705", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76531", 
+"@id": "otu76531", 
+"@label": "Botryosphaeria lutea", 
+"meta": [
+{
+"$": 958340, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria lutea CMW10310", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76532", 
+"@id": "otu76532", 
+"@label": "Botryosphaeria australis", 
+"meta": [
+{
+"$": 26868, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria australis CMW6853", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees376", 
+"@otus": "otus376", 
+"tree": [
+{
+"@about": "#tree438", 
+"@id": "tree438", 
+"edge": [
+{
+"@id": "edge202132", 
+"@source": "node202131", 
+"@target": "node202132"
+}, 
+{
+"@id": "edge202133", 
+"@source": "node202132", 
+"@target": "node202133"
+}, 
+{
+"@id": "edge202134", 
+"@source": "node202133", 
+"@target": "node202134"
+}, 
+{
+"@id": "edge202135", 
+"@source": "node202134", 
+"@target": "node202135"
+}, 
+{
+"@id": "edge202136", 
+"@source": "node202135", 
+"@target": "node202136"
+}, 
+{
+"@id": "edge202137", 
+"@source": "node202136", 
+"@target": "node202137"
+}, 
+{
+"@id": "edge202138", 
+"@source": "node202136", 
+"@target": "node202138"
+}, 
+{
+"@id": "edge202139", 
+"@source": "node202135", 
+"@target": "node202139"
+}, 
+{
+"@id": "edge202140", 
+"@source": "node202139", 
+"@target": "node202140"
+}, 
+{
+"@id": "edge202141", 
+"@source": "node202139", 
+"@target": "node202141"
+}, 
+{
+"@id": "edge202142", 
+"@source": "node202134", 
+"@target": "node202142"
+}, 
+{
+"@id": "edge202143", 
+"@source": "node202142", 
+"@target": "node202143"
+}, 
+{
+"@id": "edge202144", 
+"@source": "node202142", 
+"@target": "node202144"
+}, 
+{
+"@id": "edge202145", 
+"@source": "node202133", 
+"@target": "node202145"
+}, 
+{
+"@id": "edge202146", 
+"@source": "node202145", 
+"@target": "node202146"
+}, 
+{
+"@id": "edge202147", 
+"@source": "node202146", 
+"@target": "node202147"
+}, 
+{
+"@id": "edge202148", 
+"@source": "node202146", 
+"@target": "node202148"
+}, 
+{
+"@id": "edge202149", 
+"@source": "node202146", 
+"@target": "node202149"
+}, 
+{
+"@id": "edge202150", 
+"@source": "node202149", 
+"@target": "node202150"
+}, 
+{
+"@id": "edge202151", 
+"@source": "node202149", 
+"@target": "node202151"
+}, 
+{
+"@id": "edge202152", 
+"@source": "node202145", 
+"@target": "node202152"
+}, 
+{
+"@id": "edge202153", 
+"@source": "node202152", 
+"@target": "node202153"
+}, 
+{
+"@id": "edge202154", 
+"@source": "node202152", 
+"@target": "node202154"
+}, 
+{
+"@id": "edge202155", 
+"@source": "node202152", 
+"@target": "node202155"
+}, 
+{
+"@id": "edge202156", 
+"@source": "node202152", 
+"@target": "node202156"
+}, 
+{
+"@id": "edge202157", 
+"@source": "node202132", 
+"@target": "node202157"
+}, 
+{
+"@id": "edge202158", 
+"@source": "node202157", 
+"@target": "node202158"
+}, 
+{
+"@id": "edge202159", 
+"@source": "node202157", 
+"@target": "node202159"
+}, 
+{
+"@id": "edge202160", 
+"@source": "node202131", 
+"@target": "node202160"
+}, 
+{
+"@id": "edge202161", 
+"@source": "node202131", 
+"@target": "node202161"
+}, 
+{
+"@id": "edge202162", 
+"@source": "node202161", 
+"@target": "node202162"
+}, 
+{
+"@id": "edge202163", 
+"@source": "node202161", 
+"@target": "node202163"
+}
+], 
+"meta": [
+{
+"$": "node202132", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node202131", 
+"@root": "true"
+}, 
+{
+"@id": "node202132"
+}, 
+{
+"@id": "node202133"
+}, 
+{
+"@id": "node202134"
+}, 
+{
+"@id": "node202135"
+}, 
+{
+"@id": "node202136"
+}, 
+{
+"@id": "node202137", 
+"@otu": "otu76522"
+}, 
+{
+"@id": "node202138", 
+"@otu": "otu76518"
+}, 
+{
+"@id": "node202139"
+}, 
+{
+"@id": "node202140", 
+"@otu": "otu76527"
+}, 
+{
+"@id": "node202141", 
+"@otu": "otu76524"
+}, 
+{
+"@id": "node202142"
+}, 
+{
+"@id": "node202143", 
+"@otu": "otu76528"
+}, 
+{
+"@id": "node202144", 
+"@otu": "otu76530"
+}, 
+{
+"@id": "node202145"
+}, 
+{
+"@id": "node202146"
+}, 
+{
+"@id": "node202147", 
+"@otu": "otu76515"
+}, 
+{
+"@id": "node202148", 
+"@otu": "otu76525"
+}, 
+{
+"@id": "node202149"
+}, 
+{
+"@id": "node202150", 
+"@otu": "otu76523"
+}, 
+{
+"@id": "node202151", 
+"@otu": "otu76531"
+}, 
+{
+"@id": "node202152"
+}, 
+{
+"@id": "node202153", 
+"@otu": "otu76520"
+}, 
+{
+"@id": "node202154", 
+"@otu": "otu76529"
+}, 
+{
+"@id": "node202155", 
+"@otu": "otu76526"
+}, 
+{
+"@id": "node202156", 
+"@otu": "otu76532"
+}, 
+{
+"@id": "node202157"
+}, 
+{
+"@id": "node202158", 
+"@otu": "otu76514"
+}, 
+{
+"@id": "node202159", 
+"@otu": "otu76521"
+}, 
+{
+"@id": "node202160", 
+"@otu": "otu76519"
+}, 
+{
+"@id": "node202161"
+}, 
+{
+"@id": "node202162", 
+"@otu": "otu76516"
+}, 
+{
+"@id": "node202163", 
+"@otu": "otu76517"
+}
+]
+}
+]
+}
+}
+}

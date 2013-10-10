@@ -1,0 +1,664 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Zellerhoff N., Jarosch B., Groenewald J., Crous P., & Schaffrath U. 2006. Non-host resistance of barley is successfully manifested against Magnaporthe grisea and a closely related Pennisetum-infecting lineage, but is overcome by Magnaporthe oryzae. Molecular Plant-Microbe Interactions, 19(9): 1014-1022.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1625", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2497", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2006, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1482940, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CAL", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2497", 
+"otu": [
+{
+"@about": "#otu360305", 
+"@id": "otu360305", 
+"@label": "Magnaporthe salvinii", 
+"meta": [
+{
+"$": 268001, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe salvinii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360306", 
+"@id": "otu360306", 
+"@label": "Magnaporthe grisea (T.T. Hebert) M.E. Barr", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe grisea CD86", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360307", 
+"@id": "otu360307", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae SP24", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360308", 
+"@id": "otu360308", 
+"@label": "Magnaporthe grisea (T.T. Hebert) M.E. Barr", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe grisea CD180", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360309", 
+"@id": "otu360309", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae FR13", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360310", 
+"@id": "otu360310", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae BR32", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360311", 
+"@id": "otu360311", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae RW18", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360312", 
+"@id": "otu360312", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae TH6772", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360313", 
+"@id": "otu360313", 
+"@label": "Magnaporthe rhizophila", 
+"meta": [
+{
+"$": 229542, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe rhizophila", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360314", 
+"@id": "otu360314", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae PR9", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360315", 
+"@id": "otu360315", 
+"@label": "Magnaporthe grisea (T.T. Hebert) M.E. Barr", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe grisea PH55", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360316", 
+"@id": "otu360316", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae RW12", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360317", 
+"@id": "otu360317", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae TH03", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360318", 
+"@id": "otu360318", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae GN01", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360319", 
+"@id": "otu360319", 
+"@label": "Magnaporthe grisea (T.T. Hebert) M.E. Barr", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe grisea BR29", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360320", 
+"@id": "otu360320", 
+"@label": "Magnaporthe grisea (T.T. Hebert) M.E. Barr", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe grisea JP23", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360321", 
+"@id": "otu360321", 
+"@label": "Magnaporthe grisea (T.T. Hebert) M.E. Barr", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe grisea BF17", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360322", 
+"@id": "otu360322", 
+"@label": "Pyricularia oryzae Cavara", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe oryzae PH14", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu360323", 
+"@id": "otu360323", 
+"@label": "Magnaporthe grisea (T.T. Hebert) M.E. Barr", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe grisea IN06", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2497", 
+"@otus": "otus2497", 
+"tree": [
+{
+"@about": "#tree5371", 
+"@id": "tree5371", 
+"edge": [
+{
+"@id": "edge926757", 
+"@source": "node926756", 
+"@target": "node926757"
+}, 
+{
+"@id": "edge926758", 
+"@source": "node926756", 
+"@target": "node926758"
+}, 
+{
+"@id": "edge926759", 
+"@source": "node926758", 
+"@target": "node926759"
+}, 
+{
+"@id": "edge926760", 
+"@source": "node926758", 
+"@target": "node926760"
+}, 
+{
+"@id": "edge926761", 
+"@source": "node926760", 
+"@target": "node926761"
+}, 
+{
+"@id": "edge926762", 
+"@source": "node926761", 
+"@target": "node926762"
+}, 
+{
+"@id": "edge926763", 
+"@source": "node926762", 
+"@target": "node926763"
+}, 
+{
+"@id": "edge926764", 
+"@source": "node926763", 
+"@target": "node926764"
+}, 
+{
+"@id": "edge926765", 
+"@source": "node926763", 
+"@target": "node926765"
+}, 
+{
+"@id": "edge926766", 
+"@source": "node926762", 
+"@target": "node926766"
+}, 
+{
+"@id": "edge926767", 
+"@source": "node926762", 
+"@target": "node926767"
+}, 
+{
+"@id": "edge926768", 
+"@source": "node926761", 
+"@target": "node926768"
+}, 
+{
+"@id": "edge926769", 
+"@source": "node926768", 
+"@target": "node926769"
+}, 
+{
+"@id": "edge926770", 
+"@source": "node926768", 
+"@target": "node926770"
+}, 
+{
+"@id": "edge926771", 
+"@source": "node926768", 
+"@target": "node926771"
+}, 
+{
+"@id": "edge926772", 
+"@source": "node926760", 
+"@target": "node926772"
+}, 
+{
+"@id": "edge926773", 
+"@source": "node926772", 
+"@target": "node926773"
+}, 
+{
+"@id": "edge926774", 
+"@source": "node926773", 
+"@target": "node926774"
+}, 
+{
+"@id": "edge926775", 
+"@source": "node926773", 
+"@target": "node926775"
+}, 
+{
+"@id": "edge926776", 
+"@source": "node926773", 
+"@target": "node926776"
+}, 
+{
+"@id": "edge926777", 
+"@source": "node926772", 
+"@target": "node926777"
+}, 
+{
+"@id": "edge926778", 
+"@source": "node926772", 
+"@target": "node926778"
+}, 
+{
+"@id": "edge926779", 
+"@source": "node926778", 
+"@target": "node926779"
+}, 
+{
+"@id": "edge926780", 
+"@source": "node926778", 
+"@target": "node926780"
+}, 
+{
+"@id": "edge926781", 
+"@source": "node926778", 
+"@target": "node926781"
+}, 
+{
+"@id": "edge926782", 
+"@source": "node926778", 
+"@target": "node926782"
+}, 
+{
+"@id": "edge926783", 
+"@source": "node926778", 
+"@target": "node926783"
+}, 
+{
+"@id": "edge926784", 
+"@source": "node926778", 
+"@target": "node926784"
+}
+], 
+"meta": [
+{
+"$": "node926758", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node926756", 
+"@root": "true"
+}, 
+{
+"@id": "node926757", 
+"@otu": "otu360305"
+}, 
+{
+"@id": "node926758"
+}, 
+{
+"@id": "node926759", 
+"@otu": "otu360313"
+}, 
+{
+"@id": "node926760"
+}, 
+{
+"@id": "node926761"
+}, 
+{
+"@id": "node926762"
+}, 
+{
+"@id": "node926763"
+}, 
+{
+"@id": "node926764", 
+"@otu": "otu360319"
+}, 
+{
+"@id": "node926765", 
+"@otu": "otu360320"
+}, 
+{
+"@id": "node926766", 
+"@otu": "otu360323"
+}, 
+{
+"@id": "node926767", 
+"@otu": "otu360315"
+}, 
+{
+"@id": "node926768"
+}, 
+{
+"@id": "node926769", 
+"@otu": "otu360321"
+}, 
+{
+"@id": "node926770", 
+"@otu": "otu360306"
+}, 
+{
+"@id": "node926771", 
+"@otu": "otu360308"
+}, 
+{
+"@id": "node926772"
+}, 
+{
+"@id": "node926773"
+}, 
+{
+"@id": "node926774", 
+"@otu": "otu360316"
+}, 
+{
+"@id": "node926775", 
+"@otu": "otu360311"
+}, 
+{
+"@id": "node926776", 
+"@otu": "otu360310"
+}, 
+{
+"@id": "node926777", 
+"@otu": "otu360318"
+}, 
+{
+"@id": "node926778"
+}, 
+{
+"@id": "node926779", 
+"@otu": "otu360317"
+}, 
+{
+"@id": "node926780", 
+"@otu": "otu360309"
+}, 
+{
+"@id": "node926781", 
+"@otu": "otu360307"
+}, 
+{
+"@id": "node926782", 
+"@otu": "otu360312"
+}, 
+{
+"@id": "node926783", 
+"@otu": "otu360322"
+}, 
+{
+"@id": "node926784", 
+"@otu": "otu360314"
+}
+]
+}
+]
+}
+}
+}

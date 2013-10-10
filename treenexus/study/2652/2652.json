@@ -1,0 +1,47 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Uma Krishnan, Arpi Barsamian, Dennis L. Miller\r\nEvolution of RNA Editing Sites in the Mitochondrial Small Subunit rRNA of the Myxomycota\r\nMethods in Enzymology, Volume 424, 2007, Pages 197\u2013220", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cameah Wood", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "2652", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2007, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2652", 
+"otu": []
+}, 
+"trees": {
+"@id": "trees2652", 
+"@otus": "otus2652", 
+"tree": []
+}
+}
+}

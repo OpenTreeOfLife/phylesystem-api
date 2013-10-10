@@ -1,0 +1,4312 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Pradeep C.K., Justo A., Vrinda K.B., & Shibu V. 2012. Two new species of Pluteus (Pluteaceae, Agaricales) from India and additional observations on Pluteus chrysaegis. Mycological Progress, 11(4): 869-878.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s11557-011-0801-y", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S11974", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1325", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2012, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1118805, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ML", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Environmental", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1325", 
+"otu": [
+{
+"@about": "#otu242711", 
+"@id": "otu242711", 
+"@label": "Pluteus fenzlii", 
+"meta": [
+{
+"$": 1052936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus fenzlii Slovakia HM562111", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242712", 
+"@id": "otu242712", 
+"@label": "Pluteus aurantiorugosus", 
+"meta": [
+{
+"$": 433944, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aurantiorugosus Illinois HM562081", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242713", 
+"@id": "otu242713", 
+"@label": "Pluteus pallescens", 
+"meta": [
+{
+"$": 432985, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus pallescens Spain HM562056", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242714", 
+"@id": "otu242714", 
+"@label": "Pluteus romellii", 
+"meta": [
+{
+"$": 1010500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus romellii Michigan HM562078", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242715", 
+"@id": "otu242715", 
+"@label": "Pluteus aurantiorugosus", 
+"meta": [
+{
+"$": 433944, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aurantiorugosus Massachusetts HM562072", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242716", 
+"@id": "otu242716", 
+"@label": "Pluteus aureovenatus", 
+"meta": [
+{
+"$": 137348, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aureovenatus Brazil HM562160", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242717", 
+"@id": "otu242717", 
+"@label": "Pluteus seticeps", 
+"meta": [
+{
+"$": 958683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus seticeps Wisconsin HM562192", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242718", 
+"@id": "otu242718", 
+"@label": "Pluteus chrysophlebius", 
+"meta": [
+{
+"$": 433952, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus chrysophlebius Japan HM562125", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242719", 
+"@id": "otu242719", 
+"@label": "Pluteus phlebophorus", 
+"meta": [
+{
+"$": 432974, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus phlebophorus Spain HM562137", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242720", 
+"@id": "otu242720", 
+"@label": "Pluteus aurantiorugosus", 
+"meta": [
+{
+"$": 433944, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aurantiorugosus var aurantiovelatus Italy HQ654908", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242721", 
+"@id": "otu242721", 
+"@label": "Pluteus chrysophlebius", 
+"meta": [
+{
+"$": 433952, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus chrysophlebius Japan HM562088", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242722", 
+"@id": "otu242722", 
+"@label": "Pluteus sp. SP393694", 
+"meta": [
+{
+"$": 843683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus sublaevigatus Brazil FJ816667", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242723", 
+"@id": "otu242723", 
+"@label": "Pluteus eludens", 
+"meta": [
+{
+"$": 711463, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus eludens Russia FJ774085", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242724", 
+"@id": "otu242724", 
+"@label": "Pluteus chrysophlebius", 
+"meta": [
+{
+"$": 433952, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus chrysophlebius Illinois HM562180", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242725", 
+"@id": "otu242725", 
+"@label": "Pluteus ephebeus", 
+"meta": [
+{
+"$": 433949, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus ephebeus Spain HM562044", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242726", 
+"@id": "otu242726", 
+"@label": "Pluteus phlebophorus", 
+"meta": [
+{
+"$": 432974, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus phlebophorus Spain HM562138", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242727", 
+"@id": "otu242727", 
+"@label": "Pluteus losulus", 
+"meta": [
+{
+"$": 432997, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus losulus HM562129", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242728", 
+"@id": "otu242728", 
+"@label": "Pluteus aff. phlebophorus SF16", 
+"meta": [
+{
+"$": 975057, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff phlebophorus Illinois HM562186", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242729", 
+"@id": "otu242729", 
+"@label": "Pluteus sp. III AJ-2010", 
+"meta": [
+{
+"$": 958687, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus sp Brazil HM562145", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242730", 
+"@id": "otu242730", 
+"@label": "Pluteus thomsonii", 
+"meta": [
+{
+"$": 1021549, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus thomsonii Spain HM562053", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242731", 
+"@id": "otu242731", 
+"@label": "Pluteus multiformis", 
+"meta": [
+{
+"$": 432980, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus multiformis Spain HM562201", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242732", 
+"@id": "otu242732", 
+"@label": "Pluteus aff. cinereofuscus TNSF12400", 
+"meta": [
+{
+"$": 299088, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff cinereofuscus Japan HM562115", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242733", 
+"@id": "otu242733", 
+"@label": "Pluteus thomsonii", 
+"meta": [
+{
+"$": 1021549, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus thomsonii Illinois HM562067", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242734", 
+"@id": "otu242734", 
+"@label": "Pluteus sp. V AJ-2010", 
+"meta": [
+{
+"$": 958673, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus sp Brazil HM562161", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242735", 
+"@id": "otu242735", 
+"@label": "Pluteus fluminensis", 
+"meta": [
+{
+"$": 843680, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus fluminensis Brazil FJ816664", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242736", 
+"@id": "otu242736", 
+"@label": "Pluteus chrysophlebius", 
+"meta": [
+{
+"$": 433952, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus chrysophlebius Illinois HM562182", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242737", 
+"@id": "otu242737", 
+"@label": "Pluteus romellii", 
+"meta": [
+{
+"$": 1010500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus romellii Illinois HM562183", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242738", 
+"@id": "otu242738", 
+"@label": "Pluteus rugosidiscus", 
+"meta": [
+{
+"$": 958676, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus rugosidiscus Michigan HM562079", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242739", 
+"@id": "otu242739", 
+"@label": "Pluteus nanus", 
+"meta": [
+{
+"$": 1052938, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus nanus Russia FJ774081", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242740", 
+"@id": "otu242740", 
+"@label": "Pluteus thomsonii", 
+"meta": [
+{
+"$": 1021549, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus thomsonii Michigan HM562197", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242741", 
+"@id": "otu242741", 
+"@label": "Pluteus phlebophorus", 
+"meta": [
+{
+"$": 432974, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus phlebophorus Spain HM562144", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242742", 
+"@id": "otu242742", 
+"@label": "Pluteus mammillatus", 
+"meta": [
+{
+"$": 1029130, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus mammillatus Florida HM562120", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242743", 
+"@id": "otu242743", 
+"@label": "Pluteus sp. VI AJ-2010", 
+"meta": [
+{
+"$": 382502, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus sp Illinois HM562216", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242744", 
+"@id": "otu242744", 
+"@label": "Pluteus romellii", 
+"meta": [
+{
+"$": 1010500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus romellii Spain HM562062", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242745", 
+"@id": "otu242745", 
+"@label": "Pluteus eliae", 
+"meta": [
+{
+"$": 711461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus eliae Isaacs2460 Florida HM562076", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242746", 
+"@id": "otu242746", 
+"@label": "Pluteus dominicanus", 
+"meta": [
+{
+"$": 3833007, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus dominicanus var hyalinus Brazil FJ816665", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242747", 
+"@id": "otu242747", 
+"@label": "Pluteus romellii", 
+"meta": [
+{
+"$": 1010500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus romellii Missouri HM562105", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242748", 
+"@id": "otu242748", 
+"@label": "Pluteus thomsonii", 
+"meta": [
+{
+"$": 1021549, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus thomsonii Spain HM562066", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242749", 
+"@id": "otu242749", 
+"@label": "Pluteus cinereofuscus", 
+"meta": [
+{
+"$": 711450, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus cinereofuscus Portugal HM562108", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242750", 
+"@id": "otu242750", 
+"@label": "Pluteus chrysophlebius", 
+"meta": [
+{
+"$": 433952, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus chrysophlebius Spain HM562064", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242751", 
+"@id": "otu242751", 
+"@label": "Pluteus romellii", 
+"meta": [
+{
+"$": 1010500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus romellii Spain HM562054", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242752", 
+"@id": "otu242752", 
+"@label": "Pluteus phlebophorus", 
+"meta": [
+{
+"$": 432974, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus phlebophorus Japan HM562117", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242753", 
+"@id": "otu242753", 
+"@label": "Pluteus mammillatus", 
+"meta": [
+{
+"$": 1029130, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus mammillatus Missouri HM562119", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242754", 
+"@id": "otu242754", 
+"@label": "Pluteus glaucotinctus", 
+"meta": [
+{
+"$": 711466, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus glaucotinctus HM562132", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242755", 
+"@id": "otu242755", 
+"@label": "Pluteus sp. II AJ-2010", 
+"meta": [
+{
+"$": 958686, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus sp Brazil HM562148", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242756", 
+"@id": "otu242756", 
+"@label": "Pluteus aurantiorugosus", 
+"meta": [
+{
+"$": 433944, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aurantiorugosus var aurantiovelatus Italy HQ654907", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242757", 
+"@id": "otu242757", 
+"@label": "Pluteus aurantiorugosus", 
+"meta": [
+{
+"$": 433944, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aurantiorugosus Spain HM562041", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242758", 
+"@id": "otu242758", 
+"@label": "Pluteus podospileus", 
+"meta": [
+{
+"$": 1052932, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus podospileus Spain HM562049", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242759", 
+"@id": "otu242759", 
+"@label": "Pluteus romellii", 
+"meta": [
+{
+"$": 1010500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus romellii Russia FJ774073", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242760", 
+"@id": "otu242760", 
+"@label": "Pluteus cf. eugraptus TNSF12042", 
+"meta": [
+{
+"$": 448822, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus cf eugraptus Japan HM562116", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242761", 
+"@id": "otu242761", 
+"@label": "Pluteus aff. ephebeus Pearson sn", 
+"meta": [
+{
+"$": 975060, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff ephebeus England HM562198", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242762", 
+"@id": "otu242762", 
+"@label": "Pluteus chrysophlebius", 
+"meta": [
+{
+"$": 433952, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus chrysophlebius Illinois HM562181", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242763", 
+"@id": "otu242763", 
+"@label": "Pluteus fenzlii", 
+"meta": [
+{
+"$": 1052936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus fenzlii Japan HM562091", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242764", 
+"@id": "otu242764", 
+"@label": "Pluteus aurantiorugosus", 
+"meta": [
+{
+"$": 433944, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aurantiorugosus Japan HM562121", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242765", 
+"@id": "otu242765", 
+"@label": "Pluteus podospileus", 
+"meta": [
+{
+"$": 1052932, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus podospileus Japan HM562122", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242766", 
+"@id": "otu242766", 
+"@label": "Pluteus aff. podospileus Lundell2541", 
+"meta": [
+{
+"$": 975053, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff podospileus Sweden HM562196", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242767", 
+"@id": "otu242767", 
+"@label": "Pluteus aff. ephebeus Shaffer4673", 
+"meta": [
+{
+"$": 975059, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff ephebeus France HM562080", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242768", 
+"@id": "otu242768", 
+"@label": "Pluteus romellii", 
+"meta": [
+{
+"$": 1010500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff romellii California AY854065", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242769", 
+"@id": "otu242769", 
+"@label": "Pluteus fuligineovenosus", 
+"meta": [
+{
+"$": 167439, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus fuligineovenosus Brazil FJ816662", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242770", 
+"@id": "otu242770", 
+"@label": "Pluteus eludens", 
+"meta": [
+{
+"$": 711463, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus eludens Illinois HM562185", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242771", 
+"@id": "otu242771", 
+"@label": "Pluteus cf. nanus AJ216", 
+"meta": [
+{
+"$": 448823, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff cinereofuscus Spain HM562046", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242772", 
+"@id": "otu242772", 
+"@label": "Pluteus cinereofuscus", 
+"meta": [
+{
+"$": 711450, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus cinereofuscus Spain HM562124", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242773", 
+"@id": "otu242773", 
+"@label": "Pluteus sp. IV AJ-2010", 
+"meta": [
+{
+"$": 958672, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus sp Brazil HM562173", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242774", 
+"@id": "otu242774", 
+"@label": "Pluteus aurantiorugosus", 
+"meta": [
+{
+"$": 433944, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aurantiorugosus Michigan HM562074", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242775", 
+"@id": "otu242775", 
+"@label": "Pluteus thomsonii", 
+"meta": [
+{
+"$": 1021549, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus thomsonii Russia FJ774082", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242776", 
+"@id": "otu242776", 
+"@label": "Pluteus phlebophorus", 
+"meta": [
+{
+"$": 432974, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus phlebophorus Michigan HM562184", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242777", 
+"@id": "otu242777", 
+"@label": "Pluteus phlebophorus", 
+"meta": [
+{
+"$": 432974, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus phlebophorus Spain HM562039", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242778", 
+"@id": "otu242778", 
+"@label": "Pluteus sp. II AJ-2010", 
+"meta": [
+{
+"$": 958686, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus sp Brazil HM562146", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242779", 
+"@id": "otu242779", 
+"@label": "Pluteus fenzlii", 
+"meta": [
+{
+"$": 1052936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus fenzlii Russia FJ774082", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242780", 
+"@id": "otu242780", 
+"@label": "Pluteus pallidus", 
+"meta": [
+{
+"$": 1010502, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus pallidus Michigan HM562193", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242781", 
+"@id": "otu242781", 
+"@label": "Pluteus fluminensis", 
+"meta": [
+{
+"$": 843680, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus fluminensis Brazil FJ816655", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242782", 
+"@id": "otu242782", 
+"@label": "Pluteus cf. nanus AJ348", 
+"meta": [
+{
+"$": 316596, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus cf nanus Spain JN603203", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242783", 
+"@id": "otu242783", 
+"@label": "Pluteus diettrichii", 
+"meta": [
+{
+"$": 711458, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus diettrichii Spain HM562143", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242784", 
+"@id": "otu242784", 
+"@label": "Pluteus jamaicensis", 
+"meta": [
+{
+"$": 167440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus jamaicensis Brazil FJ816657", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242785", 
+"@id": "otu242785", 
+"@label": "Pluteus eludens", 
+"meta": [
+{
+"$": 711463, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus eludens Madeira Island HM562118", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242786", 
+"@id": "otu242786", 
+"@label": "Pluteus phlebophorus", 
+"meta": [
+{
+"$": 432974, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus phlebophorus Michigan HM562112", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242787", 
+"@id": "otu242787", 
+"@label": "Pluteus riberaltensis", 
+"meta": [
+{
+"$": 843681, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus riberaltensis var conquistensis Brazil HM562162", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242788", 
+"@id": "otu242788", 
+"@label": "Pluteus aureovenatus", 
+"meta": [
+{
+"$": 137348, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aureovenatus Brazil FJ816663", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242789", 
+"@id": "otu242789", 
+"@label": "Pluteus seticeps", 
+"meta": [
+{
+"$": 958683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus seticeps Missouri HM562191", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242790", 
+"@id": "otu242790", 
+"@label": "Pluteus romellii", 
+"meta": [
+{
+"$": 1010500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus romellii Japan HM562123", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242791", 
+"@id": "otu242791", 
+"@label": "Pluteus mammillatus", 
+"meta": [
+{
+"$": 1029130, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus mammillatus Missouri HM562086", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242792", 
+"@id": "otu242792", 
+"@label": "Pluteus seticeps", 
+"meta": [
+{
+"$": 958683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus seticeps Illinois HM562199", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242793", 
+"@id": "otu242793", 
+"@label": "Pluteus sp. AJ-2012a", 
+"meta": [
+{
+"$": 316598, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus brunneosquamulosus K12794 India JN603204", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242794", 
+"@id": "otu242794", 
+"@label": "Pluteus sp. I AJ-2010", 
+"meta": [
+{
+"$": 958685, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus velutinus TNSF12372 Japan HM562127", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242795", 
+"@id": "otu242795", 
+"@label": "Pluteus leoninus", 
+"meta": [
+{
+"$": 678473, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus leoninus Michigan HM562187", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242796", 
+"@id": "otu242796", 
+"@label": "Pluteus castri", 
+"meta": [
+{
+"$": 137342, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus castri Japan HM562092", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242797", 
+"@id": "otu242797", 
+"@label": "Pluteus longistriatus", 
+"meta": [
+{
+"$": 558818, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus longistriatus Brazil HM562158", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242798", 
+"@id": "otu242798", 
+"@label": "Pluteus granularis", 
+"meta": [
+{
+"$": 711468, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus granularis Illinois HM562189", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242799", 
+"@id": "otu242799", 
+"@label": "Pluteus plautus", 
+"meta": [
+{
+"$": 1052937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus plautus LE213024 FJ774076", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242800", 
+"@id": "otu242800", 
+"@label": "Pluteus aff. leoninus I SF21", 
+"meta": [
+{
+"$": 975061, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff leoninus I Missouri HM562190", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242801", 
+"@id": "otu242801", 
+"@label": "Pluteus castri", 
+"meta": [
+{
+"$": 137342, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus castri Russia FJ774077", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242802", 
+"@id": "otu242802", 
+"@label": "Pluteus conizatus", 
+"meta": [
+{
+"$": 711452, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus conizatus var africanus Thoen5250 Dem Rep Congo HM562142", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242803", 
+"@id": "otu242803", 
+"@label": "Pluteus aff. leoninus I SF19", 
+"meta": [
+{
+"$": 975062, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff leoninus I Illinois HM562188", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242804", 
+"@id": "otu242804", 
+"@label": "Pluteus diettrichii", 
+"meta": [
+{
+"$": 711458, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus diettrichii HM562143", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242805", 
+"@id": "otu242805", 
+"@label": "Pluteus leoninus", 
+"meta": [
+{
+"$": 678473, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus leoninus New York HM562071", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242806", 
+"@id": "otu242806", 
+"@label": "Pluteus sp. I AJ-2010", 
+"meta": [
+{
+"$": 958685, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus velutinus TNSF12365 Japan HM562114", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242807", 
+"@id": "otu242807", 
+"@label": "Pluteus leoninus", 
+"meta": [
+{
+"$": 678473, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus leoninus France HM562077", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242808", 
+"@id": "otu242808", 
+"@label": "Pluteus granularis", 
+"meta": [
+{
+"$": 711468, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus granularis Illinois HM562069", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242809", 
+"@id": "otu242809", 
+"@label": "Pluteus plautus", 
+"meta": [
+{
+"$": 1052937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus plautus Spain HM562055", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242810", 
+"@id": "otu242810", 
+"@label": "Pluteus leoninus", 
+"meta": [
+{
+"$": 678473, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus leoninus Spain HM562045", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242811", 
+"@id": "otu242811", 
+"@label": "Pluteus semibulbosus", 
+"meta": [
+{
+"$": 1052931, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus semibulbosus Russia FJ774080", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242812", 
+"@id": "otu242812", 
+"@label": "Pluteus aff. leoninus II TNSF11908", 
+"meta": [
+{
+"$": 975056, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff leoninus II Japan HM562139", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242813", 
+"@id": "otu242813", 
+"@label": "Pluteus castri", 
+"meta": [
+{
+"$": 137342, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus castri Japan HM562099", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242814", 
+"@id": "otu242814", 
+"@label": "Pluteus longistriatus", 
+"meta": [
+{
+"$": 558818, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus longistriatus Brazil HM562149", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242815", 
+"@id": "otu242815", 
+"@label": "Pluteus granulatus", 
+"meta": [
+{
+"$": 1052935, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus granulatus Spain HM562048", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242816", 
+"@id": "otu242816", 
+"@label": "Pluteus seticeps", 
+"meta": [
+{
+"$": 958683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus seticeps HM562199", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242817", 
+"@id": "otu242817", 
+"@label": "Pluteus pantherinus", 
+"meta": [
+{
+"$": 432983, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus pantherinus Japan HM562089", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242818", 
+"@id": "otu242818", 
+"@label": "Pluteus longistriatus", 
+"meta": [
+{
+"$": 558818, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus longistriatus Missouri HM562082", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242819", 
+"@id": "otu242819", 
+"@label": "Fungi", 
+"meta": [
+{
+"$": 352914, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Uncultured fungus clone TSBF1 52 Brazil HQ257439", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242820", 
+"@id": "otu242820", 
+"@label": "Pluteus leoninus", 
+"meta": [
+{
+"$": 678473, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus leoninus Idaho HM562215", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242821", 
+"@id": "otu242821", 
+"@label": "Pluteus longistriatus", 
+"meta": [
+{
+"$": 558818, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus longistriatus Brazil HM562172", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242822", 
+"@id": "otu242822", 
+"@label": "Pluteus heteromarginatus", 
+"meta": [
+{
+"$": 1009620, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus heteromarginatus Florida HM562058", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242823", 
+"@id": "otu242823", 
+"@label": "Pluteus chrysaegis", 
+"meta": [
+{
+"$": 3833006, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus chrysaegis K13587 India JN603206", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242824", 
+"@id": "otu242824", 
+"@label": "Pluteus umbrosus", 
+"meta": [
+{
+"$": 1010505, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus umbrosus Spain HM562140", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242825", 
+"@id": "otu242825", 
+"@label": "Pluteus granulatus", 
+"meta": [
+{
+"$": 1052935, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus granulatus Russia FJ774086", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242826", 
+"@id": "otu242826", 
+"@label": "Pluteus aff. semibulbosus TNSF12393", 
+"meta": [
+{
+"$": 448825, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus aff semibulbosus Japan HM562090", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu242827", 
+"@id": "otu242827", 
+"@label": "Pluteus sp. AJ-2012b", 
+"meta": [
+{
+"$": 316594, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pluteus velutinus K12851 India JN603205", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1325", 
+"@otus": "otus1325", 
+"tree": [
+{
+"@about": "#tree2643", 
+"@id": "tree2643", 
+"edge": [
+{
+"@id": "edge588843", 
+"@length": 0.104621475, 
+"@source": "node588842", 
+"@target": "node588843"
+}, 
+{
+"@id": "edge588844", 
+"@length": 0.1242733, 
+"@source": "node588843", 
+"@target": "node588844"
+}, 
+{
+"@id": "edge588845", 
+"@length": 0.22290077, 
+"@source": "node588843", 
+"@target": "node588845"
+}, 
+{
+"@id": "edge588846", 
+"@length": 0.104621475, 
+"@source": "node588842", 
+"@target": "node588846"
+}, 
+{
+"@id": "edge588847", 
+"@length": 0.17524105, 
+"@source": "node588846", 
+"@target": "node588847"
+}, 
+{
+"@id": "edge588848", 
+"@length": 0.05881377, 
+"@source": "node588846", 
+"@target": "node588848"
+}, 
+{
+"@id": "edge588849", 
+"@length": 0.03942255, 
+"@source": "node588848", 
+"@target": "node588849"
+}, 
+{
+"@id": "edge588850", 
+"@length": 0.06197187, 
+"@source": "node588849", 
+"@target": "node588850"
+}, 
+{
+"@id": "edge588851", 
+"@length": 0.05537871, 
+"@source": "node588850", 
+"@target": "node588851"
+}, 
+{
+"@id": "edge588852", 
+"@length": 0.06559445, 
+"@source": "node588850", 
+"@target": "node588852"
+}, 
+{
+"@id": "edge588853", 
+"@length": 0.01055085, 
+"@source": "node588852", 
+"@target": "node588853"
+}, 
+{
+"@id": "edge588854", 
+"@length": 0.00246986, 
+"@source": "node588852", 
+"@target": "node588854"
+}, 
+{
+"@id": "edge588855", 
+"@length": 0.00999633, 
+"@source": "node588854", 
+"@target": "node588855"
+}, 
+{
+"@id": "edge588856", 
+"@length": 1e-08, 
+"@source": "node588855", 
+"@target": "node588856"
+}, 
+{
+"@id": "edge588857", 
+"@length": 1e-08, 
+"@source": "node588855", 
+"@target": "node588857"
+}, 
+{
+"@id": "edge588858", 
+"@length": 0.00418963, 
+"@source": "node588854", 
+"@target": "node588858"
+}, 
+{
+"@id": "edge588859", 
+"@length": 0.01268455, 
+"@source": "node588858", 
+"@target": "node588859"
+}, 
+{
+"@id": "edge588860", 
+"@length": 0.01410061, 
+"@source": "node588858", 
+"@target": "node588860"
+}, 
+{
+"@id": "edge588861", 
+"@length": 0.06554223, 
+"@source": "node588849", 
+"@target": "node588861"
+}, 
+{
+"@id": "edge588862", 
+"@length": 0.02546164, 
+"@source": "node588861", 
+"@target": "node588862"
+}, 
+{
+"@id": "edge588863", 
+"@length": 0.01870945, 
+"@source": "node588862", 
+"@target": "node588863"
+}, 
+{
+"@id": "edge588864", 
+"@length": 0.00650476, 
+"@source": "node588862", 
+"@target": "node588864"
+}, 
+{
+"@id": "edge588865", 
+"@length": 0.00063569, 
+"@source": "node588864", 
+"@target": "node588865"
+}, 
+{
+"@id": "edge588866", 
+"@length": 0.00582442, 
+"@source": "node588865", 
+"@target": "node588866"
+}, 
+{
+"@id": "edge588867", 
+"@length": 0.00703017, 
+"@source": "node588865", 
+"@target": "node588867"
+}, 
+{
+"@id": "edge588868", 
+"@length": 0.00458841, 
+"@source": "node588867", 
+"@target": "node588868"
+}, 
+{
+"@id": "edge588869", 
+"@length": 1e-08, 
+"@source": "node588867", 
+"@target": "node588869"
+}, 
+{
+"@id": "edge588870", 
+"@length": 0.00649289, 
+"@source": "node588864", 
+"@target": "node588870"
+}, 
+{
+"@id": "edge588871", 
+"@length": 1e-08, 
+"@source": "node588870", 
+"@target": "node588871"
+}, 
+{
+"@id": "edge588872", 
+"@length": 0.00242026, 
+"@source": "node588870", 
+"@target": "node588872"
+}, 
+{
+"@id": "edge588873", 
+"@length": 1e-08, 
+"@source": "node588872", 
+"@target": "node588873"
+}, 
+{
+"@id": "edge588874", 
+"@length": 5e-08, 
+"@source": "node588872", 
+"@target": "node588874"
+}, 
+{
+"@id": "edge588875", 
+"@length": 0.0218573, 
+"@source": "node588861", 
+"@target": "node588875"
+}, 
+{
+"@id": "edge588876", 
+"@length": 0.00341596, 
+"@source": "node588875", 
+"@target": "node588876"
+}, 
+{
+"@id": "edge588877", 
+"@length": 0.02262129, 
+"@source": "node588876", 
+"@target": "node588877"
+}, 
+{
+"@id": "edge588878", 
+"@length": 0.00401897, 
+"@source": "node588876", 
+"@target": "node588878"
+}, 
+{
+"@id": "edge588879", 
+"@length": 0.00246002, 
+"@source": "node588878", 
+"@target": "node588879"
+}, 
+{
+"@id": "edge588880", 
+"@length": 0.01845558, 
+"@source": "node588878", 
+"@target": "node588880"
+}, 
+{
+"@id": "edge588881", 
+"@length": 0.00870668, 
+"@source": "node588875", 
+"@target": "node588881"
+}, 
+{
+"@id": "edge588882", 
+"@length": 0.02857789, 
+"@source": "node588881", 
+"@target": "node588882"
+}, 
+{
+"@id": "edge588883", 
+"@length": 0.00243321, 
+"@source": "node588881", 
+"@target": "node588883"
+}, 
+{
+"@id": "edge588884", 
+"@length": 0.01619965, 
+"@source": "node588883", 
+"@target": "node588884"
+}, 
+{
+"@id": "edge588885", 
+"@length": 0.01317972, 
+"@source": "node588883", 
+"@target": "node588885"
+}, 
+{
+"@id": "edge588886", 
+"@length": 0.00549121, 
+"@source": "node588885", 
+"@target": "node588886"
+}, 
+{
+"@id": "edge588887", 
+"@length": 1e-08, 
+"@source": "node588886", 
+"@target": "node588887"
+}, 
+{
+"@id": "edge588888", 
+"@length": 0.00179825, 
+"@source": "node588886", 
+"@target": "node588888"
+}, 
+{
+"@id": "edge588889", 
+"@length": 1e-08, 
+"@source": "node588888", 
+"@target": "node588889"
+}, 
+{
+"@id": "edge588890", 
+"@length": 1e-08, 
+"@source": "node588888", 
+"@target": "node588890"
+}, 
+{
+"@id": "edge588891", 
+"@length": 1e-08, 
+"@source": "node588890", 
+"@target": "node588891"
+}, 
+{
+"@id": "edge588892", 
+"@length": 1e-08, 
+"@source": "node588890", 
+"@target": "node588892"
+}, 
+{
+"@id": "edge588893", 
+"@length": 0.00545531, 
+"@source": "node588885", 
+"@target": "node588893"
+}, 
+{
+"@id": "edge588894", 
+"@length": 0.00181102, 
+"@source": "node588893", 
+"@target": "node588894"
+}, 
+{
+"@id": "edge588895", 
+"@length": 0.00179094, 
+"@source": "node588893", 
+"@target": "node588895"
+}, 
+{
+"@id": "edge588896", 
+"@length": 1e-08, 
+"@source": "node588895", 
+"@target": "node588896"
+}, 
+{
+"@id": "edge588897", 
+"@length": 1e-08, 
+"@source": "node588895", 
+"@target": "node588897"
+}, 
+{
+"@id": "edge588898", 
+"@length": 1e-08, 
+"@source": "node588897", 
+"@target": "node588898"
+}, 
+{
+"@id": "edge588899", 
+"@length": 0.00179713, 
+"@source": "node588897", 
+"@target": "node588899"
+}, 
+{
+"@id": "edge588900", 
+"@length": 0.03279355, 
+"@source": "node588848", 
+"@target": "node588900"
+}, 
+{
+"@id": "edge588901", 
+"@length": 0.01501753, 
+"@source": "node588900", 
+"@target": "node588901"
+}, 
+{
+"@id": "edge588902", 
+"@length": 0.13572037, 
+"@source": "node588901", 
+"@target": "node588902"
+}, 
+{
+"@id": "edge588903", 
+"@length": 0.01634589, 
+"@source": "node588902", 
+"@target": "node588903"
+}, 
+{
+"@id": "edge588904", 
+"@length": 0.0285374, 
+"@source": "node588902", 
+"@target": "node588904"
+}, 
+{
+"@id": "edge588905", 
+"@length": 0.04646111, 
+"@source": "node588901", 
+"@target": "node588905"
+}, 
+{
+"@id": "edge588906", 
+"@length": 0.06425757, 
+"@source": "node588905", 
+"@target": "node588906"
+}, 
+{
+"@id": "edge588907", 
+"@length": 0.04317682, 
+"@source": "node588906", 
+"@target": "node588907"
+}, 
+{
+"@id": "edge588908", 
+"@length": 0.01634699, 
+"@source": "node588906", 
+"@target": "node588908"
+}, 
+{
+"@id": "edge588909", 
+"@length": 0.01502922, 
+"@source": "node588908", 
+"@target": "node588909"
+}, 
+{
+"@id": "edge588910", 
+"@length": 0.00455091, 
+"@source": "node588908", 
+"@target": "node588910"
+}, 
+{
+"@id": "edge588911", 
+"@length": 0.07531713, 
+"@source": "node588905", 
+"@target": "node588911"
+}, 
+{
+"@id": "edge588912", 
+"@length": 1e-08, 
+"@source": "node588911", 
+"@target": "node588912"
+}, 
+{
+"@id": "edge588913", 
+"@length": 1e-08, 
+"@source": "node588911", 
+"@target": "node588913"
+}, 
+{
+"@id": "edge588914", 
+"@length": 1e-08, 
+"@source": "node588913", 
+"@target": "node588914"
+}, 
+{
+"@id": "edge588915", 
+"@length": 1e-08, 
+"@source": "node588913", 
+"@target": "node588915"
+}, 
+{
+"@id": "edge588916", 
+"@length": 0.02518451, 
+"@source": "node588900", 
+"@target": "node588916"
+}, 
+{
+"@id": "edge588917", 
+"@length": 0.01703363, 
+"@source": "node588916", 
+"@target": "node588917"
+}, 
+{
+"@id": "edge588918", 
+"@length": 0.16734662, 
+"@source": "node588917", 
+"@target": "node588918"
+}, 
+{
+"@id": "edge588919", 
+"@length": 0.0247833, 
+"@source": "node588917", 
+"@target": "node588919"
+}, 
+{
+"@id": "edge588920", 
+"@length": 0.07267486, 
+"@source": "node588919", 
+"@target": "node588920"
+}, 
+{
+"@id": "edge588921", 
+"@length": 0.04192873, 
+"@source": "node588919", 
+"@target": "node588921"
+}, 
+{
+"@id": "edge588922", 
+"@length": 0.05991913, 
+"@source": "node588921", 
+"@target": "node588922"
+}, 
+{
+"@id": "edge588923", 
+"@length": 0.01951709, 
+"@source": "node588922", 
+"@target": "node588923"
+}, 
+{
+"@id": "edge588924", 
+"@length": 0.00207797, 
+"@source": "node588922", 
+"@target": "node588924"
+}, 
+{
+"@id": "edge588925", 
+"@length": 0.00818361, 
+"@source": "node588924", 
+"@target": "node588925"
+}, 
+{
+"@id": "edge588926", 
+"@length": 0.00264213, 
+"@source": "node588924", 
+"@target": "node588926"
+}, 
+{
+"@id": "edge588927", 
+"@length": 0.0100961, 
+"@source": "node588926", 
+"@target": "node588927"
+}, 
+{
+"@id": "edge588928", 
+"@length": 0.00533594, 
+"@source": "node588926", 
+"@target": "node588928"
+}, 
+{
+"@id": "edge588929", 
+"@length": 0.03995876, 
+"@source": "node588921", 
+"@target": "node588929"
+}, 
+{
+"@id": "edge588930", 
+"@length": 0.03398042, 
+"@source": "node588929", 
+"@target": "node588930"
+}, 
+{
+"@id": "edge588931", 
+"@length": 1e-08, 
+"@source": "node588930", 
+"@target": "node588931"
+}, 
+{
+"@id": "edge588932", 
+"@length": 0.00178533, 
+"@source": "node588930", 
+"@target": "node588932"
+}, 
+{
+"@id": "edge588933", 
+"@length": 1e-08, 
+"@source": "node588932", 
+"@target": "node588933"
+}, 
+{
+"@id": "edge588934", 
+"@length": 1e-08, 
+"@source": "node588933", 
+"@target": "node588934"
+}, 
+{
+"@id": "edge588935", 
+"@length": 1e-08, 
+"@source": "node588933", 
+"@target": "node588935"
+}, 
+{
+"@id": "edge588936", 
+"@length": 1e-08, 
+"@source": "node588935", 
+"@target": "node588936"
+}, 
+{
+"@id": "edge588937", 
+"@length": 1e-08, 
+"@source": "node588935", 
+"@target": "node588937"
+}, 
+{
+"@id": "edge588938", 
+"@length": 0.00538303, 
+"@source": "node588932", 
+"@target": "node588938"
+}, 
+{
+"@id": "edge588939", 
+"@length": 0.00387332, 
+"@source": "node588938", 
+"@target": "node588939"
+}, 
+{
+"@id": "edge588940", 
+"@length": 1e-08, 
+"@source": "node588938", 
+"@target": "node588940"
+}, 
+{
+"@id": "edge588941", 
+"@length": 1e-08, 
+"@source": "node588940", 
+"@target": "node588941"
+}, 
+{
+"@id": "edge588942", 
+"@length": 1e-08, 
+"@source": "node588940", 
+"@target": "node588942"
+}, 
+{
+"@id": "edge588943", 
+"@length": 0.00915811, 
+"@source": "node588929", 
+"@target": "node588943"
+}, 
+{
+"@id": "edge588944", 
+"@length": 0.00438303, 
+"@source": "node588943", 
+"@target": "node588944"
+}, 
+{
+"@id": "edge588945", 
+"@length": 0.00360009, 
+"@source": "node588944", 
+"@target": "node588945"
+}, 
+{
+"@id": "edge588946", 
+"@length": 0.00175292, 
+"@source": "node588944", 
+"@target": "node588946"
+}, 
+{
+"@id": "edge588947", 
+"@length": 0.00468668, 
+"@source": "node588943", 
+"@target": "node588947"
+}, 
+{
+"@id": "edge588948", 
+"@length": 0.00356368, 
+"@source": "node588947", 
+"@target": "node588948"
+}, 
+{
+"@id": "edge588949", 
+"@length": 0.00182289, 
+"@source": "node588947", 
+"@target": "node588949"
+}, 
+{
+"@id": "edge588950", 
+"@length": 0.00539721, 
+"@source": "node588949", 
+"@target": "node588950"
+}, 
+{
+"@id": "edge588951", 
+"@source": "node588949", 
+"@target": "node588951"
+}, 
+{
+"@id": "edge588952", 
+"@length": 1e-08, 
+"@source": "node588951", 
+"@target": "node588952"
+}, 
+{
+"@id": "edge588953", 
+"@length": 1e-08, 
+"@source": "node588951", 
+"@target": "node588953"
+}, 
+{
+"@id": "edge588954", 
+"@length": 0.0035924, 
+"@source": "node588953", 
+"@target": "node588954"
+}, 
+{
+"@id": "edge588955", 
+"@length": 0.00721887, 
+"@source": "node588953", 
+"@target": "node588955"
+}, 
+{
+"@id": "edge588956", 
+"@length": 0.00656118, 
+"@source": "node588916", 
+"@target": "node588956"
+}, 
+{
+"@id": "edge588957", 
+"@length": 0.09254213, 
+"@source": "node588956", 
+"@target": "node588957"
+}, 
+{
+"@id": "edge588958", 
+"@length": 0.02891898, 
+"@source": "node588957", 
+"@target": "node588958"
+}, 
+{
+"@id": "edge588959", 
+"@length": 0.05899637, 
+"@source": "node588958", 
+"@target": "node588959"
+}, 
+{
+"@id": "edge588960", 
+"@length": 0.00515138, 
+"@source": "node588958", 
+"@target": "node588960"
+}, 
+{
+"@id": "edge588961", 
+"@length": 0.01903559, 
+"@source": "node588960", 
+"@target": "node588961"
+}, 
+{
+"@id": "edge588962", 
+"@length": 0.02784208, 
+"@source": "node588960", 
+"@target": "node588962"
+}, 
+{
+"@id": "edge588963", 
+"@length": 1e-08, 
+"@source": "node588962", 
+"@target": "node588963"
+}, 
+{
+"@id": "edge588964", 
+"@length": 1e-08, 
+"@source": "node588962", 
+"@target": "node588964"
+}, 
+{
+"@id": "edge588965", 
+"@length": 0.09687966, 
+"@source": "node588957", 
+"@target": "node588965"
+}, 
+{
+"@id": "edge588966", 
+"@length": 0.01059265, 
+"@source": "node588965", 
+"@target": "node588966"
+}, 
+{
+"@id": "edge588967", 
+"@length": 0.0017346, 
+"@source": "node588966", 
+"@target": "node588967"
+}, 
+{
+"@id": "edge588968", 
+"@length": 1e-08, 
+"@source": "node588966", 
+"@target": "node588968"
+}, 
+{
+"@id": "edge588969", 
+"@length": 1e-08, 
+"@source": "node588968", 
+"@target": "node588969"
+}, 
+{
+"@id": "edge588970", 
+"@length": 0.00173504, 
+"@source": "node588968", 
+"@target": "node588970"
+}, 
+{
+"@id": "edge588971", 
+"@length": 0.00540468, 
+"@source": "node588965", 
+"@target": "node588971"
+}, 
+{
+"@id": "edge588972", 
+"@length": 1e-08, 
+"@source": "node588971", 
+"@target": "node588972"
+}, 
+{
+"@id": "edge588973", 
+"@length": 1e-08, 
+"@source": "node588971", 
+"@target": "node588973"
+}, 
+{
+"@id": "edge588974", 
+"@length": 1e-08, 
+"@source": "node588973", 
+"@target": "node588974"
+}, 
+{
+"@id": "edge588975", 
+"@length": 1e-08, 
+"@source": "node588973", 
+"@target": "node588975"
+}, 
+{
+"@id": "edge588976", 
+"@length": 0.07072878, 
+"@source": "node588956", 
+"@target": "node588976"
+}, 
+{
+"@id": "edge588977", 
+"@length": 0.02062129, 
+"@source": "node588976", 
+"@target": "node588977"
+}, 
+{
+"@id": "edge588978", 
+"@length": 0.01114873, 
+"@source": "node588976", 
+"@target": "node588978"
+}, 
+{
+"@id": "edge588979", 
+"@length": 0.04038461, 
+"@source": "node588978", 
+"@target": "node588979"
+}, 
+{
+"@id": "edge588980", 
+"@length": 0.00098223, 
+"@source": "node588979", 
+"@target": "node588980"
+}, 
+{
+"@id": "edge588981", 
+"@length": 0.00582072, 
+"@source": "node588980", 
+"@target": "node588981"
+}, 
+{
+"@id": "edge588982", 
+"@length": 1e-08, 
+"@source": "node588980", 
+"@target": "node588982"
+}, 
+{
+"@id": "edge588983", 
+"@length": 0.00864165, 
+"@source": "node588979", 
+"@target": "node588983"
+}, 
+{
+"@id": "edge588984", 
+"@length": 0.00403428, 
+"@source": "node588983", 
+"@target": "node588984"
+}, 
+{
+"@id": "edge588985", 
+"@length": 7.07e-06, 
+"@source": "node588983", 
+"@target": "node588985"
+}, 
+{
+"@id": "edge588986", 
+"@length": 0.00115507, 
+"@source": "node588978", 
+"@target": "node588986"
+}, 
+{
+"@id": "edge588987", 
+"@length": 0.00928236, 
+"@source": "node588986", 
+"@target": "node588987"
+}, 
+{
+"@id": "edge588988", 
+"@length": 0.04146653, 
+"@source": "node588987", 
+"@target": "node588988"
+}, 
+{
+"@id": "edge588989", 
+"@length": 0.04505432, 
+"@source": "node588987", 
+"@target": "node588989"
+}, 
+{
+"@id": "edge588990", 
+"@length": 1e-08, 
+"@source": "node588989", 
+"@target": "node588990"
+}, 
+{
+"@id": "edge588991", 
+"@length": 1e-08, 
+"@source": "node588989", 
+"@target": "node588991"
+}, 
+{
+"@id": "edge588992", 
+"@length": 0.00767404, 
+"@source": "node588986", 
+"@target": "node588992"
+}, 
+{
+"@id": "edge588993", 
+"@length": 0.00197254, 
+"@source": "node588992", 
+"@target": "node588993"
+}, 
+{
+"@id": "edge588994", 
+"@length": 0.01474506, 
+"@source": "node588993", 
+"@target": "node588994"
+}, 
+{
+"@id": "edge588995", 
+"@length": 0.00458452, 
+"@source": "node588993", 
+"@target": "node588995"
+}, 
+{
+"@id": "edge588996", 
+"@length": 0.00576362, 
+"@source": "node588995", 
+"@target": "node588996"
+}, 
+{
+"@id": "edge588997", 
+"@length": 0.00376703, 
+"@source": "node588995", 
+"@target": "node588997"
+}, 
+{
+"@id": "edge588998", 
+"@length": 0.0018837, 
+"@source": "node588997", 
+"@target": "node588998"
+}, 
+{
+"@id": "edge588999", 
+"@length": 1e-08, 
+"@source": "node588997", 
+"@target": "node588999"
+}, 
+{
+"@id": "edge589000", 
+"@length": 0.0013606, 
+"@source": "node588992", 
+"@target": "node589000"
+}, 
+{
+"@id": "edge589001", 
+"@length": 0.01360489, 
+"@source": "node589000", 
+"@target": "node589001"
+}, 
+{
+"@id": "edge589002", 
+"@length": 0.01473527, 
+"@source": "node589000", 
+"@target": "node589002"
+}, 
+{
+"@id": "edge589003", 
+"@length": 0.00573277, 
+"@source": "node589002", 
+"@target": "node589003"
+}, 
+{
+"@id": "edge589004", 
+"@length": 1e-08, 
+"@source": "node589002", 
+"@target": "node589004"
+}, 
+{
+"@id": "edge589005", 
+"@length": 1e-08, 
+"@source": "node589004", 
+"@target": "node589005"
+}, 
+{
+"@id": "edge589006", 
+"@length": 1e-08, 
+"@source": "node589004", 
+"@target": "node589006"
+}
+], 
+"meta": [
+{
+"$": "node588846", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ML", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node588842", 
+"@root": "true"
+}, 
+{
+"@id": "node588843"
+}, 
+{
+"@id": "node588844", 
+"@otu": "otu242727"
+}, 
+{
+"@id": "node588845", 
+"@otu": "otu242754"
+}, 
+{
+"@id": "node588846"
+}, 
+{
+"@id": "node588847", 
+"@otu": "otu242783"
+}, 
+{
+"@id": "node588848"
+}, 
+{
+"@id": "node588849"
+}, 
+{
+"@id": "node588850"
+}, 
+{
+"@id": "node588851", 
+"@otu": "otu242746"
+}, 
+{
+"@id": "node588852"
+}, 
+{
+"@id": "node588853", 
+"@otu": "otu242740"
+}, 
+{
+"@id": "node588854"
+}, 
+{
+"@id": "node588855"
+}, 
+{
+"@id": "node588856", 
+"@otu": "otu242730"
+}, 
+{
+"@id": "node588857", 
+"@otu": "otu242775"
+}, 
+{
+"@id": "node588858"
+}, 
+{
+"@id": "node588859", 
+"@otu": "otu242748"
+}, 
+{
+"@id": "node588860", 
+"@otu": "otu242733"
+}, 
+{
+"@id": "node588861"
+}, 
+{
+"@id": "node588862"
+}, 
+{
+"@id": "node588863", 
+"@otu": "otu242738"
+}, 
+{
+"@id": "node588864"
+}, 
+{
+"@id": "node588865"
+}, 
+{
+"@id": "node588866", 
+"@otu": "otu242750"
+}, 
+{
+"@id": "node588867"
+}, 
+{
+"@id": "node588868", 
+"@otu": "otu242721"
+}, 
+{
+"@id": "node588869", 
+"@otu": "otu242718"
+}, 
+{
+"@id": "node588870"
+}, 
+{
+"@id": "node588871", 
+"@otu": "otu242724"
+}, 
+{
+"@id": "node588872"
+}, 
+{
+"@id": "node588873", 
+"@otu": "otu242762"
+}, 
+{
+"@id": "node588874", 
+"@otu": "otu242736"
+}, 
+{
+"@id": "node588875"
+}, 
+{
+"@id": "node588876"
+}, 
+{
+"@id": "node588877", 
+"@otu": "otu242782"
+}, 
+{
+"@id": "node588878"
+}, 
+{
+"@id": "node588879", 
+"@otu": "otu242743"
+}, 
+{
+"@id": "node588880", 
+"@otu": "otu242739"
+}, 
+{
+"@id": "node588881"
+}, 
+{
+"@id": "node588882", 
+"@otu": "otu242760"
+}, 
+{
+"@id": "node588883"
+}, 
+{
+"@id": "node588884", 
+"@otu": "otu242728"
+}, 
+{
+"@id": "node588885"
+}, 
+{
+"@id": "node588886"
+}, 
+{
+"@id": "node588887", 
+"@otu": "otu242741"
+}, 
+{
+"@id": "node588888"
+}, 
+{
+"@id": "node588889", 
+"@otu": "otu242777"
+}, 
+{
+"@id": "node588890"
+}, 
+{
+"@id": "node588891", 
+"@otu": "otu242726"
+}, 
+{
+"@id": "node588892", 
+"@otu": "otu242719"
+}, 
+{
+"@id": "node588893"
+}, 
+{
+"@id": "node588894", 
+"@otu": "otu242752"
+}, 
+{
+"@id": "node588895"
+}, 
+{
+"@id": "node588896", 
+"@otu": "otu242786"
+}, 
+{
+"@id": "node588897"
+}, 
+{
+"@id": "node588898", 
+"@otu": "otu242776"
+}, 
+{
+"@id": "node588899", 
+"@otu": "otu242780"
+}, 
+{
+"@id": "node588900"
+}, 
+{
+"@id": "node588901"
+}, 
+{
+"@id": "node588902"
+}, 
+{
+"@id": "node588903", 
+"@otu": "otu242745"
+}, 
+{
+"@id": "node588904", 
+"@otu": "otu242793"
+}, 
+{
+"@id": "node588905"
+}, 
+{
+"@id": "node588906"
+}, 
+{
+"@id": "node588907", 
+"@otu": "otu242766"
+}, 
+{
+"@id": "node588908"
+}, 
+{
+"@id": "node588909", 
+"@otu": "otu242758"
+}, 
+{
+"@id": "node588910", 
+"@otu": "otu242765"
+}, 
+{
+"@id": "node588911"
+}, 
+{
+"@id": "node588912", 
+"@otu": "otu242792"
+}, 
+{
+"@id": "node588913"
+}, 
+{
+"@id": "node588914", 
+"@otu": "otu242789"
+}, 
+{
+"@id": "node588915", 
+"@otu": "otu242717"
+}, 
+{
+"@id": "node588916"
+}, 
+{
+"@id": "node588917"
+}, 
+{
+"@id": "node588918", 
+"@otu": "otu242734"
+}, 
+{
+"@id": "node588919"
+}, 
+{
+"@id": "node588920", 
+"@otu": "otu242773"
+}, 
+{
+"@id": "node588921"
+}, 
+{
+"@id": "node588922"
+}, 
+{
+"@id": "node588923", 
+"@otu": "otu242768"
+}, 
+{
+"@id": "node588924"
+}, 
+{
+"@id": "node588925", 
+"@otu": "otu242722"
+}, 
+{
+"@id": "node588926"
+}, 
+{
+"@id": "node588927", 
+"@otu": "otu242716"
+}, 
+{
+"@id": "node588928", 
+"@otu": "otu242788"
+}, 
+{
+"@id": "node588929"
+}, 
+{
+"@id": "node588930"
+}, 
+{
+"@id": "node588931", 
+"@otu": "otu242764"
+}, 
+{
+"@id": "node588932"
+}, 
+{
+"@id": "node588933"
+}, 
+{
+"@id": "node588934", 
+"@otu": "otu242757"
+}, 
+{
+"@id": "node588935"
+}, 
+{
+"@id": "node588936", 
+"@otu": "otu242720"
+}, 
+{
+"@id": "node588937", 
+"@otu": "otu242756"
+}, 
+{
+"@id": "node588938"
+}, 
+{
+"@id": "node588939", 
+"@otu": "otu242715"
+}, 
+{
+"@id": "node588940"
+}, 
+{
+"@id": "node588941", 
+"@otu": "otu242774"
+}, 
+{
+"@id": "node588942", 
+"@otu": "otu242712"
+}, 
+{
+"@id": "node588943"
+}, 
+{
+"@id": "node588944"
+}, 
+{
+"@id": "node588945", 
+"@otu": "otu242747"
+}, 
+{
+"@id": "node588946", 
+"@otu": "otu242737"
+}, 
+{
+"@id": "node588947"
+}, 
+{
+"@id": "node588948", 
+"@otu": "otu242714"
+}, 
+{
+"@id": "node588949"
+}, 
+{
+"@id": "node588950", 
+"@otu": "otu242790"
+}, 
+{
+"@id": "node588951"
+}, 
+{
+"@id": "node588952", 
+"@otu": "otu242759"
+}, 
+{
+"@id": "node588953"
+}, 
+{
+"@id": "node588954", 
+"@otu": "otu242751"
+}, 
+{
+"@id": "node588955", 
+"@otu": "otu242744"
+}, 
+{
+"@id": "node588956"
+}, 
+{
+"@id": "node588957"
+}, 
+{
+"@id": "node588958"
+}, 
+{
+"@id": "node588959", 
+"@otu": "otu242787"
+}, 
+{
+"@id": "node588960"
+}, 
+{
+"@id": "node588961", 
+"@otu": "otu242725"
+}, 
+{
+"@id": "node588962"
+}, 
+{
+"@id": "node588963", 
+"@otu": "otu242767"
+}, 
+{
+"@id": "node588964", 
+"@otu": "otu242761"
+}, 
+{
+"@id": "node588965"
+}, 
+{
+"@id": "node588966"
+}, 
+{
+"@id": "node588967", 
+"@otu": "otu242753"
+}, 
+{
+"@id": "node588968"
+}, 
+{
+"@id": "node588969", 
+"@otu": "otu242791"
+}, 
+{
+"@id": "node588970", 
+"@otu": "otu242742"
+}, 
+{
+"@id": "node588971"
+}, 
+{
+"@id": "node588972", 
+"@otu": "otu242711"
+}, 
+{
+"@id": "node588973"
+}, 
+{
+"@id": "node588974", 
+"@otu": "otu242763"
+}, 
+{
+"@id": "node588975", 
+"@otu": "otu242779"
+}, 
+{
+"@id": "node588976"
+}, 
+{
+"@id": "node588977", 
+"@otu": "otu242731"
+}, 
+{
+"@id": "node588978"
+}, 
+{
+"@id": "node588979"
+}, 
+{
+"@id": "node588980"
+}, 
+{
+"@id": "node588981", 
+"@otu": "otu242735"
+}, 
+{
+"@id": "node588982", 
+"@otu": "otu242781"
+}, 
+{
+"@id": "node588983"
+}, 
+{
+"@id": "node588984", 
+"@otu": "otu242769"
+}, 
+{
+"@id": "node588985", 
+"@otu": "otu242784"
+}, 
+{
+"@id": "node588986"
+}, 
+{
+"@id": "node588987"
+}, 
+{
+"@id": "node588988", 
+"@otu": "otu242729"
+}, 
+{
+"@id": "node588989"
+}, 
+{
+"@id": "node588990", 
+"@otu": "otu242778"
+}, 
+{
+"@id": "node588991", 
+"@otu": "otu242755"
+}, 
+{
+"@id": "node588992"
+}, 
+{
+"@id": "node588993"
+}, 
+{
+"@id": "node588994", 
+"@otu": "otu242732"
+}, 
+{
+"@id": "node588995"
+}, 
+{
+"@id": "node588996", 
+"@otu": "otu242771"
+}, 
+{
+"@id": "node588997"
+}, 
+{
+"@id": "node588998", 
+"@otu": "otu242749"
+}, 
+{
+"@id": "node588999", 
+"@otu": "otu242772"
+}, 
+{
+"@id": "node589000"
+}, 
+{
+"@id": "node589001", 
+"@otu": "otu242713"
+}, 
+{
+"@id": "node589002"
+}, 
+{
+"@id": "node589003", 
+"@otu": "otu242770"
+}, 
+{
+"@id": "node589004"
+}, 
+{
+"@id": "node589005", 
+"@otu": "otu242785"
+}, 
+{
+"@id": "node589006", 
+"@otu": "otu242723"
+}
+]
+}, 
+{
+"@about": "#tree2644", 
+"@id": "tree2644", 
+"edge": [
+{
+"@id": "edge589008", 
+"@length": 0.09947163, 
+"@source": "node589007", 
+"@target": "node589008"
+}, 
+{
+"@id": "edge589009", 
+"@length": 0.14000152, 
+"@source": "node589008", 
+"@target": "node589009"
+}, 
+{
+"@id": "edge589010", 
+"@length": 0.16155262, 
+"@source": "node589008", 
+"@target": "node589010"
+}, 
+{
+"@id": "edge589011", 
+"@length": 0.09947163, 
+"@source": "node589007", 
+"@target": "node589011"
+}, 
+{
+"@id": "edge589012", 
+"@length": 0.12146509, 
+"@source": "node589011", 
+"@target": "node589012"
+}, 
+{
+"@id": "edge589013", 
+"@length": 0.0464343, 
+"@source": "node589012", 
+"@target": "node589013"
+}, 
+{
+"@id": "edge589014", 
+"@length": 1e-08, 
+"@source": "node589013", 
+"@target": "node589014"
+}, 
+{
+"@id": "edge589015", 
+"@length": 1e-08, 
+"@source": "node589013", 
+"@target": "node589015"
+}, 
+{
+"@id": "edge589016", 
+"@length": 0.04463065, 
+"@source": "node589012", 
+"@target": "node589016"
+}, 
+{
+"@id": "edge589017", 
+"@length": 0.06253141, 
+"@source": "node589016", 
+"@target": "node589017"
+}, 
+{
+"@id": "edge589018", 
+"@length": 0.0031581, 
+"@source": "node589017", 
+"@target": "node589018"
+}, 
+{
+"@id": "edge589019", 
+"@length": 0.00624912, 
+"@source": "node589017", 
+"@target": "node589019"
+}, 
+{
+"@id": "edge589020", 
+"@length": 0.02373233, 
+"@source": "node589016", 
+"@target": "node589020"
+}, 
+{
+"@id": "edge589021", 
+"@length": 0.03425522, 
+"@source": "node589020", 
+"@target": "node589021"
+}, 
+{
+"@id": "edge589022", 
+"@length": 1e-08, 
+"@source": "node589021", 
+"@target": "node589022"
+}, 
+{
+"@id": "edge589023", 
+"@length": 1e-08, 
+"@source": "node589021", 
+"@target": "node589023"
+}, 
+{
+"@id": "edge589024", 
+"@length": 1e-08, 
+"@source": "node589023", 
+"@target": "node589024"
+}, 
+{
+"@id": "edge589025", 
+"@length": 1e-08, 
+"@source": "node589023", 
+"@target": "node589025"
+}, 
+{
+"@id": "edge589026", 
+"@length": 0.01624367, 
+"@source": "node589020", 
+"@target": "node589026"
+}, 
+{
+"@id": "edge589027", 
+"@length": 0.02348397, 
+"@source": "node589026", 
+"@target": "node589027"
+}, 
+{
+"@id": "edge589028", 
+"@length": 0.01278205, 
+"@source": "node589027", 
+"@target": "node589028"
+}, 
+{
+"@id": "edge589029", 
+"@length": 0.0003449, 
+"@source": "node589027", 
+"@target": "node589029"
+}, 
+{
+"@id": "edge589030", 
+"@length": 0.017084, 
+"@source": "node589026", 
+"@target": "node589030"
+}, 
+{
+"@id": "edge589031", 
+"@length": 0.00479552, 
+"@source": "node589030", 
+"@target": "node589031"
+}, 
+{
+"@id": "edge589032", 
+"@length": 0.02245765, 
+"@source": "node589031", 
+"@target": "node589032"
+}, 
+{
+"@id": "edge589033", 
+"@length": 0.04633262, 
+"@source": "node589031", 
+"@target": "node589033"
+}, 
+{
+"@id": "edge589034", 
+"@length": 0.02656356, 
+"@source": "node589030", 
+"@target": "node589034"
+}, 
+{
+"@id": "edge589035", 
+"@length": 0.00160558, 
+"@source": "node589034", 
+"@target": "node589035"
+}, 
+{
+"@id": "edge589036", 
+"@length": 0.00396602, 
+"@source": "node589034", 
+"@target": "node589036"
+}, 
+{
+"@id": "edge589037", 
+"@length": 1e-08, 
+"@source": "node589036", 
+"@target": "node589037"
+}, 
+{
+"@id": "edge589038", 
+"@length": 1e-08, 
+"@source": "node589036", 
+"@target": "node589038"
+}, 
+{
+"@id": "edge589039", 
+"@length": 1e-08, 
+"@source": "node589038", 
+"@target": "node589039"
+}, 
+{
+"@id": "edge589040", 
+"@length": 1e-08, 
+"@source": "node589038", 
+"@target": "node589040"
+}, 
+{
+"@id": "edge589041", 
+"@length": 0.03559936, 
+"@source": "node589011", 
+"@target": "node589041"
+}, 
+{
+"@id": "edge589042", 
+"@length": 0.06013675, 
+"@source": "node589041", 
+"@target": "node589042"
+}, 
+{
+"@id": "edge589043", 
+"@length": 0.01761387, 
+"@source": "node589042", 
+"@target": "node589043"
+}, 
+{
+"@id": "edge589044", 
+"@length": 0.02976951, 
+"@source": "node589042", 
+"@target": "node589044"
+}, 
+{
+"@id": "edge589045", 
+"@length": 1e-08, 
+"@source": "node589044", 
+"@target": "node589045"
+}, 
+{
+"@id": "edge589046", 
+"@length": 1e-08, 
+"@source": "node589044", 
+"@target": "node589046"
+}, 
+{
+"@id": "edge589047", 
+"@length": 0.03197511, 
+"@source": "node589041", 
+"@target": "node589047"
+}, 
+{
+"@id": "edge589048", 
+"@length": 0.17871147, 
+"@source": "node589047", 
+"@target": "node589048"
+}, 
+{
+"@id": "edge589049", 
+"@length": 0.08797731, 
+"@source": "node589047", 
+"@target": "node589049"
+}, 
+{
+"@id": "edge589050", 
+"@length": 0.04732463, 
+"@source": "node589049", 
+"@target": "node589050"
+}, 
+{
+"@id": "edge589051", 
+"@length": 0.02288896, 
+"@source": "node589050", 
+"@target": "node589051"
+}, 
+{
+"@id": "edge589052", 
+"@length": 0.00719193, 
+"@source": "node589051", 
+"@target": "node589052"
+}, 
+{
+"@id": "edge589053", 
+"@length": 0.00187582, 
+"@source": "node589051", 
+"@target": "node589053"
+}, 
+{
+"@id": "edge589054", 
+"@length": 0.0466569, 
+"@source": "node589050", 
+"@target": "node589054"
+}, 
+{
+"@id": "edge589055", 
+"@length": 0.00351976, 
+"@source": "node589054", 
+"@target": "node589055"
+}, 
+{
+"@id": "edge589056", 
+"@length": 1e-08, 
+"@source": "node589054", 
+"@target": "node589056"
+}, 
+{
+"@id": "edge589057", 
+"@length": 1e-08, 
+"@source": "node589056", 
+"@target": "node589057"
+}, 
+{
+"@id": "edge589058", 
+"@length": 1e-08, 
+"@source": "node589056", 
+"@target": "node589058"
+}, 
+{
+"@id": "edge589059", 
+"@length": 0.00725366, 
+"@source": "node589049", 
+"@target": "node589059"
+}, 
+{
+"@id": "edge589060", 
+"@length": 0.00870086, 
+"@source": "node589059", 
+"@target": "node589060"
+}, 
+{
+"@id": "edge589061", 
+"@length": 1e-08, 
+"@source": "node589060", 
+"@target": "node589061"
+}, 
+{
+"@id": "edge589062", 
+"@length": 1e-08, 
+"@source": "node589060", 
+"@target": "node589062"
+}, 
+{
+"@id": "edge589063", 
+"@length": 0.00209545, 
+"@source": "node589059", 
+"@target": "node589063"
+}, 
+{
+"@id": "edge589064", 
+"@length": 0.02191356, 
+"@source": "node589063", 
+"@target": "node589064"
+}, 
+{
+"@id": "edge589065", 
+"@length": 0.00377328, 
+"@source": "node589063", 
+"@target": "node589065"
+}, 
+{
+"@id": "edge589066", 
+"@length": 0.00172534, 
+"@source": "node589065", 
+"@target": "node589066"
+}, 
+{
+"@id": "edge589067", 
+"@length": 1e-08, 
+"@source": "node589066", 
+"@target": "node589067"
+}, 
+{
+"@id": "edge589068", 
+"@length": 1e-08, 
+"@source": "node589066", 
+"@target": "node589068"
+}, 
+{
+"@id": "edge589069", 
+"@length": 0.00172511, 
+"@source": "node589065", 
+"@target": "node589069"
+}, 
+{
+"@id": "edge589070", 
+"@length": 0.00345218, 
+"@source": "node589069", 
+"@target": "node589070"
+}, 
+{
+"@id": "edge589071", 
+"@length": 0.00173302, 
+"@source": "node589069", 
+"@target": "node589071"
+}, 
+{
+"@id": "edge589072", 
+"@length": 1e-08, 
+"@source": "node589071", 
+"@target": "node589072"
+}, 
+{
+"@id": "edge589073", 
+"@length": 0.00176954, 
+"@source": "node589071", 
+"@target": "node589073"
+}
+], 
+"meta": [
+{
+"$": "node589011", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ML", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node589007", 
+"@root": "true"
+}, 
+{
+"@id": "node589008"
+}, 
+{
+"@id": "node589009", 
+"@otu": "otu242816"
+}, 
+{
+"@id": "node589010", 
+"@otu": "otu242804"
+}, 
+{
+"@id": "node589011"
+}, 
+{
+"@id": "node589012"
+}, 
+{
+"@id": "node589013"
+}, 
+{
+"@id": "node589014", 
+"@otu": "otu242815"
+}, 
+{
+"@id": "node589015", 
+"@otu": "otu242825"
+}, 
+{
+"@id": "node589016"
+}, 
+{
+"@id": "node589017"
+}, 
+{
+"@id": "node589018", 
+"@otu": "otu242809"
+}, 
+{
+"@id": "node589019", 
+"@otu": "otu242799"
+}, 
+{
+"@id": "node589020"
+}, 
+{
+"@id": "node589021"
+}, 
+{
+"@id": "node589022", 
+"@otu": "otu242827"
+}, 
+{
+"@id": "node589023"
+}, 
+{
+"@id": "node589024", 
+"@otu": "otu242806"
+}, 
+{
+"@id": "node589025", 
+"@otu": "otu242794"
+}, 
+{
+"@id": "node589026"
+}, 
+{
+"@id": "node589027"
+}, 
+{
+"@id": "node589028", 
+"@otu": "otu242826"
+}, 
+{
+"@id": "node589029", 
+"@otu": "otu242811"
+}, 
+{
+"@id": "node589030"
+}, 
+{
+"@id": "node589031"
+}, 
+{
+"@id": "node589032", 
+"@otu": "otu242822"
+}, 
+{
+"@id": "node589033", 
+"@otu": "otu242819"
+}, 
+{
+"@id": "node589034"
+}, 
+{
+"@id": "node589035", 
+"@otu": "otu242818"
+}, 
+{
+"@id": "node589036"
+}, 
+{
+"@id": "node589037", 
+"@otu": "otu242814"
+}, 
+{
+"@id": "node589038"
+}, 
+{
+"@id": "node589039", 
+"@otu": "otu242797"
+}, 
+{
+"@id": "node589040", 
+"@otu": "otu242821"
+}, 
+{
+"@id": "node589041"
+}, 
+{
+"@id": "node589042"
+}, 
+{
+"@id": "node589043", 
+"@otu": "otu242824"
+}, 
+{
+"@id": "node589044"
+}, 
+{
+"@id": "node589045", 
+"@otu": "otu242808"
+}, 
+{
+"@id": "node589046", 
+"@otu": "otu242798"
+}, 
+{
+"@id": "node589047"
+}, 
+{
+"@id": "node589048", 
+"@otu": "otu242817"
+}, 
+{
+"@id": "node589049"
+}, 
+{
+"@id": "node589050"
+}, 
+{
+"@id": "node589051"
+}, 
+{
+"@id": "node589052", 
+"@otu": "otu242802"
+}, 
+{
+"@id": "node589053", 
+"@otu": "otu242823"
+}, 
+{
+"@id": "node589054"
+}, 
+{
+"@id": "node589055", 
+"@otu": "otu242796"
+}, 
+{
+"@id": "node589056"
+}, 
+{
+"@id": "node589057", 
+"@otu": "otu242813"
+}, 
+{
+"@id": "node589058", 
+"@otu": "otu242801"
+}, 
+{
+"@id": "node589059"
+}, 
+{
+"@id": "node589060"
+}, 
+{
+"@id": "node589061", 
+"@otu": "otu242803"
+}, 
+{
+"@id": "node589062", 
+"@otu": "otu242800"
+}, 
+{
+"@id": "node589063"
+}, 
+{
+"@id": "node589064", 
+"@otu": "otu242812"
+}, 
+{
+"@id": "node589065"
+}, 
+{
+"@id": "node589066"
+}, 
+{
+"@id": "node589067", 
+"@otu": "otu242810"
+}, 
+{
+"@id": "node589068", 
+"@otu": "otu242807"
+}, 
+{
+"@id": "node589069"
+}, 
+{
+"@id": "node589070", 
+"@otu": "otu242820"
+}, 
+{
+"@id": "node589071"
+}, 
+{
+"@id": "node589072", 
+"@otu": "otu242805"
+}, 
+{
+"@id": "node589073", 
+"@otu": "otu242795"
+}
+]
+}
+]
+}
+}
+}

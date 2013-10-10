@@ -1,0 +1,321 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Zou, X.-H. [et al. 2008], Zhang, F.-M., Zhang, J.-G., Zang, L.-L., Tang, L., Wang, J., Sang, T., & Ge, S. 2008. Analysis of 142 genes resolves the rapid diversification of the rice genus.Genome Biol. 9:R49", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1186/gb-2008-9-3-r49", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Jiabin Deng", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "925", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2008, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1871594, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "cpDNA", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus925", 
+"otu": [
+{
+"@about": "#otu206841", 
+"@id": "otu206841", 
+"@label": "Oryza rufipogon", 
+"meta": [
+{
+"$": 135756, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza rufipogon", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206842", 
+"@id": "otu206842", 
+"@label": "Oryza punctata", 
+"meta": [
+{
+"$": 709892, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza punctata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206843", 
+"@id": "otu206843", 
+"@label": "Oryza officinalis", 
+"meta": [
+{
+"$": 709884, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza officinalis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206844", 
+"@id": "otu206844", 
+"@label": "Oryza australiensis", 
+"meta": [
+{
+"$": 709898, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza australiensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206845", 
+"@id": "otu206845", 
+"@label": "Oryza brachyantha", 
+"meta": [
+{
+"$": 709900, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza brachyantha", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206846", 
+"@id": "otu206846", 
+"@label": "Oryza granulata", 
+"meta": [
+{
+"$": 858818, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza granulata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206847", 
+"@id": "otu206847", 
+"@label": "Leersia tisserantii", 
+"meta": [
+{
+"$": 890604, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Leersia tisserantti", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees925", 
+"@otus": "otus925", 
+"tree": [
+{
+"@about": "#tree1824", 
+"@id": "tree1824", 
+"edge": [
+{
+"@id": "edge490011", 
+"@source": "node490010", 
+"@target": "node490011"
+}, 
+{
+"@id": "edge490012", 
+"@length": 0.00548, 
+"@source": "node490011", 
+"@target": "node490012"
+}, 
+{
+"@id": "edge490013", 
+"@length": 0.030809, 
+"@source": "node490012", 
+"@target": "node490013"
+}, 
+{
+"@id": "edge490014", 
+"@length": 0.006659, 
+"@source": "node490013", 
+"@target": "node490014"
+}, 
+{
+"@id": "edge490015", 
+"@length": 0.003042, 
+"@source": "node490014", 
+"@target": "node490015"
+}, 
+{
+"@id": "edge490016", 
+"@length": 0.028406, 
+"@source": "node490015", 
+"@target": "node490016"
+}, 
+{
+"@id": "edge490017", 
+"@length": 0.023734, 
+"@source": "node490015", 
+"@target": "node490017"
+}, 
+{
+"@id": "edge490018", 
+"@length": 0.020372, 
+"@source": "node490014", 
+"@target": "node490018"
+}, 
+{
+"@id": "edge490019", 
+"@length": 0.027389, 
+"@source": "node490013", 
+"@target": "node490019"
+}, 
+{
+"@id": "edge490020", 
+"@length": 0.085284, 
+"@source": "node490012", 
+"@target": "node490020"
+}, 
+{
+"@id": "edge490021", 
+"@length": 0.041883, 
+"@source": "node490011", 
+"@target": "node490021"
+}, 
+{
+"@id": "edge490022", 
+"@length": 0.088897, 
+"@source": "node490010", 
+"@target": "node490022"
+}
+], 
+"meta": [
+{
+"$": "node490011", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node490010", 
+"@root": "true"
+}, 
+{
+"@id": "node490011"
+}, 
+{
+"@id": "node490012"
+}, 
+{
+"@id": "node490013"
+}, 
+{
+"@id": "node490014"
+}, 
+{
+"@id": "node490015"
+}, 
+{
+"@id": "node490016", 
+"@otu": "otu206841"
+}, 
+{
+"@id": "node490017", 
+"@otu": "otu206842"
+}, 
+{
+"@id": "node490018", 
+"@otu": "otu206843"
+}, 
+{
+"@id": "node490019", 
+"@otu": "otu206844"
+}, 
+{
+"@id": "node490020", 
+"@otu": "otu206845"
+}, 
+{
+"@id": "node490021", 
+"@otu": "otu206846"
+}, 
+{
+"@id": "node490022", 
+"@otu": "otu206847"
+}
+]
+}
+]
+}
+}
+}

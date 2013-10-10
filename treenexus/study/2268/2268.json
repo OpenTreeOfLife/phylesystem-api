@@ -1,0 +1,239 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Martin, Frank N. \"Mitochondrial haplotype determination in the oomycete plant pathogen Phytophthora ramorum.\" Current Genetics 54.1 (2008): 23-34.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s00294-008-0196-8", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S2052", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2268", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2008, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1392638, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ML", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mitochondrial", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2268", 
+"otu": [
+{
+"@about": "#otu326129", 
+"@id": "otu326129", 
+"@label": "Phytophthora hibernalis", 
+"meta": [
+{
+"$": 81905, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phytophthora hibernalis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326130", 
+"@id": "otu326130", 
+"@label": "Phytophthora ramorum", 
+"meta": [
+{
+"$": 769955, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phytophthora ramorum IIa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326131", 
+"@id": "otu326131", 
+"@label": "Phytophthora ramorum", 
+"meta": [
+{
+"$": 769955, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phytophthora ramorum I", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326132", 
+"@id": "otu326132", 
+"@label": "Phytophthora ramorum", 
+"meta": [
+{
+"$": 769955, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phytophthora ramorum IIb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326133", 
+"@id": "otu326133", 
+"@label": "Phytophthora ramorum", 
+"meta": [
+{
+"$": 769955, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phytophthora ramorum III", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2268", 
+"@otus": "otus2268", 
+"tree": [
+{
+"@about": "#tree4804", 
+"@id": "tree4804", 
+"edge": [
+{
+"@id": "edge843528", 
+"@source": "node843527", 
+"@target": "node843528"
+}, 
+{
+"@id": "edge843529", 
+"@source": "node843527", 
+"@target": "node843529"
+}, 
+{
+"@id": "edge843530", 
+"@source": "node843529", 
+"@target": "node843530"
+}, 
+{
+"@id": "edge843531", 
+"@source": "node843530", 
+"@target": "node843531"
+}, 
+{
+"@id": "edge843532", 
+"@source": "node843530", 
+"@target": "node843532"
+}, 
+{
+"@id": "edge843533", 
+"@source": "node843529", 
+"@target": "node843533"
+}, 
+{
+"@id": "edge843534", 
+"@source": "node843527", 
+"@target": "node843534"
+}
+], 
+"meta": [
+{
+"$": "node843527", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node843527", 
+"@root": "true"
+}, 
+{
+"@id": "node843528", 
+"@otu": "otu326129"
+}, 
+{
+"@id": "node843529"
+}, 
+{
+"@id": "node843530"
+}, 
+{
+"@id": "node843531", 
+"@otu": "otu326130"
+}, 
+{
+"@id": "node843532", 
+"@otu": "otu326132"
+}, 
+{
+"@id": "node843533", 
+"@otu": "otu326131"
+}, 
+{
+"@id": "node843534", 
+"@otu": "otu326133"
+}
+]
+}
+]
+}
+}
+}

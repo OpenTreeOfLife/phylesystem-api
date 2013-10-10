@@ -1,0 +1,325 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Coetzee M., Wingfield B., Coutinho T., & Wingfield M.J. 2000. Identification of the causal agent of Armillaria root rot of Pinus species in South Africa. Mycologia, 92(4): 777-785.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2307/3761435", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S722", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1728", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2000, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 405089, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "IGS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1728", 
+"otu": [
+{
+"@about": "#otu272189", 
+"@id": "otu272189", 
+"@label": "Armillaria heimii", 
+"meta": [
+{
+"$": 409763, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Armillaria heimii CMW3173", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu272190", 
+"@id": "otu272190", 
+"@label": "Armillaria fuscipes", 
+"meta": [
+{
+"$": 409764, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Armillaria fuscipes CMW2717", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu272191", 
+"@id": "otu272191", 
+"@label": "Armillaria heimii", 
+"meta": [
+{
+"$": 409763, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Armillaria heimii CMW3955", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu272192", 
+"@id": "otu272192", 
+"@label": "Armillaria fuscipes", 
+"meta": [
+{
+"$": 409764, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Armillaria fuscipes CMW3167", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu272193", 
+"@id": "otu272193", 
+"@label": "Armillaria fuscipes", 
+"meta": [
+{
+"$": 409764, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Armillaria fuscipes CMW3164", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu272194", 
+"@id": "otu272194", 
+"@label": "Armillaria heimii", 
+"meta": [
+{
+"$": 409763, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Armillaria heimii CMW3152", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu272195", 
+"@id": "otu272195", 
+"@label": "Armillaria fuscipes", 
+"meta": [
+{
+"$": 409764, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Armillaria fuscipes CMW2740", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1728", 
+"@otus": "otus1728", 
+"tree": [
+{
+"@about": "#tree3477", 
+"@id": "tree3477", 
+"edge": [
+{
+"@id": "edge675272", 
+"@source": "node675271", 
+"@target": "node675272"
+}, 
+{
+"@id": "edge675273", 
+"@source": "node675272", 
+"@target": "node675273"
+}, 
+{
+"@id": "edge675274", 
+"@source": "node675272", 
+"@target": "node675274"
+}, 
+{
+"@id": "edge675275", 
+"@source": "node675274", 
+"@target": "node675275"
+}, 
+{
+"@id": "edge675276", 
+"@source": "node675275", 
+"@target": "node675276"
+}, 
+{
+"@id": "edge675277", 
+"@source": "node675275", 
+"@target": "node675277"
+}, 
+{
+"@id": "edge675278", 
+"@source": "node675274", 
+"@target": "node675278"
+}, 
+{
+"@id": "edge675279", 
+"@source": "node675271", 
+"@target": "node675279"
+}, 
+{
+"@id": "edge675280", 
+"@source": "node675279", 
+"@target": "node675280"
+}, 
+{
+"@id": "edge675281", 
+"@source": "node675280", 
+"@target": "node675281"
+}, 
+{
+"@id": "edge675282", 
+"@source": "node675280", 
+"@target": "node675282"
+}, 
+{
+"@id": "edge675283", 
+"@source": "node675279", 
+"@target": "node675283"
+}
+], 
+"meta": [
+{
+"$": "node675271", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "IGS-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node675271", 
+"@root": "true"
+}, 
+{
+"@id": "node675272"
+}, 
+{
+"@id": "node675273", 
+"@otu": "otu272190"
+}, 
+{
+"@id": "node675274"
+}, 
+{
+"@id": "node675275"
+}, 
+{
+"@id": "node675276", 
+"@otu": "otu272195"
+}, 
+{
+"@id": "node675277", 
+"@otu": "otu272192"
+}, 
+{
+"@id": "node675278", 
+"@otu": "otu272193"
+}, 
+{
+"@id": "node675279"
+}, 
+{
+"@id": "node675280"
+}, 
+{
+"@id": "node675281", 
+"@otu": "otu272189"
+}, 
+{
+"@id": "node675282", 
+"@otu": "otu272194"
+}, 
+{
+"@id": "node675283", 
+"@otu": "otu272191"
+}
+]
+}
+]
+}
+}
+}

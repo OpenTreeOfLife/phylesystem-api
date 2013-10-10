@@ -1,0 +1,2860 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Syring J., Farrell K., Businsky R., Cronn R., & Liston A. 2007. Widespread Genealogical Nonmonophyly in Species of Pinus Subgenus Strobus. Systematic Biology, 56(2): 163-181.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1080/10635150701258787", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1591", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1107", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2007, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1587809, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1107", 
+"otu": [
+{
+"@about": "#otu223656", 
+"@id": "otu223656", 
+"@label": "Pinus peuce", 
+"meta": [
+{
+"$": 837891, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus peuce", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223657", 
+"@id": "otu223657", 
+"@label": "Pinus krempfii", 
+"meta": [
+{
+"$": 568623, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus krempfii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223658", 
+"@id": "otu223658", 
+"@label": "Pinus squamata", 
+"meta": [
+{
+"$": 534036, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus squamata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223659", 
+"@id": "otu223659", 
+"@label": "Pinus rzedowskii", 
+"meta": [
+{
+"$": 263467, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus rzedowskii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223660", 
+"@id": "otu223660", 
+"@label": "Pinus ayacahuite", 
+"meta": [
+{
+"$": 786788, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus ayacahuite A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223661", 
+"@id": "otu223661", 
+"@label": "Pinus monophylla", 
+"meta": [
+{
+"$": 225275, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus monophylla A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223662", 
+"@id": "otu223662", 
+"@label": "Pinus flexilis", 
+"meta": [
+{
+"$": 799605, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus flexilis A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223663", 
+"@id": "otu223663", 
+"@label": "Pinus armandii", 
+"meta": [
+{
+"$": 714285, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus armandii A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223664", 
+"@id": "otu223664", 
+"@label": "Pinus culminicola", 
+"meta": [
+{
+"$": 786802, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus culminicola A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223665", 
+"@id": "otu223665", 
+"@label": "Pinus albicaulis", 
+"meta": [
+{
+"$": 786785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus albicaulis A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223666", 
+"@id": "otu223666", 
+"@label": "Pinus sibirica", 
+"meta": [
+{
+"$": 814113, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus sibirica A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223667", 
+"@id": "otu223667", 
+"@label": "Pinus culminicola", 
+"meta": [
+{
+"$": 786802, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus culminicola A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223668", 
+"@id": "otu223668", 
+"@label": "Pinus edulis", 
+"meta": [
+{
+"$": 568629, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus edulis A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223669", 
+"@id": "otu223669", 
+"@label": "Pinus dalatensis", 
+"meta": [
+{
+"$": 262951, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus dalatensis A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223670", 
+"@id": "otu223670", 
+"@label": "Pinus wallichiana", 
+"meta": [
+{
+"$": 568632, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus wallichiana A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223671", 
+"@id": "otu223671", 
+"@label": "Pinus strobiformis", 
+"meta": [
+{
+"$": 262953, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus strobiformis A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223672", 
+"@id": "otu223672", 
+"@label": "Pinus aristata", 
+"meta": [
+{
+"$": 786782, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus aristata A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223673", 
+"@id": "otu223673", 
+"@label": "Pinus gerardiana", 
+"meta": [
+{
+"$": 212453, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus gerardiana A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223674", 
+"@id": "otu223674", 
+"@label": "Pinus bungeana", 
+"meta": [
+{
+"$": 786799, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus bungeana A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223675", 
+"@id": "otu223675", 
+"@label": "Pinus remota", 
+"meta": [
+{
+"$": 225281, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus remota A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223676", 
+"@id": "otu223676", 
+"@label": "Pinus dalatensis", 
+"meta": [
+{
+"$": 262951, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus dalatensis A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223677", 
+"@id": "otu223677", 
+"@label": "Pinus kwangtungensis", 
+"meta": [
+{
+"$": 212469, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus kwantungensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223678", 
+"@id": "otu223678", 
+"@label": "Pinus nelsonii", 
+"meta": [
+{
+"$": 837873, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus nelsonii A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223679", 
+"@id": "otu223679", 
+"@label": "Pinus sibirica", 
+"meta": [
+{
+"$": 814113, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus sibirica A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223680", 
+"@id": "otu223680", 
+"@label": "Pinus discolor", 
+"meta": [
+{
+"$": 799608, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus discolor A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223681", 
+"@id": "otu223681", 
+"@label": "Pinus strobus", 
+"meta": [
+{
+"$": 568616, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus strobus A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223682", 
+"@id": "otu223682", 
+"@label": "Pinus lambertiana", 
+"meta": [
+{
+"$": 568626, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus lambertiana A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223683", 
+"@id": "otu223683", 
+"@label": "Pinus pumila", 
+"meta": [
+{
+"$": 837867, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus pumila A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223684", 
+"@id": "otu223684", 
+"@label": "Pinus cembroides", 
+"meta": [
+{
+"$": 786795, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus cembroides A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223685", 
+"@id": "otu223685", 
+"@label": "Pinus monticola", 
+"meta": [
+{
+"$": 568650, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus monticola A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223686", 
+"@id": "otu223686", 
+"@label": "Pinus koraiensis", 
+"meta": [
+{
+"$": 830806, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus koraiensis A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223687", 
+"@id": "otu223687", 
+"@label": "Pinus aristata", 
+"meta": [
+{
+"$": 786782, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus aristata A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223688", 
+"@id": "otu223688", 
+"@label": "Pinus armandii", 
+"meta": [
+{
+"$": 714285, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus armandii A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223689", 
+"@id": "otu223689", 
+"@label": "Pinus wallichiana", 
+"meta": [
+{
+"$": 568632, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus wallichiana A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223690", 
+"@id": "otu223690", 
+"@label": "Pinus strobus", 
+"meta": [
+{
+"$": 568616, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus strobus A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223691", 
+"@id": "otu223691", 
+"@label": "Pinus johannis", 
+"meta": [
+{
+"$": 212475, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus johannis A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223692", 
+"@id": "otu223692", 
+"@label": "Pinus albicaulis", 
+"meta": [
+{
+"$": 786785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus albicaulis A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223693", 
+"@id": "otu223693", 
+"@label": "Pinus chiapensis", 
+"meta": [
+{
+"$": 786804, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus chiapensis A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223694", 
+"@id": "otu223694", 
+"@label": "Pinus monophylla", 
+"meta": [
+{
+"$": 225275, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus monophylla A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223695", 
+"@id": "otu223695", 
+"@label": "Pinus gerardiana", 
+"meta": [
+{
+"$": 212453, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus gerardiana A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223696", 
+"@id": "otu223696", 
+"@label": "Pinus parviflora", 
+"meta": [
+{
+"$": 837898, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus parviflora A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223697", 
+"@id": "otu223697", 
+"@label": "Pinus quadrifolia", 
+"meta": [
+{
+"$": 225278, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus quadrifolia A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223698", 
+"@id": "otu223698", 
+"@label": "Pinus bhutanica", 
+"meta": [
+{
+"$": 113476, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus bhutanica A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223699", 
+"@id": "otu223699", 
+"@label": "Pinus bhutanica", 
+"meta": [
+{
+"$": 113476, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus bhutanica A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223700", 
+"@id": "otu223700", 
+"@label": "Pinus cembroides", 
+"meta": [
+{
+"$": 786795, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus cembroides A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223701", 
+"@id": "otu223701", 
+"@label": "Pinus longaeva", 
+"meta": [
+{
+"$": 568647, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus longaeva A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223702", 
+"@id": "otu223702", 
+"@label": "Pinus strobus", 
+"meta": [
+{
+"$": 568616, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus strobus A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223703", 
+"@id": "otu223703", 
+"@label": "Pinus remota", 
+"meta": [
+{
+"$": 225281, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus remota A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223704", 
+"@id": "otu223704", 
+"@label": "Pinus morrisonicola", 
+"meta": [
+{
+"$": 1086988, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus morrisonicola A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223705", 
+"@id": "otu223705", 
+"@label": "Pinus koraiensis", 
+"meta": [
+{
+"$": 830806, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus koraiensis A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223706", 
+"@id": "otu223706", 
+"@label": "Pinus bungeana", 
+"meta": [
+{
+"$": 786799, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus bungeana A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223707", 
+"@id": "otu223707", 
+"@label": "Pinus nelsonii", 
+"meta": [
+{
+"$": 837873, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus nelsonii A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223708", 
+"@id": "otu223708", 
+"@label": "Pinus cembra", 
+"meta": [
+{
+"$": 61771, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus cembra A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223709", 
+"@id": "otu223709", 
+"@label": "Pinus monticola", 
+"meta": [
+{
+"$": 568650, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus monticola A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223710", 
+"@id": "otu223710", 
+"@label": "Pinus discolor", 
+"meta": [
+{
+"$": 799608, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus discolor A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223711", 
+"@id": "otu223711", 
+"@label": "Pinus flexilis", 
+"meta": [
+{
+"$": 799605, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus flexilis A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223712", 
+"@id": "otu223712", 
+"@label": "Pinus pinceana", 
+"meta": [
+{
+"$": 837871, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus pinceana A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223713", 
+"@id": "otu223713", 
+"@label": "Pinus monophylla", 
+"meta": [
+{
+"$": 225275, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus monophylla A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223714", 
+"@id": "otu223714", 
+"@label": "Pinus morrisonicola", 
+"meta": [
+{
+"$": 1086988, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus morrisonicola A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223715", 
+"@id": "otu223715", 
+"@label": "Pinus ayacahuite", 
+"meta": [
+{
+"$": 786788, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus ayacahuite A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223716", 
+"@id": "otu223716", 
+"@label": "Pinus edulis", 
+"meta": [
+{
+"$": 568629, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus edulis A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223717", 
+"@id": "otu223717", 
+"@label": "Pinus ayacahuite", 
+"meta": [
+{
+"$": 786788, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus ayacahuite A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223718", 
+"@id": "otu223718", 
+"@label": "Pinus pumila", 
+"meta": [
+{
+"$": 837867, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus pumila A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223719", 
+"@id": "otu223719", 
+"@label": "Pinus", 
+"meta": [
+{
+"$": 771683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus maximartenezii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223720", 
+"@id": "otu223720", 
+"@label": "Pinus cembroides", 
+"meta": [
+{
+"$": 786795, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus cembroides A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223721", 
+"@id": "otu223721", 
+"@label": "Pinus monticola", 
+"meta": [
+{
+"$": 568650, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus monticola A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223722", 
+"@id": "otu223722", 
+"@label": "Pinus lambertiana", 
+"meta": [
+{
+"$": 568626, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus lambertiana A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223723", 
+"@id": "otu223723", 
+"@label": "Pinus lambertiana", 
+"meta": [
+{
+"$": 568626, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus lambertiana A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223724", 
+"@id": "otu223724", 
+"@label": "Pinus edulis", 
+"meta": [
+{
+"$": 568629, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus edulis A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223725", 
+"@id": "otu223725", 
+"@label": "Pinus koraiensis", 
+"meta": [
+{
+"$": 830806, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus koraiensis A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223726", 
+"@id": "otu223726", 
+"@label": "Pinus balfouriana", 
+"meta": [
+{
+"$": 1044480, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus balfouriana A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223727", 
+"@id": "otu223727", 
+"@label": "Pinus pinceana", 
+"meta": [
+{
+"$": 837871, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus pinceana A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223728", 
+"@id": "otu223728", 
+"@label": "Pinus strobiformis", 
+"meta": [
+{
+"$": 262953, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus strobiformis A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223729", 
+"@id": "otu223729", 
+"@label": "Pinus pumila", 
+"meta": [
+{
+"$": 837867, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus pumila A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223730", 
+"@id": "otu223730", 
+"@label": "Pinus cembra", 
+"meta": [
+{
+"$": 61771, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus cembra A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223731", 
+"@id": "otu223731", 
+"@label": "Pinus longaeva", 
+"meta": [
+{
+"$": 568647, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus longaeva A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223732", 
+"@id": "otu223732", 
+"@label": "Pinus quadrifolia", 
+"meta": [
+{
+"$": 225278, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus quadrifolia A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223733", 
+"@id": "otu223733", 
+"@label": "Pinus balfouriana", 
+"meta": [
+{
+"$": 1044480, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus balfouriana A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223734", 
+"@id": "otu223734", 
+"@label": "Pinus johannis", 
+"meta": [
+{
+"$": 212475, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus johannis A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223735", 
+"@id": "otu223735", 
+"@label": "Pinus discolor", 
+"meta": [
+{
+"$": 799608, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus discolor A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223736", 
+"@id": "otu223736", 
+"@label": "Pinus flexilis", 
+"meta": [
+{
+"$": 799605, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus flexilis A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223737", 
+"@id": "otu223737", 
+"@label": "Pinus parviflora", 
+"meta": [
+{
+"$": 837898, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus parviflora A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223738", 
+"@id": "otu223738", 
+"@label": "Pinus remota", 
+"meta": [
+{
+"$": 225281, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus remota A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223739", 
+"@id": "otu223739", 
+"@label": "Pinus strobiformis", 
+"meta": [
+{
+"$": 262953, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus strobiformis A2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223740", 
+"@id": "otu223740", 
+"@label": "Pinus chiapensis", 
+"meta": [
+{
+"$": 786804, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus chiapensis A1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu223741", 
+"@id": "otu223741", 
+"@label": "Pinus wallichiana", 
+"meta": [
+{
+"$": 568632, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pinus wallichiana A3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1107", 
+"@otus": "otus1107", 
+"tree": [
+{
+"@about": "#tree2194", 
+"@id": "tree2194", 
+"edge": [
+{
+"@id": "edge536565", 
+"@source": "node536564", 
+"@target": "node536565"
+}, 
+{
+"@id": "edge536566", 
+"@source": "node536564", 
+"@target": "node536566"
+}, 
+{
+"@id": "edge536567", 
+"@source": "node536566", 
+"@target": "node536567"
+}, 
+{
+"@id": "edge536568", 
+"@source": "node536567", 
+"@target": "node536568"
+}, 
+{
+"@id": "edge536569", 
+"@source": "node536568", 
+"@target": "node536569"
+}, 
+{
+"@id": "edge536570", 
+"@source": "node536569", 
+"@target": "node536570"
+}, 
+{
+"@id": "edge536571", 
+"@source": "node536570", 
+"@target": "node536571"
+}, 
+{
+"@id": "edge536572", 
+"@source": "node536571", 
+"@target": "node536572"
+}, 
+{
+"@id": "edge536573", 
+"@source": "node536572", 
+"@target": "node536573"
+}, 
+{
+"@id": "edge536574", 
+"@source": "node536573", 
+"@target": "node536574"
+}, 
+{
+"@id": "edge536575", 
+"@source": "node536574", 
+"@target": "node536575"
+}, 
+{
+"@id": "edge536576", 
+"@source": "node536574", 
+"@target": "node536576"
+}, 
+{
+"@id": "edge536577", 
+"@source": "node536573", 
+"@target": "node536577"
+}, 
+{
+"@id": "edge536578", 
+"@source": "node536577", 
+"@target": "node536578"
+}, 
+{
+"@id": "edge536579", 
+"@source": "node536577", 
+"@target": "node536579"
+}, 
+{
+"@id": "edge536580", 
+"@source": "node536573", 
+"@target": "node536580"
+}, 
+{
+"@id": "edge536581", 
+"@source": "node536580", 
+"@target": "node536581"
+}, 
+{
+"@id": "edge536582", 
+"@source": "node536581", 
+"@target": "node536582"
+}, 
+{
+"@id": "edge536583", 
+"@source": "node536581", 
+"@target": "node536583"
+}, 
+{
+"@id": "edge536584", 
+"@source": "node536580", 
+"@target": "node536584"
+}, 
+{
+"@id": "edge536585", 
+"@source": "node536573", 
+"@target": "node536585"
+}, 
+{
+"@id": "edge536586", 
+"@source": "node536585", 
+"@target": "node536586"
+}, 
+{
+"@id": "edge536587", 
+"@source": "node536585", 
+"@target": "node536587"
+}, 
+{
+"@id": "edge536588", 
+"@source": "node536587", 
+"@target": "node536588"
+}, 
+{
+"@id": "edge536589", 
+"@source": "node536587", 
+"@target": "node536589"
+}, 
+{
+"@id": "edge536590", 
+"@source": "node536572", 
+"@target": "node536590"
+}, 
+{
+"@id": "edge536591", 
+"@source": "node536590", 
+"@target": "node536591"
+}, 
+{
+"@id": "edge536592", 
+"@source": "node536590", 
+"@target": "node536592"
+}, 
+{
+"@id": "edge536593", 
+"@source": "node536590", 
+"@target": "node536593"
+}, 
+{
+"@id": "edge536594", 
+"@source": "node536571", 
+"@target": "node536594"
+}, 
+{
+"@id": "edge536595", 
+"@source": "node536570", 
+"@target": "node536595"
+}, 
+{
+"@id": "edge536596", 
+"@source": "node536595", 
+"@target": "node536596"
+}, 
+{
+"@id": "edge536597", 
+"@source": "node536596", 
+"@target": "node536597"
+}, 
+{
+"@id": "edge536598", 
+"@source": "node536597", 
+"@target": "node536598"
+}, 
+{
+"@id": "edge536599", 
+"@source": "node536598", 
+"@target": "node536599"
+}, 
+{
+"@id": "edge536600", 
+"@source": "node536598", 
+"@target": "node536600"
+}, 
+{
+"@id": "edge536601", 
+"@source": "node536598", 
+"@target": "node536601"
+}, 
+{
+"@id": "edge536602", 
+"@source": "node536601", 
+"@target": "node536602"
+}, 
+{
+"@id": "edge536603", 
+"@source": "node536601", 
+"@target": "node536603"
+}, 
+{
+"@id": "edge536604", 
+"@source": "node536598", 
+"@target": "node536604"
+}, 
+{
+"@id": "edge536605", 
+"@source": "node536597", 
+"@target": "node536605"
+}, 
+{
+"@id": "edge536606", 
+"@source": "node536597", 
+"@target": "node536606"
+}, 
+{
+"@id": "edge536607", 
+"@source": "node536596", 
+"@target": "node536607"
+}, 
+{
+"@id": "edge536608", 
+"@source": "node536596", 
+"@target": "node536608"
+}, 
+{
+"@id": "edge536609", 
+"@source": "node536608", 
+"@target": "node536609"
+}, 
+{
+"@id": "edge536610", 
+"@source": "node536608", 
+"@target": "node536610"
+}, 
+{
+"@id": "edge536611", 
+"@source": "node536595", 
+"@target": "node536611"
+}, 
+{
+"@id": "edge536612", 
+"@source": "node536570", 
+"@target": "node536612"
+}, 
+{
+"@id": "edge536613", 
+"@source": "node536612", 
+"@target": "node536613"
+}, 
+{
+"@id": "edge536614", 
+"@source": "node536612", 
+"@target": "node536614"
+}, 
+{
+"@id": "edge536615", 
+"@source": "node536569", 
+"@target": "node536615"
+}, 
+{
+"@id": "edge536616", 
+"@source": "node536615", 
+"@target": "node536616"
+}, 
+{
+"@id": "edge536617", 
+"@source": "node536615", 
+"@target": "node536617"
+}, 
+{
+"@id": "edge536618", 
+"@source": "node536617", 
+"@target": "node536618"
+}, 
+{
+"@id": "edge536619", 
+"@source": "node536618", 
+"@target": "node536619"
+}, 
+{
+"@id": "edge536620", 
+"@source": "node536619", 
+"@target": "node536620"
+}, 
+{
+"@id": "edge536621", 
+"@source": "node536619", 
+"@target": "node536621"
+}, 
+{
+"@id": "edge536622", 
+"@source": "node536618", 
+"@target": "node536622"
+}, 
+{
+"@id": "edge536623", 
+"@source": "node536617", 
+"@target": "node536623"
+}, 
+{
+"@id": "edge536624", 
+"@source": "node536623", 
+"@target": "node536624"
+}, 
+{
+"@id": "edge536625", 
+"@source": "node536624", 
+"@target": "node536625"
+}, 
+{
+"@id": "edge536626", 
+"@source": "node536624", 
+"@target": "node536626"
+}, 
+{
+"@id": "edge536627", 
+"@source": "node536626", 
+"@target": "node536627"
+}, 
+{
+"@id": "edge536628", 
+"@source": "node536626", 
+"@target": "node536628"
+}, 
+{
+"@id": "edge536629", 
+"@source": "node536623", 
+"@target": "node536629"
+}, 
+{
+"@id": "edge536630", 
+"@source": "node536629", 
+"@target": "node536630"
+}, 
+{
+"@id": "edge536631", 
+"@source": "node536630", 
+"@target": "node536631"
+}, 
+{
+"@id": "edge536632", 
+"@source": "node536630", 
+"@target": "node536632"
+}, 
+{
+"@id": "edge536633", 
+"@source": "node536629", 
+"@target": "node536633"
+}, 
+{
+"@id": "edge536634", 
+"@source": "node536568", 
+"@target": "node536634"
+}, 
+{
+"@id": "edge536635", 
+"@source": "node536634", 
+"@target": "node536635"
+}, 
+{
+"@id": "edge536636", 
+"@source": "node536635", 
+"@target": "node536636"
+}, 
+{
+"@id": "edge536637", 
+"@source": "node536635", 
+"@target": "node536637"
+}, 
+{
+"@id": "edge536638", 
+"@source": "node536637", 
+"@target": "node536638"
+}, 
+{
+"@id": "edge536639", 
+"@source": "node536637", 
+"@target": "node536639"
+}, 
+{
+"@id": "edge536640", 
+"@source": "node536637", 
+"@target": "node536640"
+}, 
+{
+"@id": "edge536641", 
+"@source": "node536640", 
+"@target": "node536641"
+}, 
+{
+"@id": "edge536642", 
+"@source": "node536640", 
+"@target": "node536642"
+}, 
+{
+"@id": "edge536643", 
+"@source": "node536637", 
+"@target": "node536643"
+}, 
+{
+"@id": "edge536644", 
+"@source": "node536643", 
+"@target": "node536644"
+}, 
+{
+"@id": "edge536645", 
+"@source": "node536643", 
+"@target": "node536645"
+}, 
+{
+"@id": "edge536646", 
+"@source": "node536634", 
+"@target": "node536646"
+}, 
+{
+"@id": "edge536647", 
+"@source": "node536646", 
+"@target": "node536647"
+}, 
+{
+"@id": "edge536648", 
+"@source": "node536646", 
+"@target": "node536648"
+}, 
+{
+"@id": "edge536649", 
+"@source": "node536646", 
+"@target": "node536649"
+}, 
+{
+"@id": "edge536650", 
+"@source": "node536567", 
+"@target": "node536650"
+}, 
+{
+"@id": "edge536651", 
+"@source": "node536650", 
+"@target": "node536651"
+}, 
+{
+"@id": "edge536652", 
+"@source": "node536651", 
+"@target": "node536652"
+}, 
+{
+"@id": "edge536653", 
+"@source": "node536652", 
+"@target": "node536653"
+}, 
+{
+"@id": "edge536654", 
+"@source": "node536652", 
+"@target": "node536654"
+}, 
+{
+"@id": "edge536655", 
+"@source": "node536651", 
+"@target": "node536655"
+}, 
+{
+"@id": "edge536656", 
+"@source": "node536655", 
+"@target": "node536656"
+}, 
+{
+"@id": "edge536657", 
+"@source": "node536655", 
+"@target": "node536657"
+}, 
+{
+"@id": "edge536658", 
+"@source": "node536650", 
+"@target": "node536658"
+}, 
+{
+"@id": "edge536659", 
+"@source": "node536566", 
+"@target": "node536659"
+}, 
+{
+"@id": "edge536660", 
+"@source": "node536564", 
+"@target": "node536660"
+}, 
+{
+"@id": "edge536661", 
+"@source": "node536660", 
+"@target": "node536661"
+}, 
+{
+"@id": "edge536662", 
+"@source": "node536660", 
+"@target": "node536662"
+}
+], 
+"meta": [
+{
+"$": "node536566", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node536564", 
+"@root": "true"
+}, 
+{
+"@id": "node536565", 
+"@otu": "otu223678"
+}, 
+{
+"@id": "node536566"
+}, 
+{
+"@id": "node536567"
+}, 
+{
+"@id": "node536568"
+}, 
+{
+"@id": "node536569"
+}, 
+{
+"@id": "node536570"
+}, 
+{
+"@id": "node536571"
+}, 
+{
+"@id": "node536572"
+}, 
+{
+"@id": "node536573"
+}, 
+{
+"@id": "node536574"
+}, 
+{
+"@id": "node536575", 
+"@otu": "otu223665"
+}, 
+{
+"@id": "node536576", 
+"@otu": "otu223692"
+}, 
+{
+"@id": "node536577"
+}, 
+{
+"@id": "node536578", 
+"@otu": "otu223723"
+}, 
+{
+"@id": "node536579", 
+"@otu": "otu223709"
+}, 
+{
+"@id": "node536580"
+}, 
+{
+"@id": "node536581"
+}, 
+{
+"@id": "node536582", 
+"@otu": "otu223702"
+}, 
+{
+"@id": "node536583", 
+"@otu": "otu223681"
+}, 
+{
+"@id": "node536584", 
+"@otu": "otu223690"
+}, 
+{
+"@id": "node536585"
+}, 
+{
+"@id": "node536586", 
+"@otu": "otu223725"
+}, 
+{
+"@id": "node536587"
+}, 
+{
+"@id": "node536588", 
+"@otu": "otu223686"
+}, 
+{
+"@id": "node536589", 
+"@otu": "otu223705"
+}, 
+{
+"@id": "node536590"
+}, 
+{
+"@id": "node536591", 
+"@otu": "otu223683"
+}, 
+{
+"@id": "node536592", 
+"@otu": "otu223729"
+}, 
+{
+"@id": "node536593", 
+"@otu": "otu223718"
+}, 
+{
+"@id": "node536594", 
+"@otu": "otu223671"
+}, 
+{
+"@id": "node536595"
+}, 
+{
+"@id": "node536596"
+}, 
+{
+"@id": "node536597"
+}, 
+{
+"@id": "node536598"
+}, 
+{
+"@id": "node536599", 
+"@otu": "otu223717"
+}, 
+{
+"@id": "node536600", 
+"@otu": "otu223715"
+}, 
+{
+"@id": "node536601"
+}, 
+{
+"@id": "node536602", 
+"@otu": "otu223660"
+}, 
+{
+"@id": "node536603", 
+"@otu": "otu223739"
+}, 
+{
+"@id": "node536604", 
+"@otu": "otu223711"
+}, 
+{
+"@id": "node536605", 
+"@otu": "otu223736"
+}, 
+{
+"@id": "node536606", 
+"@otu": "otu223662"
+}, 
+{
+"@id": "node536607", 
+"@otu": "otu223685"
+}, 
+{
+"@id": "node536608"
+}, 
+{
+"@id": "node536609", 
+"@otu": "otu223721"
+}, 
+{
+"@id": "node536610", 
+"@otu": "otu223728"
+}, 
+{
+"@id": "node536611", 
+"@otu": "otu223682"
+}, 
+{
+"@id": "node536612"
+}, 
+{
+"@id": "node536613", 
+"@otu": "otu223740"
+}, 
+{
+"@id": "node536614", 
+"@otu": "otu223693"
+}, 
+{
+"@id": "node536615"
+}, 
+{
+"@id": "node536616", 
+"@otu": "otu223722"
+}, 
+{
+"@id": "node536617"
+}, 
+{
+"@id": "node536618"
+}, 
+{
+"@id": "node536619"
+}, 
+{
+"@id": "node536620", 
+"@otu": "otu223699"
+}, 
+{
+"@id": "node536621", 
+"@otu": "otu223670"
+}, 
+{
+"@id": "node536622", 
+"@otu": "otu223656"
+}, 
+{
+"@id": "node536623"
+}, 
+{
+"@id": "node536624"
+}, 
+{
+"@id": "node536625", 
+"@otu": "otu223708"
+}, 
+{
+"@id": "node536626"
+}, 
+{
+"@id": "node536627", 
+"@otu": "otu223696"
+}, 
+{
+"@id": "node536628", 
+"@otu": "otu223737"
+}, 
+{
+"@id": "node536629"
+}, 
+{
+"@id": "node536630"
+}, 
+{
+"@id": "node536631", 
+"@otu": "otu223730"
+}, 
+{
+"@id": "node536632", 
+"@otu": "otu223679"
+}, 
+{
+"@id": "node536633", 
+"@otu": "otu223666"
+}, 
+{
+"@id": "node536634"
+}, 
+{
+"@id": "node536635"
+}, 
+{
+"@id": "node536636", 
+"@otu": "otu223663"
+}, 
+{
+"@id": "node536637"
+}, 
+{
+"@id": "node536638", 
+"@otu": "otu223688"
+}, 
+{
+"@id": "node536639", 
+"@otu": "otu223676"
+}, 
+{
+"@id": "node536640"
+}, 
+{
+"@id": "node536641", 
+"@otu": "otu223669"
+}, 
+{
+"@id": "node536642", 
+"@otu": "otu223677"
+}, 
+{
+"@id": "node536643"
+}, 
+{
+"@id": "node536644", 
+"@otu": "otu223714"
+}, 
+{
+"@id": "node536645", 
+"@otu": "otu223704"
+}, 
+{
+"@id": "node536646"
+}, 
+{
+"@id": "node536647", 
+"@otu": "otu223698"
+}, 
+{
+"@id": "node536648", 
+"@otu": "otu223689"
+}, 
+{
+"@id": "node536649", 
+"@otu": "otu223741"
+}, 
+{
+"@id": "node536650"
+}, 
+{
+"@id": "node536651"
+}, 
+{
+"@id": "node536652"
+}, 
+{
+"@id": "node536653", 
+"@otu": "otu223695"
+}, 
+{
+"@id": "node536654", 
+"@otu": "otu223673"
+}, 
+{
+"@id": "node536655"
+}, 
+{
+"@id": "node536656", 
+"@otu": "otu223674"
+}, 
+{
+"@id": "node536657", 
+"@otu": "otu223706"
+}, 
+{
+"@id": "node536658", 
+"@otu": "otu223658"
+}, 
+{
+"@id": "node536659", 
+"@otu": "otu223657"
+}, 
+{
+"@id": "node536660"
+}, 
+{
+"@id": "node536661", 
+"@otu": "otu223687"
+}, 
+{
+"@id": "node536662", 
+"@otu": "otu223716"
+}
+]
+}, 
+{
+"@about": "#tree2195", 
+"@id": "tree2195", 
+"edge": [
+{
+"@id": "edge536664", 
+"@source": "node536663", 
+"@target": "node536664"
+}, 
+{
+"@id": "edge536665", 
+"@source": "node536664", 
+"@target": "node536665"
+}, 
+{
+"@id": "edge536666", 
+"@source": "node536665", 
+"@target": "node536666"
+}, 
+{
+"@id": "edge536667", 
+"@source": "node536665", 
+"@target": "node536667"
+}, 
+{
+"@id": "edge536668", 
+"@source": "node536664", 
+"@target": "node536668"
+}, 
+{
+"@id": "edge536669", 
+"@source": "node536663", 
+"@target": "node536669"
+}, 
+{
+"@id": "edge536670", 
+"@source": "node536663", 
+"@target": "node536670"
+}, 
+{
+"@id": "edge536671", 
+"@source": "node536670", 
+"@target": "node536671"
+}, 
+{
+"@id": "edge536672", 
+"@source": "node536671", 
+"@target": "node536672"
+}, 
+{
+"@id": "edge536673", 
+"@source": "node536672", 
+"@target": "node536673"
+}, 
+{
+"@id": "edge536674", 
+"@source": "node536673", 
+"@target": "node536674"
+}, 
+{
+"@id": "edge536675", 
+"@source": "node536673", 
+"@target": "node536675"
+}, 
+{
+"@id": "edge536676", 
+"@source": "node536672", 
+"@target": "node536676"
+}, 
+{
+"@id": "edge536677", 
+"@source": "node536672", 
+"@target": "node536677"
+}, 
+{
+"@id": "edge536678", 
+"@source": "node536671", 
+"@target": "node536678"
+}, 
+{
+"@id": "edge536679", 
+"@source": "node536678", 
+"@target": "node536679"
+}, 
+{
+"@id": "edge536680", 
+"@source": "node536678", 
+"@target": "node536680"
+}, 
+{
+"@id": "edge536681", 
+"@source": "node536670", 
+"@target": "node536681"
+}, 
+{
+"@id": "edge536682", 
+"@source": "node536681", 
+"@target": "node536682"
+}, 
+{
+"@id": "edge536683", 
+"@source": "node536682", 
+"@target": "node536683"
+}, 
+{
+"@id": "edge536684", 
+"@source": "node536683", 
+"@target": "node536684"
+}, 
+{
+"@id": "edge536685", 
+"@source": "node536683", 
+"@target": "node536685"
+}, 
+{
+"@id": "edge536686", 
+"@source": "node536683", 
+"@target": "node536686"
+}, 
+{
+"@id": "edge536687", 
+"@source": "node536683", 
+"@target": "node536687"
+}, 
+{
+"@id": "edge536688", 
+"@source": "node536683", 
+"@target": "node536688"
+}, 
+{
+"@id": "edge536689", 
+"@source": "node536683", 
+"@target": "node536689"
+}, 
+{
+"@id": "edge536690", 
+"@source": "node536683", 
+"@target": "node536690"
+}, 
+{
+"@id": "edge536691", 
+"@source": "node536683", 
+"@target": "node536691"
+}, 
+{
+"@id": "edge536692", 
+"@source": "node536682", 
+"@target": "node536692"
+}, 
+{
+"@id": "edge536693", 
+"@source": "node536682", 
+"@target": "node536693"
+}, 
+{
+"@id": "edge536694", 
+"@source": "node536693", 
+"@target": "node536694"
+}, 
+{
+"@id": "edge536695", 
+"@source": "node536694", 
+"@target": "node536695"
+}, 
+{
+"@id": "edge536696", 
+"@source": "node536694", 
+"@target": "node536696"
+}, 
+{
+"@id": "edge536697", 
+"@source": "node536694", 
+"@target": "node536697"
+}, 
+{
+"@id": "edge536698", 
+"@source": "node536693", 
+"@target": "node536698"
+}, 
+{
+"@id": "edge536699", 
+"@source": "node536693", 
+"@target": "node536699"
+}, 
+{
+"@id": "edge536700", 
+"@source": "node536693", 
+"@target": "node536700"
+}, 
+{
+"@id": "edge536701", 
+"@source": "node536693", 
+"@target": "node536701"
+}, 
+{
+"@id": "edge536702", 
+"@source": "node536693", 
+"@target": "node536702"
+}, 
+{
+"@id": "edge536703", 
+"@source": "node536682", 
+"@target": "node536703"
+}, 
+{
+"@id": "edge536704", 
+"@source": "node536682", 
+"@target": "node536704"
+}, 
+{
+"@id": "edge536705", 
+"@source": "node536704", 
+"@target": "node536705"
+}, 
+{
+"@id": "edge536706", 
+"@source": "node536704", 
+"@target": "node536706"
+}, 
+{
+"@id": "edge536707", 
+"@source": "node536681", 
+"@target": "node536707"
+}, 
+{
+"@id": "edge536708", 
+"@source": "node536707", 
+"@target": "node536708"
+}, 
+{
+"@id": "edge536709", 
+"@source": "node536707", 
+"@target": "node536709"
+}, 
+{
+"@id": "edge536710", 
+"@source": "node536709", 
+"@target": "node536710"
+}, 
+{
+"@id": "edge536711", 
+"@source": "node536710", 
+"@target": "node536711"
+}, 
+{
+"@id": "edge536712", 
+"@source": "node536710", 
+"@target": "node536712"
+}, 
+{
+"@id": "edge536713", 
+"@source": "node536712", 
+"@target": "node536713"
+}, 
+{
+"@id": "edge536714", 
+"@source": "node536712", 
+"@target": "node536714"
+}, 
+{
+"@id": "edge536715", 
+"@source": "node536709", 
+"@target": "node536715"
+}
+], 
+"meta": [
+{
+"$": "node536670", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node536663", 
+"@root": "true"
+}, 
+{
+"@id": "node536664"
+}, 
+{
+"@id": "node536665"
+}, 
+{
+"@id": "node536666", 
+"@otu": "otu223685"
+}, 
+{
+"@id": "node536667", 
+"@otu": "otu223673"
+}, 
+{
+"@id": "node536668", 
+"@otu": "otu223657"
+}, 
+{
+"@id": "node536669", 
+"@otu": "otu223678"
+}, 
+{
+"@id": "node536670"
+}, 
+{
+"@id": "node536671"
+}, 
+{
+"@id": "node536672"
+}, 
+{
+"@id": "node536673"
+}, 
+{
+"@id": "node536674", 
+"@otu": "otu223672"
+}, 
+{
+"@id": "node536675", 
+"@otu": "otu223687"
+}, 
+{
+"@id": "node536676", 
+"@otu": "otu223733"
+}, 
+{
+"@id": "node536677", 
+"@otu": "otu223726"
+}, 
+{
+"@id": "node536678"
+}, 
+{
+"@id": "node536679", 
+"@otu": "otu223701"
+}, 
+{
+"@id": "node536680", 
+"@otu": "otu223731"
+}, 
+{
+"@id": "node536681"
+}, 
+{
+"@id": "node536682"
+}, 
+{
+"@id": "node536683"
+}, 
+{
+"@id": "node536684", 
+"@otu": "otu223684"
+}, 
+{
+"@id": "node536685", 
+"@otu": "otu223720"
+}, 
+{
+"@id": "node536686", 
+"@otu": "otu223700"
+}, 
+{
+"@id": "node536687", 
+"@otu": "otu223710"
+}, 
+{
+"@id": "node536688", 
+"@otu": "otu223680"
+}, 
+{
+"@id": "node536689", 
+"@otu": "otu223724"
+}, 
+{
+"@id": "node536690", 
+"@otu": "otu223738"
+}, 
+{
+"@id": "node536691", 
+"@otu": "otu223675"
+}, 
+{
+"@id": "node536692", 
+"@otu": "otu223667"
+}, 
+{
+"@id": "node536693"
+}, 
+{
+"@id": "node536694"
+}, 
+{
+"@id": "node536695", 
+"@otu": "otu223664"
+}, 
+{
+"@id": "node536696", 
+"@otu": "otu223691"
+}, 
+{
+"@id": "node536697", 
+"@otu": "otu223703"
+}, 
+{
+"@id": "node536698", 
+"@otu": "otu223716"
+}, 
+{
+"@id": "node536699", 
+"@otu": "otu223668"
+}, 
+{
+"@id": "node536700", 
+"@otu": "otu223661"
+}, 
+{
+"@id": "node536701", 
+"@otu": "otu223694"
+}, 
+{
+"@id": "node536702", 
+"@otu": "otu223713"
+}, 
+{
+"@id": "node536703", 
+"@otu": "otu223735"
+}, 
+{
+"@id": "node536704"
+}, 
+{
+"@id": "node536705", 
+"@otu": "otu223732"
+}, 
+{
+"@id": "node536706", 
+"@otu": "otu223697"
+}, 
+{
+"@id": "node536707"
+}, 
+{
+"@id": "node536708", 
+"@otu": "otu223734"
+}, 
+{
+"@id": "node536709"
+}, 
+{
+"@id": "node536710"
+}, 
+{
+"@id": "node536711", 
+"@otu": "otu223719"
+}, 
+{
+"@id": "node536712"
+}, 
+{
+"@id": "node536713", 
+"@otu": "otu223727"
+}, 
+{
+"@id": "node536714", 
+"@otu": "otu223712"
+}, 
+{
+"@id": "node536715", 
+"@otu": "otu223659"
+}
+]
+}
+]
+}
+}
+}

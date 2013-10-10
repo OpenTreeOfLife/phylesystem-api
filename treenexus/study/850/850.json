@@ -1,0 +1,929 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Woudenberg J., Aveskamp M., De gruyter J., Spiers A., & Crous P. 2009. Multiple Didymella teleomorphs are linked to the Phoma clematidina morphotype. Persoonia, 22: 56-62.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.3767/003158509x427808", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10053", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "850", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2009, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1829991, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus850", 
+"otu": [
+{
+"@about": "#otu200607", 
+"@id": "otu200607", 
+"@label": "Phoma herbarum", 
+"meta": [
+{
+"$": 437937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma herbarum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200608", 
+"@id": "otu200608", 
+"@label": "Phoma zeae-maydis", 
+"meta": [
+{
+"$": 21181, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma zeae-maydis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200609", 
+"@id": "otu200609", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 123706", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200610", 
+"@id": "otu200610", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 108.79", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200611", 
+"@id": "otu200611", 
+"@label": "Coniothyrium clematidis-rectae", 
+"meta": [
+{
+"$": 21437, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coniothyrium clematidis-rectae PD 95.1958", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200612", 
+"@id": "otu200612", 
+"@label": "Phoma glaucii", 
+"meta": [
+{
+"$": 21439, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma glaucii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200613", 
+"@id": "otu200613", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 123707", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200614", 
+"@id": "otu200614", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 97.12061", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200615", 
+"@id": "otu200615", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 195.64", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200616", 
+"@id": "otu200616", 
+"@label": "Phoma glomerata", 
+"meta": [
+{
+"$": 620121, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma glomerata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200617", 
+"@id": "otu200617", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 911.87", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200618", 
+"@id": "otu200618", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 97.12062", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200619", 
+"@id": "otu200619", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 08.04417700.3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200620", 
+"@id": "otu200620", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 95.895", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200621", 
+"@id": "otu200621", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 75.294", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200622", 
+"@id": "otu200622", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 80.683", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200623", 
+"@id": "otu200623", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 201.49", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200624", 
+"@id": "otu200624", 
+"@label": "Phoma complanata", 
+"meta": [
+{
+"$": 31684, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma complanata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200625", 
+"@id": "otu200625", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 102.66", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200626", 
+"@id": "otu200626", 
+"@label": "Phoma exigua var. exigua", 
+"meta": [
+{
+"$": 30694, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma exigua var exigua", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200627", 
+"@id": "otu200627", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 91.1865", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200628", 
+"@id": "otu200628", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 99.2069", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200629", 
+"@id": "otu200629", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 123705", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200630", 
+"@id": "otu200630", 
+"@label": "Didymella vitalbina", 
+"meta": [
+{
+"$": 145042, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Didymella vitalbina", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200631", 
+"@id": "otu200631", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina PD 08.04373904.2b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200632", 
+"@id": "otu200632", 
+"@label": "Phoma clematidina", 
+"meta": [
+{
+"$": 21440, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phoma clematidina CBS 520.66", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu200633", 
+"@id": "otu200633", 
+"@label": "Coniothyrium clematidis-rectae", 
+"meta": [
+{
+"$": 21437, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coniothyrium clematidis-rectae CBS 507.63", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees850", 
+"@otus": "otus850", 
+"tree": [
+{
+"@about": "#tree1637", 
+"@id": "tree1637", 
+"edge": [
+{
+"@id": "edge471748", 
+"@source": "node471747", 
+"@target": "node471748"
+}, 
+{
+"@id": "edge471749", 
+"@source": "node471748", 
+"@target": "node471749"
+}, 
+{
+"@id": "edge471750", 
+"@source": "node471749", 
+"@target": "node471750"
+}, 
+{
+"@id": "edge471751", 
+"@source": "node471750", 
+"@target": "node471751"
+}, 
+{
+"@id": "edge471752", 
+"@source": "node471751", 
+"@target": "node471752"
+}, 
+{
+"@id": "edge471753", 
+"@source": "node471751", 
+"@target": "node471753"
+}, 
+{
+"@id": "edge471754", 
+"@source": "node471751", 
+"@target": "node471754"
+}, 
+{
+"@id": "edge471755", 
+"@source": "node471751", 
+"@target": "node471755"
+}, 
+{
+"@id": "edge471756", 
+"@source": "node471751", 
+"@target": "node471756"
+}, 
+{
+"@id": "edge471757", 
+"@source": "node471751", 
+"@target": "node471757"
+}, 
+{
+"@id": "edge471758", 
+"@source": "node471751", 
+"@target": "node471758"
+}, 
+{
+"@id": "edge471759", 
+"@source": "node471758", 
+"@target": "node471759"
+}, 
+{
+"@id": "edge471760", 
+"@source": "node471758", 
+"@target": "node471760"
+}, 
+{
+"@id": "edge471761", 
+"@source": "node471758", 
+"@target": "node471761"
+}, 
+{
+"@id": "edge471762", 
+"@source": "node471758", 
+"@target": "node471762"
+}, 
+{
+"@id": "edge471763", 
+"@source": "node471750", 
+"@target": "node471763"
+}, 
+{
+"@id": "edge471764", 
+"@source": "node471763", 
+"@target": "node471764"
+}, 
+{
+"@id": "edge471765", 
+"@source": "node471763", 
+"@target": "node471765"
+}, 
+{
+"@id": "edge471766", 
+"@source": "node471765", 
+"@target": "node471766"
+}, 
+{
+"@id": "edge471767", 
+"@source": "node471765", 
+"@target": "node471767"
+}, 
+{
+"@id": "edge471768", 
+"@source": "node471749", 
+"@target": "node471768"
+}, 
+{
+"@id": "edge471769", 
+"@source": "node471748", 
+"@target": "node471769"
+}, 
+{
+"@id": "edge471770", 
+"@source": "node471769", 
+"@target": "node471770"
+}, 
+{
+"@id": "edge471771", 
+"@source": "node471770", 
+"@target": "node471771"
+}, 
+{
+"@id": "edge471772", 
+"@source": "node471771", 
+"@target": "node471772"
+}, 
+{
+"@id": "edge471773", 
+"@source": "node471772", 
+"@target": "node471773"
+}, 
+{
+"@id": "edge471774", 
+"@source": "node471773", 
+"@target": "node471774"
+}, 
+{
+"@id": "edge471775", 
+"@source": "node471773", 
+"@target": "node471775"
+}, 
+{
+"@id": "edge471776", 
+"@source": "node471773", 
+"@target": "node471776"
+}, 
+{
+"@id": "edge471777", 
+"@source": "node471773", 
+"@target": "node471777"
+}, 
+{
+"@id": "edge471778", 
+"@source": "node471773", 
+"@target": "node471778"
+}, 
+{
+"@id": "edge471779", 
+"@source": "node471773", 
+"@target": "node471779"
+}, 
+{
+"@id": "edge471780", 
+"@source": "node471773", 
+"@target": "node471780"
+}, 
+{
+"@id": "edge471781", 
+"@source": "node471772", 
+"@target": "node471781"
+}, 
+{
+"@id": "edge471782", 
+"@source": "node471771", 
+"@target": "node471782"
+}, 
+{
+"@id": "edge471783", 
+"@source": "node471770", 
+"@target": "node471783"
+}, 
+{
+"@id": "edge471784", 
+"@source": "node471783", 
+"@target": "node471784"
+}, 
+{
+"@id": "edge471785", 
+"@source": "node471783", 
+"@target": "node471785"
+}, 
+{
+"@id": "edge471786", 
+"@source": "node471769", 
+"@target": "node471786"
+}, 
+{
+"@id": "edge471787", 
+"@source": "node471747", 
+"@target": "node471787"
+}
+], 
+"meta": [
+{
+"$": "node471748", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node471747", 
+"@root": "true"
+}, 
+{
+"@id": "node471748"
+}, 
+{
+"@id": "node471749"
+}, 
+{
+"@id": "node471750"
+}, 
+{
+"@id": "node471751"
+}, 
+{
+"@id": "node471752", 
+"@otu": "otu200615"
+}, 
+{
+"@id": "node471753", 
+"@otu": "otu200623"
+}, 
+{
+"@id": "node471754", 
+"@otu": "otu200632"
+}, 
+{
+"@id": "node471755", 
+"@otu": "otu200622"
+}, 
+{
+"@id": "node471756", 
+"@otu": "otu200614"
+}, 
+{
+"@id": "node471757", 
+"@otu": "otu200618"
+}, 
+{
+"@id": "node471758"
+}, 
+{
+"@id": "node471759", 
+"@otu": "otu200625"
+}, 
+{
+"@id": "node471760", 
+"@otu": "otu200610"
+}, 
+{
+"@id": "node471761", 
+"@otu": "otu200627"
+}, 
+{
+"@id": "node471762", 
+"@otu": "otu200620"
+}, 
+{
+"@id": "node471763"
+}, 
+{
+"@id": "node471764", 
+"@otu": "otu200628"
+}, 
+{
+"@id": "node471765"
+}, 
+{
+"@id": "node471766", 
+"@otu": "otu200633"
+}, 
+{
+"@id": "node471767", 
+"@otu": "otu200611"
+}, 
+{
+"@id": "node471768", 
+"@otu": "otu200612"
+}, 
+{
+"@id": "node471769"
+}, 
+{
+"@id": "node471770"
+}, 
+{
+"@id": "node471771"
+}, 
+{
+"@id": "node471772"
+}, 
+{
+"@id": "node471773"
+}, 
+{
+"@id": "node471774", 
+"@otu": "otu200617"
+}, 
+{
+"@id": "node471775", 
+"@otu": "otu200621"
+}, 
+{
+"@id": "node471776", 
+"@otu": "otu200613"
+}, 
+{
+"@id": "node471777", 
+"@otu": "otu200631"
+}, 
+{
+"@id": "node471778", 
+"@otu": "otu200609"
+}, 
+{
+"@id": "node471779", 
+"@otu": "otu200619"
+}, 
+{
+"@id": "node471780", 
+"@otu": "otu200630"
+}, 
+{
+"@id": "node471781", 
+"@otu": "otu200629"
+}, 
+{
+"@id": "node471782", 
+"@otu": "otu200626"
+}, 
+{
+"@id": "node471783"
+}, 
+{
+"@id": "node471784", 
+"@otu": "otu200616"
+}, 
+{
+"@id": "node471785", 
+"@otu": "otu200608"
+}, 
+{
+"@id": "node471786", 
+"@otu": "otu200607"
+}, 
+{
+"@id": "node471787", 
+"@otu": "otu200624"
+}
+]
+}
+]
+}
+}
+}

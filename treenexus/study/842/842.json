@@ -1,0 +1,3775 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Cheewangkoon R., Crous P., Hyde K., Groenewald J., & To-anan C. 2008. Species of Mycosphaerella and related anamorphs on Eucalyptus leaves from Thailand. Persoonia, 21: 77-91.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.3767/003158508x370857", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10009", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "842", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2008, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 850242, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus842", 
+"otu": [
+{
+"@about": "#otu199898", 
+"@id": "otu199898", 
+"@label": "Mycosphaerella rosigena", 
+"meta": [
+{
+"$": 666925, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella rosigena", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199899", 
+"@id": "otu199899", 
+"@label": "Mycosphaerella punctiformis", 
+"meta": [
+{
+"$": 1051941, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella punctiformis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199900", 
+"@id": "otu199900", 
+"@label": "Teratosphaeria fibrillosa", 
+"meta": [
+{
+"$": 159025, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria fibrillosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199901", 
+"@id": "otu199901", 
+"@label": "Cladosporium bruhnei", 
+"meta": [
+{
+"$": 445238, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium bruhnei", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199902", 
+"@id": "otu199902", 
+"@label": "Mycosphaerella lateralis", 
+"meta": [
+{
+"$": 1055510, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella lateralis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199903", 
+"@id": "otu199903", 
+"@label": "Pseudocercospora robusta", 
+"meta": [
+{
+"$": 1080874, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora robusta", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199904", 
+"@id": "otu199904", 
+"@label": "Penidiella venezuelensis", 
+"meta": [
+{
+"$": 316153, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penidiella venezuelensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199905", 
+"@id": "otu199905", 
+"@label": "Ramularia miae", 
+"meta": [
+{
+"$": 409045, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ramularia miae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199906", 
+"@id": "otu199906", 
+"@label": "Mycosphaerella irregulari", 
+"meta": [
+{
+"$": 159325, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella irregulari", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199907", 
+"@id": "otu199907", 
+"@label": "Mycosphaerella gracilis", 
+"meta": [
+{
+"$": 742866, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella gracilis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199908", 
+"@id": "otu199908", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica TH011", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199909", 
+"@id": "otu199909", 
+"@label": "Mycosphaerella quasiparkii", 
+"meta": [
+{
+"$": 159323, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella quasiparkii TH091A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199910", 
+"@id": "otu199910", 
+"@label": "Pseudocercospora natalensis", 
+"meta": [
+{
+"$": 774981, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora natalensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199911", 
+"@id": "otu199911", 
+"@label": "Mycosphaerella parkii", 
+"meta": [
+{
+"$": 514684, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella parkii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199912", 
+"@id": "otu199912", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica TH091B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199913", 
+"@id": "otu199913", 
+"@label": "Penidiella columbiana", 
+"meta": [
+{
+"$": 316147, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penidiella columbiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199914", 
+"@id": "otu199914", 
+"@label": "Penidiella rigidophora", 
+"meta": [
+{
+"$": 316150, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penidiella rigidophora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199915", 
+"@id": "otu199915", 
+"@label": "Mycosphaerella heimioides", 
+"meta": [
+{
+"$": 200805, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella heimioides", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199916", 
+"@id": "otu199916", 
+"@label": "Pseudocercospora eucalyptorum", 
+"meta": [
+{
+"$": 1080875, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora pseudoeucalyptorum DQ204766", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199917", 
+"@id": "otu199917", 
+"@label": "Mycosphaerella vietnamensis", 
+"meta": [
+{
+"$": 689963, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella vietnamensis TH010", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199918", 
+"@id": "otu199918", 
+"@label": "Pseudocercospora eucalyptorum", 
+"meta": [
+{
+"$": 1080875, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora pseudoeucalyptorum DQ204765", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199919", 
+"@id": "otu199919", 
+"@label": "Mycosphaerella vietnamensis", 
+"meta": [
+{
+"$": 689963, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella vietnamensis TH099A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199920", 
+"@id": "otu199920", 
+"@label": "Mycosphaerella heimii", 
+"meta": [
+{
+"$": 200808, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella heimii TH004D", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199921", 
+"@id": "otu199921", 
+"@label": "Mycosphaerella heimii", 
+"meta": [
+{
+"$": 200808, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella heimii DQ204751", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199922", 
+"@id": "otu199922", 
+"@label": "Penidiella strumelloidea", 
+"meta": [
+{
+"$": 316151, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penidiella strumelloidea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199923", 
+"@id": "otu199923", 
+"@label": "Mycosphaerella madeirae", 
+"meta": [
+{
+"$": 862069, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella madeirae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199924", 
+"@id": "otu199924", 
+"@label": "Mycosphaerella pseudomarksii", 
+"meta": [
+{
+"$": 159324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella pseudomarksii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199925", 
+"@id": "otu199925", 
+"@label": "Mycosphaerella irregulariramosa", 
+"meta": [
+{
+"$": 200799, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella irregulariramosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199926", 
+"@id": "otu199926", 
+"@label": "Pseudocercospora chiangmaiensis", 
+"meta": [
+{
+"$": 159329, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora chiangmaiensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199927", 
+"@id": "otu199927", 
+"@label": "Pseudocercospora paraguayensis", 
+"meta": [
+{
+"$": 774980, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora paraguayensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199928", 
+"@id": "otu199928", 
+"@label": "Penidiella eucalypti", 
+"meta": [
+{
+"$": 159330, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penidiella eucalypti TH064", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199929", 
+"@id": "otu199929", 
+"@label": "Mycosphaerella quasiparkii", 
+"meta": [
+{
+"$": 159323, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella quasiparkii TH016", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199930", 
+"@id": "otu199930", 
+"@label": "Teratosphaeria ohnowa", 
+"meta": [
+{
+"$": 877159, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria ohnowa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199931", 
+"@id": "otu199931", 
+"@label": "Mycosphaerella heimii", 
+"meta": [
+{
+"$": 200808, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella heimii TH089", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199932", 
+"@id": "otu199932", 
+"@label": "Penidiella eucalypti", 
+"meta": [
+{
+"$": 159330, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penidiella eucalypti TH133", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199933", 
+"@id": "otu199933", 
+"@label": "Mycosphaerella communis", 
+"meta": [
+{
+"$": 1001852, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella communis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199934", 
+"@id": "otu199934", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica AY752156 T", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199935", 
+"@id": "otu199935", 
+"@label": "Pseudocercospora epispermogonia", 
+"meta": [
+{
+"$": 544884, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora epispermogonia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199936", 
+"@id": "otu199936", 
+"@label": "Teratosphaeria nubilosa", 
+"meta": [
+{
+"$": 554407, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria nubilosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199937", 
+"@id": "otu199937", 
+"@label": "Mycosphaerella ellipsoidea", 
+"meta": [
+{
+"$": 1091788, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella ellipsoidea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199938", 
+"@id": "otu199938", 
+"@label": "Penidiella kurandae", 
+"meta": [
+{
+"$": 597600, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penidiella kurandae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199939", 
+"@id": "otu199939", 
+"@label": "Pseudocercospora eucalyptorum", 
+"meta": [
+{
+"$": 1080875, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora pseudoeucalyptorum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199940", 
+"@id": "otu199940", 
+"@label": "Pseudocercospora basiramifera", 
+"meta": [
+{
+"$": 811844, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora basiramifera", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199941", 
+"@id": "otu199941", 
+"@label": "Mycosphaerella konae", 
+"meta": [
+{
+"$": 733762, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella konae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199942", 
+"@id": "otu199942", 
+"@label": "Mycosphaerella heimii", 
+"meta": [
+{
+"$": 200808, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella heimii AF309606", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199943", 
+"@id": "otu199943", 
+"@label": "Mycosphaerella vietnamensis", 
+"meta": [
+{
+"$": 689963, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella vietnamensis DQ632678", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199944", 
+"@id": "otu199944", 
+"@label": "Mycosphaerella yunnanensis", 
+"meta": [
+{
+"$": 689966, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella yunnanensis DQ632687", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199945", 
+"@id": "otu199945", 
+"@label": "Mycosphaerella yunnanensis", 
+"meta": [
+{
+"$": 689966, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella yunnanensis DQ632686", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199946", 
+"@id": "otu199946", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica EF394848", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199947", 
+"@id": "otu199947", 
+"@label": "Mycosphaerella vietnamensis", 
+"meta": [
+{
+"$": 689963, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella vietnamensis DQ632675", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199948", 
+"@id": "otu199948", 
+"@label": "Mycosphaerella parkii", 
+"meta": [
+{
+"$": 514684, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella parkii AY626979", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199949", 
+"@id": "otu199949", 
+"@label": "Cladosporium sphaerospermum", 
+"meta": [
+{
+"$": 128631, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium sphaerospermum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199950", 
+"@id": "otu199950", 
+"@label": "Mycosphaerella marksii", 
+"meta": [
+{
+"$": 1091786, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella marksii DQ267587", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199951", 
+"@id": "otu199951", 
+"@label": "Pseudocercospora flavomarginata", 
+"meta": [
+{
+"$": 95035, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora flavomarginata DQ155658/DQ156549/DQ166514", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199952", 
+"@id": "otu199952", 
+"@label": "Pseudocercospora chiangmaiensis", 
+"meta": [
+{
+"$": 159329, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora chiangmaiensis TH094.3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199953", 
+"@id": "otu199953", 
+"@label": "Pseudocercospora chiangmaiensis", 
+"meta": [
+{
+"$": 159329, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora chiangmaiensis TH094.1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199954", 
+"@id": "otu199954", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica AY752158/AY840478/AY752219", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199955", 
+"@id": "otu199955", 
+"@label": "Pseudocercospora chiangmaiensis", 
+"meta": [
+{
+"$": 159329, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora chiangmaiensis TH094.2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199956", 
+"@id": "otu199956", 
+"@label": "Pseudocercospora flavomarginata", 
+"meta": [
+{
+"$": 95035, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora flavomarginata DQ155657/DQ156548/DQ166513", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199957", 
+"@id": "otu199957", 
+"@label": "Teratosphaeria cryptica", 
+"meta": [
+{
+"$": 529829, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratotsphaeria cryptica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199958", 
+"@id": "otu199958", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica AY752157/AY840477/AY752218", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199959", 
+"@id": "otu199959", 
+"@label": "Pseudocercospora eucalyptorum", 
+"meta": [
+{
+"$": 1080875, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora pseudoeucalyptorum AY725526/DQ211681/DQ147613", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199960", 
+"@id": "otu199960", 
+"@label": "Pseudocercospora eucalyptorum", 
+"meta": [
+{
+"$": 1080875, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora pseudoeucalyptorum AY725527/DQ211682/DQ147615", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199961", 
+"@id": "otu199961", 
+"@label": "Pseudocercospora assamensis", 
+"meta": [
+{
+"$": 188339, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora assamensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199962", 
+"@id": "otu199962", 
+"@label": "Mycosphaerella irregulari", 
+"meta": [
+{
+"$": 159325, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella irregulari TH003.2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199963", 
+"@id": "otu199963", 
+"@label": "Teratosphaeria suberosa", 
+"meta": [
+{
+"$": 929047, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria suberosa AY725579", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199964", 
+"@id": "otu199964", 
+"@label": "Mycosphaerella marksii", 
+"meta": [
+{
+"$": 1091786, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella marksii CPC 13273", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199965", 
+"@id": "otu199965", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica TH004B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199966", 
+"@id": "otu199966", 
+"@label": "Mycosphaerella pseudomarksii", 
+"meta": [
+{
+"$": 159324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella pseudomarksii TH126", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199967", 
+"@id": "otu199967", 
+"@label": "Mycosphaerella vietnamensis", 
+"meta": [
+{
+"$": 689963, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella vietnamensis TH009B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199968", 
+"@id": "otu199968", 
+"@label": "Pseudocercospora subulata", 
+"meta": [
+{
+"$": 848404, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora subulata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199969", 
+"@id": "otu199969", 
+"@label": "Mycosphaerella marksii", 
+"meta": [
+{
+"$": 1091786, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella marksii CPC 13724", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199970", 
+"@id": "otu199970", 
+"@label": "Phaeoramularia calotropidis", 
+"meta": [
+{
+"$": 835861, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phaeoramularia calotropidis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199971", 
+"@id": "otu199971", 
+"@label": "Mycosphaerella tumulosa", 
+"meta": [
+{
+"$": 646853, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella tumulosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199972", 
+"@id": "otu199972", 
+"@label": "Penidiella eucalypti", 
+"meta": [
+{
+"$": 159330, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penidiella eucalypti TH064.1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199973", 
+"@id": "otu199973", 
+"@label": "Mycosphaerella irregulari", 
+"meta": [
+{
+"$": 159325, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella irregulari TH003", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199974", 
+"@id": "otu199974", 
+"@label": "Mycosphaerella pseudomarksii", 
+"meta": [
+{
+"$": 159324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella pseudomarksii TH126.1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199975", 
+"@id": "otu199975", 
+"@label": "Mycosphaerella irregulari", 
+"meta": [
+{
+"$": 159325, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella irregulari TH019", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199976", 
+"@id": "otu199976", 
+"@label": "Pseudocercospora longispora", 
+"meta": [
+{
+"$": 20548, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora longispora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199977", 
+"@id": "otu199977", 
+"@label": "Mycosphaerella pseudoendophytica", 
+"meta": [
+{
+"$": 3725718, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella pseudoendophytica AF468874", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199978", 
+"@id": "otu199978", 
+"@label": "Mycosphaerella heimii", 
+"meta": [
+{
+"$": 200808, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella heimii TH004C", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199979", 
+"@id": "otu199979", 
+"@label": "Mycosphaerella irregulari", 
+"meta": [
+{
+"$": 159325, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella irregulari TH004A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199980", 
+"@id": "otu199980", 
+"@label": "Mycosphaerella quasiparkii", 
+"meta": [
+{
+"$": 159323, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella quasiparkii TH016A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199981", 
+"@id": "otu199981", 
+"@label": "Mycosphaerella quasiparkii", 
+"meta": [
+{
+"$": 159323, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella quasiparkii TH016A.2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199982", 
+"@id": "otu199982", 
+"@label": "Teratosphaeria cryptica", 
+"meta": [
+{
+"$": 529829, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria cryptica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199983", 
+"@id": "otu199983", 
+"@label": "Readeriella eucalypti", 
+"meta": [
+{
+"$": 484072, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Readeriella eucalypti", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199984", 
+"@id": "otu199984", 
+"@label": "Mycosphaerella vietnamensis", 
+"meta": [
+{
+"$": 689963, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella vietnamensis TH010B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199985", 
+"@id": "otu199985", 
+"@label": "Mycosphaerella vietnamensis", 
+"meta": [
+{
+"$": 689963, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella vietnamensis TH093", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199986", 
+"@id": "otu199986", 
+"@label": "Mycosphaerella quasiparkii", 
+"meta": [
+{
+"$": 159323, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella quasiparkii TH016A.3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199987", 
+"@id": "otu199987", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica TH026A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199988", 
+"@id": "otu199988", 
+"@label": "Teratosphaeria", 
+"meta": [
+{
+"$": 159026, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria sp.", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199989", 
+"@id": "otu199989", 
+"@label": "Teratosphaeria alcornii", 
+"meta": [
+{
+"$": 655702, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Batcheloromyces eucalypti", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199990", 
+"@id": "otu199990", 
+"@label": "Mycosphaerella irregulari", 
+"meta": [
+{
+"$": 159325, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella irregulari TH003.3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199991", 
+"@id": "otu199991", 
+"@label": "Teratosphaeria suberosa", 
+"meta": [
+{
+"$": 929047, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria suberosa DQ303046", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199992", 
+"@id": "otu199992", 
+"@label": "Teratosphaeria parva", 
+"meta": [
+{
+"$": 371838, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria parva DQ303005", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199993", 
+"@id": "otu199993", 
+"@label": "Mycosphaerella parkii", 
+"meta": [
+{
+"$": 514684, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella parkii AF173311", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199994", 
+"@id": "otu199994", 
+"@label": "Teratosphaeria parva", 
+"meta": [
+{
+"$": 371838, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria parva DQ303003", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199995", 
+"@id": "otu199995", 
+"@label": "Mycosphaerella pseudoendophytica", 
+"meta": [
+{
+"$": 3725718, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella pseudoendophytica AF173303", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199996", 
+"@id": "otu199996", 
+"@label": "Mycosphaerella thailandica", 
+"meta": [
+{
+"$": 169015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella thailandica TH026B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199997", 
+"@id": "otu199997", 
+"@label": "Mycosphaerella gracilis", 
+"meta": [
+{
+"$": 742866, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella gracilis DQ302960", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199998", 
+"@id": "otu199998", 
+"@label": "Mycosphaerella pseudomarksii", 
+"meta": [
+{
+"$": 159324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella pseudomarksii TH126.3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199999", 
+"@id": "otu199999", 
+"@label": "Teratosphaeria toledana", 
+"meta": [
+{
+"$": 877161, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria toledana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees842", 
+"@otus": "otus842", 
+"tree": [
+{
+"@about": "#tree1620", 
+"@id": "tree1620", 
+"edge": [
+{
+"@id": "edge469979", 
+"@source": "node469978", 
+"@target": "node469979"
+}, 
+{
+"@id": "edge469980", 
+"@source": "node469978", 
+"@target": "node469980"
+}, 
+{
+"@id": "edge469981", 
+"@source": "node469980", 
+"@target": "node469981"
+}, 
+{
+"@id": "edge469982", 
+"@source": "node469981", 
+"@target": "node469982"
+}, 
+{
+"@id": "edge469983", 
+"@source": "node469982", 
+"@target": "node469983"
+}, 
+{
+"@id": "edge469984", 
+"@source": "node469983", 
+"@target": "node469984"
+}, 
+{
+"@id": "edge469985", 
+"@source": "node469984", 
+"@target": "node469985"
+}, 
+{
+"@id": "edge469986", 
+"@source": "node469985", 
+"@target": "node469986"
+}, 
+{
+"@id": "edge469987", 
+"@source": "node469986", 
+"@target": "node469987"
+}, 
+{
+"@id": "edge469988", 
+"@source": "node469986", 
+"@target": "node469988"
+}, 
+{
+"@id": "edge469989", 
+"@source": "node469986", 
+"@target": "node469989"
+}, 
+{
+"@id": "edge469990", 
+"@source": "node469989", 
+"@target": "node469990"
+}, 
+{
+"@id": "edge469991", 
+"@source": "node469989", 
+"@target": "node469991"
+}, 
+{
+"@id": "edge469992", 
+"@source": "node469989", 
+"@target": "node469992"
+}, 
+{
+"@id": "edge469993", 
+"@source": "node469989", 
+"@target": "node469993"
+}, 
+{
+"@id": "edge469994", 
+"@source": "node469985", 
+"@target": "node469994"
+}, 
+{
+"@id": "edge469995", 
+"@source": "node469994", 
+"@target": "node469995"
+}, 
+{
+"@id": "edge469996", 
+"@source": "node469994", 
+"@target": "node469996"
+}, 
+{
+"@id": "edge469997", 
+"@source": "node469984", 
+"@target": "node469997"
+}, 
+{
+"@id": "edge469998", 
+"@source": "node469997", 
+"@target": "node469998"
+}, 
+{
+"@id": "edge469999", 
+"@source": "node469997", 
+"@target": "node469999"
+}, 
+{
+"@id": "edge470000", 
+"@source": "node469999", 
+"@target": "node470000"
+}, 
+{
+"@id": "edge470001", 
+"@source": "node470000", 
+"@target": "node470001"
+}, 
+{
+"@id": "edge470002", 
+"@source": "node470000", 
+"@target": "node470002"
+}, 
+{
+"@id": "edge470003", 
+"@source": "node470002", 
+"@target": "node470003"
+}, 
+{
+"@id": "edge470004", 
+"@source": "node470002", 
+"@target": "node470004"
+}, 
+{
+"@id": "edge470005", 
+"@source": "node470004", 
+"@target": "node470005"
+}, 
+{
+"@id": "edge470006", 
+"@source": "node470004", 
+"@target": "node470006"
+}, 
+{
+"@id": "edge470007", 
+"@source": "node470004", 
+"@target": "node470007"
+}, 
+{
+"@id": "edge470008", 
+"@source": "node469999", 
+"@target": "node470008"
+}, 
+{
+"@id": "edge470009", 
+"@source": "node470008", 
+"@target": "node470009"
+}, 
+{
+"@id": "edge470010", 
+"@source": "node470008", 
+"@target": "node470010"
+}, 
+{
+"@id": "edge470011", 
+"@source": "node470008", 
+"@target": "node470011"
+}, 
+{
+"@id": "edge470012", 
+"@source": "node469983", 
+"@target": "node470012"
+}, 
+{
+"@id": "edge470013", 
+"@source": "node470012", 
+"@target": "node470013"
+}, 
+{
+"@id": "edge470014", 
+"@source": "node470013", 
+"@target": "node470014"
+}, 
+{
+"@id": "edge470015", 
+"@source": "node470013", 
+"@target": "node470015"
+}, 
+{
+"@id": "edge470016", 
+"@source": "node470015", 
+"@target": "node470016"
+}, 
+{
+"@id": "edge470017", 
+"@source": "node470015", 
+"@target": "node470017"
+}, 
+{
+"@id": "edge470018", 
+"@source": "node470012", 
+"@target": "node470018"
+}, 
+{
+"@id": "edge470019", 
+"@source": "node469982", 
+"@target": "node470019"
+}, 
+{
+"@id": "edge470020", 
+"@source": "node470019", 
+"@target": "node470020"
+}, 
+{
+"@id": "edge470021", 
+"@source": "node470020", 
+"@target": "node470021"
+}, 
+{
+"@id": "edge470022", 
+"@source": "node470021", 
+"@target": "node470022"
+}, 
+{
+"@id": "edge470023", 
+"@source": "node470021", 
+"@target": "node470023"
+}, 
+{
+"@id": "edge470024", 
+"@source": "node470023", 
+"@target": "node470024"
+}, 
+{
+"@id": "edge470025", 
+"@source": "node470024", 
+"@target": "node470025"
+}, 
+{
+"@id": "edge470026", 
+"@source": "node470025", 
+"@target": "node470026"
+}, 
+{
+"@id": "edge470027", 
+"@source": "node470025", 
+"@target": "node470027"
+}, 
+{
+"@id": "edge470028", 
+"@source": "node470025", 
+"@target": "node470028"
+}, 
+{
+"@id": "edge470029", 
+"@source": "node470025", 
+"@target": "node470029"
+}, 
+{
+"@id": "edge470030", 
+"@source": "node470025", 
+"@target": "node470030"
+}, 
+{
+"@id": "edge470031", 
+"@source": "node470025", 
+"@target": "node470031"
+}, 
+{
+"@id": "edge470032", 
+"@source": "node470025", 
+"@target": "node470032"
+}, 
+{
+"@id": "edge470033", 
+"@source": "node470024", 
+"@target": "node470033"
+}, 
+{
+"@id": "edge470034", 
+"@source": "node470033", 
+"@target": "node470034"
+}, 
+{
+"@id": "edge470035", 
+"@source": "node470033", 
+"@target": "node470035"
+}, 
+{
+"@id": "edge470036", 
+"@source": "node470033", 
+"@target": "node470036"
+}, 
+{
+"@id": "edge470037", 
+"@source": "node470033", 
+"@target": "node470037"
+}, 
+{
+"@id": "edge470038", 
+"@source": "node470033", 
+"@target": "node470038"
+}, 
+{
+"@id": "edge470039", 
+"@source": "node470023", 
+"@target": "node470039"
+}, 
+{
+"@id": "edge470040", 
+"@source": "node470039", 
+"@target": "node470040"
+}, 
+{
+"@id": "edge470041", 
+"@source": "node470040", 
+"@target": "node470041"
+}, 
+{
+"@id": "edge470042", 
+"@source": "node470040", 
+"@target": "node470042"
+}, 
+{
+"@id": "edge470043", 
+"@source": "node470042", 
+"@target": "node470043"
+}, 
+{
+"@id": "edge470044", 
+"@source": "node470042", 
+"@target": "node470044"
+}, 
+{
+"@id": "edge470045", 
+"@source": "node470042", 
+"@target": "node470045"
+}, 
+{
+"@id": "edge470046", 
+"@source": "node470042", 
+"@target": "node470046"
+}, 
+{
+"@id": "edge470047", 
+"@source": "node470039", 
+"@target": "node470047"
+}, 
+{
+"@id": "edge470048", 
+"@source": "node470047", 
+"@target": "node470048"
+}, 
+{
+"@id": "edge470049", 
+"@source": "node470048", 
+"@target": "node470049"
+}, 
+{
+"@id": "edge470050", 
+"@source": "node470048", 
+"@target": "node470050"
+}, 
+{
+"@id": "edge470051", 
+"@source": "node470050", 
+"@target": "node470051"
+}, 
+{
+"@id": "edge470052", 
+"@source": "node470050", 
+"@target": "node470052"
+}, 
+{
+"@id": "edge470053", 
+"@source": "node470047", 
+"@target": "node470053"
+}, 
+{
+"@id": "edge470054", 
+"@source": "node470053", 
+"@target": "node470054"
+}, 
+{
+"@id": "edge470055", 
+"@source": "node470054", 
+"@target": "node470055"
+}, 
+{
+"@id": "edge470056", 
+"@source": "node470054", 
+"@target": "node470056"
+}, 
+{
+"@id": "edge470057", 
+"@source": "node470053", 
+"@target": "node470057"
+}, 
+{
+"@id": "edge470058", 
+"@source": "node470057", 
+"@target": "node470058"
+}, 
+{
+"@id": "edge470059", 
+"@source": "node470058", 
+"@target": "node470059"
+}, 
+{
+"@id": "edge470060", 
+"@source": "node470058", 
+"@target": "node470060"
+}, 
+{
+"@id": "edge470061", 
+"@source": "node470058", 
+"@target": "node470061"
+}, 
+{
+"@id": "edge470062", 
+"@source": "node470058", 
+"@target": "node470062"
+}, 
+{
+"@id": "edge470063", 
+"@source": "node470057", 
+"@target": "node470063"
+}, 
+{
+"@id": "edge470064", 
+"@source": "node470063", 
+"@target": "node470064"
+}, 
+{
+"@id": "edge470065", 
+"@source": "node470063", 
+"@target": "node470065"
+}, 
+{
+"@id": "edge470066", 
+"@source": "node470020", 
+"@target": "node470066"
+}, 
+{
+"@id": "edge470067", 
+"@source": "node470066", 
+"@target": "node470067"
+}, 
+{
+"@id": "edge470068", 
+"@source": "node470066", 
+"@target": "node470068"
+}, 
+{
+"@id": "edge470069", 
+"@source": "node470068", 
+"@target": "node470069"
+}, 
+{
+"@id": "edge470070", 
+"@source": "node470068", 
+"@target": "node470070"
+}, 
+{
+"@id": "edge470071", 
+"@source": "node470019", 
+"@target": "node470071"
+}, 
+{
+"@id": "edge470072", 
+"@source": "node470071", 
+"@target": "node470072"
+}, 
+{
+"@id": "edge470073", 
+"@source": "node470071", 
+"@target": "node470073"
+}, 
+{
+"@id": "edge470074", 
+"@source": "node469981", 
+"@target": "node470074"
+}, 
+{
+"@id": "edge470075", 
+"@source": "node470074", 
+"@target": "node470075"
+}, 
+{
+"@id": "edge470076", 
+"@source": "node470075", 
+"@target": "node470076"
+}, 
+{
+"@id": "edge470077", 
+"@source": "node470075", 
+"@target": "node470077"
+}, 
+{
+"@id": "edge470078", 
+"@source": "node470077", 
+"@target": "node470078"
+}, 
+{
+"@id": "edge470079", 
+"@source": "node470077", 
+"@target": "node470079"
+}, 
+{
+"@id": "edge470080", 
+"@source": "node470077", 
+"@target": "node470080"
+}, 
+{
+"@id": "edge470081", 
+"@source": "node470074", 
+"@target": "node470081"
+}, 
+{
+"@id": "edge470082", 
+"@source": "node470081", 
+"@target": "node470082"
+}, 
+{
+"@id": "edge470083", 
+"@source": "node470082", 
+"@target": "node470083"
+}, 
+{
+"@id": "edge470084", 
+"@source": "node470083", 
+"@target": "node470084"
+}, 
+{
+"@id": "edge470085", 
+"@source": "node470084", 
+"@target": "node470085"
+}, 
+{
+"@id": "edge470086", 
+"@source": "node470084", 
+"@target": "node470086"
+}, 
+{
+"@id": "edge470087", 
+"@source": "node470083", 
+"@target": "node470087"
+}, 
+{
+"@id": "edge470088", 
+"@source": "node470087", 
+"@target": "node470088"
+}, 
+{
+"@id": "edge470089", 
+"@source": "node470087", 
+"@target": "node470089"
+}, 
+{
+"@id": "edge470090", 
+"@source": "node470089", 
+"@target": "node470090"
+}, 
+{
+"@id": "edge470091", 
+"@source": "node470090", 
+"@target": "node470091"
+}, 
+{
+"@id": "edge470092", 
+"@source": "node470090", 
+"@target": "node470092"
+}, 
+{
+"@id": "edge470093", 
+"@source": "node470089", 
+"@target": "node470093"
+}, 
+{
+"@id": "edge470094", 
+"@source": "node470082", 
+"@target": "node470094"
+}, 
+{
+"@id": "edge470095", 
+"@source": "node470094", 
+"@target": "node470095"
+}, 
+{
+"@id": "edge470096", 
+"@source": "node470094", 
+"@target": "node470096"
+}, 
+{
+"@id": "edge470097", 
+"@source": "node470081", 
+"@target": "node470097"
+}, 
+{
+"@id": "edge470098", 
+"@source": "node470097", 
+"@target": "node470098"
+}, 
+{
+"@id": "edge470099", 
+"@source": "node470097", 
+"@target": "node470099"
+}, 
+{
+"@id": "edge470100", 
+"@source": "node470099", 
+"@target": "node470100"
+}, 
+{
+"@id": "edge470101", 
+"@source": "node470099", 
+"@target": "node470101"
+}, 
+{
+"@id": "edge470102", 
+"@source": "node469980", 
+"@target": "node470102"
+}, 
+{
+"@id": "edge470103", 
+"@source": "node470102", 
+"@target": "node470103"
+}, 
+{
+"@id": "edge470104", 
+"@source": "node470102", 
+"@target": "node470104"
+}
+], 
+"meta": [
+{
+"$": "node469980", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node469978", 
+"@root": "true"
+}, 
+{
+"@id": "node469979", 
+"@otu": "otu199949"
+}, 
+{
+"@id": "node469980"
+}, 
+{
+"@id": "node469981"
+}, 
+{
+"@id": "node469982"
+}, 
+{
+"@id": "node469983"
+}, 
+{
+"@id": "node469984"
+}, 
+{
+"@id": "node469985"
+}, 
+{
+"@id": "node469986"
+}, 
+{
+"@id": "node469987", 
+"@otu": "otu199947"
+}, 
+{
+"@id": "node469988", 
+"@otu": "otu199943"
+}, 
+{
+"@id": "node469989"
+}, 
+{
+"@id": "node469990", 
+"@otu": "otu199967"
+}, 
+{
+"@id": "node469991", 
+"@otu": "otu199985"
+}, 
+{
+"@id": "node469992", 
+"@otu": "otu199919"
+}, 
+{
+"@id": "node469993", 
+"@otu": "otu199984"
+}, 
+{
+"@id": "node469994"
+}, 
+{
+"@id": "node469995", 
+"@otu": "otu199993"
+}, 
+{
+"@id": "node469996", 
+"@otu": "otu199948"
+}, 
+{
+"@id": "node469997"
+}, 
+{
+"@id": "node469998", 
+"@otu": "otu199898"
+}, 
+{
+"@id": "node469999"
+}, 
+{
+"@id": "node470000"
+}, 
+{
+"@id": "node470001", 
+"@otu": "otu199975"
+}, 
+{
+"@id": "node470002"
+}, 
+{
+"@id": "node470003", 
+"@otu": "otu199979"
+}, 
+{
+"@id": "node470004"
+}, 
+{
+"@id": "node470005", 
+"@otu": "otu199973"
+}, 
+{
+"@id": "node470006", 
+"@otu": "otu199990"
+}, 
+{
+"@id": "node470007", 
+"@otu": "otu199962"
+}, 
+{
+"@id": "node470008"
+}, 
+{
+"@id": "node470009", 
+"@otu": "otu199966"
+}, 
+{
+"@id": "node470010", 
+"@otu": "otu199974"
+}, 
+{
+"@id": "node470011", 
+"@otu": "otu199998"
+}, 
+{
+"@id": "node470012"
+}, 
+{
+"@id": "node470013"
+}, 
+{
+"@id": "node470014", 
+"@otu": "otu199935"
+}, 
+{
+"@id": "node470015"
+}, 
+{
+"@id": "node470016", 
+"@otu": "otu199950"
+}, 
+{
+"@id": "node470017", 
+"@otu": "otu199969"
+}, 
+{
+"@id": "node470018", 
+"@otu": "otu199964"
+}, 
+{
+"@id": "node470019"
+}, 
+{
+"@id": "node470020"
+}, 
+{
+"@id": "node470021"
+}, 
+{
+"@id": "node470022", 
+"@otu": "otu199899"
+}, 
+{
+"@id": "node470023"
+}, 
+{
+"@id": "node470024"
+}, 
+{
+"@id": "node470025"
+}, 
+{
+"@id": "node470026", 
+"@otu": "otu199934"
+}, 
+{
+"@id": "node470027", 
+"@otu": "otu199946"
+}, 
+{
+"@id": "node470028", 
+"@otu": "otu199965"
+}, 
+{
+"@id": "node470029", 
+"@otu": "otu199912"
+}, 
+{
+"@id": "node470030", 
+"@otu": "otu199908"
+}, 
+{
+"@id": "node470031", 
+"@otu": "otu199987"
+}, 
+{
+"@id": "node470032", 
+"@otu": "otu199996"
+}, 
+{
+"@id": "node470033"
+}, 
+{
+"@id": "node470034", 
+"@otu": "otu199942"
+}, 
+{
+"@id": "node470035", 
+"@otu": "otu199931"
+}, 
+{
+"@id": "node470036", 
+"@otu": "otu199920"
+}, 
+{
+"@id": "node470037", 
+"@otu": "otu199978"
+}, 
+{
+"@id": "node470038", 
+"@otu": "otu199941"
+}, 
+{
+"@id": "node470039"
+}, 
+{
+"@id": "node470040"
+}, 
+{
+"@id": "node470041", 
+"@otu": "otu199970"
+}, 
+{
+"@id": "node470042"
+}, 
+{
+"@id": "node470043", 
+"@otu": "otu199909"
+}, 
+{
+"@id": "node470044", 
+"@otu": "otu199980"
+}, 
+{
+"@id": "node470045", 
+"@otu": "otu199986"
+}, 
+{
+"@id": "node470046", 
+"@otu": "otu199981"
+}, 
+{
+"@id": "node470047"
+}, 
+{
+"@id": "node470048"
+}, 
+{
+"@id": "node470049", 
+"@otu": "otu199997"
+}, 
+{
+"@id": "node470050"
+}, 
+{
+"@id": "node470051", 
+"@otu": "otu199968"
+}, 
+{
+"@id": "node470052", 
+"@otu": "otu199939"
+}, 
+{
+"@id": "node470053"
+}, 
+{
+"@id": "node470054"
+}, 
+{
+"@id": "node470055", 
+"@otu": "otu199976"
+}, 
+{
+"@id": "node470056", 
+"@otu": "otu199971"
+}, 
+{
+"@id": "node470057"
+}, 
+{
+"@id": "node470058"
+}, 
+{
+"@id": "node470059", 
+"@otu": "otu199961"
+}, 
+{
+"@id": "node470060", 
+"@otu": "otu199953"
+}, 
+{
+"@id": "node470061", 
+"@otu": "otu199955"
+}, 
+{
+"@id": "node470062", 
+"@otu": "otu199952"
+}, 
+{
+"@id": "node470063"
+}, 
+{
+"@id": "node470064", 
+"@otu": "otu199927"
+}, 
+{
+"@id": "node470065", 
+"@otu": "otu199940"
+}, 
+{
+"@id": "node470066"
+}, 
+{
+"@id": "node470067", 
+"@otu": "otu199937"
+}, 
+{
+"@id": "node470068"
+}, 
+{
+"@id": "node470069", 
+"@otu": "otu199995"
+}, 
+{
+"@id": "node470070", 
+"@otu": "otu199977"
+}, 
+{
+"@id": "node470071"
+}, 
+{
+"@id": "node470072", 
+"@otu": "otu199945"
+}, 
+{
+"@id": "node470073", 
+"@otu": "otu199944"
+}, 
+{
+"@id": "node470074"
+}, 
+{
+"@id": "node470075"
+}, 
+{
+"@id": "node470076", 
+"@otu": "otu199988"
+}, 
+{
+"@id": "node470077"
+}, 
+{
+"@id": "node470078", 
+"@otu": "otu199932"
+}, 
+{
+"@id": "node470079", 
+"@otu": "otu199928"
+}, 
+{
+"@id": "node470080", 
+"@otu": "otu199972"
+}, 
+{
+"@id": "node470081"
+}, 
+{
+"@id": "node470082"
+}, 
+{
+"@id": "node470083"
+}, 
+{
+"@id": "node470084"
+}, 
+{
+"@id": "node470085", 
+"@otu": "otu199914"
+}, 
+{
+"@id": "node470086", 
+"@otu": "otu199983"
+}, 
+{
+"@id": "node470087"
+}, 
+{
+"@id": "node470088", 
+"@otu": "otu199982"
+}, 
+{
+"@id": "node470089"
+}, 
+{
+"@id": "node470090"
+}, 
+{
+"@id": "node470091", 
+"@otu": "otu199936"
+}, 
+{
+"@id": "node470092", 
+"@otu": "otu199989"
+}, 
+{
+"@id": "node470093", 
+"@otu": "otu199999"
+}, 
+{
+"@id": "node470094"
+}, 
+{
+"@id": "node470095", 
+"@otu": "otu199963"
+}, 
+{
+"@id": "node470096", 
+"@otu": "otu199991"
+}, 
+{
+"@id": "node470097"
+}, 
+{
+"@id": "node470098", 
+"@otu": "otu199938"
+}, 
+{
+"@id": "node470099"
+}, 
+{
+"@id": "node470100", 
+"@otu": "otu199992"
+}, 
+{
+"@id": "node470101", 
+"@otu": "otu199994"
+}, 
+{
+"@id": "node470102"
+}, 
+{
+"@id": "node470103", 
+"@otu": "otu199904"
+}, 
+{
+"@id": "node470104", 
+"@otu": "otu199922"
+}
+]
+}, 
+{
+"@about": "#tree1621", 
+"@id": "tree1621", 
+"edge": [
+{
+"@id": "edge470106", 
+"@source": "node470105", 
+"@target": "node470106"
+}, 
+{
+"@id": "edge470107", 
+"@source": "node470105", 
+"@target": "node470107"
+}, 
+{
+"@id": "edge470108", 
+"@source": "node470107", 
+"@target": "node470108"
+}, 
+{
+"@id": "edge470109", 
+"@source": "node470108", 
+"@target": "node470109"
+}, 
+{
+"@id": "edge470110", 
+"@source": "node470109", 
+"@target": "node470110"
+}, 
+{
+"@id": "edge470111", 
+"@source": "node470110", 
+"@target": "node470111"
+}, 
+{
+"@id": "edge470112", 
+"@source": "node470111", 
+"@target": "node470112"
+}, 
+{
+"@id": "edge470113", 
+"@source": "node470112", 
+"@target": "node470113"
+}, 
+{
+"@id": "edge470114", 
+"@source": "node470112", 
+"@target": "node470114"
+}, 
+{
+"@id": "edge470115", 
+"@source": "node470112", 
+"@target": "node470115"
+}, 
+{
+"@id": "edge470116", 
+"@source": "node470112", 
+"@target": "node470116"
+}, 
+{
+"@id": "edge470117", 
+"@source": "node470112", 
+"@target": "node470117"
+}, 
+{
+"@id": "edge470118", 
+"@source": "node470112", 
+"@target": "node470118"
+}, 
+{
+"@id": "edge470119", 
+"@source": "node470118", 
+"@target": "node470119"
+}, 
+{
+"@id": "edge470120", 
+"@source": "node470118", 
+"@target": "node470120"
+}, 
+{
+"@id": "edge470121", 
+"@source": "node470111", 
+"@target": "node470121"
+}, 
+{
+"@id": "edge470122", 
+"@source": "node470121", 
+"@target": "node470122"
+}, 
+{
+"@id": "edge470123", 
+"@source": "node470122", 
+"@target": "node470123"
+}, 
+{
+"@id": "edge470124", 
+"@source": "node470123", 
+"@target": "node470124"
+}, 
+{
+"@id": "edge470125", 
+"@source": "node470123", 
+"@target": "node470125"
+}, 
+{
+"@id": "edge470126", 
+"@source": "node470125", 
+"@target": "node470126"
+}, 
+{
+"@id": "edge470127", 
+"@source": "node470125", 
+"@target": "node470127"
+}, 
+{
+"@id": "edge470128", 
+"@source": "node470125", 
+"@target": "node470128"
+}, 
+{
+"@id": "edge470129", 
+"@source": "node470125", 
+"@target": "node470129"
+}, 
+{
+"@id": "edge470130", 
+"@source": "node470122", 
+"@target": "node470130"
+}, 
+{
+"@id": "edge470131", 
+"@source": "node470130", 
+"@target": "node470131"
+}, 
+{
+"@id": "edge470132", 
+"@source": "node470130", 
+"@target": "node470132"
+}, 
+{
+"@id": "edge470133", 
+"@source": "node470121", 
+"@target": "node470133"
+}, 
+{
+"@id": "edge470134", 
+"@source": "node470133", 
+"@target": "node470134"
+}, 
+{
+"@id": "edge470135", 
+"@source": "node470133", 
+"@target": "node470135"
+}, 
+{
+"@id": "edge470136", 
+"@source": "node470110", 
+"@target": "node470136"
+}, 
+{
+"@id": "edge470137", 
+"@source": "node470136", 
+"@target": "node470137"
+}, 
+{
+"@id": "edge470138", 
+"@source": "node470136", 
+"@target": "node470138"
+}, 
+{
+"@id": "edge470139", 
+"@source": "node470109", 
+"@target": "node470139"
+}, 
+{
+"@id": "edge470140", 
+"@source": "node470139", 
+"@target": "node470140"
+}, 
+{
+"@id": "edge470141", 
+"@source": "node470140", 
+"@target": "node470141"
+}, 
+{
+"@id": "edge470142", 
+"@source": "node470140", 
+"@target": "node470142"
+}, 
+{
+"@id": "edge470143", 
+"@source": "node470142", 
+"@target": "node470143"
+}, 
+{
+"@id": "edge470144", 
+"@source": "node470142", 
+"@target": "node470144"
+}, 
+{
+"@id": "edge470145", 
+"@source": "node470139", 
+"@target": "node470145"
+}, 
+{
+"@id": "edge470146", 
+"@source": "node470145", 
+"@target": "node470146"
+}, 
+{
+"@id": "edge470147", 
+"@source": "node470145", 
+"@target": "node470147"
+}, 
+{
+"@id": "edge470148", 
+"@source": "node470147", 
+"@target": "node470148"
+}, 
+{
+"@id": "edge470149", 
+"@source": "node470147", 
+"@target": "node470149"
+}, 
+{
+"@id": "edge470150", 
+"@source": "node470108", 
+"@target": "node470150"
+}, 
+{
+"@id": "edge470151", 
+"@source": "node470150", 
+"@target": "node470151"
+}, 
+{
+"@id": "edge470152", 
+"@source": "node470150", 
+"@target": "node470152"
+}, 
+{
+"@id": "edge470153", 
+"@source": "node470107", 
+"@target": "node470153"
+}, 
+{
+"@id": "edge470154", 
+"@source": "node470153", 
+"@target": "node470154"
+}, 
+{
+"@id": "edge470155", 
+"@source": "node470154", 
+"@target": "node470155"
+}, 
+{
+"@id": "edge470156", 
+"@source": "node470155", 
+"@target": "node470156"
+}, 
+{
+"@id": "edge470157", 
+"@source": "node470155", 
+"@target": "node470157"
+}, 
+{
+"@id": "edge470158", 
+"@source": "node470157", 
+"@target": "node470158"
+}, 
+{
+"@id": "edge470159", 
+"@source": "node470158", 
+"@target": "node470159"
+}, 
+{
+"@id": "edge470160", 
+"@source": "node470158", 
+"@target": "node470160"
+}, 
+{
+"@id": "edge470161", 
+"@source": "node470157", 
+"@target": "node470161"
+}, 
+{
+"@id": "edge470162", 
+"@source": "node470154", 
+"@target": "node470162"
+}, 
+{
+"@id": "edge470163", 
+"@source": "node470162", 
+"@target": "node470163"
+}, 
+{
+"@id": "edge470164", 
+"@source": "node470162", 
+"@target": "node470164"
+}, 
+{
+"@id": "edge470165", 
+"@source": "node470164", 
+"@target": "node470165"
+}, 
+{
+"@id": "edge470166", 
+"@source": "node470164", 
+"@target": "node470166"
+}, 
+{
+"@id": "edge470167", 
+"@source": "node470153", 
+"@target": "node470167"
+}
+], 
+"meta": [
+{
+"$": "node470107", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node470105", 
+"@root": "true"
+}, 
+{
+"@id": "node470106", 
+"@otu": "otu199901"
+}, 
+{
+"@id": "node470107"
+}, 
+{
+"@id": "node470108"
+}, 
+{
+"@id": "node470109"
+}, 
+{
+"@id": "node470110"
+}, 
+{
+"@id": "node470111"
+}, 
+{
+"@id": "node470112"
+}, 
+{
+"@id": "node470113", 
+"@otu": "otu199910"
+}, 
+{
+"@id": "node470114", 
+"@otu": "otu199903"
+}, 
+{
+"@id": "node470115", 
+"@otu": "otu199916"
+}, 
+{
+"@id": "node470116", 
+"@otu": "otu199918"
+}, 
+{
+"@id": "node470117", 
+"@otu": "otu199907"
+}, 
+{
+"@id": "node470118"
+}, 
+{
+"@id": "node470119", 
+"@otu": "otu199927"
+}, 
+{
+"@id": "node470120", 
+"@otu": "otu199926"
+}, 
+{
+"@id": "node470121"
+}, 
+{
+"@id": "node470122"
+}, 
+{
+"@id": "node470123"
+}, 
+{
+"@id": "node470124", 
+"@otu": "otu199925"
+}, 
+{
+"@id": "node470125"
+}, 
+{
+"@id": "node470126", 
+"@otu": "otu199915"
+}, 
+{
+"@id": "node470127", 
+"@otu": "otu199921"
+}, 
+{
+"@id": "node470128", 
+"@otu": "otu199920"
+}, 
+{
+"@id": "node470129", 
+"@otu": "otu199931"
+}, 
+{
+"@id": "node470130"
+}, 
+{
+"@id": "node470131", 
+"@otu": "otu199912"
+}, 
+{
+"@id": "node470132", 
+"@otu": "otu199908"
+}, 
+{
+"@id": "node470133"
+}, 
+{
+"@id": "node470134", 
+"@otu": "otu199899"
+}, 
+{
+"@id": "node470135", 
+"@otu": "otu199905"
+}, 
+{
+"@id": "node470136"
+}, 
+{
+"@id": "node470137", 
+"@otu": "otu199929"
+}, 
+{
+"@id": "node470138", 
+"@otu": "otu199909"
+}, 
+{
+"@id": "node470139"
+}, 
+{
+"@id": "node470140"
+}, 
+{
+"@id": "node470141", 
+"@otu": "otu199923"
+}, 
+{
+"@id": "node470142"
+}, 
+{
+"@id": "node470143", 
+"@otu": "otu199906"
+}, 
+{
+"@id": "node470144", 
+"@otu": "otu199924"
+}, 
+{
+"@id": "node470145"
+}, 
+{
+"@id": "node470146", 
+"@otu": "otu199911"
+}, 
+{
+"@id": "node470147"
+}, 
+{
+"@id": "node470148", 
+"@otu": "otu199919"
+}, 
+{
+"@id": "node470149", 
+"@otu": "otu199917"
+}, 
+{
+"@id": "node470150"
+}, 
+{
+"@id": "node470151", 
+"@otu": "otu199902"
+}, 
+{
+"@id": "node470152", 
+"@otu": "otu199933"
+}, 
+{
+"@id": "node470153"
+}, 
+{
+"@id": "node470154"
+}, 
+{
+"@id": "node470155"
+}, 
+{
+"@id": "node470156", 
+"@otu": "otu199913"
+}, 
+{
+"@id": "node470157"
+}, 
+{
+"@id": "node470158"
+}, 
+{
+"@id": "node470159", 
+"@otu": "otu199928"
+}, 
+{
+"@id": "node470160", 
+"@otu": "otu199932"
+}, 
+{
+"@id": "node470161", 
+"@otu": "otu199904"
+}, 
+{
+"@id": "node470162"
+}, 
+{
+"@id": "node470163", 
+"@otu": "otu199914"
+}, 
+{
+"@id": "node470164"
+}, 
+{
+"@id": "node470165", 
+"@otu": "otu199930"
+}, 
+{
+"@id": "node470166", 
+"@otu": "otu199900"
+}, 
+{
+"@id": "node470167", 
+"@otu": "otu199922"
+}
+]
+}, 
+{
+"@about": "#tree1622", 
+"@id": "tree1622", 
+"edge": [
+{
+"@id": "edge470169", 
+"@source": "node470168", 
+"@target": "node470169"
+}, 
+{
+"@id": "edge470170", 
+"@source": "node470168", 
+"@target": "node470170"
+}, 
+{
+"@id": "edge470171", 
+"@source": "node470170", 
+"@target": "node470171"
+}, 
+{
+"@id": "edge470172", 
+"@source": "node470171", 
+"@target": "node470172"
+}, 
+{
+"@id": "edge470173", 
+"@source": "node470171", 
+"@target": "node470173"
+}, 
+{
+"@id": "edge470174", 
+"@source": "node470170", 
+"@target": "node470174"
+}, 
+{
+"@id": "edge470175", 
+"@source": "node470174", 
+"@target": "node470175"
+}, 
+{
+"@id": "edge470176", 
+"@source": "node470175", 
+"@target": "node470176"
+}, 
+{
+"@id": "edge470177", 
+"@source": "node470176", 
+"@target": "node470177"
+}, 
+{
+"@id": "edge470178", 
+"@source": "node470177", 
+"@target": "node470178"
+}, 
+{
+"@id": "edge470179", 
+"@source": "node470178", 
+"@target": "node470179"
+}, 
+{
+"@id": "edge470180", 
+"@source": "node470179", 
+"@target": "node470180"
+}, 
+{
+"@id": "edge470181", 
+"@source": "node470179", 
+"@target": "node470181"
+}, 
+{
+"@id": "edge470182", 
+"@source": "node470179", 
+"@target": "node470182"
+}, 
+{
+"@id": "edge470183", 
+"@source": "node470178", 
+"@target": "node470183"
+}, 
+{
+"@id": "edge470184", 
+"@source": "node470177", 
+"@target": "node470184"
+}, 
+{
+"@id": "edge470185", 
+"@source": "node470184", 
+"@target": "node470185"
+}, 
+{
+"@id": "edge470186", 
+"@source": "node470184", 
+"@target": "node470186"
+}, 
+{
+"@id": "edge470187", 
+"@source": "node470186", 
+"@target": "node470187"
+}, 
+{
+"@id": "edge470188", 
+"@source": "node470186", 
+"@target": "node470188"
+}, 
+{
+"@id": "edge470189", 
+"@source": "node470176", 
+"@target": "node470189"
+}, 
+{
+"@id": "edge470190", 
+"@source": "node470175", 
+"@target": "node470190"
+}, 
+{
+"@id": "edge470191", 
+"@source": "node470190", 
+"@target": "node470191"
+}, 
+{
+"@id": "edge470192", 
+"@source": "node470190", 
+"@target": "node470192"
+}, 
+{
+"@id": "edge470193", 
+"@source": "node470192", 
+"@target": "node470193"
+}, 
+{
+"@id": "edge470194", 
+"@source": "node470193", 
+"@target": "node470194"
+}, 
+{
+"@id": "edge470195", 
+"@source": "node470193", 
+"@target": "node470195"
+}, 
+{
+"@id": "edge470196", 
+"@source": "node470192", 
+"@target": "node470196"
+}, 
+{
+"@id": "edge470197", 
+"@source": "node470174", 
+"@target": "node470197"
+}
+], 
+"meta": [
+{
+"$": "node470170", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node470168", 
+"@root": "true"
+}, 
+{
+"@id": "node470169", 
+"@otu": "otu199957"
+}, 
+{
+"@id": "node470170"
+}, 
+{
+"@id": "node470171"
+}, 
+{
+"@id": "node470172", 
+"@otu": "otu199954"
+}, 
+{
+"@id": "node470173", 
+"@otu": "otu199958"
+}, 
+{
+"@id": "node470174"
+}, 
+{
+"@id": "node470175"
+}, 
+{
+"@id": "node470176"
+}, 
+{
+"@id": "node470177"
+}, 
+{
+"@id": "node470178"
+}, 
+{
+"@id": "node470179"
+}, 
+{
+"@id": "node470180", 
+"@otu": "otu199953"
+}, 
+{
+"@id": "node470181", 
+"@otu": "otu199955"
+}, 
+{
+"@id": "node470182", 
+"@otu": "otu199952"
+}, 
+{
+"@id": "node470183", 
+"@otu": "otu199961"
+}, 
+{
+"@id": "node470184"
+}, 
+{
+"@id": "node470185", 
+"@otu": "otu199940"
+}, 
+{
+"@id": "node470186"
+}, 
+{
+"@id": "node470187", 
+"@otu": "otu199956"
+}, 
+{
+"@id": "node470188", 
+"@otu": "otu199951"
+}, 
+{
+"@id": "node470189", 
+"@otu": "otu199927"
+}, 
+{
+"@id": "node470190"
+}, 
+{
+"@id": "node470191", 
+"@otu": "otu199903"
+}, 
+{
+"@id": "node470192"
+}, 
+{
+"@id": "node470193"
+}, 
+{
+"@id": "node470194", 
+"@otu": "otu199959"
+}, 
+{
+"@id": "node470195", 
+"@otu": "otu199960"
+}, 
+{
+"@id": "node470196", 
+"@otu": "otu199907"
+}, 
+{
+"@id": "node470197", 
+"@otu": "otu199910"
+}
+]
+}
+]
+}
+}
+}

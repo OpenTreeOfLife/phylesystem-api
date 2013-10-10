@@ -1,0 +1,3879 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Ito M., & Takamatsu S. 2010. Molecular phylogeny and evolution of subsection Magnicellulatae (Erysiphaceae: Podosphaera) with special reference to host plants. Mycoscience, 51(1): 34-43.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s10267-009-0005-3", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10070", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1038", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 213061, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "study contains plant taxa", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1038", 
+"otu": [
+{
+"@about": "#otu215862", 
+"@id": "otu215862", 
+"@label": "Glycine max", 
+"meta": [
+{
+"$": 681762, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Glycine max", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215863", 
+"@id": "otu215863", 
+"@label": "Aster ageratoides", 
+"meta": [
+{
+"$": 129768, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Aster ageratoides", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215864", 
+"@id": "otu215864", 
+"@label": "Lactuca indica", 
+"meta": [
+{
+"$": 678386, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactuca indica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215865", 
+"@id": "otu215865", 
+"@label": "Rudbeckia", 
+"meta": [
+{
+"$": 416971, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rudbeckia sp", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215866", 
+"@id": "otu215866", 
+"@label": "Taraxacum officinale", 
+"meta": [
+{
+"$": 451182, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Taraxacum officinale", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215867", 
+"@id": "otu215867", 
+"@label": "Cosmos bipinnatus", 
+"meta": [
+{
+"$": 608104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cosmos bipinnatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215868", 
+"@id": "otu215868", 
+"@label": "Helianthus annuus", 
+"meta": [
+{
+"$": 515712, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helianthus annuus MUMH324", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215869", 
+"@id": "otu215869", 
+"@label": "Clerodendrum trichotomum", 
+"meta": [
+{
+"$": 261345, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Clerodendrum trichotomum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215870", 
+"@id": "otu215870", 
+"@label": "Kalimeris pinnatifida", 
+"meta": [
+{
+"$": 166282, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Kalimeris pinnatifida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215871", 
+"@id": "otu215871", 
+"@label": "Boehmeria", 
+"meta": [
+{
+"$": 594987, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Boehmeria nipononivea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215872", 
+"@id": "otu215872", 
+"@label": "Ajuga reptans", 
+"meta": [
+{
+"$": 11338, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ajuga reptans", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215873", 
+"@id": "otu215873", 
+"@label": "Veronicastrum sibiricum", 
+"meta": [
+{
+"$": 484334, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Veronicastrum sibiricum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215874", 
+"@id": "otu215874", 
+"@label": "Trichosanthes kirilowii", 
+"meta": [
+{
+"$": 955540, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trichosanthes kirilowii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215875", 
+"@id": "otu215875", 
+"@label": "Taraxacum albidum", 
+"meta": {
+"$": "Taraxacum albidum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu215876", 
+"@id": "otu215876", 
+"@label": "Bothria japonica", 
+"meta": [
+{
+"$": 926965, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Melothria japonica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215877", 
+"@id": "otu215877", 
+"@label": "Arctium lappa", 
+"meta": [
+{
+"$": 46196, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Arctium lappa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215878", 
+"@id": "otu215878", 
+"@label": "Calendula officinalis", 
+"meta": [
+{
+"$": 768229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calendula officinalis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215879", 
+"@id": "otu215879", 
+"@label": "Impatiens noli-tangere", 
+"meta": [
+{
+"$": 460548, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens noli tangere", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215880", 
+"@id": "otu215880", 
+"@label": "Crotalaria juncea", 
+"meta": [
+{
+"$": 612454, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crotalaria juncea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215881", 
+"@id": "otu215881", 
+"@label": "Cayratia japonica", 
+"meta": [
+{
+"$": 438636, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cayratia japonica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215882", 
+"@id": "otu215882", 
+"@label": "Verbena hybrida", 
+"meta": {
+"$": "Verbena x hybrida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu215883", 
+"@id": "otu215883", 
+"@label": "Impatiens textorii", 
+"meta": [
+{
+"$": 730178, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens textorii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215884", 
+"@id": "otu215884", 
+"@label": "Helianthus annuus", 
+"meta": [
+{
+"$": 515712, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helianthus annuus MUMH337", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215885", 
+"@id": "otu215885", 
+"@label": "Cucurbita moschata", 
+"meta": [
+{
+"$": 84409, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucurbita moschata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215886", 
+"@id": "otu215886", 
+"@label": "Zinnia violacea", 
+"meta": [
+{
+"$": 107899, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Zinnia elegans", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215887", 
+"@id": "otu215887", 
+"@label": "Vigna unguiculata", 
+"meta": [
+{
+"$": 1065941, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Vigna unguiculata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215888", 
+"@id": "otu215888", 
+"@label": "Podosphaera tridactyla", 
+"meta": [
+{
+"$": 85912, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Podosphaera tridactyla ex Prunus japonica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215889", 
+"@id": "otu215889", 
+"@label": "Vigna angularis", 
+"meta": [
+{
+"$": 1065959, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Vigna angularis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215890", 
+"@id": "otu215890", 
+"@label": "Acalypha australis", 
+"meta": [
+{
+"$": 607870, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acalypha australis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215891", 
+"@id": "otu215891", 
+"@label": "Solanum melongena", 
+"meta": [
+{
+"$": 494843, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum melongena", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215892", 
+"@id": "otu215892", 
+"@label": "Peristrophe japonica", 
+"meta": [
+{
+"$": 961777, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Peristrophe japonica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215893", 
+"@id": "otu215893", 
+"@label": "Bidens frondosa", 
+"meta": [
+{
+"$": 86774, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Bidens frondosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215894", 
+"@id": "otu215894", 
+"@label": "Aster tataricus", 
+"meta": [
+{
+"$": 287847, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Aster tataricus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215895", 
+"@id": "otu215895", 
+"@label": "Lactuca raddeana", 
+"meta": [
+{
+"$": 3896780, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactuca raddeana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215896", 
+"@id": "otu215896", 
+"@label": "Verbena hybrida", 
+"meta": {
+"$": "Gerbera hybrida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu215897", 
+"@id": "otu215897", 
+"@label": "Podosphaera longiseta", 
+"meta": [
+{
+"$": 446104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Podosphaera longiseta ex Prunus grayana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215898", 
+"@id": "otu215898", 
+"@label": "Lycopus lucidus", 
+"meta": [
+{
+"$": 980292, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lycopus lucidus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215899", 
+"@id": "otu215899", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215900", 
+"@id": "otu215900", 
+"@label": "Impatiens balsamina", 
+"meta": [
+{
+"$": 326129, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens balsamina", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215901", 
+"@id": "otu215901", 
+"@label": "Dunbaria villosa", 
+"meta": [
+{
+"$": 3921151, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dunbaria villosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215902", 
+"@id": "otu215902", 
+"@label": "Conyza canadensis", 
+"meta": [
+{
+"$": 1008406, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erigeron canadensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215903", 
+"@id": "otu215903", 
+"@label": "Verbena bonariensis", 
+"meta": [
+{
+"$": 595183, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Verbena bonariensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215904", 
+"@id": "otu215904", 
+"@label": "Lycopus lucidus", 
+"meta": [
+{
+"$": 980292, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lycopus lucidus AB040343", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215905", 
+"@id": "otu215905", 
+"@label": "Impatiens noli-tangere", 
+"meta": [
+{
+"$": 460548, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens noli-tangere MUMH2890", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215906", 
+"@id": "otu215906", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040324", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215907", 
+"@id": "otu215907", 
+"@label": "Veronicastrum sibiricum", 
+"meta": [
+{
+"$": 484334, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Veronicastrum sibiricum AB026144", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215908", 
+"@id": "otu215908", 
+"@label": "Carpesium abrotanoides", 
+"meta": [
+{
+"$": 587353, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carpesium abrotanoides AB040350", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215909", 
+"@id": "otu215909", 
+"@label": "Verbena hybrida", 
+"meta": {
+"$": "Verbena x hybrida AB046985", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu215910", 
+"@id": "otu215910", 
+"@label": "Euryops pectinatus", 
+"meta": [
+{
+"$": 812768, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Euryops pectinatus AB046989", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215911", 
+"@id": "otu215911", 
+"@label": "Coreopsis lanceolata", 
+"meta": [
+{
+"$": 184409, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coreopsis lanceolata  AB046990", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215912", 
+"@id": "otu215912", 
+"@label": "Podosphaera longiseta", 
+"meta": [
+{
+"$": 446104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Podosphaera longiseta ex Prunus grayana AB000945", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215913", 
+"@id": "otu215913", 
+"@label": "Bidens frondosa", 
+"meta": [
+{
+"$": 86774, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Bidens frondosa AB040295", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215914", 
+"@id": "otu215914", 
+"@label": "Youngia denticulata", 
+"meta": [
+{
+"$": 747022, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Youngia denticulata AB040351", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215915", 
+"@id": "otu215915", 
+"@label": "Verbena hybrida", 
+"meta": {
+"$": "Verbena x hybrida AB040347", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu215916", 
+"@id": "otu215916", 
+"@label": "Saintpaulia", 
+"meta": [
+{
+"$": 376722, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Saintpaulia sp. AB040339", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215917", 
+"@id": "otu215917", 
+"@label": "Helianthus annuus", 
+"meta": [
+{
+"$": 515712, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helianthus annuus AB040311", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215918", 
+"@id": "otu215918", 
+"@label": "Vigna angularis", 
+"meta": [
+{
+"$": 1065959, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Vigna angularis AB040297", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215919", 
+"@id": "otu215919", 
+"@label": "Zinnia elegans", 
+"meta": [
+{
+"$": 107899, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Zinnia elegans AB040354", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215920", 
+"@id": "otu215920", 
+"@label": "Impatiens textorii", 
+"meta": [
+{
+"$": 730178, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens textorii MUMH1496", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215921", 
+"@id": "otu215921", 
+"@label": "Euryops chrysanthemoides", 
+"meta": [
+{
+"$": 3899406, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Euryops chrysanthemoides DQ205330", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215922", 
+"@id": "otu215922", 
+"@label": "Aster ageratoides", 
+"meta": [
+{
+"$": 129768, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Aster ageratoides AB040335", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215923", 
+"@id": "otu215923", 
+"@label": "Helianthus annuus", 
+"meta": [
+{
+"$": 515712, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helianthus annuus EF010913", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215924", 
+"@id": "otu215924", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB026146", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215925", 
+"@id": "otu215925", 
+"@label": "Kalimeris pinnatifida", 
+"meta": [
+{
+"$": 166282, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Kalimeris pinnatifida AB040353", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215926", 
+"@id": "otu215926", 
+"@label": "Verbena hybrida", 
+"meta": {
+"$": "Gerbera hybrida AB040309", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu215927", 
+"@id": "otu215927", 
+"@label": "Impatiens balsamina", 
+"meta": [
+{
+"$": 326129, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens balsamina MUMH1225", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215928", 
+"@id": "otu215928", 
+"@label": "Leontodon autumnalis", 
+"meta": [
+{
+"$": 220789, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Leontodon autumnalis AB040331", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215929", 
+"@id": "otu215929", 
+"@label": "Cayratia japonica", 
+"meta": [
+{
+"$": 438636, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cayratia japonica AB026151", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215930", 
+"@id": "otu215930", 
+"@label": "Crotalaria juncea", 
+"meta": [
+{
+"$": 612454, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crotalaria juncea AB040304", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215931", 
+"@id": "otu215931", 
+"@label": "Taraxacum officinale", 
+"meta": [
+{
+"$": 451182, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Taraxacum officinale AB026148", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215932", 
+"@id": "otu215932", 
+"@label": "Cosmos bipinnatus", 
+"meta": [
+{
+"$": 608104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cosmos bipinnatus AB040299", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215933", 
+"@id": "otu215933", 
+"@label": "Cosmos bipinnatus", 
+"meta": [
+{
+"$": 608104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cosmos bipinnatus AB040300", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215934", 
+"@id": "otu215934", 
+"@label": "Podosphaera tridactyla", 
+"meta": [
+{
+"$": 85912, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Podosphaera tridactyla ex Prunus japonica AB000936", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215935", 
+"@id": "otu215935", 
+"@label": "Cucurbita moschata", 
+"meta": [
+{
+"$": 84409, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucurbita moschata AB040315", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215936", 
+"@id": "otu215936", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040323", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215937", 
+"@id": "otu215937", 
+"@label": "Impatiens noli-tangere", 
+"meta": [
+{
+"$": 460548, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens noli-tangere MUMH2841", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215938", 
+"@id": "otu215938", 
+"@label": "Erigeron canadensis", 
+"meta": [
+{
+"$": 1008406, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erigeron canadensis AB040313", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215939", 
+"@id": "otu215939", 
+"@label": "Trichosanthes kirilowii", 
+"meta": [
+{
+"$": 955540, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trichosanthes kirilowii AB040316", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215940", 
+"@id": "otu215940", 
+"@label": "Peristrophe japonica", 
+"meta": [
+{
+"$": 961777, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Peristrophe japonica AB026135", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215941", 
+"@id": "otu215941", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040325", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215942", 
+"@id": "otu215942", 
+"@label": "Calendula officinalis", 
+"meta": [
+{
+"$": 768229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calendula officinalis AB040317", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215943", 
+"@id": "otu215943", 
+"@label": "Impatiens balsamina", 
+"meta": [
+{
+"$": 326129, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens balsamina MUMH1608", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215944", 
+"@id": "otu215944", 
+"@label": "Impatiens textorii", 
+"meta": [
+{
+"$": 730178, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens textorii MUMH1231", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215945", 
+"@id": "otu215945", 
+"@label": "Acalypha australis", 
+"meta": [
+{
+"$": 607870, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acalypha australis AB040306", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215946", 
+"@id": "otu215946", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040330", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215947", 
+"@id": "otu215947", 
+"@label": "Fungi", 
+"meta": [
+{
+"$": 352914, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Verononia sp. AB040348", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215948", 
+"@id": "otu215948", 
+"@label": "Petasites japonicus", 
+"meta": [
+{
+"$": 47000, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Petasites japonicus AB040307", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215949", 
+"@id": "otu215949", 
+"@label": "Physalis", 
+"meta": [
+{
+"$": 392144, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Physalis sp. AB040336", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215950", 
+"@id": "otu215950", 
+"@label": "Saintpaulia ionantha", 
+"meta": [
+{
+"$": 676058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Saintpaulia ionantha AB040338", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215951", 
+"@id": "otu215951", 
+"@label": "Cosmos bipinnatus", 
+"meta": [
+{
+"$": 608104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cosmos bipinnatus AB040302", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215952", 
+"@id": "otu215952", 
+"@label": "Veronica spicata", 
+"meta": [
+{
+"$": 79022, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Veronica spicata AB046986", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215953", 
+"@id": "otu215953", 
+"@label": "Glycine max", 
+"meta": [
+{
+"$": 681762, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Glycine max AB040305", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215954", 
+"@id": "otu215954", 
+"@label": "Farfugium japonicum", 
+"meta": [
+{
+"$": 619957, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Farfugium japonicum AB040346", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215955", 
+"@id": "otu215955", 
+"@label": "Impatiens textori", 
+"meta": [
+{
+"$": 730178, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens textori AB040344", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215956", 
+"@id": "otu215956", 
+"@label": "Cacalia", 
+"meta": [
+{
+"$": 4728144, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cacalia hastata AB040314", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215957", 
+"@id": "otu215957", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040321", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215958", 
+"@id": "otu215958", 
+"@label": "Cosmos bipinnatus", 
+"meta": [
+{
+"$": 608104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cosmos bipinnatus AB040301", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215959", 
+"@id": "otu215959", 
+"@label": "Gynostemma pentaphyllum", 
+"meta": [
+{
+"$": 493377, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gynostemma pentaphylla D84378", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215960", 
+"@id": "otu215960", 
+"@label": "Clerodendrum trichotomum", 
+"meta": [
+{
+"$": 261345, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Clerodendrum trichotomum AB026145", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215961", 
+"@id": "otu215961", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040327", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215962", 
+"@id": "otu215962", 
+"@label": "Cosmos bipinnatus", 
+"meta": [
+{
+"$": 608104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cosmos bipinnatus AB040303", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215963", 
+"@id": "otu215963", 
+"@label": "Hibiscus mutabilis", 
+"meta": [
+{
+"$": 1092076, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hibiscus mutabilis AB040308", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215964", 
+"@id": "otu215964", 
+"@label": "Zinnia elegans", 
+"meta": [
+{
+"$": 107899, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Zinnia elegans AB040355", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215965", 
+"@id": "otu215965", 
+"@label": "Carthamus tinctorius", 
+"meta": [
+{
+"$": 1061541, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carthamus tinctorius AB040298", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215966", 
+"@id": "otu215966", 
+"@label": "Melampyrum nemorosum", 
+"meta": [
+{
+"$": 404928, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Melampyrum nemorosum AB040332", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215967", 
+"@id": "otu215967", 
+"@label": "Lactuca indica", 
+"meta": [
+{
+"$": 678386, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactuca indica AB040294", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215968", 
+"@id": "otu215968", 
+"@label": "Syneilesis palmata", 
+"meta": [
+{
+"$": 944235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Syneilesis palmata AB040349", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215969", 
+"@id": "otu215969", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040326", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215970", 
+"@id": "otu215970", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040322", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215971", 
+"@id": "otu215971", 
+"@label": "Vigna unguiculata", 
+"meta": [
+{
+"$": 1065941, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Vigna unguiculata AB040340", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215972", 
+"@id": "otu215972", 
+"@label": "Tussilago farfara", 
+"meta": [
+{
+"$": 1069824, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tussilago farfara AB040345", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215973", 
+"@id": "otu215973", 
+"@label": "Coreopsis lanceolata", 
+"meta": [
+{
+"$": 184409, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coreopsis lanceolata EF442023", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215974", 
+"@id": "otu215974", 
+"@label": "Dunbaria villosa", 
+"meta": [
+{
+"$": 3921151, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dunbaria villosa AB040334", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215975", 
+"@id": "otu215975", 
+"@label": "Lactuca raddeana", 
+"meta": [
+{
+"$": 3896780, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactuca raddeana AB040352", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215976", 
+"@id": "otu215976", 
+"@label": "Matricaria matricarioides", 
+"meta": [
+{
+"$": 896512, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Matricaria matricarioides AB046988", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215977", 
+"@id": "otu215977", 
+"@label": "Taraxacum albidum", 
+"meta": {
+"$": "Taraxacum albidum AB040342", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu215978", 
+"@id": "otu215978", 
+"@label": "Aster tataricus", 
+"meta": [
+{
+"$": 287847, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Aster tataricus AB040341", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215979", 
+"@id": "otu215979", 
+"@label": "Helianthus annuus", 
+"meta": [
+{
+"$": 515712, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helianthus annuus AB040312", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215980", 
+"@id": "otu215980", 
+"@label": "Abelmoschus ficulneus", 
+"meta": [
+{
+"$": 590121, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Abelmoschus ficulneus AB040293", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215981", 
+"@id": "otu215981", 
+"@label": "Arctium lappa", 
+"meta": [
+{
+"$": 46196, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Arctium lappa AB040310", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215982", 
+"@id": "otu215982", 
+"@label": "Fatoua villosa", 
+"meta": [
+{
+"$": 210683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fatoua villosa AB040320", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215983", 
+"@id": "otu215983", 
+"@label": "Hypochaeris brasiliensis", 
+"meta": [
+{
+"$": 495967, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hypochaeris brasiliensis AY739113", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215984", 
+"@id": "otu215984", 
+"@label": "Impatiens balsamina", 
+"meta": [
+{
+"$": 326129, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens balsamina MUMH1125", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215985", 
+"@id": "otu215985", 
+"@label": "Rudbeckia hirta", 
+"meta": [
+{
+"$": 837485, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rudbeckia hirta AB040296", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215986", 
+"@id": "otu215986", 
+"@label": "Physalis angulata", 
+"meta": [
+{
+"$": 12537, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Physalis angulata EF050036", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215987", 
+"@id": "otu215987", 
+"@label": "Solanum melongena", 
+"meta": [
+{
+"$": 494843, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum melongena AB040333", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215988", 
+"@id": "otu215988", 
+"@label": "Taraxacum officinale", 
+"meta": [
+{
+"$": 451182, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Taraxacum officinale AB046987", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215989", 
+"@id": "otu215989", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040329", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215990", 
+"@id": "otu215990", 
+"@label": "Boehmeria", 
+"meta": [
+{
+"$": 594987, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Boehmeria nipononivea AB026139", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215991", 
+"@id": "otu215991", 
+"@label": "Impatiens noli-tangere", 
+"meta": [
+{
+"$": 460548, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens noli-tangere MUMH2658", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215992", 
+"@id": "otu215992", 
+"@label": "Bothria japonica", 
+"meta": [
+{
+"$": 926965, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Melothria japonica D84387", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215993", 
+"@id": "otu215993", 
+"@label": "Ajuga reptans", 
+"meta": [
+{
+"$": 11338, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ajuga reptans AB026142", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215994", 
+"@id": "otu215994", 
+"@label": "Impatiens noli-tangere", 
+"meta": [
+{
+"$": 460548, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Impatiens noli-tangere AB040318", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215995", 
+"@id": "otu215995", 
+"@label": "Rudbeckia", 
+"meta": [
+{
+"$": 416971, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rudbeckia sp. AB040337", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215996", 
+"@id": "otu215996", 
+"@label": "Cucumis sativus", 
+"meta": [
+{
+"$": 1006246, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cucumis sativus AB040328", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215997", 
+"@id": "otu215997", 
+"@label": "Helianthus multiflorus", 
+"meta": [
+{
+"$": 3899807, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helianthus x multiflorus AB040319", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1038", 
+"@otus": "otus1038", 
+"tree": [
+{
+"@about": "#tree1991", 
+"@id": "tree1991", 
+"edge": [
+{
+"@id": "edge509046", 
+"@source": "node509045", 
+"@target": "node509046"
+}, 
+{
+"@id": "edge509047", 
+"@source": "node509046", 
+"@target": "node509047"
+}, 
+{
+"@id": "edge509048", 
+"@source": "node509047", 
+"@target": "node509048"
+}, 
+{
+"@id": "edge509049", 
+"@source": "node509048", 
+"@target": "node509049"
+}, 
+{
+"@id": "edge509050", 
+"@source": "node509049", 
+"@target": "node509050"
+}, 
+{
+"@id": "edge509051", 
+"@source": "node509050", 
+"@target": "node509051"
+}, 
+{
+"@id": "edge509052", 
+"@source": "node509050", 
+"@target": "node509052"
+}, 
+{
+"@id": "edge509053", 
+"@source": "node509052", 
+"@target": "node509053"
+}, 
+{
+"@id": "edge509054", 
+"@source": "node509053", 
+"@target": "node509054"
+}, 
+{
+"@id": "edge509055", 
+"@source": "node509054", 
+"@target": "node509055"
+}, 
+{
+"@id": "edge509056", 
+"@source": "node509055", 
+"@target": "node509056"
+}, 
+{
+"@id": "edge509057", 
+"@source": "node509056", 
+"@target": "node509057"
+}, 
+{
+"@id": "edge509058", 
+"@source": "node509056", 
+"@target": "node509058"
+}, 
+{
+"@id": "edge509059", 
+"@source": "node509056", 
+"@target": "node509059"
+}, 
+{
+"@id": "edge509060", 
+"@source": "node509056", 
+"@target": "node509060"
+}, 
+{
+"@id": "edge509061", 
+"@source": "node509056", 
+"@target": "node509061"
+}, 
+{
+"@id": "edge509062", 
+"@source": "node509056", 
+"@target": "node509062"
+}, 
+{
+"@id": "edge509063", 
+"@source": "node509056", 
+"@target": "node509063"
+}, 
+{
+"@id": "edge509064", 
+"@source": "node509056", 
+"@target": "node509064"
+}, 
+{
+"@id": "edge509065", 
+"@source": "node509056", 
+"@target": "node509065"
+}, 
+{
+"@id": "edge509066", 
+"@source": "node509056", 
+"@target": "node509066"
+}, 
+{
+"@id": "edge509067", 
+"@source": "node509056", 
+"@target": "node509067"
+}, 
+{
+"@id": "edge509068", 
+"@source": "node509055", 
+"@target": "node509068"
+}, 
+{
+"@id": "edge509069", 
+"@source": "node509055", 
+"@target": "node509069"
+}, 
+{
+"@id": "edge509070", 
+"@source": "node509055", 
+"@target": "node509070"
+}, 
+{
+"@id": "edge509071", 
+"@source": "node509055", 
+"@target": "node509071"
+}, 
+{
+"@id": "edge509072", 
+"@source": "node509054", 
+"@target": "node509072"
+}, 
+{
+"@id": "edge509073", 
+"@source": "node509053", 
+"@target": "node509073"
+}, 
+{
+"@id": "edge509074", 
+"@source": "node509053", 
+"@target": "node509074"
+}, 
+{
+"@id": "edge509075", 
+"@source": "node509053", 
+"@target": "node509075"
+}, 
+{
+"@id": "edge509076", 
+"@source": "node509053", 
+"@target": "node509076"
+}, 
+{
+"@id": "edge509077", 
+"@source": "node509053", 
+"@target": "node509077"
+}, 
+{
+"@id": "edge509078", 
+"@source": "node509053", 
+"@target": "node509078"
+}, 
+{
+"@id": "edge509079", 
+"@source": "node509052", 
+"@target": "node509079"
+}, 
+{
+"@id": "edge509080", 
+"@source": "node509079", 
+"@target": "node509080"
+}, 
+{
+"@id": "edge509081", 
+"@source": "node509079", 
+"@target": "node509081"
+}, 
+{
+"@id": "edge509082", 
+"@source": "node509050", 
+"@target": "node509082"
+}, 
+{
+"@id": "edge509083", 
+"@source": "node509082", 
+"@target": "node509083"
+}, 
+{
+"@id": "edge509084", 
+"@source": "node509082", 
+"@target": "node509084"
+}, 
+{
+"@id": "edge509085", 
+"@source": "node509082", 
+"@target": "node509085"
+}, 
+{
+"@id": "edge509086", 
+"@source": "node509050", 
+"@target": "node509086"
+}, 
+{
+"@id": "edge509087", 
+"@source": "node509050", 
+"@target": "node509087"
+}, 
+{
+"@id": "edge509088", 
+"@source": "node509049", 
+"@target": "node509088"
+}, 
+{
+"@id": "edge509089", 
+"@source": "node509088", 
+"@target": "node509089"
+}, 
+{
+"@id": "edge509090", 
+"@source": "node509089", 
+"@target": "node509090"
+}, 
+{
+"@id": "edge509091", 
+"@source": "node509089", 
+"@target": "node509091"
+}, 
+{
+"@id": "edge509092", 
+"@source": "node509088", 
+"@target": "node509092"
+}, 
+{
+"@id": "edge509093", 
+"@source": "node509048", 
+"@target": "node509093"
+}, 
+{
+"@id": "edge509094", 
+"@source": "node509047", 
+"@target": "node509094"
+}, 
+{
+"@id": "edge509095", 
+"@source": "node509047", 
+"@target": "node509095"
+}, 
+{
+"@id": "edge509096", 
+"@source": "node509047", 
+"@target": "node509096"
+}, 
+{
+"@id": "edge509097", 
+"@source": "node509096", 
+"@target": "node509097"
+}, 
+{
+"@id": "edge509098", 
+"@source": "node509096", 
+"@target": "node509098"
+}, 
+{
+"@id": "edge509099", 
+"@source": "node509046", 
+"@target": "node509099"
+}, 
+{
+"@id": "edge509100", 
+"@source": "node509045", 
+"@target": "node509100"
+}, 
+{
+"@id": "edge509101", 
+"@source": "node509100", 
+"@target": "node509101"
+}, 
+{
+"@id": "edge509102", 
+"@source": "node509100", 
+"@target": "node509102"
+}
+], 
+"meta": [
+{
+"$": "node509046", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "plant taxa", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node509045", 
+"@root": "true"
+}, 
+{
+"@id": "node509046"
+}, 
+{
+"@id": "node509047"
+}, 
+{
+"@id": "node509048"
+}, 
+{
+"@id": "node509049"
+}, 
+{
+"@id": "node509050"
+}, 
+{
+"@id": "node509051", 
+"@otu": "otu215892"
+}, 
+{
+"@id": "node509052"
+}, 
+{
+"@id": "node509053"
+}, 
+{
+"@id": "node509054"
+}, 
+{
+"@id": "node509055"
+}, 
+{
+"@id": "node509056"
+}, 
+{
+"@id": "node509057", 
+"@otu": "otu215885"
+}, 
+{
+"@id": "node509058", 
+"@otu": "otu215889"
+}, 
+{
+"@id": "node509059", 
+"@otu": "otu215898"
+}, 
+{
+"@id": "node509060", 
+"@otu": "otu215884"
+}, 
+{
+"@id": "node509061", 
+"@otu": "otu215886"
+}, 
+{
+"@id": "node509062", 
+"@otu": "otu215862"
+}, 
+{
+"@id": "node509063", 
+"@otu": "otu215880"
+}, 
+{
+"@id": "node509064", 
+"@otu": "otu215876"
+}, 
+{
+"@id": "node509065", 
+"@otu": "otu215900"
+}, 
+{
+"@id": "node509066", 
+"@otu": "otu215899"
+}, 
+{
+"@id": "node509067", 
+"@otu": "otu215874"
+}, 
+{
+"@id": "node509068", 
+"@otu": "otu215891"
+}, 
+{
+"@id": "node509069", 
+"@otu": "otu215890"
+}, 
+{
+"@id": "node509070", 
+"@otu": "otu215901"
+}, 
+{
+"@id": "node509071", 
+"@otu": "otu215887"
+}, 
+{
+"@id": "node509072", 
+"@otu": "otu215865"
+}, 
+{
+"@id": "node509073", 
+"@otu": "otu215877"
+}, 
+{
+"@id": "node509074", 
+"@otu": "otu215871"
+}, 
+{
+"@id": "node509075", 
+"@otu": "otu215864"
+}, 
+{
+"@id": "node509076", 
+"@otu": "otu215895"
+}, 
+{
+"@id": "node509077", 
+"@otu": "otu215882"
+}, 
+{
+"@id": "node509078", 
+"@otu": "otu215881"
+}, 
+{
+"@id": "node509079"
+}, 
+{
+"@id": "node509080", 
+"@otu": "otu215896"
+}, 
+{
+"@id": "node509081", 
+"@otu": "otu215879"
+}, 
+{
+"@id": "node509082"
+}, 
+{
+"@id": "node509083", 
+"@otu": "otu215868"
+}, 
+{
+"@id": "node509084", 
+"@otu": "otu215867"
+}, 
+{
+"@id": "node509085", 
+"@otu": "otu215893"
+}, 
+{
+"@id": "node509086", 
+"@otu": "otu215878"
+}, 
+{
+"@id": "node509087", 
+"@otu": "otu215883"
+}, 
+{
+"@id": "node509088"
+}, 
+{
+"@id": "node509089"
+}, 
+{
+"@id": "node509090", 
+"@otu": "otu215863"
+}, 
+{
+"@id": "node509091", 
+"@otu": "otu215894"
+}, 
+{
+"@id": "node509092", 
+"@otu": "otu215870"
+}, 
+{
+"@id": "node509093", 
+"@otu": "otu215869"
+}, 
+{
+"@id": "node509094", 
+"@otu": "otu215872"
+}, 
+{
+"@id": "node509095", 
+"@otu": "otu215902"
+}, 
+{
+"@id": "node509096"
+}, 
+{
+"@id": "node509097", 
+"@otu": "otu215875"
+}, 
+{
+"@id": "node509098", 
+"@otu": "otu215866"
+}, 
+{
+"@id": "node509099", 
+"@otu": "otu215873"
+}, 
+{
+"@id": "node509100"
+}, 
+{
+"@id": "node509101", 
+"@otu": "otu215897"
+}, 
+{
+"@id": "node509102", 
+"@otu": "otu215888"
+}
+]
+}, 
+{
+"@about": "#tree1992", 
+"@id": "tree1992", 
+"edge": [
+{
+"@id": "edge509104", 
+"@source": "node509103", 
+"@target": "node509104"
+}, 
+{
+"@id": "edge509105", 
+"@source": "node509104", 
+"@target": "node509105"
+}, 
+{
+"@id": "edge509106", 
+"@source": "node509105", 
+"@target": "node509106"
+}, 
+{
+"@id": "edge509107", 
+"@source": "node509106", 
+"@target": "node509107"
+}, 
+{
+"@id": "edge509108", 
+"@source": "node509107", 
+"@target": "node509108"
+}, 
+{
+"@id": "edge509109", 
+"@source": "node509108", 
+"@target": "node509109"
+}, 
+{
+"@id": "edge509110", 
+"@source": "node509109", 
+"@target": "node509110"
+}, 
+{
+"@id": "edge509111", 
+"@source": "node509110", 
+"@target": "node509111"
+}, 
+{
+"@id": "edge509112", 
+"@source": "node509111", 
+"@target": "node509112"
+}, 
+{
+"@id": "edge509113", 
+"@source": "node509111", 
+"@target": "node509113"
+}, 
+{
+"@id": "edge509114", 
+"@source": "node509111", 
+"@target": "node509114"
+}, 
+{
+"@id": "edge509115", 
+"@source": "node509114", 
+"@target": "node509115"
+}, 
+{
+"@id": "edge509116", 
+"@source": "node509114", 
+"@target": "node509116"
+}, 
+{
+"@id": "edge509117", 
+"@source": "node509114", 
+"@target": "node509117"
+}, 
+{
+"@id": "edge509118", 
+"@source": "node509114", 
+"@target": "node509118"
+}, 
+{
+"@id": "edge509119", 
+"@source": "node509114", 
+"@target": "node509119"
+}, 
+{
+"@id": "edge509120", 
+"@source": "node509111", 
+"@target": "node509120"
+}, 
+{
+"@id": "edge509121", 
+"@source": "node509120", 
+"@target": "node509121"
+}, 
+{
+"@id": "edge509122", 
+"@source": "node509121", 
+"@target": "node509122"
+}, 
+{
+"@id": "edge509123", 
+"@source": "node509122", 
+"@target": "node509123"
+}, 
+{
+"@id": "edge509124", 
+"@source": "node509122", 
+"@target": "node509124"
+}, 
+{
+"@id": "edge509125", 
+"@source": "node509122", 
+"@target": "node509125"
+}, 
+{
+"@id": "edge509126", 
+"@source": "node509122", 
+"@target": "node509126"
+}, 
+{
+"@id": "edge509127", 
+"@source": "node509122", 
+"@target": "node509127"
+}, 
+{
+"@id": "edge509128", 
+"@source": "node509122", 
+"@target": "node509128"
+}, 
+{
+"@id": "edge509129", 
+"@source": "node509122", 
+"@target": "node509129"
+}, 
+{
+"@id": "edge509130", 
+"@source": "node509122", 
+"@target": "node509130"
+}, 
+{
+"@id": "edge509131", 
+"@source": "node509122", 
+"@target": "node509131"
+}, 
+{
+"@id": "edge509132", 
+"@source": "node509122", 
+"@target": "node509132"
+}, 
+{
+"@id": "edge509133", 
+"@source": "node509122", 
+"@target": "node509133"
+}, 
+{
+"@id": "edge509134", 
+"@source": "node509122", 
+"@target": "node509134"
+}, 
+{
+"@id": "edge509135", 
+"@source": "node509122", 
+"@target": "node509135"
+}, 
+{
+"@id": "edge509136", 
+"@source": "node509122", 
+"@target": "node509136"
+}, 
+{
+"@id": "edge509137", 
+"@source": "node509122", 
+"@target": "node509137"
+}, 
+{
+"@id": "edge509138", 
+"@source": "node509122", 
+"@target": "node509138"
+}, 
+{
+"@id": "edge509139", 
+"@source": "node509122", 
+"@target": "node509139"
+}, 
+{
+"@id": "edge509140", 
+"@source": "node509122", 
+"@target": "node509140"
+}, 
+{
+"@id": "edge509141", 
+"@source": "node509122", 
+"@target": "node509141"
+}, 
+{
+"@id": "edge509142", 
+"@source": "node509122", 
+"@target": "node509142"
+}, 
+{
+"@id": "edge509143", 
+"@source": "node509122", 
+"@target": "node509143"
+}, 
+{
+"@id": "edge509144", 
+"@source": "node509122", 
+"@target": "node509144"
+}, 
+{
+"@id": "edge509145", 
+"@source": "node509122", 
+"@target": "node509145"
+}, 
+{
+"@id": "edge509146", 
+"@source": "node509122", 
+"@target": "node509146"
+}, 
+{
+"@id": "edge509147", 
+"@source": "node509122", 
+"@target": "node509147"
+}, 
+{
+"@id": "edge509148", 
+"@source": "node509122", 
+"@target": "node509148"
+}, 
+{
+"@id": "edge509149", 
+"@source": "node509122", 
+"@target": "node509149"
+}, 
+{
+"@id": "edge509150", 
+"@source": "node509122", 
+"@target": "node509150"
+}, 
+{
+"@id": "edge509151", 
+"@source": "node509122", 
+"@target": "node509151"
+}, 
+{
+"@id": "edge509152", 
+"@source": "node509121", 
+"@target": "node509152"
+}, 
+{
+"@id": "edge509153", 
+"@source": "node509121", 
+"@target": "node509153"
+}, 
+{
+"@id": "edge509154", 
+"@source": "node509121", 
+"@target": "node509154"
+}, 
+{
+"@id": "edge509155", 
+"@source": "node509121", 
+"@target": "node509155"
+}, 
+{
+"@id": "edge509156", 
+"@source": "node509121", 
+"@target": "node509156"
+}, 
+{
+"@id": "edge509157", 
+"@source": "node509121", 
+"@target": "node509157"
+}, 
+{
+"@id": "edge509158", 
+"@source": "node509120", 
+"@target": "node509158"
+}, 
+{
+"@id": "edge509159", 
+"@source": "node509120", 
+"@target": "node509159"
+}, 
+{
+"@id": "edge509160", 
+"@source": "node509120", 
+"@target": "node509160"
+}, 
+{
+"@id": "edge509161", 
+"@source": "node509111", 
+"@target": "node509161"
+}, 
+{
+"@id": "edge509162", 
+"@source": "node509111", 
+"@target": "node509162"
+}, 
+{
+"@id": "edge509163", 
+"@source": "node509111", 
+"@target": "node509163"
+}, 
+{
+"@id": "edge509164", 
+"@source": "node509111", 
+"@target": "node509164"
+}, 
+{
+"@id": "edge509165", 
+"@source": "node509111", 
+"@target": "node509165"
+}, 
+{
+"@id": "edge509166", 
+"@source": "node509111", 
+"@target": "node509166"
+}, 
+{
+"@id": "edge509167", 
+"@source": "node509111", 
+"@target": "node509167"
+}, 
+{
+"@id": "edge509168", 
+"@source": "node509111", 
+"@target": "node509168"
+}, 
+{
+"@id": "edge509169", 
+"@source": "node509111", 
+"@target": "node509169"
+}, 
+{
+"@id": "edge509170", 
+"@source": "node509111", 
+"@target": "node509170"
+}, 
+{
+"@id": "edge509171", 
+"@source": "node509110", 
+"@target": "node509171"
+}, 
+{
+"@id": "edge509172", 
+"@source": "node509109", 
+"@target": "node509172"
+}, 
+{
+"@id": "edge509173", 
+"@source": "node509172", 
+"@target": "node509173"
+}, 
+{
+"@id": "edge509174", 
+"@source": "node509172", 
+"@target": "node509174"
+}, 
+{
+"@id": "edge509175", 
+"@source": "node509172", 
+"@target": "node509175"
+}, 
+{
+"@id": "edge509176", 
+"@source": "node509172", 
+"@target": "node509176"
+}, 
+{
+"@id": "edge509177", 
+"@source": "node509176", 
+"@target": "node509177"
+}, 
+{
+"@id": "edge509178", 
+"@source": "node509177", 
+"@target": "node509178"
+}, 
+{
+"@id": "edge509179", 
+"@source": "node509177", 
+"@target": "node509179"
+}, 
+{
+"@id": "edge509180", 
+"@source": "node509177", 
+"@target": "node509180"
+}, 
+{
+"@id": "edge509181", 
+"@source": "node509177", 
+"@target": "node509181"
+}, 
+{
+"@id": "edge509182", 
+"@source": "node509177", 
+"@target": "node509182"
+}, 
+{
+"@id": "edge509183", 
+"@source": "node509177", 
+"@target": "node509183"
+}, 
+{
+"@id": "edge509184", 
+"@source": "node509176", 
+"@target": "node509184"
+}, 
+{
+"@id": "edge509185", 
+"@source": "node509176", 
+"@target": "node509185"
+}, 
+{
+"@id": "edge509186", 
+"@source": "node509176", 
+"@target": "node509186"
+}, 
+{
+"@id": "edge509187", 
+"@source": "node509176", 
+"@target": "node509187"
+}, 
+{
+"@id": "edge509188", 
+"@source": "node509176", 
+"@target": "node509188"
+}, 
+{
+"@id": "edge509189", 
+"@source": "node509172", 
+"@target": "node509189"
+}, 
+{
+"@id": "edge509190", 
+"@source": "node509172", 
+"@target": "node509190"
+}, 
+{
+"@id": "edge509191", 
+"@source": "node509172", 
+"@target": "node509191"
+}, 
+{
+"@id": "edge509192", 
+"@source": "node509172", 
+"@target": "node509192"
+}, 
+{
+"@id": "edge509193", 
+"@source": "node509172", 
+"@target": "node509193"
+}, 
+{
+"@id": "edge509194", 
+"@source": "node509172", 
+"@target": "node509194"
+}, 
+{
+"@id": "edge509195", 
+"@source": "node509109", 
+"@target": "node509195"
+}, 
+{
+"@id": "edge509196", 
+"@source": "node509108", 
+"@target": "node509196"
+}, 
+{
+"@id": "edge509197", 
+"@source": "node509196", 
+"@target": "node509197"
+}, 
+{
+"@id": "edge509198", 
+"@source": "node509196", 
+"@target": "node509198"
+}, 
+{
+"@id": "edge509199", 
+"@source": "node509196", 
+"@target": "node509199"
+}, 
+{
+"@id": "edge509200", 
+"@source": "node509196", 
+"@target": "node509200"
+}, 
+{
+"@id": "edge509201", 
+"@source": "node509107", 
+"@target": "node509201"
+}, 
+{
+"@id": "edge509202", 
+"@source": "node509107", 
+"@target": "node509202"
+}, 
+{
+"@id": "edge509203", 
+"@source": "node509202", 
+"@target": "node509203"
+}, 
+{
+"@id": "edge509204", 
+"@source": "node509203", 
+"@target": "node509204"
+}, 
+{
+"@id": "edge509205", 
+"@source": "node509203", 
+"@target": "node509205"
+}, 
+{
+"@id": "edge509206", 
+"@source": "node509202", 
+"@target": "node509206"
+}, 
+{
+"@id": "edge509207", 
+"@source": "node509202", 
+"@target": "node509207"
+}, 
+{
+"@id": "edge509208", 
+"@source": "node509107", 
+"@target": "node509208"
+}, 
+{
+"@id": "edge509209", 
+"@source": "node509107", 
+"@target": "node509209"
+}, 
+{
+"@id": "edge509210", 
+"@source": "node509107", 
+"@target": "node509210"
+}, 
+{
+"@id": "edge509211", 
+"@source": "node509107", 
+"@target": "node509211"
+}, 
+{
+"@id": "edge509212", 
+"@source": "node509106", 
+"@target": "node509212"
+}, 
+{
+"@id": "edge509213", 
+"@source": "node509105", 
+"@target": "node509213"
+}, 
+{
+"@id": "edge509214", 
+"@source": "node509104", 
+"@target": "node509214"
+}, 
+{
+"@id": "edge509215", 
+"@source": "node509103", 
+"@target": "node509215"
+}, 
+{
+"@id": "edge509216", 
+"@source": "node509215", 
+"@target": "node509216"
+}, 
+{
+"@id": "edge509217", 
+"@source": "node509215", 
+"@target": "node509217"
+}
+], 
+"meta": [
+{
+"$": "plant taxa", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node509103", 
+"@root": "true"
+}, 
+{
+"@id": "node509104"
+}, 
+{
+"@id": "node509105"
+}, 
+{
+"@id": "node509106"
+}, 
+{
+"@id": "node509107"
+}, 
+{
+"@id": "node509108"
+}, 
+{
+"@id": "node509109"
+}, 
+{
+"@id": "node509110"
+}, 
+{
+"@id": "node509111"
+}, 
+{
+"@id": "node509112", 
+"@otu": "otu215986"
+}, 
+{
+"@id": "node509113", 
+"@otu": "otu215949"
+}, 
+{
+"@id": "node509114"
+}, 
+{
+"@id": "node509115", 
+"@otu": "otu215991"
+}, 
+{
+"@id": "node509116", 
+"@otu": "otu215937"
+}, 
+{
+"@id": "node509117", 
+"@otu": "otu215905"
+}, 
+{
+"@id": "node509118", 
+"@otu": "otu215926"
+}, 
+{
+"@id": "node509119", 
+"@otu": "otu215994"
+}, 
+{
+"@id": "node509120"
+}, 
+{
+"@id": "node509121"
+}, 
+{
+"@id": "node509122"
+}, 
+{
+"@id": "node509123", 
+"@otu": "otu215984"
+}, 
+{
+"@id": "node509124", 
+"@otu": "otu215927"
+}, 
+{
+"@id": "node509125", 
+"@otu": "otu215943"
+}, 
+{
+"@id": "node509126", 
+"@otu": "otu215959"
+}, 
+{
+"@id": "node509127", 
+"@otu": "otu215992"
+}, 
+{
+"@id": "node509128", 
+"@otu": "otu215909"
+}, 
+{
+"@id": "node509129", 
+"@otu": "otu215980"
+}, 
+{
+"@id": "node509130", 
+"@otu": "otu215918"
+}, 
+{
+"@id": "node509131", 
+"@otu": "otu215930"
+}, 
+{
+"@id": "node509132", 
+"@otu": "otu215953"
+}, 
+{
+"@id": "node509133", 
+"@otu": "otu215979"
+}, 
+{
+"@id": "node509134", 
+"@otu": "otu215935"
+}, 
+{
+"@id": "node509135", 
+"@otu": "otu215939"
+}, 
+{
+"@id": "node509136", 
+"@otu": "otu215924"
+}, 
+{
+"@id": "node509137", 
+"@otu": "otu215906"
+}, 
+{
+"@id": "node509138", 
+"@otu": "otu215941"
+}, 
+{
+"@id": "node509139", 
+"@otu": "otu215969"
+}, 
+{
+"@id": "node509140", 
+"@otu": "otu215961"
+}, 
+{
+"@id": "node509141", 
+"@otu": "otu215996"
+}, 
+{
+"@id": "node509142", 
+"@otu": "otu215989"
+}, 
+{
+"@id": "node509143", 
+"@otu": "otu215946"
+}, 
+{
+"@id": "node509144", 
+"@otu": "otu215957"
+}, 
+{
+"@id": "node509145", 
+"@otu": "otu215970"
+}, 
+{
+"@id": "node509146", 
+"@otu": "otu215936"
+}, 
+{
+"@id": "node509147", 
+"@otu": "otu215950"
+}, 
+{
+"@id": "node509148", 
+"@otu": "otu215916"
+}, 
+{
+"@id": "node509149", 
+"@otu": "otu215904"
+}, 
+{
+"@id": "node509150", 
+"@otu": "otu215919"
+}, 
+{
+"@id": "node509151", 
+"@otu": "otu215964"
+}, 
+{
+"@id": "node509152", 
+"@otu": "otu215945"
+}, 
+{
+"@id": "node509153", 
+"@otu": "otu215963"
+}, 
+{
+"@id": "node509154", 
+"@otu": "otu215987"
+}, 
+{
+"@id": "node509155", 
+"@otu": "otu215974"
+}, 
+{
+"@id": "node509156", 
+"@otu": "otu215971"
+}, 
+{
+"@id": "node509157", 
+"@otu": "otu215947"
+}, 
+{
+"@id": "node509158", 
+"@otu": "otu215985"
+}, 
+{
+"@id": "node509159", 
+"@otu": "otu215948"
+}, 
+{
+"@id": "node509160", 
+"@otu": "otu215995"
+}, 
+{
+"@id": "node509161", 
+"@otu": "otu215903"
+}, 
+{
+"@id": "node509162", 
+"@otu": "otu215929"
+}, 
+{
+"@id": "node509163", 
+"@otu": "otu215990"
+}, 
+{
+"@id": "node509164", 
+"@otu": "otu215967"
+}, 
+{
+"@id": "node509165", 
+"@otu": "otu215981"
+}, 
+{
+"@id": "node509166", 
+"@otu": "otu215982"
+}, 
+{
+"@id": "node509167", 
+"@otu": "otu215972"
+}, 
+{
+"@id": "node509168", 
+"@otu": "otu215915"
+}, 
+{
+"@id": "node509169", 
+"@otu": "otu215914"
+}, 
+{
+"@id": "node509170", 
+"@otu": "otu215975"
+}, 
+{
+"@id": "node509171", 
+"@otu": "otu215923"
+}, 
+{
+"@id": "node509172"
+}, 
+{
+"@id": "node509173", 
+"@otu": "otu215921"
+}, 
+{
+"@id": "node509174", 
+"@otu": "otu215973"
+}, 
+{
+"@id": "node509175", 
+"@otu": "otu215944"
+}, 
+{
+"@id": "node509176"
+}, 
+{
+"@id": "node509177"
+}, 
+{
+"@id": "node509178", 
+"@otu": "otu215911"
+}, 
+{
+"@id": "node509179", 
+"@otu": "otu215933"
+}, 
+{
+"@id": "node509180", 
+"@otu": "otu215951"
+}, 
+{
+"@id": "node509181", 
+"@otu": "otu215962"
+}, 
+{
+"@id": "node509182", 
+"@otu": "otu215958"
+}, 
+{
+"@id": "node509183", 
+"@otu": "otu215932"
+}, 
+{
+"@id": "node509184", 
+"@otu": "otu215913"
+}, 
+{
+"@id": "node509185", 
+"@otu": "otu215965"
+}, 
+{
+"@id": "node509186", 
+"@otu": "otu215917"
+}, 
+{
+"@id": "node509187", 
+"@otu": "otu215997"
+}, 
+{
+"@id": "node509188", 
+"@otu": "otu215956"
+}, 
+{
+"@id": "node509189", 
+"@otu": "otu215910"
+}, 
+{
+"@id": "node509190", 
+"@otu": "otu215942"
+}, 
+{
+"@id": "node509191", 
+"@otu": "otu215955"
+}, 
+{
+"@id": "node509192", 
+"@otu": "otu215954"
+}, 
+{
+"@id": "node509193", 
+"@otu": "otu215968"
+}, 
+{
+"@id": "node509194", 
+"@otu": "otu215940"
+}, 
+{
+"@id": "node509195", 
+"@otu": "otu215920"
+}, 
+{
+"@id": "node509196"
+}, 
+{
+"@id": "node509197", 
+"@otu": "otu215922"
+}, 
+{
+"@id": "node509198", 
+"@otu": "otu215978"
+}, 
+{
+"@id": "node509199", 
+"@otu": "otu215908"
+}, 
+{
+"@id": "node509200", 
+"@otu": "otu215925"
+}, 
+{
+"@id": "node509201", 
+"@otu": "otu215983"
+}, 
+{
+"@id": "node509202"
+}, 
+{
+"@id": "node509203"
+}, 
+{
+"@id": "node509204", 
+"@otu": "otu215931"
+}, 
+{
+"@id": "node509205", 
+"@otu": "otu215977"
+}, 
+{
+"@id": "node509206", 
+"@otu": "otu215976"
+}, 
+{
+"@id": "node509207", 
+"@otu": "otu215988"
+}, 
+{
+"@id": "node509208", 
+"@otu": "otu215960"
+}, 
+{
+"@id": "node509209", 
+"@otu": "otu215993"
+}, 
+{
+"@id": "node509210", 
+"@otu": "otu215938"
+}, 
+{
+"@id": "node509211", 
+"@otu": "otu215966"
+}, 
+{
+"@id": "node509212", 
+"@otu": "otu215928"
+}, 
+{
+"@id": "node509213", 
+"@otu": "otu215907"
+}, 
+{
+"@id": "node509214", 
+"@otu": "otu215952"
+}, 
+{
+"@id": "node509215"
+}, 
+{
+"@id": "node509216", 
+"@otu": "otu215934"
+}, 
+{
+"@id": "node509217", 
+"@otu": "otu215912"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,974 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Forest, F. [et al. 2005], Savolainen, V., Chase, M. W., Lupia, R., Bruneau, A., & Crane, P. R. 2005. Teasing apart molecular- versus fossil-based error estimates when dating phylogenetic trees: A case study in the birch family (Betulaceae). Syst. Bot. 30: 118-133.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1600/0363644053661850", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1208", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "610", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2004, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 155125, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus610", 
+"otu": [
+{
+"@about": "#otu176865", 
+"@id": "otu176865", 
+"@label": "Betula nigra", 
+"meta": [
+{
+"$": 267696, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Betula nigra", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176866", 
+"@id": "otu176866", 
+"@label": "Betula pendula", 
+"meta": [
+{
+"$": 267719, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Betula pendula", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176867", 
+"@id": "otu176867", 
+"@label": "Alnus nitida", 
+"meta": [
+{
+"$": 353450, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alnus nitida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176868", 
+"@id": "otu176868", 
+"@label": "Alnus maritima", 
+"meta": [
+{
+"$": 526375, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alnus maritima", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176869", 
+"@id": "otu176869", 
+"@label": "Carpinus cordata", 
+"meta": [
+{
+"$": 799877, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carpinus cordata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176870", 
+"@id": "otu176870", 
+"@label": "Betula populifolia", 
+"meta": [
+{
+"$": 46581, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Betula populifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176871", 
+"@id": "otu176871", 
+"@label": "Alnus cremastogyne", 
+"meta": [
+{
+"$": 939699, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alnus cremastogyne", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176872", 
+"@id": "otu176872", 
+"@label": "Betula insignis", 
+"meta": [
+{
+"$": 921956, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Betula insignis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176873", 
+"@id": "otu176873", 
+"@label": "Alnus incana rugosa", 
+"meta": [
+{
+"$": 66025, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alnus incana rugosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176874", 
+"@id": "otu176874", 
+"@label": "Carpinus caroliniana subsp. virginiana", 
+"meta": [
+{
+"$": 324980, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carpinus caroliniana virginiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176875", 
+"@id": "otu176875", 
+"@label": "Carpinus japonica", 
+"meta": [
+{
+"$": 864523, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carpinus japonica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176876", 
+"@id": "otu176876", 
+"@label": "Corylus ferox", 
+"meta": [
+{
+"$": 747662, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Corylus ferox", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176877", 
+"@id": "otu176877", 
+"@label": "Alnus acuminata", 
+"meta": [
+{
+"$": 117369, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alnus acuminata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176878", 
+"@id": "otu176878", 
+"@label": "Betula pumila", 
+"meta": [
+{
+"$": 921959, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Betula pumila", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176879", 
+"@id": "otu176879", 
+"@label": "Alnus viridis subsp. crispa", 
+"meta": [
+{
+"$": 791101, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alnus viridis crispa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176880", 
+"@id": "otu176880", 
+"@label": "Carpinus betulus", 
+"meta": [
+{
+"$": 466468, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carpinus betulus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176881", 
+"@id": "otu176881", 
+"@label": "Carpinus fangiana", 
+"meta": [
+{
+"$": 785459, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Carpinus fangiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176882", 
+"@id": "otu176882", 
+"@label": "Betula humilis", 
+"meta": [
+{
+"$": 567478, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Betula humilis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176883", 
+"@id": "otu176883", 
+"@label": "Ticodendron incognitum", 
+"meta": [
+{
+"$": 71491, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ticodendron incognitum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176884", 
+"@id": "otu176884", 
+"@label": "Corylus americana", 
+"meta": [
+{
+"$": 731679, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Corylus americana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176885", 
+"@id": "otu176885", 
+"@label": "Ostryopsis davidiana", 
+"meta": [
+{
+"$": 274190, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ostryopsis davidiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176886", 
+"@id": "otu176886", 
+"@label": "Corylus colurna", 
+"meta": [
+{
+"$": 182954, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Corylus colurna", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176887", 
+"@id": "otu176887", 
+"@label": "Corylus maxima", 
+"meta": [
+{
+"$": 747675, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Corylus maxima", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176888", 
+"@id": "otu176888", 
+"@label": "Ostrya japonica", 
+"meta": [
+{
+"$": 389019, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ostry japonica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176889", 
+"@id": "otu176889", 
+"@label": "Betula alnoides", 
+"meta": [
+{
+"$": 921963, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Betula alnoides", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176890", 
+"@id": "otu176890", 
+"@label": "Ostrya virginiana", 
+"meta": [
+{
+"$": 747780, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ostrya virginiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu176891", 
+"@id": "otu176891", 
+"@label": "Corylus cornuta subsp. cornuta", 
+"meta": [
+{
+"$": 747661, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Corylus cornuta cornuta", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees610", 
+"@otus": "otus610", 
+"tree": [
+{
+"@about": "#tree5337", 
+"@id": "tree5337", 
+"edge": [
+{
+"@id": "edge923840", 
+"@source": "node923839", 
+"@target": "node923840"
+}, 
+{
+"@id": "edge923841", 
+"@source": "node923840", 
+"@target": "node923841"
+}, 
+{
+"@id": "edge923842", 
+"@source": "node923841", 
+"@target": "node923842"
+}, 
+{
+"@id": "edge923843", 
+"@source": "node923842", 
+"@target": "node923843"
+}, 
+{
+"@id": "edge923844", 
+"@source": "node923843", 
+"@target": "node923844"
+}, 
+{
+"@id": "edge923845", 
+"@source": "node923844", 
+"@target": "node923845"
+}, 
+{
+"@id": "edge923846", 
+"@source": "node923845", 
+"@target": "node923846"
+}, 
+{
+"@id": "edge923847", 
+"@source": "node923845", 
+"@target": "node923847"
+}, 
+{
+"@id": "edge923848", 
+"@source": "node923844", 
+"@target": "node923848"
+}, 
+{
+"@id": "edge923849", 
+"@source": "node923843", 
+"@target": "node923849"
+}, 
+{
+"@id": "edge923850", 
+"@source": "node923842", 
+"@target": "node923850"
+}, 
+{
+"@id": "edge923851", 
+"@source": "node923841", 
+"@target": "node923851"
+}, 
+{
+"@id": "edge923852", 
+"@source": "node923851", 
+"@target": "node923852"
+}, 
+{
+"@id": "edge923853", 
+"@source": "node923851", 
+"@target": "node923853"
+}, 
+{
+"@id": "edge923854", 
+"@source": "node923853", 
+"@target": "node923854"
+}, 
+{
+"@id": "edge923855", 
+"@source": "node923854", 
+"@target": "node923855"
+}, 
+{
+"@id": "edge923856", 
+"@source": "node923855", 
+"@target": "node923856"
+}, 
+{
+"@id": "edge923857", 
+"@source": "node923855", 
+"@target": "node923857"
+}, 
+{
+"@id": "edge923858", 
+"@source": "node923854", 
+"@target": "node923858"
+}, 
+{
+"@id": "edge923859", 
+"@source": "node923858", 
+"@target": "node923859"
+}, 
+{
+"@id": "edge923860", 
+"@source": "node923859", 
+"@target": "node923860"
+}, 
+{
+"@id": "edge923861", 
+"@source": "node923859", 
+"@target": "node923861"
+}, 
+{
+"@id": "edge923862", 
+"@source": "node923858", 
+"@target": "node923862"
+}, 
+{
+"@id": "edge923863", 
+"@source": "node923853", 
+"@target": "node923863"
+}, 
+{
+"@id": "edge923864", 
+"@source": "node923863", 
+"@target": "node923864"
+}, 
+{
+"@id": "edge923865", 
+"@source": "node923863", 
+"@target": "node923865"
+}, 
+{
+"@id": "edge923866", 
+"@source": "node923840", 
+"@target": "node923866"
+}, 
+{
+"@id": "edge923867", 
+"@source": "node923866", 
+"@target": "node923867"
+}, 
+{
+"@id": "edge923868", 
+"@source": "node923867", 
+"@target": "node923868"
+}, 
+{
+"@id": "edge923869", 
+"@source": "node923868", 
+"@target": "node923869"
+}, 
+{
+"@id": "edge923870", 
+"@source": "node923869", 
+"@target": "node923870"
+}, 
+{
+"@id": "edge923871", 
+"@source": "node923870", 
+"@target": "node923871"
+}, 
+{
+"@id": "edge923872", 
+"@source": "node923870", 
+"@target": "node923872"
+}, 
+{
+"@id": "edge923873", 
+"@source": "node923869", 
+"@target": "node923873"
+}, 
+{
+"@id": "edge923874", 
+"@source": "node923873", 
+"@target": "node923874"
+}, 
+{
+"@id": "edge923875", 
+"@source": "node923873", 
+"@target": "node923875"
+}, 
+{
+"@id": "edge923876", 
+"@source": "node923868", 
+"@target": "node923876"
+}, 
+{
+"@id": "edge923877", 
+"@source": "node923867", 
+"@target": "node923877"
+}, 
+{
+"@id": "edge923878", 
+"@source": "node923866", 
+"@target": "node923878"
+}, 
+{
+"@id": "edge923879", 
+"@source": "node923878", 
+"@target": "node923879"
+}, 
+{
+"@id": "edge923880", 
+"@source": "node923879", 
+"@target": "node923880"
+}, 
+{
+"@id": "edge923881", 
+"@source": "node923880", 
+"@target": "node923881"
+}, 
+{
+"@id": "edge923882", 
+"@source": "node923880", 
+"@target": "node923882"
+}, 
+{
+"@id": "edge923883", 
+"@source": "node923880", 
+"@target": "node923883"
+}, 
+{
+"@id": "edge923884", 
+"@source": "node923880", 
+"@target": "node923884"
+}, 
+{
+"@id": "edge923885", 
+"@source": "node923884", 
+"@target": "node923885"
+}, 
+{
+"@id": "edge923886", 
+"@source": "node923884", 
+"@target": "node923886"
+}, 
+{
+"@id": "edge923887", 
+"@source": "node923879", 
+"@target": "node923887"
+}, 
+{
+"@id": "edge923888", 
+"@source": "node923878", 
+"@target": "node923888"
+}, 
+{
+"@id": "edge923889", 
+"@source": "node923839", 
+"@target": "node923889"
+}
+], 
+"meta": [
+{
+"$": "node923840", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node923839", 
+"@root": "true"
+}, 
+{
+"@id": "node923840"
+}, 
+{
+"@id": "node923841"
+}, 
+{
+"@id": "node923842"
+}, 
+{
+"@id": "node923843"
+}, 
+{
+"@id": "node923844"
+}, 
+{
+"@id": "node923845"
+}, 
+{
+"@id": "node923846", 
+"@otu": "otu176887"
+}, 
+{
+"@id": "node923847", 
+"@otu": "otu176884"
+}, 
+{
+"@id": "node923848", 
+"@otu": "otu176886"
+}, 
+{
+"@id": "node923849", 
+"@otu": "otu176891"
+}, 
+{
+"@id": "node923850", 
+"@otu": "otu176876"
+}, 
+{
+"@id": "node923851"
+}, 
+{
+"@id": "node923852", 
+"@otu": "otu176885"
+}, 
+{
+"@id": "node923853"
+}, 
+{
+"@id": "node923854"
+}, 
+{
+"@id": "node923855"
+}, 
+{
+"@id": "node923856", 
+"@otu": "otu176881"
+}, 
+{
+"@id": "node923857", 
+"@otu": "otu176869"
+}, 
+{
+"@id": "node923858"
+}, 
+{
+"@id": "node923859"
+}, 
+{
+"@id": "node923860", 
+"@otu": "otu176874"
+}, 
+{
+"@id": "node923861", 
+"@otu": "otu176880"
+}, 
+{
+"@id": "node923862", 
+"@otu": "otu176875"
+}, 
+{
+"@id": "node923863"
+}, 
+{
+"@id": "node923864", 
+"@otu": "otu176888"
+}, 
+{
+"@id": "node923865", 
+"@otu": "otu176890"
+}, 
+{
+"@id": "node923866"
+}, 
+{
+"@id": "node923867"
+}, 
+{
+"@id": "node923868"
+}, 
+{
+"@id": "node923869"
+}, 
+{
+"@id": "node923870"
+}, 
+{
+"@id": "node923871", 
+"@otu": "otu176867"
+}, 
+{
+"@id": "node923872", 
+"@otu": "otu176871"
+}, 
+{
+"@id": "node923873"
+}, 
+{
+"@id": "node923874", 
+"@otu": "otu176873"
+}, 
+{
+"@id": "node923875", 
+"@otu": "otu176877"
+}, 
+{
+"@id": "node923876", 
+"@otu": "otu176879"
+}, 
+{
+"@id": "node923877", 
+"@otu": "otu176868"
+}, 
+{
+"@id": "node923878"
+}, 
+{
+"@id": "node923879"
+}, 
+{
+"@id": "node923880"
+}, 
+{
+"@id": "node923881", 
+"@otu": "otu176889"
+}, 
+{
+"@id": "node923882", 
+"@otu": "otu176878"
+}, 
+{
+"@id": "node923883", 
+"@otu": "otu176882"
+}, 
+{
+"@id": "node923884"
+}, 
+{
+"@id": "node923885", 
+"@otu": "otu176870"
+}, 
+{
+"@id": "node923886", 
+"@otu": "otu176866"
+}, 
+{
+"@id": "node923887", 
+"@otu": "otu176865"
+}, 
+{
+"@id": "node923888", 
+"@otu": "otu176872"
+}, 
+{
+"@id": "node923889", 
+"@otu": "otu176883"
+}
+]
+}
+]
+}
+}
+}

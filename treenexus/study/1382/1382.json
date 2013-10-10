@@ -1,0 +1,610 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Lee S., Lee I., & Suh Y. 2005. Molecular evidence for recognizing Antithamnion sparsum (Ceramiales, Rhodophyta) at the species level. Phycologia, 44: 530-535.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2216/0031-8884(2005)44[530:MEFRAS]2.0.CO;2", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Jiabin Deng", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1511", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1382", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2005, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1305568, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "cpDNA & nrDNA", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1382", 
+"otu": [
+{
+"@about": "#otu247383", 
+"@id": "otu247383", 
+"@label": "Antithamnionella", 
+"meta": [
+{
+"$": 1037139, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnionella sp ATN", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247384", 
+"@id": "otu247384", 
+"@label": "Antithamnion aglandum", 
+"meta": [
+{
+"$": 238502, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion aglandum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247385", 
+"@id": "otu247385", 
+"@label": "Antithamnion defectum", 
+"meta": [
+{
+"$": 91316, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion defectum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247386", 
+"@id": "otu247386", 
+"@label": "Antithamnion sparsum", 
+"meta": [
+{
+"$": 1037130, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion sparsum ASM", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247387", 
+"@id": "otu247387", 
+"@label": "Antithamnion sparsum", 
+"meta": [
+{
+"$": 1037130, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion sparsum ASW", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247388", 
+"@id": "otu247388", 
+"@label": "Antithamnion densum", 
+"meta": [
+{
+"$": 91315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion densum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247389", 
+"@id": "otu247389", 
+"@label": "Antithamnion nipponicum", 
+"meta": [
+{
+"$": 238511, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion nipponicum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247390", 
+"@id": "otu247390", 
+"@label": "Pterothamnion yezoense", 
+"meta": [
+{
+"$": 403533, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Platythamnion yezoense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247391", 
+"@id": "otu247391", 
+"@label": "Antithamnion sparsum", 
+"meta": [
+{
+"$": 1037130, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion sparsum ASB", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247392", 
+"@id": "otu247392", 
+"@label": "Antithamnion callocladum", 
+"meta": [
+{
+"$": 238503, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion callocladum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247393", 
+"@id": "otu247393", 
+"@label": "Antithamnion kylinii", 
+"meta": [
+{
+"$": 238510, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithamnion kylinii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu247394", 
+"@id": "otu247394", 
+"@label": "Antithamnion densum", 
+"meta": [
+{
+"$": 91315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antithmanion densum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1382", 
+"@otus": "otus1382", 
+"tree": [
+{
+"@id": "tree2762", 
+"edge": [
+{
+"@id": "edge602177", 
+"@source": "node602176", 
+"@target": "node602177"
+}, 
+{
+"@id": "edge602178", 
+"@source": "node602177", 
+"@target": "node602178"
+}, 
+{
+"@id": "edge602179", 
+"@source": "node602178", 
+"@target": "node602179"
+}, 
+{
+"@id": "edge602180", 
+"@source": "node602179", 
+"@target": "node602180"
+}, 
+{
+"@id": "edge602181", 
+"@source": "node602180", 
+"@target": "node602181"
+}, 
+{
+"@id": "edge602182", 
+"@source": "node602180", 
+"@target": "node602182"
+}, 
+{
+"@id": "edge602183", 
+"@source": "node602179", 
+"@target": "node602183"
+}, 
+{
+"@id": "edge602184", 
+"@source": "node602178", 
+"@target": "node602184"
+}, 
+{
+"@id": "edge602185", 
+"@source": "node602184", 
+"@target": "node602185"
+}, 
+{
+"@id": "edge602186", 
+"@source": "node602185", 
+"@target": "node602186"
+}, 
+{
+"@id": "edge602187", 
+"@source": "node602185", 
+"@target": "node602187"
+}, 
+{
+"@id": "edge602188", 
+"@source": "node602185", 
+"@target": "node602188"
+}, 
+{
+"@id": "edge602189", 
+"@source": "node602184", 
+"@target": "node602189"
+}, 
+{
+"@id": "edge602190", 
+"@source": "node602184", 
+"@target": "node602190"
+}, 
+{
+"@id": "edge602191", 
+"@source": "node602184", 
+"@target": "node602191"
+}, 
+{
+"@id": "edge602192", 
+"@source": "node602177", 
+"@target": "node602192"
+}, 
+{
+"@id": "edge602193", 
+"@source": "node602176", 
+"@target": "node602193"
+}
+], 
+"node": [
+{
+"@id": "node602176", 
+"@root": "true"
+}, 
+{
+"@id": "node602177"
+}, 
+{
+"@id": "node602178"
+}, 
+{
+"@id": "node602179"
+}, 
+{
+"@id": "node602180"
+}, 
+{
+"@id": "node602181", 
+"@otu": "otu247384"
+}, 
+{
+"@id": "node602182", 
+"@otu": "otu247389"
+}, 
+{
+"@id": "node602183", 
+"@otu": "otu247392"
+}, 
+{
+"@id": "node602184"
+}, 
+{
+"@id": "node602185"
+}, 
+{
+"@id": "node602186", 
+"@otu": "otu247387"
+}, 
+{
+"@id": "node602187", 
+"@otu": "otu247391"
+}, 
+{
+"@id": "node602188", 
+"@otu": "otu247386"
+}, 
+{
+"@id": "node602189", 
+"@otu": "otu247385"
+}, 
+{
+"@id": "node602190", 
+"@otu": "otu247393"
+}, 
+{
+"@id": "node602191", 
+"@otu": "otu247388"
+}, 
+{
+"@id": "node602192", 
+"@otu": "otu247390"
+}, 
+{
+"@id": "node602193", 
+"@otu": "otu247383"
+}
+]
+}, 
+{
+"@about": "#tree2763", 
+"@id": "tree2763", 
+"edge": [
+{
+"@id": "edge602195", 
+"@source": "node602194", 
+"@target": "node602195"
+}, 
+{
+"@id": "edge602196", 
+"@source": "node602195", 
+"@target": "node602196"
+}, 
+{
+"@id": "edge602197", 
+"@source": "node602196", 
+"@target": "node602197"
+}, 
+{
+"@id": "edge602198", 
+"@source": "node602197", 
+"@target": "node602198"
+}, 
+{
+"@id": "edge602199", 
+"@source": "node602197", 
+"@target": "node602199"
+}, 
+{
+"@id": "edge602200", 
+"@source": "node602199", 
+"@target": "node602200"
+}, 
+{
+"@id": "edge602201", 
+"@source": "node602199", 
+"@target": "node602201"
+}, 
+{
+"@id": "edge602202", 
+"@source": "node602196", 
+"@target": "node602202"
+}, 
+{
+"@id": "edge602203", 
+"@source": "node602202", 
+"@target": "node602203"
+}, 
+{
+"@id": "edge602204", 
+"@source": "node602203", 
+"@target": "node602204"
+}, 
+{
+"@id": "edge602205", 
+"@source": "node602204", 
+"@target": "node602205"
+}, 
+{
+"@id": "edge602206", 
+"@source": "node602204", 
+"@target": "node602206"
+}, 
+{
+"@id": "edge602207", 
+"@source": "node602204", 
+"@target": "node602207"
+}, 
+{
+"@id": "edge602208", 
+"@source": "node602204", 
+"@target": "node602208"
+}, 
+{
+"@id": "edge602209", 
+"@source": "node602203", 
+"@target": "node602209"
+}, 
+{
+"@id": "edge602210", 
+"@source": "node602202", 
+"@target": "node602210"
+}, 
+{
+"@id": "edge602211", 
+"@source": "node602195", 
+"@target": "node602211"
+}, 
+{
+"@id": "edge602212", 
+"@source": "node602194", 
+"@target": "node602212"
+}
+], 
+"meta": [
+{
+"$": "node602196", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node602194", 
+"@root": "true"
+}, 
+{
+"@id": "node602195"
+}, 
+{
+"@id": "node602196"
+}, 
+{
+"@id": "node602197"
+}, 
+{
+"@id": "node602198", 
+"@otu": "otu247384"
+}, 
+{
+"@id": "node602199"
+}, 
+{
+"@id": "node602200", 
+"@otu": "otu247389"
+}, 
+{
+"@id": "node602201", 
+"@otu": "otu247392"
+}, 
+{
+"@id": "node602202"
+}, 
+{
+"@id": "node602203"
+}, 
+{
+"@id": "node602204"
+}, 
+{
+"@id": "node602205", 
+"@otu": "otu247387"
+}, 
+{
+"@id": "node602206", 
+"@otu": "otu247391"
+}, 
+{
+"@id": "node602207", 
+"@otu": "otu247386"
+}, 
+{
+"@id": "node602208", 
+"@otu": "otu247385"
+}, 
+{
+"@id": "node602209", 
+"@otu": "otu247393"
+}, 
+{
+"@id": "node602210", 
+"@otu": "otu247394"
+}, 
+{
+"@id": "node602211", 
+"@otu": "otu247390"
+}, 
+{
+"@id": "node602212", 
+"@otu": "otu247383"
+}
+]
+}
+]
+}
+}
+}

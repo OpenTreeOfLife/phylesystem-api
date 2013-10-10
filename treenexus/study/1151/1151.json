@@ -1,0 +1,1163 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Walker, Donald M., et al. \"New molecular markers for fungal phylogenetics: Two genes for species-level systematics in the Sordariomycetes (Ascomycota).\" Molecular Phylogenetics and Evolution (2012). Volume 64, Issue 3, Pages 500\u2013512", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.ympev.2012.05.005", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "1151", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2012, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2062150, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ML", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "FG1093", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MS204", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1151", 
+"otu": [
+{
+"@about": "#otu227565", 
+"@id": "otu227565", 
+"@label": "Ophiognomonia setacea", 
+"meta": [
+{
+"$": 822575, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "DMW310.1 Ophiognomonia setacea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227566", 
+"@id": "otu227566", 
+"@label": "Sirococcus tsugae", 
+"meta": [
+{
+"$": 1012674, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "JB11.10.09.06 Sirococcus tsugae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227567", 
+"@id": "otu227567", 
+"@label": "Sirococcus conigenus", 
+"meta": [
+{
+"$": 823197, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS113.75 Sirococcus conigenus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227568", 
+"@id": "otu227568", 
+"@label": "Gnomoniopsis idaeicola", 
+"meta": [
+{
+"$": 291773, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "DMW98.2 Gnomoniopsis idaeicola", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227569", 
+"@id": "otu227569", 
+"@label": "Gnomoniopsis macounii", 
+"meta": [
+{
+"$": 291757, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS 121468 Gnomoniopsis macounii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227570", 
+"@id": "otu227570", 
+"@label": "Gnomoniopsis fructicola", 
+"meta": [
+{
+"$": 291746, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS208.34 Gnomoniopsis fructicola", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227571", 
+"@id": "otu227571", 
+"@label": "Gnomoniopsis chamaemori", 
+"meta": [
+{
+"$": 536981, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS804.79 Gnomoniopsis chamaemori", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227572", 
+"@id": "otu227572", 
+"@label": "Gnomoniopsis occulta", 
+"meta": [
+{
+"$": 291770, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "DMW206.1 Gnomoniopsis occulta", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227573", 
+"@id": "otu227573", 
+"@label": "Gnomoniopsis alderdunensis", 
+"meta": [
+{
+"$": 864367, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "DMW72.1 Gnomoniopsis alderdunensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227574", 
+"@id": "otu227574", 
+"@label": "Gnomoniopsis sanguisorbae", 
+"meta": [
+{
+"$": 291752, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS858.79 Gnomoniopsis sanguisorbae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227575", 
+"@id": "otu227575", 
+"@label": "Gnomoniopsis comari", 
+"meta": [
+{
+"$": 760530, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS806.79 Gnomoniopsis comari", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227576", 
+"@id": "otu227576", 
+"@label": "Gnomoniopsis tormentillae", 
+"meta": [
+{
+"$": 866554, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS904.79 Gnomoniopsis tormentillae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227577", 
+"@id": "otu227577", 
+"@label": "Gnomoniopsis clavulata", 
+"meta": [
+{
+"$": 291762, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS121255 Gnomoniopsis clavulata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227578", 
+"@id": "otu227578", 
+"@label": "Gnomoniopsis", 
+"meta": [
+{
+"$": 632069, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS123202 Gnomoniopsis paraclavulata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227579", 
+"@id": "otu227579", 
+"@label": "Plagiostoma", 
+"meta": [
+{
+"$": 822581, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "DMW286.1 Plagiostoma sp", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227580", 
+"@id": "otu227580", 
+"@label": "Ophiognomonia gei-montani", 
+"meta": [
+{
+"$": 84841, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS821.79 Ophiognomonia geimontani", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227581", 
+"@id": "otu227581", 
+"@label": "Ophiognomonia balsamiferae", 
+"meta": [
+{
+"$": 336876, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "AR4320 Ophiognomonia balsamiferae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227582", 
+"@id": "otu227582", 
+"@label": "Ophiognomonia alni-viridis", 
+"meta": [
+{
+"$": 842996, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LCM494 Ophiognomonia alniviridis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227583", 
+"@id": "otu227583", 
+"@label": "Ophiognomonia intermedia", 
+"meta": [
+{
+"$": 767620, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "AR4147 Ophiognomonia intermedia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227584", 
+"@id": "otu227584", 
+"@label": "Ophiognomonia melanostyla", 
+"meta": [
+{
+"$": 764814, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LCM389.01 Ophiognomonia melanostyla", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227585", 
+"@id": "otu227585", 
+"@label": "Ophiognomonia sassafras", 
+"meta": [
+{
+"$": 336848, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "AR4284 Ophiognomonia sassafras", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227586", 
+"@id": "otu227586", 
+"@label": "Ophiognomonia padicola", 
+"meta": [
+{
+"$": 543878, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS845.79 Ophiognomonia padicola", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227587", 
+"@id": "otu227587", 
+"@label": "Ophiognomonia rosae", 
+"meta": [
+{
+"$": 336312, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "DMW108.2 Ophiognomonia rosae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227588", 
+"@id": "otu227588", 
+"@label": "Ophiognomonia vasiljevae", 
+"meta": [
+{
+"$": 336870, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "DMW303.3 Ophiognomonia vasiljevae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227589", 
+"@id": "otu227589", 
+"@label": "Ophiognomonia ischnostyla", 
+"meta": [
+{
+"$": 654995, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CBS837.79 Ophiognomonia ischnostyla", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227590", 
+"@id": "otu227590", 
+"@label": "Ophiognomonia", 
+"meta": [
+{
+"$": 511740, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "AR4295 Ophiognomonia nervisequa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227591", 
+"@id": "otu227591", 
+"@label": "Ophiognomonia setacea", 
+"meta": [
+{
+"$": 822575, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "DMW291.1 Ophiognomonia setacea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu227592", 
+"@id": "otu227592", 
+"@label": "Ophiognomonia pseudoclavulata", 
+"meta": [
+{
+"$": 336879, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "AR4059 Ophiognomonia pseudoclavulata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1151", 
+"@otus": "otus1151", 
+"tree": [
+{
+"@about": "#tree2332", 
+"@id": "tree2332", 
+"edge": [
+{
+"@id": "edge552692", 
+"@length": 0.18851205, 
+"@source": "node552691", 
+"@target": "node552692"
+}, 
+{
+"@id": "edge552693", 
+"@length": 0.12702434, 
+"@source": "node552691", 
+"@target": "node552693"
+}, 
+{
+"@id": "edge552694", 
+"@length": 0.11999707, 
+"@source": "node552693", 
+"@target": "node552694"
+}, 
+{
+"@id": "edge552695", 
+"@length": 0.04212641, 
+"@source": "node552694", 
+"@target": "node552695"
+}, 
+{
+"@id": "edge552696", 
+"@length": 0.04468315, 
+"@source": "node552694", 
+"@target": "node552696"
+}, 
+{
+"@id": "edge552697", 
+"@length": 0.06881125, 
+"@source": "node552693", 
+"@target": "node552697"
+}, 
+{
+"@id": "edge552698", 
+"@length": 0.04693658, 
+"@source": "node552697", 
+"@target": "node552698"
+}, 
+{
+"@id": "edge552699", 
+"@length": 0.06818979, 
+"@source": "node552698", 
+"@target": "node552699"
+}, 
+{
+"@id": "edge552700", 
+"@length": 0.00707757, 
+"@source": "node552698", 
+"@target": "node552700"
+}, 
+{
+"@id": "edge552701", 
+"@length": 0.03539708, 
+"@source": "node552700", 
+"@target": "node552701"
+}, 
+{
+"@id": "edge552702", 
+"@length": 0.01403795, 
+"@source": "node552700", 
+"@target": "node552702"
+}, 
+{
+"@id": "edge552703", 
+"@length": 0.00461798, 
+"@source": "node552702", 
+"@target": "node552703"
+}, 
+{
+"@id": "edge552704", 
+"@length": 0.09627895, 
+"@source": "node552703", 
+"@target": "node552704"
+}, 
+{
+"@id": "edge552705", 
+"@length": 0.01153165, 
+"@source": "node552703", 
+"@target": "node552705"
+}, 
+{
+"@id": "edge552706", 
+"@length": 0.00404675, 
+"@source": "node552705", 
+"@target": "node552706"
+}, 
+{
+"@id": "edge552707", 
+"@length": 0.03486304, 
+"@source": "node552706", 
+"@target": "node552707"
+}, 
+{
+"@id": "edge552708", 
+"@length": 0.02616521, 
+"@source": "node552706", 
+"@target": "node552708"
+}, 
+{
+"@id": "edge552709", 
+"@length": 0.0324929, 
+"@source": "node552705", 
+"@target": "node552709"
+}, 
+{
+"@id": "edge552710", 
+"@length": 0.00300578, 
+"@source": "node552702", 
+"@target": "node552710"
+}, 
+{
+"@id": "edge552711", 
+"@length": 0.05433227, 
+"@source": "node552710", 
+"@target": "node552711"
+}, 
+{
+"@id": "edge552712", 
+"@length": 0.00930954, 
+"@source": "node552710", 
+"@target": "node552712"
+}, 
+{
+"@id": "edge552713", 
+"@length": 0.03335514, 
+"@source": "node552712", 
+"@target": "node552713"
+}, 
+{
+"@id": "edge552714", 
+"@length": 0.03067325, 
+"@source": "node552712", 
+"@target": "node552714"
+}, 
+{
+"@id": "edge552715", 
+"@length": 0.02219156, 
+"@source": "node552697", 
+"@target": "node552715"
+}, 
+{
+"@id": "edge552716", 
+"@length": 0.09928602, 
+"@source": "node552715", 
+"@target": "node552716"
+}, 
+{
+"@id": "edge552717", 
+"@length": 0.08181354, 
+"@source": "node552715", 
+"@target": "node552717"
+}, 
+{
+"@id": "edge552718", 
+"@length": 0.15386126, 
+"@source": "node552691", 
+"@target": "node552718"
+}
+], 
+"meta": [
+{
+"$": "node552693", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node552691", 
+"@root": "true"
+}, 
+{
+"@id": "node552692", 
+"@otu": "otu227565"
+}, 
+{
+"@id": "node552693"
+}, 
+{
+"@id": "node552694"
+}, 
+{
+"@id": "node552695", 
+"@otu": "otu227566"
+}, 
+{
+"@id": "node552696", 
+"@otu": "otu227567"
+}, 
+{
+"@id": "node552697"
+}, 
+{
+"@id": "node552698"
+}, 
+{
+"@id": "node552699", 
+"@otu": "otu227568"
+}, 
+{
+"@id": "node552700"
+}, 
+{
+"@id": "node552701", 
+"@otu": "otu227569"
+}, 
+{
+"@id": "node552702"
+}, 
+{
+"@id": "node552703"
+}, 
+{
+"@id": "node552704", 
+"@otu": "otu227570"
+}, 
+{
+"@id": "node552705"
+}, 
+{
+"@id": "node552706"
+}, 
+{
+"@id": "node552707", 
+"@otu": "otu227571"
+}, 
+{
+"@id": "node552708", 
+"@otu": "otu227572"
+}, 
+{
+"@id": "node552709", 
+"@otu": "otu227573"
+}, 
+{
+"@id": "node552710"
+}, 
+{
+"@id": "node552711", 
+"@otu": "otu227574"
+}, 
+{
+"@id": "node552712"
+}, 
+{
+"@id": "node552713", 
+"@otu": "otu227575"
+}, 
+{
+"@id": "node552714", 
+"@otu": "otu227576"
+}, 
+{
+"@id": "node552715"
+}, 
+{
+"@id": "node552716", 
+"@otu": "otu227577"
+}, 
+{
+"@id": "node552717", 
+"@otu": "otu227578"
+}, 
+{
+"@id": "node552718", 
+"@otu": "otu227579"
+}
+]
+}, 
+{
+"@about": "#tree2333", 
+"@id": "tree2333", 
+"edge": [
+{
+"@id": "edge552720", 
+"@length": 0.042858625, 
+"@source": "node552719", 
+"@target": "node552720"
+}, 
+{
+"@id": "edge552721", 
+"@length": 0.25790217, 
+"@source": "node552720", 
+"@target": "node552721"
+}, 
+{
+"@id": "edge552722", 
+"@length": 0.13397361, 
+"@source": "node552720", 
+"@target": "node552722"
+}, 
+{
+"@id": "edge552723", 
+"@length": 0.08571725, 
+"@source": "node552719", 
+"@target": "node552723"
+}, 
+{
+"@id": "edge552724", 
+"@length": 0.058683509999999994, 
+"@source": "node552723", 
+"@target": "node552724"
+}, 
+{
+"@id": "edge552725", 
+"@length": 0.009347240000000007, 
+"@source": "node552723", 
+"@target": "node552725"
+}, 
+{
+"@id": "edge552726", 
+"@length": 0.04442135999999999, 
+"@source": "node552725", 
+"@target": "node552726"
+}, 
+{
+"@id": "edge552727", 
+"@length": 0.048598119999999995, 
+"@source": "node552726", 
+"@target": "node552727"
+}, 
+{
+"@id": "edge552728", 
+"@length": 0.02265215000000001, 
+"@source": "node552726", 
+"@target": "node552728"
+}, 
+{
+"@id": "edge552729", 
+"@length": 0.023569129999999994, 
+"@source": "node552728", 
+"@target": "node552729"
+}, 
+{
+"@id": "edge552730", 
+"@length": 0.06824355999999998, 
+"@source": "node552728", 
+"@target": "node552730"
+}, 
+{
+"@id": "edge552731", 
+"@length": 0.005819240000000003, 
+"@source": "node552725", 
+"@target": "node552731"
+}, 
+{
+"@id": "edge552732", 
+"@length": 0.006933889999999998, 
+"@source": "node552731", 
+"@target": "node552732"
+}, 
+{
+"@id": "edge552733", 
+"@length": 0.009696480000000007, 
+"@source": "node552732", 
+"@target": "node552733"
+}, 
+{
+"@id": "edge552734", 
+"@length": 0.038773959999999996, 
+"@source": "node552733", 
+"@target": "node552734"
+}, 
+{
+"@id": "edge552735", 
+"@length": 0.0014477200000000134, 
+"@source": "node552734", 
+"@target": "node552735"
+}, 
+{
+"@id": "edge552736", 
+"@length": 0.00438000999999999, 
+"@source": "node552734", 
+"@target": "node552736"
+}, 
+{
+"@id": "edge552737", 
+"@length": 0.014580389999999999, 
+"@source": "node552733", 
+"@target": "node552737"
+}, 
+{
+"@id": "edge552738", 
+"@length": 0.05933218000000001, 
+"@source": "node552737", 
+"@target": "node552738"
+}, 
+{
+"@id": "edge552739", 
+"@length": 0.03663762000000001, 
+"@source": "node552737", 
+"@target": "node552739"
+}, 
+{
+"@id": "edge552740", 
+"@length": 0.10053198000000002, 
+"@source": "node552732", 
+"@target": "node552740"
+}, 
+{
+"@id": "edge552741", 
+"@length": 0.0036230500000000165, 
+"@source": "node552731", 
+"@target": "node552741"
+}, 
+{
+"@id": "edge552742", 
+"@length": 0.01514533999999998, 
+"@source": "node552741", 
+"@target": "node552742"
+}, 
+{
+"@id": "edge552743", 
+"@length": 0.01959127999999999, 
+"@source": "node552742", 
+"@target": "node552743"
+}, 
+{
+"@id": "edge552744", 
+"@length": 0.029836589999999996, 
+"@source": "node552743", 
+"@target": "node552744"
+}, 
+{
+"@id": "edge552745", 
+"@length": 0.03365921999999999, 
+"@source": "node552743", 
+"@target": "node552745"
+}, 
+{
+"@id": "edge552746", 
+"@length": 0.04769164000000001, 
+"@source": "node552742", 
+"@target": "node552746"
+}, 
+{
+"@id": "edge552747", 
+"@length": 0.12071564999999998, 
+"@source": "node552741", 
+"@target": "node552747"
+}
+], 
+"meta": [
+{
+"$": "node552723", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ML", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "FG1093", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MS204", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Choose me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node552719", 
+"@root": "true"
+}, 
+{
+"@id": "node552720"
+}, 
+{
+"@id": "node552721", 
+"@otu": "otu227574"
+}, 
+{
+"@id": "node552722", 
+"@otu": "otu227579"
+}, 
+{
+"@id": "node552723"
+}, 
+{
+"@id": "node552724", 
+"@otu": "otu227580"
+}, 
+{
+"@id": "node552725"
+}, 
+{
+"@id": "node552726"
+}, 
+{
+"@id": "node552727", 
+"@otu": "otu227581"
+}, 
+{
+"@id": "node552728"
+}, 
+{
+"@id": "node552729", 
+"@otu": "otu227582"
+}, 
+{
+"@id": "node552730", 
+"@otu": "otu227583"
+}, 
+{
+"@id": "node552731"
+}, 
+{
+"@id": "node552732"
+}, 
+{
+"@id": "node552733"
+}, 
+{
+"@id": "node552734"
+}, 
+{
+"@id": "node552735", 
+"@otu": "otu227584"
+}, 
+{
+"@id": "node552736", 
+"@otu": "otu227585"
+}, 
+{
+"@id": "node552737"
+}, 
+{
+"@id": "node552738", 
+"@otu": "otu227586"
+}, 
+{
+"@id": "node552739", 
+"@otu": "otu227587"
+}, 
+{
+"@id": "node552740", 
+"@otu": "otu227588"
+}, 
+{
+"@id": "node552741"
+}, 
+{
+"@id": "node552742"
+}, 
+{
+"@id": "node552743"
+}, 
+{
+"@id": "node552744", 
+"@otu": "otu227589"
+}, 
+{
+"@id": "node552745", 
+"@otu": "otu227590"
+}, 
+{
+"@id": "node552746", 
+"@otu": "otu227591"
+}, 
+{
+"@id": "node552747", 
+"@otu": "otu227592"
+}
+]
+}
+]
+}
+}
+}

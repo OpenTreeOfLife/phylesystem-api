@@ -1,0 +1,996 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Patsch R., Hentschel J., Linares-palomino R., Zhu R., & Heinrichs J. 2010. Diversification and taxonomy of the liverwort Jubula Dumort. (Jungermanniopsida: Porellales) inferred from nuclear and chloroplast DNA sequences. American Journal of Botany, 35(1): 6-12.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1600/036364410790862515", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10110", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2083", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2608592, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2083", 
+"otu": [
+{
+"@about": "#otu311550", 
+"@id": "otu311550", 
+"@label": "Jubula hutchinsiae subsp. pennsylvanica", 
+"meta": [
+{
+"$": 751936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae pennsylvanica USA7", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311551", 
+"@id": "otu311551", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica China2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311552", 
+"@id": "otu311552", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica Malaysia2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311553", 
+"@id": "otu311553", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica China1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311554", 
+"@id": "otu311554", 
+"@label": "Jubula hutchinsiae subsp. hutchinsiae", 
+"meta": [
+{
+"$": 1034989, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae hutchinsiae British Isles1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311555", 
+"@id": "otu311555", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica China4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311556", 
+"@id": "otu311556", 
+"@label": "Jubula hutchinsiae subsp. pennsylvanica", 
+"meta": [
+{
+"$": 751936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae pennsylvanica USA5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311557", 
+"@id": "otu311557", 
+"@label": "Jubula hutchinsiae subsp. hutchinsiae", 
+"meta": [
+{
+"$": 1034989, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae hutchinsiae Madeira2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311558", 
+"@id": "otu311558", 
+"@label": "Jubula hutchinsiae subsp. bogotensis", 
+"meta": [
+{
+"$": 80708, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae bogotensis Costa Rica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311559", 
+"@id": "otu311559", 
+"@label": "Jubula hutchinsiae subsp. hutchinsiae", 
+"meta": [
+{
+"$": 1034989, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae hutchinsiae Madeira1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311560", 
+"@id": "otu311560", 
+"@label": "Jubula hutchinsiae subsp. pennsylvanica", 
+"meta": [
+{
+"$": 751936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae pennsylvanica USA8", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311561", 
+"@id": "otu311561", 
+"@label": "Jubula hutchinsiae subsp. japonica", 
+"meta": [
+{
+"$": 502838, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae japonica Japan1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311562", 
+"@id": "otu311562", 
+"@label": "Jubula hutchinsiae subsp. hutchinsiae", 
+"meta": [
+{
+"$": 1034989, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae hutchinsiae Madeira3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311563", 
+"@id": "otu311563", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica Malaysia1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311564", 
+"@id": "otu311564", 
+"@label": "Jubula hutchinsiae subsp. bogotensis", 
+"meta": [
+{
+"$": 80708, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae bogotensis Mexico2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311565", 
+"@id": "otu311565", 
+"@label": "Jubula hutchinsiae subsp. pennsylvanica", 
+"meta": [
+{
+"$": 751936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae pennsylvanica USA4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311566", 
+"@id": "otu311566", 
+"@label": "Jubula hutchinsiae subsp. bogotensis", 
+"meta": [
+{
+"$": 80708, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae bogotensis Peru", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311567", 
+"@id": "otu311567", 
+"@label": "Jubula hutchinsiae subsp. pennsylvanica", 
+"meta": [
+{
+"$": 751936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae pennsylvanica USA3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311568", 
+"@id": "otu311568", 
+"@label": "Jubula hutchinsiae subsp. hutchinsiae", 
+"meta": [
+{
+"$": 1034989, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae hutchinsiae British Isles2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311569", 
+"@id": "otu311569", 
+"@label": "Nipponolejeunea pilifera", 
+"meta": [
+{
+"$": 502850, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nipponolejeunea pilifera", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311570", 
+"@id": "otu311570", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica China5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311571", 
+"@id": "otu311571", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica China3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311572", 
+"@id": "otu311572", 
+"@label": "Nipponolejeunea subalpina", 
+"meta": [
+{
+"$": 80697, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nipponolejeunea subalpina", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311573", 
+"@id": "otu311573", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica Vietnam1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311574", 
+"@id": "otu311574", 
+"@label": "Jubula hutchinsiae subsp. pennsylvanica", 
+"meta": [
+{
+"$": 751936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae pennsylvanica USA1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311575", 
+"@id": "otu311575", 
+"@label": "Jubula hutchinsiae subsp. bogotensis", 
+"meta": [
+{
+"$": 80708, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae bogotensis Mexico1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311576", 
+"@id": "otu311576", 
+"@label": "Jubula hutchinsiae subsp. japonica", 
+"meta": [
+{
+"$": 502838, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae japonica Japan2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311577", 
+"@id": "otu311577", 
+"@label": "Jubula hutchinsiae subsp. pennsylvanica", 
+"meta": [
+{
+"$": 751936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae pennsylvanica USA2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311578", 
+"@id": "otu311578", 
+"@label": "Jubula hutchinsiae subsp. pennsylvanica", 
+"meta": [
+{
+"$": 751936, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae pennsylvanica USA6", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311579", 
+"@id": "otu311579", 
+"@label": "Jubula hutchinsiae subsp. javanica", 
+"meta": [
+{
+"$": 1075264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Jubula hutchinsiae javanica Vietnam2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2083", 
+"@otus": "otus2083", 
+"tree": [
+{
+"@about": "#tree4315", 
+"@id": "tree4315", 
+"edge": [
+{
+"@id": "edge792905", 
+"@source": "node792904", 
+"@target": "node792905"
+}, 
+{
+"@id": "edge792906", 
+"@source": "node792904", 
+"@target": "node792906"
+}, 
+{
+"@id": "edge792907", 
+"@source": "node792904", 
+"@target": "node792907"
+}, 
+{
+"@id": "edge792908", 
+"@source": "node792907", 
+"@target": "node792908"
+}, 
+{
+"@id": "edge792909", 
+"@source": "node792908", 
+"@target": "node792909"
+}, 
+{
+"@id": "edge792910", 
+"@source": "node792908", 
+"@target": "node792910"
+}, 
+{
+"@id": "edge792911", 
+"@source": "node792907", 
+"@target": "node792911"
+}, 
+{
+"@id": "edge792912", 
+"@source": "node792911", 
+"@target": "node792912"
+}, 
+{
+"@id": "edge792913", 
+"@source": "node792912", 
+"@target": "node792913"
+}, 
+{
+"@id": "edge792914", 
+"@source": "node792913", 
+"@target": "node792914"
+}, 
+{
+"@id": "edge792915", 
+"@source": "node792913", 
+"@target": "node792915"
+}, 
+{
+"@id": "edge792916", 
+"@source": "node792915", 
+"@target": "node792916"
+}, 
+{
+"@id": "edge792917", 
+"@source": "node792915", 
+"@target": "node792917"
+}, 
+{
+"@id": "edge792918", 
+"@source": "node792917", 
+"@target": "node792918"
+}, 
+{
+"@id": "edge792919", 
+"@source": "node792917", 
+"@target": "node792919"
+}, 
+{
+"@id": "edge792920", 
+"@source": "node792912", 
+"@target": "node792920"
+}, 
+{
+"@id": "edge792921", 
+"@source": "node792920", 
+"@target": "node792921"
+}, 
+{
+"@id": "edge792922", 
+"@source": "node792920", 
+"@target": "node792922"
+}, 
+{
+"@id": "edge792923", 
+"@source": "node792912", 
+"@target": "node792923"
+}, 
+{
+"@id": "edge792924", 
+"@source": "node792911", 
+"@target": "node792924"
+}, 
+{
+"@id": "edge792925", 
+"@source": "node792924", 
+"@target": "node792925"
+}, 
+{
+"@id": "edge792926", 
+"@source": "node792924", 
+"@target": "node792926"
+}, 
+{
+"@id": "edge792927", 
+"@source": "node792911", 
+"@target": "node792927"
+}, 
+{
+"@id": "edge792928", 
+"@source": "node792927", 
+"@target": "node792928"
+}, 
+{
+"@id": "edge792929", 
+"@source": "node792927", 
+"@target": "node792929"
+}, 
+{
+"@id": "edge792930", 
+"@source": "node792927", 
+"@target": "node792930"
+}, 
+{
+"@id": "edge792931", 
+"@source": "node792927", 
+"@target": "node792931"
+}, 
+{
+"@id": "edge792932", 
+"@source": "node792927", 
+"@target": "node792932"
+}, 
+{
+"@id": "edge792933", 
+"@source": "node792911", 
+"@target": "node792933"
+}, 
+{
+"@id": "edge792934", 
+"@source": "node792933", 
+"@target": "node792934"
+}, 
+{
+"@id": "edge792935", 
+"@source": "node792934", 
+"@target": "node792935"
+}, 
+{
+"@id": "edge792936", 
+"@source": "node792935", 
+"@target": "node792936"
+}, 
+{
+"@id": "edge792937", 
+"@source": "node792935", 
+"@target": "node792937"
+}, 
+{
+"@id": "edge792938", 
+"@source": "node792934", 
+"@target": "node792938"
+}, 
+{
+"@id": "edge792939", 
+"@source": "node792938", 
+"@target": "node792939"
+}, 
+{
+"@id": "edge792940", 
+"@source": "node792938", 
+"@target": "node792940"
+}, 
+{
+"@id": "edge792941", 
+"@source": "node792933", 
+"@target": "node792941"
+}, 
+{
+"@id": "edge792942", 
+"@source": "node792941", 
+"@target": "node792942"
+}, 
+{
+"@id": "edge792943", 
+"@source": "node792941", 
+"@target": "node792943"
+}, 
+{
+"@id": "edge792944", 
+"@source": "node792941", 
+"@target": "node792944"
+}, 
+{
+"@id": "edge792945", 
+"@source": "node792941", 
+"@target": "node792945"
+}, 
+{
+"@id": "edge792946", 
+"@source": "node792941", 
+"@target": "node792946"
+}, 
+{
+"@id": "edge792947", 
+"@source": "node792933", 
+"@target": "node792947"
+}, 
+{
+"@id": "edge792948", 
+"@source": "node792947", 
+"@target": "node792948"
+}, 
+{
+"@id": "edge792949", 
+"@source": "node792947", 
+"@target": "node792949"
+}, 
+{
+"@id": "edge792950", 
+"@source": "node792947", 
+"@target": "node792950"
+}
+], 
+"meta": [
+{
+"$": "node792907", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node792904", 
+"@root": "true"
+}, 
+{
+"@id": "node792905", 
+"@otu": "otu311569"
+}, 
+{
+"@id": "node792906", 
+"@otu": "otu311572"
+}, 
+{
+"@id": "node792907"
+}, 
+{
+"@id": "node792908"
+}, 
+{
+"@id": "node792909", 
+"@otu": "otu311553"
+}, 
+{
+"@id": "node792910", 
+"@otu": "otu311551"
+}, 
+{
+"@id": "node792911"
+}, 
+{
+"@id": "node792912"
+}, 
+{
+"@id": "node792913"
+}, 
+{
+"@id": "node792914", 
+"@otu": "otu311552"
+}, 
+{
+"@id": "node792915"
+}, 
+{
+"@id": "node792916", 
+"@otu": "otu311570"
+}, 
+{
+"@id": "node792917"
+}, 
+{
+"@id": "node792918", 
+"@otu": "otu311573"
+}, 
+{
+"@id": "node792919", 
+"@otu": "otu311579"
+}, 
+{
+"@id": "node792920"
+}, 
+{
+"@id": "node792921", 
+"@otu": "otu311563"
+}, 
+{
+"@id": "node792922", 
+"@otu": "otu311555"
+}, 
+{
+"@id": "node792923", 
+"@otu": "otu311571"
+}, 
+{
+"@id": "node792924"
+}, 
+{
+"@id": "node792925", 
+"@otu": "otu311561"
+}, 
+{
+"@id": "node792926", 
+"@otu": "otu311576"
+}, 
+{
+"@id": "node792927"
+}, 
+{
+"@id": "node792928", 
+"@otu": "otu311559"
+}, 
+{
+"@id": "node792929", 
+"@otu": "otu311557"
+}, 
+{
+"@id": "node792930", 
+"@otu": "otu311554"
+}, 
+{
+"@id": "node792931", 
+"@otu": "otu311568"
+}, 
+{
+"@id": "node792932", 
+"@otu": "otu311562"
+}, 
+{
+"@id": "node792933"
+}, 
+{
+"@id": "node792934"
+}, 
+{
+"@id": "node792935"
+}, 
+{
+"@id": "node792936", 
+"@otu": "otu311566"
+}, 
+{
+"@id": "node792937", 
+"@otu": "otu311558"
+}, 
+{
+"@id": "node792938"
+}, 
+{
+"@id": "node792939", 
+"@otu": "otu311564"
+}, 
+{
+"@id": "node792940", 
+"@otu": "otu311575"
+}, 
+{
+"@id": "node792941"
+}, 
+{
+"@id": "node792942", 
+"@otu": "otu311560"
+}, 
+{
+"@id": "node792943", 
+"@otu": "otu311550"
+}, 
+{
+"@id": "node792944", 
+"@otu": "otu311565"
+}, 
+{
+"@id": "node792945", 
+"@otu": "otu311556"
+}, 
+{
+"@id": "node792946", 
+"@otu": "otu311578"
+}, 
+{
+"@id": "node792947"
+}, 
+{
+"@id": "node792948", 
+"@otu": "otu311574"
+}, 
+{
+"@id": "node792949", 
+"@otu": "otu311577"
+}, 
+{
+"@id": "node792950", 
+"@otu": "otu311567"
+}
+]
+}
+]
+}
+}
+}

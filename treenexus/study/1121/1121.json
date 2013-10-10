@@ -1,0 +1,995 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Levin, R. A., Watson, K., & Bohs, L. (2005). A four-gene study of evolutionary relationships in Solanum section Acanthophora. American Journal of Botany, 92(4), 603-612.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.3732/ajb.92.4.603", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1276", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1121", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2004, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 151261, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1121", 
+"otu": [
+{
+"@about": "#otu225100", 
+"@id": "otu225100", 
+"@label": "Solanum pseudolulo", 
+"meta": [
+{
+"$": 835545, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum pseudolulo", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225101", 
+"@id": "otu225101", 
+"@label": "Solanum stramoniifolium", 
+"meta": [
+{
+"$": 4050, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum stramonifolium", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225102", 
+"@id": "otu225102", 
+"@label": "Solanum luteoalbum", 
+"meta": [
+{
+"$": 326631, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum luteoalbum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225103", 
+"@id": "otu225103", 
+"@label": "Solanum pseudocapsicum", 
+"meta": [
+{
+"$": 121218, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum pseudocapsicum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225104", 
+"@id": "otu225104", 
+"@label": "Solanum myriacanthum", 
+"meta": [
+{
+"$": 877389, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum myriacanthum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225105", 
+"@id": "otu225105", 
+"@label": "Solanum stenandrum", 
+"meta": [
+{
+"$": 352580, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum stenandrum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225106", 
+"@id": "otu225106", 
+"@label": "Solanum abutiloides", 
+"meta": [
+{
+"$": 121213, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum abutiloides", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225107", 
+"@id": "otu225107", 
+"@label": "Solanum sisymbriifolium", 
+"meta": [
+{
+"$": 4047, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum sisymbriifolium", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225108", 
+"@id": "otu225108", 
+"@label": "Solanum aculeatissimum", 
+"meta": [
+{
+"$": 217959, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum aculeatissimum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225109", 
+"@id": "otu225109", 
+"@label": "Solanum mammosum", 
+"meta": [
+{
+"$": 399736, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum mammosum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225110", 
+"@id": "otu225110", 
+"@label": "Solanum tenuispinum", 
+"meta": [
+{
+"$": 510734, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum tenuispinum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225111", 
+"@id": "otu225111", 
+"@label": "Solanum quitoense", 
+"meta": [
+{
+"$": 835548, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum quitoense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225112", 
+"@id": "otu225112", 
+"@label": "Solanum stagnale", 
+"meta": [
+{
+"$": 835019, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum stagnale", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225113", 
+"@id": "otu225113", 
+"@label": "Solanum wendlandii", 
+"meta": [
+{
+"$": 590312, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum wendlandii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225114", 
+"@id": "otu225114", 
+"@label": "Solanum melongena", 
+"meta": [
+{
+"$": 494843, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum melongena", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225115", 
+"@id": "otu225115", 
+"@label": "Solanum candidum", 
+"meta": [
+{
+"$": 399745, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum candidum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225116", 
+"@id": "otu225116", 
+"@label": "Solanum aviculare", 
+"meta": [
+{
+"$": 494825, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum aviculare", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225117", 
+"@id": "otu225117", 
+"@label": "Solanum agrarium", 
+"meta": [
+{
+"$": 80983, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum agrarium", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225118", 
+"@id": "otu225118", 
+"@label": "Solanum acerifolium", 
+"meta": [
+{
+"$": 835021, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum acerifolium", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225119", 
+"@id": "otu225119", 
+"@label": "Solanum robustum", 
+"meta": [
+{
+"$": 835017, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum robustum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225120", 
+"@id": "otu225120", 
+"@label": "Solanum jamaicense", 
+"meta": [
+{
+"$": 399740, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum jamaicense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225121", 
+"@id": "otu225121", 
+"@label": "Solanum platense", 
+"meta": [
+{
+"$": 877387, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum platense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225122", 
+"@id": "otu225122", 
+"@label": "Solanum torvum", 
+"meta": [
+{
+"$": 1022523, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum torvum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225123", 
+"@id": "otu225123", 
+"@label": "Solanum capsicoides", 
+"meta": [
+{
+"$": 311868, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum capsicoides", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225124", 
+"@id": "otu225124", 
+"@label": "Solanum incarceratum", 
+"meta": [
+{
+"$": 863012, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum incarceratum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225125", 
+"@id": "otu225125", 
+"@label": "Solanum palinacanthum", 
+"meta": [
+{
+"$": 882310, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum palinacanthum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225126", 
+"@id": "otu225126", 
+"@label": "Solanum atropurpureum", 
+"meta": [
+{
+"$": 217948, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum atropurpureum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225127", 
+"@id": "otu225127", 
+"@label": "Solanum viarum", 
+"meta": [
+{
+"$": 450048, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum viarum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225128", 
+"@id": "otu225128", 
+"@label": "Solanum vaillantii", 
+"meta": [
+{
+"$": 400145, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum vaillantii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1121", 
+"@otus": "otus1121", 
+"tree": [
+{
+"@about": "#tree2232", 
+"@id": "tree2232", 
+"edge": [
+{
+"@id": "edge541448", 
+"@source": "node541447", 
+"@target": "node541448"
+}, 
+{
+"@id": "edge541449", 
+"@source": "node541448", 
+"@target": "node541449"
+}, 
+{
+"@id": "edge541450", 
+"@source": "node541449", 
+"@target": "node541450"
+}, 
+{
+"@id": "edge541451", 
+"@source": "node541450", 
+"@target": "node541451"
+}, 
+{
+"@id": "edge541452", 
+"@source": "node541451", 
+"@target": "node541452"
+}, 
+{
+"@id": "edge541453", 
+"@source": "node541452", 
+"@target": "node541453"
+}, 
+{
+"@id": "edge541454", 
+"@source": "node541453", 
+"@target": "node541454"
+}, 
+{
+"@id": "edge541455", 
+"@source": "node541454", 
+"@target": "node541455"
+}, 
+{
+"@id": "edge541456", 
+"@source": "node541455", 
+"@target": "node541456"
+}, 
+{
+"@id": "edge541457", 
+"@source": "node541456", 
+"@target": "node541457"
+}, 
+{
+"@id": "edge541458", 
+"@source": "node541456", 
+"@target": "node541458"
+}, 
+{
+"@id": "edge541459", 
+"@source": "node541458", 
+"@target": "node541459"
+}, 
+{
+"@id": "edge541460", 
+"@source": "node541458", 
+"@target": "node541460"
+}, 
+{
+"@id": "edge541461", 
+"@source": "node541455", 
+"@target": "node541461"
+}, 
+{
+"@id": "edge541462", 
+"@source": "node541454", 
+"@target": "node541462"
+}, 
+{
+"@id": "edge541463", 
+"@source": "node541462", 
+"@target": "node541463"
+}, 
+{
+"@id": "edge541464", 
+"@source": "node541463", 
+"@target": "node541464"
+}, 
+{
+"@id": "edge541465", 
+"@source": "node541463", 
+"@target": "node541465"
+}, 
+{
+"@id": "edge541466", 
+"@source": "node541463", 
+"@target": "node541466"
+}, 
+{
+"@id": "edge541467", 
+"@source": "node541462", 
+"@target": "node541467"
+}, 
+{
+"@id": "edge541468", 
+"@source": "node541453", 
+"@target": "node541468"
+}, 
+{
+"@id": "edge541469", 
+"@source": "node541452", 
+"@target": "node541469"
+}, 
+{
+"@id": "edge541470", 
+"@source": "node541469", 
+"@target": "node541470"
+}, 
+{
+"@id": "edge541471", 
+"@source": "node541469", 
+"@target": "node541471"
+}, 
+{
+"@id": "edge541472", 
+"@source": "node541451", 
+"@target": "node541472"
+}, 
+{
+"@id": "edge541473", 
+"@source": "node541472", 
+"@target": "node541473"
+}, 
+{
+"@id": "edge541474", 
+"@source": "node541473", 
+"@target": "node541474"
+}, 
+{
+"@id": "edge541475", 
+"@source": "node541473", 
+"@target": "node541475"
+}, 
+{
+"@id": "edge541476", 
+"@source": "node541473", 
+"@target": "node541476"
+}, 
+{
+"@id": "edge541477", 
+"@source": "node541472", 
+"@target": "node541477"
+}, 
+{
+"@id": "edge541478", 
+"@source": "node541450", 
+"@target": "node541478"
+}, 
+{
+"@id": "edge541479", 
+"@source": "node541478", 
+"@target": "node541479"
+}, 
+{
+"@id": "edge541480", 
+"@source": "node541479", 
+"@target": "node541480"
+}, 
+{
+"@id": "edge541481", 
+"@source": "node541480", 
+"@target": "node541481"
+}, 
+{
+"@id": "edge541482", 
+"@source": "node541481", 
+"@target": "node541482"
+}, 
+{
+"@id": "edge541483", 
+"@source": "node541481", 
+"@target": "node541483"
+}, 
+{
+"@id": "edge541484", 
+"@source": "node541480", 
+"@target": "node541484"
+}, 
+{
+"@id": "edge541485", 
+"@source": "node541479", 
+"@target": "node541485"
+}, 
+{
+"@id": "edge541486", 
+"@source": "node541478", 
+"@target": "node541486"
+}, 
+{
+"@id": "edge541487", 
+"@source": "node541486", 
+"@target": "node541487"
+}, 
+{
+"@id": "edge541488", 
+"@source": "node541487", 
+"@target": "node541488"
+}, 
+{
+"@id": "edge541489", 
+"@source": "node541487", 
+"@target": "node541489"
+}, 
+{
+"@id": "edge541490", 
+"@source": "node541486", 
+"@target": "node541490"
+}, 
+{
+"@id": "edge541491", 
+"@source": "node541449", 
+"@target": "node541491"
+}, 
+{
+"@id": "edge541492", 
+"@source": "node541491", 
+"@target": "node541492"
+}, 
+{
+"@id": "edge541493", 
+"@source": "node541491", 
+"@target": "node541493"
+}, 
+{
+"@id": "edge541494", 
+"@source": "node541449", 
+"@target": "node541494"
+}, 
+{
+"@id": "edge541495", 
+"@source": "node541448", 
+"@target": "node541495"
+}, 
+{
+"@id": "edge541496", 
+"@source": "node541447", 
+"@target": "node541496"
+}
+], 
+"meta": [
+{
+"$": "node541447", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node541447", 
+"@root": "true"
+}, 
+{
+"@id": "node541448"
+}, 
+{
+"@id": "node541449"
+}, 
+{
+"@id": "node541450"
+}, 
+{
+"@id": "node541451"
+}, 
+{
+"@id": "node541452"
+}, 
+{
+"@id": "node541453"
+}, 
+{
+"@id": "node541454"
+}, 
+{
+"@id": "node541455"
+}, 
+{
+"@id": "node541456"
+}, 
+{
+"@id": "node541457", 
+"@otu": "otu225118"
+}, 
+{
+"@id": "node541458"
+}, 
+{
+"@id": "node541459", 
+"@otu": "otu225126"
+}, 
+{
+"@id": "node541460", 
+"@otu": "otu225110"
+}, 
+{
+"@id": "node541461", 
+"@otu": "otu225123"
+}, 
+{
+"@id": "node541462"
+}, 
+{
+"@id": "node541463"
+}, 
+{
+"@id": "node541464", 
+"@otu": "otu225104"
+}, 
+{
+"@id": "node541465", 
+"@otu": "otu225108"
+}, 
+{
+"@id": "node541466", 
+"@otu": "otu225127"
+}, 
+{
+"@id": "node541467", 
+"@otu": "otu225124"
+}, 
+{
+"@id": "node541468", 
+"@otu": "otu225121"
+}, 
+{
+"@id": "node541469"
+}, 
+{
+"@id": "node541470", 
+"@otu": "otu225125"
+}, 
+{
+"@id": "node541471", 
+"@otu": "otu225109"
+}, 
+{
+"@id": "node541472"
+}, 
+{
+"@id": "node541473"
+}, 
+{
+"@id": "node541474", 
+"@otu": "otu225111"
+}, 
+{
+"@id": "node541475", 
+"@otu": "otu225100"
+}, 
+{
+"@id": "node541476", 
+"@otu": "otu225115"
+}, 
+{
+"@id": "node541477", 
+"@otu": "otu225101"
+}, 
+{
+"@id": "node541478"
+}, 
+{
+"@id": "node541479"
+}, 
+{
+"@id": "node541480"
+}, 
+{
+"@id": "node541481"
+}, 
+{
+"@id": "node541482", 
+"@otu": "otu225122"
+}, 
+{
+"@id": "node541483", 
+"@otu": "otu225120"
+}, 
+{
+"@id": "node541484", 
+"@otu": "otu225114"
+}, 
+{
+"@id": "node541485", 
+"@otu": "otu225107"
+}, 
+{
+"@id": "node541486"
+}, 
+{
+"@id": "node541487"
+}, 
+{
+"@id": "node541488", 
+"@otu": "otu225112"
+}, 
+{
+"@id": "node541489", 
+"@otu": "otu225119"
+}, 
+{
+"@id": "node541490", 
+"@otu": "otu225105"
+}, 
+{
+"@id": "node541491"
+}, 
+{
+"@id": "node541492", 
+"@otu": "otu225103"
+}, 
+{
+"@id": "node541493", 
+"@otu": "otu225106"
+}, 
+{
+"@id": "node541494", 
+"@otu": "otu225113"
+}, 
+{
+"@id": "node541495", 
+"@otu": "otu225102"
+}, 
+{
+"@id": "node541496", 
+"@otu": "otu225116"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,631 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Risede J., & Simoneau P. 2001. Typing Cylindrocladium species by analysis of ribosomal DNA spacers polymorphism: application to field isolates from the banana rhizosphere. Mycologia, 93(3): 494-504.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2307/3761735", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S687", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1718", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2001, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2439839, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1718", 
+"otu": [
+{
+"@about": "#otu271852", 
+"@id": "otu271852", 
+"@label": "Fusarium sambucinum", 
+"meta": [
+{
+"$": 728368, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium sambucinum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271853", 
+"@id": "otu271853", 
+"@label": "Cylindrocladium spathiphylli", 
+"meta": [
+{
+"$": 501536, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium spathiphylli IMI167983", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271854", 
+"@id": "otu271854", 
+"@label": "Cylindrocladium", 
+"meta": [
+{
+"$": 412519, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium sp.Slu2 MT1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271855", 
+"@id": "otu271855", 
+"@label": "Cylindrocladium pteridis", 
+"meta": [
+{
+"$": 412516, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium pteridis IMI354530", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271856", 
+"@id": "otu271856", 
+"@label": "Cylindrocladium pseudogracile", 
+"meta": [
+{
+"$": 218449, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium pseudogracile PPRI4176", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271857", 
+"@id": "otu271857", 
+"@label": "Cylindrocladiella camelliae", 
+"meta": [
+{
+"$": 315573, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladiella camelliae MUCL31395", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271858", 
+"@id": "otu271858", 
+"@label": "Cylindrocladium floridanum", 
+"meta": [
+{
+"$": 716777, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium floridanum ATCC18882", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271859", 
+"@id": "otu271859", 
+"@label": "Cylindrocladium citri", 
+"meta": [
+{
+"$": 828691, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium citri CBS 18636", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271860", 
+"@id": "otu271860", 
+"@label": "Cylindrocladium", 
+"meta": [
+{
+"$": 412519, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium sp. Dom4 MT2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271861", 
+"@id": "otu271861", 
+"@label": "Curvicladium cigneum", 
+"meta": [
+{
+"$": 828649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Curvicladium cigneum MUCL40269", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271862", 
+"@id": "otu271862", 
+"@label": "Cylindrocladium floridanum", 
+"meta": [
+{
+"$": 716777, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium floridanum ATCC22677", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271863", 
+"@id": "otu271863", 
+"@label": "Xenocylindrocladium serpens", 
+"meta": [
+{
+"$": 924045, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Xenocylindrocladium serpens MUCL39315", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271864", 
+"@id": "otu271864", 
+"@label": "Cylindrocladium spathiphylli", 
+"meta": [
+{
+"$": 501536, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium spathiphylli ATCC44730", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271865", 
+"@id": "otu271865", 
+"@label": "Cylindrocladium sp. STE-U 623", 
+"meta": [
+{
+"$": 663314, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium gracile ATCC22833", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271866", 
+"@id": "otu271866", 
+"@label": "Cylindrocladiella parva", 
+"meta": [
+{
+"$": 792850, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladiella parva MUCL636", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu271867", 
+"@id": "otu271867", 
+"@label": "Cylindrocladium spathulatum", 
+"meta": [
+{
+"$": 136937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium spathulatum ATCC62616", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1718", 
+"@otus": "otus1718", 
+"tree": [
+{
+"@about": "#tree3460", 
+"@id": "tree3460", 
+"edge": [
+{
+"@id": "edge674331", 
+"@source": "node674330", 
+"@target": "node674331"
+}, 
+{
+"@id": "edge674332", 
+"@source": "node674331", 
+"@target": "node674332"
+}, 
+{
+"@id": "edge674333", 
+"@source": "node674332", 
+"@target": "node674333"
+}, 
+{
+"@id": "edge674334", 
+"@source": "node674333", 
+"@target": "node674334"
+}, 
+{
+"@id": "edge674335", 
+"@source": "node674334", 
+"@target": "node674335"
+}, 
+{
+"@id": "edge674336", 
+"@source": "node674335", 
+"@target": "node674336"
+}, 
+{
+"@id": "edge674337", 
+"@source": "node674336", 
+"@target": "node674337"
+}, 
+{
+"@id": "edge674338", 
+"@source": "node674337", 
+"@target": "node674338"
+}, 
+{
+"@id": "edge674339", 
+"@source": "node674338", 
+"@target": "node674339"
+}, 
+{
+"@id": "edge674340", 
+"@source": "node674339", 
+"@target": "node674340"
+}, 
+{
+"@id": "edge674341", 
+"@source": "node674340", 
+"@target": "node674341"
+}, 
+{
+"@id": "edge674342", 
+"@source": "node674340", 
+"@target": "node674342"
+}, 
+{
+"@id": "edge674343", 
+"@source": "node674339", 
+"@target": "node674343"
+}, 
+{
+"@id": "edge674344", 
+"@source": "node674338", 
+"@target": "node674344"
+}, 
+{
+"@id": "edge674345", 
+"@source": "node674337", 
+"@target": "node674345"
+}, 
+{
+"@id": "edge674346", 
+"@source": "node674345", 
+"@target": "node674346"
+}, 
+{
+"@id": "edge674347", 
+"@source": "node674345", 
+"@target": "node674347"
+}, 
+{
+"@id": "edge674348", 
+"@source": "node674336", 
+"@target": "node674348"
+}, 
+{
+"@id": "edge674349", 
+"@source": "node674335", 
+"@target": "node674349"
+}, 
+{
+"@id": "edge674350", 
+"@source": "node674334", 
+"@target": "node674350"
+}, 
+{
+"@id": "edge674351", 
+"@source": "node674350", 
+"@target": "node674351"
+}, 
+{
+"@id": "edge674352", 
+"@source": "node674351", 
+"@target": "node674352"
+}, 
+{
+"@id": "edge674353", 
+"@source": "node674351", 
+"@target": "node674353"
+}, 
+{
+"@id": "edge674354", 
+"@source": "node674350", 
+"@target": "node674354"
+}, 
+{
+"@id": "edge674355", 
+"@source": "node674333", 
+"@target": "node674355"
+}, 
+{
+"@id": "edge674356", 
+"@source": "node674332", 
+"@target": "node674356"
+}, 
+{
+"@id": "edge674357", 
+"@source": "node674331", 
+"@target": "node674357"
+}, 
+{
+"@id": "edge674358", 
+"@source": "node674357", 
+"@target": "node674358"
+}, 
+{
+"@id": "edge674359", 
+"@source": "node674357", 
+"@target": "node674359"
+}, 
+{
+"@id": "edge674360", 
+"@source": "node674330", 
+"@target": "node674360"
+}
+], 
+"meta": [
+{
+"$": "node674331", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node674330", 
+"@root": "true"
+}, 
+{
+"@id": "node674331"
+}, 
+{
+"@id": "node674332"
+}, 
+{
+"@id": "node674333"
+}, 
+{
+"@id": "node674334"
+}, 
+{
+"@id": "node674335"
+}, 
+{
+"@id": "node674336"
+}, 
+{
+"@id": "node674337"
+}, 
+{
+"@id": "node674338"
+}, 
+{
+"@id": "node674339"
+}, 
+{
+"@id": "node674340"
+}, 
+{
+"@id": "node674341", 
+"@otu": "otu271855"
+}, 
+{
+"@id": "node674342", 
+"@otu": "otu271854"
+}, 
+{
+"@id": "node674343", 
+"@otu": "otu271856"
+}, 
+{
+"@id": "node674344", 
+"@otu": "otu271865"
+}, 
+{
+"@id": "node674345"
+}, 
+{
+"@id": "node674346", 
+"@otu": "otu271858"
+}, 
+{
+"@id": "node674347", 
+"@otu": "otu271862"
+}, 
+{
+"@id": "node674348", 
+"@otu": "otu271867"
+}, 
+{
+"@id": "node674349", 
+"@otu": "otu271859"
+}, 
+{
+"@id": "node674350"
+}, 
+{
+"@id": "node674351"
+}, 
+{
+"@id": "node674352", 
+"@otu": "otu271853"
+}, 
+{
+"@id": "node674353", 
+"@otu": "otu271860"
+}, 
+{
+"@id": "node674354", 
+"@otu": "otu271864"
+}, 
+{
+"@id": "node674355", 
+"@otu": "otu271863"
+}, 
+{
+"@id": "node674356", 
+"@otu": "otu271861"
+}, 
+{
+"@id": "node674357"
+}, 
+{
+"@id": "node674358", 
+"@otu": "otu271857"
+}, 
+{
+"@id": "node674359", 
+"@otu": "otu271866"
+}, 
+{
+"@id": "node674360", 
+"@otu": "otu271852"
+}
+]
+}
+]
+}
+}
+}

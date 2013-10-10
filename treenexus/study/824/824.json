@@ -1,0 +1,1978 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Harrow S., Farrokhi-nejad R., Pitman A., Scott I., Bentley A., Hide C., & Cromey M. 2010. Characterisation of New Zealand Fusarium populations using a polyphasic approach differentiates the F. avenaceum/F. acuminatum/F. tricinctum species complex in cereal and grassland systems. Fungal Biology, 114(4): 293-311.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.funbio.2010.01.005", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10289", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "824", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 140752, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus824", 
+"otu": [
+{
+"@about": "#otu198028", 
+"@id": "otu198028", 
+"@label": "Fusarium culmorum", 
+"meta": [
+{
+"$": 264394, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium culmorum FUS 19", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198029", 
+"@id": "otu198029", 
+"@label": "Fusarium cerealis", 
+"meta": [
+{
+"$": 750232, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium cerealis FUS 18", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198030", 
+"@id": "otu198030", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum FUS 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198031", 
+"@id": "otu198031", 
+"@label": "Fusarium heterosporum", 
+"meta": [
+{
+"$": 137089, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium heterosporum FUS 16", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198032", 
+"@id": "otu198032", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum FUS 13", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198033", 
+"@id": "otu198033", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum FUS 7", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198034", 
+"@id": "otu198034", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum FUS 4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198035", 
+"@id": "otu198035", 
+"@label": "Fusarium acuminatum", 
+"meta": [
+{
+"$": 264391, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium acuminatum FUS 8", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198036", 
+"@id": "otu198036", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum FUS 14", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198037", 
+"@id": "otu198037", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum FUS 10", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198038", 
+"@id": "otu198038", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum FUS 5A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198039", 
+"@id": "otu198039", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum FUS 5B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198040", 
+"@id": "otu198040", 
+"@label": "Fusarium graminearum species complex", 
+"meta": [
+{
+"$": 193688, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium graminearum FUS 20", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198041", 
+"@id": "otu198041", 
+"@label": "Fusarium heterosporum", 
+"meta": [
+{
+"$": 137089, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium heterosporum FUS 15", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198042", 
+"@id": "otu198042", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum FUS 12", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198043", 
+"@id": "otu198043", 
+"@label": "Fusarium acuminatum", 
+"meta": [
+{
+"$": 264391, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium acuminatum FUS 9", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198044", 
+"@id": "otu198044", 
+"@label": "Fusarium", 
+"meta": [
+{
+"$": 838968, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium species FUS 17", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198045", 
+"@id": "otu198045", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum FUS 11", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198046", 
+"@id": "otu198046", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum FUS 3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198047", 
+"@id": "otu198047", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum FUS 6", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198048", 
+"@id": "otu198048", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum FUS 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198049", 
+"@id": "otu198049", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum BTUB 6", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198050", 
+"@id": "otu198050", 
+"@label": "Fusarium cerealis", 
+"meta": [
+{
+"$": 750232, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium cerealis BTUB 12", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198051", 
+"@id": "otu198051", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum BTUB 9", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198052", 
+"@id": "otu198052", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum BTUB 3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198053", 
+"@id": "otu198053", 
+"@label": "Fusarium graminearum species complex", 
+"meta": [
+{
+"$": 193688, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium graminearum BTUB 13", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198054", 
+"@id": "otu198054", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum BTUB 8", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198055", 
+"@id": "otu198055", 
+"@label": "Fusarium culmorum", 
+"meta": [
+{
+"$": 264394, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium culmorum BTUB 14", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198056", 
+"@id": "otu198056", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum BTUB 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198057", 
+"@id": "otu198057", 
+"@label": "Fusarium heterosporum", 
+"meta": [
+{
+"$": 137089, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium heterosporum BTUB 10", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198058", 
+"@id": "otu198058", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum BTUB 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198059", 
+"@id": "otu198059", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum BTUB 7", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198060", 
+"@id": "otu198060", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum BTUB 4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198061", 
+"@id": "otu198061", 
+"@label": "Fusarium", 
+"meta": [
+{
+"$": 838968, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium species BTUB 11", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198062", 
+"@id": "otu198062", 
+"@label": "Fusarium acuminatum", 
+"meta": [
+{
+"$": 264391, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium acuminatum BTUB 5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198063", 
+"@id": "otu198063", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum EF1a 12", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198064", 
+"@id": "otu198064", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum EF1a 14", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198065", 
+"@id": "otu198065", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum EF1a 3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198066", 
+"@id": "otu198066", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum EF1a 5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198067", 
+"@id": "otu198067", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum EF1a 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198068", 
+"@id": "otu198068", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum EF1a 4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198069", 
+"@id": "otu198069", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum EF1a 13", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198070", 
+"@id": "otu198070", 
+"@label": "Fusarium", 
+"meta": [
+{
+"$": 838968, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium species EF1a 17", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198071", 
+"@id": "otu198071", 
+"@label": "Fusarium cerealis", 
+"meta": [
+{
+"$": 750232, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium cerealis EF1a 18", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198072", 
+"@id": "otu198072", 
+"@label": "Fusarium acuminatum", 
+"meta": [
+{
+"$": 264391, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium acuminatum EF1a 9", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198073", 
+"@id": "otu198073", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum EF1a 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198074", 
+"@id": "otu198074", 
+"@label": "Fusarium culmorum", 
+"meta": [
+{
+"$": 264394, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium culmorum EF1a 19", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198075", 
+"@id": "otu198075", 
+"@label": "Fusarium acuminatum", 
+"meta": [
+{
+"$": 264391, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium acuminatum EF1a 8", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198076", 
+"@id": "otu198076", 
+"@label": "Fusarium heterosporum", 
+"meta": [
+{
+"$": 137089, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium heterosporum EF1a 15", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198077", 
+"@id": "otu198077", 
+"@label": "Fusarium graminearum species complex", 
+"meta": [
+{
+"$": 193688, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium graminearum EF1a 20", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198078", 
+"@id": "otu198078", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum EF1a 6", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198079", 
+"@id": "otu198079", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum EF1a 10", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198080", 
+"@id": "otu198080", 
+"@label": "Fusarium tricinctum", 
+"meta": [
+{
+"$": 938587, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium tricinctum EF1a 11", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198081", 
+"@id": "otu198081", 
+"@label": "Fusarium avenaceum", 
+"meta": [
+{
+"$": 406461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium avenaceum EF1a 7", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu198082", 
+"@id": "otu198082", 
+"@label": "Fusarium heterosporum", 
+"meta": [
+{
+"$": 137089, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium heterosporum EF1a 16", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees824", 
+"@otus": "otus824", 
+"tree": [
+{
+"@about": "#tree1578", 
+"@id": "tree1578", 
+"edge": [
+{
+"@id": "edge465667", 
+"@source": "node465666", 
+"@target": "node465667"
+}, 
+{
+"@id": "edge465668", 
+"@source": "node465667", 
+"@target": "node465668"
+}, 
+{
+"@id": "edge465669", 
+"@source": "node465668", 
+"@target": "node465669"
+}, 
+{
+"@id": "edge465670", 
+"@source": "node465669", 
+"@target": "node465670"
+}, 
+{
+"@id": "edge465671", 
+"@source": "node465670", 
+"@target": "node465671"
+}, 
+{
+"@id": "edge465672", 
+"@source": "node465671", 
+"@target": "node465672"
+}, 
+{
+"@id": "edge465673", 
+"@source": "node465671", 
+"@target": "node465673"
+}, 
+{
+"@id": "edge465674", 
+"@source": "node465670", 
+"@target": "node465674"
+}, 
+{
+"@id": "edge465675", 
+"@source": "node465669", 
+"@target": "node465675"
+}, 
+{
+"@id": "edge465676", 
+"@source": "node465668", 
+"@target": "node465676"
+}, 
+{
+"@id": "edge465677", 
+"@source": "node465676", 
+"@target": "node465677"
+}, 
+{
+"@id": "edge465678", 
+"@source": "node465677", 
+"@target": "node465678"
+}, 
+{
+"@id": "edge465679", 
+"@source": "node465678", 
+"@target": "node465679"
+}, 
+{
+"@id": "edge465680", 
+"@source": "node465679", 
+"@target": "node465680"
+}, 
+{
+"@id": "edge465681", 
+"@source": "node465679", 
+"@target": "node465681"
+}, 
+{
+"@id": "edge465682", 
+"@source": "node465678", 
+"@target": "node465682"
+}, 
+{
+"@id": "edge465683", 
+"@source": "node465677", 
+"@target": "node465683"
+}, 
+{
+"@id": "edge465684", 
+"@source": "node465676", 
+"@target": "node465684"
+}, 
+{
+"@id": "edge465685", 
+"@source": "node465667", 
+"@target": "node465685"
+}, 
+{
+"@id": "edge465686", 
+"@source": "node465666", 
+"@target": "node465686"
+}, 
+{
+"@id": "edge465687", 
+"@source": "node465686", 
+"@target": "node465687"
+}, 
+{
+"@id": "edge465688", 
+"@source": "node465687", 
+"@target": "node465688"
+}, 
+{
+"@id": "edge465689", 
+"@source": "node465688", 
+"@target": "node465689"
+}, 
+{
+"@id": "edge465690", 
+"@source": "node465688", 
+"@target": "node465690"
+}, 
+{
+"@id": "edge465691", 
+"@source": "node465687", 
+"@target": "node465691"
+}, 
+{
+"@id": "edge465692", 
+"@source": "node465686", 
+"@target": "node465692"
+}
+], 
+"meta": [
+{
+"$": "node465666", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node465666", 
+"@root": "true"
+}, 
+{
+"@id": "node465667"
+}, 
+{
+"@id": "node465668"
+}, 
+{
+"@id": "node465669"
+}, 
+{
+"@id": "node465670"
+}, 
+{
+"@id": "node465671"
+}, 
+{
+"@id": "node465672", 
+"@otu": "otu198059"
+}, 
+{
+"@id": "node465673", 
+"@otu": "otu198054"
+}, 
+{
+"@id": "node465674", 
+"@otu": "otu198049"
+}, 
+{
+"@id": "node465675", 
+"@otu": "otu198051"
+}, 
+{
+"@id": "node465676"
+}, 
+{
+"@id": "node465677"
+}, 
+{
+"@id": "node465678"
+}, 
+{
+"@id": "node465679"
+}, 
+{
+"@id": "node465680", 
+"@otu": "otu198058"
+}, 
+{
+"@id": "node465681", 
+"@otu": "otu198052"
+}, 
+{
+"@id": "node465682", 
+"@otu": "otu198056"
+}, 
+{
+"@id": "node465683", 
+"@otu": "otu198060"
+}, 
+{
+"@id": "node465684", 
+"@otu": "otu198062"
+}, 
+{
+"@id": "node465685", 
+"@otu": "otu198057"
+}, 
+{
+"@id": "node465686"
+}, 
+{
+"@id": "node465687"
+}, 
+{
+"@id": "node465688"
+}, 
+{
+"@id": "node465689", 
+"@otu": "otu198050"
+}, 
+{
+"@id": "node465690", 
+"@otu": "otu198053"
+}, 
+{
+"@id": "node465691", 
+"@otu": "otu198055"
+}, 
+{
+"@id": "node465692", 
+"@otu": "otu198061"
+}
+]
+}, 
+{
+"@about": "#tree1579", 
+"@id": "tree1579", 
+"edge": [
+{
+"@id": "edge465694", 
+"@source": "node465693", 
+"@target": "node465694"
+}, 
+{
+"@id": "edge465695", 
+"@source": "node465694", 
+"@target": "node465695"
+}, 
+{
+"@id": "edge465696", 
+"@source": "node465695", 
+"@target": "node465696"
+}, 
+{
+"@id": "edge465697", 
+"@source": "node465696", 
+"@target": "node465697"
+}, 
+{
+"@id": "edge465698", 
+"@source": "node465697", 
+"@target": "node465698"
+}, 
+{
+"@id": "edge465699", 
+"@source": "node465697", 
+"@target": "node465699"
+}, 
+{
+"@id": "edge465700", 
+"@source": "node465696", 
+"@target": "node465700"
+}, 
+{
+"@id": "edge465701", 
+"@source": "node465700", 
+"@target": "node465701"
+}, 
+{
+"@id": "edge465702", 
+"@source": "node465701", 
+"@target": "node465702"
+}, 
+{
+"@id": "edge465703", 
+"@source": "node465702", 
+"@target": "node465703"
+}, 
+{
+"@id": "edge465704", 
+"@source": "node465703", 
+"@target": "node465704"
+}, 
+{
+"@id": "edge465705", 
+"@source": "node465703", 
+"@target": "node465705"
+}, 
+{
+"@id": "edge465706", 
+"@source": "node465702", 
+"@target": "node465706"
+}, 
+{
+"@id": "edge465707", 
+"@source": "node465706", 
+"@target": "node465707"
+}, 
+{
+"@id": "edge465708", 
+"@source": "node465707", 
+"@target": "node465708"
+}, 
+{
+"@id": "edge465709", 
+"@source": "node465707", 
+"@target": "node465709"
+}, 
+{
+"@id": "edge465710", 
+"@source": "node465706", 
+"@target": "node465710"
+}, 
+{
+"@id": "edge465711", 
+"@source": "node465701", 
+"@target": "node465711"
+}, 
+{
+"@id": "edge465712", 
+"@source": "node465700", 
+"@target": "node465712"
+}, 
+{
+"@id": "edge465713", 
+"@source": "node465695", 
+"@target": "node465713"
+}, 
+{
+"@id": "edge465714", 
+"@source": "node465713", 
+"@target": "node465714"
+}, 
+{
+"@id": "edge465715", 
+"@source": "node465714", 
+"@target": "node465715"
+}, 
+{
+"@id": "edge465716", 
+"@source": "node465714", 
+"@target": "node465716"
+}, 
+{
+"@id": "edge465717", 
+"@source": "node465716", 
+"@target": "node465717"
+}, 
+{
+"@id": "edge465718", 
+"@source": "node465716", 
+"@target": "node465718"
+}, 
+{
+"@id": "edge465719", 
+"@source": "node465713", 
+"@target": "node465719"
+}, 
+{
+"@id": "edge465720", 
+"@source": "node465719", 
+"@target": "node465720"
+}, 
+{
+"@id": "edge465721", 
+"@source": "node465719", 
+"@target": "node465721"
+}, 
+{
+"@id": "edge465722", 
+"@source": "node465694", 
+"@target": "node465722"
+}, 
+{
+"@id": "edge465723", 
+"@source": "node465722", 
+"@target": "node465723"
+}, 
+{
+"@id": "edge465724", 
+"@source": "node465722", 
+"@target": "node465724"
+}, 
+{
+"@id": "edge465725", 
+"@source": "node465693", 
+"@target": "node465725"
+}, 
+{
+"@id": "edge465726", 
+"@source": "node465725", 
+"@target": "node465726"
+}, 
+{
+"@id": "edge465727", 
+"@source": "node465726", 
+"@target": "node465727"
+}, 
+{
+"@id": "edge465728", 
+"@source": "node465727", 
+"@target": "node465728"
+}, 
+{
+"@id": "edge465729", 
+"@source": "node465727", 
+"@target": "node465729"
+}, 
+{
+"@id": "edge465730", 
+"@source": "node465726", 
+"@target": "node465730"
+}, 
+{
+"@id": "edge465731", 
+"@source": "node465725", 
+"@target": "node465731"
+}
+], 
+"meta": [
+{
+"$": "node465693", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node465693", 
+"@root": "true"
+}, 
+{
+"@id": "node465694"
+}, 
+{
+"@id": "node465695"
+}, 
+{
+"@id": "node465696"
+}, 
+{
+"@id": "node465697"
+}, 
+{
+"@id": "node465698", 
+"@otu": "otu198075"
+}, 
+{
+"@id": "node465699", 
+"@otu": "otu198072"
+}, 
+{
+"@id": "node465700"
+}, 
+{
+"@id": "node465701"
+}, 
+{
+"@id": "node465702"
+}, 
+{
+"@id": "node465703"
+}, 
+{
+"@id": "node465704", 
+"@otu": "otu198067"
+}, 
+{
+"@id": "node465705", 
+"@otu": "otu198073"
+}, 
+{
+"@id": "node465706"
+}, 
+{
+"@id": "node465707"
+}, 
+{
+"@id": "node465708", 
+"@otu": "otu198065"
+}, 
+{
+"@id": "node465709", 
+"@otu": "otu198068"
+}, 
+{
+"@id": "node465710", 
+"@otu": "otu198066"
+}, 
+{
+"@id": "node465711", 
+"@otu": "otu198078"
+}, 
+{
+"@id": "node465712", 
+"@otu": "otu198081"
+}, 
+{
+"@id": "node465713"
+}, 
+{
+"@id": "node465714"
+}, 
+{
+"@id": "node465715", 
+"@otu": "otu198069"
+}, 
+{
+"@id": "node465716"
+}, 
+{
+"@id": "node465717", 
+"@otu": "otu198063"
+}, 
+{
+"@id": "node465718", 
+"@otu": "otu198064"
+}, 
+{
+"@id": "node465719"
+}, 
+{
+"@id": "node465720", 
+"@otu": "otu198079"
+}, 
+{
+"@id": "node465721", 
+"@otu": "otu198080"
+}, 
+{
+"@id": "node465722"
+}, 
+{
+"@id": "node465723", 
+"@otu": "otu198076"
+}, 
+{
+"@id": "node465724", 
+"@otu": "otu198082"
+}, 
+{
+"@id": "node465725"
+}, 
+{
+"@id": "node465726"
+}, 
+{
+"@id": "node465727"
+}, 
+{
+"@id": "node465728", 
+"@otu": "otu198071"
+}, 
+{
+"@id": "node465729", 
+"@otu": "otu198074"
+}, 
+{
+"@id": "node465730", 
+"@otu": "otu198077"
+}, 
+{
+"@id": "node465731", 
+"@otu": "otu198070"
+}
+]
+}, 
+{
+"@about": "#tree1580", 
+"@id": "tree1580", 
+"edge": [
+{
+"@id": "edge465733", 
+"@source": "node465732", 
+"@target": "node465733"
+}, 
+{
+"@id": "edge465734", 
+"@source": "node465733", 
+"@target": "node465734"
+}, 
+{
+"@id": "edge465735", 
+"@source": "node465734", 
+"@target": "node465735"
+}, 
+{
+"@id": "edge465736", 
+"@source": "node465734", 
+"@target": "node465736"
+}, 
+{
+"@id": "edge465737", 
+"@source": "node465733", 
+"@target": "node465737"
+}, 
+{
+"@id": "edge465738", 
+"@source": "node465737", 
+"@target": "node465738"
+}, 
+{
+"@id": "edge465739", 
+"@source": "node465738", 
+"@target": "node465739"
+}, 
+{
+"@id": "edge465740", 
+"@source": "node465739", 
+"@target": "node465740"
+}, 
+{
+"@id": "edge465741", 
+"@source": "node465740", 
+"@target": "node465741"
+}, 
+{
+"@id": "edge465742", 
+"@source": "node465740", 
+"@target": "node465742"
+}, 
+{
+"@id": "edge465743", 
+"@source": "node465739", 
+"@target": "node465743"
+}, 
+{
+"@id": "edge465744", 
+"@source": "node465743", 
+"@target": "node465744"
+}, 
+{
+"@id": "edge465745", 
+"@source": "node465743", 
+"@target": "node465745"
+}, 
+{
+"@id": "edge465746", 
+"@source": "node465738", 
+"@target": "node465746"
+}, 
+{
+"@id": "edge465747", 
+"@source": "node465737", 
+"@target": "node465747"
+}, 
+{
+"@id": "edge465748", 
+"@source": "node465747", 
+"@target": "node465748"
+}, 
+{
+"@id": "edge465749", 
+"@source": "node465748", 
+"@target": "node465749"
+}, 
+{
+"@id": "edge465750", 
+"@source": "node465748", 
+"@target": "node465750"
+}, 
+{
+"@id": "edge465751", 
+"@source": "node465747", 
+"@target": "node465751"
+}, 
+{
+"@id": "edge465752", 
+"@source": "node465751", 
+"@target": "node465752"
+}, 
+{
+"@id": "edge465753", 
+"@source": "node465752", 
+"@target": "node465753"
+}, 
+{
+"@id": "edge465754", 
+"@source": "node465753", 
+"@target": "node465754"
+}, 
+{
+"@id": "edge465755", 
+"@source": "node465754", 
+"@target": "node465755"
+}, 
+{
+"@id": "edge465756", 
+"@source": "node465754", 
+"@target": "node465756"
+}, 
+{
+"@id": "edge465757", 
+"@source": "node465753", 
+"@target": "node465757"
+}, 
+{
+"@id": "edge465758", 
+"@source": "node465757", 
+"@target": "node465758"
+}, 
+{
+"@id": "edge465759", 
+"@source": "node465758", 
+"@target": "node465759"
+}, 
+{
+"@id": "edge465760", 
+"@source": "node465758", 
+"@target": "node465760"
+}, 
+{
+"@id": "edge465761", 
+"@source": "node465757", 
+"@target": "node465761"
+}, 
+{
+"@id": "edge465762", 
+"@source": "node465761", 
+"@target": "node465762"
+}, 
+{
+"@id": "edge465763", 
+"@source": "node465761", 
+"@target": "node465763"
+}, 
+{
+"@id": "edge465764", 
+"@source": "node465752", 
+"@target": "node465764"
+}, 
+{
+"@id": "edge465765", 
+"@source": "node465751", 
+"@target": "node465765"
+}, 
+{
+"@id": "edge465766", 
+"@source": "node465732", 
+"@target": "node465766"
+}, 
+{
+"@id": "edge465767", 
+"@source": "node465766", 
+"@target": "node465767"
+}, 
+{
+"@id": "edge465768", 
+"@source": "node465767", 
+"@target": "node465768"
+}, 
+{
+"@id": "edge465769", 
+"@source": "node465768", 
+"@target": "node465769"
+}, 
+{
+"@id": "edge465770", 
+"@source": "node465768", 
+"@target": "node465770"
+}, 
+{
+"@id": "edge465771", 
+"@source": "node465767", 
+"@target": "node465771"
+}, 
+{
+"@id": "edge465772", 
+"@source": "node465766", 
+"@target": "node465772"
+}
+], 
+"meta": [
+{
+"$": "node465732", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Choose me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node465732", 
+"@root": "true"
+}, 
+{
+"@id": "node465733"
+}, 
+{
+"@id": "node465734"
+}, 
+{
+"@id": "node465735", 
+"@otu": "otu198041"
+}, 
+{
+"@id": "node465736", 
+"@otu": "otu198031"
+}, 
+{
+"@id": "node465737"
+}, 
+{
+"@id": "node465738"
+}, 
+{
+"@id": "node465739"
+}, 
+{
+"@id": "node465740"
+}, 
+{
+"@id": "node465741", 
+"@otu": "otu198037"
+}, 
+{
+"@id": "node465742", 
+"@otu": "otu198045"
+}, 
+{
+"@id": "node465743"
+}, 
+{
+"@id": "node465744", 
+"@otu": "otu198042"
+}, 
+{
+"@id": "node465745", 
+"@otu": "otu198032"
+}, 
+{
+"@id": "node465746", 
+"@otu": "otu198036"
+}, 
+{
+"@id": "node465747"
+}, 
+{
+"@id": "node465748"
+}, 
+{
+"@id": "node465749", 
+"@otu": "otu198035"
+}, 
+{
+"@id": "node465750", 
+"@otu": "otu198043"
+}, 
+{
+"@id": "node465751"
+}, 
+{
+"@id": "node465752"
+}, 
+{
+"@id": "node465753"
+}, 
+{
+"@id": "node465754"
+}, 
+{
+"@id": "node465755", 
+"@otu": "otu198038"
+}, 
+{
+"@id": "node465756", 
+"@otu": "otu198039"
+}, 
+{
+"@id": "node465757"
+}, 
+{
+"@id": "node465758"
+}, 
+{
+"@id": "node465759", 
+"@otu": "otu198030"
+}, 
+{
+"@id": "node465760", 
+"@otu": "otu198048"
+}, 
+{
+"@id": "node465761"
+}, 
+{
+"@id": "node465762", 
+"@otu": "otu198046"
+}, 
+{
+"@id": "node465763", 
+"@otu": "otu198034"
+}, 
+{
+"@id": "node465764", 
+"@otu": "otu198033"
+}, 
+{
+"@id": "node465765", 
+"@otu": "otu198047"
+}, 
+{
+"@id": "node465766"
+}, 
+{
+"@id": "node465767"
+}, 
+{
+"@id": "node465768"
+}, 
+{
+"@id": "node465769", 
+"@otu": "otu198029"
+}, 
+{
+"@id": "node465770", 
+"@otu": "otu198028"
+}, 
+{
+"@id": "node465771", 
+"@otu": "otu198040"
+}, 
+{
+"@id": "node465772", 
+"@otu": "otu198044"
+}
+]
+}
+]
+}
+}
+}

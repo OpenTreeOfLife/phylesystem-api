@@ -1,0 +1,2643 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Tang, L., Zou, X.-H., Achoundong, G., Potgieter, C., Second, G., Zhang, D.-Y., & Ge, S. 2010. Phylogeny and biogeography of the rice tribe (Oryzeae): Evidence from combined analysis of 20 chloroplast fragments. Mol. Phyl. Evol. 54: 266-277", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.ympev.2009.08.007", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Jiabin Deng", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "922", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2441400, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "cpDNA", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus922", 
+"otu": [
+{
+"@about": "#otu206747", 
+"@id": "otu206747", 
+"@label": "Oryza sativa", 
+"meta": [
+{
+"$": 709894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.sat", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206748", 
+"@id": "otu206748", 
+"@label": "Oryza rufipogon", 
+"meta": [
+{
+"$": 135756, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.ruf", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206749", 
+"@id": "otu206749", 
+"@label": "Oryza glaberrima", 
+"meta": [
+{
+"$": 709876, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.gla", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206750", 
+"@id": "otu206750", 
+"@label": "Oryza meridionalis", 
+"meta": [
+{
+"$": 831087, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.mer", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206751", 
+"@id": "otu206751", 
+"@label": "Oryza punctata", 
+"meta": [
+{
+"$": 709892, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.pun.B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206752", 
+"@id": "otu206752", 
+"@label": "Oryza malampuzhaensis", 
+"meta": [
+{
+"$": 36487, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.mal", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206753", 
+"@id": "otu206753", 
+"@label": "Oryza officinalis", 
+"meta": [
+{
+"$": 709884, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.off", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206754", 
+"@id": "otu206754", 
+"@label": "Oryza punctata", 
+"meta": [
+{
+"$": 709892, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.pun.BC", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206755", 
+"@id": "otu206755", 
+"@label": "Oryza rhizomatis", 
+"meta": [
+{
+"$": 67120, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.rhi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206756", 
+"@id": "otu206756", 
+"@label": "Oryza latifolia", 
+"meta": [
+{
+"$": 709882, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.lat", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206757", 
+"@id": "otu206757", 
+"@label": "Oryza australiensis", 
+"meta": [
+{
+"$": 709898, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.aus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206758", 
+"@id": "otu206758", 
+"@label": "Oryza coarctata", 
+"meta": [
+{
+"$": 272949, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.coa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206759", 
+"@id": "otu206759", 
+"@label": "Oryza brachyantha", 
+"meta": [
+{
+"$": 709900, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.bra", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206760", 
+"@id": "otu206760", 
+"@label": "Oryza ridleyi", 
+"meta": [
+{
+"$": 755607, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.rid", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206761", 
+"@id": "otu206761", 
+"@label": "Oryza granulata", 
+"meta": [
+{
+"$": 858818, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.gra", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206762", 
+"@id": "otu206762", 
+"@label": "Oryza neocaledonica", 
+"meta": [
+{
+"$": 105471, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "O.neoca", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206763", 
+"@id": "otu206763", 
+"@label": "Leersia oryzoides", 
+"meta": [
+{
+"$": 137222, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "L.ory", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206764", 
+"@id": "otu206764", 
+"@label": "Leersia hexandra", 
+"meta": [
+{
+"$": 1032135, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "L.hex", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206765", 
+"@id": "otu206765", 
+"@label": "Leersia perrieri", 
+"meta": [
+{
+"$": 272926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "L.per", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206766", 
+"@id": "otu206766", 
+"@label": "Leersia tisserantii", 
+"meta": [
+{
+"$": 890604, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "L.tis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206767", 
+"@id": "otu206767", 
+"@label": "Maltebrunia letestui", 
+"meta": [
+{
+"$": 105473, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mal.se", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206768", 
+"@id": "otu206768", 
+"@label": "Prosphytochloa prehensilis", 
+"meta": [
+{
+"$": 890593, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pro.pre.se", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206769", 
+"@id": "otu206769", 
+"@label": "Potamophila parviflora", 
+"meta": [
+{
+"$": 939500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pot.par.se", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206770", 
+"@id": "otu206770", 
+"@label": "Potamophila parviflora", 
+"meta": [
+{
+"$": 939500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pot.par", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206771", 
+"@id": "otu206771", 
+"@label": "Prosphytochloa prehensilis", 
+"meta": [
+{
+"$": 890593, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pro.pre", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206772", 
+"@id": "otu206772", 
+"@label": "Zizania aquatica", 
+"meta": [
+{
+"$": 670554, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ziz.aqu", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206773", 
+"@id": "otu206773", 
+"@label": "Zizania latifolia", 
+"meta": [
+{
+"$": 11561, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ziz.lat", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206774", 
+"@id": "otu206774", 
+"@label": "Rhynchoryza subulata", 
+"meta": [
+{
+"$": 858810, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rhy.sub", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206775", 
+"@id": "otu206775", 
+"@label": "Hygroryza aristata", 
+"meta": [
+{
+"$": 890607, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hyg.ari", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206776", 
+"@id": "otu206776", 
+"@label": "Luziola fluitans", 
+"meta": [
+{
+"$": 890597, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Luz.flu", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206777", 
+"@id": "otu206777", 
+"@label": "Luziola leiocarpa", 
+"meta": [
+{
+"$": 890597, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Luz.lei", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206778", 
+"@id": "otu206778", 
+"@label": "Zizaniopsis villanensis", 
+"meta": [
+{
+"$": 858823, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ziz.vil", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206779", 
+"@id": "otu206779", 
+"@label": "Chikusichloa aquatica", 
+"meta": [
+{
+"$": 91189, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Chi.aqu", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206780", 
+"@id": "otu206780", 
+"@label": "Chikusichloa mutica", 
+"meta": [
+{
+"$": 105469, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Chi.mut", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206781", 
+"@id": "otu206781", 
+"@label": "Ehrharta erecta", 
+"meta": [
+{
+"$": 407885, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ehr.ere", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu206782", 
+"@id": "otu206782", 
+"@label": "Phyllostachys aurea", 
+"meta": [
+{
+"$": 819819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phy.aur", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296503", 
+"@id": "otu296503", 
+"@label": "Oryza sativa", 
+"meta": [
+{
+"$": 709894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza sativa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296504", 
+"@id": "otu296504", 
+"@label": "Oryza rufipogon", 
+"meta": [
+{
+"$": 135756, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza rufipogon ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296505", 
+"@id": "otu296505", 
+"@label": "Oryza glaberrima", 
+"meta": [
+{
+"$": 709876, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza glaberrima ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296506", 
+"@id": "otu296506", 
+"@label": "Oryza meridionalis", 
+"meta": [
+{
+"$": 831087, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza meridionalis ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296507", 
+"@id": "otu296507", 
+"@label": "Oryza punctata", 
+"meta": [
+{
+"$": 709892, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza punctata.B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296508", 
+"@id": "otu296508", 
+"@label": "Oryza malampuzhaensis", 
+"meta": [
+{
+"$": 36487, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza malampuzhaensis ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296509", 
+"@id": "otu296509", 
+"@label": "Oryza officinalis", 
+"meta": [
+{
+"$": 709884, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza officinalis ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296510", 
+"@id": "otu296510", 
+"@label": "Oryza punctata", 
+"meta": [
+{
+"$": 709892, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza punctata .BC", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296511", 
+"@id": "otu296511", 
+"@label": "Oryza rhizomatis", 
+"meta": [
+{
+"$": 67120, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza rhizomatis ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296512", 
+"@id": "otu296512", 
+"@label": "Oryza latifolia", 
+"meta": [
+{
+"$": 709882, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza latifolia ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296513", 
+"@id": "otu296513", 
+"@label": "Oryza australiensis", 
+"meta": [
+{
+"$": 709898, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza australiensis ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296514", 
+"@id": "otu296514", 
+"@label": "Oryza coarctata", 
+"meta": [
+{
+"$": 272949, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza coarctata ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296515", 
+"@id": "otu296515", 
+"@label": "Oryza brachyantha", 
+"meta": [
+{
+"$": 709900, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza brachyantha ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296516", 
+"@id": "otu296516", 
+"@label": "Oryza ridleyi", 
+"meta": [
+{
+"$": 755607, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza ridleyi ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296517", 
+"@id": "otu296517", 
+"@label": "Oryza granulata", 
+"meta": [
+{
+"$": 858818, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza granulata ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296518", 
+"@id": "otu296518", 
+"@label": "Oryza neocaledonica", 
+"meta": [
+{
+"$": 105471, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza neocaledonica ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296519", 
+"@id": "otu296519", 
+"@label": "Leersia oryzoides", 
+"meta": [
+{
+"$": 137222, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Leersia oryzoides ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296520", 
+"@id": "otu296520", 
+"@label": "Leersia hexandra", 
+"meta": [
+{
+"$": 1032135, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Leersia hexandra ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296521", 
+"@id": "otu296521", 
+"@label": "Leersia perrieri", 
+"meta": [
+{
+"$": 272926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Leersia perrieri ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296522", 
+"@id": "otu296522", 
+"@label": "Leersia tisserantii", 
+"meta": [
+{
+"$": 890604, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Leersia tisserantii ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296523", 
+"@id": "otu296523", 
+"@label": "Maltebrunia letestui", 
+"meta": [
+{
+"$": 105473, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Maltebrunia letestui ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296524", 
+"@id": "otu296524", 
+"@label": "Prosphytochloa prehensilis", 
+"meta": [
+{
+"$": 890593, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Prosphytochloa prehensilis.se", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296525", 
+"@id": "otu296525", 
+"@label": "Potamophila parviflora", 
+"meta": [
+{
+"$": 939500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Potamophila parviflora .se", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296526", 
+"@id": "otu296526", 
+"@label": "Potamophila parviflora", 
+"meta": [
+{
+"$": 939500, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Potamophila parviflora ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296527", 
+"@id": "otu296527", 
+"@label": "Prosphytochloa prehensilis", 
+"meta": [
+{
+"$": 890593, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Prosphytochloa prehensilis ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296528", 
+"@id": "otu296528", 
+"@label": "Zizania aquatica", 
+"meta": [
+{
+"$": 670554, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Zizania aquatica ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296529", 
+"@id": "otu296529", 
+"@label": "Zizania latifolia", 
+"meta": [
+{
+"$": 11561, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Zizania latifolia ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296530", 
+"@id": "otu296530", 
+"@label": "Rhynchoryza subulata", 
+"meta": [
+{
+"$": 858810, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rhynchoryza subulata ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296531", 
+"@id": "otu296531", 
+"@label": "Hygroryza aristata", 
+"meta": [
+{
+"$": 890607, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hygroryza aristata ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296532", 
+"@id": "otu296532", 
+"@label": "Luziola fluitans", 
+"meta": [
+{
+"$": 890597, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Luziola fluitans ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296533", 
+"@id": "otu296533", 
+"@label": "Luziola leiocarpa", 
+"meta": [
+{
+"$": 890597, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Luziola leiocarpa ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296534", 
+"@id": "otu296534", 
+"@label": "Zizaniopsis villanensis", 
+"meta": [
+{
+"$": 858823, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Zizaniopsis villanensis ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296535", 
+"@id": "otu296535", 
+"@label": "Chikusichloa aquatica", 
+"meta": [
+{
+"$": 91189, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Chikusichloa aquatica ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296536", 
+"@id": "otu296536", 
+"@label": "Chikusichloa mutica", 
+"meta": [
+{
+"$": 105469, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Chikusichloa mutica ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296537", 
+"@id": "otu296537", 
+"@label": "Ehrharta erecta", 
+"meta": [
+{
+"$": 407885, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ehrharta erecta ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu296538", 
+"@id": "otu296538", 
+"@label": "Phyllostachys aurea", 
+"meta": [
+{
+"$": 819819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phyllostachys aurea ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees922", 
+"@otus": "otus922", 
+"tree": [
+{
+"@about": "#tree1821", 
+"@id": "tree1821", 
+"edge": [
+{
+"@id": "edge489828", 
+"@length": 0.014255, 
+"@source": "node489827", 
+"@target": "node489828"
+}, 
+{
+"@id": "edge489829", 
+"@length": 0.008323, 
+"@source": "node489828", 
+"@target": "node489829"
+}, 
+{
+"@id": "edge489830", 
+"@length": 0.002561, 
+"@source": "node489829", 
+"@target": "node489830"
+}, 
+{
+"@id": "edge489831", 
+"@length": 0.003881, 
+"@source": "node489830", 
+"@target": "node489831"
+}, 
+{
+"@id": "edge489832", 
+"@length": 0.002535, 
+"@source": "node489831", 
+"@target": "node489832"
+}, 
+{
+"@id": "edge489833", 
+"@length": 0.001947, 
+"@source": "node489832", 
+"@target": "node489833"
+}, 
+{
+"@id": "edge489834", 
+"@length": 0.000847, 
+"@source": "node489833", 
+"@target": "node489834"
+}, 
+{
+"@id": "edge489835", 
+"@length": 0.003436, 
+"@source": "node489834", 
+"@target": "node489835"
+}, 
+{
+"@id": "edge489836", 
+"@length": 0.000141, 
+"@source": "node489835", 
+"@target": "node489836"
+}, 
+{
+"@id": "edge489837", 
+"@length": 0.000145, 
+"@source": "node489836", 
+"@target": "node489837"
+}, 
+{
+"@id": "edge489838", 
+"@length": 0.001717, 
+"@source": "node489837", 
+"@target": "node489838"
+}, 
+{
+"@id": "edge489839", 
+"@length": 0.00038, 
+"@source": "node489837", 
+"@target": "node489839"
+}, 
+{
+"@id": "edge489840", 
+"@length": 0.000326, 
+"@source": "node489836", 
+"@target": "node489840"
+}, 
+{
+"@id": "edge489841", 
+"@length": 0.00043, 
+"@source": "node489835", 
+"@target": "node489841"
+}, 
+{
+"@id": "edge489842", 
+"@length": 0.003147, 
+"@source": "node489834", 
+"@target": "node489842"
+}, 
+{
+"@id": "edge489843", 
+"@length": 0.000341, 
+"@source": "node489842", 
+"@target": "node489843"
+}, 
+{
+"@id": "edge489844", 
+"@length": 0.000631, 
+"@source": "node489842", 
+"@target": "node489844"
+}, 
+{
+"@id": "edge489845", 
+"@length": 0.001252, 
+"@source": "node489833", 
+"@target": "node489845"
+}, 
+{
+"@id": "edge489846", 
+"@length": 0.000379, 
+"@source": "node489845", 
+"@target": "node489846"
+}, 
+{
+"@id": "edge489847", 
+"@length": 0.00011, 
+"@source": "node489846", 
+"@target": "node489847"
+}, 
+{
+"@id": "edge489848", 
+"@length": 0.00038, 
+"@source": "node489847", 
+"@target": "node489848"
+}, 
+{
+"@id": "edge489849", 
+"@length": 0.000285, 
+"@source": "node489847", 
+"@target": "node489849"
+}, 
+{
+"@id": "edge489850", 
+"@length": 0.000743, 
+"@source": "node489846", 
+"@target": "node489850"
+}, 
+{
+"@id": "edge489851", 
+"@length": 0.000684, 
+"@source": "node489845", 
+"@target": "node489851"
+}, 
+{
+"@id": "edge489852", 
+"@length": 0.005135, 
+"@source": "node489832", 
+"@target": "node489852"
+}, 
+{
+"@id": "edge489853", 
+"@length": 0.003421, 
+"@source": "node489831", 
+"@target": "node489853"
+}, 
+{
+"@id": "edge489854", 
+"@length": 0.001813, 
+"@source": "node489830", 
+"@target": "node489854"
+}, 
+{
+"@id": "edge489855", 
+"@length": 0.001465, 
+"@source": "node489854", 
+"@target": "node489855"
+}, 
+{
+"@id": "edge489856", 
+"@length": 0.011581, 
+"@source": "node489855", 
+"@target": "node489856"
+}, 
+{
+"@id": "edge489857", 
+"@length": 0.006308, 
+"@source": "node489855", 
+"@target": "node489857"
+}, 
+{
+"@id": "edge489858", 
+"@length": 0.004299, 
+"@source": "node489854", 
+"@target": "node489858"
+}, 
+{
+"@id": "edge489859", 
+"@length": 0.000833, 
+"@source": "node489858", 
+"@target": "node489859"
+}, 
+{
+"@id": "edge489860", 
+"@length": 0.001809, 
+"@source": "node489858", 
+"@target": "node489860"
+}, 
+{
+"@id": "edge489861", 
+"@length": 0.006236, 
+"@source": "node489829", 
+"@target": "node489861"
+}, 
+{
+"@id": "edge489862", 
+"@length": 0.004108, 
+"@source": "node489861", 
+"@target": "node489862"
+}, 
+{
+"@id": "edge489863", 
+"@length": 0.009152, 
+"@source": "node489862", 
+"@target": "node489863"
+}, 
+{
+"@id": "edge489864", 
+"@length": 0.000381, 
+"@source": "node489863", 
+"@target": "node489864"
+}, 
+{
+"@id": "edge489865", 
+"@length": 0.000102, 
+"@source": "node489864", 
+"@target": "node489865"
+}, 
+{
+"@id": "edge489866", 
+"@length": 0.000356, 
+"@source": "node489864", 
+"@target": "node489866"
+}, 
+{
+"@id": "edge489867", 
+"@length": 0.001306, 
+"@source": "node489863", 
+"@target": "node489867"
+}, 
+{
+"@id": "edge489868", 
+"@length": 0.010517, 
+"@source": "node489862", 
+"@target": "node489868"
+}, 
+{
+"@id": "edge489869", 
+"@length": 0.001634, 
+"@source": "node489861", 
+"@target": "node489869"
+}, 
+{
+"@id": "edge489870", 
+"@length": 0.002877, 
+"@source": "node489869", 
+"@target": "node489870"
+}, 
+{
+"@id": "edge489871", 
+"@length": 0.00201, 
+"@source": "node489869", 
+"@target": "node489871"
+}, 
+{
+"@id": "edge489872", 
+"@length": 0.002755, 
+"@source": "node489828", 
+"@target": "node489872"
+}, 
+{
+"@id": "edge489873", 
+"@length": 0.000405, 
+"@source": "node489872", 
+"@target": "node489873"
+}, 
+{
+"@id": "edge489874", 
+"@length": 0.006108, 
+"@source": "node489873", 
+"@target": "node489874"
+}, 
+{
+"@id": "edge489875", 
+"@length": 9.352e-05, 
+"@source": "node489874", 
+"@target": "node489875"
+}, 
+{
+"@id": "edge489876", 
+"@length": 0.000255, 
+"@source": "node489875", 
+"@target": "node489876"
+}, 
+{
+"@id": "edge489877", 
+"@source": "node489875", 
+"@target": "node489877"
+}, 
+{
+"@id": "edge489878", 
+"@length": 9.267e-05, 
+"@source": "node489874", 
+"@target": "node489878"
+}, 
+{
+"@id": "edge489879", 
+"@length": 0.000468, 
+"@source": "node489873", 
+"@target": "node489879"
+}, 
+{
+"@id": "edge489880", 
+"@length": 0.000494, 
+"@source": "node489879", 
+"@target": "node489880"
+}, 
+{
+"@id": "edge489881", 
+"@length": 0.001392, 
+"@source": "node489880", 
+"@target": "node489881"
+}, 
+{
+"@id": "edge489882", 
+"@length": 0.009387, 
+"@source": "node489881", 
+"@target": "node489882"
+}, 
+{
+"@id": "edge489883", 
+"@length": 0.007741, 
+"@source": "node489882", 
+"@target": "node489883"
+}, 
+{
+"@id": "edge489884", 
+"@length": 0.001124, 
+"@source": "node489882", 
+"@target": "node489884"
+}, 
+{
+"@id": "edge489885", 
+"@length": 0.006166, 
+"@source": "node489881", 
+"@target": "node489885"
+}, 
+{
+"@id": "edge489886", 
+"@length": 0.015788, 
+"@source": "node489880", 
+"@target": "node489886"
+}, 
+{
+"@id": "edge489887", 
+"@length": 0.005369, 
+"@source": "node489879", 
+"@target": "node489887"
+}, 
+{
+"@id": "edge489888", 
+"@length": 0.007242, 
+"@source": "node489887", 
+"@target": "node489888"
+}, 
+{
+"@id": "edge489889", 
+"@length": 0.007455, 
+"@source": "node489888", 
+"@target": "node489889"
+}, 
+{
+"@id": "edge489890", 
+"@length": 0.009135, 
+"@source": "node489888", 
+"@target": "node489890"
+}, 
+{
+"@id": "edge489891", 
+"@length": 0.009811, 
+"@source": "node489887", 
+"@target": "node489891"
+}, 
+{
+"@id": "edge489892", 
+"@length": 0.005205, 
+"@source": "node489872", 
+"@target": "node489892"
+}, 
+{
+"@id": "edge489893", 
+"@length": 0.000282, 
+"@source": "node489892", 
+"@target": "node489893"
+}, 
+{
+"@id": "edge489894", 
+"@length": 0.000234, 
+"@source": "node489892", 
+"@target": "node489894"
+}, 
+{
+"@id": "edge489895", 
+"@length": 0.044101, 
+"@source": "node489827", 
+"@target": "node489895"
+}, 
+{
+"@id": "edge489896", 
+"@length": 0.02007, 
+"@source": "node489827", 
+"@target": "node489896"
+}
+], 
+"meta": [
+{
+"$": "delete", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node489827", 
+"@root": "true"
+}, 
+{
+"@id": "node489828"
+}, 
+{
+"@id": "node489829"
+}, 
+{
+"@id": "node489830"
+}, 
+{
+"@id": "node489831"
+}, 
+{
+"@id": "node489832"
+}, 
+{
+"@id": "node489833"
+}, 
+{
+"@id": "node489834"
+}, 
+{
+"@id": "node489835"
+}, 
+{
+"@id": "node489836"
+}, 
+{
+"@id": "node489837"
+}, 
+{
+"@id": "node489838", 
+"@otu": "otu206747"
+}, 
+{
+"@id": "node489839", 
+"@otu": "otu206748"
+}, 
+{
+"@id": "node489840", 
+"@otu": "otu206749"
+}, 
+{
+"@id": "node489841", 
+"@otu": "otu206750"
+}, 
+{
+"@id": "node489842"
+}, 
+{
+"@id": "node489843", 
+"@otu": "otu206751"
+}, 
+{
+"@id": "node489844", 
+"@otu": "otu206752"
+}, 
+{
+"@id": "node489845"
+}, 
+{
+"@id": "node489846"
+}, 
+{
+"@id": "node489847"
+}, 
+{
+"@id": "node489848", 
+"@otu": "otu206753"
+}, 
+{
+"@id": "node489849", 
+"@otu": "otu206754"
+}, 
+{
+"@id": "node489850", 
+"@otu": "otu206755"
+}, 
+{
+"@id": "node489851", 
+"@otu": "otu206756"
+}, 
+{
+"@id": "node489852", 
+"@otu": "otu206757"
+}, 
+{
+"@id": "node489853", 
+"@otu": "otu206758"
+}, 
+{
+"@id": "node489854"
+}, 
+{
+"@id": "node489855"
+}, 
+{
+"@id": "node489856", 
+"@otu": "otu206759"
+}, 
+{
+"@id": "node489857", 
+"@otu": "otu206760"
+}, 
+{
+"@id": "node489858"
+}, 
+{
+"@id": "node489859", 
+"@otu": "otu206761"
+}, 
+{
+"@id": "node489860", 
+"@otu": "otu206762"
+}, 
+{
+"@id": "node489861"
+}, 
+{
+"@id": "node489862"
+}, 
+{
+"@id": "node489863"
+}, 
+{
+"@id": "node489864"
+}, 
+{
+"@id": "node489865", 
+"@otu": "otu206763"
+}, 
+{
+"@id": "node489866", 
+"@otu": "otu206764"
+}, 
+{
+"@id": "node489867", 
+"@otu": "otu206765"
+}, 
+{
+"@id": "node489868", 
+"@otu": "otu206766"
+}, 
+{
+"@id": "node489869"
+}, 
+{
+"@id": "node489870", 
+"@otu": "otu206767"
+}, 
+{
+"@id": "node489871", 
+"@otu": "otu206768"
+}, 
+{
+"@id": "node489872"
+}, 
+{
+"@id": "node489873"
+}, 
+{
+"@id": "node489874"
+}, 
+{
+"@id": "node489875"
+}, 
+{
+"@id": "node489876", 
+"@otu": "otu206769"
+}, 
+{
+"@id": "node489877", 
+"@otu": "otu206770"
+}, 
+{
+"@id": "node489878", 
+"@otu": "otu206771"
+}, 
+{
+"@id": "node489879"
+}, 
+{
+"@id": "node489880"
+}, 
+{
+"@id": "node489881"
+}, 
+{
+"@id": "node489882"
+}, 
+{
+"@id": "node489883", 
+"@otu": "otu206772"
+}, 
+{
+"@id": "node489884", 
+"@otu": "otu206773"
+}, 
+{
+"@id": "node489885", 
+"@otu": "otu206774"
+}, 
+{
+"@id": "node489886", 
+"@otu": "otu206775"
+}, 
+{
+"@id": "node489887"
+}, 
+{
+"@id": "node489888"
+}, 
+{
+"@id": "node489889", 
+"@otu": "otu206776"
+}, 
+{
+"@id": "node489890", 
+"@otu": "otu206777"
+}, 
+{
+"@id": "node489891", 
+"@otu": "otu206778"
+}, 
+{
+"@id": "node489892"
+}, 
+{
+"@id": "node489893", 
+"@otu": "otu206779"
+}, 
+{
+"@id": "node489894", 
+"@otu": "otu206780"
+}, 
+{
+"@id": "node489895", 
+"@otu": "otu206781"
+}, 
+{
+"@id": "node489896", 
+"@otu": "otu206782"
+}
+]
+}, 
+{
+"@about": "#tree4029", 
+"@id": "tree4029", 
+"edge": [
+{
+"@id": "edge751390", 
+"@length": 0.014255, 
+"@source": "node751389", 
+"@target": "node751390"
+}, 
+{
+"@id": "edge751391", 
+"@length": 0.008323, 
+"@source": "node751390", 
+"@target": "node751391"
+}, 
+{
+"@id": "edge751392", 
+"@length": 0.002561, 
+"@source": "node751391", 
+"@target": "node751392"
+}, 
+{
+"@id": "edge751393", 
+"@length": 0.003881, 
+"@source": "node751392", 
+"@target": "node751393"
+}, 
+{
+"@id": "edge751394", 
+"@length": 0.002535, 
+"@source": "node751393", 
+"@target": "node751394"
+}, 
+{
+"@id": "edge751395", 
+"@length": 0.001947, 
+"@source": "node751394", 
+"@target": "node751395"
+}, 
+{
+"@id": "edge751396", 
+"@length": 0.000847, 
+"@source": "node751395", 
+"@target": "node751396"
+}, 
+{
+"@id": "edge751397", 
+"@length": 0.003436, 
+"@source": "node751396", 
+"@target": "node751397"
+}, 
+{
+"@id": "edge751398", 
+"@length": 0.000141, 
+"@source": "node751397", 
+"@target": "node751398"
+}, 
+{
+"@id": "edge751399", 
+"@length": 0.000145, 
+"@source": "node751398", 
+"@target": "node751399"
+}, 
+{
+"@id": "edge751400", 
+"@length": 0.001717, 
+"@source": "node751399", 
+"@target": "node751400"
+}, 
+{
+"@id": "edge751401", 
+"@length": 0.00038, 
+"@source": "node751399", 
+"@target": "node751401"
+}, 
+{
+"@id": "edge751402", 
+"@length": 0.000326, 
+"@source": "node751398", 
+"@target": "node751402"
+}, 
+{
+"@id": "edge751403", 
+"@length": 0.00043, 
+"@source": "node751397", 
+"@target": "node751403"
+}, 
+{
+"@id": "edge751404", 
+"@length": 0.003147, 
+"@source": "node751396", 
+"@target": "node751404"
+}, 
+{
+"@id": "edge751405", 
+"@length": 0.000341, 
+"@source": "node751404", 
+"@target": "node751405"
+}, 
+{
+"@id": "edge751406", 
+"@length": 0.000631, 
+"@source": "node751404", 
+"@target": "node751406"
+}, 
+{
+"@id": "edge751407", 
+"@length": 0.001252, 
+"@source": "node751395", 
+"@target": "node751407"
+}, 
+{
+"@id": "edge751408", 
+"@length": 0.000379, 
+"@source": "node751407", 
+"@target": "node751408"
+}, 
+{
+"@id": "edge751409", 
+"@length": 0.00011, 
+"@source": "node751408", 
+"@target": "node751409"
+}, 
+{
+"@id": "edge751410", 
+"@length": 0.00038, 
+"@source": "node751409", 
+"@target": "node751410"
+}, 
+{
+"@id": "edge751411", 
+"@length": 0.000285, 
+"@source": "node751409", 
+"@target": "node751411"
+}, 
+{
+"@id": "edge751412", 
+"@length": 0.000743, 
+"@source": "node751408", 
+"@target": "node751412"
+}, 
+{
+"@id": "edge751413", 
+"@length": 0.000684, 
+"@source": "node751407", 
+"@target": "node751413"
+}, 
+{
+"@id": "edge751414", 
+"@length": 0.005135, 
+"@source": "node751394", 
+"@target": "node751414"
+}, 
+{
+"@id": "edge751415", 
+"@length": 0.003421, 
+"@source": "node751393", 
+"@target": "node751415"
+}, 
+{
+"@id": "edge751416", 
+"@length": 0.001813, 
+"@source": "node751392", 
+"@target": "node751416"
+}, 
+{
+"@id": "edge751417", 
+"@length": 0.001465, 
+"@source": "node751416", 
+"@target": "node751417"
+}, 
+{
+"@id": "edge751418", 
+"@length": 0.011581, 
+"@source": "node751417", 
+"@target": "node751418"
+}, 
+{
+"@id": "edge751419", 
+"@length": 0.006308, 
+"@source": "node751417", 
+"@target": "node751419"
+}, 
+{
+"@id": "edge751420", 
+"@length": 0.004299, 
+"@source": "node751416", 
+"@target": "node751420"
+}, 
+{
+"@id": "edge751421", 
+"@length": 0.000833, 
+"@source": "node751420", 
+"@target": "node751421"
+}, 
+{
+"@id": "edge751422", 
+"@length": 0.001809, 
+"@source": "node751420", 
+"@target": "node751422"
+}, 
+{
+"@id": "edge751423", 
+"@length": 0.006236, 
+"@source": "node751391", 
+"@target": "node751423"
+}, 
+{
+"@id": "edge751424", 
+"@length": 0.004108, 
+"@source": "node751423", 
+"@target": "node751424"
+}, 
+{
+"@id": "edge751425", 
+"@length": 0.009152, 
+"@source": "node751424", 
+"@target": "node751425"
+}, 
+{
+"@id": "edge751426", 
+"@length": 0.000381, 
+"@source": "node751425", 
+"@target": "node751426"
+}, 
+{
+"@id": "edge751427", 
+"@length": 0.000102, 
+"@source": "node751426", 
+"@target": "node751427"
+}, 
+{
+"@id": "edge751428", 
+"@length": 0.000356, 
+"@source": "node751426", 
+"@target": "node751428"
+}, 
+{
+"@id": "edge751429", 
+"@length": 0.001306, 
+"@source": "node751425", 
+"@target": "node751429"
+}, 
+{
+"@id": "edge751430", 
+"@length": 0.010517, 
+"@source": "node751424", 
+"@target": "node751430"
+}, 
+{
+"@id": "edge751431", 
+"@length": 0.001634, 
+"@source": "node751423", 
+"@target": "node751431"
+}, 
+{
+"@id": "edge751432", 
+"@length": 0.002877, 
+"@source": "node751431", 
+"@target": "node751432"
+}, 
+{
+"@id": "edge751433", 
+"@length": 0.00201, 
+"@source": "node751431", 
+"@target": "node751433"
+}, 
+{
+"@id": "edge751434", 
+"@length": 0.002755, 
+"@source": "node751390", 
+"@target": "node751434"
+}, 
+{
+"@id": "edge751435", 
+"@length": 0.000405, 
+"@source": "node751434", 
+"@target": "node751435"
+}, 
+{
+"@id": "edge751436", 
+"@length": 0.006108, 
+"@source": "node751435", 
+"@target": "node751436"
+}, 
+{
+"@id": "edge751437", 
+"@length": 9.352e-05, 
+"@source": "node751436", 
+"@target": "node751437"
+}, 
+{
+"@id": "edge751438", 
+"@length": 0.000255, 
+"@source": "node751437", 
+"@target": "node751438"
+}, 
+{
+"@id": "edge751439", 
+"@source": "node751437", 
+"@target": "node751439"
+}, 
+{
+"@id": "edge751440", 
+"@length": 9.267e-05, 
+"@source": "node751436", 
+"@target": "node751440"
+}, 
+{
+"@id": "edge751441", 
+"@length": 0.000468, 
+"@source": "node751435", 
+"@target": "node751441"
+}, 
+{
+"@id": "edge751442", 
+"@length": 0.000494, 
+"@source": "node751441", 
+"@target": "node751442"
+}, 
+{
+"@id": "edge751443", 
+"@length": 0.001392, 
+"@source": "node751442", 
+"@target": "node751443"
+}, 
+{
+"@id": "edge751444", 
+"@length": 0.009387, 
+"@source": "node751443", 
+"@target": "node751444"
+}, 
+{
+"@id": "edge751445", 
+"@length": 0.007741, 
+"@source": "node751444", 
+"@target": "node751445"
+}, 
+{
+"@id": "edge751446", 
+"@length": 0.001124, 
+"@source": "node751444", 
+"@target": "node751446"
+}, 
+{
+"@id": "edge751447", 
+"@length": 0.006166, 
+"@source": "node751443", 
+"@target": "node751447"
+}, 
+{
+"@id": "edge751448", 
+"@length": 0.015788, 
+"@source": "node751442", 
+"@target": "node751448"
+}, 
+{
+"@id": "edge751449", 
+"@length": 0.005369, 
+"@source": "node751441", 
+"@target": "node751449"
+}, 
+{
+"@id": "edge751450", 
+"@length": 0.007242, 
+"@source": "node751449", 
+"@target": "node751450"
+}, 
+{
+"@id": "edge751451", 
+"@length": 0.007455, 
+"@source": "node751450", 
+"@target": "node751451"
+}, 
+{
+"@id": "edge751452", 
+"@length": 0.009135, 
+"@source": "node751450", 
+"@target": "node751452"
+}, 
+{
+"@id": "edge751453", 
+"@length": 0.009811, 
+"@source": "node751449", 
+"@target": "node751453"
+}, 
+{
+"@id": "edge751454", 
+"@length": 0.005205, 
+"@source": "node751434", 
+"@target": "node751454"
+}, 
+{
+"@id": "edge751455", 
+"@length": 0.000282, 
+"@source": "node751454", 
+"@target": "node751455"
+}, 
+{
+"@id": "edge751456", 
+"@length": 0.000234, 
+"@source": "node751454", 
+"@target": "node751456"
+}, 
+{
+"@id": "edge751457", 
+"@length": 0.044101, 
+"@source": "node751389", 
+"@target": "node751457"
+}, 
+{
+"@id": "edge751458", 
+"@length": 0.02007, 
+"@source": "node751389", 
+"@target": "node751458"
+}
+], 
+"meta": [
+{
+"$": "node751390", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node751389", 
+"@root": "true"
+}, 
+{
+"@id": "node751390"
+}, 
+{
+"@id": "node751391"
+}, 
+{
+"@id": "node751392"
+}, 
+{
+"@id": "node751393"
+}, 
+{
+"@id": "node751394"
+}, 
+{
+"@id": "node751395"
+}, 
+{
+"@id": "node751396"
+}, 
+{
+"@id": "node751397"
+}, 
+{
+"@id": "node751398"
+}, 
+{
+"@id": "node751399"
+}, 
+{
+"@id": "node751400", 
+"@otu": "otu296503"
+}, 
+{
+"@id": "node751401", 
+"@otu": "otu296504"
+}, 
+{
+"@id": "node751402", 
+"@otu": "otu296505"
+}, 
+{
+"@id": "node751403", 
+"@otu": "otu296506"
+}, 
+{
+"@id": "node751404"
+}, 
+{
+"@id": "node751405", 
+"@otu": "otu296507"
+}, 
+{
+"@id": "node751406", 
+"@otu": "otu296508"
+}, 
+{
+"@id": "node751407"
+}, 
+{
+"@id": "node751408"
+}, 
+{
+"@id": "node751409"
+}, 
+{
+"@id": "node751410", 
+"@otu": "otu296509"
+}, 
+{
+"@id": "node751411", 
+"@otu": "otu296510"
+}, 
+{
+"@id": "node751412", 
+"@otu": "otu296511"
+}, 
+{
+"@id": "node751413", 
+"@otu": "otu296512"
+}, 
+{
+"@id": "node751414", 
+"@otu": "otu296513"
+}, 
+{
+"@id": "node751415", 
+"@otu": "otu296514"
+}, 
+{
+"@id": "node751416"
+}, 
+{
+"@id": "node751417"
+}, 
+{
+"@id": "node751418", 
+"@otu": "otu296515"
+}, 
+{
+"@id": "node751419", 
+"@otu": "otu296516"
+}, 
+{
+"@id": "node751420"
+}, 
+{
+"@id": "node751421", 
+"@otu": "otu296517"
+}, 
+{
+"@id": "node751422", 
+"@otu": "otu296518"
+}, 
+{
+"@id": "node751423"
+}, 
+{
+"@id": "node751424"
+}, 
+{
+"@id": "node751425"
+}, 
+{
+"@id": "node751426"
+}, 
+{
+"@id": "node751427", 
+"@otu": "otu296519"
+}, 
+{
+"@id": "node751428", 
+"@otu": "otu296520"
+}, 
+{
+"@id": "node751429", 
+"@otu": "otu296521"
+}, 
+{
+"@id": "node751430", 
+"@otu": "otu296522"
+}, 
+{
+"@id": "node751431"
+}, 
+{
+"@id": "node751432", 
+"@otu": "otu296523"
+}, 
+{
+"@id": "node751433", 
+"@otu": "otu296524"
+}, 
+{
+"@id": "node751434"
+}, 
+{
+"@id": "node751435"
+}, 
+{
+"@id": "node751436"
+}, 
+{
+"@id": "node751437"
+}, 
+{
+"@id": "node751438", 
+"@otu": "otu296525"
+}, 
+{
+"@id": "node751439", 
+"@otu": "otu296526"
+}, 
+{
+"@id": "node751440", 
+"@otu": "otu296527"
+}, 
+{
+"@id": "node751441"
+}, 
+{
+"@id": "node751442"
+}, 
+{
+"@id": "node751443"
+}, 
+{
+"@id": "node751444"
+}, 
+{
+"@id": "node751445", 
+"@otu": "otu296528"
+}, 
+{
+"@id": "node751446", 
+"@otu": "otu296529"
+}, 
+{
+"@id": "node751447", 
+"@otu": "otu296530"
+}, 
+{
+"@id": "node751448", 
+"@otu": "otu296531"
+}, 
+{
+"@id": "node751449"
+}, 
+{
+"@id": "node751450"
+}, 
+{
+"@id": "node751451", 
+"@otu": "otu296532"
+}, 
+{
+"@id": "node751452", 
+"@otu": "otu296533"
+}, 
+{
+"@id": "node751453", 
+"@otu": "otu296534"
+}, 
+{
+"@id": "node751454"
+}, 
+{
+"@id": "node751455", 
+"@otu": "otu296535"
+}, 
+{
+"@id": "node751456", 
+"@otu": "otu296536"
+}, 
+{
+"@id": "node751457", 
+"@otu": "otu296537"
+}, 
+{
+"@id": "node751458", 
+"@otu": "otu296538"
+}
+]
+}
+]
+}
+}
+}

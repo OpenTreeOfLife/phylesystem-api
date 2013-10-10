@@ -1,0 +1,2564 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Hirata K., Kusaba M., Chuma I., Osue J., Nakayashiki H., Mayama S., & Tosa Y. 2007. Speciation in Pyricularia inferred from multilocus phylogenetic analysis. Mycological Research, 111 (7): 799-808.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.mycres.2007.05.014", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1844", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "789", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2007, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 552658, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CAL", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus789", 
+"otu": [
+{
+"@about": "#otu195136", 
+"@id": "otu195136", 
+"@label": "Magnaporthe salvinii", 
+"meta": [
+{
+"$": 268001, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Magnaporthe salvinii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195137", 
+"@id": "otu195137", 
+"@label": "Pyricularia higginsii", 
+"meta": [
+{
+"$": 722915, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia higginsii Ci", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195138", 
+"@id": "otu195138", 
+"@label": "Pyricularia zizaniaecola", 
+"meta": [
+{
+"$": 843863, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia zizaniaecola Zl1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195139", 
+"@id": "otu195139", 
+"@label": "Pyricularia zingiberi", 
+"meta": [
+{
+"$": 777224, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia zingiberi Zm1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195140", 
+"@id": "otu195140", 
+"@label": "Pyricularia", 
+"meta": [
+{
+"$": 722917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia sp. Pb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195141", 
+"@id": "otu195141", 
+"@label": "Magnaporthe grisea", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia grisea Dssh1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195142", 
+"@id": "otu195142", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae TELE1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195143", 
+"@id": "otu195143", 
+"@label": "Pyricularia", 
+"meta": [
+{
+"$": 722917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia sp. CE1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195144", 
+"@id": "otu195144", 
+"@label": "Pyricularia", 
+"meta": [
+{
+"$": 722917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia sp. Lo", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195145", 
+"@id": "otu195145", 
+"@label": "Pyricularia zizaniaecola", 
+"meta": [
+{
+"$": 843863, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia zizaniaecola Zl2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195146", 
+"@id": "otu195146", 
+"@label": "Pyricularia", 
+"meta": [
+{
+"$": 722917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia sp. Sg", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195147", 
+"@id": "otu195147", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae Os2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195148", 
+"@id": "otu195148", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae Sp", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195149", 
+"@id": "otu195149", 
+"@label": "Magnaporthe grisea", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia grisea Dssh2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195150", 
+"@id": "otu195150", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae As", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195151", 
+"@id": "otu195151", 
+"@label": "Pyricularia", 
+"meta": [
+{
+"$": 722917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia sp. CE2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195152", 
+"@id": "otu195152", 
+"@label": "Pyricularia", 
+"meta": [
+{
+"$": 722917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia sp. Kb1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195153", 
+"@id": "otu195153", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae Bp1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195154", 
+"@id": "otu195154", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae TELE3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195155", 
+"@id": "otu195155", 
+"@label": "Magnaporthe grisea", 
+"meta": [
+{
+"$": 258235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia grisea Dssh3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195156", 
+"@id": "otu195156", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae Os1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195157", 
+"@id": "otu195157", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae Os3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195158", 
+"@id": "otu195158", 
+"@label": "Pyricularia zingiberi", 
+"meta": [
+{
+"$": 777224, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia zingiberi Zm2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195159", 
+"@id": "otu195159", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae Bp2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195160", 
+"@id": "otu195160", 
+"@label": "Pyricularia zingiberi", 
+"meta": [
+{
+"$": 777224, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia zingiberi Zm3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195161", 
+"@id": "otu195161", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae Os4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195162", 
+"@id": "otu195162", 
+"@label": "Magnaporthe oryzae", 
+"meta": [
+{
+"$": 625710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia oryzae TELE2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195163", 
+"@id": "otu195163", 
+"@label": "Pyricularia", 
+"meta": [
+{
+"$": 722917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia sp. Kb2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195164", 
+"@id": "otu195164", 
+"@label": "Pyricularia", 
+"meta": [
+{
+"$": 722917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia sp. Ss", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu195165", 
+"@id": "otu195165", 
+"@label": "Pyricularia zingiberi", 
+"meta": [
+{
+"$": 777224, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyricularia zingiberi Zm4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees789", 
+"@otus": "otus789", 
+"tree": [
+{
+"@about": "#tree1473", 
+"@id": "tree1473", 
+"edge": [
+{
+"@id": "edge456491", 
+"@source": "node456490", 
+"@target": "node456491"
+}, 
+{
+"@id": "edge456492", 
+"@source": "node456490", 
+"@target": "node456492"
+}, 
+{
+"@id": "edge456493", 
+"@source": "node456492", 
+"@target": "node456493"
+}, 
+{
+"@id": "edge456494", 
+"@source": "node456493", 
+"@target": "node456494"
+}, 
+{
+"@id": "edge456495", 
+"@source": "node456494", 
+"@target": "node456495"
+}, 
+{
+"@id": "edge456496", 
+"@source": "node456495", 
+"@target": "node456496"
+}, 
+{
+"@id": "edge456497", 
+"@source": "node456496", 
+"@target": "node456497"
+}, 
+{
+"@id": "edge456498", 
+"@source": "node456496", 
+"@target": "node456498"
+}, 
+{
+"@id": "edge456499", 
+"@source": "node456496", 
+"@target": "node456499"
+}, 
+{
+"@id": "edge456500", 
+"@source": "node456496", 
+"@target": "node456500"
+}, 
+{
+"@id": "edge456501", 
+"@source": "node456496", 
+"@target": "node456501"
+}, 
+{
+"@id": "edge456502", 
+"@source": "node456501", 
+"@target": "node456502"
+}, 
+{
+"@id": "edge456503", 
+"@source": "node456501", 
+"@target": "node456503"
+}, 
+{
+"@id": "edge456504", 
+"@source": "node456501", 
+"@target": "node456504"
+}, 
+{
+"@id": "edge456505", 
+"@source": "node456496", 
+"@target": "node456505"
+}, 
+{
+"@id": "edge456506", 
+"@source": "node456505", 
+"@target": "node456506"
+}, 
+{
+"@id": "edge456507", 
+"@source": "node456505", 
+"@target": "node456507"
+}, 
+{
+"@id": "edge456508", 
+"@source": "node456505", 
+"@target": "node456508"
+}, 
+{
+"@id": "edge456509", 
+"@source": "node456495", 
+"@target": "node456509"
+}, 
+{
+"@id": "edge456510", 
+"@source": "node456494", 
+"@target": "node456510"
+}, 
+{
+"@id": "edge456511", 
+"@source": "node456510", 
+"@target": "node456511"
+}, 
+{
+"@id": "edge456512", 
+"@source": "node456510", 
+"@target": "node456512"
+}, 
+{
+"@id": "edge456513", 
+"@source": "node456494", 
+"@target": "node456513"
+}, 
+{
+"@id": "edge456514", 
+"@source": "node456513", 
+"@target": "node456514"
+}, 
+{
+"@id": "edge456515", 
+"@source": "node456513", 
+"@target": "node456515"
+}, 
+{
+"@id": "edge456516", 
+"@source": "node456494", 
+"@target": "node456516"
+}, 
+{
+"@id": "edge456517", 
+"@source": "node456516", 
+"@target": "node456517"
+}, 
+{
+"@id": "edge456518", 
+"@source": "node456516", 
+"@target": "node456518"
+}, 
+{
+"@id": "edge456519", 
+"@source": "node456516", 
+"@target": "node456519"
+}, 
+{
+"@id": "edge456520", 
+"@source": "node456494", 
+"@target": "node456520"
+}, 
+{
+"@id": "edge456521", 
+"@source": "node456520", 
+"@target": "node456521"
+}, 
+{
+"@id": "edge456522", 
+"@source": "node456520", 
+"@target": "node456522"
+}, 
+{
+"@id": "edge456523", 
+"@source": "node456493", 
+"@target": "node456523"
+}, 
+{
+"@id": "edge456524", 
+"@source": "node456523", 
+"@target": "node456524"
+}, 
+{
+"@id": "edge456525", 
+"@source": "node456523", 
+"@target": "node456525"
+}, 
+{
+"@id": "edge456526", 
+"@source": "node456493", 
+"@target": "node456526"
+}, 
+{
+"@id": "edge456527", 
+"@source": "node456526", 
+"@target": "node456527"
+}, 
+{
+"@id": "edge456528", 
+"@source": "node456526", 
+"@target": "node456528"
+}, 
+{
+"@id": "edge456529", 
+"@source": "node456526", 
+"@target": "node456529"
+}, 
+{
+"@id": "edge456530", 
+"@source": "node456526", 
+"@target": "node456530"
+}, 
+{
+"@id": "edge456531", 
+"@source": "node456492", 
+"@target": "node456531"
+}, 
+{
+"@id": "edge456532", 
+"@source": "node456531", 
+"@target": "node456532"
+}, 
+{
+"@id": "edge456533", 
+"@source": "node456531", 
+"@target": "node456533"
+}, 
+{
+"@id": "edge456534", 
+"@source": "node456533", 
+"@target": "node456534"
+}, 
+{
+"@id": "edge456535", 
+"@source": "node456533", 
+"@target": "node456535"
+}
+], 
+"meta": [
+{
+"$": "node456492", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node456490", 
+"@root": "true"
+}, 
+{
+"@id": "node456491", 
+"@otu": "otu195136"
+}, 
+{
+"@id": "node456492"
+}, 
+{
+"@id": "node456493"
+}, 
+{
+"@id": "node456494"
+}, 
+{
+"@id": "node456495"
+}, 
+{
+"@id": "node456496"
+}, 
+{
+"@id": "node456497", 
+"@otu": "otu195156"
+}, 
+{
+"@id": "node456498", 
+"@otu": "otu195147"
+}, 
+{
+"@id": "node456499", 
+"@otu": "otu195157"
+}, 
+{
+"@id": "node456500", 
+"@otu": "otu195148"
+}, 
+{
+"@id": "node456501"
+}, 
+{
+"@id": "node456502", 
+"@otu": "otu195142"
+}, 
+{
+"@id": "node456503", 
+"@otu": "otu195150"
+}, 
+{
+"@id": "node456504", 
+"@otu": "otu195162"
+}, 
+{
+"@id": "node456505"
+}, 
+{
+"@id": "node456506", 
+"@otu": "otu195154"
+}, 
+{
+"@id": "node456507", 
+"@otu": "otu195153"
+}, 
+{
+"@id": "node456508", 
+"@otu": "otu195159"
+}, 
+{
+"@id": "node456509", 
+"@otu": "otu195161"
+}, 
+{
+"@id": "node456510"
+}, 
+{
+"@id": "node456511", 
+"@otu": "otu195144"
+}, 
+{
+"@id": "node456512", 
+"@otu": "otu195146"
+}, 
+{
+"@id": "node456513"
+}, 
+{
+"@id": "node456514", 
+"@otu": "otu195143"
+}, 
+{
+"@id": "node456515", 
+"@otu": "otu195151"
+}, 
+{
+"@id": "node456516"
+}, 
+{
+"@id": "node456517", 
+"@otu": "otu195141"
+}, 
+{
+"@id": "node456518", 
+"@otu": "otu195149"
+}, 
+{
+"@id": "node456519", 
+"@otu": "otu195155"
+}, 
+{
+"@id": "node456520"
+}, 
+{
+"@id": "node456521", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456522", 
+"@otu": "otu195145"
+}, 
+{
+"@id": "node456523"
+}, 
+{
+"@id": "node456524", 
+"@otu": "otu195164"
+}, 
+{
+"@id": "node456525", 
+"@otu": "otu195140"
+}, 
+{
+"@id": "node456526"
+}, 
+{
+"@id": "node456527", 
+"@otu": "otu195139"
+}, 
+{
+"@id": "node456528", 
+"@otu": "otu195158"
+}, 
+{
+"@id": "node456529", 
+"@otu": "otu195160"
+}, 
+{
+"@id": "node456530", 
+"@otu": "otu195165"
+}, 
+{
+"@id": "node456531"
+}, 
+{
+"@id": "node456532", 
+"@otu": "otu195137"
+}, 
+{
+"@id": "node456533"
+}, 
+{
+"@id": "node456534", 
+"@otu": "otu195152"
+}, 
+{
+"@id": "node456535", 
+"@otu": "otu195163"
+}
+]
+}, 
+{
+"@about": "#tree1474", 
+"@id": "tree1474", 
+"edge": [
+{
+"@id": "edge456537", 
+"@source": "node456536", 
+"@target": "node456537"
+}, 
+{
+"@id": "edge456538", 
+"@source": "node456536", 
+"@target": "node456538"
+}, 
+{
+"@id": "edge456539", 
+"@source": "node456538", 
+"@target": "node456539"
+}, 
+{
+"@id": "edge456540", 
+"@source": "node456539", 
+"@target": "node456540"
+}, 
+{
+"@id": "edge456541", 
+"@source": "node456540", 
+"@target": "node456541"
+}, 
+{
+"@id": "edge456542", 
+"@source": "node456541", 
+"@target": "node456542"
+}, 
+{
+"@id": "edge456543", 
+"@source": "node456542", 
+"@target": "node456543"
+}, 
+{
+"@id": "edge456544", 
+"@source": "node456543", 
+"@target": "node456544"
+}, 
+{
+"@id": "edge456545", 
+"@source": "node456544", 
+"@target": "node456545"
+}, 
+{
+"@id": "edge456546", 
+"@source": "node456545", 
+"@target": "node456546"
+}, 
+{
+"@id": "edge456547", 
+"@source": "node456546", 
+"@target": "node456547"
+}, 
+{
+"@id": "edge456548", 
+"@source": "node456546", 
+"@target": "node456548"
+}, 
+{
+"@id": "edge456549", 
+"@source": "node456548", 
+"@target": "node456549"
+}, 
+{
+"@id": "edge456550", 
+"@source": "node456548", 
+"@target": "node456550"
+}, 
+{
+"@id": "edge456551", 
+"@source": "node456546", 
+"@target": "node456551"
+}, 
+{
+"@id": "edge456552", 
+"@source": "node456545", 
+"@target": "node456552"
+}, 
+{
+"@id": "edge456553", 
+"@source": "node456545", 
+"@target": "node456553"
+}, 
+{
+"@id": "edge456554", 
+"@source": "node456553", 
+"@target": "node456554"
+}, 
+{
+"@id": "edge456555", 
+"@source": "node456554", 
+"@target": "node456555"
+}, 
+{
+"@id": "edge456556", 
+"@source": "node456555", 
+"@target": "node456556"
+}, 
+{
+"@id": "edge456557", 
+"@source": "node456555", 
+"@target": "node456557"
+}, 
+{
+"@id": "edge456558", 
+"@source": "node456554", 
+"@target": "node456558"
+}, 
+{
+"@id": "edge456559", 
+"@source": "node456553", 
+"@target": "node456559"
+}, 
+{
+"@id": "edge456560", 
+"@source": "node456559", 
+"@target": "node456560"
+}, 
+{
+"@id": "edge456561", 
+"@source": "node456559", 
+"@target": "node456561"
+}, 
+{
+"@id": "edge456562", 
+"@source": "node456544", 
+"@target": "node456562"
+}, 
+{
+"@id": "edge456563", 
+"@source": "node456543", 
+"@target": "node456563"
+}, 
+{
+"@id": "edge456564", 
+"@source": "node456563", 
+"@target": "node456564"
+}, 
+{
+"@id": "edge456565", 
+"@source": "node456563", 
+"@target": "node456565"
+}, 
+{
+"@id": "edge456566", 
+"@source": "node456542", 
+"@target": "node456566"
+}, 
+{
+"@id": "edge456567", 
+"@source": "node456566", 
+"@target": "node456567"
+}, 
+{
+"@id": "edge456568", 
+"@source": "node456566", 
+"@target": "node456568"
+}, 
+{
+"@id": "edge456569", 
+"@source": "node456541", 
+"@target": "node456569"
+}, 
+{
+"@id": "edge456570", 
+"@source": "node456569", 
+"@target": "node456570"
+}, 
+{
+"@id": "edge456571", 
+"@source": "node456570", 
+"@target": "node456571"
+}, 
+{
+"@id": "edge456572", 
+"@source": "node456570", 
+"@target": "node456572"
+}, 
+{
+"@id": "edge456573", 
+"@source": "node456569", 
+"@target": "node456573"
+}, 
+{
+"@id": "edge456574", 
+"@source": "node456540", 
+"@target": "node456574"
+}, 
+{
+"@id": "edge456575", 
+"@source": "node456574", 
+"@target": "node456575"
+}, 
+{
+"@id": "edge456576", 
+"@source": "node456574", 
+"@target": "node456576"
+}, 
+{
+"@id": "edge456577", 
+"@source": "node456539", 
+"@target": "node456577"
+}, 
+{
+"@id": "edge456578", 
+"@source": "node456577", 
+"@target": "node456578"
+}, 
+{
+"@id": "edge456579", 
+"@source": "node456578", 
+"@target": "node456579"
+}, 
+{
+"@id": "edge456580", 
+"@source": "node456578", 
+"@target": "node456580"
+}, 
+{
+"@id": "edge456581", 
+"@source": "node456577", 
+"@target": "node456581"
+}, 
+{
+"@id": "edge456582", 
+"@source": "node456581", 
+"@target": "node456582"
+}, 
+{
+"@id": "edge456583", 
+"@source": "node456582", 
+"@target": "node456583"
+}, 
+{
+"@id": "edge456584", 
+"@source": "node456582", 
+"@target": "node456584"
+}, 
+{
+"@id": "edge456585", 
+"@source": "node456581", 
+"@target": "node456585"
+}, 
+{
+"@id": "edge456586", 
+"@source": "node456585", 
+"@target": "node456586"
+}, 
+{
+"@id": "edge456587", 
+"@source": "node456585", 
+"@target": "node456587"
+}, 
+{
+"@id": "edge456588", 
+"@source": "node456538", 
+"@target": "node456588"
+}, 
+{
+"@id": "edge456589", 
+"@source": "node456588", 
+"@target": "node456589"
+}, 
+{
+"@id": "edge456590", 
+"@source": "node456588", 
+"@target": "node456590"
+}
+], 
+"meta": [
+{
+"$": "node456539", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CAL", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Choose me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node456536", 
+"@root": "true"
+}, 
+{
+"@id": "node456537", 
+"@otu": "otu195137"
+}, 
+{
+"@id": "node456538"
+}, 
+{
+"@id": "node456539"
+}, 
+{
+"@id": "node456540"
+}, 
+{
+"@id": "node456541"
+}, 
+{
+"@id": "node456542"
+}, 
+{
+"@id": "node456543"
+}, 
+{
+"@id": "node456544"
+}, 
+{
+"@id": "node456545"
+}, 
+{
+"@id": "node456546"
+}, 
+{
+"@id": "node456547", 
+"@otu": "otu195156"
+}, 
+{
+"@id": "node456548"
+}, 
+{
+"@id": "node456549", 
+"@otu": "otu195147"
+}, 
+{
+"@id": "node456550", 
+"@otu": "otu195157"
+}, 
+{
+"@id": "node456551", 
+"@otu": "otu195161"
+}, 
+{
+"@id": "node456552", 
+"@otu": "otu195148"
+}, 
+{
+"@id": "node456553"
+}, 
+{
+"@id": "node456554"
+}, 
+{
+"@id": "node456555"
+}, 
+{
+"@id": "node456556", 
+"@otu": "otu195142"
+}, 
+{
+"@id": "node456557", 
+"@otu": "otu195162"
+}, 
+{
+"@id": "node456558", 
+"@otu": "otu195154"
+}, 
+{
+"@id": "node456559"
+}, 
+{
+"@id": "node456560", 
+"@otu": "otu195153"
+}, 
+{
+"@id": "node456561", 
+"@otu": "otu195159"
+}, 
+{
+"@id": "node456562", 
+"@otu": "otu195150"
+}, 
+{
+"@id": "node456563"
+}, 
+{
+"@id": "node456564", 
+"@otu": "otu195144"
+}, 
+{
+"@id": "node456565", 
+"@otu": "otu195146"
+}, 
+{
+"@id": "node456566"
+}, 
+{
+"@id": "node456567", 
+"@otu": "otu195143"
+}, 
+{
+"@id": "node456568", 
+"@otu": "otu195151"
+}, 
+{
+"@id": "node456569"
+}, 
+{
+"@id": "node456570"
+}, 
+{
+"@id": "node456571", 
+"@otu": "otu195141"
+}, 
+{
+"@id": "node456572", 
+"@otu": "otu195149"
+}, 
+{
+"@id": "node456573", 
+"@otu": "otu195155"
+}, 
+{
+"@id": "node456574"
+}, 
+{
+"@id": "node456575", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456576", 
+"@otu": "otu195145"
+}, 
+{
+"@id": "node456577"
+}, 
+{
+"@id": "node456578"
+}, 
+{
+"@id": "node456579", 
+"@otu": "otu195164"
+}, 
+{
+"@id": "node456580", 
+"@otu": "otu195140"
+}, 
+{
+"@id": "node456581"
+}, 
+{
+"@id": "node456582"
+}, 
+{
+"@id": "node456583", 
+"@otu": "otu195139"
+}, 
+{
+"@id": "node456584", 
+"@otu": "otu195165"
+}, 
+{
+"@id": "node456585"
+}, 
+{
+"@id": "node456586", 
+"@otu": "otu195158"
+}, 
+{
+"@id": "node456587", 
+"@otu": "otu195160"
+}, 
+{
+"@id": "node456588"
+}, 
+{
+"@id": "node456589", 
+"@otu": "otu195152"
+}, 
+{
+"@id": "node456590", 
+"@otu": "otu195163"
+}
+]
+}, 
+{
+"@about": "#tree1475", 
+"@id": "tree1475", 
+"edge": [
+{
+"@id": "edge456592", 
+"@source": "node456591", 
+"@target": "node456592"
+}, 
+{
+"@id": "edge456593", 
+"@source": "node456592", 
+"@target": "node456593"
+}, 
+{
+"@id": "edge456594", 
+"@source": "node456593", 
+"@target": "node456594"
+}, 
+{
+"@id": "edge456595", 
+"@source": "node456594", 
+"@target": "node456595"
+}, 
+{
+"@id": "edge456596", 
+"@source": "node456595", 
+"@target": "node456596"
+}, 
+{
+"@id": "edge456597", 
+"@source": "node456596", 
+"@target": "node456597"
+}, 
+{
+"@id": "edge456598", 
+"@source": "node456597", 
+"@target": "node456598"
+}, 
+{
+"@id": "edge456599", 
+"@source": "node456598", 
+"@target": "node456599"
+}, 
+{
+"@id": "edge456600", 
+"@source": "node456599", 
+"@target": "node456600"
+}, 
+{
+"@id": "edge456601", 
+"@source": "node456600", 
+"@target": "node456601"
+}, 
+{
+"@id": "edge456602", 
+"@source": "node456600", 
+"@target": "node456602"
+}, 
+{
+"@id": "edge456603", 
+"@source": "node456602", 
+"@target": "node456603"
+}, 
+{
+"@id": "edge456604", 
+"@source": "node456602", 
+"@target": "node456604"
+}, 
+{
+"@id": "edge456605", 
+"@source": "node456599", 
+"@target": "node456605"
+}, 
+{
+"@id": "edge456606", 
+"@source": "node456598", 
+"@target": "node456606"
+}, 
+{
+"@id": "edge456607", 
+"@source": "node456606", 
+"@target": "node456607"
+}, 
+{
+"@id": "edge456608", 
+"@source": "node456606", 
+"@target": "node456608"
+}, 
+{
+"@id": "edge456609", 
+"@source": "node456608", 
+"@target": "node456609"
+}, 
+{
+"@id": "edge456610", 
+"@source": "node456609", 
+"@target": "node456610"
+}, 
+{
+"@id": "edge456611", 
+"@source": "node456610", 
+"@target": "node456611"
+}, 
+{
+"@id": "edge456612", 
+"@source": "node456610", 
+"@target": "node456612"
+}, 
+{
+"@id": "edge456613", 
+"@source": "node456609", 
+"@target": "node456613"
+}, 
+{
+"@id": "edge456614", 
+"@source": "node456608", 
+"@target": "node456614"
+}, 
+{
+"@id": "edge456615", 
+"@source": "node456614", 
+"@target": "node456615"
+}, 
+{
+"@id": "edge456616", 
+"@source": "node456614", 
+"@target": "node456616"
+}, 
+{
+"@id": "edge456617", 
+"@source": "node456597", 
+"@target": "node456617"
+}, 
+{
+"@id": "edge456618", 
+"@source": "node456596", 
+"@target": "node456618"
+}, 
+{
+"@id": "edge456619", 
+"@source": "node456618", 
+"@target": "node456619"
+}, 
+{
+"@id": "edge456620", 
+"@source": "node456618", 
+"@target": "node456620"
+}, 
+{
+"@id": "edge456621", 
+"@source": "node456595", 
+"@target": "node456621"
+}, 
+{
+"@id": "edge456622", 
+"@source": "node456621", 
+"@target": "node456622"
+}, 
+{
+"@id": "edge456623", 
+"@source": "node456622", 
+"@target": "node456623"
+}, 
+{
+"@id": "edge456624", 
+"@source": "node456622", 
+"@target": "node456624"
+}, 
+{
+"@id": "edge456625", 
+"@source": "node456621", 
+"@target": "node456625"
+}, 
+{
+"@id": "edge456626", 
+"@source": "node456625", 
+"@target": "node456626"
+}, 
+{
+"@id": "edge456627", 
+"@source": "node456626", 
+"@target": "node456627"
+}, 
+{
+"@id": "edge456628", 
+"@source": "node456626", 
+"@target": "node456628"
+}, 
+{
+"@id": "edge456629", 
+"@source": "node456625", 
+"@target": "node456629"
+}, 
+{
+"@id": "edge456630", 
+"@source": "node456594", 
+"@target": "node456630"
+}, 
+{
+"@id": "edge456631", 
+"@source": "node456630", 
+"@target": "node456631"
+}, 
+{
+"@id": "edge456632", 
+"@source": "node456630", 
+"@target": "node456632"
+}, 
+{
+"@id": "edge456633", 
+"@source": "node456593", 
+"@target": "node456633"
+}, 
+{
+"@id": "edge456634", 
+"@source": "node456633", 
+"@target": "node456634"
+}, 
+{
+"@id": "edge456635", 
+"@source": "node456634", 
+"@target": "node456635"
+}, 
+{
+"@id": "edge456636", 
+"@source": "node456635", 
+"@target": "node456636"
+}, 
+{
+"@id": "edge456637", 
+"@source": "node456635", 
+"@target": "node456637"
+}, 
+{
+"@id": "edge456638", 
+"@source": "node456634", 
+"@target": "node456638"
+}, 
+{
+"@id": "edge456639", 
+"@source": "node456633", 
+"@target": "node456639"
+}, 
+{
+"@id": "edge456640", 
+"@source": "node456592", 
+"@target": "node456640"
+}, 
+{
+"@id": "edge456641", 
+"@source": "node456640", 
+"@target": "node456641"
+}, 
+{
+"@id": "edge456642", 
+"@source": "node456640", 
+"@target": "node456642"
+}, 
+{
+"@id": "edge456643", 
+"@source": "node456591", 
+"@target": "node456643"
+}, 
+{
+"@id": "edge456644", 
+"@source": "node456643", 
+"@target": "node456644"
+}, 
+{
+"@id": "edge456645", 
+"@source": "node456643", 
+"@target": "node456645"
+}
+], 
+"meta": [
+{
+"$": "node456593", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node456591", 
+"@root": "true"
+}, 
+{
+"@id": "node456592"
+}, 
+{
+"@id": "node456593"
+}, 
+{
+"@id": "node456594"
+}, 
+{
+"@id": "node456595"
+}, 
+{
+"@id": "node456596"
+}, 
+{
+"@id": "node456597"
+}, 
+{
+"@id": "node456598"
+}, 
+{
+"@id": "node456599"
+}, 
+{
+"@id": "node456600"
+}, 
+{
+"@id": "node456601", 
+"@otu": "otu195156"
+}, 
+{
+"@id": "node456602"
+}, 
+{
+"@id": "node456603", 
+"@otu": "otu195147"
+}, 
+{
+"@id": "node456604", 
+"@otu": "otu195157"
+}, 
+{
+"@id": "node456605", 
+"@otu": "otu195161"
+}, 
+{
+"@id": "node456606"
+}, 
+{
+"@id": "node456607", 
+"@otu": "otu195148"
+}, 
+{
+"@id": "node456608"
+}, 
+{
+"@id": "node456609"
+}, 
+{
+"@id": "node456610"
+}, 
+{
+"@id": "node456611", 
+"@otu": "otu195142"
+}, 
+{
+"@id": "node456612", 
+"@otu": "otu195162"
+}, 
+{
+"@id": "node456613", 
+"@otu": "otu195150"
+}, 
+{
+"@id": "node456614"
+}, 
+{
+"@id": "node456615", 
+"@otu": "otu195154"
+}, 
+{
+"@id": "node456616", 
+"@otu": "otu195153"
+}, 
+{
+"@id": "node456617", 
+"@otu": "otu195159"
+}, 
+{
+"@id": "node456618"
+}, 
+{
+"@id": "node456619", 
+"@otu": "otu195144"
+}, 
+{
+"@id": "node456620", 
+"@otu": "otu195146"
+}, 
+{
+"@id": "node456621"
+}, 
+{
+"@id": "node456622"
+}, 
+{
+"@id": "node456623", 
+"@otu": "otu195143"
+}, 
+{
+"@id": "node456624", 
+"@otu": "otu195151"
+}, 
+{
+"@id": "node456625"
+}, 
+{
+"@id": "node456626"
+}, 
+{
+"@id": "node456627", 
+"@otu": "otu195141"
+}, 
+{
+"@id": "node456628", 
+"@otu": "otu195149"
+}, 
+{
+"@id": "node456629", 
+"@otu": "otu195155"
+}, 
+{
+"@id": "node456630"
+}, 
+{
+"@id": "node456631", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456632", 
+"@otu": "otu195145"
+}, 
+{
+"@id": "node456633"
+}, 
+{
+"@id": "node456634"
+}, 
+{
+"@id": "node456635"
+}, 
+{
+"@id": "node456636", 
+"@otu": "otu195139"
+}, 
+{
+"@id": "node456637", 
+"@otu": "otu195165"
+}, 
+{
+"@id": "node456638", 
+"@otu": "otu195160"
+}, 
+{
+"@id": "node456639", 
+"@otu": "otu195158"
+}, 
+{
+"@id": "node456640"
+}, 
+{
+"@id": "node456641", 
+"@otu": "otu195164"
+}, 
+{
+"@id": "node456642", 
+"@otu": "otu195140"
+}, 
+{
+"@id": "node456643"
+}, 
+{
+"@id": "node456644", 
+"@otu": "otu195152"
+}, 
+{
+"@id": "node456645", 
+"@otu": "otu195163"
+}
+]
+}, 
+{
+"@id": "tree1476", 
+"edge": [
+{
+"@id": "edge456647", 
+"@source": "node456646", 
+"@target": "node456647"
+}, 
+{
+"@id": "edge456648", 
+"@source": "node456646", 
+"@target": "node456648"
+}, 
+{
+"@id": "edge456649", 
+"@source": "node456648", 
+"@target": "node456649"
+}, 
+{
+"@id": "edge456650", 
+"@source": "node456649", 
+"@target": "node456650"
+}, 
+{
+"@id": "edge456651", 
+"@source": "node456650", 
+"@target": "node456651"
+}, 
+{
+"@id": "edge456652", 
+"@source": "node456650", 
+"@target": "node456652"
+}, 
+{
+"@id": "edge456653", 
+"@source": "node456649", 
+"@target": "node456653"
+}, 
+{
+"@id": "edge456654", 
+"@source": "node456648", 
+"@target": "node456654"
+}
+], 
+"node": [
+{
+"@id": "node456646", 
+"@root": "true"
+}, 
+{
+"@id": "node456647", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456648"
+}, 
+{
+"@id": "node456649"
+}, 
+{
+"@id": "node456650"
+}, 
+{
+"@id": "node456651", 
+"@otu": "otu195142"
+}, 
+{
+"@id": "node456652", 
+"@otu": "otu195144"
+}, 
+{
+"@id": "node456653", 
+"@otu": "otu195143"
+}, 
+{
+"@id": "node456654", 
+"@otu": "otu195141"
+}
+]
+}, 
+{
+"@id": "tree1477", 
+"edge": [
+{
+"@id": "edge456656", 
+"@source": "node456655", 
+"@target": "node456656"
+}, 
+{
+"@id": "edge456657", 
+"@source": "node456655", 
+"@target": "node456657"
+}, 
+{
+"@id": "edge456658", 
+"@source": "node456657", 
+"@target": "node456658"
+}, 
+{
+"@id": "edge456659", 
+"@source": "node456658", 
+"@target": "node456659"
+}, 
+{
+"@id": "edge456660", 
+"@source": "node456659", 
+"@target": "node456660"
+}, 
+{
+"@id": "edge456661", 
+"@source": "node456659", 
+"@target": "node456661"
+}, 
+{
+"@id": "edge456662", 
+"@source": "node456658", 
+"@target": "node456662"
+}, 
+{
+"@id": "edge456663", 
+"@source": "node456657", 
+"@target": "node456663"
+}
+], 
+"node": [
+{
+"@id": "node456655", 
+"@root": "true"
+}, 
+{
+"@id": "node456656", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456657"
+}, 
+{
+"@id": "node456658"
+}, 
+{
+"@id": "node456659"
+}, 
+{
+"@id": "node456660", 
+"@otu": "otu195142"
+}, 
+{
+"@id": "node456661", 
+"@otu": "otu195144"
+}, 
+{
+"@id": "node456662", 
+"@otu": "otu195141"
+}, 
+{
+"@id": "node456663", 
+"@otu": "otu195143"
+}
+]
+}, 
+{
+"@id": "tree1478", 
+"edge": [
+{
+"@id": "edge456665", 
+"@source": "node456664", 
+"@target": "node456665"
+}, 
+{
+"@id": "edge456666", 
+"@source": "node456664", 
+"@target": "node456666"
+}, 
+{
+"@id": "edge456667", 
+"@source": "node456666", 
+"@target": "node456667"
+}, 
+{
+"@id": "edge456668", 
+"@source": "node456667", 
+"@target": "node456668"
+}, 
+{
+"@id": "edge456669", 
+"@source": "node456668", 
+"@target": "node456669"
+}, 
+{
+"@id": "edge456670", 
+"@source": "node456668", 
+"@target": "node456670"
+}, 
+{
+"@id": "edge456671", 
+"@source": "node456667", 
+"@target": "node456671"
+}, 
+{
+"@id": "edge456672", 
+"@source": "node456666", 
+"@target": "node456672"
+}
+], 
+"node": [
+{
+"@id": "node456664", 
+"@root": "true"
+}, 
+{
+"@id": "node456665", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456666"
+}, 
+{
+"@id": "node456667"
+}, 
+{
+"@id": "node456668"
+}, 
+{
+"@id": "node456669", 
+"@otu": "otu195142"
+}, 
+{
+"@id": "node456670", 
+"@otu": "otu195144"
+}, 
+{
+"@id": "node456671", 
+"@otu": "otu195143"
+}, 
+{
+"@id": "node456672", 
+"@otu": "otu195141"
+}
+]
+}, 
+{
+"@id": "tree1479", 
+"edge": [
+{
+"@id": "edge456674", 
+"@source": "node456673", 
+"@target": "node456674"
+}, 
+{
+"@id": "edge456675", 
+"@source": "node456673", 
+"@target": "node456675"
+}, 
+{
+"@id": "edge456676", 
+"@source": "node456675", 
+"@target": "node456676"
+}, 
+{
+"@id": "edge456677", 
+"@source": "node456675", 
+"@target": "node456677"
+}, 
+{
+"@id": "edge456678", 
+"@source": "node456677", 
+"@target": "node456678"
+}, 
+{
+"@id": "edge456679", 
+"@source": "node456677", 
+"@target": "node456679"
+}, 
+{
+"@id": "edge456680", 
+"@source": "node456679", 
+"@target": "node456680"
+}, 
+{
+"@id": "edge456681", 
+"@source": "node456679", 
+"@target": "node456681"
+}
+], 
+"node": [
+{
+"@id": "node456673", 
+"@root": "true"
+}, 
+{
+"@id": "node456674", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456675"
+}, 
+{
+"@id": "node456676", 
+"@otu": "otu195142"
+}, 
+{
+"@id": "node456677"
+}, 
+{
+"@id": "node456678", 
+"@otu": "otu195144"
+}, 
+{
+"@id": "node456679"
+}, 
+{
+"@id": "node456680", 
+"@otu": "otu195143"
+}, 
+{
+"@id": "node456681", 
+"@otu": "otu195141"
+}
+]
+}, 
+{
+"@id": "tree1480", 
+"edge": [
+{
+"@id": "edge456683", 
+"@source": "node456682", 
+"@target": "node456683"
+}, 
+{
+"@id": "edge456684", 
+"@source": "node456682", 
+"@target": "node456684"
+}, 
+{
+"@id": "edge456685", 
+"@source": "node456684", 
+"@target": "node456685"
+}, 
+{
+"@id": "edge456686", 
+"@source": "node456685", 
+"@target": "node456686"
+}, 
+{
+"@id": "edge456687", 
+"@source": "node456685", 
+"@target": "node456687"
+}, 
+{
+"@id": "edge456688", 
+"@source": "node456684", 
+"@target": "node456688"
+}
+], 
+"node": [
+{
+"@id": "node456682", 
+"@root": "true"
+}, 
+{
+"@id": "node456683", 
+"@otu": "otu195137"
+}, 
+{
+"@id": "node456684"
+}, 
+{
+"@id": "node456685"
+}, 
+{
+"@id": "node456686", 
+"@otu": "otu195139"
+}, 
+{
+"@id": "node456687", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456688", 
+"@otu": "otu195140"
+}
+]
+}, 
+{
+"@id": "tree1481", 
+"edge": [
+{
+"@id": "edge456690", 
+"@source": "node456689", 
+"@target": "node456690"
+}, 
+{
+"@id": "edge456691", 
+"@source": "node456689", 
+"@target": "node456691"
+}, 
+{
+"@id": "edge456692", 
+"@source": "node456691", 
+"@target": "node456692"
+}, 
+{
+"@id": "edge456693", 
+"@source": "node456691", 
+"@target": "node456693"
+}, 
+{
+"@id": "edge456694", 
+"@source": "node456693", 
+"@target": "node456694"
+}, 
+{
+"@id": "edge456695", 
+"@source": "node456693", 
+"@target": "node456695"
+}
+], 
+"node": [
+{
+"@id": "node456689", 
+"@root": "true"
+}, 
+{
+"@id": "node456690", 
+"@otu": "otu195137"
+}, 
+{
+"@id": "node456691"
+}, 
+{
+"@id": "node456692", 
+"@otu": "otu195139"
+}, 
+{
+"@id": "node456693"
+}, 
+{
+"@id": "node456694", 
+"@otu": "otu195140"
+}, 
+{
+"@id": "node456695", 
+"@otu": "otu195138"
+}
+]
+}, 
+{
+"@id": "tree1482", 
+"edge": [
+{
+"@id": "edge456697", 
+"@source": "node456696", 
+"@target": "node456697"
+}, 
+{
+"@id": "edge456698", 
+"@source": "node456696", 
+"@target": "node456698"
+}, 
+{
+"@id": "edge456699", 
+"@source": "node456698", 
+"@target": "node456699"
+}, 
+{
+"@id": "edge456700", 
+"@source": "node456699", 
+"@target": "node456700"
+}, 
+{
+"@id": "edge456701", 
+"@source": "node456699", 
+"@target": "node456701"
+}, 
+{
+"@id": "edge456702", 
+"@source": "node456698", 
+"@target": "node456702"
+}
+], 
+"node": [
+{
+"@id": "node456696", 
+"@root": "true"
+}, 
+{
+"@id": "node456697", 
+"@otu": "otu195137"
+}, 
+{
+"@id": "node456698"
+}, 
+{
+"@id": "node456699"
+}, 
+{
+"@id": "node456700", 
+"@otu": "otu195139"
+}, 
+{
+"@id": "node456701", 
+"@otu": "otu195140"
+}, 
+{
+"@id": "node456702", 
+"@otu": "otu195138"
+}
+]
+}, 
+{
+"@id": "tree1483", 
+"edge": [
+{
+"@id": "edge456704", 
+"@source": "node456703", 
+"@target": "node456704"
+}, 
+{
+"@id": "edge456705", 
+"@source": "node456703", 
+"@target": "node456705"
+}, 
+{
+"@id": "edge456706", 
+"@source": "node456705", 
+"@target": "node456706"
+}, 
+{
+"@id": "edge456707", 
+"@source": "node456706", 
+"@target": "node456707"
+}, 
+{
+"@id": "edge456708", 
+"@source": "node456706", 
+"@target": "node456708"
+}, 
+{
+"@id": "edge456709", 
+"@source": "node456705", 
+"@target": "node456709"
+}
+], 
+"node": [
+{
+"@id": "node456703", 
+"@root": "true"
+}, 
+{
+"@id": "node456704", 
+"@otu": "otu195137"
+}, 
+{
+"@id": "node456705"
+}, 
+{
+"@id": "node456706"
+}, 
+{
+"@id": "node456707", 
+"@otu": "otu195139"
+}, 
+{
+"@id": "node456708", 
+"@otu": "otu195138"
+}, 
+{
+"@id": "node456709", 
+"@otu": "otu195140"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,815 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Stanley W., & Olson L. 2005. Phylogeny, phylogeography, and geographic variation of Sylvisorex howelli (Family Soricidae), an endemic shrew of the Eastern Arc Mountains, Tanzania. Journal of Zoology, null.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1017/S0952836905007016", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Chris Owen", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1382", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2095", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2005, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2235550, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2095", 
+"otu": [
+{
+"@about": "#otu311970", 
+"@id": "otu311970", 
+"@label": "Blarina brevicauda", 
+"meta": [
+{
+"$": 54160, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Blarina brevicauda", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311971", 
+"@id": "otu311971", 
+"@label": "Sorex cinereus", 
+"meta": [
+{
+"$": 809506, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sorex cinereus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311972", 
+"@id": "otu311972", 
+"@label": "Sorex palustris", 
+"meta": [
+{
+"$": 144491, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sorex palustris", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311973", 
+"@id": "otu311973", 
+"@label": "Myosorex kihaulei", 
+"meta": [
+{
+"$": 587041, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myosorex kihaulei", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311974", 
+"@id": "otu311974", 
+"@label": "Sylvisorex megalura", 
+"meta": [
+{
+"$": 250786, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex megalura", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311975", 
+"@id": "otu311975", 
+"@label": "Sylvisorex vulcanorum", 
+"meta": [
+{
+"$": 98831, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex cf vulcanorum 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311976", 
+"@id": "otu311976", 
+"@label": "Sylvisorex lunaris", 
+"meta": [
+{
+"$": 587055, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex lunaris", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311977", 
+"@id": "otu311977", 
+"@label": "Sylvisorex howelli", 
+"meta": [
+{
+"$": 587058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex howelli FMNH 166868", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311978", 
+"@id": "otu311978", 
+"@label": "Sylvisorex ollula", 
+"meta": [
+{
+"$": 535656, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex ollula", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311979", 
+"@id": "otu311979", 
+"@label": "Sylvisorex howelli", 
+"meta": [
+{
+"$": 587058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex howelli FMNH 150013", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311980", 
+"@id": "otu311980", 
+"@label": "Sylvisorex johnstoni", 
+"meta": [
+{
+"$": 1005591, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex johnstoni", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311981", 
+"@id": "otu311981", 
+"@label": "Soriculus fumidus", 
+"meta": [
+{
+"$": 250788, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Soriculus fumidus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311982", 
+"@id": "otu311982", 
+"@label": "Sorex unguiculatus", 
+"meta": [
+{
+"$": 992419, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sorex unguiculatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311983", 
+"@id": "otu311983", 
+"@label": "Sylvisorex howelli", 
+"meta": [
+{
+"$": 587058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex howelli FMNH 161243", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311984", 
+"@id": "otu311984", 
+"@label": "Sylvisorex vulcanorum", 
+"meta": [
+{
+"$": 98831, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex cf vulcanorum 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311985", 
+"@id": "otu311985", 
+"@label": "Sylvisorex howelli", 
+"meta": [
+{
+"$": 587058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex howelli FMNH 150023", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311986", 
+"@id": "otu311986", 
+"@label": "Suncus murinus", 
+"meta": [
+{
+"$": 226396, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Suncus murinus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311987", 
+"@id": "otu311987", 
+"@label": "Crocidura hildegardeae", 
+"meta": [
+{
+"$": 1076522, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crocidura hildegardeae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311988", 
+"@id": "otu311988", 
+"@label": "Suncus madagascariensis", 
+"meta": [
+{
+"$": 98828, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Suncus madagascariensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311989", 
+"@id": "otu311989", 
+"@label": "Sylvisorex howelli", 
+"meta": [
+{
+"$": 587058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex howelli FMNH 168166", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311990", 
+"@id": "otu311990", 
+"@label": "Sylvisorex granti", 
+"meta": [
+{
+"$": 587053, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex granti", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu311991", 
+"@id": "otu311991", 
+"@label": "Sylvisorex howelli", 
+"meta": [
+{
+"$": 587058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sylvisorex howelli FMNH 158304", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2095", 
+"@otus": "otus2095", 
+"tree": [
+{
+"@about": "#tree4339", 
+"@id": "tree4339", 
+"edge": [
+{
+"@id": "edge794151", 
+"@source": "node794150", 
+"@target": "node794151"
+}, 
+{
+"@id": "edge794152", 
+"@source": "node794151", 
+"@target": "node794152"
+}, 
+{
+"@id": "edge794153", 
+"@source": "node794152", 
+"@target": "node794153"
+}, 
+{
+"@id": "edge794154", 
+"@source": "node794153", 
+"@target": "node794154"
+}, 
+{
+"@id": "edge794155", 
+"@source": "node794154", 
+"@target": "node794155"
+}, 
+{
+"@id": "edge794156", 
+"@source": "node794155", 
+"@target": "node794156"
+}, 
+{
+"@id": "edge794157", 
+"@source": "node794156", 
+"@target": "node794157"
+}, 
+{
+"@id": "edge794158", 
+"@source": "node794157", 
+"@target": "node794158"
+}, 
+{
+"@id": "edge794159", 
+"@source": "node794158", 
+"@target": "node794159"
+}, 
+{
+"@id": "edge794160", 
+"@source": "node794158", 
+"@target": "node794160"
+}, 
+{
+"@id": "edge794161", 
+"@source": "node794157", 
+"@target": "node794161"
+}, 
+{
+"@id": "edge794162", 
+"@source": "node794161", 
+"@target": "node794162"
+}, 
+{
+"@id": "edge794163", 
+"@source": "node794161", 
+"@target": "node794163"
+}, 
+{
+"@id": "edge794164", 
+"@source": "node794156", 
+"@target": "node794164"
+}, 
+{
+"@id": "edge794165", 
+"@source": "node794155", 
+"@target": "node794165"
+}, 
+{
+"@id": "edge794166", 
+"@source": "node794154", 
+"@target": "node794166"
+}, 
+{
+"@id": "edge794167", 
+"@source": "node794166", 
+"@target": "node794167"
+}, 
+{
+"@id": "edge794168", 
+"@source": "node794167", 
+"@target": "node794168"
+}, 
+{
+"@id": "edge794169", 
+"@source": "node794167", 
+"@target": "node794169"
+}, 
+{
+"@id": "edge794170", 
+"@source": "node794166", 
+"@target": "node794170"
+}, 
+{
+"@id": "edge794171", 
+"@source": "node794153", 
+"@target": "node794171"
+}, 
+{
+"@id": "edge794172", 
+"@source": "node794171", 
+"@target": "node794172"
+}, 
+{
+"@id": "edge794173", 
+"@source": "node794172", 
+"@target": "node794173"
+}, 
+{
+"@id": "edge794174", 
+"@source": "node794172", 
+"@target": "node794174"
+}, 
+{
+"@id": "edge794175", 
+"@source": "node794174", 
+"@target": "node794175"
+}, 
+{
+"@id": "edge794176", 
+"@source": "node794174", 
+"@target": "node794176"
+}, 
+{
+"@id": "edge794177", 
+"@source": "node794171", 
+"@target": "node794177"
+}, 
+{
+"@id": "edge794178", 
+"@source": "node794177", 
+"@target": "node794178"
+}, 
+{
+"@id": "edge794179", 
+"@source": "node794177", 
+"@target": "node794179"
+}, 
+{
+"@id": "edge794180", 
+"@source": "node794152", 
+"@target": "node794180"
+}, 
+{
+"@id": "edge794181", 
+"@source": "node794180", 
+"@target": "node794181"
+}, 
+{
+"@id": "edge794182", 
+"@source": "node794180", 
+"@target": "node794182"
+}, 
+{
+"@id": "edge794183", 
+"@source": "node794151", 
+"@target": "node794183"
+}, 
+{
+"@id": "edge794184", 
+"@source": "node794150", 
+"@target": "node794184"
+}, 
+{
+"@id": "edge794185", 
+"@source": "node794184", 
+"@target": "node794185"
+}, 
+{
+"@id": "edge794186", 
+"@source": "node794184", 
+"@target": "node794186"
+}, 
+{
+"@id": "edge794187", 
+"@source": "node794186", 
+"@target": "node794187"
+}, 
+{
+"@id": "edge794188", 
+"@source": "node794187", 
+"@target": "node794188"
+}, 
+{
+"@id": "edge794189", 
+"@source": "node794187", 
+"@target": "node794189"
+}, 
+{
+"@id": "edge794190", 
+"@source": "node794186", 
+"@target": "node794190"
+}, 
+{
+"@id": "edge794191", 
+"@source": "node794190", 
+"@target": "node794191"
+}, 
+{
+"@id": "edge794192", 
+"@source": "node794190", 
+"@target": "node794192"
+}
+], 
+"meta": [
+{
+"$": "node794155", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node794150", 
+"@root": "true"
+}, 
+{
+"@id": "node794151"
+}, 
+{
+"@id": "node794152"
+}, 
+{
+"@id": "node794153"
+}, 
+{
+"@id": "node794154"
+}, 
+{
+"@id": "node794155"
+}, 
+{
+"@id": "node794156"
+}, 
+{
+"@id": "node794157"
+}, 
+{
+"@id": "node794158"
+}, 
+{
+"@id": "node794159", 
+"@otu": "otu311983"
+}, 
+{
+"@id": "node794160", 
+"@otu": "otu311989"
+}, 
+{
+"@id": "node794161"
+}, 
+{
+"@id": "node794162", 
+"@otu": "otu311985"
+}, 
+{
+"@id": "node794163", 
+"@otu": "otu311979"
+}, 
+{
+"@id": "node794164", 
+"@otu": "otu311977"
+}, 
+{
+"@id": "node794165", 
+"@otu": "otu311991"
+}, 
+{
+"@id": "node794166"
+}, 
+{
+"@id": "node794167"
+}, 
+{
+"@id": "node794168", 
+"@otu": "otu311987"
+}, 
+{
+"@id": "node794169", 
+"@otu": "otu311988"
+}, 
+{
+"@id": "node794170", 
+"@otu": "otu311986"
+}, 
+{
+"@id": "node794171"
+}, 
+{
+"@id": "node794172"
+}, 
+{
+"@id": "node794173", 
+"@otu": "otu311980"
+}, 
+{
+"@id": "node794174"
+}, 
+{
+"@id": "node794175", 
+"@otu": "otu311976"
+}, 
+{
+"@id": "node794176", 
+"@otu": "otu311990"
+}, 
+{
+"@id": "node794177"
+}, 
+{
+"@id": "node794178", 
+"@otu": "otu311974"
+}, 
+{
+"@id": "node794179", 
+"@otu": "otu311978"
+}, 
+{
+"@id": "node794180"
+}, 
+{
+"@id": "node794181", 
+"@otu": "otu311975"
+}, 
+{
+"@id": "node794182", 
+"@otu": "otu311984"
+}, 
+{
+"@id": "node794183", 
+"@otu": "otu311973"
+}, 
+{
+"@id": "node794184"
+}, 
+{
+"@id": "node794185", 
+"@otu": "otu311981"
+}, 
+{
+"@id": "node794186"
+}, 
+{
+"@id": "node794187"
+}, 
+{
+"@id": "node794188", 
+"@otu": "otu311970"
+}, 
+{
+"@id": "node794189", 
+"@otu": "otu311982"
+}, 
+{
+"@id": "node794190"
+}, 
+{
+"@id": "node794191", 
+"@otu": "otu311971"
+}, 
+{
+"@id": "node794192", 
+"@otu": "otu311972"
+}
+]
+}
+]
+}
+}
+}

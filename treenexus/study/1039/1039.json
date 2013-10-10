@@ -1,0 +1,1069 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Tarigan M., Van wyk M., Roux J., & Wingfield M.J. 2010. Three new Ceratocystis spp. in the Ceratocystis moniliformis complex from wounds on Acacia mangium and A. crassicarpa. Mycoscience, 51(1): 53-67.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s10267-009-0003-5", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10017", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1039", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 945858, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1039", 
+"otu": [
+{
+"@about": "#otu215998", 
+"@id": "otu215998", 
+"@label": "Ceratocystis virescens", 
+"meta": [
+{
+"$": 148772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis virescens quercus USA CMW11164", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215999", 
+"@id": "otu215999", 
+"@label": "Ceratocystis moniliformis", 
+"meta": [
+{
+"$": 430261, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis moniliformis eucalyptus RSA CMW9590", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216000", 
+"@id": "otu216000", 
+"@label": "Ceratocystis sumatrana", 
+"meta": [
+{
+"$": 705344, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acacia mangium Indonesia CMW21109", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216001", 
+"@id": "otu216001", 
+"@label": "Ceratocystis moniliformis", 
+"meta": [
+{
+"$": 430261, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis moniliformis eucalyptus RSA CMW10134", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216002", 
+"@id": "otu216002", 
+"@label": "Ceratocystis savannae", 
+"meta": [
+{
+"$": 650252, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis savannae acacia RSA CMW17298", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216003", 
+"@id": "otu216003", 
+"@label": "Ceratocystis microbasis", 
+"meta": [
+{
+"$": 705337, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acacia mangium Indonesia CMW21118", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216004", 
+"@id": "otu216004", 
+"@label": "Ceratocystis moniliformis", 
+"meta": [
+{
+"$": 430261, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis moniliformis schizolobium Ecuador CMW4114", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216005", 
+"@id": "otu216005", 
+"@label": "Ceratocystis oblonga", 
+"meta": [
+{
+"$": 637268, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis oblonga acacia RSA CMW23803", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216006", 
+"@id": "otu216006", 
+"@label": "Ceratocystis microbasis", 
+"meta": [
+{
+"$": 705337, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acacia mangium Indonesia CMW21115", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216007", 
+"@id": "otu216007", 
+"@label": "Ceratocystis tribiliformis", 
+"meta": [
+{
+"$": 671498, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis tribiliformis pinus Indonesia CMW13012", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216008", 
+"@id": "otu216008", 
+"@label": "Ceratocystis moniliformopsis", 
+"meta": [
+{
+"$": 671494, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis moniliformopsis eucalyptus australia CMW9986", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216009", 
+"@id": "otu216009", 
+"@label": "Ceratocystis sumatrana", 
+"meta": [
+{
+"$": 705344, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acacia mangium Indonesia CMW21111", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216010", 
+"@id": "otu216010", 
+"@label": "Ceratocystis sumatrana", 
+"meta": [
+{
+"$": 705344, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acacia mangium Indonesia CMW21113", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216011", 
+"@id": "otu216011", 
+"@label": "Ceratocystis virescens", 
+"meta": [
+{
+"$": 148772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis virescens quercus USA CMW3276", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216012", 
+"@id": "otu216012", 
+"@label": "Ceratocystis bhutanensis", 
+"meta": [
+{
+"$": 671490, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis bhutanensis picea Bhutan CMW8217", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216013", 
+"@id": "otu216013", 
+"@label": "Ceratocystis moniliformis", 
+"meta": [
+{
+"$": 430261, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis moniliformis picea Bhutan CMW8379", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216014", 
+"@id": "otu216014", 
+"@label": "Ceratocystis omanensis", 
+"meta": [
+{
+"$": 3704444, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis omanensis mango Oman CMW11048", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216015", 
+"@id": "otu216015", 
+"@label": "Ceratocystis oblonga", 
+"meta": [
+{
+"$": 637268, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis oblonga acacia RSA CMW23802", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216016", 
+"@id": "otu216016", 
+"@label": "Ceratocystis tribiliformis", 
+"meta": [
+{
+"$": 671498, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis tribiliformis pinus Indonesia CMW13011", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216017", 
+"@id": "otu216017", 
+"@label": "Ceratocystis savannae", 
+"meta": [
+{
+"$": 650252, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis savannae acacia RSA CMW17300", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216018", 
+"@id": "otu216018", 
+"@label": "Thielaviopsis ceramica", 
+"meta": [
+{
+"$": 63838, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Thielaviopsis ceramica eucalyptus Malawi CMW15238", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216019", 
+"@id": "otu216019", 
+"@label": "Ceratocystis microbasis", 
+"meta": [
+{
+"$": 705337, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acacia mangium Indonesia CMW21117", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216020", 
+"@id": "otu216020", 
+"@label": "Ceratocystis bhutanensis", 
+"meta": [
+{
+"$": 671490, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis bhutanensis picea Bhutan CMW8242", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216021", 
+"@id": "otu216021", 
+"@label": "Thielaviopsis ceramica", 
+"meta": [
+{
+"$": 63838, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Thielaviopsis ceramica eucalyptus Malawi CMW15245", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216022", 
+"@id": "otu216022", 
+"@label": "Ceratocystis moniliformopsis", 
+"meta": [
+{
+"$": 671494, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis moniliformopsis eucalyptus australia CMW10214", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216023", 
+"@id": "otu216023", 
+"@label": "Ceratocystis inquinans", 
+"meta": [
+{
+"$": 705340, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acacia mangium Indonesia CMW21107", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216024", 
+"@id": "otu216024", 
+"@label": "Ceratocystis moniliformis", 
+"meta": [
+{
+"$": 430261, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis moniliformis cacao Costa Rica CMW9990", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216025", 
+"@id": "otu216025", 
+"@label": "Ceratocystis omanensis", 
+"meta": [
+{
+"$": 3704444, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ceratocystis omanensis mango Oman CMW3800", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu216026", 
+"@id": "otu216026", 
+"@label": "Ceratocystis inquinans", 
+"meta": [
+{
+"$": 705340, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Acacia mangium Indonesia CMW21106", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1039", 
+"@otus": "otus1039", 
+"tree": [
+{
+"@about": "#tree1993", 
+"@id": "tree1993", 
+"edge": [
+{
+"@id": "edge509219", 
+"@source": "node509218", 
+"@target": "node509219"
+}, 
+{
+"@id": "edge509220", 
+"@source": "node509219", 
+"@target": "node509220"
+}, 
+{
+"@id": "edge509221", 
+"@source": "node509220", 
+"@target": "node509221"
+}, 
+{
+"@id": "edge509222", 
+"@source": "node509221", 
+"@target": "node509222"
+}, 
+{
+"@id": "edge509223", 
+"@source": "node509222", 
+"@target": "node509223"
+}, 
+{
+"@id": "edge509224", 
+"@source": "node509222", 
+"@target": "node509224"
+}, 
+{
+"@id": "edge509225", 
+"@source": "node509221", 
+"@target": "node509225"
+}, 
+{
+"@id": "edge509226", 
+"@source": "node509225", 
+"@target": "node509226"
+}, 
+{
+"@id": "edge509227", 
+"@source": "node509226", 
+"@target": "node509227"
+}, 
+{
+"@id": "edge509228", 
+"@source": "node509226", 
+"@target": "node509228"
+}, 
+{
+"@id": "edge509229", 
+"@source": "node509226", 
+"@target": "node509229"
+}, 
+{
+"@id": "edge509230", 
+"@source": "node509226", 
+"@target": "node509230"
+}, 
+{
+"@id": "edge509231", 
+"@source": "node509225", 
+"@target": "node509231"
+}, 
+{
+"@id": "edge509232", 
+"@source": "node509220", 
+"@target": "node509232"
+}, 
+{
+"@id": "edge509233", 
+"@source": "node509232", 
+"@target": "node509233"
+}, 
+{
+"@id": "edge509234", 
+"@source": "node509232", 
+"@target": "node509234"
+}, 
+{
+"@id": "edge509235", 
+"@source": "node509219", 
+"@target": "node509235"
+}, 
+{
+"@id": "edge509236", 
+"@source": "node509235", 
+"@target": "node509236"
+}, 
+{
+"@id": "edge509237", 
+"@source": "node509236", 
+"@target": "node509237"
+}, 
+{
+"@id": "edge509238", 
+"@source": "node509237", 
+"@target": "node509238"
+}, 
+{
+"@id": "edge509239", 
+"@source": "node509237", 
+"@target": "node509239"
+}, 
+{
+"@id": "edge509240", 
+"@source": "node509236", 
+"@target": "node509240"
+}, 
+{
+"@id": "edge509241", 
+"@source": "node509240", 
+"@target": "node509241"
+}, 
+{
+"@id": "edge509242", 
+"@source": "node509240", 
+"@target": "node509242"
+}, 
+{
+"@id": "edge509243", 
+"@source": "node509235", 
+"@target": "node509243"
+}, 
+{
+"@id": "edge509244", 
+"@source": "node509243", 
+"@target": "node509244"
+}, 
+{
+"@id": "edge509245", 
+"@source": "node509244", 
+"@target": "node509245"
+}, 
+{
+"@id": "edge509246", 
+"@source": "node509245", 
+"@target": "node509246"
+}, 
+{
+"@id": "edge509247", 
+"@source": "node509245", 
+"@target": "node509247"
+}, 
+{
+"@id": "edge509248", 
+"@source": "node509244", 
+"@target": "node509248"
+}, 
+{
+"@id": "edge509249", 
+"@source": "node509248", 
+"@target": "node509249"
+}, 
+{
+"@id": "edge509250", 
+"@source": "node509249", 
+"@target": "node509250"
+}, 
+{
+"@id": "edge509251", 
+"@source": "node509249", 
+"@target": "node509251"
+}, 
+{
+"@id": "edge509252", 
+"@source": "node509249", 
+"@target": "node509252"
+}, 
+{
+"@id": "edge509253", 
+"@source": "node509248", 
+"@target": "node509253"
+}, 
+{
+"@id": "edge509254", 
+"@source": "node509253", 
+"@target": "node509254"
+}, 
+{
+"@id": "edge509255", 
+"@source": "node509254", 
+"@target": "node509255"
+}, 
+{
+"@id": "edge509256", 
+"@source": "node509254", 
+"@target": "node509256"
+}, 
+{
+"@id": "edge509257", 
+"@source": "node509253", 
+"@target": "node509257"
+}, 
+{
+"@id": "edge509258", 
+"@source": "node509243", 
+"@target": "node509258"
+}, 
+{
+"@id": "edge509259", 
+"@source": "node509258", 
+"@target": "node509259"
+}, 
+{
+"@id": "edge509260", 
+"@source": "node509259", 
+"@target": "node509260"
+}, 
+{
+"@id": "edge509261", 
+"@source": "node509260", 
+"@target": "node509261"
+}, 
+{
+"@id": "edge509262", 
+"@source": "node509260", 
+"@target": "node509262"
+}, 
+{
+"@id": "edge509263", 
+"@source": "node509259", 
+"@target": "node509263"
+}, 
+{
+"@id": "edge509264", 
+"@source": "node509263", 
+"@target": "node509264"
+}, 
+{
+"@id": "edge509265", 
+"@source": "node509263", 
+"@target": "node509265"
+}, 
+{
+"@id": "edge509266", 
+"@source": "node509258", 
+"@target": "node509266"
+}, 
+{
+"@id": "edge509267", 
+"@source": "node509266", 
+"@target": "node509267"
+}, 
+{
+"@id": "edge509268", 
+"@source": "node509266", 
+"@target": "node509268"
+}, 
+{
+"@id": "edge509269", 
+"@source": "node509218", 
+"@target": "node509269"
+}, 
+{
+"@id": "edge509270", 
+"@source": "node509269", 
+"@target": "node509270"
+}, 
+{
+"@id": "edge509271", 
+"@source": "node509269", 
+"@target": "node509271"
+}
+], 
+"meta": [
+{
+"$": "node509219", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node509218", 
+"@root": "true"
+}, 
+{
+"@id": "node509219"
+}, 
+{
+"@id": "node509220"
+}, 
+{
+"@id": "node509221"
+}, 
+{
+"@id": "node509222"
+}, 
+{
+"@id": "node509223", 
+"@otu": "otu216016"
+}, 
+{
+"@id": "node509224", 
+"@otu": "otu216007"
+}, 
+{
+"@id": "node509225"
+}, 
+{
+"@id": "node509226"
+}, 
+{
+"@id": "node509227", 
+"@otu": "otu215999"
+}, 
+{
+"@id": "node509228", 
+"@otu": "otu216001"
+}, 
+{
+"@id": "node509229", 
+"@otu": "otu216004"
+}, 
+{
+"@id": "node509230", 
+"@otu": "otu216013"
+}, 
+{
+"@id": "node509231", 
+"@otu": "otu216024"
+}, 
+{
+"@id": "node509232"
+}, 
+{
+"@id": "node509233", 
+"@otu": "otu216008"
+}, 
+{
+"@id": "node509234", 
+"@otu": "otu216022"
+}, 
+{
+"@id": "node509235"
+}, 
+{
+"@id": "node509236"
+}, 
+{
+"@id": "node509237"
+}, 
+{
+"@id": "node509238", 
+"@otu": "otu216014"
+}, 
+{
+"@id": "node509239", 
+"@otu": "otu216025"
+}, 
+{
+"@id": "node509240"
+}, 
+{
+"@id": "node509241", 
+"@otu": "otu216012"
+}, 
+{
+"@id": "node509242", 
+"@otu": "otu216020"
+}, 
+{
+"@id": "node509243"
+}, 
+{
+"@id": "node509244"
+}, 
+{
+"@id": "node509245"
+}, 
+{
+"@id": "node509246", 
+"@otu": "otu216026"
+}, 
+{
+"@id": "node509247", 
+"@otu": "otu216023"
+}, 
+{
+"@id": "node509248"
+}, 
+{
+"@id": "node509249"
+}, 
+{
+"@id": "node509250", 
+"@otu": "otu216010"
+}, 
+{
+"@id": "node509251", 
+"@otu": "otu216000"
+}, 
+{
+"@id": "node509252", 
+"@otu": "otu216009"
+}, 
+{
+"@id": "node509253"
+}, 
+{
+"@id": "node509254"
+}, 
+{
+"@id": "node509255", 
+"@otu": "otu216006"
+}, 
+{
+"@id": "node509256", 
+"@otu": "otu216019"
+}, 
+{
+"@id": "node509257", 
+"@otu": "otu216003"
+}, 
+{
+"@id": "node509258"
+}, 
+{
+"@id": "node509259"
+}, 
+{
+"@id": "node509260"
+}, 
+{
+"@id": "node509261", 
+"@otu": "otu216005"
+}, 
+{
+"@id": "node509262", 
+"@otu": "otu216015"
+}, 
+{
+"@id": "node509263"
+}, 
+{
+"@id": "node509264", 
+"@otu": "otu216017"
+}, 
+{
+"@id": "node509265", 
+"@otu": "otu216002"
+}, 
+{
+"@id": "node509266"
+}, 
+{
+"@id": "node509267", 
+"@otu": "otu216018"
+}, 
+{
+"@id": "node509268", 
+"@otu": "otu216021"
+}, 
+{
+"@id": "node509269"
+}, 
+{
+"@id": "node509270", 
+"@otu": "otu216011"
+}, 
+{
+"@id": "node509271", 
+"@otu": "otu215998"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,591 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Knutsen A., Torp M., & Holst-jensen A. 2003. Phylogenetic analyses of Fusarium species in the section Sporotrichiella based on partial sequences of the translation elongation factor-1 alpha gene. International Journal of Food Microbiology, 95(3): 287-295..", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.ijfoodmicro.2003.12.007", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1968", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2281", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2003, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 140752, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2281", 
+"otu": [
+{
+"@about": "#otu326778", 
+"@id": "otu326778", 
+"@label": "Fusarium pseudograminearum", 
+"meta": [
+{
+"$": 427868, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium pseudograminearum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326779", 
+"@id": "otu326779", 
+"@label": "Fusarium langsethiae", 
+"meta": [
+{
+"$": 1064648, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium langsethiae L2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326780", 
+"@id": "otu326780", 
+"@label": "Fusarium sporotrichioides", 
+"meta": [
+{
+"$": 264393, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium sporotrichioides S1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326781", 
+"@id": "otu326781", 
+"@label": "Fusarium poae", 
+"meta": [
+{
+"$": 1017216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium poae P3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326782", 
+"@id": "otu326782", 
+"@label": "Fusarium langsethiae", 
+"meta": [
+{
+"$": 1064648, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium langsethiae L3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326783", 
+"@id": "otu326783", 
+"@label": "Fusarium langsethiae", 
+"meta": [
+{
+"$": 1064648, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium langsethiae L5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326784", 
+"@id": "otu326784", 
+"@label": "Fusarium sporotrichioides", 
+"meta": [
+{
+"$": 264393, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium sporotrichioides S5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326785", 
+"@id": "otu326785", 
+"@label": "Fusarium langsethiae", 
+"meta": [
+{
+"$": 1064648, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium langsethiae L1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326786", 
+"@id": "otu326786", 
+"@label": "Fusarium kyushuense", 
+"meta": [
+{
+"$": 513885, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium kyushuense K1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326787", 
+"@id": "otu326787", 
+"@label": "Fusarium poae", 
+"meta": [
+{
+"$": 1017216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium poae P1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326788", 
+"@id": "otu326788", 
+"@label": "Fusarium sporotrichioides", 
+"meta": [
+{
+"$": 264393, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium sporotrichioides S2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326789", 
+"@id": "otu326789", 
+"@label": "Fusarium sporotrichioides", 
+"meta": [
+{
+"$": 264393, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium sporotrichioides S4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326790", 
+"@id": "otu326790", 
+"@label": "Fusarium langsethiae", 
+"meta": [
+{
+"$": 1064648, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium langsethiae L4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326791", 
+"@id": "otu326791", 
+"@label": "Fusarium sporotrichioides", 
+"meta": [
+{
+"$": 264393, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium sporotrichioides S3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326792", 
+"@id": "otu326792", 
+"@label": "Fusarium poae", 
+"meta": [
+{
+"$": 1017216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium poae P2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu326793", 
+"@id": "otu326793", 
+"@label": "Fusarium poae", 
+"meta": [
+{
+"$": 1017216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium poae P4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2281", 
+"@otus": "otus2281", 
+"tree": [
+{
+"@about": "#tree4828", 
+"@id": "tree4828", 
+"edge": [
+{
+"@id": "edge844944", 
+"@source": "node844943", 
+"@target": "node844944"
+}, 
+{
+"@id": "edge844945", 
+"@source": "node844944", 
+"@target": "node844945"
+}, 
+{
+"@id": "edge844946", 
+"@source": "node844945", 
+"@target": "node844946"
+}, 
+{
+"@id": "edge844947", 
+"@source": "node844946", 
+"@target": "node844947"
+}, 
+{
+"@id": "edge844948", 
+"@source": "node844946", 
+"@target": "node844948"
+}, 
+{
+"@id": "edge844949", 
+"@source": "node844946", 
+"@target": "node844949"
+}, 
+{
+"@id": "edge844950", 
+"@source": "node844949", 
+"@target": "node844950"
+}, 
+{
+"@id": "edge844951", 
+"@source": "node844949", 
+"@target": "node844951"
+}, 
+{
+"@id": "edge844952", 
+"@source": "node844945", 
+"@target": "node844952"
+}, 
+{
+"@id": "edge844953", 
+"@source": "node844944", 
+"@target": "node844953"
+}, 
+{
+"@id": "edge844954", 
+"@source": "node844953", 
+"@target": "node844954"
+}, 
+{
+"@id": "edge844955", 
+"@source": "node844954", 
+"@target": "node844955"
+}, 
+{
+"@id": "edge844956", 
+"@source": "node844955", 
+"@target": "node844956"
+}, 
+{
+"@id": "edge844957", 
+"@source": "node844955", 
+"@target": "node844957"
+}, 
+{
+"@id": "edge844958", 
+"@source": "node844955", 
+"@target": "node844958"
+}, 
+{
+"@id": "edge844959", 
+"@source": "node844955", 
+"@target": "node844959"
+}, 
+{
+"@id": "edge844960", 
+"@source": "node844954", 
+"@target": "node844960"
+}, 
+{
+"@id": "edge844961", 
+"@source": "node844954", 
+"@target": "node844961"
+}, 
+{
+"@id": "edge844962", 
+"@source": "node844953", 
+"@target": "node844962"
+}, 
+{
+"@id": "edge844963", 
+"@source": "node844962", 
+"@target": "node844963"
+}, 
+{
+"@id": "edge844964", 
+"@source": "node844963", 
+"@target": "node844964"
+}, 
+{
+"@id": "edge844965", 
+"@source": "node844963", 
+"@target": "node844965"
+}, 
+{
+"@id": "edge844966", 
+"@source": "node844962", 
+"@target": "node844966"
+}, 
+{
+"@id": "edge844967", 
+"@source": "node844962", 
+"@target": "node844967"
+}, 
+{
+"@id": "edge844968", 
+"@source": "node844943", 
+"@target": "node844968"
+}
+], 
+"meta": [
+{
+"$": "node844944", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node844943", 
+"@root": "true"
+}, 
+{
+"@id": "node844944"
+}, 
+{
+"@id": "node844945"
+}, 
+{
+"@id": "node844946"
+}, 
+{
+"@id": "node844947", 
+"@otu": "otu326787"
+}, 
+{
+"@id": "node844948", 
+"@otu": "otu326792"
+}, 
+{
+"@id": "node844949"
+}, 
+{
+"@id": "node844950", 
+"@otu": "otu326781"
+}, 
+{
+"@id": "node844951", 
+"@otu": "otu326793"
+}, 
+{
+"@id": "node844952", 
+"@otu": "otu326786"
+}, 
+{
+"@id": "node844953"
+}, 
+{
+"@id": "node844954"
+}, 
+{
+"@id": "node844955"
+}, 
+{
+"@id": "node844956", 
+"@otu": "otu326788"
+}, 
+{
+"@id": "node844957", 
+"@otu": "otu326789"
+}, 
+{
+"@id": "node844958", 
+"@otu": "otu326783"
+}, 
+{
+"@id": "node844959", 
+"@otu": "otu326791"
+}, 
+{
+"@id": "node844960", 
+"@otu": "otu326780"
+}, 
+{
+"@id": "node844961", 
+"@otu": "otu326784"
+}, 
+{
+"@id": "node844962"
+}, 
+{
+"@id": "node844963"
+}, 
+{
+"@id": "node844964", 
+"@otu": "otu326779"
+}, 
+{
+"@id": "node844965", 
+"@otu": "otu326782"
+}, 
+{
+"@id": "node844966", 
+"@otu": "otu326785"
+}, 
+{
+"@id": "node844967", 
+"@otu": "otu326790"
+}, 
+{
+"@id": "node844968", 
+"@otu": "otu326778"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,538 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Lemmon A.R., Lemmon E., & Emme S. 2012. Anchored hybrid enrichment for massively high-throughput phylogenomics. Systematic Biology.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1093/sysbio/sys049", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Chris Owen", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S12669", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2586", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2012, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1214659, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2586", 
+"otu": [
+{
+"@about": "#otu380940", 
+"@id": "otu380940", 
+"@label": "Danio rerio", 
+"meta": [
+{
+"$": 1005914, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Danio rerio", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu380941", 
+"@id": "otu380941", 
+"@label": "Xenopus tropicalis", 
+"meta": [
+{
+"$": 940184, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Xenopus tropicalis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu380942", 
+"@id": "otu380942", 
+"@label": "Pseudacris feriarum", 
+"meta": [
+{
+"$": 323018, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudacris feriarum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu380943", 
+"@id": "otu380943", 
+"@label": "Crotalus adamanteus", 
+"meta": [
+{
+"$": 27076, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crotalus adamanteus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu380944", 
+"@id": "otu380944", 
+"@label": "Anolis carolinensis", 
+"meta": [
+{
+"$": 705356, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Anolis carolinensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu380945", 
+"@id": "otu380945", 
+"@label": "Chiroxiphia lanceolata", 
+"meta": [
+{
+"$": 590809, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Chiroxiphia lanceolata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu380946", 
+"@id": "otu380946", 
+"@label": "Gallus gallus", 
+"meta": [
+{
+"$": 153563, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gallus gallus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu380947", 
+"@id": "otu380947", 
+"@label": "Mus musculus", 
+"meta": [
+{
+"$": 542509, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mus musculus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu380948", 
+"@id": "otu380948", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2586", 
+"@otus": "otus2586", 
+"tree": [
+{
+"@about": "#tree5996", 
+"@id": "tree5996", 
+"edge": [
+{
+"@id": "edge1018931", 
+"@length": 0.380016, 
+"@source": "node1018930", 
+"@target": "node1018931"
+}, 
+{
+"@id": "edge1018932", 
+"@length": 0.169551, 
+"@source": "node1018930", 
+"@target": "node1018932"
+}, 
+{
+"@id": "edge1018933", 
+"@length": 0.123403, 
+"@source": "node1018932", 
+"@target": "node1018933"
+}, 
+{
+"@id": "edge1018934", 
+"@length": 0.087062, 
+"@source": "node1018933", 
+"@target": "node1018934"
+}, 
+{
+"@id": "edge1018935", 
+"@length": 0.087062, 
+"@source": "node1018933", 
+"@target": "node1018935"
+}, 
+{
+"@id": "edge1018936", 
+"@length": 0.083733, 
+"@source": "node1018932", 
+"@target": "node1018936"
+}, 
+{
+"@id": "edge1018937", 
+"@length": 0.0007, 
+"@source": "node1018936", 
+"@target": "node1018937"
+}, 
+{
+"@id": "edge1018938", 
+"@length": 0.0697, 
+"@source": "node1018937", 
+"@target": "node1018938"
+}, 
+{
+"@id": "edge1018939", 
+"@length": 0.056333, 
+"@source": "node1018938", 
+"@target": "node1018939"
+}, 
+{
+"@id": "edge1018940", 
+"@length": 0.056333, 
+"@source": "node1018938", 
+"@target": "node1018940"
+}, 
+{
+"@id": "edge1018941", 
+"@length": 0.098313, 
+"@source": "node1018937", 
+"@target": "node1018941"
+}, 
+{
+"@id": "edge1018942", 
+"@length": 0.027719, 
+"@source": "node1018941", 
+"@target": "node1018942"
+}, 
+{
+"@id": "edge1018943", 
+"@length": 0.027719, 
+"@source": "node1018941", 
+"@target": "node1018943"
+}, 
+{
+"@id": "edge1018944", 
+"@length": 0.092034, 
+"@source": "node1018936", 
+"@target": "node1018944"
+}, 
+{
+"@id": "edge1018945", 
+"@length": 0.034697, 
+"@source": "node1018944", 
+"@target": "node1018945"
+}, 
+{
+"@id": "edge1018946", 
+"@length": 0.034697, 
+"@source": "node1018944", 
+"@target": "node1018946"
+}
+], 
+"meta": [
+{
+"$": "ot:substitutionCount", 
+"@property": "ot:branchLengthMode", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "node1018932", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "choose me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node1018930", 
+"@root": "true"
+}, 
+{
+"@id": "node1018931", 
+"@otu": "otu380940"
+}, 
+{
+"@id": "node1018932"
+}, 
+{
+"@id": "node1018933"
+}, 
+{
+"@id": "node1018934", 
+"@otu": "otu380941"
+}, 
+{
+"@id": "node1018935", 
+"@otu": "otu380942"
+}, 
+{
+"@id": "node1018936"
+}, 
+{
+"@id": "node1018937"
+}, 
+{
+"@id": "node1018938"
+}, 
+{
+"@id": "node1018939", 
+"@otu": "otu380943"
+}, 
+{
+"@id": "node1018940", 
+"@otu": "otu380944"
+}, 
+{
+"@id": "node1018941"
+}, 
+{
+"@id": "node1018942", 
+"@otu": "otu380945"
+}, 
+{
+"@id": "node1018943", 
+"@otu": "otu380946"
+}, 
+{
+"@id": "node1018944"
+}, 
+{
+"@id": "node1018945", 
+"@otu": "otu380947"
+}, 
+{
+"@id": "node1018946", 
+"@otu": "otu380948"
+}
+]
+}, 
+{
+"@about": "#tree5997", 
+"@id": "tree5997", 
+"edge": [
+{
+"@id": "edge1018948", 
+"@length": 0.320639, 
+"@source": "node1018947", 
+"@target": "node1018948"
+}, 
+{
+"@id": "edge1018949", 
+"@length": 0.127862, 
+"@source": "node1018947", 
+"@target": "node1018949"
+}, 
+{
+"@id": "edge1018950", 
+"@length": 0.042288, 
+"@source": "node1018949", 
+"@target": "node1018950"
+}, 
+{
+"@id": "edge1018951", 
+"@length": 0.081333, 
+"@source": "node1018950", 
+"@target": "node1018951"
+}, 
+{
+"@id": "edge1018952", 
+"@length": 0.069156, 
+"@source": "node1018951", 
+"@target": "node1018952"
+}, 
+{
+"@id": "edge1018953", 
+"@length": 0.069156, 
+"@source": "node1018951", 
+"@target": "node1018953"
+}, 
+{
+"@id": "edge1018954", 
+"@length": 0.127178, 
+"@source": "node1018950", 
+"@target": "node1018954"
+}, 
+{
+"@id": "edge1018955", 
+"@length": 0.023311, 
+"@source": "node1018954", 
+"@target": "node1018955"
+}, 
+{
+"@id": "edge1018956", 
+"@length": 0.023311, 
+"@source": "node1018954", 
+"@target": "node1018956"
+}, 
+{
+"@id": "edge1018957", 
+"@length": 0.146458, 
+"@source": "node1018949", 
+"@target": "node1018957"
+}, 
+{
+"@id": "edge1018958", 
+"@length": 0.046319, 
+"@source": "node1018957", 
+"@target": "node1018958"
+}, 
+{
+"@id": "edge1018959", 
+"@length": 0.046319, 
+"@source": "node1018957", 
+"@target": "node1018959"
+}
+], 
+"meta": [
+{
+"$": "ot:substitutionCount", 
+"@property": "ot:branchLengthMode", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "node1018949", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node1018947", 
+"@root": "true"
+}, 
+{
+"@id": "node1018948", 
+"@otu": "otu380941"
+}, 
+{
+"@id": "node1018949"
+}, 
+{
+"@id": "node1018950"
+}, 
+{
+"@id": "node1018951"
+}, 
+{
+"@id": "node1018952", 
+"@otu": "otu380943"
+}, 
+{
+"@id": "node1018953", 
+"@otu": "otu380944"
+}, 
+{
+"@id": "node1018954"
+}, 
+{
+"@id": "node1018955", 
+"@otu": "otu380945"
+}, 
+{
+"@id": "node1018956", 
+"@otu": "otu380946"
+}, 
+{
+"@id": "node1018957"
+}, 
+{
+"@id": "node1018958", 
+"@otu": "otu380947"
+}, 
+{
+"@id": "node1018959", 
+"@otu": "otu380948"
+}
+]
+}
+]
+}
+}
+}

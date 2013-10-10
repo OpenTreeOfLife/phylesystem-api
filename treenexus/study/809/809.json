@@ -1,0 +1,873 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Alves A., Correia A., & Phillips A. 2006. Multi-gene genealogies and morphological data support Diplodia cupressi sp. nov., previously recognized as D. pinea f. sp. cupressi, as a distinct species. Fungal Diversity, 23: 1-15.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://www.fungaldiversity.org/fdp/sfdp/23-1.pdf", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1595", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "809", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2006, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1711335, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus809", 
+"otu": [
+{
+"@about": "#otu197159", 
+"@id": "otu197159", 
+"@label": "Botryosphaeria lutea", 
+"meta": [
+{
+"$": 958340, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria lutea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197160", 
+"@id": "otu197160", 
+"@label": "Botryosphaeria tsugae", 
+"meta": [
+{
+"$": 958336, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria tsugae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197161", 
+"@id": "otu197161", 
+"@label": "Diplodia pinea", 
+"meta": [
+{
+"$": 804876, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Diplodia pinea A CBS393.84", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197162", 
+"@id": "otu197162", 
+"@label": "Botryosphaeria ribis", 
+"meta": [
+{
+"$": 33907, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria ribis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197163", 
+"@id": "otu197163", 
+"@label": "Diplodia pinea", 
+"meta": [
+{
+"$": 804876, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Diplodia pinea C CBS109943", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197164", 
+"@id": "otu197164", 
+"@label": "Diplodia pinea", 
+"meta": [
+{
+"$": 804876, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Diplodia pinea A CBS109727", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197165", 
+"@id": "otu197165", 
+"@label": "Diplodia scrobiculata", 
+"meta": [
+{
+"$": 529219, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Diplodia scrobiculata CBS109944", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197166", 
+"@id": "otu197166", 
+"@label": "Diplodia scrobiculata", 
+"meta": [
+{
+"$": 529219, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Diplodia scrobiculata CBS113423", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197167", 
+"@id": "otu197167", 
+"@label": "Diplodia pinea", 
+"meta": [
+{
+"$": 804876, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Diplodia pinea C CBS109725", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197168", 
+"@id": "otu197168", 
+"@label": "Diplodia cupressi", 
+"meta": [
+{
+"$": 563772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Diplodia cupressi CBS261.85", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197169", 
+"@id": "otu197169", 
+"@label": "Diplodia cupressi", 
+"meta": [
+{
+"$": 563772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Diplodia cupressi CBS168.87", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197170", 
+"@id": "otu197170", 
+"@label": "Botryosphaeria stevensii", 
+"meta": [
+{
+"$": 305447, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria stevensii CMW7060", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197171", 
+"@id": "otu197171", 
+"@label": "Botryosphaeria obtusa", 
+"meta": [
+{
+"$": 134178, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria obtusa CBS112555", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197172", 
+"@id": "otu197172", 
+"@label": "Botryosphaeria corticola", 
+"meta": [
+{
+"$": 488127, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria corticola CBS112549", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197173", 
+"@id": "otu197173", 
+"@label": "Botryosphaeria stevensii", 
+"meta": [
+{
+"$": 305447, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria stevensii JL375", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197174", 
+"@id": "otu197174", 
+"@label": "Lasiodiplodia theobromae", 
+"meta": [
+{
+"$": 33894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria rhodina CBS124.13", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197175", 
+"@id": "otu197175", 
+"@label": "Botryosphaeria stevensii", 
+"meta": [
+{
+"$": 305447, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria stevensii CBS230.30", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197176", 
+"@id": "otu197176", 
+"@label": "Botryosphaeria stevensii", 
+"meta": [
+{
+"$": 305447, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria stevensii CBS112554", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197177", 
+"@id": "otu197177", 
+"@label": "Botryosphaeria obtusa", 
+"meta": [
+{
+"$": 134178, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria obtusa CBS119049", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197178", 
+"@id": "otu197178", 
+"@label": "Lasiodiplodia gonubiensis", 
+"meta": [
+{
+"$": 349527, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lasiodiplodia gonubiensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197179", 
+"@id": "otu197179", 
+"@label": "Botryosphaeria corticola", 
+"meta": [
+{
+"$": 488127, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria corticola CBS112547", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197180", 
+"@id": "otu197180", 
+"@label": "Botryosphaeria stevensii", 
+"meta": [
+{
+"$": 305447, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria stevensii CBS112553", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu197181", 
+"@id": "otu197181", 
+"@label": "Lasiodiplodia theobromae", 
+"meta": [
+{
+"$": 33894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria rhodina CAA006", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees809", 
+"@otus": "otus809", 
+"tree": [
+{
+"@about": "#tree1530", 
+"@id": "tree1530", 
+"edge": [
+{
+"@id": "edge462471", 
+"@source": "node462470", 
+"@target": "node462471"
+}, 
+{
+"@id": "edge462472", 
+"@source": "node462470", 
+"@target": "node462472"
+}, 
+{
+"@id": "edge462473", 
+"@source": "node462470", 
+"@target": "node462473"
+}, 
+{
+"@id": "edge462474", 
+"@source": "node462473", 
+"@target": "node462474"
+}, 
+{
+"@id": "edge462475", 
+"@source": "node462474", 
+"@target": "node462475"
+}, 
+{
+"@id": "edge462476", 
+"@source": "node462475", 
+"@target": "node462476"
+}, 
+{
+"@id": "edge462477", 
+"@source": "node462476", 
+"@target": "node462477"
+}, 
+{
+"@id": "edge462478", 
+"@source": "node462477", 
+"@target": "node462478"
+}, 
+{
+"@id": "edge462479", 
+"@source": "node462478", 
+"@target": "node462479"
+}, 
+{
+"@id": "edge462480", 
+"@source": "node462479", 
+"@target": "node462480"
+}, 
+{
+"@id": "edge462481", 
+"@source": "node462479", 
+"@target": "node462481"
+}, 
+{
+"@id": "edge462482", 
+"@source": "node462478", 
+"@target": "node462482"
+}, 
+{
+"@id": "edge462483", 
+"@source": "node462478", 
+"@target": "node462483"
+}, 
+{
+"@id": "edge462484", 
+"@source": "node462477", 
+"@target": "node462484"
+}, 
+{
+"@id": "edge462485", 
+"@source": "node462484", 
+"@target": "node462485"
+}, 
+{
+"@id": "edge462486", 
+"@source": "node462484", 
+"@target": "node462486"
+}, 
+{
+"@id": "edge462487", 
+"@source": "node462476", 
+"@target": "node462487"
+}, 
+{
+"@id": "edge462488", 
+"@source": "node462487", 
+"@target": "node462488"
+}, 
+{
+"@id": "edge462489", 
+"@source": "node462487", 
+"@target": "node462489"
+}, 
+{
+"@id": "edge462490", 
+"@source": "node462475", 
+"@target": "node462490"
+}, 
+{
+"@id": "edge462491", 
+"@source": "node462490", 
+"@target": "node462491"
+}, 
+{
+"@id": "edge462492", 
+"@source": "node462491", 
+"@target": "node462492"
+}, 
+{
+"@id": "edge462493", 
+"@source": "node462492", 
+"@target": "node462493"
+}, 
+{
+"@id": "edge462494", 
+"@source": "node462493", 
+"@target": "node462494"
+}, 
+{
+"@id": "edge462495", 
+"@source": "node462494", 
+"@target": "node462495"
+}, 
+{
+"@id": "edge462496", 
+"@source": "node462494", 
+"@target": "node462496"
+}, 
+{
+"@id": "edge462497", 
+"@source": "node462493", 
+"@target": "node462497"
+}, 
+{
+"@id": "edge462498", 
+"@source": "node462492", 
+"@target": "node462498"
+}, 
+{
+"@id": "edge462499", 
+"@source": "node462491", 
+"@target": "node462499"
+}, 
+{
+"@id": "edge462500", 
+"@source": "node462490", 
+"@target": "node462500"
+}, 
+{
+"@id": "edge462501", 
+"@source": "node462500", 
+"@target": "node462501"
+}, 
+{
+"@id": "edge462502", 
+"@source": "node462501", 
+"@target": "node462502"
+}, 
+{
+"@id": "edge462503", 
+"@source": "node462501", 
+"@target": "node462503"
+}, 
+{
+"@id": "edge462504", 
+"@source": "node462500", 
+"@target": "node462504"
+}, 
+{
+"@id": "edge462505", 
+"@source": "node462474", 
+"@target": "node462505"
+}, 
+{
+"@id": "edge462506", 
+"@source": "node462505", 
+"@target": "node462506"
+}, 
+{
+"@id": "edge462507", 
+"@source": "node462505", 
+"@target": "node462507"
+}, 
+{
+"@id": "edge462508", 
+"@source": "node462473", 
+"@target": "node462508"
+}, 
+{
+"@id": "edge462509", 
+"@source": "node462508", 
+"@target": "node462509"
+}, 
+{
+"@id": "edge462510", 
+"@source": "node462509", 
+"@target": "node462510"
+}, 
+{
+"@id": "edge462511", 
+"@source": "node462509", 
+"@target": "node462511"
+}, 
+{
+"@id": "edge462512", 
+"@source": "node462508", 
+"@target": "node462512"
+}
+], 
+"meta": [
+{
+"$": "node462473", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node462470", 
+"@root": "true"
+}, 
+{
+"@id": "node462471", 
+"@otu": "otu197159"
+}, 
+{
+"@id": "node462472", 
+"@otu": "otu197162"
+}, 
+{
+"@id": "node462473"
+}, 
+{
+"@id": "node462474"
+}, 
+{
+"@id": "node462475"
+}, 
+{
+"@id": "node462476"
+}, 
+{
+"@id": "node462477"
+}, 
+{
+"@id": "node462478"
+}, 
+{
+"@id": "node462479"
+}, 
+{
+"@id": "node462480", 
+"@otu": "otu197167"
+}, 
+{
+"@id": "node462481", 
+"@otu": "otu197163"
+}, 
+{
+"@id": "node462482", 
+"@otu": "otu197161"
+}, 
+{
+"@id": "node462483", 
+"@otu": "otu197164"
+}, 
+{
+"@id": "node462484"
+}, 
+{
+"@id": "node462485", 
+"@otu": "otu197165"
+}, 
+{
+"@id": "node462486", 
+"@otu": "otu197166"
+}, 
+{
+"@id": "node462487"
+}, 
+{
+"@id": "node462488", 
+"@otu": "otu197171"
+}, 
+{
+"@id": "node462489", 
+"@otu": "otu197177"
+}, 
+{
+"@id": "node462490"
+}, 
+{
+"@id": "node462491"
+}, 
+{
+"@id": "node462492"
+}, 
+{
+"@id": "node462493"
+}, 
+{
+"@id": "node462494"
+}, 
+{
+"@id": "node462495", 
+"@otu": "otu197180"
+}, 
+{
+"@id": "node462496", 
+"@otu": "otu197175"
+}, 
+{
+"@id": "node462497", 
+"@otu": "otu197173"
+}, 
+{
+"@id": "node462498", 
+"@otu": "otu197170"
+}, 
+{
+"@id": "node462499", 
+"@otu": "otu197176"
+}, 
+{
+"@id": "node462500"
+}, 
+{
+"@id": "node462501"
+}, 
+{
+"@id": "node462502", 
+"@otu": "otu197169"
+}, 
+{
+"@id": "node462503", 
+"@otu": "otu197168"
+}, 
+{
+"@id": "node462504", 
+"@otu": "otu197160"
+}, 
+{
+"@id": "node462505"
+}, 
+{
+"@id": "node462506", 
+"@otu": "otu197179"
+}, 
+{
+"@id": "node462507", 
+"@otu": "otu197172"
+}, 
+{
+"@id": "node462508"
+}, 
+{
+"@id": "node462509"
+}, 
+{
+"@id": "node462510", 
+"@otu": "otu197181"
+}, 
+{
+"@id": "node462511", 
+"@otu": "otu197174"
+}, 
+{
+"@id": "node462512", 
+"@otu": "otu197178"
+}
+]
+}
+]
+}
+}
+}

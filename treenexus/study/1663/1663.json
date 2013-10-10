@@ -1,0 +1,381 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Morton J. 1995. Taxonomic and phylogenetic divergence among five Scutellospora species based on comparative developmental sequences. Mycologia, 87: 127-137.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2307/3760955", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S296", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1663", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1995, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2751608, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "morphology", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1663", 
+"otu": [
+{
+"@about": "#otu269838", 
+"@id": "otu269838", 
+"@label": "Gigaspora rosea", 
+"meta": [
+{
+"$": 149958, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gigaspora rosea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu269839", 
+"@id": "otu269839", 
+"@label": "Scutellospora gregaria", 
+"meta": [
+{
+"$": 802577, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Scutellospora gregaria", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu269840", 
+"@id": "otu269840", 
+"@label": "Scutellospora persica", 
+"meta": [
+{
+"$": 923349, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Scutellospora persica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu269841", 
+"@id": "otu269841", 
+"@label": "Scutellospora coralloidea", 
+"meta": [
+{
+"$": 350144, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Scutellospora coralloidea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu269842", 
+"@id": "otu269842", 
+"@label": "Scutellospora fulgida", 
+"meta": [
+{
+"$": 340746, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Scutellospora fulgida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu269843", 
+"@id": "otu269843", 
+"@label": "Scutellospora verrucosa", 
+"meta": [
+{
+"$": 672202, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Scutellospora verrucosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1663", 
+"@otus": "otus1663", 
+"tree": [
+{
+"@about": "#tree3355", 
+"@id": "tree3355", 
+"edge": [
+{
+"@id": "edge668418", 
+"@source": "node668417", 
+"@target": "node668418"
+}, 
+{
+"@id": "edge668419", 
+"@source": "node668417", 
+"@target": "node668419"
+}, 
+{
+"@id": "edge668420", 
+"@source": "node668419", 
+"@target": "node668420"
+}, 
+{
+"@id": "edge668421", 
+"@source": "node668419", 
+"@target": "node668421"
+}, 
+{
+"@id": "edge668422", 
+"@source": "node668421", 
+"@target": "node668422"
+}, 
+{
+"@id": "edge668423", 
+"@source": "node668421", 
+"@target": "node668423"
+}, 
+{
+"@id": "edge668424", 
+"@source": "node668423", 
+"@target": "node668424"
+}, 
+{
+"@id": "edge668425", 
+"@source": "node668423", 
+"@target": "node668425"
+}, 
+{
+"@id": "edge668426", 
+"@source": "node668425", 
+"@target": "node668426"
+}, 
+{
+"@id": "edge668427", 
+"@source": "node668425", 
+"@target": "node668427"
+}
+], 
+"meta": [
+{
+"$": "node668419", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node668417", 
+"@root": "true"
+}, 
+{
+"@id": "node668418", 
+"@otu": "otu269838"
+}, 
+{
+"@id": "node668419"
+}, 
+{
+"@id": "node668420", 
+"@otu": "otu269842"
+}, 
+{
+"@id": "node668421"
+}, 
+{
+"@id": "node668422", 
+"@otu": "otu269843"
+}, 
+{
+"@id": "node668423"
+}, 
+{
+"@id": "node668424", 
+"@otu": "otu269840"
+}, 
+{
+"@id": "node668425"
+}, 
+{
+"@id": "node668426", 
+"@otu": "otu269841"
+}, 
+{
+"@id": "node668427", 
+"@otu": "otu269839"
+}
+]
+}, 
+{
+"@about": "#tree3356", 
+"@id": "tree3356", 
+"edge": [
+{
+"@id": "edge668429", 
+"@source": "node668428", 
+"@target": "node668429"
+}, 
+{
+"@id": "edge668430", 
+"@source": "node668428", 
+"@target": "node668430"
+}, 
+{
+"@id": "edge668431", 
+"@source": "node668430", 
+"@target": "node668431"
+}, 
+{
+"@id": "edge668432", 
+"@source": "node668430", 
+"@target": "node668432"
+}, 
+{
+"@id": "edge668433", 
+"@source": "node668432", 
+"@target": "node668433"
+}, 
+{
+"@id": "edge668434", 
+"@source": "node668432", 
+"@target": "node668434"
+}, 
+{
+"@id": "edge668435", 
+"@source": "node668434", 
+"@target": "node668435"
+}, 
+{
+"@id": "edge668436", 
+"@source": "node668434", 
+"@target": "node668436"
+}, 
+{
+"@id": "edge668437", 
+"@source": "node668436", 
+"@target": "node668437"
+}, 
+{
+"@id": "edge668438", 
+"@source": "node668436", 
+"@target": "node668438"
+}
+], 
+"meta": [
+{
+"$": "node668430", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node668428", 
+"@root": "true"
+}, 
+{
+"@id": "node668429", 
+"@otu": "otu269838"
+}, 
+{
+"@id": "node668430"
+}, 
+{
+"@id": "node668431", 
+"@otu": "otu269842"
+}, 
+{
+"@id": "node668432"
+}, 
+{
+"@id": "node668433", 
+"@otu": "otu269840"
+}, 
+{
+"@id": "node668434"
+}, 
+{
+"@id": "node668435", 
+"@otu": "otu269843"
+}, 
+{
+"@id": "node668436"
+}, 
+{
+"@id": "node668437", 
+"@otu": "otu269841"
+}, 
+{
+"@id": "node668438", 
+"@otu": "otu269839"
+}
+]
+}
+]
+}
+}
+}

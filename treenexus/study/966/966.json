@@ -1,0 +1,777 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "To-anun C., Kom-un S., Limkaisang S., Fangfuk W., Sato Y., & Takamatsu S. 2004. A new subgenus, Microidium, of Oidium (Erysiphaceae) on Phyllanthus spp. Mycoscience, 46(1), p. 1-8.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s10267-004-0202-z", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1216", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "966", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2004, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 213061, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "SSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus966", 
+"otu": [
+{
+"@about": "#otu208984", 
+"@id": "otu208984", 
+"@label": "Erysiphe japonica", 
+"meta": [
+{
+"$": 208301, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Typhulochaeta japonica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208985", 
+"@id": "otu208985", 
+"@label": "Erysiphe mori", 
+"meta": [
+{
+"$": 622889, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe mori", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208986", 
+"@id": "otu208986", 
+"@label": "Neoerysiphe galeopsidis", 
+"meta": [
+{
+"$": 773763, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Neoerysiphe galeopsidis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208987", 
+"@id": "otu208987", 
+"@label": "Pleochaeta shiraiana", 
+"meta": [
+{
+"$": 1089923, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pleochaeta shiraiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208988", 
+"@id": "otu208988", 
+"@label": "Oidium phyllanthi", 
+"meta": [
+{
+"$": 803556, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium phyllanthi ex P. acidus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208989", 
+"@id": "otu208989", 
+"@label": "Podosphaera xanthii", 
+"meta": [
+{
+"$": 312686, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Podosphaera xanthii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208990", 
+"@id": "otu208990", 
+"@label": "Phyllactinia moricola", 
+"meta": [
+{
+"$": 1089925, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phyllactinia moricola", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208991", 
+"@id": "otu208991", 
+"@label": "Blumeria graminis", 
+"meta": [
+{
+"$": 555363, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Blumeria graminis ex Bromus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208992", 
+"@id": "otu208992", 
+"@label": "Arthrocladiella mougeotii", 
+"meta": [
+{
+"$": 829310, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Arthrocladiella mougeotii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208993", 
+"@id": "otu208993", 
+"@label": "Erysiphe friesii", 
+"meta": [
+{
+"$": 622876, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe friesii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208994", 
+"@id": "otu208994", 
+"@label": "Sawadaea polyfida", 
+"meta": [
+{
+"$": 1097412, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sawadaea polyfida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208995", 
+"@id": "otu208995", 
+"@label": "Golovinomyces orontii", 
+"meta": [
+{
+"$": 712257, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Golovinomyces orontii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208996", 
+"@id": "otu208996", 
+"@label": "Leveillula taurica", 
+"meta": [
+{
+"$": 712252, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Leveillula taurica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208997", 
+"@id": "otu208997", 
+"@label": "Oidium phyllanthi", 
+"meta": [
+{
+"$": 803556, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium phyllanthi ex P. amarus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208998", 
+"@id": "otu208998", 
+"@label": "Byssoascus striatosporus", 
+"meta": [
+{
+"$": 84170, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Byssoascus striatosporus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208999", 
+"@id": "otu208999", 
+"@label": "Oidium phyllanthi", 
+"meta": [
+{
+"$": 803556, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium phyllanthi ex P. reticulatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu209000", 
+"@id": "otu209000", 
+"@label": "Cystotheca wrightii", 
+"meta": [
+{
+"$": 1097409, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cystotheca wrightii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu209001", 
+"@id": "otu209001", 
+"@label": "Podosphaera longiseta", 
+"meta": [
+{
+"$": 446104, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Podosphaera longiseta", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu209002", 
+"@id": "otu209002", 
+"@label": "Erysiphe glycines", 
+"meta": [
+{
+"$": 727243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe glycines", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu209003", 
+"@id": "otu209003", 
+"@label": "Blumeria graminis", 
+"meta": [
+{
+"$": 555363, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Blumeria graminis ex Hordeum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees966", 
+"@otus": "otus966", 
+"tree": [
+{
+"@about": "#tree1896", 
+"@id": "tree1896", 
+"edge": [
+{
+"@id": "edge495710", 
+"@source": "node495709", 
+"@target": "node495710"
+}, 
+{
+"@id": "edge495711", 
+"@source": "node495709", 
+"@target": "node495711"
+}, 
+{
+"@id": "edge495712", 
+"@source": "node495711", 
+"@target": "node495712"
+}, 
+{
+"@id": "edge495713", 
+"@source": "node495712", 
+"@target": "node495713"
+}, 
+{
+"@id": "edge495714", 
+"@source": "node495713", 
+"@target": "node495714"
+}, 
+{
+"@id": "edge495715", 
+"@source": "node495714", 
+"@target": "node495715"
+}, 
+{
+"@id": "edge495716", 
+"@source": "node495715", 
+"@target": "node495716"
+}, 
+{
+"@id": "edge495717", 
+"@source": "node495716", 
+"@target": "node495717"
+}, 
+{
+"@id": "edge495718", 
+"@source": "node495716", 
+"@target": "node495718"
+}, 
+{
+"@id": "edge495719", 
+"@source": "node495715", 
+"@target": "node495719"
+}, 
+{
+"@id": "edge495720", 
+"@source": "node495719", 
+"@target": "node495720"
+}, 
+{
+"@id": "edge495721", 
+"@source": "node495719", 
+"@target": "node495721"
+}, 
+{
+"@id": "edge495722", 
+"@source": "node495714", 
+"@target": "node495722"
+}, 
+{
+"@id": "edge495723", 
+"@source": "node495722", 
+"@target": "node495723"
+}, 
+{
+"@id": "edge495724", 
+"@source": "node495723", 
+"@target": "node495724"
+}, 
+{
+"@id": "edge495725", 
+"@source": "node495724", 
+"@target": "node495725"
+}, 
+{
+"@id": "edge495726", 
+"@source": "node495724", 
+"@target": "node495726"
+}, 
+{
+"@id": "edge495727", 
+"@source": "node495723", 
+"@target": "node495727"
+}, 
+{
+"@id": "edge495728", 
+"@source": "node495722", 
+"@target": "node495728"
+}, 
+{
+"@id": "edge495729", 
+"@source": "node495728", 
+"@target": "node495729"
+}, 
+{
+"@id": "edge495730", 
+"@source": "node495728", 
+"@target": "node495730"
+}, 
+{
+"@id": "edge495731", 
+"@source": "node495730", 
+"@target": "node495731"
+}, 
+{
+"@id": "edge495732", 
+"@source": "node495730", 
+"@target": "node495732"
+}, 
+{
+"@id": "edge495733", 
+"@source": "node495713", 
+"@target": "node495733"
+}, 
+{
+"@id": "edge495734", 
+"@source": "node495733", 
+"@target": "node495734"
+}, 
+{
+"@id": "edge495735", 
+"@source": "node495734", 
+"@target": "node495735"
+}, 
+{
+"@id": "edge495736", 
+"@source": "node495734", 
+"@target": "node495736"
+}, 
+{
+"@id": "edge495737", 
+"@source": "node495733", 
+"@target": "node495737"
+}, 
+{
+"@id": "edge495738", 
+"@source": "node495712", 
+"@target": "node495738"
+}, 
+{
+"@id": "edge495739", 
+"@source": "node495738", 
+"@target": "node495739"
+}, 
+{
+"@id": "edge495740", 
+"@source": "node495738", 
+"@target": "node495740"
+}, 
+{
+"@id": "edge495741", 
+"@source": "node495711", 
+"@target": "node495741"
+}, 
+{
+"@id": "edge495742", 
+"@source": "node495741", 
+"@target": "node495742"
+}, 
+{
+"@id": "edge495743", 
+"@source": "node495742", 
+"@target": "node495743"
+}, 
+{
+"@id": "edge495744", 
+"@source": "node495742", 
+"@target": "node495744"
+}, 
+{
+"@id": "edge495745", 
+"@source": "node495741", 
+"@target": "node495745"
+}, 
+{
+"@id": "edge495746", 
+"@source": "node495745", 
+"@target": "node495746"
+}, 
+{
+"@id": "edge495747", 
+"@source": "node495745", 
+"@target": "node495747"
+}
+], 
+"meta": [
+{
+"$": "node495711", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "SSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node495709", 
+"@root": "true"
+}, 
+{
+"@id": "node495710", 
+"@otu": "otu208998"
+}, 
+{
+"@id": "node495711"
+}, 
+{
+"@id": "node495712"
+}, 
+{
+"@id": "node495713"
+}, 
+{
+"@id": "node495714"
+}, 
+{
+"@id": "node495715"
+}, 
+{
+"@id": "node495716"
+}, 
+{
+"@id": "node495717", 
+"@otu": "otu209002"
+}, 
+{
+"@id": "node495718", 
+"@otu": "otu208993"
+}, 
+{
+"@id": "node495719"
+}, 
+{
+"@id": "node495720", 
+"@otu": "otu208985"
+}, 
+{
+"@id": "node495721", 
+"@otu": "otu208984"
+}, 
+{
+"@id": "node495722"
+}, 
+{
+"@id": "node495723"
+}, 
+{
+"@id": "node495724"
+}, 
+{
+"@id": "node495725", 
+"@otu": "otu208995"
+}, 
+{
+"@id": "node495726", 
+"@otu": "otu208992"
+}, 
+{
+"@id": "node495727", 
+"@otu": "otu208986"
+}, 
+{
+"@id": "node495728"
+}, 
+{
+"@id": "node495729", 
+"@otu": "otu208999"
+}, 
+{
+"@id": "node495730"
+}, 
+{
+"@id": "node495731", 
+"@otu": "otu208997"
+}, 
+{
+"@id": "node495732", 
+"@otu": "otu208988"
+}, 
+{
+"@id": "node495733"
+}, 
+{
+"@id": "node495734"
+}, 
+{
+"@id": "node495735", 
+"@otu": "otu208990"
+}, 
+{
+"@id": "node495736", 
+"@otu": "otu208996"
+}, 
+{
+"@id": "node495737", 
+"@otu": "otu208987"
+}, 
+{
+"@id": "node495738"
+}, 
+{
+"@id": "node495739", 
+"@otu": "otu209003"
+}, 
+{
+"@id": "node495740", 
+"@otu": "otu208991"
+}, 
+{
+"@id": "node495741"
+}, 
+{
+"@id": "node495742"
+}, 
+{
+"@id": "node495743", 
+"@otu": "otu208994"
+}, 
+{
+"@id": "node495744", 
+"@otu": "otu209000"
+}, 
+{
+"@id": "node495745"
+}, 
+{
+"@id": "node495746", 
+"@otu": "otu208989"
+}, 
+{
+"@id": "node495747", 
+"@otu": "otu209001"
+}
+]
+}
+]
+}
+}
+}

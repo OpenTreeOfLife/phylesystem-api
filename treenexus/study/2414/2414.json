@@ -1,0 +1,1351 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Freitas T., Hou S., Dioum E., Salto J., Newhouse J., Gonzalez G., Gilles-gonzalez M., & Alam M. 2004. Ancestral hemoglobins in Archaea. Proceedings of the National Academy of Sciences of the United States of America, 101(17): 6675-6680.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1073/pnas.0308657101", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Laura Katz", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1410", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2414", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2004, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2730168, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2414", 
+"otu": [
+{
+"@about": "#otu342514", 
+"@id": "otu342514", 
+"@label": "Mus musculus", 
+"meta": [
+{
+"$": 542509, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mus musculus HbA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342515", 
+"@id": "otu342515", 
+"@label": "Mus musculus", 
+"meta": [
+{
+"$": 542509, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mus musculus HbBm", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342516", 
+"@id": "otu342516", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens Ngb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342517", 
+"@id": "otu342517", 
+"@label": "Chloroflexus aurantiacus", 
+"meta": [
+{
+"$": 201533, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Chloroflexus aurantiacus Pgb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342518", 
+"@id": "otu342518", 
+"@label": "Paramecium caudatum", 
+"meta": [
+{
+"$": 568125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paramecium caudatum Hb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342519", 
+"@id": "otu342519", 
+"@label": "Thermomonospora fusca", 
+"meta": [
+{
+"$": 802011, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Thermobifida fusca Pgb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342520", 
+"@id": "otu342520", 
+"@label": "Lucina pectinata", 
+"meta": [
+{
+"$": 2860802, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lucina pectinata Hb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342521", 
+"@id": "otu342521", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens HbG", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342522", 
+"@id": "otu342522", 
+"@label": "Oryza sativa", 
+"meta": [
+{
+"$": 709894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oryza sativa LHb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342523", 
+"@id": "otu342523", 
+"@label": "Ascaris suum", 
+"meta": [
+{
+"$": 345758, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ascaris suum Hb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342524", 
+"@id": "otu342524", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens HbT", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342525", 
+"@id": "otu342525", 
+"@label": "Aeropyrum pernix", 
+"meta": [
+{
+"$": 989927, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Aeropyrum pernix Pgb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342526", 
+"@id": "otu342526", 
+"@label": "Thermosynechococcus elongatus", 
+"meta": [
+{
+"$": 717455, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Thermosynechococcus elongatus Gib", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342527", 
+"@id": "otu342527", 
+"@label": "Riftia pachyptila", 
+"meta": [
+{
+"$": 954033, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Riftia pachyptila Hb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342528", 
+"@id": "otu342528", 
+"@label": "Vitreoscilla stercoraria", 
+"meta": [
+{
+"$": 737083, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Vitreoscilla stercoraria Hb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342529", 
+"@id": "otu342529", 
+"@label": "Halobacterium halobium (strain Shark)", 
+"meta": [
+{
+"$": 4280, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Halobacterium salinarum HemAT", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342530", 
+"@id": "otu342530", 
+"@label": "Bacillus coli", 
+"meta": [
+{
+"$": 474506, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Escherichia coli Hmp", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342531", 
+"@id": "otu342531", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens HbE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342532", 
+"@id": "otu342532", 
+"@label": "Cerebratulus lacteus", 
+"meta": [
+{
+"$": 971433, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cerebratulus lacteus NHb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342533", 
+"@id": "otu342533", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens Cyg", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342534", 
+"@id": "otu342534", 
+"@label": "Bacillus endorhythmos", 
+"meta": [
+{
+"$": 492618, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Bacillus cereus HemAT", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342535", 
+"@id": "otu342535", 
+"@label": "Mus musculus", 
+"meta": [
+{
+"$": 542509, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mus musculus HbE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342536", 
+"@id": "otu342536", 
+"@label": "Alcaligenes eutrophus", 
+"meta": [
+{
+"$": 103785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cupriavidus necator FHb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342537", 
+"@id": "otu342537", 
+"@label": "Paramphistomum epiclitum", 
+"meta": [
+{
+"$": 353033, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paramphistomum epiclitum Hb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342538", 
+"@id": "otu342538", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens HbA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342539", 
+"@id": "otu342539", 
+"@label": "Mus musculus", 
+"meta": [
+{
+"$": 542509, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mus musculus Ngb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342540", 
+"@id": "otu342540", 
+"@label": "Glycera dibranchiata", 
+"meta": [
+{
+"$": 305734, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Glycera dibranchiata Hb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342541", 
+"@id": "otu342541", 
+"@label": "Physeter macrocephalus", 
+"meta": [
+{
+"$": 276851, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Physeter catodon Mb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342542", 
+"@id": "otu342542", 
+"@label": "Bacillus tuberculosis", 
+"meta": [
+{
+"$": 604112, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycobacterium tuberculosis HbN", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342543", 
+"@id": "otu342543", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens Mb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342544", 
+"@id": "otu342544", 
+"@label": "Bacillus globigii", 
+"meta": [
+{
+"$": 1084928, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Bacillus subtilis HemAT", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342545", 
+"@id": "otu342545", 
+"@label": "Methanosarcina acetivorans", 
+"meta": [
+{
+"$": 416158, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Methanosarcina acetivorans Pgb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342546", 
+"@id": "otu342546", 
+"@label": "Synechocystis", 
+"meta": [
+{
+"$": 319255, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Synechocystis sp. PCC6803 cyanoHb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342547", 
+"@id": "otu342547", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens HbD", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342548", 
+"@id": "otu342548", 
+"@label": "Equus ferus caballus", 
+"meta": [
+{
+"$": 1068218, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Equus caballus Mb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342549", 
+"@id": "otu342549", 
+"@label": "Homo sapiens", 
+"meta": [
+{
+"$": 770315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Homo sapiens HbB", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342550", 
+"@id": "otu342550", 
+"@label": "Lupinus luteus L.", 
+"meta": [
+{
+"$": 1086811, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lupinus luteus LHb", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu342551", 
+"@id": "otu342551", 
+"@label": "Mus musculus", 
+"meta": [
+{
+"$": 542509, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mus musculus Cyg", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2414", 
+"@otus": "otus2414", 
+"tree": [
+{
+"@id": "tree5095", 
+"edge": [
+{
+"@id": "edge882178", 
+"@source": "node882177", 
+"@target": "node882178"
+}, 
+{
+"@id": "edge882179", 
+"@source": "node882178", 
+"@target": "node882179"
+}, 
+{
+"@id": "edge882180", 
+"@source": "node882178", 
+"@target": "node882180"
+}, 
+{
+"@id": "edge882181", 
+"@source": "node882180", 
+"@target": "node882181"
+}, 
+{
+"@id": "edge882182", 
+"@source": "node882181", 
+"@target": "node882182"
+}, 
+{
+"@id": "edge882183", 
+"@source": "node882181", 
+"@target": "node882183"
+}, 
+{
+"@id": "edge882184", 
+"@source": "node882180", 
+"@target": "node882184"
+}, 
+{
+"@id": "edge882185", 
+"@source": "node882177", 
+"@target": "node882185"
+}, 
+{
+"@id": "edge882186", 
+"@source": "node882185", 
+"@target": "node882186"
+}, 
+{
+"@id": "edge882187", 
+"@source": "node882186", 
+"@target": "node882187"
+}, 
+{
+"@id": "edge882188", 
+"@source": "node882186", 
+"@target": "node882188"
+}, 
+{
+"@id": "edge882189", 
+"@source": "node882185", 
+"@target": "node882189"
+}, 
+{
+"@id": "edge882190", 
+"@source": "node882189", 
+"@target": "node882190"
+}, 
+{
+"@id": "edge882191", 
+"@source": "node882190", 
+"@target": "node882191"
+}, 
+{
+"@id": "edge882192", 
+"@source": "node882191", 
+"@target": "node882192"
+}, 
+{
+"@id": "edge882193", 
+"@source": "node882191", 
+"@target": "node882193"
+}, 
+{
+"@id": "edge882194", 
+"@source": "node882190", 
+"@target": "node882194"
+}, 
+{
+"@id": "edge882195", 
+"@source": "node882189", 
+"@target": "node882195"
+}, 
+{
+"@id": "edge882196", 
+"@source": "node882195", 
+"@target": "node882196"
+}, 
+{
+"@id": "edge882197", 
+"@source": "node882195", 
+"@target": "node882197"
+}, 
+{
+"@id": "edge882198", 
+"@source": "node882197", 
+"@target": "node882198"
+}, 
+{
+"@id": "edge882199", 
+"@source": "node882198", 
+"@target": "node882199"
+}, 
+{
+"@id": "edge882200", 
+"@source": "node882198", 
+"@target": "node882200"
+}, 
+{
+"@id": "edge882201", 
+"@source": "node882197", 
+"@target": "node882201"
+}, 
+{
+"@id": "edge882202", 
+"@source": "node882201", 
+"@target": "node882202"
+}, 
+{
+"@id": "edge882203", 
+"@source": "node882202", 
+"@target": "node882203"
+}, 
+{
+"@id": "edge882204", 
+"@source": "node882202", 
+"@target": "node882204"
+}, 
+{
+"@id": "edge882205", 
+"@source": "node882204", 
+"@target": "node882205"
+}, 
+{
+"@id": "edge882206", 
+"@source": "node882204", 
+"@target": "node882206"
+}, 
+{
+"@id": "edge882207", 
+"@source": "node882201", 
+"@target": "node882207"
+}, 
+{
+"@id": "edge882208", 
+"@source": "node882207", 
+"@target": "node882208"
+}, 
+{
+"@id": "edge882209", 
+"@source": "node882208", 
+"@target": "node882209"
+}, 
+{
+"@id": "edge882210", 
+"@source": "node882208", 
+"@target": "node882210"
+}, 
+{
+"@id": "edge882211", 
+"@source": "node882210", 
+"@target": "node882211"
+}, 
+{
+"@id": "edge882212", 
+"@source": "node882210", 
+"@target": "node882212"
+}, 
+{
+"@id": "edge882213", 
+"@source": "node882207", 
+"@target": "node882213"
+}, 
+{
+"@id": "edge882214", 
+"@source": "node882213", 
+"@target": "node882214"
+}, 
+{
+"@id": "edge882215", 
+"@source": "node882214", 
+"@target": "node882215"
+}, 
+{
+"@id": "edge882216", 
+"@source": "node882214", 
+"@target": "node882216"
+}, 
+{
+"@id": "edge882217", 
+"@source": "node882213", 
+"@target": "node882217"
+}, 
+{
+"@id": "edge882218", 
+"@source": "node882217", 
+"@target": "node882218"
+}, 
+{
+"@id": "edge882219", 
+"@source": "node882218", 
+"@target": "node882219"
+}, 
+{
+"@id": "edge882220", 
+"@source": "node882218", 
+"@target": "node882220"
+}, 
+{
+"@id": "edge882221", 
+"@source": "node882217", 
+"@target": "node882221"
+}, 
+{
+"@id": "edge882222", 
+"@source": "node882221", 
+"@target": "node882222"
+}, 
+{
+"@id": "edge882223", 
+"@source": "node882222", 
+"@target": "node882223"
+}, 
+{
+"@id": "edge882224", 
+"@source": "node882222", 
+"@target": "node882224"
+}, 
+{
+"@id": "edge882225", 
+"@source": "node882221", 
+"@target": "node882225"
+}, 
+{
+"@id": "edge882226", 
+"@source": "node882225", 
+"@target": "node882226"
+}, 
+{
+"@id": "edge882227", 
+"@source": "node882226", 
+"@target": "node882227"
+}, 
+{
+"@id": "edge882228", 
+"@source": "node882227", 
+"@target": "node882228"
+}, 
+{
+"@id": "edge882229", 
+"@source": "node882227", 
+"@target": "node882229"
+}, 
+{
+"@id": "edge882230", 
+"@source": "node882226", 
+"@target": "node882230"
+}, 
+{
+"@id": "edge882231", 
+"@source": "node882230", 
+"@target": "node882231"
+}, 
+{
+"@id": "edge882232", 
+"@source": "node882231", 
+"@target": "node882232"
+}, 
+{
+"@id": "edge882233", 
+"@source": "node882231", 
+"@target": "node882233"
+}, 
+{
+"@id": "edge882234", 
+"@source": "node882230", 
+"@target": "node882234"
+}, 
+{
+"@id": "edge882235", 
+"@source": "node882225", 
+"@target": "node882235"
+}, 
+{
+"@id": "edge882236", 
+"@source": "node882235", 
+"@target": "node882236"
+}, 
+{
+"@id": "edge882237", 
+"@source": "node882236", 
+"@target": "node882237"
+}, 
+{
+"@id": "edge882238", 
+"@source": "node882237", 
+"@target": "node882238"
+}, 
+{
+"@id": "edge882239", 
+"@source": "node882238", 
+"@target": "node882239"
+}, 
+{
+"@id": "edge882240", 
+"@source": "node882238", 
+"@target": "node882240"
+}, 
+{
+"@id": "edge882241", 
+"@source": "node882237", 
+"@target": "node882241"
+}, 
+{
+"@id": "edge882242", 
+"@source": "node882236", 
+"@target": "node882242"
+}, 
+{
+"@id": "edge882243", 
+"@source": "node882242", 
+"@target": "node882243"
+}, 
+{
+"@id": "edge882244", 
+"@source": "node882242", 
+"@target": "node882244"
+}, 
+{
+"@id": "edge882245", 
+"@source": "node882235", 
+"@target": "node882245"
+}, 
+{
+"@id": "edge882246", 
+"@source": "node882245", 
+"@target": "node882246"
+}, 
+{
+"@id": "edge882247", 
+"@source": "node882246", 
+"@target": "node882247"
+}, 
+{
+"@id": "edge882248", 
+"@source": "node882247", 
+"@target": "node882248"
+}, 
+{
+"@id": "edge882249", 
+"@source": "node882247", 
+"@target": "node882249"
+}, 
+{
+"@id": "edge882250", 
+"@source": "node882246", 
+"@target": "node882250"
+}, 
+{
+"@id": "edge882251", 
+"@source": "node882245", 
+"@target": "node882251"
+}
+], 
+"node": [
+{
+"@id": "node882177", 
+"@root": "true"
+}, 
+{
+"@id": "node882178"
+}, 
+{
+"@id": "node882179", 
+"@otu": "otu342525"
+}, 
+{
+"@id": "node882180"
+}, 
+{
+"@id": "node882181"
+}, 
+{
+"@id": "node882182", 
+"@otu": "otu342545"
+}, 
+{
+"@id": "node882183", 
+"@otu": "otu342517"
+}, 
+{
+"@id": "node882184", 
+"@otu": "otu342519"
+}, 
+{
+"@id": "node882185"
+}, 
+{
+"@id": "node882186"
+}, 
+{
+"@id": "node882187", 
+"@otu": "otu342527"
+}, 
+{
+"@id": "node882188", 
+"@otu": "otu342523"
+}, 
+{
+"@id": "node882189"
+}, 
+{
+"@id": "node882190"
+}, 
+{
+"@id": "node882191"
+}, 
+{
+"@id": "node882192", 
+"@otu": "otu342544"
+}, 
+{
+"@id": "node882193", 
+"@otu": "otu342534"
+}, 
+{
+"@id": "node882194", 
+"@otu": "otu342529"
+}, 
+{
+"@id": "node882195"
+}, 
+{
+"@id": "node882196", 
+"@otu": "otu342526"
+}, 
+{
+"@id": "node882197"
+}, 
+{
+"@id": "node882198"
+}, 
+{
+"@id": "node882199", 
+"@otu": "otu342532"
+}, 
+{
+"@id": "node882200", 
+"@otu": "otu342537"
+}, 
+{
+"@id": "node882201"
+}, 
+{
+"@id": "node882202"
+}, 
+{
+"@id": "node882203", 
+"@otu": "otu342518"
+}, 
+{
+"@id": "node882204"
+}, 
+{
+"@id": "node882205", 
+"@otu": "otu342546"
+}, 
+{
+"@id": "node882206", 
+"@otu": "otu342542"
+}, 
+{
+"@id": "node882207"
+}, 
+{
+"@id": "node882208"
+}, 
+{
+"@id": "node882209", 
+"@otu": "otu342528"
+}, 
+{
+"@id": "node882210"
+}, 
+{
+"@id": "node882211", 
+"@otu": "otu342530"
+}, 
+{
+"@id": "node882212", 
+"@otu": "otu342536"
+}, 
+{
+"@id": "node882213"
+}, 
+{
+"@id": "node882214"
+}, 
+{
+"@id": "node882215", 
+"@otu": "otu342540"
+}, 
+{
+"@id": "node882216", 
+"@otu": "otu342520"
+}, 
+{
+"@id": "node882217"
+}, 
+{
+"@id": "node882218"
+}, 
+{
+"@id": "node882219", 
+"@otu": "otu342550"
+}, 
+{
+"@id": "node882220", 
+"@otu": "otu342522"
+}, 
+{
+"@id": "node882221"
+}, 
+{
+"@id": "node882222"
+}, 
+{
+"@id": "node882223", 
+"@otu": "otu342516"
+}, 
+{
+"@id": "node882224", 
+"@otu": "otu342539"
+}, 
+{
+"@id": "node882225"
+}, 
+{
+"@id": "node882226"
+}, 
+{
+"@id": "node882227"
+}, 
+{
+"@id": "node882228", 
+"@otu": "otu342533"
+}, 
+{
+"@id": "node882229", 
+"@otu": "otu342551"
+}, 
+{
+"@id": "node882230"
+}, 
+{
+"@id": "node882231"
+}, 
+{
+"@id": "node882232", 
+"@otu": "otu342543"
+}, 
+{
+"@id": "node882233", 
+"@otu": "otu342541"
+}, 
+{
+"@id": "node882234", 
+"@otu": "otu342548"
+}, 
+{
+"@id": "node882235"
+}, 
+{
+"@id": "node882236"
+}, 
+{
+"@id": "node882237"
+}, 
+{
+"@id": "node882238"
+}, 
+{
+"@id": "node882239", 
+"@otu": "otu342531"
+}, 
+{
+"@id": "node882240", 
+"@otu": "otu342535"
+}, 
+{
+"@id": "node882241", 
+"@otu": "otu342521"
+}, 
+{
+"@id": "node882242"
+}, 
+{
+"@id": "node882243", 
+"@otu": "otu342547"
+}, 
+{
+"@id": "node882244", 
+"@otu": "otu342549"
+}, 
+{
+"@id": "node882245"
+}, 
+{
+"@id": "node882246"
+}, 
+{
+"@id": "node882247"
+}, 
+{
+"@id": "node882248", 
+"@otu": "otu342514"
+}, 
+{
+"@id": "node882249", 
+"@otu": "otu342515"
+}, 
+{
+"@id": "node882250", 
+"@otu": "otu342538"
+}, 
+{
+"@id": "node882251", 
+"@otu": "otu342524"
+}
+]
+}
+]
+}
+}
+}

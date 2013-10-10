@@ -1,0 +1,3023 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Damm U., Cannon P., Woudenberg J., Johnston P., Weir B.S., Tan Y., Shivas R.G., & Crous P.W. 2012. The Colletotrichum boninense species complex. Studies in Mycology, 73: 1-36.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.3114/sim0002", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S12517", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "702", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2012, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 757295, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "GAPDH", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "HIS3", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub2", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CHS1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CAL", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus702", 
+"otu": [
+{
+"@about": "#otu187898", 
+"@id": "otu187898", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 128549", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187899", 
+"@id": "otu187899", 
+"@label": "Colletotrichum torulosum", 
+"meta": [
+{
+"$": 219022, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum torulosum CBS 128544", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187900", 
+"@id": "otu187900", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 128500", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187901", 
+"@id": "otu187901", 
+"@label": "Colletotrichum constrictum", 
+"meta": [
+{
+"$": 797841, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum constrictum CBS 128503", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187902", 
+"@id": "otu187902", 
+"@label": "Colletotrichum oncidii", 
+"meta": [
+{
+"$": 797845, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum oncidii CBS 130242", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187903", 
+"@id": "otu187903", 
+"@label": "Colletotrichum dacrycarpi", 
+"meta": [
+{
+"$": 797847, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum dacrycarpi CBS 130241", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187904", 
+"@id": "otu187904", 
+"@label": "Colletotrichum phyllanthi", 
+"meta": [
+{
+"$": 797839, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum phyllanthi CBS 175 67", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187905", 
+"@id": "otu187905", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 128550", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187906", 
+"@id": "otu187906", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 112982", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187907", 
+"@id": "otu187907", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 113087", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187908", 
+"@id": "otu187908", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129824", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187909", 
+"@id": "otu187909", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 127597", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187910", 
+"@id": "otu187910", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 123755", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187911", 
+"@id": "otu187911", 
+"@label": "Colletotrichum", 
+"meta": [
+{
+"$": 1085553, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum sp CBS 123921", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187912", 
+"@id": "otu187912", 
+"@label": "Colletotrichum novae-zelandiae", 
+"meta": [
+{
+"$": 797848, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum novae-zelandiae CBS 128505", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187913", 
+"@id": "otu187913", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 127535", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187914", 
+"@id": "otu187914", 
+"@label": "Glomerella cingulata", 
+"meta": [
+{
+"$": 1085557, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum gloeosporioides CBS 112999", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187915", 
+"@id": "otu187915", 
+"@label": "Colletotrichum brasiliense", 
+"meta": [
+{
+"$": 611114, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum brasiliense CBS 128528", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187916", 
+"@id": "otu187916", 
+"@label": "Colletotrichum cymbidiicola", 
+"meta": [
+{
+"$": 797842, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum cymbidiicola IMI 347923", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187917", 
+"@id": "otu187917", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense MAFF 306162", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187918", 
+"@id": "otu187918", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129832", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187919", 
+"@id": "otu187919", 
+"@label": "Colletotrichum hippeastri", 
+"meta": [
+{
+"$": 594042, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum hippeastri CBS 241 78", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187920", 
+"@id": "otu187920", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 111998", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187921", 
+"@id": "otu187921", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 508 97", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187922", 
+"@id": "otu187922", 
+"@label": "Colletotrichum petchii", 
+"meta": [
+{
+"$": 797837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum petchii CBS 125957", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187923", 
+"@id": "otu187923", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 127536", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187924", 
+"@id": "otu187924", 
+"@label": "Colletotrichum oncidii", 
+"meta": [
+{
+"$": 797845, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum oncidii CBS 129828", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187925", 
+"@id": "otu187925", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 130235", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187926", 
+"@id": "otu187926", 
+"@label": "Colletotrichum petchii", 
+"meta": [
+{
+"$": 797837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum petchii CBS 118193", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187927", 
+"@id": "otu187927", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 111860", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187928", 
+"@id": "otu187928", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 123756", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187929", 
+"@id": "otu187929", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii MAFF 305998", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187930", 
+"@id": "otu187930", 
+"@label": "Colletotrichum parsonsiae", 
+"meta": [
+{
+"$": 797846, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum parsonsiae CBS 128525", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187931", 
+"@id": "otu187931", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 112115", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187932", 
+"@id": "otu187932", 
+"@label": "Colletotrichum beeveri", 
+"meta": [
+{
+"$": 155763, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum beeveri CBS 128527", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187933", 
+"@id": "otu187933", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 112762", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187934", 
+"@id": "otu187934", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 124969", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187935", 
+"@id": "otu187935", 
+"@label": "Colletotrichum cymbidiicola", 
+"meta": [
+{
+"$": 797842, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum cymbidiicola CBS 123757", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187936", 
+"@id": "otu187936", 
+"@label": "Colletotrichum torulosum", 
+"meta": [
+{
+"$": 219022, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum torulosum CBS 102667", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187937", 
+"@id": "otu187937", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 118401", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187938", 
+"@id": "otu187938", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 126532", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187939", 
+"@id": "otu187939", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129830", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187940", 
+"@id": "otu187940", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 127595", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187941", 
+"@id": "otu187941", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 128545", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187942", 
+"@id": "otu187942", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 125388", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187943", 
+"@id": "otu187943", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 125468", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187944", 
+"@id": "otu187944", 
+"@label": "Colletotrichum hippeastri", 
+"meta": [
+{
+"$": 594042, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum hippeastri CBS 125376", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187945", 
+"@id": "otu187945", 
+"@label": "Colletotrichum hippeastri", 
+"meta": [
+{
+"$": 594042, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum hippeastri CBS 125377", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187946", 
+"@id": "otu187946", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129822", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187947", 
+"@id": "otu187947", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129927", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187948", 
+"@id": "otu187948", 
+"@label": "Colletotrichum annellatum", 
+"meta": [
+{
+"$": 611096, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum annellatum CBS 129826", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187949", 
+"@id": "otu187949", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 127596", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187950", 
+"@id": "otu187950", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 110779", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187951", 
+"@id": "otu187951", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129834", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187952", 
+"@id": "otu187952", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 115535", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187953", 
+"@id": "otu187953", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 129831", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187954", 
+"@id": "otu187954", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129833", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187955", 
+"@id": "otu187955", 
+"@label": "Colletotrichum colombiense", 
+"meta": [
+{
+"$": 797844, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum colombiense CBS 129818", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187956", 
+"@id": "otu187956", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129815", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187957", 
+"@id": "otu187957", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 127591", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187958", 
+"@id": "otu187958", 
+"@label": "Colletotrichum brassicicola", 
+"meta": [
+{
+"$": 797843, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum brassicicola CBS 101059", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187959", 
+"@id": "otu187959", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 127552", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187960", 
+"@id": "otu187960", 
+"@label": "Colletotrichum novae-zelandiae", 
+"meta": [
+{
+"$": 797848, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum novae-zelandiae CBS 130240", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187961", 
+"@id": "otu187961", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 128526", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187962", 
+"@id": "otu187962", 
+"@label": "Colletotrichum brasiliense", 
+"meta": [
+{
+"$": 611114, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum brasiliense CBS 128501", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187963", 
+"@id": "otu187963", 
+"@label": "Colletotrichum constrictum", 
+"meta": [
+{
+"$": 797841, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum constrictum CBS 128504", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187964", 
+"@id": "otu187964", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 486 97", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187965", 
+"@id": "otu187965", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 128551", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187966", 
+"@id": "otu187966", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 129829", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187967", 
+"@id": "otu187967", 
+"@label": "Colletotrichum petchii", 
+"meta": [
+{
+"$": 797837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum petchii CBS 118774", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187968", 
+"@id": "otu187968", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 106 91", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187969", 
+"@id": "otu187969", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 128524", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187970", 
+"@id": "otu187970", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 861 72", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187971", 
+"@id": "otu187971", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii MAFF 305973", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187972", 
+"@id": "otu187972", 
+"@label": "Colletotrichum cymbidiicola", 
+"meta": [
+{
+"$": 797842, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum cymbidiicola CBS 128543", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187973", 
+"@id": "otu187973", 
+"@label": "Colletotrichum petchii", 
+"meta": [
+{
+"$": 797837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum petchii CBS 379 94", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187974", 
+"@id": "otu187974", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 124951", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187975", 
+"@id": "otu187975", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 128552", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187976", 
+"@id": "otu187976", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii MAFF 306204", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187977", 
+"@id": "otu187977", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 128548", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187978", 
+"@id": "otu187978", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 128547", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187979", 
+"@id": "otu187979", 
+"@label": "Colletotrichum petchii", 
+"meta": [
+{
+"$": 797837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum petchii CBS 378 94", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187980", 
+"@id": "otu187980", 
+"@label": "Colletotrichum colombiense", 
+"meta": [
+{
+"$": 797844, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum colombiense CBS 129817", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187981", 
+"@id": "otu187981", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 128540", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187982", 
+"@id": "otu187982", 
+"@label": "Colletotrichum karstii", 
+"meta": [
+{
+"$": 686421, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum karstii CBS 124956", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187983", 
+"@id": "otu187983", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 128546", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu187984", 
+"@id": "otu187984", 
+"@label": "Colletotrichum boninense", 
+"meta": [
+{
+"$": 332420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colletotrichum boninense CBS 128506", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees702", 
+"@otus": "otus702", 
+"tree": [
+{
+"@about": "#tree1263", 
+"@id": "tree1263", 
+"edge": [
+{
+"@id": "edge432926", 
+"@length": 0.12533442, 
+"@source": "node432925", 
+"@target": "node432926"
+}, 
+{
+"@id": "edge432927", 
+"@length": 0.12533442, 
+"@source": "node432925", 
+"@target": "node432927"
+}, 
+{
+"@id": "edge432928", 
+"@length": 0.07077407, 
+"@source": "node432927", 
+"@target": "node432928"
+}, 
+{
+"@id": "edge432929", 
+"@length": 0.00126895, 
+"@source": "node432928", 
+"@target": "node432929"
+}, 
+{
+"@id": "edge432930", 
+"@length": 1e-08, 
+"@source": "node432928", 
+"@target": "node432930"
+}, 
+{
+"@id": "edge432931", 
+"@length": 0.00102427, 
+"@source": "node432927", 
+"@target": "node432931"
+}, 
+{
+"@id": "edge432932", 
+"@length": 0.04365641, 
+"@source": "node432931", 
+"@target": "node432932"
+}, 
+{
+"@id": "edge432933", 
+"@length": 0.04022035, 
+"@source": "node432931", 
+"@target": "node432933"
+}, 
+{
+"@id": "edge432934", 
+"@length": 0.0329453, 
+"@source": "node432933", 
+"@target": "node432934"
+}, 
+{
+"@id": "edge432935", 
+"@length": 0.01662232, 
+"@source": "node432934", 
+"@target": "node432935"
+}, 
+{
+"@id": "edge432936", 
+"@length": 1e-08, 
+"@source": "node432935", 
+"@target": "node432936"
+}, 
+{
+"@id": "edge432937", 
+"@length": 1e-08, 
+"@source": "node432935", 
+"@target": "node432937"
+}, 
+{
+"@id": "edge432938", 
+"@length": 1e-08, 
+"@source": "node432935", 
+"@target": "node432938"
+}, 
+{
+"@id": "edge432939", 
+"@length": 0.00134454, 
+"@source": "node432934", 
+"@target": "node432939"
+}, 
+{
+"@id": "edge432940", 
+"@length": 0.00720814, 
+"@source": "node432939", 
+"@target": "node432940"
+}, 
+{
+"@id": "edge432941", 
+"@length": 0.01077269, 
+"@source": "node432939", 
+"@target": "node432941"
+}, 
+{
+"@id": "edge432942", 
+"@length": 0.00090174, 
+"@source": "node432941", 
+"@target": "node432942"
+}, 
+{
+"@id": "edge432943", 
+"@length": 0.00043849, 
+"@source": "node432941", 
+"@target": "node432943"
+}, 
+{
+"@id": "edge432944", 
+"@length": 0.00909726, 
+"@source": "node432933", 
+"@target": "node432944"
+}, 
+{
+"@id": "edge432945", 
+"@length": 0.02059128, 
+"@source": "node432944", 
+"@target": "node432945"
+}, 
+{
+"@id": "edge432946", 
+"@length": 0.01531178, 
+"@source": "node432945", 
+"@target": "node432946"
+}, 
+{
+"@id": "edge432947", 
+"@length": 0.00061893, 
+"@source": "node432946", 
+"@target": "node432947"
+}, 
+{
+"@id": "edge432948", 
+"@length": 0.01218455, 
+"@source": "node432947", 
+"@target": "node432948"
+}, 
+{
+"@id": "edge432949", 
+"@length": 0.01949093, 
+"@source": "node432947", 
+"@target": "node432949"
+}, 
+{
+"@id": "edge432950", 
+"@length": 0.01466689, 
+"@source": "node432946", 
+"@target": "node432950"
+}, 
+{
+"@id": "edge432951", 
+"@length": 0.00459884, 
+"@source": "node432950", 
+"@target": "node432951"
+}, 
+{
+"@id": "edge432952", 
+"@length": 0.00499272, 
+"@source": "node432950", 
+"@target": "node432952"
+}, 
+{
+"@id": "edge432953", 
+"@length": 0.00665401, 
+"@source": "node432945", 
+"@target": "node432953"
+}, 
+{
+"@id": "edge432954", 
+"@length": 0.00162815, 
+"@source": "node432953", 
+"@target": "node432954"
+}, 
+{
+"@id": "edge432955", 
+"@length": 0.00397127, 
+"@source": "node432954", 
+"@target": "node432955"
+}, 
+{
+"@id": "edge432956", 
+"@length": 1e-08, 
+"@source": "node432955", 
+"@target": "node432956"
+}, 
+{
+"@id": "edge432957", 
+"@length": 0.00044039, 
+"@source": "node432955", 
+"@target": "node432957"
+}, 
+{
+"@id": "edge432958", 
+"@length": 0.00229232, 
+"@source": "node432954", 
+"@target": "node432958"
+}, 
+{
+"@id": "edge432959", 
+"@length": 0.00088361, 
+"@source": "node432958", 
+"@target": "node432959"
+}, 
+{
+"@id": "edge432960", 
+"@source": "node432958", 
+"@target": "node432960"
+}, 
+{
+"@id": "edge432961", 
+"@length": 0.00044093, 
+"@source": "node432960", 
+"@target": "node432961"
+}, 
+{
+"@id": "edge432962", 
+"@length": 0.00044101, 
+"@source": "node432960", 
+"@target": "node432962"
+}, 
+{
+"@id": "edge432963", 
+"@length": 0.0023826, 
+"@source": "node432953", 
+"@target": "node432963"
+}, 
+{
+"@id": "edge432964", 
+"@length": 0.00488592, 
+"@source": "node432963", 
+"@target": "node432964"
+}, 
+{
+"@id": "edge432965", 
+"@length": 0.00044045, 
+"@source": "node432964", 
+"@target": "node432965"
+}, 
+{
+"@id": "edge432966", 
+"@length": 1e-08, 
+"@source": "node432964", 
+"@target": "node432966"
+}, 
+{
+"@id": "edge432967", 
+"@length": 0.00091121, 
+"@source": "node432963", 
+"@target": "node432967"
+}, 
+{
+"@id": "edge432968", 
+"@length": 0.00489207, 
+"@source": "node432967", 
+"@target": "node432968"
+}, 
+{
+"@id": "edge432969", 
+"@length": 0.00179024, 
+"@source": "node432967", 
+"@target": "node432969"
+}, 
+{
+"@id": "edge432970", 
+"@length": 0.00089079, 
+"@source": "node432969", 
+"@target": "node432970"
+}, 
+{
+"@id": "edge432971", 
+"@length": 0.00043956, 
+"@source": "node432969", 
+"@target": "node432971"
+}, 
+{
+"@id": "edge432972", 
+"@length": 0.00044038, 
+"@source": "node432971", 
+"@target": "node432972"
+}, 
+{
+"@id": "edge432973", 
+"@length": 0.00088269, 
+"@source": "node432972", 
+"@target": "node432973"
+}, 
+{
+"@id": "edge432974", 
+"@source": "node432972", 
+"@target": "node432974"
+}, 
+{
+"@id": "edge432975", 
+"@length": 0.00437003, 
+"@source": "node432974", 
+"@target": "node432975"
+}, 
+{
+"@id": "edge432976", 
+"@length": 0.00221679, 
+"@source": "node432974", 
+"@target": "node432976"
+}, 
+{
+"@id": "edge432977", 
+"@length": 0.00044152, 
+"@source": "node432976", 
+"@target": "node432977"
+}, 
+{
+"@id": "edge432978", 
+"@length": 1e-08, 
+"@source": "node432976", 
+"@target": "node432978"
+}, 
+{
+"@id": "edge432979", 
+"@length": 0.00177563, 
+"@source": "node432971", 
+"@target": "node432979"
+}, 
+{
+"@id": "edge432980", 
+"@length": 1e-08, 
+"@source": "node432979", 
+"@target": "node432980"
+}, 
+{
+"@id": "edge432981", 
+"@length": 0.00133045, 
+"@source": "node432979", 
+"@target": "node432981"
+}, 
+{
+"@id": "edge432982", 
+"@length": 1e-08, 
+"@source": "node432979", 
+"@target": "node432982"
+}, 
+{
+"@id": "edge432983", 
+"@length": 1e-08, 
+"@source": "node432979", 
+"@target": "node432983"
+}, 
+{
+"@id": "edge432984", 
+"@length": 1e-08, 
+"@source": "node432979", 
+"@target": "node432984"
+}, 
+{
+"@id": "edge432985", 
+"@length": 0.0027286, 
+"@source": "node432944", 
+"@target": "node432985"
+}, 
+{
+"@id": "edge432986", 
+"@length": 0.04683725, 
+"@source": "node432985", 
+"@target": "node432986"
+}, 
+{
+"@id": "edge432987", 
+"@length": 0.00029168, 
+"@source": "node432986", 
+"@target": "node432987"
+}, 
+{
+"@id": "edge432988", 
+"@length": 0.00151683, 
+"@source": "node432986", 
+"@target": "node432988"
+}, 
+{
+"@id": "edge432989", 
+"@length": 0.01125316, 
+"@source": "node432985", 
+"@target": "node432989"
+}, 
+{
+"@id": "edge432990", 
+"@length": 0.02079499, 
+"@source": "node432989", 
+"@target": "node432990"
+}, 
+{
+"@id": "edge432991", 
+"@length": 1e-08, 
+"@source": "node432990", 
+"@target": "node432991"
+}, 
+{
+"@id": "edge432992", 
+"@length": 0.0004373, 
+"@source": "node432990", 
+"@target": "node432992"
+}, 
+{
+"@id": "edge432993", 
+"@length": 1e-08, 
+"@source": "node432992", 
+"@target": "node432993"
+}, 
+{
+"@id": "edge432994", 
+"@length": 1e-08, 
+"@source": "node432992", 
+"@target": "node432994"
+}, 
+{
+"@id": "edge432995", 
+"@length": 0.00087503, 
+"@source": "node432992", 
+"@target": "node432995"
+}, 
+{
+"@id": "edge432996", 
+"@length": 1e-08, 
+"@source": "node432995", 
+"@target": "node432996"
+}, 
+{
+"@id": "edge432997", 
+"@length": 1e-08, 
+"@source": "node432995", 
+"@target": "node432997"
+}, 
+{
+"@id": "edge432998", 
+"@length": 0.00920136, 
+"@source": "node432989", 
+"@target": "node432998"
+}, 
+{
+"@id": "edge432999", 
+"@length": 0.0106364, 
+"@source": "node432998", 
+"@target": "node432999"
+}, 
+{
+"@id": "edge433000", 
+"@length": 0.00211148, 
+"@source": "node432998", 
+"@target": "node433000"
+}, 
+{
+"@id": "edge433001", 
+"@length": 0.00681656, 
+"@source": "node433000", 
+"@target": "node433001"
+}, 
+{
+"@id": "edge433002", 
+"@length": 0.00316329, 
+"@source": "node433000", 
+"@target": "node433002"
+}, 
+{
+"@id": "edge433003", 
+"@length": 0.00088973, 
+"@source": "node433002", 
+"@target": "node433003"
+}, 
+{
+"@id": "edge433004", 
+"@length": 1e-08, 
+"@source": "node433003", 
+"@target": "node433004"
+}, 
+{
+"@id": "edge433005", 
+"@length": 1e-08, 
+"@source": "node433004", 
+"@target": "node433005"
+}, 
+{
+"@id": "edge433006", 
+"@length": 1e-08, 
+"@source": "node433004", 
+"@target": "node433006"
+}, 
+{
+"@id": "edge433007", 
+"@length": 0.00132716, 
+"@source": "node433003", 
+"@target": "node433007"
+}, 
+{
+"@id": "edge433008", 
+"@length": 1e-08, 
+"@source": "node433007", 
+"@target": "node433008"
+}, 
+{
+"@id": "edge433009", 
+"@length": 0.00086343, 
+"@source": "node433007", 
+"@target": "node433009"
+}, 
+{
+"@id": "edge433010", 
+"@length": 0.00496387, 
+"@source": "node433009", 
+"@target": "node433010"
+}, 
+{
+"@id": "edge433011", 
+"@length": 0.00314918, 
+"@source": "node433009", 
+"@target": "node433011"
+}, 
+{
+"@id": "edge433012", 
+"@length": 0.00043772, 
+"@source": "node433011", 
+"@target": "node433012"
+}, 
+{
+"@id": "edge433013", 
+"@length": 0.00178171, 
+"@source": "node433011", 
+"@target": "node433013"
+}, 
+{
+"@id": "edge433014", 
+"@length": 0.00132678, 
+"@source": "node433002", 
+"@target": "node433014"
+}, 
+{
+"@id": "edge433015", 
+"@length": 0.00044099, 
+"@source": "node433014", 
+"@target": "node433015"
+}, 
+{
+"@id": "edge433016", 
+"@length": 0.0013261, 
+"@source": "node433015", 
+"@target": "node433016"
+}, 
+{
+"@id": "edge433017", 
+"@length": 1e-08, 
+"@source": "node433015", 
+"@target": "node433017"
+}, 
+{
+"@id": "edge433018", 
+"@length": 1e-08, 
+"@source": "node433015", 
+"@target": "node433018"
+}, 
+{
+"@id": "edge433019", 
+"@length": 0.00044113, 
+"@source": "node433015", 
+"@target": "node433019"
+}, 
+{
+"@id": "edge433020", 
+"@length": 1e-08, 
+"@source": "node433019", 
+"@target": "node433020"
+}, 
+{
+"@id": "edge433021", 
+"@length": 1e-08, 
+"@source": "node433019", 
+"@target": "node433021"
+}, 
+{
+"@id": "edge433022", 
+"@length": 1e-08, 
+"@source": "node433019", 
+"@target": "node433022"
+}, 
+{
+"@id": "edge433023", 
+"@length": 1e-08, 
+"@source": "node433019", 
+"@target": "node433023"
+}, 
+{
+"@id": "edge433024", 
+"@length": 1e-08, 
+"@source": "node433019", 
+"@target": "node433024"
+}, 
+{
+"@id": "edge433025", 
+"@length": 0.00044122, 
+"@source": "node433015", 
+"@target": "node433025"
+}, 
+{
+"@id": "edge433026", 
+"@length": 1e-08, 
+"@source": "node433025", 
+"@target": "node433026"
+}, 
+{
+"@id": "edge433027", 
+"@length": 1e-08, 
+"@source": "node433025", 
+"@target": "node433027"
+}, 
+{
+"@id": "edge433028", 
+"@length": 1e-08, 
+"@source": "node433025", 
+"@target": "node433028"
+}, 
+{
+"@id": "edge433029", 
+"@length": 0.00044163, 
+"@source": "node433025", 
+"@target": "node433029"
+}, 
+{
+"@id": "edge433030", 
+"@length": 1e-08, 
+"@source": "node433025", 
+"@target": "node433030"
+}, 
+{
+"@id": "edge433031", 
+"@length": 1e-08, 
+"@source": "node433025", 
+"@target": "node433031"
+}, 
+{
+"@id": "edge433032", 
+"@length": 1e-08, 
+"@source": "node433025", 
+"@target": "node433032"
+}, 
+{
+"@id": "edge433033", 
+"@length": 1e-08, 
+"@source": "node433025", 
+"@target": "node433033"
+}, 
+{
+"@id": "edge433034", 
+"@length": 1e-08, 
+"@source": "node433025", 
+"@target": "node433034"
+}, 
+{
+"@id": "edge433035", 
+"@length": 0.00044268, 
+"@source": "node433014", 
+"@target": "node433035"
+}, 
+{
+"@id": "edge433036", 
+"@length": 0.00088844, 
+"@source": "node433035", 
+"@target": "node433036"
+}, 
+{
+"@id": "edge433037", 
+"@length": 0.0013304, 
+"@source": "node433036", 
+"@target": "node433037"
+}, 
+{
+"@id": "edge433038", 
+"@length": 0.00043978, 
+"@source": "node433036", 
+"@target": "node433038"
+}, 
+{
+"@id": "edge433039", 
+"@length": 1e-08, 
+"@source": "node433038", 
+"@target": "node433039"
+}, 
+{
+"@id": "edge433040", 
+"@length": 1e-08, 
+"@source": "node433038", 
+"@target": "node433040"
+}, 
+{
+"@id": "edge433041", 
+"@length": 0.00088345, 
+"@source": "node433035", 
+"@target": "node433041"
+}, 
+{
+"@id": "edge433042", 
+"@length": 0.00088431, 
+"@source": "node433041", 
+"@target": "node433042"
+}, 
+{
+"@id": "edge433043", 
+"@length": 0.00400494, 
+"@source": "node433042", 
+"@target": "node433043"
+}, 
+{
+"@id": "edge433044", 
+"@length": 1e-08, 
+"@source": "node433042", 
+"@target": "node433044"
+}, 
+{
+"@id": "edge433045", 
+"@length": 0.0004413, 
+"@source": "node433042", 
+"@target": "node433045"
+}, 
+{
+"@id": "edge433046", 
+"@length": 0.00132495, 
+"@source": "node433041", 
+"@target": "node433046"
+}, 
+{
+"@id": "edge433047", 
+"@length": 0.00044095, 
+"@source": "node433046", 
+"@target": "node433047"
+}, 
+{
+"@id": "edge433048", 
+"@length": 0.00088234, 
+"@source": "node433047", 
+"@target": "node433048"
+}, 
+{
+"@id": "edge433049", 
+"@length": 1e-08, 
+"@source": "node433047", 
+"@target": "node433049"
+}, 
+{
+"@id": "edge433050", 
+"@length": 0.00044422, 
+"@source": "node433046", 
+"@target": "node433050"
+}, 
+{
+"@id": "edge433051", 
+"@length": 0.00221613, 
+"@source": "node433050", 
+"@target": "node433051"
+}, 
+{
+"@id": "edge433052", 
+"@length": 0.0004397, 
+"@source": "node433050", 
+"@target": "node433052"
+}, 
+{
+"@id": "edge433053", 
+"@length": 1e-08, 
+"@source": "node433052", 
+"@target": "node433053"
+}, 
+{
+"@id": "edge433054", 
+"@length": 1e-08, 
+"@source": "node433052", 
+"@target": "node433054"
+}, 
+{
+"@id": "edge433055", 
+"@length": 1e-08, 
+"@source": "node433052", 
+"@target": "node433055"
+}, 
+{
+"@id": "edge433056", 
+"@length": 0.00044081, 
+"@source": "node433041", 
+"@target": "node433056"
+}, 
+{
+"@id": "edge433057", 
+"@length": 1e-08, 
+"@source": "node433056", 
+"@target": "node433057"
+}, 
+{
+"@id": "edge433058", 
+"@length": 1e-08, 
+"@source": "node433056", 
+"@target": "node433058"
+}, 
+{
+"@id": "edge433059", 
+"@length": 1e-08, 
+"@source": "node433056", 
+"@target": "node433059"
+}, 
+{
+"@id": "edge433060", 
+"@length": 1e-08, 
+"@source": "node433056", 
+"@target": "node433060"
+}, 
+{
+"@id": "edge433061", 
+"@length": 1e-08, 
+"@source": "node433056", 
+"@target": "node433061"
+}, 
+{
+"@id": "edge433062", 
+"@length": 0.0004406, 
+"@source": "node433056", 
+"@target": "node433062"
+}, 
+{
+"@id": "edge433063", 
+"@length": 0.00044075, 
+"@source": "node433056", 
+"@target": "node433063"
+}, 
+{
+"@id": "edge433064", 
+"@length": 1e-08, 
+"@source": "node433063", 
+"@target": "node433064"
+}, 
+{
+"@id": "edge433065", 
+"@length": 0.00044093, 
+"@source": "node433063", 
+"@target": "node433065"
+}, 
+{
+"@id": "edge433066", 
+"@length": 1e-08, 
+"@source": "node433063", 
+"@target": "node433066"
+}, 
+{
+"@id": "edge433067", 
+"@length": 0.00044107, 
+"@source": "node433063", 
+"@target": "node433067"
+}, 
+{
+"@id": "edge433068", 
+"@length": 1e-08, 
+"@source": "node433067", 
+"@target": "node433068"
+}, 
+{
+"@id": "edge433069", 
+"@length": 1e-08, 
+"@source": "node433067", 
+"@target": "node433069"
+}
+], 
+"meta": [
+{
+"$": "node432927", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "GAPDH", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "CHS1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "HIS3", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub2", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node432925", 
+"@root": "true"
+}, 
+{
+"@id": "node432926", 
+"@otu": "otu187914"
+}, 
+{
+"@id": "node432927"
+}, 
+{
+"@id": "node432928"
+}, 
+{
+"@id": "node432929", 
+"@otu": "otu187901"
+}, 
+{
+"@id": "node432930", 
+"@otu": "otu187963"
+}, 
+{
+"@id": "node432931"
+}, 
+{
+"@id": "node432932", 
+"@otu": "otu187903"
+}, 
+{
+"@id": "node432933"
+}, 
+{
+"@id": "node432934"
+}, 
+{
+"@id": "node432935"
+}, 
+{
+"@id": "node432936", 
+"@otu": "otu187945"
+}, 
+{
+"@id": "node432937", 
+"@otu": "otu187944"
+}, 
+{
+"@id": "node432938", 
+"@otu": "otu187919"
+}, 
+{
+"@id": "node432939"
+}, 
+{
+"@id": "node432940", 
+"@otu": "otu187930"
+}, 
+{
+"@id": "node432941"
+}, 
+{
+"@id": "node432942", 
+"@otu": "otu187915"
+}, 
+{
+"@id": "node432943", 
+"@otu": "otu187962"
+}, 
+{
+"@id": "node432944"
+}, 
+{
+"@id": "node432945"
+}, 
+{
+"@id": "node432946"
+}, 
+{
+"@id": "node432947"
+}, 
+{
+"@id": "node432948", 
+"@otu": "otu187932"
+}, 
+{
+"@id": "node432949", 
+"@otu": "otu187958"
+}, 
+{
+"@id": "node432950"
+}, 
+{
+"@id": "node432951", 
+"@otu": "otu187980"
+}, 
+{
+"@id": "node432952", 
+"@otu": "otu187955"
+}, 
+{
+"@id": "node432953"
+}, 
+{
+"@id": "node432954"
+}, 
+{
+"@id": "node432955"
+}, 
+{
+"@id": "node432956", 
+"@otu": "otu187924"
+}, 
+{
+"@id": "node432957", 
+"@otu": "otu187902"
+}, 
+{
+"@id": "node432958"
+}, 
+{
+"@id": "node432959", 
+"@otu": "otu187935"
+}, 
+{
+"@id": "node432960"
+}, 
+{
+"@id": "node432961", 
+"@otu": "otu187916"
+}, 
+{
+"@id": "node432962", 
+"@otu": "otu187972"
+}, 
+{
+"@id": "node432963"
+}, 
+{
+"@id": "node432964"
+}, 
+{
+"@id": "node432965", 
+"@otu": "otu187899"
+}, 
+{
+"@id": "node432966", 
+"@otu": "otu187936"
+}, 
+{
+"@id": "node432967"
+}, 
+{
+"@id": "node432968", 
+"@otu": "otu187911"
+}, 
+{
+"@id": "node432969"
+}, 
+{
+"@id": "node432970", 
+"@otu": "otu187961"
+}, 
+{
+"@id": "node432971"
+}, 
+{
+"@id": "node432972"
+}, 
+{
+"@id": "node432973", 
+"@otu": "otu187898"
+}, 
+{
+"@id": "node432974"
+}, 
+{
+"@id": "node432975", 
+"@otu": "otu187917"
+}, 
+{
+"@id": "node432976"
+}, 
+{
+"@id": "node432977", 
+"@otu": "otu187910"
+}, 
+{
+"@id": "node432978", 
+"@otu": "otu187928"
+}, 
+{
+"@id": "node432979"
+}, 
+{
+"@id": "node432980", 
+"@otu": "otu187984"
+}, 
+{
+"@id": "node432981", 
+"@otu": "otu187983"
+}, 
+{
+"@id": "node432982", 
+"@otu": "otu187978"
+}, 
+{
+"@id": "node432983", 
+"@otu": "otu187931"
+}, 
+{
+"@id": "node432984", 
+"@otu": "otu187953"
+}, 
+{
+"@id": "node432985"
+}, 
+{
+"@id": "node432986"
+}, 
+{
+"@id": "node432987", 
+"@otu": "otu187912"
+}, 
+{
+"@id": "node432988", 
+"@otu": "otu187960"
+}, 
+{
+"@id": "node432989"
+}, 
+{
+"@id": "node432990"
+}, 
+{
+"@id": "node432991", 
+"@otu": "otu187922"
+}, 
+{
+"@id": "node432992"
+}, 
+{
+"@id": "node432993", 
+"@otu": "otu187979"
+}, 
+{
+"@id": "node432994", 
+"@otu": "otu187973"
+}, 
+{
+"@id": "node432995"
+}, 
+{
+"@id": "node432996", 
+"@otu": "otu187967"
+}, 
+{
+"@id": "node432997", 
+"@otu": "otu187926"
+}, 
+{
+"@id": "node432998"
+}, 
+{
+"@id": "node432999", 
+"@otu": "otu187948"
+}, 
+{
+"@id": "node433000"
+}, 
+{
+"@id": "node433001", 
+"@otu": "otu187904"
+}, 
+{
+"@id": "node433002"
+}, 
+{
+"@id": "node433003"
+}, 
+{
+"@id": "node433004"
+}, 
+{
+"@id": "node433005", 
+"@otu": "otu187959"
+}, 
+{
+"@id": "node433006", 
+"@otu": "otu187946"
+}, 
+{
+"@id": "node433007"
+}, 
+{
+"@id": "node433008", 
+"@otu": "otu187905"
+}, 
+{
+"@id": "node433009"
+}, 
+{
+"@id": "node433010", 
+"@otu": "otu187968"
+}, 
+{
+"@id": "node433011"
+}, 
+{
+"@id": "node433012", 
+"@otu": "otu187908"
+}, 
+{
+"@id": "node433013", 
+"@otu": "otu187982"
+}, 
+{
+"@id": "node433014"
+}, 
+{
+"@id": "node433015"
+}, 
+{
+"@id": "node433016", 
+"@otu": "otu187947"
+}, 
+{
+"@id": "node433017", 
+"@otu": "otu187938"
+}, 
+{
+"@id": "node433018", 
+"@otu": "otu187981"
+}, 
+{
+"@id": "node433019"
+}, 
+{
+"@id": "node433020", 
+"@otu": "otu187950"
+}, 
+{
+"@id": "node433021", 
+"@otu": "otu187913"
+}, 
+{
+"@id": "node433022", 
+"@otu": "otu187939"
+}, 
+{
+"@id": "node433023", 
+"@otu": "otu187923"
+}, 
+{
+"@id": "node433024", 
+"@otu": "otu187900"
+}, 
+{
+"@id": "node433025"
+}, 
+{
+"@id": "node433026", 
+"@otu": "otu187949"
+}, 
+{
+"@id": "node433027", 
+"@otu": "otu187909"
+}, 
+{
+"@id": "node433028", 
+"@otu": "otu187977"
+}, 
+{
+"@id": "node433029", 
+"@otu": "otu187941"
+}, 
+{
+"@id": "node433030", 
+"@otu": "otu187965"
+}, 
+{
+"@id": "node433031", 
+"@otu": "otu187927"
+}, 
+{
+"@id": "node433032", 
+"@otu": "otu187920"
+}, 
+{
+"@id": "node433033", 
+"@otu": "otu187933"
+}, 
+{
+"@id": "node433034", 
+"@otu": "otu187952"
+}, 
+{
+"@id": "node433035"
+}, 
+{
+"@id": "node433036"
+}, 
+{
+"@id": "node433037", 
+"@otu": "otu187943"
+}, 
+{
+"@id": "node433038"
+}, 
+{
+"@id": "node433039", 
+"@otu": "otu187954"
+}, 
+{
+"@id": "node433040", 
+"@otu": "otu187951"
+}, 
+{
+"@id": "node433041"
+}, 
+{
+"@id": "node433042"
+}, 
+{
+"@id": "node433043", 
+"@otu": "otu187971"
+}, 
+{
+"@id": "node433044", 
+"@otu": "otu187969"
+}, 
+{
+"@id": "node433045", 
+"@otu": "otu187976"
+}, 
+{
+"@id": "node433046"
+}, 
+{
+"@id": "node433047"
+}, 
+{
+"@id": "node433048", 
+"@otu": "otu187934"
+}, 
+{
+"@id": "node433049", 
+"@otu": "otu187974"
+}, 
+{
+"@id": "node433050"
+}, 
+{
+"@id": "node433051", 
+"@otu": "otu187970"
+}, 
+{
+"@id": "node433052"
+}, 
+{
+"@id": "node433053", 
+"@otu": "otu187907"
+}, 
+{
+"@id": "node433054", 
+"@otu": "otu187964"
+}, 
+{
+"@id": "node433055", 
+"@otu": "otu187906"
+}, 
+{
+"@id": "node433056"
+}, 
+{
+"@id": "node433057", 
+"@otu": "otu187918"
+}, 
+{
+"@id": "node433058", 
+"@otu": "otu187940"
+}, 
+{
+"@id": "node433059", 
+"@otu": "otu187942"
+}, 
+{
+"@id": "node433060", 
+"@otu": "otu187929"
+}, 
+{
+"@id": "node433061", 
+"@otu": "otu187937"
+}, 
+{
+"@id": "node433062", 
+"@otu": "otu187921"
+}, 
+{
+"@id": "node433063"
+}, 
+{
+"@id": "node433064", 
+"@otu": "otu187957"
+}, 
+{
+"@id": "node433065", 
+"@otu": "otu187956"
+}, 
+{
+"@id": "node433066", 
+"@otu": "otu187975"
+}, 
+{
+"@id": "node433067"
+}, 
+{
+"@id": "node433068", 
+"@otu": "otu187966"
+}, 
+{
+"@id": "node433069", 
+"@otu": "otu187925"
+}
+]
+}
+]
+}
+}
+}

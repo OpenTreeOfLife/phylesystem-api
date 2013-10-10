@@ -1,0 +1,433 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Chaverri P., Samuels G., & Stewart E. 2000. Hypocrea virens sp. nov., the teleomorph of Trichoderma virens. Mycologia, 93(6): 1113-1124.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2307/3761672", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S857", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1753", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2000, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 554881, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1753", 
+"otu": [
+{
+"@about": "#otu273774", 
+"@id": "otu273774", 
+"@label": "Hypocrea cf. nigricans", 
+"meta": [
+{
+"$": 439794, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hypocrea nigricans GJS98.183", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273775", 
+"@id": "otu273775", 
+"@label": "Trichoderma virens Gv29-8", 
+"meta": [
+{
+"$": 73921, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trichoderma virens GL39", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273776", 
+"@id": "otu273776", 
+"@label": "Trichoderma flavofuscum", 
+"meta": [
+{
+"$": 409099, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hypocrea virens GJS95.194", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273777", 
+"@id": "otu273777", 
+"@label": "Hypocrea flavovirens", 
+"meta": [
+{
+"$": 844024, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hypocrea flavovirens PC4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273778", 
+"@id": "otu273778", 
+"@label": "Trichoderma virens Gv29-8", 
+"meta": [
+{
+"$": 73921, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trichoderma virens GL20", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273779", 
+"@id": "otu273779", 
+"@label": "Trichoderma virens Gv29-8", 
+"meta": [
+{
+"$": 73921, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trichoderma virens GL3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273780", 
+"@id": "otu273780", 
+"@label": "Trichoderma virens Gv29-8", 
+"meta": [
+{
+"$": 73921, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trichoderma virens GL21", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1753", 
+"@otus": "otus1753", 
+"tree": [
+{
+"@about": "#tree3530", 
+"@id": "tree3530", 
+"edge": [
+{
+"@id": "edge680309", 
+"@source": "node680308", 
+"@target": "node680309"
+}, 
+{
+"@id": "edge680310", 
+"@source": "node680309", 
+"@target": "node680310"
+}, 
+{
+"@id": "edge680311", 
+"@source": "node680310", 
+"@target": "node680311"
+}, 
+{
+"@id": "edge680312", 
+"@source": "node680310", 
+"@target": "node680312"
+}, 
+{
+"@id": "edge680313", 
+"@source": "node680310", 
+"@target": "node680313"
+}, 
+{
+"@id": "edge680314", 
+"@source": "node680310", 
+"@target": "node680314"
+}, 
+{
+"@id": "edge680315", 
+"@source": "node680310", 
+"@target": "node680315"
+}, 
+{
+"@id": "edge680316", 
+"@source": "node680309", 
+"@target": "node680316"
+}, 
+{
+"@id": "edge680317", 
+"@source": "node680308", 
+"@target": "node680317"
+}
+], 
+"meta": [
+{
+"$": "node680309", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node680308", 
+"@root": "true"
+}, 
+{
+"@id": "node680309"
+}, 
+{
+"@id": "node680310"
+}, 
+{
+"@id": "node680311", 
+"@otu": "otu273776"
+}, 
+{
+"@id": "node680312", 
+"@otu": "otu273779"
+}, 
+{
+"@id": "node680313", 
+"@otu": "otu273778"
+}, 
+{
+"@id": "node680314", 
+"@otu": "otu273780"
+}, 
+{
+"@id": "node680315", 
+"@otu": "otu273775"
+}, 
+{
+"@id": "node680316", 
+"@otu": "otu273774"
+}, 
+{
+"@id": "node680317", 
+"@otu": "otu273777"
+}
+]
+}, 
+{
+"@about": "#tree3531", 
+"@id": "tree3531", 
+"edge": [
+{
+"@id": "edge680319", 
+"@source": "node680318", 
+"@target": "node680319"
+}, 
+{
+"@id": "edge680320", 
+"@source": "node680319", 
+"@target": "node680320"
+}, 
+{
+"@id": "edge680321", 
+"@source": "node680320", 
+"@target": "node680321"
+}, 
+{
+"@id": "edge680322", 
+"@source": "node680321", 
+"@target": "node680322"
+}, 
+{
+"@id": "edge680323", 
+"@source": "node680322", 
+"@target": "node680323"
+}, 
+{
+"@id": "edge680324", 
+"@source": "node680323", 
+"@target": "node680324"
+}, 
+{
+"@id": "edge680325", 
+"@source": "node680323", 
+"@target": "node680325"
+}, 
+{
+"@id": "edge680326", 
+"@source": "node680322", 
+"@target": "node680326"
+}, 
+{
+"@id": "edge680327", 
+"@source": "node680321", 
+"@target": "node680327"
+}, 
+{
+"@id": "edge680328", 
+"@source": "node680320", 
+"@target": "node680328"
+}, 
+{
+"@id": "edge680329", 
+"@source": "node680319", 
+"@target": "node680329"
+}, 
+{
+"@id": "edge680330", 
+"@source": "node680318", 
+"@target": "node680330"
+}
+], 
+"meta": [
+{
+"$": "node680319", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "EF-1", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Choose me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node680318", 
+"@root": "true"
+}, 
+{
+"@id": "node680319"
+}, 
+{
+"@id": "node680320"
+}, 
+{
+"@id": "node680321"
+}, 
+{
+"@id": "node680322"
+}, 
+{
+"@id": "node680323"
+}, 
+{
+"@id": "node680324", 
+"@otu": "otu273776"
+}, 
+{
+"@id": "node680325", 
+"@otu": "otu273775"
+}, 
+{
+"@id": "node680326", 
+"@otu": "otu273780"
+}, 
+{
+"@id": "node680327", 
+"@otu": "otu273778"
+}, 
+{
+"@id": "node680328", 
+"@otu": "otu273779"
+}, 
+{
+"@id": "node680329", 
+"@otu": "otu273774"
+}, 
+{
+"@id": "node680330", 
+"@otu": "otu273777"
+}
+]
+}
+]
+}
+}
+}

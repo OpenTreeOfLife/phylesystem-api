@@ -1,0 +1,733 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Vizzini A., Contu M., & Justo A. 2011. Additional records of Volvariella dunensis (Basidiomycota, Agaricales): morphological and molecular characterization. Mycotaxon, 117: 37-43.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.5248/117.37", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S11441", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "893", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2011, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1285847, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ML", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus893", 
+"otu": [
+{
+"@about": "#otu203733", 
+"@id": "otu203733", 
+"@label": "Volvariella pusilla", 
+"meta": [
+{
+"$": 402038, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella pusilla AJ51 Spain JF415137", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203734", 
+"@id": "otu203734", 
+"@label": "Volvariella bombycina", 
+"meta": [
+{
+"$": 64847, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella bombycina AJ244 Spain HM562212", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203735", 
+"@id": "otu203735", 
+"@label": "Volvariella dunensis", 
+"meta": [
+{
+"$": 202837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella dunensis SCM3513 Spain JF415140", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203736", 
+"@id": "otu203736", 
+"@label": "Volvariella caesiotincta", 
+"meta": [
+{
+"$": 1073198, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella caesiotincta MA54717 Spain HM562211", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203737", 
+"@id": "otu203737", 
+"@label": "Volvariella hypopithys", 
+"meta": [
+{
+"$": 236997, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella hypopithys TOAV137 Sardinia HM246492", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203738", 
+"@id": "otu203738", 
+"@label": "Volvariella strangulata", 
+"meta": [
+{
+"$": 452123, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella strangulata Italy TOAV141 HM246493", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203739", 
+"@id": "otu203739", 
+"@label": "Volvariella", 
+"meta": [
+{
+"$": 639926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella sp LOU18924 Spain JF415139", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203740", 
+"@id": "otu203740", 
+"@label": "Volvariella terrea", 
+"meta": [
+{
+"$": 202835, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella terrea LUG11010 JF41541", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203741", 
+"@id": "otu203741", 
+"@label": "Volvariella", 
+"meta": [
+{
+"$": 639926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella nullicystidiata EU920671 ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203742", 
+"@id": "otu203742", 
+"@label": "Volvariella dunensis", 
+"meta": [
+{
+"$": 202837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella dunensis RFS 07031003 Spain JF415138", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203743", 
+"@id": "otu203743", 
+"@label": "Volvariella", 
+"meta": [
+{
+"$": 639926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella nivea China FJ749127 ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203744", 
+"@id": "otu203744", 
+"@label": "Volvariella lepiotospora", 
+"meta": [
+{
+"$": 1050179, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella lepiotospora AJ155 USA HM562214", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203745", 
+"@id": "otu203745", 
+"@label": "Volvariella pusilla", 
+"meta": [
+{
+"$": 402038, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella pusilla Sardinia TOAV139 HM246494", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203746", 
+"@id": "otu203746", 
+"@label": "Volvariella taylorii", 
+"meta": [
+{
+"$": 1028538, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella taylorii AJ54 Portugal HM562210", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203747", 
+"@id": "otu203747", 
+"@label": "Volvariella", 
+"meta": [
+{
+"$": 639926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella sp Slovenia TOAV143 HM246500", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203748", 
+"@id": "otu203748", 
+"@label": "Volvariella surrecta", 
+"meta": [
+{
+"$": 1056072, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella surrecta AJ55 Spain HM562213", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203749", 
+"@id": "otu203749", 
+"@label": "Volvariella volvacea", 
+"meta": [
+{
+"$": 639925, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella volvacea FJ379274 ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203750", 
+"@id": "otu203750", 
+"@label": "Volvariella dunensis", 
+"meta": [
+{
+"$": 202837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Volvariella dunensis TOAV140 JF415136", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees893", 
+"@otus": "otus893", 
+"tree": [
+{
+"@about": "#tree1720", 
+"@id": "tree1720", 
+"edge": [
+{
+"@id": "edge478936", 
+"@length": 0.45, 
+"@source": "node478935", 
+"@target": "node478936"
+}, 
+{
+"@id": "edge478937", 
+"@length": 0.058535394314137144, 
+"@source": "node478936", 
+"@target": "node478937"
+}, 
+{
+"@id": "edge478938", 
+"@length": 0.009036685852359757, 
+"@source": "node478936", 
+"@target": "node478938"
+}, 
+{
+"@id": "edge478939", 
+"@length": 0.10743965716056603, 
+"@source": "node478938", 
+"@target": "node478939"
+}, 
+{
+"@id": "edge478940", 
+"@length": 0.008751595334491062, 
+"@source": "node478938", 
+"@target": "node478940"
+}, 
+{
+"@id": "edge478941", 
+"@length": 0.009840410069123907, 
+"@source": "node478940", 
+"@target": "node478941"
+}, 
+{
+"@id": "edge478942", 
+"@length": 0.08796765535758898, 
+"@source": "node478941", 
+"@target": "node478942"
+}, 
+{
+"@id": "edge478943", 
+"@length": 0.005693296472836546, 
+"@source": "node478941", 
+"@target": "node478943"
+}, 
+{
+"@id": "edge478944", 
+"@length": 0.07153055730625767, 
+"@source": "node478943", 
+"@target": "node478944"
+}, 
+{
+"@id": "edge478945", 
+"@length": 0.011887252223229424, 
+"@source": "node478943", 
+"@target": "node478945"
+}, 
+{
+"@id": "edge478946", 
+"@length": 0.030076335186330905, 
+"@source": "node478945", 
+"@target": "node478946"
+}, 
+{
+"@id": "edge478947", 
+"@length": 0.02305113135434422, 
+"@source": "node478946", 
+"@target": "node478947"
+}, 
+{
+"@id": "edge478948", 
+"@length": 0.02777325789481275, 
+"@source": "node478947", 
+"@target": "node478948"
+}, 
+{
+"@id": "edge478949", 
+"@length": 0.007460804773426784, 
+"@source": "node478948", 
+"@target": "node478949"
+}, 
+{
+"@id": "edge478950", 
+"@length": 0.029274324384627758, 
+"@source": "node478949", 
+"@target": "node478950"
+}, 
+{
+"@id": "edge478951", 
+"@length": 0.027602242496503025, 
+"@source": "node478949", 
+"@target": "node478951"
+}, 
+{
+"@id": "edge478952", 
+"@length": 0.019734410651519204, 
+"@source": "node478948", 
+"@target": "node478952"
+}, 
+{
+"@id": "edge478953", 
+"@length": 1.48820924778135e-06, 
+"@source": "node478952", 
+"@target": "node478953"
+}, 
+{
+"@id": "edge478954", 
+"@length": 0.0024919570676557312, 
+"@source": "node478952", 
+"@target": "node478954"
+}, 
+{
+"@id": "edge478955", 
+"@length": 0.009391648054603876, 
+"@source": "node478954", 
+"@target": "node478955"
+}, 
+{
+"@id": "edge478956", 
+"@length": 0.009395968682867684, 
+"@source": "node478955", 
+"@target": "node478956"
+}, 
+{
+"@id": "edge478957", 
+"@length": 0.007596700247096668, 
+"@source": "node478955", 
+"@target": "node478957"
+}, 
+{
+"@id": "edge478958", 
+"@length": 0.008844793904928223, 
+"@source": "node478954", 
+"@target": "node478958"
+}, 
+{
+"@id": "edge478959", 
+"@length": 0.032807586759940034, 
+"@source": "node478947", 
+"@target": "node478959"
+}, 
+{
+"@id": "edge478960", 
+"@length": 0.08205191870530353, 
+"@source": "node478946", 
+"@target": "node478960"
+}, 
+{
+"@id": "edge478961", 
+"@length": 1.48820924778135e-06, 
+"@source": "node478960", 
+"@target": "node478961"
+}, 
+{
+"@id": "edge478962", 
+"@length": 1.48820924778135e-06, 
+"@source": "node478961", 
+"@target": "node478962"
+}, 
+{
+"@id": "edge478963", 
+"@length": 1.48820924778135e-06, 
+"@source": "node478961", 
+"@target": "node478963"
+}, 
+{
+"@id": "edge478964", 
+"@length": 0.0020081346483645677, 
+"@source": "node478960", 
+"@target": "node478964"
+}, 
+{
+"@id": "edge478965", 
+"@length": 0.043303039013809594, 
+"@source": "node478945", 
+"@target": "node478965"
+}, 
+{
+"@id": "edge478966", 
+"@length": 0.17836903564389986, 
+"@source": "node478940", 
+"@target": "node478966"
+}, 
+{
+"@id": "edge478967", 
+"@length": 0.45, 
+"@source": "node478935", 
+"@target": "node478967"
+}, 
+{
+"@id": "edge478968", 
+"@length": 0.023519159136196677, 
+"@source": "node478967", 
+"@target": "node478968"
+}, 
+{
+"@id": "edge478969", 
+"@length": 0.02921203964622531, 
+"@source": "node478967", 
+"@target": "node478969"
+}
+], 
+"meta": [
+{
+"$": "node478936", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ML", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node478935", 
+"@root": "true"
+}, 
+{
+"@id": "node478936"
+}, 
+{
+"@id": "node478937", 
+"@otu": "otu203741"
+}, 
+{
+"@id": "node478938"
+}, 
+{
+"@id": "node478939", 
+"@otu": "otu203744"
+}, 
+{
+"@id": "node478940"
+}, 
+{
+"@id": "node478941"
+}, 
+{
+"@id": "node478942", 
+"@otu": "otu203746"
+}, 
+{
+"@id": "node478943"
+}, 
+{
+"@id": "node478944", 
+"@otu": "otu203747"
+}, 
+{
+"@id": "node478945"
+}, 
+{
+"@id": "node478946"
+}, 
+{
+"@id": "node478947"
+}, 
+{
+"@id": "node478948"
+}, 
+{
+"@id": "node478949"
+}, 
+{
+"@id": "node478950", 
+"@otu": "otu203738"
+}, 
+{
+"@id": "node478951", 
+"@otu": "otu203748"
+}, 
+{
+"@id": "node478952"
+}, 
+{
+"@id": "node478953", 
+"@otu": "otu203733"
+}, 
+{
+"@id": "node478954"
+}, 
+{
+"@id": "node478955"
+}, 
+{
+"@id": "node478956", 
+"@otu": "otu203739"
+}, 
+{
+"@id": "node478957", 
+"@otu": "otu203737"
+}, 
+{
+"@id": "node478958", 
+"@otu": "otu203745"
+}, 
+{
+"@id": "node478959", 
+"@otu": "otu203740"
+}, 
+{
+"@id": "node478960"
+}, 
+{
+"@id": "node478961"
+}, 
+{
+"@id": "node478962", 
+"@otu": "otu203742"
+}, 
+{
+"@id": "node478963", 
+"@otu": "otu203735"
+}, 
+{
+"@id": "node478964", 
+"@otu": "otu203750"
+}, 
+{
+"@id": "node478965", 
+"@otu": "otu203736"
+}, 
+{
+"@id": "node478966", 
+"@otu": "otu203743"
+}, 
+{
+"@id": "node478967"
+}, 
+{
+"@id": "node478968", 
+"@otu": "otu203734"
+}, 
+{
+"@id": "node478969", 
+"@otu": "otu203749"
+}
+]
+}
+]
+}
+}
+}

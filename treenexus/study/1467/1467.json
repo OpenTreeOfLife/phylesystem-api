@@ -1,0 +1,2302 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Pokorny, L., Oliv\u00e1n, G., & Shaw, A. J. (2011). Phylogeographic patterns in two southern Hemisphere species of Calyptrochaeta (Daltoniaceae, Bryophyta). Systematic Botany, 36(3), 542-553.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1600/036364411X583529", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S11229", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1467", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2011, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1467", 
+"otu": [
+{
+"@about": "#otu254050", 
+"@id": "otu254050", 
+"@label": "Daltonia marginata", 
+"meta": [
+{
+"$": 205408, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Daltonia marginata JY23 AU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254051", 
+"@id": "otu254051", 
+"@label": "Daltonia splachnoides", 
+"meta": [
+{
+"$": 205414, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Daltonia splachnoides G038 IR", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254052", 
+"@id": "otu254052", 
+"@label": "Calyptrochaeta brownii", 
+"meta": [
+{
+"$": 95225, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta brownii G103 AU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254053", 
+"@id": "otu254053", 
+"@label": "Calyptrochaeta brownii", 
+"meta": [
+{
+"$": 95225, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta brownii G102 AU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254054", 
+"@id": "otu254054", 
+"@label": "Calyptrochaeta brownii", 
+"meta": [
+{
+"$": 95225, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta brownii WB14 AU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254055", 
+"@id": "otu254055", 
+"@label": "Calyptrochaeta flaccida", 
+"meta": [
+{
+"$": 402444, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta flaccida B525 PH", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254056", 
+"@id": "otu254056", 
+"@label": "Calyptrochaeta ramosa", 
+"meta": [
+{
+"$": 825772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta ramosa BC597 ID", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254057", 
+"@id": "otu254057", 
+"@label": "Calyptrochaeta microblasta", 
+"meta": [
+{
+"$": 584395, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta microblasta B533 PH", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254058", 
+"@id": "otu254058", 
+"@label": "Calyptrochaeta japonica", 
+"meta": [
+{
+"$": 95227, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta japonica G062 JP", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254059", 
+"@id": "otu254059", 
+"@label": "Calyptrochaeta japonica", 
+"meta": [
+{
+"$": 95227, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta japonica G061 JP", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254060", 
+"@id": "otu254060", 
+"@label": "Calyptrochaeta japonica", 
+"meta": [
+{
+"$": 95227, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta japonica G063 JP", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254061", 
+"@id": "otu254061", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata L009 FK", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254062", 
+"@id": "otu254062", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G002 CL", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254063", 
+"@id": "otu254063", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G060 AU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254064", 
+"@id": "otu254064", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G105 CL", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254065", 
+"@id": "otu254065", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G110 CL", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254066", 
+"@id": "otu254066", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G113 GB", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254067", 
+"@id": "otu254067", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G101 AU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254068", 
+"@id": "otu254068", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G104 CL", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254069", 
+"@id": "otu254069", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G106 CL", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254070", 
+"@id": "otu254070", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G100 AU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254071", 
+"@id": "otu254071", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G109 CL", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254072", 
+"@id": "otu254072", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata G107 CL", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254073", 
+"@id": "otu254073", 
+"@label": "Calyptrochaeta apiculata", 
+"meta": [
+{
+"$": 704229, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta apiculata L012 NZ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254074", 
+"@id": "otu254074", 
+"@label": "Calyptrochaeta cristata", 
+"meta": [
+{
+"$": 584392, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta cristata G111 NZ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254075", 
+"@id": "otu254075", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G070 ZA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254076", 
+"@id": "otu254076", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides L006 ZA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254077", 
+"@id": "otu254077", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G091 ZA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254078", 
+"@id": "otu254078", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides L001 ZA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254079", 
+"@id": "otu254079", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides L007 ZA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254080", 
+"@id": "otu254080", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G098 TZ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254081", 
+"@id": "otu254081", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G094 TZ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254082", 
+"@id": "otu254082", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G066 TZ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254083", 
+"@id": "otu254083", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides L008 CD", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254084", 
+"@id": "otu254084", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G099 CD", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254085", 
+"@id": "otu254085", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides L002 TZ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254086", 
+"@id": "otu254086", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G090 RW", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254087", 
+"@id": "otu254087", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G093 TZ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254088", 
+"@id": "otu254088", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides L003 TZ", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254089", 
+"@id": "otu254089", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides L015 MG", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254090", 
+"@id": "otu254090", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G069 KM", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254091", 
+"@id": "otu254091", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G071 KM", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254092", 
+"@id": "otu254092", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G074 KM", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254093", 
+"@id": "otu254093", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G072 KM", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254094", 
+"@id": "otu254094", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G073 KM", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254095", 
+"@id": "otu254095", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G067 MG", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254096", 
+"@id": "otu254096", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G087 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254097", 
+"@id": "otu254097", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G089 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254098", 
+"@id": "otu254098", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G065 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254099", 
+"@id": "otu254099", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G068 MU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254100", 
+"@id": "otu254100", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G081 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254101", 
+"@id": "otu254101", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G003 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254102", 
+"@id": "otu254102", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G075 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254103", 
+"@id": "otu254103", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G079 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254104", 
+"@id": "otu254104", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G077 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254105", 
+"@id": "otu254105", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G084 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254106", 
+"@id": "otu254106", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G064 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254107", 
+"@id": "otu254107", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides L013 MU", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254108", 
+"@id": "otu254108", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G083 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254109", 
+"@id": "otu254109", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G080 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254110", 
+"@id": "otu254110", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G082 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu254111", 
+"@id": "otu254111", 
+"@label": "Calyptrochaeta asplenioides", 
+"meta": [
+{
+"$": 948649, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calyptrochaeta asplenioides G086 RE", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1467", 
+"@otus": "otus1467", 
+"tree": [
+{
+"@about": "#tree2960", 
+"@id": "tree2960", 
+"edge": [
+{
+"@id": "edge622057", 
+"@length": 0.05560269, 
+"@source": "node622056", 
+"@target": "node622057"
+}, 
+{
+"@id": "edge622058", 
+"@length": 0.00752915, 
+"@source": "node622057", 
+"@target": "node622058"
+}, 
+{
+"@id": "edge622059", 
+"@length": 0.00890037, 
+"@source": "node622057", 
+"@target": "node622059"
+}, 
+{
+"@id": "edge622060", 
+"@length": 0.05560269, 
+"@source": "node622056", 
+"@target": "node622060"
+}, 
+{
+"@id": "edge622061", 
+"@length": 0.05007813, 
+"@source": "node622060", 
+"@target": "node622061"
+}, 
+{
+"@id": "edge622062", 
+"@length": 0.00475854, 
+"@source": "node622061", 
+"@target": "node622062"
+}, 
+{
+"@id": "edge622063", 
+"@length": 0.01008685, 
+"@source": "node622062", 
+"@target": "node622063"
+}, 
+{
+"@id": "edge622064", 
+"@length": 1e-08, 
+"@source": "node622063", 
+"@target": "node622064"
+}, 
+{
+"@id": "edge622065", 
+"@length": 1e-08, 
+"@source": "node622063", 
+"@target": "node622065"
+}, 
+{
+"@id": "edge622066", 
+"@length": 1e-08, 
+"@source": "node622065", 
+"@target": "node622066"
+}, 
+{
+"@id": "edge622067", 
+"@length": 0.00117777, 
+"@source": "node622065", 
+"@target": "node622067"
+}, 
+{
+"@id": "edge622068", 
+"@length": 0.0074232, 
+"@source": "node622062", 
+"@target": "node622068"
+}, 
+{
+"@id": "edge622069", 
+"@length": 0.00204251, 
+"@source": "node622068", 
+"@target": "node622069"
+}, 
+{
+"@id": "edge622070", 
+"@length": 0.0091289, 
+"@source": "node622069", 
+"@target": "node622070"
+}, 
+{
+"@id": "edge622071", 
+"@length": 0.00370214, 
+"@source": "node622069", 
+"@target": "node622071"
+}, 
+{
+"@id": "edge622072", 
+"@length": 0.00234489, 
+"@source": "node622068", 
+"@target": "node622072"
+}, 
+{
+"@id": "edge622073", 
+"@length": 0.01174248, 
+"@source": "node622072", 
+"@target": "node622073"
+}, 
+{
+"@id": "edge622074", 
+"@length": 0.00100873, 
+"@source": "node622072", 
+"@target": "node622074"
+}, 
+{
+"@id": "edge622075", 
+"@length": 0.00699348, 
+"@source": "node622074", 
+"@target": "node622075"
+}, 
+{
+"@id": "edge622076", 
+"@length": 0.00106847, 
+"@source": "node622074", 
+"@target": "node622076"
+}, 
+{
+"@id": "edge622077", 
+"@length": 1e-08, 
+"@source": "node622076", 
+"@target": "node622077"
+}, 
+{
+"@id": "edge622078", 
+"@length": 0.01048706, 
+"@source": "node622076", 
+"@target": "node622078"
+}, 
+{
+"@id": "edge622079", 
+"@length": 0.01686543, 
+"@source": "node622061", 
+"@target": "node622079"
+}, 
+{
+"@id": "edge622080", 
+"@length": 0.00086412, 
+"@source": "node622079", 
+"@target": "node622080"
+}, 
+{
+"@id": "edge622081", 
+"@length": 0.00035229, 
+"@source": "node622079", 
+"@target": "node622081"
+}, 
+{
+"@id": "edge622082", 
+"@length": 1e-08, 
+"@source": "node622081", 
+"@target": "node622082"
+}, 
+{
+"@id": "edge622083", 
+"@length": 0.00060117, 
+"@source": "node622081", 
+"@target": "node622083"
+}, 
+{
+"@id": "edge622084", 
+"@length": 1e-08, 
+"@source": "node622083", 
+"@target": "node622084"
+}, 
+{
+"@id": "edge622085", 
+"@length": 1e-08, 
+"@source": "node622083", 
+"@target": "node622085"
+}, 
+{
+"@id": "edge622086", 
+"@length": 1e-08, 
+"@source": "node622085", 
+"@target": "node622086"
+}, 
+{
+"@id": "edge622087", 
+"@length": 1e-08, 
+"@source": "node622085", 
+"@target": "node622087"
+}, 
+{
+"@id": "edge622088", 
+"@length": 1e-08, 
+"@source": "node622087", 
+"@target": "node622088"
+}, 
+{
+"@id": "edge622089", 
+"@length": 1e-08, 
+"@source": "node622087", 
+"@target": "node622089"
+}, 
+{
+"@id": "edge622090", 
+"@length": 1e-08, 
+"@source": "node622089", 
+"@target": "node622090"
+}, 
+{
+"@id": "edge622091", 
+"@length": 1e-08, 
+"@source": "node622089", 
+"@target": "node622091"
+}, 
+{
+"@id": "edge622092", 
+"@length": 1e-08, 
+"@source": "node622091", 
+"@target": "node622092"
+}, 
+{
+"@id": "edge622093", 
+"@length": 1e-08, 
+"@source": "node622092", 
+"@target": "node622093"
+}, 
+{
+"@id": "edge622094", 
+"@length": 1e-08, 
+"@source": "node622092", 
+"@target": "node622094"
+}, 
+{
+"@id": "edge622095", 
+"@length": 1e-08, 
+"@source": "node622094", 
+"@target": "node622095"
+}, 
+{
+"@id": "edge622096", 
+"@length": 1e-08, 
+"@source": "node622094", 
+"@target": "node622096"
+}, 
+{
+"@id": "edge622097", 
+"@length": 1e-08, 
+"@source": "node622091", 
+"@target": "node622097"
+}, 
+{
+"@id": "edge622098", 
+"@length": 1e-08, 
+"@source": "node622097", 
+"@target": "node622098"
+}, 
+{
+"@id": "edge622099", 
+"@length": 0.00059566, 
+"@source": "node622098", 
+"@target": "node622099"
+}, 
+{
+"@id": "edge622100", 
+"@length": 1e-08, 
+"@source": "node622098", 
+"@target": "node622100"
+}, 
+{
+"@id": "edge622101", 
+"@length": 1e-08, 
+"@source": "node622097", 
+"@target": "node622101"
+}, 
+{
+"@id": "edge622102", 
+"@length": 0.00119316, 
+"@source": "node622101", 
+"@target": "node622102"
+}, 
+{
+"@id": "edge622103", 
+"@length": 1e-08, 
+"@source": "node622101", 
+"@target": "node622103"
+}, 
+{
+"@id": "edge622104", 
+"@length": 0.01971329, 
+"@source": "node622060", 
+"@target": "node622104"
+}, 
+{
+"@id": "edge622105", 
+"@length": 0.04238671, 
+"@source": "node622104", 
+"@target": "node622105"
+}, 
+{
+"@id": "edge622106", 
+"@length": 0.01762104, 
+"@source": "node622104", 
+"@target": "node622106"
+}, 
+{
+"@id": "edge622107", 
+"@length": 0.00719233, 
+"@source": "node622106", 
+"@target": "node622107"
+}, 
+{
+"@id": "edge622108", 
+"@length": 1e-08, 
+"@source": "node622107", 
+"@target": "node622108"
+}, 
+{
+"@id": "edge622109", 
+"@length": 1e-08, 
+"@source": "node622107", 
+"@target": "node622109"
+}, 
+{
+"@id": "edge622110", 
+"@length": 4e-08, 
+"@source": "node622109", 
+"@target": "node622110"
+}, 
+{
+"@id": "edge622111", 
+"@length": 1e-08, 
+"@source": "node622109", 
+"@target": "node622111"
+}, 
+{
+"@id": "edge622112", 
+"@length": 1e-08, 
+"@source": "node622111", 
+"@target": "node622112"
+}, 
+{
+"@id": "edge622113", 
+"@length": 1e-08, 
+"@source": "node622111", 
+"@target": "node622113"
+}, 
+{
+"@id": "edge622114", 
+"@length": 2e-08, 
+"@source": "node622113", 
+"@target": "node622114"
+}, 
+{
+"@id": "edge622115", 
+"@length": 0.00061381, 
+"@source": "node622113", 
+"@target": "node622115"
+}, 
+{
+"@id": "edge622116", 
+"@length": 0.0071604, 
+"@source": "node622106", 
+"@target": "node622116"
+}, 
+{
+"@id": "edge622117", 
+"@length": 0.00366619, 
+"@source": "node622116", 
+"@target": "node622117"
+}, 
+{
+"@id": "edge622118", 
+"@length": 1e-08, 
+"@source": "node622117", 
+"@target": "node622118"
+}, 
+{
+"@id": "edge622119", 
+"@length": 0.001212, 
+"@source": "node622117", 
+"@target": "node622119"
+}, 
+{
+"@id": "edge622120", 
+"@length": 1e-08, 
+"@source": "node622119", 
+"@target": "node622120"
+}, 
+{
+"@id": "edge622121", 
+"@length": 1e-08, 
+"@source": "node622120", 
+"@target": "node622121"
+}, 
+{
+"@id": "edge622122", 
+"@length": 1e-08, 
+"@source": "node622120", 
+"@target": "node622122"
+}, 
+{
+"@id": "edge622123", 
+"@length": 1e-08, 
+"@source": "node622122", 
+"@target": "node622123"
+}, 
+{
+"@id": "edge622124", 
+"@length": 2e-08, 
+"@source": "node622122", 
+"@target": "node622124"
+}, 
+{
+"@id": "edge622125", 
+"@length": 1e-08, 
+"@source": "node622119", 
+"@target": "node622125"
+}, 
+{
+"@id": "edge622126", 
+"@length": 1e-08, 
+"@source": "node622125", 
+"@target": "node622126"
+}, 
+{
+"@id": "edge622127", 
+"@length": 1e-08, 
+"@source": "node622125", 
+"@target": "node622127"
+}, 
+{
+"@id": "edge622128", 
+"@length": 5e-08, 
+"@source": "node622127", 
+"@target": "node622128"
+}, 
+{
+"@id": "edge622129", 
+"@length": 1e-08, 
+"@source": "node622127", 
+"@target": "node622129"
+}, 
+{
+"@id": "edge622130", 
+"@length": 2e-08, 
+"@source": "node622129", 
+"@target": "node622130"
+}, 
+{
+"@id": "edge622131", 
+"@length": 1e-08, 
+"@source": "node622129", 
+"@target": "node622131"
+}, 
+{
+"@id": "edge622132", 
+"@length": 1e-08, 
+"@source": "node622131", 
+"@target": "node622132"
+}, 
+{
+"@id": "edge622133", 
+"@length": 0.00063211, 
+"@source": "node622131", 
+"@target": "node622133"
+}, 
+{
+"@id": "edge622134", 
+"@length": 0.00056833, 
+"@source": "node622116", 
+"@target": "node622134"
+}, 
+{
+"@id": "edge622135", 
+"@length": 0.00850029, 
+"@source": "node622134", 
+"@target": "node622135"
+}, 
+{
+"@id": "edge622136", 
+"@length": 1e-08, 
+"@source": "node622135", 
+"@target": "node622136"
+}, 
+{
+"@id": "edge622137", 
+"@length": 1e-08, 
+"@source": "node622135", 
+"@target": "node622137"
+}, 
+{
+"@id": "edge622138", 
+"@length": 1e-08, 
+"@source": "node622137", 
+"@target": "node622138"
+}, 
+{
+"@id": "edge622139", 
+"@length": 1e-08, 
+"@source": "node622137", 
+"@target": "node622139"
+}, 
+{
+"@id": "edge622140", 
+"@length": 1e-08, 
+"@source": "node622139", 
+"@target": "node622140"
+}, 
+{
+"@id": "edge622141", 
+"@length": 1e-08, 
+"@source": "node622140", 
+"@target": "node622141"
+}, 
+{
+"@id": "edge622142", 
+"@length": 1e-08, 
+"@source": "node622140", 
+"@target": "node622142"
+}, 
+{
+"@id": "edge622143", 
+"@length": 1e-08, 
+"@source": "node622139", 
+"@target": "node622143"
+}, 
+{
+"@id": "edge622144", 
+"@length": 2e-08, 
+"@source": "node622143", 
+"@target": "node622144"
+}, 
+{
+"@id": "edge622145", 
+"@length": 1e-08, 
+"@source": "node622143", 
+"@target": "node622145"
+}, 
+{
+"@id": "edge622146", 
+"@length": 0.0005365, 
+"@source": "node622134", 
+"@target": "node622146"
+}, 
+{
+"@id": "edge622147", 
+"@length": 0.00372138, 
+"@source": "node622146", 
+"@target": "node622147"
+}, 
+{
+"@id": "edge622148", 
+"@length": 0.00856683, 
+"@source": "node622146", 
+"@target": "node622148"
+}, 
+{
+"@id": "edge622149", 
+"@length": 1e-08, 
+"@source": "node622148", 
+"@target": "node622149"
+}, 
+{
+"@id": "edge622150", 
+"@length": 1e-08, 
+"@source": "node622149", 
+"@target": "node622150"
+}, 
+{
+"@id": "edge622151", 
+"@length": 1e-08, 
+"@source": "node622149", 
+"@target": "node622151"
+}, 
+{
+"@id": "edge622152", 
+"@length": 1e-08, 
+"@source": "node622148", 
+"@target": "node622152"
+}, 
+{
+"@id": "edge622153", 
+"@length": 0.00059714, 
+"@source": "node622152", 
+"@target": "node622153"
+}, 
+{
+"@id": "edge622154", 
+"@length": 1e-08, 
+"@source": "node622153", 
+"@target": "node622154"
+}, 
+{
+"@id": "edge622155", 
+"@length": 1e-08, 
+"@source": "node622153", 
+"@target": "node622155"
+}, 
+{
+"@id": "edge622156", 
+"@length": 1e-08, 
+"@source": "node622152", 
+"@target": "node622156"
+}, 
+{
+"@id": "edge622157", 
+"@length": 1e-08, 
+"@source": "node622156", 
+"@target": "node622157"
+}, 
+{
+"@id": "edge622158", 
+"@length": 1e-08, 
+"@source": "node622156", 
+"@target": "node622158"
+}, 
+{
+"@id": "edge622159", 
+"@length": 1e-08, 
+"@source": "node622158", 
+"@target": "node622159"
+}, 
+{
+"@id": "edge622160", 
+"@length": 1e-08, 
+"@source": "node622159", 
+"@target": "node622160"
+}, 
+{
+"@id": "edge622161", 
+"@length": 1e-08, 
+"@source": "node622160", 
+"@target": "node622161"
+}, 
+{
+"@id": "edge622162", 
+"@length": 1e-08, 
+"@source": "node622160", 
+"@target": "node622162"
+}, 
+{
+"@id": "edge622163", 
+"@length": 1e-08, 
+"@source": "node622159", 
+"@target": "node622163"
+}, 
+{
+"@id": "edge622164", 
+"@length": 1e-08, 
+"@source": "node622163", 
+"@target": "node622164"
+}, 
+{
+"@id": "edge622165", 
+"@length": 1e-08, 
+"@source": "node622163", 
+"@target": "node622165"
+}, 
+{
+"@id": "edge622166", 
+"@length": 1e-08, 
+"@source": "node622165", 
+"@target": "node622166"
+}, 
+{
+"@id": "edge622167", 
+"@length": 0.00061618, 
+"@source": "node622165", 
+"@target": "node622167"
+}, 
+{
+"@id": "edge622168", 
+"@length": 1e-08, 
+"@source": "node622158", 
+"@target": "node622168"
+}, 
+{
+"@id": "edge622169", 
+"@length": 1e-08, 
+"@source": "node622168", 
+"@target": "node622169"
+}, 
+{
+"@id": "edge622170", 
+"@length": 1e-08, 
+"@source": "node622168", 
+"@target": "node622170"
+}, 
+{
+"@id": "edge622171", 
+"@length": 5e-08, 
+"@source": "node622170", 
+"@target": "node622171"
+}, 
+{
+"@id": "edge622172", 
+"@length": 1e-08, 
+"@source": "node622170", 
+"@target": "node622172"
+}, 
+{
+"@id": "edge622173", 
+"@length": 3e-08, 
+"@source": "node622172", 
+"@target": "node622173"
+}, 
+{
+"@id": "edge622174", 
+"@length": 0.0005981, 
+"@source": "node622172", 
+"@target": "node622174"
+}, 
+{
+"@id": "edge622175", 
+"@length": 0.00183857, 
+"@source": "node622174", 
+"@target": "node622175"
+}, 
+{
+"@id": "edge622176", 
+"@length": 1e-08, 
+"@source": "node622174", 
+"@target": "node622176"
+}, 
+{
+"@id": "edge622177", 
+"@length": 1e-08, 
+"@source": "node622176", 
+"@target": "node622177"
+}, 
+{
+"@id": "edge622178", 
+"@length": 1e-08, 
+"@source": "node622176", 
+"@target": "node622178"
+}
+], 
+"meta": [
+{
+"$": "ot:substitutionCount", 
+"@property": "ot:branchLengthMode", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "node622060", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node622056", 
+"@root": "true"
+}, 
+{
+"@id": "node622057"
+}, 
+{
+"@id": "node622058", 
+"@otu": "otu254050"
+}, 
+{
+"@id": "node622059", 
+"@otu": "otu254051"
+}, 
+{
+"@id": "node622060"
+}, 
+{
+"@id": "node622061"
+}, 
+{
+"@id": "node622062"
+}, 
+{
+"@id": "node622063"
+}, 
+{
+"@id": "node622064", 
+"@otu": "otu254052"
+}, 
+{
+"@id": "node622065"
+}, 
+{
+"@id": "node622066", 
+"@otu": "otu254053"
+}, 
+{
+"@id": "node622067", 
+"@otu": "otu254054"
+}, 
+{
+"@id": "node622068"
+}, 
+{
+"@id": "node622069"
+}, 
+{
+"@id": "node622070", 
+"@otu": "otu254055"
+}, 
+{
+"@id": "node622071", 
+"@otu": "otu254056"
+}, 
+{
+"@id": "node622072"
+}, 
+{
+"@id": "node622073", 
+"@otu": "otu254057"
+}, 
+{
+"@id": "node622074"
+}, 
+{
+"@id": "node622075", 
+"@otu": "otu254058"
+}, 
+{
+"@id": "node622076"
+}, 
+{
+"@id": "node622077", 
+"@otu": "otu254059"
+}, 
+{
+"@id": "node622078", 
+"@otu": "otu254060"
+}, 
+{
+"@id": "node622079"
+}, 
+{
+"@id": "node622080", 
+"@otu": "otu254061"
+}, 
+{
+"@id": "node622081"
+}, 
+{
+"@id": "node622082", 
+"@otu": "otu254062"
+}, 
+{
+"@id": "node622083"
+}, 
+{
+"@id": "node622084", 
+"@otu": "otu254063"
+}, 
+{
+"@id": "node622085"
+}, 
+{
+"@id": "node622086", 
+"@otu": "otu254064"
+}, 
+{
+"@id": "node622087"
+}, 
+{
+"@id": "node622088", 
+"@otu": "otu254065"
+}, 
+{
+"@id": "node622089"
+}, 
+{
+"@id": "node622090", 
+"@otu": "otu254066"
+}, 
+{
+"@id": "node622091"
+}, 
+{
+"@id": "node622092"
+}, 
+{
+"@id": "node622093", 
+"@otu": "otu254067"
+}, 
+{
+"@id": "node622094"
+}, 
+{
+"@id": "node622095", 
+"@otu": "otu254068"
+}, 
+{
+"@id": "node622096", 
+"@otu": "otu254069"
+}, 
+{
+"@id": "node622097"
+}, 
+{
+"@id": "node622098"
+}, 
+{
+"@id": "node622099", 
+"@otu": "otu254070"
+}, 
+{
+"@id": "node622100", 
+"@otu": "otu254071"
+}, 
+{
+"@id": "node622101"
+}, 
+{
+"@id": "node622102", 
+"@otu": "otu254072"
+}, 
+{
+"@id": "node622103", 
+"@otu": "otu254073"
+}, 
+{
+"@id": "node622104"
+}, 
+{
+"@id": "node622105", 
+"@otu": "otu254074"
+}, 
+{
+"@id": "node622106"
+}, 
+{
+"@id": "node622107"
+}, 
+{
+"@id": "node622108", 
+"@otu": "otu254075"
+}, 
+{
+"@id": "node622109"
+}, 
+{
+"@id": "node622110", 
+"@otu": "otu254076"
+}, 
+{
+"@id": "node622111"
+}, 
+{
+"@id": "node622112", 
+"@otu": "otu254077"
+}, 
+{
+"@id": "node622113"
+}, 
+{
+"@id": "node622114", 
+"@otu": "otu254078"
+}, 
+{
+"@id": "node622115", 
+"@otu": "otu254079"
+}, 
+{
+"@id": "node622116"
+}, 
+{
+"@id": "node622117"
+}, 
+{
+"@id": "node622118", 
+"@otu": "otu254080"
+}, 
+{
+"@id": "node622119"
+}, 
+{
+"@id": "node622120"
+}, 
+{
+"@id": "node622121", 
+"@otu": "otu254081"
+}, 
+{
+"@id": "node622122"
+}, 
+{
+"@id": "node622123", 
+"@otu": "otu254082"
+}, 
+{
+"@id": "node622124", 
+"@otu": "otu254083"
+}, 
+{
+"@id": "node622125"
+}, 
+{
+"@id": "node622126", 
+"@otu": "otu254084"
+}, 
+{
+"@id": "node622127"
+}, 
+{
+"@id": "node622128", 
+"@otu": "otu254085"
+}, 
+{
+"@id": "node622129"
+}, 
+{
+"@id": "node622130", 
+"@otu": "otu254086"
+}, 
+{
+"@id": "node622131"
+}, 
+{
+"@id": "node622132", 
+"@otu": "otu254087"
+}, 
+{
+"@id": "node622133", 
+"@otu": "otu254088"
+}, 
+{
+"@id": "node622134"
+}, 
+{
+"@id": "node622135"
+}, 
+{
+"@id": "node622136", 
+"@otu": "otu254089"
+}, 
+{
+"@id": "node622137"
+}, 
+{
+"@id": "node622138", 
+"@otu": "otu254090"
+}, 
+{
+"@id": "node622139"
+}, 
+{
+"@id": "node622140"
+}, 
+{
+"@id": "node622141", 
+"@otu": "otu254091"
+}, 
+{
+"@id": "node622142", 
+"@otu": "otu254092"
+}, 
+{
+"@id": "node622143"
+}, 
+{
+"@id": "node622144", 
+"@otu": "otu254093"
+}, 
+{
+"@id": "node622145", 
+"@otu": "otu254094"
+}, 
+{
+"@id": "node622146"
+}, 
+{
+"@id": "node622147", 
+"@otu": "otu254095"
+}, 
+{
+"@id": "node622148"
+}, 
+{
+"@id": "node622149"
+}, 
+{
+"@id": "node622150", 
+"@otu": "otu254096"
+}, 
+{
+"@id": "node622151", 
+"@otu": "otu254097"
+}, 
+{
+"@id": "node622152"
+}, 
+{
+"@id": "node622153"
+}, 
+{
+"@id": "node622154", 
+"@otu": "otu254098"
+}, 
+{
+"@id": "node622155", 
+"@otu": "otu254099"
+}, 
+{
+"@id": "node622156"
+}, 
+{
+"@id": "node622157", 
+"@otu": "otu254100"
+}, 
+{
+"@id": "node622158"
+}, 
+{
+"@id": "node622159"
+}, 
+{
+"@id": "node622160"
+}, 
+{
+"@id": "node622161", 
+"@otu": "otu254101"
+}, 
+{
+"@id": "node622162", 
+"@otu": "otu254102"
+}, 
+{
+"@id": "node622163"
+}, 
+{
+"@id": "node622164", 
+"@otu": "otu254103"
+}, 
+{
+"@id": "node622165"
+}, 
+{
+"@id": "node622166", 
+"@otu": "otu254104"
+}, 
+{
+"@id": "node622167", 
+"@otu": "otu254105"
+}, 
+{
+"@id": "node622168"
+}, 
+{
+"@id": "node622169", 
+"@otu": "otu254106"
+}, 
+{
+"@id": "node622170"
+}, 
+{
+"@id": "node622171", 
+"@otu": "otu254107"
+}, 
+{
+"@id": "node622172"
+}, 
+{
+"@id": "node622173", 
+"@otu": "otu254108"
+}, 
+{
+"@id": "node622174"
+}, 
+{
+"@id": "node622175", 
+"@otu": "otu254109"
+}, 
+{
+"@id": "node622176"
+}, 
+{
+"@id": "node622177", 
+"@otu": "otu254110"
+}, 
+{
+"@id": "node622178", 
+"@otu": "otu254111"
+}
+]
+}
+]
+}
+}
+}

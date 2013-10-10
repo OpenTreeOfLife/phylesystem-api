@@ -1,0 +1,3718 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Kurtzman C., & Suzuki M. 2010. Phylogenetic analysis of ascomycete yeasts that form coenzyme Q-9 and the proposal of the new genera Babjeviella, Meyerozyma, Millerozyma, Priceomyces, and Scheffersomyces. Mycoscience, 51(1): 2-14.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s10267-009-0011-5", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10118", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1037", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2016448, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "SSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1037", 
+"otu": [
+{
+"@about": "#otu215737", 
+"@id": "otu215737", 
+"@label": "Debaryomyces maramus", 
+"meta": [
+{
+"$": 893357, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces maramus 433", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215738", 
+"@id": "otu215738", 
+"@label": "Candida insectamans", 
+"meta": [
+{
+"$": 286506, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida insectamans 255", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215739", 
+"@id": "otu215739", 
+"@label": "Hyphopichia burtonii", 
+"meta": [
+{
+"$": 142994, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hyphopichia burtonii 187", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215740", 
+"@id": "otu215740", 
+"@label": "Debaryomyces carsonii", 
+"meta": [
+{
+"$": 125837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces carsonii 127", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215741", 
+"@id": "otu215741", 
+"@label": "Candida shehatae var. shehatae", 
+"meta": [
+{
+"$": 558333, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida shehatae shehatae 366", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215742", 
+"@id": "otu215742", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp ML4096", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215743", 
+"@id": "otu215743", 
+"@label": "Candida ergastensis", 
+"meta": [
+{
+"$": 34267, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida ergastensis 158", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215744", 
+"@id": "otu215744", 
+"@label": "Candida oleophila", 
+"meta": [
+{
+"$": 832179, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida oleophila 310", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215745", 
+"@id": "otu215745", 
+"@label": "Candida schatavii", 
+"meta": [
+{
+"$": 558329, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida schatavii 369", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215746", 
+"@id": "otu215746", 
+"@label": "Candida membranifaciens", 
+"meta": [
+{
+"$": 307938, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida membranifaciens 284", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215747", 
+"@id": "otu215747", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp Y27122 A77", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215748", 
+"@id": "otu215748", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp Eleanor YB1501", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215749", 
+"@id": "otu215749", 
+"@label": "Candida shehatae var. insectosa", 
+"meta": [
+{
+"$": 434852, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida shehatae insectosa 516", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215750", 
+"@id": "otu215750", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp AL999013", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215751", 
+"@id": "otu215751", 
+"@label": "Candida boleticola", 
+"meta": [
+{
+"$": 407549, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida boleticola 111", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215752", 
+"@id": "otu215752", 
+"@label": "Debaryomyces melissophilus", 
+"meta": [
+{
+"$": 533626, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces melissophilus 112", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215753", 
+"@id": "otu215753", 
+"@label": "Candida neerlandica", 
+"meta": [
+{
+"$": 910385, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida neerlandica A19", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215754", 
+"@id": "otu215754", 
+"@label": "Candida atmosphaerica", 
+"meta": [
+{
+"$": 407561, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida atmosphaerica 145", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215755", 
+"@id": "otu215755", 
+"@label": "Sporopachydermia lactativora", 
+"meta": [
+{
+"$": 635038, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sporopachy lactativora Y11591 609", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215756", 
+"@id": "otu215756", 
+"@label": "Debaryomyces vanrijiae var. yarrowii", 
+"meta": [
+{
+"$": 911822, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces vanrijiae yarrowii 439", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215757", 
+"@id": "otu215757", 
+"@label": "Pichia inositovora", 
+"meta": [
+{
+"$": 337190, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia inositovora 507", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215758", 
+"@id": "otu215758", 
+"@label": "Debaryomyces polymorphus", 
+"meta": [
+{
+"$": 145616, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces polymorphus 416", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215759", 
+"@id": "otu215759", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp Y27097 A48", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215760", 
+"@id": "otu215760", 
+"@label": "Trigonopsis variabilis", 
+"meta": [
+{
+"$": 207067, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trigonopsis variabilis Y1579 277", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215761", 
+"@id": "otu215761", 
+"@label": "Pichia", 
+"meta": [
+{
+"$": 858840, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia sp AL996631", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215762", 
+"@id": "otu215762", 
+"@label": "Candida atlantica", 
+"meta": [
+{
+"$": 257026, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida atlantica 467", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215763", 
+"@id": "otu215763", 
+"@label": "Pichia castillae", 
+"meta": [
+{
+"$": 357867, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia castillae 431", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215764", 
+"@id": "otu215764", 
+"@label": "Pichia triangularis", 
+"meta": [
+{
+"$": 882692, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia triangularis 408", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215765", 
+"@id": "otu215765", 
+"@label": "Candida maltosa", 
+"meta": [
+{
+"$": 1078106, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida maltosa 151", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215766", 
+"@id": "otu215766", 
+"@label": "Candida conglobata", 
+"meta": [
+{
+"$": 436254, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida conglobata 215", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215767", 
+"@id": "otu215767", 
+"@label": "Candida sojae", 
+"meta": [
+{
+"$": 735671, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sojae 762", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215768", 
+"@id": "otu215768", 
+"@label": "Candida santamariae var. santamariae", 
+"meta": [
+{
+"$": 558331, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida santamariae santamariae 362", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215769", 
+"@id": "otu215769", 
+"@label": "Candida diddensiae", 
+"meta": [
+{
+"$": 410744, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida diddensiae 218", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215770", 
+"@id": "otu215770", 
+"@label": "Candida psychrophila", 
+"meta": [
+{
+"$": 832183, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida psychrophila 143", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215771", 
+"@id": "otu215771", 
+"@label": "Candida tammaniensis", 
+"meta": [
+{
+"$": 883109, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida tammaniensis 391", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215772", 
+"@id": "otu215772", 
+"@label": "Candida sake", 
+"meta": [
+{
+"$": 608777, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sake 359", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215773", 
+"@id": "otu215773", 
+"@label": "Candida trypodendroni", 
+"meta": [
+{
+"$": 883110, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida trypodendroni 726", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215774", 
+"@id": "otu215774", 
+"@label": "Debaryomyces udenii", 
+"meta": [
+{
+"$": 699907, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces udenii 440", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215775", 
+"@id": "otu215775", 
+"@label": "Candida lodderae", 
+"meta": [
+{
+"$": 408228, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida lodderae 264", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215776", 
+"@id": "otu215776", 
+"@label": "Debaryomyces castellii", 
+"meta": [
+{
+"$": 1019887, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces castellii 436", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215777", 
+"@id": "otu215777", 
+"@label": "Pichia spartinae", 
+"meta": [
+{
+"$": 882710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia spartinae 418", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215778", 
+"@id": "otu215778", 
+"@label": "Candida zeylanoides", 
+"meta": [
+{
+"$": 984639, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida zeylanoides 387", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215779", 
+"@id": "otu215779", 
+"@label": "Pichia guilliermondii", 
+"meta": [
+{
+"$": 334025, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia guilliermondii 15", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215780", 
+"@id": "otu215780", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp n Y27098 A64", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215781", 
+"@id": "otu215781", 
+"@label": "Debaryomyces coudertii", 
+"meta": [
+{
+"$": 497582, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces coudertii 445", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215782", 
+"@id": "otu215782", 
+"@label": "Pichia nakazawae var. akitaensis", 
+"meta": [
+{
+"$": 357871, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia nakazawea akitaensis 420", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215783", 
+"@id": "otu215783", 
+"@label": "Candida tropicalis", 
+"meta": [
+{
+"$": 408236, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida tropicalis 199", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215784", 
+"@id": "otu215784", 
+"@label": "Debaryomyces", 
+"meta": [
+{
+"$": 959615, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces sp AL996651", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215785", 
+"@id": "otu215785", 
+"@label": "Pichia ohmeri", 
+"meta": [
+{
+"$": 607409, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia ohmeri 101", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215786", 
+"@id": "otu215786", 
+"@label": "Debaryomyces polymorphus var. africanus", 
+"meta": [
+{
+"$": 970676, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces polymorphus africanus AB054994", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215787", 
+"@id": "otu215787", 
+"@label": "Candida pseudoglaebosa", 
+"meta": [
+{
+"$": 735677, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida pseudoglaebosa 764", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215788", 
+"@id": "otu215788", 
+"@label": "Debaryomyces hansenii var. hansenii", 
+"meta": [
+{
+"$": 914607, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii hansenii 117", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215789", 
+"@id": "otu215789", 
+"@label": "Pichia philogaea", 
+"meta": [
+{
+"$": 882701, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia philogaea 419", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215790", 
+"@id": "otu215790", 
+"@label": "Debaryomyces prosopidis", 
+"meta": [
+{
+"$": 534179, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces prosopidis AB054993", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215791", 
+"@id": "otu215791", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp ML4100", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215792", 
+"@id": "otu215792", 
+"@label": "Candida tenuis", 
+"meta": [
+{
+"$": 987482, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida tenuis 72", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215793", 
+"@id": "otu215793", 
+"@label": "Pichia haplophila", 
+"meta": [
+{
+"$": 357862, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia haplophila 432", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215794", 
+"@id": "otu215794", 
+"@label": "Candida natalensis", 
+"meta": [
+{
+"$": 832181, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida natalensis 176", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215795", 
+"@id": "otu215795", 
+"@label": "Debaryomyces pseudopolymorphus", 
+"meta": [
+{
+"$": 145627, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces pseudopolymorphus 441", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215796", 
+"@id": "otu215796", 
+"@label": "Candida jeffriesii", 
+"meta": [
+{
+"$": 753816, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida jeffriesii AY520415", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215797", 
+"@id": "otu215797", 
+"@label": "Candida sophiae-reginae", 
+"meta": [
+{
+"$": 1084824, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sophiaereginae 173", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215798", 
+"@id": "otu215798", 
+"@label": "Candida dubliniensis", 
+"meta": [
+{
+"$": 148759, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida dubliniensis 671", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215799", 
+"@id": "otu215799", 
+"@label": "Pichia media", 
+"meta": [
+{
+"$": 357875, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia media 430", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215800", 
+"@id": "otu215800", 
+"@label": "Candida insectorum", 
+"meta": [
+{
+"$": 307933, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida insectorum 244", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215801", 
+"@id": "otu215801", 
+"@label": "Candida aaseri", 
+"meta": [
+{
+"$": 882721, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida aaseri 99", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215802", 
+"@id": "otu215802", 
+"@label": "Candida santamariae var. membranifaciens", 
+"meta": [
+{
+"$": 558332, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida santamariae membranifaciens 156", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215803", 
+"@id": "otu215803", 
+"@label": "Pichia", 
+"meta": [
+{
+"$": 858840, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia sp ALS874711l", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215804", 
+"@id": "otu215804", 
+"@label": "Candida palmioleophila", 
+"meta": [
+{
+"$": 832184, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida palmioleophila 308", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215805", 
+"@id": "otu215805", 
+"@label": "Candida albicans", 
+"meta": [
+{
+"$": 1034966, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida albicans 94", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215806", 
+"@id": "otu215806", 
+"@label": "Candida railenensis", 
+"meta": [
+{
+"$": 588396, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida railenensis 470", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215807", 
+"@id": "otu215807", 
+"@label": "Candida quercitrusa", 
+"meta": [
+{
+"$": 60841, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida quercitrusa 361", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215808", 
+"@id": "otu215808", 
+"@label": "Candida aurita", 
+"meta": [
+{
+"$": 716481, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida aurita AJ549217", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215809", 
+"@id": "otu215809", 
+"@label": "Pichia nakazawae var. nakazawae", 
+"meta": [
+{
+"$": 357861, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia nakazawea nakazawae 193", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215810", 
+"@id": "otu215810", 
+"@label": "Pichia acaciae", 
+"meta": [
+{
+"$": 538129, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia acaciae 426", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215811", 
+"@id": "otu215811", 
+"@label": "Debaryomyces yamadae", 
+"meta": [
+{
+"$": 145611, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces yamadae 422", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215812", 
+"@id": "otu215812", 
+"@label": "Wickerhamia fluorescens", 
+"meta": [
+{
+"$": 635034, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Wickerhamia fluorescens 267", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215813", 
+"@id": "otu215813", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp ML4144", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215814", 
+"@id": "otu215814", 
+"@label": "Candida parapsilosis", 
+"meta": [
+{
+"$": 408239, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida parapsilosis 259", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215815", 
+"@id": "otu215815", 
+"@label": "Pichia farinosa", 
+"meta": [
+{
+"$": 333994, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia farinosa 104", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215816", 
+"@id": "otu215816", 
+"@label": "Candida saitoana", 
+"meta": [
+{
+"$": 558326, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida saitoana 372", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215817", 
+"@id": "otu215817", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp Y27100 A50", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215818", 
+"@id": "otu215818", 
+"@label": "Candida fermenticarens", 
+"meta": [
+{
+"$": 257803, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida fermenticarens 265", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215819", 
+"@id": "otu215819", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp AL999251", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215820", 
+"@id": "otu215820", 
+"@label": "Wickerhamia", 
+"meta": [
+{
+"$": 113397, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Wickerham domercqiae Y6692 455", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215821", 
+"@id": "otu215821", 
+"@label": "Candida germanica", 
+"meta": [
+{
+"$": 1065264, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida germanica A26", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215822", 
+"@id": "otu215822", 
+"@label": "Debaryomyces hansenii var. fabryi", 
+"meta": [
+{
+"$": 965247, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii fabryi 796", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215823", 
+"@id": "otu215823", 
+"@label": "Candida diospyri", 
+"meta": [
+{
+"$": 313162, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida diospyri AY450918", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215824", 
+"@id": "otu215824", 
+"@label": "Pichia segobiensis", 
+"meta": [
+{
+"$": 882705, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia segobiensis 118", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215825", 
+"@id": "otu215825", 
+"@label": "Candida fragi", 
+"meta": [
+{
+"$": 735679, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida fragi 763", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215826", 
+"@id": "otu215826", 
+"@label": "Candida dendronema", 
+"meta": [
+{
+"$": 436252, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida dendronema 219", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215827", 
+"@id": "otu215827", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp ML3831", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215828", 
+"@id": "otu215828", 
+"@label": "Lodderomyces elongisporus", 
+"meta": [
+{
+"$": 213945, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lodderomyces elongisporus 412", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215829", 
+"@id": "otu215829", 
+"@label": "Candida buinensis", 
+"meta": [
+{
+"$": 407543, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida buinensis 119", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215830", 
+"@id": "otu215830", 
+"@label": "Candida fluviatilis", 
+"meta": [
+{
+"$": 325026, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida fluviatilis 253", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215831", 
+"@id": "otu215831", 
+"@label": "Debaryomyces vanrijiae var. vanrijiae", 
+"meta": [
+{
+"$": 911819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces vanrijiae vanrijiae 437", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215832", 
+"@id": "otu215832", 
+"@label": "Spathaspora passalidarum", 
+"meta": [
+{
+"$": 452874, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Spathaspora passalidarum DQ109807", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215833", 
+"@id": "otu215833", 
+"@label": "Candida glucosophila", 
+"meta": [
+{
+"$": 337186, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida glucosophila 518", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215834", 
+"@id": "otu215834", 
+"@label": "Debaryomyces nepalensis", 
+"meta": [
+{
+"$": 533625, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces nepalensis 434", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215835", 
+"@id": "otu215835", 
+"@label": "Debaryomyces occidentalis var. persoonii", 
+"meta": [
+{
+"$": 882697, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces occidentalis persoonii 435", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215836", 
+"@id": "otu215836", 
+"@label": "Metschnikowia bicuspidata var. bicuspidata", 
+"meta": [
+{
+"$": 236590, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Metschnikowia bicus bicus 458", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215837", 
+"@id": "otu215837", 
+"@label": "Pichia mexicana", 
+"meta": [
+{
+"$": 58459, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia mexicana 442", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215838", 
+"@id": "otu215838", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp Y5517 A730", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215839", 
+"@id": "otu215839", 
+"@label": "Candida cleridarum", 
+"meta": [
+{
+"$": 97969, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida cleridarum AF251552", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215840", 
+"@id": "otu215840", 
+"@label": "Candida viswanathii", 
+"meta": [
+{
+"$": 408228, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida viswanathii 252", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215841", 
+"@id": "otu215841", 
+"@label": "Candida anglica", 
+"meta": [
+{
+"$": 910394, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida anglica A38", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215842", 
+"@id": "otu215842", 
+"@label": "Candida glaebosa", 
+"meta": [
+{
+"$": 780837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida glaebosa 274", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215843", 
+"@id": "otu215843", 
+"@label": "Zygoascus hellenicus", 
+"meta": [
+{
+"$": 868683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Zygoascus hellenicus Y7136 A876", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215844", 
+"@id": "otu215844", 
+"@label": "Pichia scolyti", 
+"meta": [
+{
+"$": 896571, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia scolyti 194", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215845", 
+"@id": "otu215845", 
+"@label": "Saccharomyces cerevisiae", 
+"meta": [
+{
+"$": 908549, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Saccharomyces cerevisiae 8", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215846", 
+"@id": "otu215846", 
+"@label": "Candida multigemmis", 
+"meta": [
+{
+"$": 307943, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida multigemmis 148", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215847", 
+"@id": "otu215847", 
+"@label": "Trichomonascus petasosporus", 
+"meta": [
+{
+"$": 738463, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trich petasosporus YB2092 592", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215848", 
+"@id": "otu215848", 
+"@label": "Candida coipomoensis", 
+"meta": [
+{
+"$": 436256, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida coipomoensis 169", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215849", 
+"@id": "otu215849", 
+"@label": "Candida lyxosophila", 
+"meta": [
+{
+"$": 307937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida lyxosophila 79", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215850", 
+"@id": "otu215850", 
+"@label": "Pichia stipitis", 
+"meta": [
+{
+"$": 334015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia stipitis 116", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215851", 
+"@id": "otu215851", 
+"@label": "Debaryomyces occidentalis var. occidentalis", 
+"meta": [
+{
+"$": 383407, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces occidentalis occidentalis 107", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215852", 
+"@id": "otu215852", 
+"@label": "Pichia caribbica", 
+"meta": [
+{
+"$": 989532, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia caribbica Y27274", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215853", 
+"@id": "otu215853", 
+"@label": "Candida glabrata", 
+"meta": [
+{
+"$": 718605, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida glabrata 246", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215854", 
+"@id": "otu215854", 
+"@label": "Sugiyamaella smithiae", 
+"meta": [
+{
+"$": 638679, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sugiyamaella smithiae Y17850 680", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215855", 
+"@id": "otu215855", 
+"@label": "Pichia heimii", 
+"meta": [
+{
+"$": 802826, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pichia heimii 190", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215856", 
+"@id": "otu215856", 
+"@label": "Debaryomyces", 
+"meta": [
+{
+"$": 959615, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces sp Y7804 490", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215857", 
+"@id": "otu215857", 
+"@label": "Debaryomyces robertsiae", 
+"meta": [
+{
+"$": 699900, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces robertsiae 109", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215858", 
+"@id": "otu215858", 
+"@label": "Schizosaccharomyces pombe", 
+"meta": [
+{
+"$": 990004, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Schizosaccharomyces pombe 17", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215859", 
+"@id": "otu215859", 
+"@label": "Candida friedrichii", 
+"meta": [
+{
+"$": 286546, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida friedrichii 147", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215860", 
+"@id": "otu215860", 
+"@label": "Candida", 
+"meta": [
+{
+"$": 1034970, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Candida sp AL994011", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu215861", 
+"@id": "otu215861", 
+"@label": "Debaryomyces etchellsii", 
+"meta": [
+{
+"$": 699908, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces etchellsii 123", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1037", 
+"@otus": "otus1037", 
+"tree": [
+{
+"@about": "#tree1990", 
+"@id": "tree1990", 
+"edge": [
+{
+"@id": "edge508871", 
+"@source": "node508870", 
+"@target": "node508871"
+}, 
+{
+"@id": "edge508872", 
+"@source": "node508871", 
+"@target": "node508872"
+}, 
+{
+"@id": "edge508873", 
+"@source": "node508872", 
+"@target": "node508873"
+}, 
+{
+"@id": "edge508874", 
+"@source": "node508873", 
+"@target": "node508874"
+}, 
+{
+"@id": "edge508875", 
+"@source": "node508874", 
+"@target": "node508875"
+}, 
+{
+"@id": "edge508876", 
+"@source": "node508875", 
+"@target": "node508876"
+}, 
+{
+"@id": "edge508877", 
+"@source": "node508876", 
+"@target": "node508877"
+}, 
+{
+"@id": "edge508878", 
+"@source": "node508877", 
+"@target": "node508878"
+}, 
+{
+"@id": "edge508879", 
+"@source": "node508878", 
+"@target": "node508879"
+}, 
+{
+"@id": "edge508880", 
+"@source": "node508879", 
+"@target": "node508880"
+}, 
+{
+"@id": "edge508881", 
+"@source": "node508879", 
+"@target": "node508881"
+}, 
+{
+"@id": "edge508882", 
+"@source": "node508881", 
+"@target": "node508882"
+}, 
+{
+"@id": "edge508883", 
+"@source": "node508882", 
+"@target": "node508883"
+}, 
+{
+"@id": "edge508884", 
+"@source": "node508882", 
+"@target": "node508884"
+}, 
+{
+"@id": "edge508885", 
+"@source": "node508881", 
+"@target": "node508885"
+}, 
+{
+"@id": "edge508886", 
+"@source": "node508878", 
+"@target": "node508886"
+}, 
+{
+"@id": "edge508887", 
+"@source": "node508886", 
+"@target": "node508887"
+}, 
+{
+"@id": "edge508888", 
+"@source": "node508887", 
+"@target": "node508888"
+}, 
+{
+"@id": "edge508889", 
+"@source": "node508887", 
+"@target": "node508889"
+}, 
+{
+"@id": "edge508890", 
+"@source": "node508886", 
+"@target": "node508890"
+}, 
+{
+"@id": "edge508891", 
+"@source": "node508890", 
+"@target": "node508891"
+}, 
+{
+"@id": "edge508892", 
+"@source": "node508891", 
+"@target": "node508892"
+}, 
+{
+"@id": "edge508893", 
+"@source": "node508892", 
+"@target": "node508893"
+}, 
+{
+"@id": "edge508894", 
+"@source": "node508893", 
+"@target": "node508894"
+}, 
+{
+"@id": "edge508895", 
+"@source": "node508893", 
+"@target": "node508895"
+}, 
+{
+"@id": "edge508896", 
+"@source": "node508895", 
+"@target": "node508896"
+}, 
+{
+"@id": "edge508897", 
+"@source": "node508895", 
+"@target": "node508897"
+}, 
+{
+"@id": "edge508898", 
+"@source": "node508892", 
+"@target": "node508898"
+}, 
+{
+"@id": "edge508899", 
+"@source": "node508898", 
+"@target": "node508899"
+}, 
+{
+"@id": "edge508900", 
+"@source": "node508898", 
+"@target": "node508900"
+}, 
+{
+"@id": "edge508901", 
+"@source": "node508891", 
+"@target": "node508901"
+}, 
+{
+"@id": "edge508902", 
+"@source": "node508890", 
+"@target": "node508902"
+}, 
+{
+"@id": "edge508903", 
+"@source": "node508902", 
+"@target": "node508903"
+}, 
+{
+"@id": "edge508904", 
+"@source": "node508902", 
+"@target": "node508904"
+}, 
+{
+"@id": "edge508905", 
+"@source": "node508877", 
+"@target": "node508905"
+}, 
+{
+"@id": "edge508906", 
+"@source": "node508876", 
+"@target": "node508906"
+}, 
+{
+"@id": "edge508907", 
+"@source": "node508906", 
+"@target": "node508907"
+}, 
+{
+"@id": "edge508908", 
+"@source": "node508906", 
+"@target": "node508908"
+}, 
+{
+"@id": "edge508909", 
+"@source": "node508908", 
+"@target": "node508909"
+}, 
+{
+"@id": "edge508910", 
+"@source": "node508909", 
+"@target": "node508910"
+}, 
+{
+"@id": "edge508911", 
+"@source": "node508910", 
+"@target": "node508911"
+}, 
+{
+"@id": "edge508912", 
+"@source": "node508910", 
+"@target": "node508912"
+}, 
+{
+"@id": "edge508913", 
+"@source": "node508909", 
+"@target": "node508913"
+}, 
+{
+"@id": "edge508914", 
+"@source": "node508913", 
+"@target": "node508914"
+}, 
+{
+"@id": "edge508915", 
+"@source": "node508913", 
+"@target": "node508915"
+}, 
+{
+"@id": "edge508916", 
+"@source": "node508908", 
+"@target": "node508916"
+}, 
+{
+"@id": "edge508917", 
+"@source": "node508916", 
+"@target": "node508917"
+}, 
+{
+"@id": "edge508918", 
+"@source": "node508916", 
+"@target": "node508918"
+}, 
+{
+"@id": "edge508919", 
+"@source": "node508875", 
+"@target": "node508919"
+}, 
+{
+"@id": "edge508920", 
+"@source": "node508919", 
+"@target": "node508920"
+}, 
+{
+"@id": "edge508921", 
+"@source": "node508920", 
+"@target": "node508921"
+}, 
+{
+"@id": "edge508922", 
+"@source": "node508920", 
+"@target": "node508922"
+}, 
+{
+"@id": "edge508923", 
+"@source": "node508919", 
+"@target": "node508923"
+}, 
+{
+"@id": "edge508924", 
+"@source": "node508923", 
+"@target": "node508924"
+}, 
+{
+"@id": "edge508925", 
+"@source": "node508923", 
+"@target": "node508925"
+}, 
+{
+"@id": "edge508926", 
+"@source": "node508925", 
+"@target": "node508926"
+}, 
+{
+"@id": "edge508927", 
+"@source": "node508925", 
+"@target": "node508927"
+}, 
+{
+"@id": "edge508928", 
+"@source": "node508874", 
+"@target": "node508928"
+}, 
+{
+"@id": "edge508929", 
+"@source": "node508928", 
+"@target": "node508929"
+}, 
+{
+"@id": "edge508930", 
+"@source": "node508929", 
+"@target": "node508930"
+}, 
+{
+"@id": "edge508931", 
+"@source": "node508930", 
+"@target": "node508931"
+}, 
+{
+"@id": "edge508932", 
+"@source": "node508931", 
+"@target": "node508932"
+}, 
+{
+"@id": "edge508933", 
+"@source": "node508932", 
+"@target": "node508933"
+}, 
+{
+"@id": "edge508934", 
+"@source": "node508933", 
+"@target": "node508934"
+}, 
+{
+"@id": "edge508935", 
+"@source": "node508934", 
+"@target": "node508935"
+}, 
+{
+"@id": "edge508936", 
+"@source": "node508934", 
+"@target": "node508936"
+}, 
+{
+"@id": "edge508937", 
+"@source": "node508936", 
+"@target": "node508937"
+}, 
+{
+"@id": "edge508938", 
+"@source": "node508937", 
+"@target": "node508938"
+}, 
+{
+"@id": "edge508939", 
+"@source": "node508937", 
+"@target": "node508939"
+}, 
+{
+"@id": "edge508940", 
+"@source": "node508939", 
+"@target": "node508940"
+}, 
+{
+"@id": "edge508941", 
+"@source": "node508939", 
+"@target": "node508941"
+}, 
+{
+"@id": "edge508942", 
+"@source": "node508936", 
+"@target": "node508942"
+}, 
+{
+"@id": "edge508943", 
+"@source": "node508942", 
+"@target": "node508943"
+}, 
+{
+"@id": "edge508944", 
+"@source": "node508943", 
+"@target": "node508944"
+}, 
+{
+"@id": "edge508945", 
+"@source": "node508944", 
+"@target": "node508945"
+}, 
+{
+"@id": "edge508946", 
+"@source": "node508944", 
+"@target": "node508946"
+}, 
+{
+"@id": "edge508947", 
+"@source": "node508943", 
+"@target": "node508947"
+}, 
+{
+"@id": "edge508948", 
+"@source": "node508942", 
+"@target": "node508948"
+}, 
+{
+"@id": "edge508949", 
+"@source": "node508948", 
+"@target": "node508949"
+}, 
+{
+"@id": "edge508950", 
+"@source": "node508949", 
+"@target": "node508950"
+}, 
+{
+"@id": "edge508951", 
+"@source": "node508949", 
+"@target": "node508951"
+}, 
+{
+"@id": "edge508952", 
+"@source": "node508948", 
+"@target": "node508952"
+}, 
+{
+"@id": "edge508953", 
+"@source": "node508933", 
+"@target": "node508953"
+}, 
+{
+"@id": "edge508954", 
+"@source": "node508932", 
+"@target": "node508954"
+}, 
+{
+"@id": "edge508955", 
+"@source": "node508954", 
+"@target": "node508955"
+}, 
+{
+"@id": "edge508956", 
+"@source": "node508955", 
+"@target": "node508956"
+}, 
+{
+"@id": "edge508957", 
+"@source": "node508956", 
+"@target": "node508957"
+}, 
+{
+"@id": "edge508958", 
+"@source": "node508957", 
+"@target": "node508958"
+}, 
+{
+"@id": "edge508959", 
+"@source": "node508957", 
+"@target": "node508959"
+}, 
+{
+"@id": "edge508960", 
+"@source": "node508956", 
+"@target": "node508960"
+}, 
+{
+"@id": "edge508961", 
+"@source": "node508955", 
+"@target": "node508961"
+}, 
+{
+"@id": "edge508962", 
+"@source": "node508961", 
+"@target": "node508962"
+}, 
+{
+"@id": "edge508963", 
+"@source": "node508961", 
+"@target": "node508963"
+}, 
+{
+"@id": "edge508964", 
+"@source": "node508963", 
+"@target": "node508964"
+}, 
+{
+"@id": "edge508965", 
+"@source": "node508964", 
+"@target": "node508965"
+}, 
+{
+"@id": "edge508966", 
+"@source": "node508964", 
+"@target": "node508966"
+}, 
+{
+"@id": "edge508967", 
+"@source": "node508963", 
+"@target": "node508967"
+}, 
+{
+"@id": "edge508968", 
+"@source": "node508954", 
+"@target": "node508968"
+}, 
+{
+"@id": "edge508969", 
+"@source": "node508968", 
+"@target": "node508969"
+}, 
+{
+"@id": "edge508970", 
+"@source": "node508968", 
+"@target": "node508970"
+}, 
+{
+"@id": "edge508971", 
+"@source": "node508931", 
+"@target": "node508971"
+}, 
+{
+"@id": "edge508972", 
+"@source": "node508971", 
+"@target": "node508972"
+}, 
+{
+"@id": "edge508973", 
+"@source": "node508972", 
+"@target": "node508973"
+}, 
+{
+"@id": "edge508974", 
+"@source": "node508973", 
+"@target": "node508974"
+}, 
+{
+"@id": "edge508975", 
+"@source": "node508974", 
+"@target": "node508975"
+}, 
+{
+"@id": "edge508976", 
+"@source": "node508975", 
+"@target": "node508976"
+}, 
+{
+"@id": "edge508977", 
+"@source": "node508976", 
+"@target": "node508977"
+}, 
+{
+"@id": "edge508978", 
+"@source": "node508976", 
+"@target": "node508978"
+}, 
+{
+"@id": "edge508979", 
+"@source": "node508975", 
+"@target": "node508979"
+}, 
+{
+"@id": "edge508980", 
+"@source": "node508974", 
+"@target": "node508980"
+}, 
+{
+"@id": "edge508981", 
+"@source": "node508980", 
+"@target": "node508981"
+}, 
+{
+"@id": "edge508982", 
+"@source": "node508981", 
+"@target": "node508982"
+}, 
+{
+"@id": "edge508983", 
+"@source": "node508981", 
+"@target": "node508983"
+}, 
+{
+"@id": "edge508984", 
+"@source": "node508980", 
+"@target": "node508984"
+}, 
+{
+"@id": "edge508985", 
+"@source": "node508973", 
+"@target": "node508985"
+}, 
+{
+"@id": "edge508986", 
+"@source": "node508972", 
+"@target": "node508986"
+}, 
+{
+"@id": "edge508987", 
+"@source": "node508986", 
+"@target": "node508987"
+}, 
+{
+"@id": "edge508988", 
+"@source": "node508986", 
+"@target": "node508988"
+}, 
+{
+"@id": "edge508989", 
+"@source": "node508971", 
+"@target": "node508989"
+}, 
+{
+"@id": "edge508990", 
+"@source": "node508930", 
+"@target": "node508990"
+}, 
+{
+"@id": "edge508991", 
+"@source": "node508929", 
+"@target": "node508991"
+}, 
+{
+"@id": "edge508992", 
+"@source": "node508991", 
+"@target": "node508992"
+}, 
+{
+"@id": "edge508993", 
+"@source": "node508991", 
+"@target": "node508993"
+}, 
+{
+"@id": "edge508994", 
+"@source": "node508928", 
+"@target": "node508994"
+}, 
+{
+"@id": "edge508995", 
+"@source": "node508994", 
+"@target": "node508995"
+}, 
+{
+"@id": "edge508996", 
+"@source": "node508995", 
+"@target": "node508996"
+}, 
+{
+"@id": "edge508997", 
+"@source": "node508995", 
+"@target": "node508997"
+}, 
+{
+"@id": "edge508998", 
+"@source": "node508994", 
+"@target": "node508998"
+}, 
+{
+"@id": "edge508999", 
+"@source": "node508998", 
+"@target": "node508999"
+}, 
+{
+"@id": "edge509000", 
+"@source": "node508999", 
+"@target": "node509000"
+}, 
+{
+"@id": "edge509001", 
+"@source": "node509000", 
+"@target": "node509001"
+}, 
+{
+"@id": "edge509002", 
+"@source": "node509000", 
+"@target": "node509002"
+}, 
+{
+"@id": "edge509003", 
+"@source": "node508999", 
+"@target": "node509003"
+}, 
+{
+"@id": "edge509004", 
+"@source": "node509003", 
+"@target": "node509004"
+}, 
+{
+"@id": "edge509005", 
+"@source": "node509004", 
+"@target": "node509005"
+}, 
+{
+"@id": "edge509006", 
+"@source": "node509004", 
+"@target": "node509006"
+}, 
+{
+"@id": "edge509007", 
+"@source": "node509003", 
+"@target": "node509007"
+}, 
+{
+"@id": "edge509008", 
+"@source": "node508998", 
+"@target": "node509008"
+}, 
+{
+"@id": "edge509009", 
+"@source": "node508873", 
+"@target": "node509009"
+}, 
+{
+"@id": "edge509010", 
+"@source": "node509009", 
+"@target": "node509010"
+}, 
+{
+"@id": "edge509011", 
+"@source": "node509010", 
+"@target": "node509011"
+}, 
+{
+"@id": "edge509012", 
+"@source": "node509011", 
+"@target": "node509012"
+}, 
+{
+"@id": "edge509013", 
+"@source": "node509012", 
+"@target": "node509013"
+}, 
+{
+"@id": "edge509014", 
+"@source": "node509013", 
+"@target": "node509014"
+}, 
+{
+"@id": "edge509015", 
+"@source": "node509014", 
+"@target": "node509015"
+}, 
+{
+"@id": "edge509016", 
+"@source": "node509014", 
+"@target": "node509016"
+}, 
+{
+"@id": "edge509017", 
+"@source": "node509013", 
+"@target": "node509017"
+}, 
+{
+"@id": "edge509018", 
+"@source": "node509012", 
+"@target": "node509018"
+}, 
+{
+"@id": "edge509019", 
+"@source": "node509018", 
+"@target": "node509019"
+}, 
+{
+"@id": "edge509020", 
+"@source": "node509019", 
+"@target": "node509020"
+}, 
+{
+"@id": "edge509021", 
+"@source": "node509019", 
+"@target": "node509021"
+}, 
+{
+"@id": "edge509022", 
+"@source": "node509018", 
+"@target": "node509022"
+}, 
+{
+"@id": "edge509023", 
+"@source": "node509011", 
+"@target": "node509023"
+}, 
+{
+"@id": "edge509024", 
+"@source": "node509023", 
+"@target": "node509024"
+}, 
+{
+"@id": "edge509025", 
+"@source": "node509024", 
+"@target": "node509025"
+}, 
+{
+"@id": "edge509026", 
+"@source": "node509025", 
+"@target": "node509026"
+}, 
+{
+"@id": "edge509027", 
+"@source": "node509026", 
+"@target": "node509027"
+}, 
+{
+"@id": "edge509028", 
+"@source": "node509026", 
+"@target": "node509028"
+}, 
+{
+"@id": "edge509029", 
+"@source": "node509025", 
+"@target": "node509029"
+}, 
+{
+"@id": "edge509030", 
+"@source": "node509024", 
+"@target": "node509030"
+}, 
+{
+"@id": "edge509031", 
+"@source": "node509030", 
+"@target": "node509031"
+}, 
+{
+"@id": "edge509032", 
+"@source": "node509030", 
+"@target": "node509032"
+}, 
+{
+"@id": "edge509033", 
+"@source": "node509023", 
+"@target": "node509033"
+}, 
+{
+"@id": "edge509034", 
+"@source": "node509033", 
+"@target": "node509034"
+}, 
+{
+"@id": "edge509035", 
+"@source": "node509033", 
+"@target": "node509035"
+}, 
+{
+"@id": "edge509036", 
+"@source": "node509035", 
+"@target": "node509036"
+}, 
+{
+"@id": "edge509037", 
+"@source": "node509035", 
+"@target": "node509037"
+}, 
+{
+"@id": "edge509038", 
+"@source": "node509010", 
+"@target": "node509038"
+}, 
+{
+"@id": "edge509039", 
+"@source": "node509038", 
+"@target": "node509039"
+}, 
+{
+"@id": "edge509040", 
+"@source": "node509038", 
+"@target": "node509040"
+}, 
+{
+"@id": "edge509041", 
+"@source": "node509009", 
+"@target": "node509041"
+}, 
+{
+"@id": "edge509042", 
+"@source": "node508872", 
+"@target": "node509042"
+}, 
+{
+"@id": "edge509043", 
+"@source": "node508871", 
+"@target": "node509043"
+}, 
+{
+"@id": "edge509044", 
+"@source": "node508870", 
+"@target": "node509044"
+}
+], 
+"meta": [
+{
+"$": "node508872", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "SSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node508870", 
+"@root": "true"
+}, 
+{
+"@id": "node508871"
+}, 
+{
+"@id": "node508872"
+}, 
+{
+"@id": "node508873"
+}, 
+{
+"@id": "node508874"
+}, 
+{
+"@id": "node508875"
+}, 
+{
+"@id": "node508876"
+}, 
+{
+"@id": "node508877"
+}, 
+{
+"@id": "node508878"
+}, 
+{
+"@id": "node508879"
+}, 
+{
+"@id": "node508880", 
+"@otu": "otu215738"
+}, 
+{
+"@id": "node508881"
+}, 
+{
+"@id": "node508882"
+}, 
+{
+"@id": "node508883", 
+"@otu": "otu215796"
+}, 
+{
+"@id": "node508884", 
+"@otu": "otu215832"
+}, 
+{
+"@id": "node508885", 
+"@otu": "otu215849"
+}, 
+{
+"@id": "node508886"
+}, 
+{
+"@id": "node508887"
+}, 
+{
+"@id": "node508888", 
+"@otu": "otu215814"
+}, 
+{
+"@id": "node508889", 
+"@otu": "otu215828"
+}, 
+{
+"@id": "node508890"
+}, 
+{
+"@id": "node508891"
+}, 
+{
+"@id": "node508892"
+}, 
+{
+"@id": "node508893"
+}, 
+{
+"@id": "node508894", 
+"@otu": "otu215753"
+}, 
+{
+"@id": "node508895"
+}, 
+{
+"@id": "node508896", 
+"@otu": "otu215767"
+}, 
+{
+"@id": "node508897", 
+"@otu": "otu215783"
+}, 
+{
+"@id": "node508898"
+}, 
+{
+"@id": "node508899", 
+"@otu": "otu215775"
+}, 
+{
+"@id": "node508900", 
+"@otu": "otu215840"
+}, 
+{
+"@id": "node508901", 
+"@otu": "otu215765"
+}, 
+{
+"@id": "node508902"
+}, 
+{
+"@id": "node508903", 
+"@otu": "otu215805"
+}, 
+{
+"@id": "node508904", 
+"@otu": "otu215798"
+}, 
+{
+"@id": "node508905", 
+"@otu": "otu215772"
+}, 
+{
+"@id": "node508906"
+}, 
+{
+"@id": "node508907", 
+"@otu": "otu215777"
+}, 
+{
+"@id": "node508908"
+}, 
+{
+"@id": "node508909"
+}, 
+{
+"@id": "node508910"
+}, 
+{
+"@id": "node508911", 
+"@otu": "otu215824"
+}, 
+{
+"@id": "node508912", 
+"@otu": "otu215850"
+}, 
+{
+"@id": "node508913"
+}, 
+{
+"@id": "node508914", 
+"@otu": "otu215749"
+}, 
+{
+"@id": "node508915", 
+"@otu": "otu215741"
+}, 
+{
+"@id": "node508916"
+}, 
+{
+"@id": "node508917", 
+"@otu": "otu215848"
+}, 
+{
+"@id": "node508918", 
+"@otu": "otu215743"
+}, 
+{
+"@id": "node508919"
+}, 
+{
+"@id": "node508920"
+}, 
+{
+"@id": "node508921", 
+"@otu": "otu215830"
+}, 
+{
+"@id": "node508922", 
+"@otu": "otu215804"
+}, 
+{
+"@id": "node508923"
+}, 
+{
+"@id": "node508924", 
+"@otu": "otu215842"
+}, 
+{
+"@id": "node508925"
+}, 
+{
+"@id": "node508926", 
+"@otu": "otu215787"
+}, 
+{
+"@id": "node508927", 
+"@otu": "otu215816"
+}, 
+{
+"@id": "node508928"
+}, 
+{
+"@id": "node508929"
+}, 
+{
+"@id": "node508930"
+}, 
+{
+"@id": "node508931"
+}, 
+{
+"@id": "node508932"
+}, 
+{
+"@id": "node508933"
+}, 
+{
+"@id": "node508934"
+}, 
+{
+"@id": "node508935", 
+"@otu": "otu215797"
+}, 
+{
+"@id": "node508936"
+}, 
+{
+"@id": "node508937"
+}, 
+{
+"@id": "node508938", 
+"@otu": "otu215825"
+}, 
+{
+"@id": "node508939"
+}, 
+{
+"@id": "node508940", 
+"@otu": "otu215794"
+}, 
+{
+"@id": "node508941", 
+"@otu": "otu215807"
+}, 
+{
+"@id": "node508942"
+}, 
+{
+"@id": "node508943"
+}, 
+{
+"@id": "node508944"
+}, 
+{
+"@id": "node508945", 
+"@otu": "otu215751"
+}, 
+{
+"@id": "node508946", 
+"@otu": "otu215745"
+}, 
+{
+"@id": "node508947", 
+"@otu": "otu215744"
+}, 
+{
+"@id": "node508948"
+}, 
+{
+"@id": "node508949"
+}, 
+{
+"@id": "node508950", 
+"@otu": "otu215802"
+}, 
+{
+"@id": "node508951", 
+"@otu": "otu215768"
+}, 
+{
+"@id": "node508952", 
+"@otu": "otu215778"
+}, 
+{
+"@id": "node508953", 
+"@otu": "otu215846"
+}, 
+{
+"@id": "node508954"
+}, 
+{
+"@id": "node508955"
+}, 
+{
+"@id": "node508956"
+}, 
+{
+"@id": "node508957"
+}, 
+{
+"@id": "node508958", 
+"@otu": "otu215770"
+}, 
+{
+"@id": "node508959", 
+"@otu": "otu215822"
+}, 
+{
+"@id": "node508960", 
+"@otu": "otu215788"
+}, 
+{
+"@id": "node508961"
+}, 
+{
+"@id": "node508962", 
+"@otu": "otu215790"
+}, 
+{
+"@id": "node508963"
+}, 
+{
+"@id": "node508964"
+}, 
+{
+"@id": "node508965", 
+"@otu": "otu215737"
+}, 
+{
+"@id": "node508966", 
+"@otu": "otu215834"
+}, 
+{
+"@id": "node508967", 
+"@otu": "otu215781"
+}, 
+{
+"@id": "node508968"
+}, 
+{
+"@id": "node508969", 
+"@otu": "otu215857"
+}, 
+{
+"@id": "node508970", 
+"@otu": "otu215774"
+}, 
+{
+"@id": "node508971"
+}, 
+{
+"@id": "node508972"
+}, 
+{
+"@id": "node508973"
+}, 
+{
+"@id": "node508974"
+}, 
+{
+"@id": "node508975"
+}, 
+{
+"@id": "node508976"
+}, 
+{
+"@id": "node508977", 
+"@otu": "otu215831"
+}, 
+{
+"@id": "node508978", 
+"@otu": "otu215756"
+}, 
+{
+"@id": "node508979", 
+"@otu": "otu215776"
+}, 
+{
+"@id": "node508980"
+}, 
+{
+"@id": "node508981"
+}, 
+{
+"@id": "node508982", 
+"@otu": "otu215758"
+}, 
+{
+"@id": "node508983", 
+"@otu": "otu215795"
+}, 
+{
+"@id": "node508984", 
+"@otu": "otu215786"
+}, 
+{
+"@id": "node508985", 
+"@otu": "otu215811"
+}, 
+{
+"@id": "node508986"
+}, 
+{
+"@id": "node508987", 
+"@otu": "otu215851"
+}, 
+{
+"@id": "node508988", 
+"@otu": "otu215835"
+}, 
+{
+"@id": "node508989", 
+"@otu": "otu215861"
+}, 
+{
+"@id": "node508990", 
+"@otu": "otu215833"
+}, 
+{
+"@id": "node508991"
+}, 
+{
+"@id": "node508992", 
+"@otu": "otu215852"
+}, 
+{
+"@id": "node508993", 
+"@otu": "otu215779"
+}, 
+{
+"@id": "node508994"
+}, 
+{
+"@id": "node508995"
+}, 
+{
+"@id": "node508996", 
+"@otu": "otu215815"
+}, 
+{
+"@id": "node508997", 
+"@otu": "otu215810"
+}, 
+{
+"@id": "node508998"
+}, 
+{
+"@id": "node508999"
+}, 
+{
+"@id": "node509000"
+}, 
+{
+"@id": "node509001", 
+"@otu": "otu215818"
+}, 
+{
+"@id": "node509002", 
+"@otu": "otu215752"
+}, 
+{
+"@id": "node509003"
+}, 
+{
+"@id": "node509004"
+}, 
+{
+"@id": "node509005", 
+"@otu": "otu215793"
+}, 
+{
+"@id": "node509006", 
+"@otu": "otu215763"
+}, 
+{
+"@id": "node509007", 
+"@otu": "otu215799"
+}, 
+{
+"@id": "node509008", 
+"@otu": "otu215740"
+}, 
+{
+"@id": "node509009"
+}, 
+{
+"@id": "node509010"
+}, 
+{
+"@id": "node509011"
+}, 
+{
+"@id": "node509012"
+}, 
+{
+"@id": "node509013"
+}, 
+{
+"@id": "node509014"
+}, 
+{
+"@id": "node509015", 
+"@otu": "otu215782"
+}, 
+{
+"@id": "node509016", 
+"@otu": "otu215809"
+}, 
+{
+"@id": "node509017", 
+"@otu": "otu215789"
+}, 
+{
+"@id": "node509018"
+}, 
+{
+"@id": "node509019"
+}, 
+{
+"@id": "node509020", 
+"@otu": "otu215826"
+}, 
+{
+"@id": "node509021", 
+"@otu": "otu215769"
+}, 
+{
+"@id": "node509022", 
+"@otu": "otu215792"
+}, 
+{
+"@id": "node509023"
+}, 
+{
+"@id": "node509024"
+}, 
+{
+"@id": "node509025"
+}, 
+{
+"@id": "node509026"
+}, 
+{
+"@id": "node509027", 
+"@otu": "otu215801"
+}, 
+{
+"@id": "node509028", 
+"@otu": "otu215766"
+}, 
+{
+"@id": "node509029", 
+"@otu": "otu215800"
+}, 
+{
+"@id": "node509030"
+}, 
+{
+"@id": "node509031", 
+"@otu": "otu215837"
+}, 
+{
+"@id": "node509032", 
+"@otu": "otu215844"
+}, 
+{
+"@id": "node509033"
+}, 
+{
+"@id": "node509034", 
+"@otu": "otu215829"
+}, 
+{
+"@id": "node509035"
+}, 
+{
+"@id": "node509036", 
+"@otu": "otu215859"
+}, 
+{
+"@id": "node509037", 
+"@otu": "otu215746"
+}, 
+{
+"@id": "node509038"
+}, 
+{
+"@id": "node509039", 
+"@otu": "otu215762"
+}, 
+{
+"@id": "node509040", 
+"@otu": "otu215754"
+}, 
+{
+"@id": "node509041", 
+"@otu": "otu215764"
+}, 
+{
+"@id": "node509042", 
+"@otu": "otu215757"
+}, 
+{
+"@id": "node509043", 
+"@otu": "otu215739"
+}, 
+{
+"@id": "node509044", 
+"@otu": "otu215858"
+}
+]
+}
+]
+}
+}
+}

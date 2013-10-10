@@ -1,0 +1,823 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Groenewald M., Daniel H., Robert V., Poot G., & Smith M. 2008. Polyphasic re-examination of Debaryomyces hansenii strains and the reinstatements of D. hansenii, D. fabryi and D. subglobosus. Persoonia, 21: 17-27.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.3767/003158508X336576", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S2104", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "839", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2008, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 17928, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus839", 
+"otu": [
+{
+"@about": "#otu199710", 
+"@id": "otu199710", 
+"@label": "Debaryomyces fabryi", 
+"meta": [
+{
+"$": 965247, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces fabryi 1793", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199711", 
+"@id": "otu199711", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii AJ508465", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199712", 
+"@id": "otu199712", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii AJ508505", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199713", 
+"@id": "otu199713", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii AB099684", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199714", 
+"@id": "otu199714", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 1103", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199715", 
+"@id": "otu199715", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 1142", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199716", 
+"@id": "otu199716", 
+"@label": "Debaryomyces subglobosus", 
+"meta": [
+{
+"$": 325562, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces subglobosus 1128", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199717", 
+"@id": "otu199717", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 1960", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199718", 
+"@id": "otu199718", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 1124", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199719", 
+"@id": "otu199719", 
+"@label": "Debaryomyces polymorphus var. polymorphus", 
+"meta": [
+{
+"$": 147302, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces polymorphus var. polymorphus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199720", 
+"@id": "otu199720", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 773", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199721", 
+"@id": "otu199721", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 1098", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199722", 
+"@id": "otu199722", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 790", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199723", 
+"@id": "otu199723", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 766", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199724", 
+"@id": "otu199724", 
+"@label": "Debaryomyces nepalensis", 
+"meta": [
+{
+"$": 533625, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces nepalensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199725", 
+"@id": "otu199725", 
+"@label": "Debaryomyces subglobosus", 
+"meta": [
+{
+"$": 325562, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces subglobosus AJ508464", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199726", 
+"@id": "otu199726", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 771", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199727", 
+"@id": "otu199727", 
+"@label": "Debaryomyces fabryi", 
+"meta": [
+{
+"$": 965247, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces fabryi AJ508504", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199728", 
+"@id": "otu199728", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 1792", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199729", 
+"@id": "otu199729", 
+"@label": "Debaryomyces subglobosus", 
+"meta": [
+{
+"$": 325562, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces subglobosus 792", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199730", 
+"@id": "otu199730", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 1119", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199731", 
+"@id": "otu199731", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 1959", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199732", 
+"@id": "otu199732", 
+"@label": "Debaryomyces fabryi", 
+"meta": [
+{
+"$": 965247, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces fabryi 4373", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu199733", 
+"@id": "otu199733", 
+"@label": "Debaryomyces hansenii", 
+"meta": [
+{
+"$": 959617, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Debaryomyces hansenii 2842", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees839", 
+"@otus": "otus839", 
+"tree": [
+{
+"@about": "#tree1612", 
+"@id": "tree1612", 
+"edge": [
+{
+"@id": "edge469298", 
+"@source": "node469297", 
+"@target": "node469298"
+}, 
+{
+"@id": "edge469299", 
+"@source": "node469298", 
+"@target": "node469299"
+}, 
+{
+"@id": "edge469300", 
+"@source": "node469299", 
+"@target": "node469300"
+}, 
+{
+"@id": "edge469301", 
+"@source": "node469300", 
+"@target": "node469301"
+}, 
+{
+"@id": "edge469302", 
+"@source": "node469301", 
+"@target": "node469302"
+}, 
+{
+"@id": "edge469303", 
+"@source": "node469301", 
+"@target": "node469303"
+}, 
+{
+"@id": "edge469304", 
+"@source": "node469301", 
+"@target": "node469304"
+}, 
+{
+"@id": "edge469305", 
+"@source": "node469300", 
+"@target": "node469305"
+}, 
+{
+"@id": "edge469306", 
+"@source": "node469305", 
+"@target": "node469306"
+}, 
+{
+"@id": "edge469307", 
+"@source": "node469305", 
+"@target": "node469307"
+}, 
+{
+"@id": "edge469308", 
+"@source": "node469305", 
+"@target": "node469308"
+}, 
+{
+"@id": "edge469309", 
+"@source": "node469299", 
+"@target": "node469309"
+}, 
+{
+"@id": "edge469310", 
+"@source": "node469309", 
+"@target": "node469310"
+}, 
+{
+"@id": "edge469311", 
+"@source": "node469310", 
+"@target": "node469311"
+}, 
+{
+"@id": "edge469312", 
+"@source": "node469311", 
+"@target": "node469312"
+}, 
+{
+"@id": "edge469313", 
+"@source": "node469312", 
+"@target": "node469313"
+}, 
+{
+"@id": "edge469314", 
+"@source": "node469313", 
+"@target": "node469314"
+}, 
+{
+"@id": "edge469315", 
+"@source": "node469314", 
+"@target": "node469315"
+}, 
+{
+"@id": "edge469316", 
+"@source": "node469314", 
+"@target": "node469316"
+}, 
+{
+"@id": "edge469317", 
+"@source": "node469313", 
+"@target": "node469317"
+}, 
+{
+"@id": "edge469318", 
+"@source": "node469312", 
+"@target": "node469318"
+}, 
+{
+"@id": "edge469319", 
+"@source": "node469312", 
+"@target": "node469319"
+}, 
+{
+"@id": "edge469320", 
+"@source": "node469312", 
+"@target": "node469320"
+}, 
+{
+"@id": "edge469321", 
+"@source": "node469312", 
+"@target": "node469321"
+}, 
+{
+"@id": "edge469322", 
+"@source": "node469312", 
+"@target": "node469322"
+}, 
+{
+"@id": "edge469323", 
+"@source": "node469311", 
+"@target": "node469323"
+}, 
+{
+"@id": "edge469324", 
+"@source": "node469311", 
+"@target": "node469324"
+}, 
+{
+"@id": "edge469325", 
+"@source": "node469324", 
+"@target": "node469325"
+}, 
+{
+"@id": "edge469326", 
+"@source": "node469324", 
+"@target": "node469326"
+}, 
+{
+"@id": "edge469327", 
+"@source": "node469324", 
+"@target": "node469327"
+}, 
+{
+"@id": "edge469328", 
+"@source": "node469324", 
+"@target": "node469328"
+}, 
+{
+"@id": "edge469329", 
+"@source": "node469324", 
+"@target": "node469329"
+}, 
+{
+"@id": "edge469330", 
+"@source": "node469310", 
+"@target": "node469330"
+}, 
+{
+"@id": "edge469331", 
+"@source": "node469309", 
+"@target": "node469331"
+}, 
+{
+"@id": "edge469332", 
+"@source": "node469298", 
+"@target": "node469332"
+}, 
+{
+"@id": "edge469333", 
+"@source": "node469297", 
+"@target": "node469333"
+}
+], 
+"meta": [
+{
+"$": "node469298", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ACT", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node469297", 
+"@root": "true"
+}, 
+{
+"@id": "node469298"
+}, 
+{
+"@id": "node469299"
+}, 
+{
+"@id": "node469300"
+}, 
+{
+"@id": "node469301"
+}, 
+{
+"@id": "node469302", 
+"@otu": "otu199727"
+}, 
+{
+"@id": "node469303", 
+"@otu": "otu199732"
+}, 
+{
+"@id": "node469304", 
+"@otu": "otu199710"
+}, 
+{
+"@id": "node469305"
+}, 
+{
+"@id": "node469306", 
+"@otu": "otu199725"
+}, 
+{
+"@id": "node469307", 
+"@otu": "otu199716"
+}, 
+{
+"@id": "node469308", 
+"@otu": "otu199729"
+}, 
+{
+"@id": "node469309"
+}, 
+{
+"@id": "node469310"
+}, 
+{
+"@id": "node469311"
+}, 
+{
+"@id": "node469312"
+}, 
+{
+"@id": "node469313"
+}, 
+{
+"@id": "node469314"
+}, 
+{
+"@id": "node469315", 
+"@otu": "otu199726"
+}, 
+{
+"@id": "node469316", 
+"@otu": "otu199728"
+}, 
+{
+"@id": "node469317", 
+"@otu": "otu199711"
+}, 
+{
+"@id": "node469318", 
+"@otu": "otu199715"
+}, 
+{
+"@id": "node469319", 
+"@otu": "otu199718"
+}, 
+{
+"@id": "node469320", 
+"@otu": "otu199720"
+}, 
+{
+"@id": "node469321", 
+"@otu": "otu199717"
+}, 
+{
+"@id": "node469322", 
+"@otu": "otu199731"
+}, 
+{
+"@id": "node469323", 
+"@otu": "otu199713"
+}, 
+{
+"@id": "node469324"
+}, 
+{
+"@id": "node469325", 
+"@otu": "otu199714"
+}, 
+{
+"@id": "node469326", 
+"@otu": "otu199721"
+}, 
+{
+"@id": "node469327", 
+"@otu": "otu199733"
+}, 
+{
+"@id": "node469328", 
+"@otu": "otu199712"
+}, 
+{
+"@id": "node469329", 
+"@otu": "otu199730"
+}, 
+{
+"@id": "node469330", 
+"@otu": "otu199722"
+}, 
+{
+"@id": "node469331", 
+"@otu": "otu199723"
+}, 
+{
+"@id": "node469332", 
+"@otu": "otu199724"
+}, 
+{
+"@id": "node469333", 
+"@otu": "otu199719"
+}
+]
+}
+]
+}
+}
+}

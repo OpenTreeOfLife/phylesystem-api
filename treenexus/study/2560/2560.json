@@ -1,0 +1,323 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Santos S., Shearer T., Hannes A., & Coffroth M. 2003. Fine-scale specificity and diversity in the most prevalent lineage of symbiotic dinoflagellates (Symbiodinium, Dinophyceae) in the Caribbean. Molecular Ecology, null.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1046/j.1365-294X.2003.02058.x", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Laura Katz", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1055", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2560", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2003, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2631154, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2560", 
+"otu": [
+{
+"@about": "#otu373092", 
+"@id": "otu373092", 
+"@label": "Briareum asbestinum", 
+"meta": [
+{
+"$": 277297, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Briareum asbestinum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu373093", 
+"@id": "otu373093", 
+"@label": "Gorgonia", 
+"meta": [
+{
+"$": 352701, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gorgonia ventilina", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu373094", 
+"@id": "otu373094", 
+"@label": "Pseudopterogorgia bipinnata", 
+"meta": [
+{
+"$": 1079547, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudoterogorgia bipinnata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu373095", 
+"@id": "otu373095", 
+"@label": "Plexaura kuna", 
+"meta": [
+{
+"$": 83531, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plexaura kuna Pk702 SB", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu373096", 
+"@id": "otu373096", 
+"@label": "Plexaura kuna", 
+"meta": [
+{
+"$": 83531, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plexaura kuna Pk704 SB", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu373097", 
+"@id": "otu373097", 
+"@label": "Pseudopterogorgia elisabethae", 
+"meta": [
+{
+"$": 1079564, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudoterogorgia elisabethae RR", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu373098", 
+"@id": "otu373098", 
+"@label": "Pseudopterogorgia elisabethae", 
+"meta": [
+{
+"$": 1079564, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudoterogorgia elisabethae CI", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu373099", 
+"@id": "otu373099", 
+"@label": "Aiptasia pallida", 
+"meta": [
+{
+"$": 135923, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Aiptasia pallida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2560", 
+"@otus": "otus2560", 
+"tree": [
+{
+"@id": "tree5687", 
+"edge": [
+{
+"@id": "edge979714", 
+"@source": "node979713", 
+"@target": "node979714"
+}, 
+{
+"@id": "edge979715", 
+"@source": "node979714", 
+"@target": "node979715"
+}, 
+{
+"@id": "edge979716", 
+"@source": "node979715", 
+"@target": "node979716"
+}, 
+{
+"@id": "edge979717", 
+"@source": "node979716", 
+"@target": "node979717"
+}, 
+{
+"@id": "edge979718", 
+"@source": "node979716", 
+"@target": "node979718"
+}, 
+{
+"@id": "edge979719", 
+"@source": "node979715", 
+"@target": "node979719"
+}, 
+{
+"@id": "edge979720", 
+"@source": "node979714", 
+"@target": "node979720"
+}, 
+{
+"@id": "edge979721", 
+"@source": "node979720", 
+"@target": "node979721"
+}, 
+{
+"@id": "edge979722", 
+"@source": "node979721", 
+"@target": "node979722"
+}, 
+{
+"@id": "edge979723", 
+"@source": "node979721", 
+"@target": "node979723"
+}, 
+{
+"@id": "edge979724", 
+"@source": "node979720", 
+"@target": "node979724"
+}, 
+{
+"@id": "edge979725", 
+"@source": "node979713", 
+"@target": "node979725"
+}, 
+{
+"@id": "edge979726", 
+"@source": "node979713", 
+"@target": "node979726"
+}
+], 
+"node": [
+{
+"@id": "node979713", 
+"@root": "true"
+}, 
+{
+"@id": "node979714"
+}, 
+{
+"@id": "node979715"
+}, 
+{
+"@id": "node979716"
+}, 
+{
+"@id": "node979717", 
+"@otu": "otu373097"
+}, 
+{
+"@id": "node979718", 
+"@otu": "otu373093"
+}, 
+{
+"@id": "node979719", 
+"@otu": "otu373098"
+}, 
+{
+"@id": "node979720"
+}, 
+{
+"@id": "node979721"
+}, 
+{
+"@id": "node979722", 
+"@otu": "otu373094"
+}, 
+{
+"@id": "node979723", 
+"@otu": "otu373096"
+}, 
+{
+"@id": "node979724", 
+"@otu": "otu373099"
+}, 
+{
+"@id": "node979725", 
+"@otu": "otu373092"
+}, 
+{
+"@id": "node979726", 
+"@otu": "otu373095"
+}
+]
+}
+]
+}
+}
+}

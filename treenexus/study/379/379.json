@@ -1,0 +1,940 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Butterworth, C. A., & Wallace, R. S. (2005). Molecular phylogenetics of the leafy cactus genus Pereskia (Cactaceae). Systematic Botany, 30(4), 800-808.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1600/036364405775097806", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1411", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "379", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2005, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1126003, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus379", 
+"otu": [
+{
+"@about": "#otu76628", 
+"@id": "otu76628", 
+"@label": "Pereskiopsis porteri", 
+"meta": [
+{
+"$": 670877, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskiopsis porteri", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76629", 
+"@id": "otu76629", 
+"@label": "Opuntia polyacantha", 
+"meta": [
+{
+"$": 494240, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Opuntia polyacantha", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76630", 
+"@id": "otu76630", 
+"@label": "Austrocylindropuntia subulata", 
+"meta": [
+{
+"$": 878319, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Opuntia subulata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76631", 
+"@id": "otu76631", 
+"@label": "Pterocactus kuntzei", 
+"meta": [
+{
+"$": 878337, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pterocactus kuntzei", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76632", 
+"@id": "otu76632", 
+"@label": "Pereskia aculeata", 
+"meta": [
+{
+"$": 584122, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia aculeata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76633", 
+"@id": "otu76633", 
+"@label": "Pereskia horrida subsp. horrida", 
+"meta": [
+{
+"$": 140009, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia horrida horrida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76634", 
+"@id": "otu76634", 
+"@label": "Pereskia horrida subsp. rauhii", 
+"meta": [
+{
+"$": 140006, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia horrida rauhii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76635", 
+"@id": "otu76635", 
+"@label": "Pereskia diaz-romeroana", 
+"meta": [
+{
+"$": 23012, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia diaz romeroana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76636", 
+"@id": "otu76636", 
+"@label": "Pereskia weberiana", 
+"meta": [
+{
+"$": 139998, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia weberiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76637", 
+"@id": "otu76637", 
+"@label": "Pereskia lychnidiflora", 
+"meta": [
+{
+"$": 140004, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia lychnidiflora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76638", 
+"@id": "otu76638", 
+"@label": "Leptocereus quadricostatus", 
+"meta": [
+{
+"$": 907600, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Leptocereus quadricostatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76639", 
+"@id": "otu76639", 
+"@label": "Calymmanthium substerile", 
+"meta": [
+{
+"$": 1018999, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calymmanthium substerile", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76640", 
+"@id": "otu76640", 
+"@label": "Pereskia nemorosa", 
+"meta": [
+{
+"$": 779495, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia nemorosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76641", 
+"@id": "otu76641", 
+"@label": "Pereskia sacharosa", 
+"meta": [
+{
+"$": 393234, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia sacharosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76642", 
+"@id": "otu76642", 
+"@label": "Pereskia grandifolia subsp. grandifolia", 
+"meta": [
+{
+"$": 779486, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia grandifolia grandifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76643", 
+"@id": "otu76643", 
+"@label": "Pereskia bahiensis", 
+"meta": [
+{
+"$": 494225, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia bahiensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76644", 
+"@id": "otu76644", 
+"@label": "Pereskia stenantha", 
+"meta": [
+{
+"$": 913969, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia stenantha", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76645", 
+"@id": "otu76645", 
+"@label": "Pereskia grandifolia subsp. violacea", 
+"meta": [
+{
+"$": 494227, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia grandifolia violacea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76646", 
+"@id": "otu76646", 
+"@label": "Pereskia aureiflora", 
+"meta": [
+{
+"$": 23002, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia aureiflora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76647", 
+"@id": "otu76647", 
+"@label": "Pereskia guamacho", 
+"meta": [
+{
+"$": 913967, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia guamacho", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76648", 
+"@id": "otu76648", 
+"@label": "Pereskia zinniiflora", 
+"meta": [
+{
+"$": 913971, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia zinniiflora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76649", 
+"@id": "otu76649", 
+"@label": "Pereskia portulacifolia", 
+"meta": [
+{
+"$": 23004, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia portulacifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76650", 
+"@id": "otu76650", 
+"@label": "Pereskia quisqueyana", 
+"meta": [
+{
+"$": 779501, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia quisqueyana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76651", 
+"@id": "otu76651", 
+"@label": "Pereskia bleo", 
+"meta": [
+{
+"$": 779498, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pereskia bleo", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76652", 
+"@id": "otu76652", 
+"@label": "Maihuenia poeppigii", 
+"meta": [
+{
+"$": 151086, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Maihuenia poeppigii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu76653", 
+"@id": "otu76653", 
+"@label": "Talinum paniculatum", 
+"meta": [
+{
+"$": 1009730, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talinum paniculatum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees379", 
+"@otus": "otus379", 
+"tree": [
+{
+"@about": "#tree442", 
+"@id": "tree442", 
+"edge": [
+{
+"@id": "edge202341", 
+"@source": "node202340", 
+"@target": "node202341"
+}, 
+{
+"@id": "edge202342", 
+"@source": "node202341", 
+"@target": "node202342"
+}, 
+{
+"@id": "edge202343", 
+"@source": "node202342", 
+"@target": "node202343"
+}, 
+{
+"@id": "edge202344", 
+"@source": "node202343", 
+"@target": "node202344"
+}, 
+{
+"@id": "edge202345", 
+"@source": "node202343", 
+"@target": "node202345"
+}, 
+{
+"@id": "edge202346", 
+"@source": "node202343", 
+"@target": "node202346"
+}, 
+{
+"@id": "edge202347", 
+"@source": "node202343", 
+"@target": "node202347"
+}, 
+{
+"@id": "edge202348", 
+"@source": "node202342", 
+"@target": "node202348"
+}, 
+{
+"@id": "edge202349", 
+"@source": "node202348", 
+"@target": "node202349"
+}, 
+{
+"@id": "edge202350", 
+"@source": "node202349", 
+"@target": "node202350"
+}, 
+{
+"@id": "edge202351", 
+"@source": "node202349", 
+"@target": "node202351"
+}, 
+{
+"@id": "edge202352", 
+"@source": "node202351", 
+"@target": "node202352"
+}, 
+{
+"@id": "edge202353", 
+"@source": "node202352", 
+"@target": "node202353"
+}, 
+{
+"@id": "edge202354", 
+"@source": "node202352", 
+"@target": "node202354"
+}, 
+{
+"@id": "edge202355", 
+"@source": "node202351", 
+"@target": "node202355"
+}, 
+{
+"@id": "edge202356", 
+"@source": "node202355", 
+"@target": "node202356"
+}, 
+{
+"@id": "edge202357", 
+"@source": "node202355", 
+"@target": "node202357"
+}, 
+{
+"@id": "edge202358", 
+"@source": "node202348", 
+"@target": "node202358"
+}, 
+{
+"@id": "edge202359", 
+"@source": "node202358", 
+"@target": "node202359"
+}, 
+{
+"@id": "edge202360", 
+"@source": "node202359", 
+"@target": "node202360"
+}, 
+{
+"@id": "edge202361", 
+"@source": "node202360", 
+"@target": "node202361"
+}, 
+{
+"@id": "edge202362", 
+"@source": "node202360", 
+"@target": "node202362"
+}, 
+{
+"@id": "edge202363", 
+"@source": "node202362", 
+"@target": "node202363"
+}, 
+{
+"@id": "edge202364", 
+"@source": "node202362", 
+"@target": "node202364"
+}, 
+{
+"@id": "edge202365", 
+"@source": "node202359", 
+"@target": "node202365"
+}, 
+{
+"@id": "edge202366", 
+"@source": "node202365", 
+"@target": "node202366"
+}, 
+{
+"@id": "edge202367", 
+"@source": "node202366", 
+"@target": "node202367"
+}, 
+{
+"@id": "edge202368", 
+"@source": "node202366", 
+"@target": "node202368"
+}, 
+{
+"@id": "edge202369", 
+"@source": "node202365", 
+"@target": "node202369"
+}, 
+{
+"@id": "edge202370", 
+"@source": "node202369", 
+"@target": "node202370"
+}, 
+{
+"@id": "edge202371", 
+"@source": "node202370", 
+"@target": "node202371"
+}, 
+{
+"@id": "edge202372", 
+"@source": "node202370", 
+"@target": "node202372"
+}, 
+{
+"@id": "edge202373", 
+"@source": "node202372", 
+"@target": "node202373"
+}, 
+{
+"@id": "edge202374", 
+"@source": "node202372", 
+"@target": "node202374"
+}, 
+{
+"@id": "edge202375", 
+"@source": "node202369", 
+"@target": "node202375"
+}, 
+{
+"@id": "edge202376", 
+"@source": "node202358", 
+"@target": "node202376"
+}, 
+{
+"@id": "edge202377", 
+"@source": "node202376", 
+"@target": "node202377"
+}, 
+{
+"@id": "edge202378", 
+"@source": "node202377", 
+"@target": "node202378"
+}, 
+{
+"@id": "edge202379", 
+"@source": "node202377", 
+"@target": "node202379"
+}, 
+{
+"@id": "edge202380", 
+"@source": "node202376", 
+"@target": "node202380"
+}, 
+{
+"@id": "edge202381", 
+"@source": "node202380", 
+"@target": "node202381"
+}, 
+{
+"@id": "edge202382", 
+"@source": "node202381", 
+"@target": "node202382"
+}, 
+{
+"@id": "edge202383", 
+"@source": "node202382", 
+"@target": "node202383"
+}, 
+{
+"@id": "edge202384", 
+"@source": "node202382", 
+"@target": "node202384"
+}, 
+{
+"@id": "edge202385", 
+"@source": "node202381", 
+"@target": "node202385"
+}, 
+{
+"@id": "edge202386", 
+"@source": "node202380", 
+"@target": "node202386"
+}, 
+{
+"@id": "edge202387", 
+"@source": "node202341", 
+"@target": "node202387"
+}, 
+{
+"@id": "edge202388", 
+"@source": "node202340", 
+"@target": "node202388"
+}
+], 
+"meta": [
+{
+"$": "node202342", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node202340", 
+"@root": "true"
+}, 
+{
+"@id": "node202341"
+}, 
+{
+"@id": "node202342"
+}, 
+{
+"@id": "node202343"
+}, 
+{
+"@id": "node202344", 
+"@otu": "otu76628"
+}, 
+{
+"@id": "node202345", 
+"@otu": "otu76629"
+}, 
+{
+"@id": "node202346", 
+"@otu": "otu76630"
+}, 
+{
+"@id": "node202347", 
+"@otu": "otu76631"
+}, 
+{
+"@id": "node202348"
+}, 
+{
+"@id": "node202349"
+}, 
+{
+"@id": "node202350", 
+"@otu": "otu76632"
+}, 
+{
+"@id": "node202351"
+}, 
+{
+"@id": "node202352"
+}, 
+{
+"@id": "node202353", 
+"@otu": "otu76633"
+}, 
+{
+"@id": "node202354", 
+"@otu": "otu76634"
+}, 
+{
+"@id": "node202355"
+}, 
+{
+"@id": "node202356", 
+"@otu": "otu76635"
+}, 
+{
+"@id": "node202357", 
+"@otu": "otu76636"
+}, 
+{
+"@id": "node202358"
+}, 
+{
+"@id": "node202359"
+}, 
+{
+"@id": "node202360"
+}, 
+{
+"@id": "node202361", 
+"@otu": "otu76637"
+}, 
+{
+"@id": "node202362"
+}, 
+{
+"@id": "node202363", 
+"@otu": "otu76638"
+}, 
+{
+"@id": "node202364", 
+"@otu": "otu76639"
+}, 
+{
+"@id": "node202365"
+}, 
+{
+"@id": "node202366"
+}, 
+{
+"@id": "node202367", 
+"@otu": "otu76640"
+}, 
+{
+"@id": "node202368", 
+"@otu": "otu76641"
+}, 
+{
+"@id": "node202369"
+}, 
+{
+"@id": "node202370"
+}, 
+{
+"@id": "node202371", 
+"@otu": "otu76642"
+}, 
+{
+"@id": "node202372"
+}, 
+{
+"@id": "node202373", 
+"@otu": "otu76643"
+}, 
+{
+"@id": "node202374", 
+"@otu": "otu76644"
+}, 
+{
+"@id": "node202375", 
+"@otu": "otu76645"
+}, 
+{
+"@id": "node202376"
+}, 
+{
+"@id": "node202377"
+}, 
+{
+"@id": "node202378", 
+"@otu": "otu76646"
+}, 
+{
+"@id": "node202379", 
+"@otu": "otu76647"
+}, 
+{
+"@id": "node202380"
+}, 
+{
+"@id": "node202381"
+}, 
+{
+"@id": "node202382"
+}, 
+{
+"@id": "node202383", 
+"@otu": "otu76648"
+}, 
+{
+"@id": "node202384", 
+"@otu": "otu76649"
+}, 
+{
+"@id": "node202385", 
+"@otu": "otu76650"
+}, 
+{
+"@id": "node202386", 
+"@otu": "otu76651"
+}, 
+{
+"@id": "node202387", 
+"@otu": "otu76652"
+}, 
+{
+"@id": "node202388", 
+"@otu": "otu76653"
+}
+]
+}
+]
+}
+}
+}

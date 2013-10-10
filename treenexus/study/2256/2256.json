@@ -1,0 +1,234 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Benny G., & Benjamin R. 1991. The Radiomycetaceae (Mucorales; Zygomycetes).III.A new species of Radiomyces, and cladistic analysis and taxonomy of the family; with a discussion of the evolutionary ordinal relationships in Zygomycotina. Mycologia, 83: 713-735.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2307/3760429", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S282", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2256", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1991, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2408094, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "morphology", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2256", 
+"otu": [
+{
+"@about": "#otu325409", 
+"@id": "otu325409", 
+"@label": "Ellisomyces anomalus", 
+"meta": [
+{
+"$": 28319, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ellisomyces anomalus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325410", 
+"@id": "otu325410", 
+"@label": "Radiomyces spectabilis", 
+"meta": [
+{
+"$": 861304, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Radiomyces spectabilis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325411", 
+"@id": "otu325411", 
+"@label": "Hesseltinella vesiculosa", 
+"meta": [
+{
+"$": 549501, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hesseltinella vesiculosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325412", 
+"@id": "otu325412", 
+"@label": "Radiomyces mexicanus", 
+"meta": [
+{
+"$": 3686050, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Radiomyces mexicana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325413", 
+"@id": "otu325413", 
+"@label": "Radiomyces embreei", 
+"meta": [
+{
+"$": 861290, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Radiomyces embreei", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2256", 
+"@otus": "otus2256", 
+"tree": [
+{
+"@id": "tree4780", 
+"edge": [
+{
+"@id": "edge842086", 
+"@source": "node842085", 
+"@target": "node842086"
+}, 
+{
+"@id": "edge842087", 
+"@source": "node842085", 
+"@target": "node842087"
+}, 
+{
+"@id": "edge842088", 
+"@source": "node842087", 
+"@target": "node842088"
+}, 
+{
+"@id": "edge842089", 
+"@source": "node842087", 
+"@target": "node842089"
+}, 
+{
+"@id": "edge842090", 
+"@source": "node842089", 
+"@target": "node842090"
+}, 
+{
+"@id": "edge842091", 
+"@source": "node842089", 
+"@target": "node842091"
+}, 
+{
+"@id": "edge842092", 
+"@source": "node842091", 
+"@target": "node842092"
+}, 
+{
+"@id": "edge842093", 
+"@source": "node842091", 
+"@target": "node842093"
+}
+], 
+"node": [
+{
+"@id": "node842085", 
+"@root": "true"
+}, 
+{
+"@id": "node842086", 
+"@otu": "otu325409"
+}, 
+{
+"@id": "node842087"
+}, 
+{
+"@id": "node842088", 
+"@otu": "otu325411"
+}, 
+{
+"@id": "node842089"
+}, 
+{
+"@id": "node842090", 
+"@otu": "otu325410"
+}, 
+{
+"@id": "node842091"
+}, 
+{
+"@id": "node842092", 
+"@otu": "otu325412"
+}, 
+{
+"@id": "node842093", 
+"@otu": "otu325413"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,4559 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Braun U., Crous P., Dugan F., Groenewald J., & De hoog G. 2003. Phylogeny and taxonomy of Cladosporium-like hyphomycetes, including Davidiella gen. nov., the teleomorph of Cladosporium s. str. Mycological Progress, 2(1), 3-18.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s11557-006-0039-2", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S986", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "880", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2003, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2086845, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "SSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus880", 
+"otu": [
+{
+"@about": "#otu203146", 
+"@id": "otu203146", 
+"@label": "Cercospora conyzae", 
+"meta": [
+{
+"$": 3722002, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cercospora oryzae STE-U 4303 AY251103", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203147", 
+"@id": "otu203147", 
+"@label": "Fusarium oxysporum f. sp. fragariae", 
+"meta": [
+{
+"$": 1040398, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium oxysporum f. sp. fragariae E17083", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203148", 
+"@id": "otu203148", 
+"@label": "Alternaria japonica", 
+"meta": [
+{
+"$": 899894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria raphani U05199", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203149", 
+"@id": "otu203149", 
+"@label": "Ramularia", 
+"meta": [
+{
+"$": 514686, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ramularia sp. STE-U 4195 AY251112", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203150", 
+"@id": "otu203150", 
+"@label": "Cladosporium", 
+"meta": [
+{
+"$": 984626, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium sp. STE-U 5124 AY251090", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203151", 
+"@id": "otu203151", 
+"@label": "Columnosphaeria fagi", 
+"meta": [
+{
+"$": 1027801, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Discosphaerina fagi AY016342", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203152", 
+"@id": "otu203152", 
+"@label": "Mycosphaerella latebrosa", 
+"meta": [
+{
+"$": 1059814, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella latebrosa CBS 652.85 AY251114", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203153", 
+"@id": "otu203153", 
+"@label": "Cladosporium cladosporioides", 
+"meta": [
+{
+"$": 187451, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium cladosporioides STE-U 5100 AY251094", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203154", 
+"@id": "otu203154", 
+"@label": "Guignardia endophyllicola", 
+"meta": [
+{
+"$": 950086, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Guignardia endophyllicola AB041249", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203155", 
+"@id": "otu203155", 
+"@label": "Mycosphaerella pseudovespa", 
+"meta": [
+{
+"$": 646849, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella sp. STE-U 1731 AY251115", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203156", 
+"@id": "otu203156", 
+"@label": "Batcheloromyces proteae", 
+"meta": [
+{
+"$": 765851, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Batcheloromyces proteae STE-U 1518 AY251102", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203157", 
+"@id": "otu203157", 
+"@label": "Saccharicola bicolor", 
+"meta": [
+{
+"$": 538134, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Saccharicola bicolor U04202", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203158", 
+"@id": "otu203158", 
+"@label": "Mycosphaerella pseudovespa", 
+"meta": [
+{
+"$": 646849, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella sp. STE-U 3837 AY251116", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203159", 
+"@id": "otu203159", 
+"@label": "Cladosporium cladosporioides", 
+"meta": [
+{
+"$": 187451, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium cladosporioides U20381", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203160", 
+"@id": "otu203160", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum STE-U 3685 AY251128", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203161", 
+"@id": "otu203161", 
+"@label": "Mycosphaerella nubilosa", 
+"meta": [
+{
+"$": 554407, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella juvenis STE-U 1004 AY251119", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203162", 
+"@id": "otu203162", 
+"@label": "Passalora dodonaea", 
+"meta": [
+{
+"$": 390091, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora dodonaea STE-U 1223 AY251108", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203163", 
+"@id": "otu203163", 
+"@label": "Cercospora sorghi", 
+"meta": [
+{
+"$": 1065068, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ramulispora sorghi STE-U 905 AY251110", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203164", 
+"@id": "otu203164", 
+"@label": "Cladosporium", 
+"meta": [
+{
+"$": 984626, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium sp. STE-U 5371 AY251099", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203165", 
+"@id": "otu203165", 
+"@label": "Cladosporium cladosporioides", 
+"meta": [
+{
+"$": 187451, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium cladosporioides STE-U 3682 AY251093", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203166", 
+"@id": "otu203166", 
+"@label": "Lewia infectoria", 
+"meta": [
+{
+"$": 513296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lewia infectoria U43465", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203167", 
+"@id": "otu203167", 
+"@label": "Cladosporium uredinicola", 
+"meta": [
+{
+"$": 765854, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium uredinicola STE-U 5390 AY251097", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203168", 
+"@id": "otu203168", 
+"@label": "Venturia hystrioides", 
+"meta": [
+{
+"$": 274721, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phaeoramularia hachijoense STE-U 5121 AY251100", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203169", 
+"@id": "otu203169", 
+"@label": "Fusicladium effusum", 
+"meta": [
+{
+"$": 956324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusicladium effusum STE-U 4525 AY251126", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203170", 
+"@id": "otu203170", 
+"@label": "Cercospora zebrina", 
+"meta": [
+{
+"$": 242477, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cercospora zebrina STE-U 3955 AY251104", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203171", 
+"@id": "otu203171", 
+"@label": "Pseudocercospora protearum var. leucadendri", 
+"meta": [
+{
+"$": 326406, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora protearum var. leucadendri STE-U 1869 AY251107", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203172", 
+"@id": "otu203172", 
+"@label": "Mycosphaerella cruenta", 
+"meta": [
+{
+"$": 689760, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cercospora cruenta CBS 462.75 AY251105", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203173", 
+"@id": "otu203173", 
+"@label": "Cladosporium cladosporioides", 
+"meta": [
+{
+"$": 187451, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium cladosporioides STE-U 3683 AY251091", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203174", 
+"@id": "otu203174", 
+"@label": "Davidiella tassiana", 
+"meta": [
+{
+"$": 187461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium herbarum STE-U 5101 AY251096", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203175", 
+"@id": "otu203175", 
+"@label": "Mycosphaerella populorum", 
+"meta": [
+{
+"$": 235469, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella populorum AF271130", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203176", 
+"@id": "otu203176", 
+"@label": "Septoria rosae", 
+"meta": [
+{
+"$": 390090, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Septoria rosae STE-U 4302 AY251113", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203177", 
+"@id": "otu203177", 
+"@label": "Alternaria brassicicola", 
+"meta": [
+{
+"$": 380927, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria brassicicola U05197", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203178", 
+"@id": "otu203178", 
+"@label": "Pseudocercospora angolensis", 
+"meta": [
+{
+"$": 263484, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocercospora angolensis CBS 149.53 AY251106", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203179", 
+"@id": "otu203179", 
+"@label": "Trimmatostroma macowanii", 
+"meta": [
+{
+"$": 693038, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trimmatostroma macowanii STE-U 1488 AY251118", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203180", 
+"@id": "otu203180", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum STE-U 4571 AY251130", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203181", 
+"@id": "otu203181", 
+"@label": "Cladosporium sphaerospermum", 
+"meta": [
+{
+"$": 128631, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium sphaerospermum STE-U 3686 AY251098", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203182", 
+"@id": "otu203182", 
+"@label": "Cladosporium colocasiae", 
+"meta": [
+{
+"$": 102703, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium colocasiae STE-U 4323 AY251092", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203183", 
+"@id": "otu203183", 
+"@label": "Sphaerulina polyspora", 
+"meta": [
+{
+"$": 765857, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sphaerulina polyspora STE-U 4301 AY251095", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203184", 
+"@id": "otu203184", 
+"@label": "Alternaria alternata", 
+"meta": [
+{
+"$": 464784, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria alternata U05194", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203185", 
+"@id": "otu203185", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum STE-U 4572 AY251131", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203186", 
+"@id": "otu203186", 
+"@label": "Cercospora sorghi", 
+"meta": [
+{
+"$": 1065068, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ramulispora sorghi STE-U 906 AY251111", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203187", 
+"@id": "otu203187", 
+"@label": "Dissoconium dekkeri", 
+"meta": [
+{
+"$": 1055510, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dissoconium dekkeri STE-U 1535 AY251101", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203188", 
+"@id": "otu203188", 
+"@label": "Paraphaeosphaeria pilleata", 
+"meta": [
+{
+"$": 645495, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paraphaeosphaeria pileata AF250821", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203189", 
+"@id": "otu203189", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum STE-U 3680 AY251127", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203190", 
+"@id": "otu203190", 
+"@label": "Mycosphaerella nubilosa", 
+"meta": [
+{
+"$": 554407, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella nubilosa STE-U 4661 AY251120", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203191", 
+"@id": "otu203191", 
+"@label": "Anungitopsis amoena", 
+"meta": [
+{
+"$": 390087, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Anungitopsis amoena STE-U 3681 AY251122", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203192", 
+"@id": "otu203192", 
+"@label": "Mycosphaerella graminicola", 
+"meta": [
+{
+"$": 906425, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Septoria tritici STE-U 658 AY251117", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203193", 
+"@id": "otu203193", 
+"@label": "Passalora fulva", 
+"meta": [
+{
+"$": 984627, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora fulva STE-U 3688 AY251109", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203194", 
+"@id": "otu203194", 
+"@label": "Botryosphaeria ribis", 
+"meta": [
+{
+"$": 33907, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Botryosphaeria ribis AF271129", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203195", 
+"@id": "otu203195", 
+"@label": "Alternaria malorum var. polymorpha", 
+"meta": [
+{
+"$": 1038266, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum var. polymorpha STE-U 4570 AY251129", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203196", 
+"@id": "otu203196", 
+"@label": "Devriesia staurophora", 
+"meta": [
+{
+"$": 66454, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium staurophorum STE-U 3687 AY251121", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203197", 
+"@id": "otu203197", 
+"@label": "Pseudocladosporium hachijoense", 
+"meta": [
+{
+"$": 404670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocladosporium hachijoense STE-U 5391 AY251123", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203198", 
+"@id": "otu203198", 
+"@label": "Dothidea ribesia", 
+"meta": [
+{
+"$": 295793, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dothidea ribesia AY016343", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203199", 
+"@id": "otu203199", 
+"@label": "Fusicladium convolvularum", 
+"meta": [
+{
+"$": 1038265, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusicladium convolvulorum STE-U 3884 AY251124", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203200", 
+"@id": "otu203200", 
+"@label": "Fusicladium effusum", 
+"meta": [
+{
+"$": 956324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusicladium effusum STE-U 4524 AY251125", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203201", 
+"@id": "otu203201", 
+"@label": "Fusicladium convolvularum", 
+"meta": [
+{
+"$": 1038265, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusicladium convolvularum STE-U 3884 AY251082", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203202", 
+"@id": "otu203202", 
+"@label": "Cladosporium oxysporum", 
+"meta": [
+{
+"$": 187468, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium oxysporum AJ300332", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203203", 
+"@id": "otu203203", 
+"@label": "Phialophora verrucosa", 
+"meta": [
+{
+"$": 376062, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phialophora verrucosa AF050283", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203204", 
+"@id": "otu203204", 
+"@label": "Venturia cerasi", 
+"meta": [
+{
+"$": 26836, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Venturia cerasi AF065847", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203205", 
+"@id": "otu203205", 
+"@label": "Mycosphaerella iridis", 
+"meta": [
+{
+"$": 251861, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella iridis CBS 282.49 AY251088", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203206", 
+"@id": "otu203206", 
+"@label": "Fusicladium effusum", 
+"meta": [
+{
+"$": 956324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusicladium effusum STE-U 4524 AY251084", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203207", 
+"@id": "otu203207", 
+"@label": "Cladosporium gossypiicola", 
+"meta": [
+{
+"$": 827837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium gossypiicola AF393702", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203208", 
+"@id": "otu203208", 
+"@label": "Cladosporium breviramosum", 
+"meta": [
+{
+"$": 827831, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium breviramosum AF393683", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203209", 
+"@id": "otu203209", 
+"@label": "Phomopsis vaccinii", 
+"meta": [
+{
+"$": 571488, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phomopsis vaccinii CBS 160.32 AF317578", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203210", 
+"@id": "otu203210", 
+"@label": "Pseudocladosporium hachijoense", 
+"meta": [
+{
+"$": 404670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pseudocladosporium hachijoensis STE-U 5391 AY251083", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203211", 
+"@id": "otu203211", 
+"@label": "Cladosporium uredinicola", 
+"meta": [
+{
+"$": 765854, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium uredinicola STE-U 5390 AY251071", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203212", 
+"@id": "otu203212", 
+"@label": "Rhinocladiella compacta", 
+"meta": [
+{
+"$": 535563, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rhinocladiella compacta AF397133", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203213", 
+"@id": "otu203213", 
+"@label": "Cladophialophora carrionii", 
+"meta": [
+{
+"$": 849118, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladophialophora carrionii AF050262", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203214", 
+"@id": "otu203214", 
+"@label": "Cladosporium", 
+"meta": [
+{
+"$": 984626, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium sp. STE-U 5124 AY251076", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203215", 
+"@id": "otu203215", 
+"@label": "Cladosporium cladosporioides", 
+"meta": [
+{
+"$": 187451, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium cladosporioides STE-U 5100 AY251070", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203216", 
+"@id": "otu203216", 
+"@label": "Alternaria conjuncta", 
+"meta": [
+{
+"$": 419856, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria conjuncta AF392988", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203217", 
+"@id": "otu203217", 
+"@label": "Lewia ethzedia", 
+"meta": [
+{
+"$": 419854, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lewia ethzedia AF392987", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203218", 
+"@id": "otu203218", 
+"@label": "Amorphotheca resinae", 
+"meta": [
+{
+"$": 677024, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Amorphotheca resinae AF393726", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203219", 
+"@id": "otu203219", 
+"@label": "Cladosporium magnusianum", 
+"meta": [
+{
+"$": 559633, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium magnusianum AF393712", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203220", 
+"@id": "otu203220", 
+"@label": "Cladosporidium", 
+"meta": [
+{
+"$": 4114637, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium sp. STE-U 5371 AY251072", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203221", 
+"@id": "otu203221", 
+"@label": "Passalora bellynckii", 
+"meta": [
+{
+"$": 479696, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora bellynckii AF222831", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203222", 
+"@id": "otu203222", 
+"@label": "Cladophialophora bantiana", 
+"meta": [
+{
+"$": 757326, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladophialophora bantiana AF131079", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203223", 
+"@id": "otu203223", 
+"@label": "Cladosporium colocasiae", 
+"meta": [
+{
+"$": 102703, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium colocasiae STE-U 4323 AY251075", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203224", 
+"@id": "otu203224", 
+"@label": "Mycosphaerella dianthi", 
+"meta": [
+{
+"$": 827839, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium echinulatum AF393698", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203225", 
+"@id": "otu203225", 
+"@label": "Cladosporium macrocarpum", 
+"meta": [
+{
+"$": 736947, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium macrocarpum AJ244229", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203226", 
+"@id": "otu203226", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum STE-U 4572 AY251079", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203227", 
+"@id": "otu203227", 
+"@label": "Devriesia staurophora", 
+"meta": [
+{
+"$": 66454, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium staurophorum AF393723", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203228", 
+"@id": "otu203228", 
+"@label": "Capronia semiimmersa", 
+"meta": [
+{
+"$": 818009, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Capronia semiimmersa AF050260", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203229", 
+"@id": "otu203229", 
+"@label": "Venturia hystrioides", 
+"meta": [
+{
+"$": 274721, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phaeoramularia hachijoensis STE-U 5121 AY251068", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203230", 
+"@id": "otu203230", 
+"@label": "Phialophora verrucosa", 
+"meta": [
+{
+"$": 376062, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phialophora americana U31838", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203231", 
+"@id": "otu203231", 
+"@label": "Venturia hystrioides", 
+"meta": [
+{
+"$": 274721, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phaeoramularia hachijoensis STE-U 3679 AY251086", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203232", 
+"@id": "otu203232", 
+"@label": "Cladosporium cucumerinum", 
+"meta": [
+{
+"$": 559641, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium cucumerinum AF393696", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203233", 
+"@id": "otu203233", 
+"@label": "Passalora dissiliens", 
+"meta": [
+{
+"$": 3720154, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora dissiliens AF222835", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203234", 
+"@id": "otu203234", 
+"@label": "Davidiella tassiana", 
+"meta": [
+{
+"$": 187461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium herbarum STE-U 5101 AY251078", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203235", 
+"@id": "otu203235", 
+"@label": "Cladosporium oxysporum", 
+"meta": [
+{
+"$": 187468, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium oxysporum AF393720", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203236", 
+"@id": "otu203236", 
+"@label": "Amorphotheca resinae", 
+"meta": [
+{
+"$": 677024, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Amorphotheca resinae STE-U 3692 AY251067", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203237", 
+"@id": "otu203237", 
+"@label": "Davidiella macrospora", 
+"meta": [
+{
+"$": 33420, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium iridis AF297231", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203238", 
+"@id": "otu203238", 
+"@label": "Cladophialophora minourae", 
+"meta": [
+{
+"$": 303644, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladophialophora minourae CBS 556.83 AY251087", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203239", 
+"@id": "otu203239", 
+"@label": "Fusicladium effusum", 
+"meta": [
+{
+"$": 956324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusicladium effusum AF065851", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203240", 
+"@id": "otu203240", 
+"@label": "Anungitopsis amoena", 
+"meta": [
+{
+"$": 390087, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Anungitopsis amoena CBS 254.95 AF393682", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203241", 
+"@id": "otu203241", 
+"@label": "Passalora fulva", 
+"meta": [
+{
+"$": 984627, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora fulva AF393701", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203242", 
+"@id": "otu203242", 
+"@label": "Cladosporium tenuissimum", 
+"meta": [
+{
+"$": 263790, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium tenuissimum AF393724", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203243", 
+"@id": "otu203243", 
+"@label": "Phialophora verrucosa", 
+"meta": [
+{
+"$": 376062, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Phialophora verrucosa AF397136", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203244", 
+"@id": "otu203244", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum AF393680", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203245", 
+"@id": "otu203245", 
+"@label": "Cladosporium sphaerospermum", 
+"meta": [
+{
+"$": 128631, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium sphaerospermum STE-U 3686 AY251077", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203246", 
+"@id": "otu203246", 
+"@label": "Passalora fulva", 
+"meta": [
+{
+"$": 984627, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora fulva STE-U 3688 AY251069", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203247", 
+"@id": "otu203247", 
+"@label": "Passalora fulva", 
+"meta": [
+{
+"$": 984627, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora fulva L25430", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203248", 
+"@id": "otu203248", 
+"@label": "Passalora henningsii", 
+"meta": [
+{
+"$": 224509, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora henningsii AF284389", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203249", 
+"@id": "otu203249", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum AF393722", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203250", 
+"@id": "otu203250", 
+"@label": "Passalora vaginae", 
+"meta": [
+{
+"$": 479687, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora vaginae AF222832", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203251", 
+"@id": "otu203251", 
+"@label": "Cladophialophora bantiana", 
+"meta": [
+{
+"$": 757326, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladophialophora bantiana AF397182", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203252", 
+"@id": "otu203252", 
+"@label": "Cladophialophora carrionii", 
+"meta": [
+{
+"$": 849118, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladophialophora carrionii AF397180", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203253", 
+"@id": "otu203253", 
+"@label": "Cladophialophora carrionii", 
+"meta": [
+{
+"$": 849118, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladophialophora carrionii AF397181", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203254", 
+"@id": "otu203254", 
+"@label": "Fusicladium effusum", 
+"meta": [
+{
+"$": 956324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusicladium effusum STE-U 4525 AY251085", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203255", 
+"@id": "otu203255", 
+"@label": "Passalora arachidicola", 
+"meta": [
+{
+"$": 260942, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Passalora arachidicola AF297224", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203256", 
+"@id": "otu203256", 
+"@label": "Venturia inaequalis", 
+"meta": [
+{
+"$": 581449, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Venturia inaequalis AF065837", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203257", 
+"@id": "otu203257", 
+"@label": "Venturia pyrina", 
+"meta": [
+{
+"$": 911861, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Venturia pyrina AF065844", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203258", 
+"@id": "otu203258", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum STE-U 4571 AY251081", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203259", 
+"@id": "otu203259", 
+"@label": "Graphiopsis chlorocephala", 
+"meta": [
+{
+"$": 827832, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium chlorocephalum AF393686", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203260", 
+"@id": "otu203260", 
+"@label": "Fusicladium effusum", 
+"meta": [
+{
+"$": 956324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusicladium effusum AF065850", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203261", 
+"@id": "otu203261", 
+"@label": "Cladosporium breviramosum", 
+"meta": [
+{
+"$": 827831, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium breviramosum AF393684", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203262", 
+"@id": "otu203262", 
+"@label": "Alternaria malorum", 
+"meta": [
+{
+"$": 468769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum AF393715", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203263", 
+"@id": "otu203263", 
+"@label": "Mycosphaerella iridis", 
+"meta": [
+{
+"$": 251861, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella iridis CBS 281.49 AY251089", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203264", 
+"@id": "otu203264", 
+"@label": "Alternaria malorum var. polymorpha", 
+"meta": [
+{
+"$": 1038266, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria malorum var. polymorpha STE-U 4570 AY251080", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203265", 
+"@id": "otu203265", 
+"@label": "Cladosporium cladosporioides", 
+"meta": [
+{
+"$": 187451, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium cladosporioides STE-U 3683 AY251074", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203266", 
+"@id": "otu203266", 
+"@label": "Cladosporium cladosporioides", 
+"meta": [
+{
+"$": 187451, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium cladosporioides STE-U 3682 AY251073", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203267", 
+"@id": "otu203267", 
+"@label": "Lewia infectoria", 
+"meta": [
+{
+"$": 513296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lewia infectoria AF397248", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203268", 
+"@id": "otu203268", 
+"@label": "Cladosporium colocasiae", 
+"meta": [
+{
+"$": 102703, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium colocasiae AF393692", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203269", 
+"@id": "otu203269", 
+"@label": "Cladosporium herbarum", 
+"meta": [
+{
+"$": 187461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium herbarum AF393705", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203270", 
+"@id": "otu203270", 
+"@label": "Cladosporium herbarum", 
+"meta": [
+{
+"$": 187461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium herbarum AJ238469", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203271", 
+"@id": "otu203271", 
+"@label": "Davidiella tassiana", 
+"meta": [
+{
+"$": 187461, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladosporium herbarum AJ244227", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203272", 
+"@id": "otu203272", 
+"@label": "Pleospora betae", 
+"meta": [
+{
+"$": 348855, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pleospora betae U43466", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203273", 
+"@id": "otu203273", 
+"@label": "Pleospora herbarum", 
+"meta": [
+{
+"$": 282723, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pleospora herbarum U43458", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203274", 
+"@id": "otu203274", 
+"@label": "Dothidea insculpta", 
+"meta": [
+{
+"$": 666122, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dothidea insculpta U42474", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203275", 
+"@id": "otu203275", 
+"@label": "Paraphaeosphaeria michotii", 
+"meta": [
+{
+"$": 645493, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paraphaeosphaeria michotii AF250817", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203276", 
+"@id": "otu203276", 
+"@label": "Lewia infectoria", 
+"meta": [
+{
+"$": 513296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Alternaria infectoria Y17066", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees880", 
+"@otus": "otus880", 
+"tree": [
+{
+"@about": "#tree1699", 
+"@id": "tree1699", 
+"edge": [
+{
+"@id": "edge477765", 
+"@source": "node477764", 
+"@target": "node477765"
+}, 
+{
+"@id": "edge477766", 
+"@source": "node477764", 
+"@target": "node477766"
+}, 
+{
+"@id": "edge477767", 
+"@source": "node477766", 
+"@target": "node477767"
+}, 
+{
+"@id": "edge477768", 
+"@source": "node477767", 
+"@target": "node477768"
+}, 
+{
+"@id": "edge477769", 
+"@source": "node477768", 
+"@target": "node477769"
+}, 
+{
+"@id": "edge477770", 
+"@source": "node477769", 
+"@target": "node477770"
+}, 
+{
+"@id": "edge477771", 
+"@source": "node477770", 
+"@target": "node477771"
+}, 
+{
+"@id": "edge477772", 
+"@source": "node477771", 
+"@target": "node477772"
+}, 
+{
+"@id": "edge477773", 
+"@source": "node477772", 
+"@target": "node477773"
+}, 
+{
+"@id": "edge477774", 
+"@source": "node477772", 
+"@target": "node477774"
+}, 
+{
+"@id": "edge477775", 
+"@source": "node477771", 
+"@target": "node477775"
+}, 
+{
+"@id": "edge477776", 
+"@source": "node477770", 
+"@target": "node477776"
+}, 
+{
+"@id": "edge477777", 
+"@source": "node477776", 
+"@target": "node477777"
+}, 
+{
+"@id": "edge477778", 
+"@source": "node477777", 
+"@target": "node477778"
+}, 
+{
+"@id": "edge477779", 
+"@source": "node477777", 
+"@target": "node477779"
+}, 
+{
+"@id": "edge477780", 
+"@source": "node477776", 
+"@target": "node477780"
+}, 
+{
+"@id": "edge477781", 
+"@source": "node477780", 
+"@target": "node477781"
+}, 
+{
+"@id": "edge477782", 
+"@source": "node477781", 
+"@target": "node477782"
+}, 
+{
+"@id": "edge477783", 
+"@source": "node477781", 
+"@target": "node477783"
+}, 
+{
+"@id": "edge477784", 
+"@source": "node477783", 
+"@target": "node477784"
+}, 
+{
+"@id": "edge477785", 
+"@source": "node477783", 
+"@target": "node477785"
+}, 
+{
+"@id": "edge477786", 
+"@source": "node477780", 
+"@target": "node477786"
+}, 
+{
+"@id": "edge477787", 
+"@source": "node477769", 
+"@target": "node477787"
+}, 
+{
+"@id": "edge477788", 
+"@source": "node477787", 
+"@target": "node477788"
+}, 
+{
+"@id": "edge477789", 
+"@source": "node477787", 
+"@target": "node477789"
+}, 
+{
+"@id": "edge477790", 
+"@source": "node477768", 
+"@target": "node477790"
+}, 
+{
+"@id": "edge477791", 
+"@source": "node477790", 
+"@target": "node477791"
+}, 
+{
+"@id": "edge477792", 
+"@source": "node477790", 
+"@target": "node477792"
+}, 
+{
+"@id": "edge477793", 
+"@source": "node477792", 
+"@target": "node477793"
+}, 
+{
+"@id": "edge477794", 
+"@source": "node477792", 
+"@target": "node477794"
+}, 
+{
+"@id": "edge477795", 
+"@source": "node477794", 
+"@target": "node477795"
+}, 
+{
+"@id": "edge477796", 
+"@source": "node477794", 
+"@target": "node477796"
+}, 
+{
+"@id": "edge477797", 
+"@source": "node477767", 
+"@target": "node477797"
+}, 
+{
+"@id": "edge477798", 
+"@source": "node477797", 
+"@target": "node477798"
+}, 
+{
+"@id": "edge477799", 
+"@source": "node477798", 
+"@target": "node477799"
+}, 
+{
+"@id": "edge477800", 
+"@source": "node477798", 
+"@target": "node477800"
+}, 
+{
+"@id": "edge477801", 
+"@source": "node477797", 
+"@target": "node477801"
+}, 
+{
+"@id": "edge477802", 
+"@source": "node477801", 
+"@target": "node477802"
+}, 
+{
+"@id": "edge477803", 
+"@source": "node477802", 
+"@target": "node477803"
+}, 
+{
+"@id": "edge477804", 
+"@source": "node477803", 
+"@target": "node477804"
+}, 
+{
+"@id": "edge477805", 
+"@source": "node477804", 
+"@target": "node477805"
+}, 
+{
+"@id": "edge477806", 
+"@source": "node477805", 
+"@target": "node477806"
+}, 
+{
+"@id": "edge477807", 
+"@source": "node477805", 
+"@target": "node477807"
+}, 
+{
+"@id": "edge477808", 
+"@source": "node477804", 
+"@target": "node477808"
+}, 
+{
+"@id": "edge477809", 
+"@source": "node477803", 
+"@target": "node477809"
+}, 
+{
+"@id": "edge477810", 
+"@source": "node477809", 
+"@target": "node477810"
+}, 
+{
+"@id": "edge477811", 
+"@source": "node477809", 
+"@target": "node477811"
+}, 
+{
+"@id": "edge477812", 
+"@source": "node477811", 
+"@target": "node477812"
+}, 
+{
+"@id": "edge477813", 
+"@source": "node477811", 
+"@target": "node477813"
+}, 
+{
+"@id": "edge477814", 
+"@source": "node477813", 
+"@target": "node477814"
+}, 
+{
+"@id": "edge477815", 
+"@source": "node477813", 
+"@target": "node477815"
+}, 
+{
+"@id": "edge477816", 
+"@source": "node477802", 
+"@target": "node477816"
+}, 
+{
+"@id": "edge477817", 
+"@source": "node477801", 
+"@target": "node477817"
+}, 
+{
+"@id": "edge477818", 
+"@source": "node477817", 
+"@target": "node477818"
+}, 
+{
+"@id": "edge477819", 
+"@source": "node477818", 
+"@target": "node477819"
+}, 
+{
+"@id": "edge477820", 
+"@source": "node477818", 
+"@target": "node477820"
+}, 
+{
+"@id": "edge477821", 
+"@source": "node477820", 
+"@target": "node477821"
+}, 
+{
+"@id": "edge477822", 
+"@source": "node477821", 
+"@target": "node477822"
+}, 
+{
+"@id": "edge477823", 
+"@source": "node477822", 
+"@target": "node477823"
+}, 
+{
+"@id": "edge477824", 
+"@source": "node477823", 
+"@target": "node477824"
+}, 
+{
+"@id": "edge477825", 
+"@source": "node477824", 
+"@target": "node477825"
+}, 
+{
+"@id": "edge477826", 
+"@source": "node477825", 
+"@target": "node477826"
+}, 
+{
+"@id": "edge477827", 
+"@source": "node477826", 
+"@target": "node477827"
+}, 
+{
+"@id": "edge477828", 
+"@source": "node477826", 
+"@target": "node477828"
+}, 
+{
+"@id": "edge477829", 
+"@source": "node477825", 
+"@target": "node477829"
+}, 
+{
+"@id": "edge477830", 
+"@source": "node477829", 
+"@target": "node477830"
+}, 
+{
+"@id": "edge477831", 
+"@source": "node477829", 
+"@target": "node477831"
+}, 
+{
+"@id": "edge477832", 
+"@source": "node477824", 
+"@target": "node477832"
+}, 
+{
+"@id": "edge477833", 
+"@source": "node477823", 
+"@target": "node477833"
+}, 
+{
+"@id": "edge477834", 
+"@source": "node477833", 
+"@target": "node477834"
+}, 
+{
+"@id": "edge477835", 
+"@source": "node477833", 
+"@target": "node477835"
+}, 
+{
+"@id": "edge477836", 
+"@source": "node477822", 
+"@target": "node477836"
+}, 
+{
+"@id": "edge477837", 
+"@source": "node477836", 
+"@target": "node477837"
+}, 
+{
+"@id": "edge477838", 
+"@source": "node477836", 
+"@target": "node477838"
+}, 
+{
+"@id": "edge477839", 
+"@source": "node477821", 
+"@target": "node477839"
+}, 
+{
+"@id": "edge477840", 
+"@source": "node477839", 
+"@target": "node477840"
+}, 
+{
+"@id": "edge477841", 
+"@source": "node477840", 
+"@target": "node477841"
+}, 
+{
+"@id": "edge477842", 
+"@source": "node477841", 
+"@target": "node477842"
+}, 
+{
+"@id": "edge477843", 
+"@source": "node477841", 
+"@target": "node477843"
+}, 
+{
+"@id": "edge477844", 
+"@source": "node477840", 
+"@target": "node477844"
+}, 
+{
+"@id": "edge477845", 
+"@source": "node477839", 
+"@target": "node477845"
+}, 
+{
+"@id": "edge477846", 
+"@source": "node477845", 
+"@target": "node477846"
+}, 
+{
+"@id": "edge477847", 
+"@source": "node477845", 
+"@target": "node477847"
+}, 
+{
+"@id": "edge477848", 
+"@source": "node477820", 
+"@target": "node477848"
+}, 
+{
+"@id": "edge477849", 
+"@source": "node477848", 
+"@target": "node477849"
+}, 
+{
+"@id": "edge477850", 
+"@source": "node477849", 
+"@target": "node477850"
+}, 
+{
+"@id": "edge477851", 
+"@source": "node477850", 
+"@target": "node477851"
+}, 
+{
+"@id": "edge477852", 
+"@source": "node477851", 
+"@target": "node477852"
+}, 
+{
+"@id": "edge477853", 
+"@source": "node477852", 
+"@target": "node477853"
+}, 
+{
+"@id": "edge477854", 
+"@source": "node477852", 
+"@target": "node477854"
+}, 
+{
+"@id": "edge477855", 
+"@source": "node477854", 
+"@target": "node477855"
+}, 
+{
+"@id": "edge477856", 
+"@source": "node477855", 
+"@target": "node477856"
+}, 
+{
+"@id": "edge477857", 
+"@source": "node477856", 
+"@target": "node477857"
+}, 
+{
+"@id": "edge477858", 
+"@source": "node477856", 
+"@target": "node477858"
+}, 
+{
+"@id": "edge477859", 
+"@source": "node477855", 
+"@target": "node477859"
+}, 
+{
+"@id": "edge477860", 
+"@source": "node477854", 
+"@target": "node477860"
+}, 
+{
+"@id": "edge477861", 
+"@source": "node477851", 
+"@target": "node477861"
+}, 
+{
+"@id": "edge477862", 
+"@source": "node477850", 
+"@target": "node477862"
+}, 
+{
+"@id": "edge477863", 
+"@source": "node477849", 
+"@target": "node477863"
+}, 
+{
+"@id": "edge477864", 
+"@source": "node477848", 
+"@target": "node477864"
+}, 
+{
+"@id": "edge477865", 
+"@source": "node477817", 
+"@target": "node477865"
+}, 
+{
+"@id": "edge477866", 
+"@source": "node477865", 
+"@target": "node477866"
+}, 
+{
+"@id": "edge477867", 
+"@source": "node477865", 
+"@target": "node477867"
+}, 
+{
+"@id": "edge477868", 
+"@source": "node477867", 
+"@target": "node477868"
+}, 
+{
+"@id": "edge477869", 
+"@source": "node477868", 
+"@target": "node477869"
+}, 
+{
+"@id": "edge477870", 
+"@source": "node477868", 
+"@target": "node477870"
+}, 
+{
+"@id": "edge477871", 
+"@source": "node477870", 
+"@target": "node477871"
+}, 
+{
+"@id": "edge477872", 
+"@source": "node477871", 
+"@target": "node477872"
+}, 
+{
+"@id": "edge477873", 
+"@source": "node477871", 
+"@target": "node477873"
+}, 
+{
+"@id": "edge477874", 
+"@source": "node477873", 
+"@target": "node477874"
+}, 
+{
+"@id": "edge477875", 
+"@source": "node477874", 
+"@target": "node477875"
+}, 
+{
+"@id": "edge477876", 
+"@source": "node477874", 
+"@target": "node477876"
+}, 
+{
+"@id": "edge477877", 
+"@source": "node477873", 
+"@target": "node477877"
+}, 
+{
+"@id": "edge477878", 
+"@source": "node477870", 
+"@target": "node477878"
+}, 
+{
+"@id": "edge477879", 
+"@source": "node477867", 
+"@target": "node477879"
+}, 
+{
+"@id": "edge477880", 
+"@source": "node477879", 
+"@target": "node477880"
+}, 
+{
+"@id": "edge477881", 
+"@source": "node477880", 
+"@target": "node477881"
+}, 
+{
+"@id": "edge477882", 
+"@source": "node477880", 
+"@target": "node477882"
+}, 
+{
+"@id": "edge477883", 
+"@source": "node477879", 
+"@target": "node477883"
+}, 
+{
+"@id": "edge477884", 
+"@source": "node477883", 
+"@target": "node477884"
+}, 
+{
+"@id": "edge477885", 
+"@source": "node477883", 
+"@target": "node477885"
+}, 
+{
+"@id": "edge477886", 
+"@source": "node477766", 
+"@target": "node477886"
+}, 
+{
+"@id": "edge477887", 
+"@source": "node477886", 
+"@target": "node477887"
+}, 
+{
+"@id": "edge477888", 
+"@source": "node477887", 
+"@target": "node477888"
+}, 
+{
+"@id": "edge477889", 
+"@source": "node477888", 
+"@target": "node477889"
+}, 
+{
+"@id": "edge477890", 
+"@source": "node477889", 
+"@target": "node477890"
+}, 
+{
+"@id": "edge477891", 
+"@source": "node477890", 
+"@target": "node477891"
+}, 
+{
+"@id": "edge477892", 
+"@source": "node477890", 
+"@target": "node477892"
+}, 
+{
+"@id": "edge477893", 
+"@source": "node477892", 
+"@target": "node477893"
+}, 
+{
+"@id": "edge477894", 
+"@source": "node477893", 
+"@target": "node477894"
+}, 
+{
+"@id": "edge477895", 
+"@source": "node477893", 
+"@target": "node477895"
+}, 
+{
+"@id": "edge477896", 
+"@source": "node477892", 
+"@target": "node477896"
+}, 
+{
+"@id": "edge477897", 
+"@source": "node477889", 
+"@target": "node477897"
+}, 
+{
+"@id": "edge477898", 
+"@source": "node477888", 
+"@target": "node477898"
+}, 
+{
+"@id": "edge477899", 
+"@source": "node477898", 
+"@target": "node477899"
+}, 
+{
+"@id": "edge477900", 
+"@source": "node477899", 
+"@target": "node477900"
+}, 
+{
+"@id": "edge477901", 
+"@source": "node477900", 
+"@target": "node477901"
+}, 
+{
+"@id": "edge477902", 
+"@source": "node477900", 
+"@target": "node477902"
+}, 
+{
+"@id": "edge477903", 
+"@source": "node477899", 
+"@target": "node477903"
+}, 
+{
+"@id": "edge477904", 
+"@source": "node477898", 
+"@target": "node477904"
+}, 
+{
+"@id": "edge477905", 
+"@source": "node477887", 
+"@target": "node477905"
+}, 
+{
+"@id": "edge477906", 
+"@source": "node477886", 
+"@target": "node477906"
+}
+], 
+"meta": [
+{
+"$": "node477766", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node477764", 
+"@root": "true"
+}, 
+{
+"@id": "node477765", 
+"@otu": "otu203209"
+}, 
+{
+"@id": "node477766"
+}, 
+{
+"@id": "node477767"
+}, 
+{
+"@id": "node477768"
+}, 
+{
+"@id": "node477769"
+}, 
+{
+"@id": "node477770"
+}, 
+{
+"@id": "node477771"
+}, 
+{
+"@id": "node477772"
+}, 
+{
+"@id": "node477773", 
+"@otu": "otu203213"
+}, 
+{
+"@id": "node477774", 
+"@otu": "otu203252"
+}, 
+{
+"@id": "node477775", 
+"@otu": "otu203253"
+}, 
+{
+"@id": "node477776"
+}, 
+{
+"@id": "node477777"
+}, 
+{
+"@id": "node477778", 
+"@otu": "otu203238"
+}, 
+{
+"@id": "node477779", 
+"@otu": "otu203212"
+}, 
+{
+"@id": "node477780"
+}, 
+{
+"@id": "node477781"
+}, 
+{
+"@id": "node477782", 
+"@otu": "otu203230"
+}, 
+{
+"@id": "node477783"
+}, 
+{
+"@id": "node477784", 
+"@otu": "otu203243"
+}, 
+{
+"@id": "node477785", 
+"@otu": "otu203203"
+}, 
+{
+"@id": "node477786", 
+"@otu": "otu203228"
+}, 
+{
+"@id": "node477787"
+}, 
+{
+"@id": "node477788", 
+"@otu": "otu203251"
+}, 
+{
+"@id": "node477789", 
+"@otu": "otu203222"
+}, 
+{
+"@id": "node477790"
+}, 
+{
+"@id": "node477791", 
+"@otu": "otu203218"
+}, 
+{
+"@id": "node477792"
+}, 
+{
+"@id": "node477793", 
+"@otu": "otu203236"
+}, 
+{
+"@id": "node477794"
+}, 
+{
+"@id": "node477795", 
+"@otu": "otu203261"
+}, 
+{
+"@id": "node477796", 
+"@otu": "otu203208"
+}, 
+{
+"@id": "node477797"
+}, 
+{
+"@id": "node477798"
+}, 
+{
+"@id": "node477799", 
+"@otu": "otu203227"
+}, 
+{
+"@id": "node477800", 
+"@otu": "otu203229"
+}, 
+{
+"@id": "node477801"
+}, 
+{
+"@id": "node477802"
+}, 
+{
+"@id": "node477803"
+}, 
+{
+"@id": "node477804"
+}, 
+{
+"@id": "node477805"
+}, 
+{
+"@id": "node477806", 
+"@otu": "otu203241"
+}, 
+{
+"@id": "node477807", 
+"@otu": "otu203246"
+}, 
+{
+"@id": "node477808", 
+"@otu": "otu203247"
+}, 
+{
+"@id": "node477809"
+}, 
+{
+"@id": "node477810", 
+"@otu": "otu203248"
+}, 
+{
+"@id": "node477811"
+}, 
+{
+"@id": "node477812", 
+"@otu": "otu203233"
+}, 
+{
+"@id": "node477813"
+}, 
+{
+"@id": "node477814", 
+"@otu": "otu203250"
+}, 
+{
+"@id": "node477815", 
+"@otu": "otu203221"
+}, 
+{
+"@id": "node477816", 
+"@otu": "otu203255"
+}, 
+{
+"@id": "node477817"
+}, 
+{
+"@id": "node477818"
+}, 
+{
+"@id": "node477819", 
+"@otu": "otu203205"
+}, 
+{
+"@id": "node477820"
+}, 
+{
+"@id": "node477821"
+}, 
+{
+"@id": "node477822"
+}, 
+{
+"@id": "node477823"
+}, 
+{
+"@id": "node477824"
+}, 
+{
+"@id": "node477825"
+}, 
+{
+"@id": "node477826"
+}, 
+{
+"@id": "node477827", 
+"@otu": "otu203242"
+}, 
+{
+"@id": "node477828", 
+"@otu": "otu203232"
+}, 
+{
+"@id": "node477829"
+}, 
+{
+"@id": "node477830", 
+"@otu": "otu203202"
+}, 
+{
+"@id": "node477831", 
+"@otu": "otu203215"
+}, 
+{
+"@id": "node477832", 
+"@otu": "otu203211"
+}, 
+{
+"@id": "node477833"
+}, 
+{
+"@id": "node477834", 
+"@otu": "otu203207"
+}, 
+{
+"@id": "node477835", 
+"@otu": "otu203220"
+}, 
+{
+"@id": "node477836"
+}, 
+{
+"@id": "node477837", 
+"@otu": "otu203266"
+}, 
+{
+"@id": "node477838", 
+"@otu": "otu203265"
+}, 
+{
+"@id": "node477839"
+}, 
+{
+"@id": "node477840"
+}, 
+{
+"@id": "node477841"
+}, 
+{
+"@id": "node477842", 
+"@otu": "otu203235"
+}, 
+{
+"@id": "node477843", 
+"@otu": "otu203268"
+}, 
+{
+"@id": "node477844", 
+"@otu": "otu203259"
+}, 
+{
+"@id": "node477845"
+}, 
+{
+"@id": "node477846", 
+"@otu": "otu203223"
+}, 
+{
+"@id": "node477847", 
+"@otu": "otu203214"
+}, 
+{
+"@id": "node477848"
+}, 
+{
+"@id": "node477849"
+}, 
+{
+"@id": "node477850"
+}, 
+{
+"@id": "node477851"
+}, 
+{
+"@id": "node477852"
+}, 
+{
+"@id": "node477853", 
+"@otu": "otu203219"
+}, 
+{
+"@id": "node477854"
+}, 
+{
+"@id": "node477855"
+}, 
+{
+"@id": "node477856"
+}, 
+{
+"@id": "node477857", 
+"@otu": "otu203245"
+}, 
+{
+"@id": "node477858", 
+"@otu": "otu203224"
+}, 
+{
+"@id": "node477859", 
+"@otu": "otu203270"
+}, 
+{
+"@id": "node477860", 
+"@otu": "otu203269"
+}, 
+{
+"@id": "node477861", 
+"@otu": "otu203237"
+}, 
+{
+"@id": "node477862", 
+"@otu": "otu203234"
+}, 
+{
+"@id": "node477863", 
+"@otu": "otu203225"
+}, 
+{
+"@id": "node477864", 
+"@otu": "otu203271"
+}, 
+{
+"@id": "node477865"
+}, 
+{
+"@id": "node477866", 
+"@otu": "otu203263"
+}, 
+{
+"@id": "node477867"
+}, 
+{
+"@id": "node477868"
+}, 
+{
+"@id": "node477869", 
+"@otu": "otu203226"
+}, 
+{
+"@id": "node477870"
+}, 
+{
+"@id": "node477871"
+}, 
+{
+"@id": "node477872", 
+"@otu": "otu203264"
+}, 
+{
+"@id": "node477873"
+}, 
+{
+"@id": "node477874"
+}, 
+{
+"@id": "node477875", 
+"@otu": "otu203262"
+}, 
+{
+"@id": "node477876", 
+"@otu": "otu203249"
+}, 
+{
+"@id": "node477877", 
+"@otu": "otu203244"
+}, 
+{
+"@id": "node477878", 
+"@otu": "otu203258"
+}, 
+{
+"@id": "node477879"
+}, 
+{
+"@id": "node477880"
+}, 
+{
+"@id": "node477881", 
+"@otu": "otu203267"
+}, 
+{
+"@id": "node477882", 
+"@otu": "otu203217"
+}, 
+{
+"@id": "node477883"
+}, 
+{
+"@id": "node477884", 
+"@otu": "otu203276"
+}, 
+{
+"@id": "node477885", 
+"@otu": "otu203216"
+}, 
+{
+"@id": "node477886"
+}, 
+{
+"@id": "node477887"
+}, 
+{
+"@id": "node477888"
+}, 
+{
+"@id": "node477889"
+}, 
+{
+"@id": "node477890"
+}, 
+{
+"@id": "node477891", 
+"@otu": "otu203201"
+}, 
+{
+"@id": "node477892"
+}, 
+{
+"@id": "node477893"
+}, 
+{
+"@id": "node477894", 
+"@otu": "otu203256"
+}, 
+{
+"@id": "node477895", 
+"@otu": "otu203210"
+}, 
+{
+"@id": "node477896", 
+"@otu": "otu203204"
+}, 
+{
+"@id": "node477897", 
+"@otu": "otu203257"
+}, 
+{
+"@id": "node477898"
+}, 
+{
+"@id": "node477899"
+}, 
+{
+"@id": "node477900"
+}, 
+{
+"@id": "node477901", 
+"@otu": "otu203239"
+}, 
+{
+"@id": "node477902", 
+"@otu": "otu203206"
+}, 
+{
+"@id": "node477903", 
+"@otu": "otu203260"
+}, 
+{
+"@id": "node477904", 
+"@otu": "otu203254"
+}, 
+{
+"@id": "node477905", 
+"@otu": "otu203231"
+}, 
+{
+"@id": "node477906", 
+"@otu": "otu203240"
+}
+]
+}, 
+{
+"@about": "#tree1700", 
+"@id": "tree1700", 
+"edge": [
+{
+"@id": "edge477908", 
+"@source": "node477907", 
+"@target": "node477908"
+}, 
+{
+"@id": "edge477909", 
+"@source": "node477907", 
+"@target": "node477909"
+}, 
+{
+"@id": "edge477910", 
+"@source": "node477909", 
+"@target": "node477910"
+}, 
+{
+"@id": "edge477911", 
+"@source": "node477910", 
+"@target": "node477911"
+}, 
+{
+"@id": "edge477912", 
+"@source": "node477911", 
+"@target": "node477912"
+}, 
+{
+"@id": "edge477913", 
+"@source": "node477912", 
+"@target": "node477913"
+}, 
+{
+"@id": "edge477914", 
+"@source": "node477913", 
+"@target": "node477914"
+}, 
+{
+"@id": "edge477915", 
+"@source": "node477913", 
+"@target": "node477915"
+}, 
+{
+"@id": "edge477916", 
+"@source": "node477915", 
+"@target": "node477916"
+}, 
+{
+"@id": "edge477917", 
+"@source": "node477916", 
+"@target": "node477917"
+}, 
+{
+"@id": "edge477918", 
+"@source": "node477917", 
+"@target": "node477918"
+}, 
+{
+"@id": "edge477919", 
+"@source": "node477918", 
+"@target": "node477919"
+}, 
+{
+"@id": "edge477920", 
+"@source": "node477919", 
+"@target": "node477920"
+}, 
+{
+"@id": "edge477921", 
+"@source": "node477920", 
+"@target": "node477921"
+}, 
+{
+"@id": "edge477922", 
+"@source": "node477921", 
+"@target": "node477922"
+}, 
+{
+"@id": "edge477923", 
+"@source": "node477921", 
+"@target": "node477923"
+}, 
+{
+"@id": "edge477924", 
+"@source": "node477923", 
+"@target": "node477924"
+}, 
+{
+"@id": "edge477925", 
+"@source": "node477923", 
+"@target": "node477925"
+}, 
+{
+"@id": "edge477926", 
+"@source": "node477925", 
+"@target": "node477926"
+}, 
+{
+"@id": "edge477927", 
+"@source": "node477925", 
+"@target": "node477927"
+}, 
+{
+"@id": "edge477928", 
+"@source": "node477920", 
+"@target": "node477928"
+}, 
+{
+"@id": "edge477929", 
+"@source": "node477919", 
+"@target": "node477929"
+}, 
+{
+"@id": "edge477930", 
+"@source": "node477918", 
+"@target": "node477930"
+}, 
+{
+"@id": "edge477931", 
+"@source": "node477917", 
+"@target": "node477931"
+}, 
+{
+"@id": "edge477932", 
+"@source": "node477916", 
+"@target": "node477932"
+}, 
+{
+"@id": "edge477933", 
+"@source": "node477915", 
+"@target": "node477933"
+}, 
+{
+"@id": "edge477934", 
+"@source": "node477912", 
+"@target": "node477934"
+}, 
+{
+"@id": "edge477935", 
+"@source": "node477934", 
+"@target": "node477935"
+}, 
+{
+"@id": "edge477936", 
+"@source": "node477935", 
+"@target": "node477936"
+}, 
+{
+"@id": "edge477937", 
+"@source": "node477935", 
+"@target": "node477937"
+}, 
+{
+"@id": "edge477938", 
+"@source": "node477937", 
+"@target": "node477938"
+}, 
+{
+"@id": "edge477939", 
+"@source": "node477937", 
+"@target": "node477939"
+}, 
+{
+"@id": "edge477940", 
+"@source": "node477939", 
+"@target": "node477940"
+}, 
+{
+"@id": "edge477941", 
+"@source": "node477939", 
+"@target": "node477941"
+}, 
+{
+"@id": "edge477942", 
+"@source": "node477941", 
+"@target": "node477942"
+}, 
+{
+"@id": "edge477943", 
+"@source": "node477941", 
+"@target": "node477943"
+}, 
+{
+"@id": "edge477944", 
+"@source": "node477943", 
+"@target": "node477944"
+}, 
+{
+"@id": "edge477945", 
+"@source": "node477944", 
+"@target": "node477945"
+}, 
+{
+"@id": "edge477946", 
+"@source": "node477945", 
+"@target": "node477946"
+}, 
+{
+"@id": "edge477947", 
+"@source": "node477946", 
+"@target": "node477947"
+}, 
+{
+"@id": "edge477948", 
+"@source": "node477947", 
+"@target": "node477948"
+}, 
+{
+"@id": "edge477949", 
+"@source": "node477947", 
+"@target": "node477949"
+}, 
+{
+"@id": "edge477950", 
+"@source": "node477949", 
+"@target": "node477950"
+}, 
+{
+"@id": "edge477951", 
+"@source": "node477949", 
+"@target": "node477951"
+}, 
+{
+"@id": "edge477952", 
+"@source": "node477946", 
+"@target": "node477952"
+}, 
+{
+"@id": "edge477953", 
+"@source": "node477952", 
+"@target": "node477953"
+}, 
+{
+"@id": "edge477954", 
+"@source": "node477953", 
+"@target": "node477954"
+}, 
+{
+"@id": "edge477955", 
+"@source": "node477953", 
+"@target": "node477955"
+}, 
+{
+"@id": "edge477956", 
+"@source": "node477955", 
+"@target": "node477956"
+}, 
+{
+"@id": "edge477957", 
+"@source": "node477955", 
+"@target": "node477957"
+}, 
+{
+"@id": "edge477958", 
+"@source": "node477957", 
+"@target": "node477958"
+}, 
+{
+"@id": "edge477959", 
+"@source": "node477957", 
+"@target": "node477959"
+}, 
+{
+"@id": "edge477960", 
+"@source": "node477952", 
+"@target": "node477960"
+}, 
+{
+"@id": "edge477961", 
+"@source": "node477960", 
+"@target": "node477961"
+}, 
+{
+"@id": "edge477962", 
+"@source": "node477960", 
+"@target": "node477962"
+}, 
+{
+"@id": "edge477963", 
+"@source": "node477945", 
+"@target": "node477963"
+}, 
+{
+"@id": "edge477964", 
+"@source": "node477963", 
+"@target": "node477964"
+}, 
+{
+"@id": "edge477965", 
+"@source": "node477963", 
+"@target": "node477965"
+}, 
+{
+"@id": "edge477966", 
+"@source": "node477944", 
+"@target": "node477966"
+}, 
+{
+"@id": "edge477967", 
+"@source": "node477966", 
+"@target": "node477967"
+}, 
+{
+"@id": "edge477968", 
+"@source": "node477966", 
+"@target": "node477968"
+}, 
+{
+"@id": "edge477969", 
+"@source": "node477943", 
+"@target": "node477969"
+}, 
+{
+"@id": "edge477970", 
+"@source": "node477969", 
+"@target": "node477970"
+}, 
+{
+"@id": "edge477971", 
+"@source": "node477969", 
+"@target": "node477971"
+}, 
+{
+"@id": "edge477972", 
+"@source": "node477934", 
+"@target": "node477972"
+}, 
+{
+"@id": "edge477973", 
+"@source": "node477972", 
+"@target": "node477973"
+}, 
+{
+"@id": "edge477974", 
+"@source": "node477973", 
+"@target": "node477974"
+}, 
+{
+"@id": "edge477975", 
+"@source": "node477973", 
+"@target": "node477975"
+}, 
+{
+"@id": "edge477976", 
+"@source": "node477975", 
+"@target": "node477976"
+}, 
+{
+"@id": "edge477977", 
+"@source": "node477975", 
+"@target": "node477977"
+}, 
+{
+"@id": "edge477978", 
+"@source": "node477972", 
+"@target": "node477978"
+}, 
+{
+"@id": "edge477979", 
+"@source": "node477911", 
+"@target": "node477979"
+}, 
+{
+"@id": "edge477980", 
+"@source": "node477979", 
+"@target": "node477980"
+}, 
+{
+"@id": "edge477981", 
+"@source": "node477980", 
+"@target": "node477981"
+}, 
+{
+"@id": "edge477982", 
+"@source": "node477980", 
+"@target": "node477982"
+}, 
+{
+"@id": "edge477983", 
+"@source": "node477982", 
+"@target": "node477983"
+}, 
+{
+"@id": "edge477984", 
+"@source": "node477982", 
+"@target": "node477984"
+}, 
+{
+"@id": "edge477985", 
+"@source": "node477979", 
+"@target": "node477985"
+}, 
+{
+"@id": "edge477986", 
+"@source": "node477985", 
+"@target": "node477986"
+}, 
+{
+"@id": "edge477987", 
+"@source": "node477985", 
+"@target": "node477987"
+}, 
+{
+"@id": "edge477988", 
+"@source": "node477910", 
+"@target": "node477988"
+}, 
+{
+"@id": "edge477989", 
+"@source": "node477988", 
+"@target": "node477989"
+}, 
+{
+"@id": "edge477990", 
+"@source": "node477988", 
+"@target": "node477990"
+}, 
+{
+"@id": "edge477991", 
+"@source": "node477990", 
+"@target": "node477991"
+}, 
+{
+"@id": "edge477992", 
+"@source": "node477990", 
+"@target": "node477992"
+}, 
+{
+"@id": "edge477993", 
+"@source": "node477992", 
+"@target": "node477993"
+}, 
+{
+"@id": "edge477994", 
+"@source": "node477992", 
+"@target": "node477994"
+}, 
+{
+"@id": "edge477995", 
+"@source": "node477994", 
+"@target": "node477995"
+}, 
+{
+"@id": "edge477996", 
+"@source": "node477994", 
+"@target": "node477996"
+}, 
+{
+"@id": "edge477997", 
+"@source": "node477909", 
+"@target": "node477997"
+}, 
+{
+"@id": "edge477998", 
+"@source": "node477997", 
+"@target": "node477998"
+}, 
+{
+"@id": "edge477999", 
+"@source": "node477998", 
+"@target": "node477999"
+}, 
+{
+"@id": "edge478000", 
+"@source": "node477998", 
+"@target": "node478000"
+}, 
+{
+"@id": "edge478001", 
+"@source": "node478000", 
+"@target": "node478001"
+}, 
+{
+"@id": "edge478002", 
+"@source": "node478001", 
+"@target": "node478002"
+}, 
+{
+"@id": "edge478003", 
+"@source": "node478002", 
+"@target": "node478003"
+}, 
+{
+"@id": "edge478004", 
+"@source": "node478003", 
+"@target": "node478004"
+}, 
+{
+"@id": "edge478005", 
+"@source": "node478003", 
+"@target": "node478005"
+}, 
+{
+"@id": "edge478006", 
+"@source": "node478005", 
+"@target": "node478006"
+}, 
+{
+"@id": "edge478007", 
+"@source": "node478006", 
+"@target": "node478007"
+}, 
+{
+"@id": "edge478008", 
+"@source": "node478006", 
+"@target": "node478008"
+}, 
+{
+"@id": "edge478009", 
+"@source": "node478005", 
+"@target": "node478009"
+}, 
+{
+"@id": "edge478010", 
+"@source": "node478002", 
+"@target": "node478010"
+}, 
+{
+"@id": "edge478011", 
+"@source": "node478001", 
+"@target": "node478011"
+}, 
+{
+"@id": "edge478012", 
+"@source": "node478000", 
+"@target": "node478012"
+}, 
+{
+"@id": "edge478013", 
+"@source": "node478012", 
+"@target": "node478013"
+}, 
+{
+"@id": "edge478014", 
+"@source": "node478012", 
+"@target": "node478014"
+}, 
+{
+"@id": "edge478015", 
+"@source": "node478014", 
+"@target": "node478015"
+}, 
+{
+"@id": "edge478016", 
+"@source": "node478015", 
+"@target": "node478016"
+}, 
+{
+"@id": "edge478017", 
+"@source": "node478015", 
+"@target": "node478017"
+}, 
+{
+"@id": "edge478018", 
+"@source": "node478014", 
+"@target": "node478018"
+}, 
+{
+"@id": "edge478019", 
+"@source": "node477997", 
+"@target": "node478019"
+}, 
+{
+"@id": "edge478020", 
+"@source": "node478019", 
+"@target": "node478020"
+}, 
+{
+"@id": "edge478021", 
+"@source": "node478020", 
+"@target": "node478021"
+}, 
+{
+"@id": "edge478022", 
+"@source": "node478020", 
+"@target": "node478022"
+}, 
+{
+"@id": "edge478023", 
+"@source": "node478019", 
+"@target": "node478023"
+}
+], 
+"meta": [
+{
+"$": "node477909", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "SSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node477907", 
+"@root": "true"
+}, 
+{
+"@id": "node477908", 
+"@otu": "otu203147"
+}, 
+{
+"@id": "node477909"
+}, 
+{
+"@id": "node477910"
+}, 
+{
+"@id": "node477911"
+}, 
+{
+"@id": "node477912"
+}, 
+{
+"@id": "node477913"
+}, 
+{
+"@id": "node477914", 
+"@otu": "otu203150"
+}, 
+{
+"@id": "node477915"
+}, 
+{
+"@id": "node477916"
+}, 
+{
+"@id": "node477917"
+}, 
+{
+"@id": "node477918"
+}, 
+{
+"@id": "node477919"
+}, 
+{
+"@id": "node477920"
+}, 
+{
+"@id": "node477921"
+}, 
+{
+"@id": "node477922", 
+"@otu": "otu203173"
+}, 
+{
+"@id": "node477923"
+}, 
+{
+"@id": "node477924", 
+"@otu": "otu203167"
+}, 
+{
+"@id": "node477925"
+}, 
+{
+"@id": "node477926", 
+"@otu": "otu203181"
+}, 
+{
+"@id": "node477927", 
+"@otu": "otu203159"
+}, 
+{
+"@id": "node477928", 
+"@otu": "otu203174"
+}, 
+{
+"@id": "node477929", 
+"@otu": "otu203153"
+}, 
+{
+"@id": "node477930", 
+"@otu": "otu203182"
+}, 
+{
+"@id": "node477931", 
+"@otu": "otu203165"
+}, 
+{
+"@id": "node477932", 
+"@otu": "otu203164"
+}, 
+{
+"@id": "node477933", 
+"@otu": "otu203183"
+}, 
+{
+"@id": "node477934"
+}, 
+{
+"@id": "node477935"
+}, 
+{
+"@id": "node477936", 
+"@otu": "otu203168"
+}, 
+{
+"@id": "node477937"
+}, 
+{
+"@id": "node477938", 
+"@otu": "otu203187"
+}, 
+{
+"@id": "node477939"
+}, 
+{
+"@id": "node477940", 
+"@otu": "otu203156"
+}, 
+{
+"@id": "node477941"
+}, 
+{
+"@id": "node477942", 
+"@otu": "otu203175"
+}, 
+{
+"@id": "node477943"
+}, 
+{
+"@id": "node477944"
+}, 
+{
+"@id": "node477945"
+}, 
+{
+"@id": "node477946"
+}, 
+{
+"@id": "node477947"
+}, 
+{
+"@id": "node477948", 
+"@otu": "otu203146"
+}, 
+{
+"@id": "node477949"
+}, 
+{
+"@id": "node477950", 
+"@otu": "otu203149"
+}, 
+{
+"@id": "node477951", 
+"@otu": "otu203176"
+}, 
+{
+"@id": "node477952"
+}, 
+{
+"@id": "node477953"
+}, 
+{
+"@id": "node477954", 
+"@otu": "otu203170"
+}, 
+{
+"@id": "node477955"
+}, 
+{
+"@id": "node477956", 
+"@otu": "otu203172"
+}, 
+{
+"@id": "node477957"
+}, 
+{
+"@id": "node477958", 
+"@otu": "otu203178"
+}, 
+{
+"@id": "node477959", 
+"@otu": "otu203171"
+}, 
+{
+"@id": "node477960"
+}, 
+{
+"@id": "node477961", 
+"@otu": "otu203162"
+}, 
+{
+"@id": "node477962", 
+"@otu": "otu203193"
+}, 
+{
+"@id": "node477963"
+}, 
+{
+"@id": "node477964", 
+"@otu": "otu203163"
+}, 
+{
+"@id": "node477965", 
+"@otu": "otu203186"
+}, 
+{
+"@id": "node477966"
+}, 
+{
+"@id": "node477967", 
+"@otu": "otu203152"
+}, 
+{
+"@id": "node477968", 
+"@otu": "otu203155"
+}, 
+{
+"@id": "node477969"
+}, 
+{
+"@id": "node477970", 
+"@otu": "otu203158"
+}, 
+{
+"@id": "node477971", 
+"@otu": "otu203192"
+}, 
+{
+"@id": "node477972"
+}, 
+{
+"@id": "node477973"
+}, 
+{
+"@id": "node477974", 
+"@otu": "otu203179"
+}, 
+{
+"@id": "node477975"
+}, 
+{
+"@id": "node477976", 
+"@otu": "otu203161"
+}, 
+{
+"@id": "node477977", 
+"@otu": "otu203190"
+}, 
+{
+"@id": "node477978", 
+"@otu": "otu203196"
+}, 
+{
+"@id": "node477979"
+}, 
+{
+"@id": "node477980"
+}, 
+{
+"@id": "node477981", 
+"@otu": "otu203151"
+}, 
+{
+"@id": "node477982"
+}, 
+{
+"@id": "node477983", 
+"@otu": "otu203198"
+}, 
+{
+"@id": "node477984", 
+"@otu": "otu203274"
+}, 
+{
+"@id": "node477985"
+}, 
+{
+"@id": "node477986", 
+"@otu": "otu203194"
+}, 
+{
+"@id": "node477987", 
+"@otu": "otu203154"
+}, 
+{
+"@id": "node477988"
+}, 
+{
+"@id": "node477989", 
+"@otu": "otu203191"
+}, 
+{
+"@id": "node477990"
+}, 
+{
+"@id": "node477991", 
+"@otu": "otu203197"
+}, 
+{
+"@id": "node477992"
+}, 
+{
+"@id": "node477993", 
+"@otu": "otu203199"
+}, 
+{
+"@id": "node477994"
+}, 
+{
+"@id": "node477995", 
+"@otu": "otu203200"
+}, 
+{
+"@id": "node477996", 
+"@otu": "otu203169"
+}, 
+{
+"@id": "node477997"
+}, 
+{
+"@id": "node477998"
+}, 
+{
+"@id": "node477999", 
+"@otu": "otu203272"
+}, 
+{
+"@id": "node478000"
+}, 
+{
+"@id": "node478001"
+}, 
+{
+"@id": "node478002"
+}, 
+{
+"@id": "node478003"
+}, 
+{
+"@id": "node478004", 
+"@otu": "otu203189"
+}, 
+{
+"@id": "node478005"
+}, 
+{
+"@id": "node478006"
+}, 
+{
+"@id": "node478007", 
+"@otu": "otu203195"
+}, 
+{
+"@id": "node478008", 
+"@otu": "otu203185"
+}, 
+{
+"@id": "node478009", 
+"@otu": "otu203180"
+}, 
+{
+"@id": "node478010", 
+"@otu": "otu203160"
+}, 
+{
+"@id": "node478011", 
+"@otu": "otu203166"
+}, 
+{
+"@id": "node478012"
+}, 
+{
+"@id": "node478013", 
+"@otu": "otu203273"
+}, 
+{
+"@id": "node478014"
+}, 
+{
+"@id": "node478015"
+}, 
+{
+"@id": "node478016", 
+"@otu": "otu203177"
+}, 
+{
+"@id": "node478017", 
+"@otu": "otu203184"
+}, 
+{
+"@id": "node478018", 
+"@otu": "otu203148"
+}, 
+{
+"@id": "node478019"
+}, 
+{
+"@id": "node478020"
+}, 
+{
+"@id": "node478021", 
+"@otu": "otu203188"
+}, 
+{
+"@id": "node478022", 
+"@otu": "otu203275"
+}, 
+{
+"@id": "node478023", 
+"@otu": "otu203157"
+}
+]
+}
+]
+}
+}
+}

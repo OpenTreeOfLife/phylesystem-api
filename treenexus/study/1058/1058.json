@@ -1,0 +1,1264 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Levy L., Castlebury L., M carris L., Meyer R., & Pimentel G. 2001. Internal Transcribed Spacer Sequence-Based Phylogeny and Polymerase Chain Reaction-Restriction Fragment Length Polymorphism Differentiation of Tilletia walkeri and T. indica. Phytopathology, 91(10): 935-940.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1094/PHYTO.2001.91.10.935", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S765", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1058", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2001, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 782848, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1058", 
+"otu": [
+{
+"@about": "#otu217582", 
+"@id": "otu217582", 
+"@label": "Tilletia indica", 
+"meta": [
+{
+"$": 534296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia indica BC388", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217583", 
+"@id": "otu217583", 
+"@label": "Tilletia walkeri", 
+"meta": [
+{
+"$": 514526, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia walkeri BC456", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217584", 
+"@id": "otu217584", 
+"@label": "Tilletia laevis", 
+"meta": [
+{
+"$": 125327, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia laevis V766", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217585", 
+"@id": "otu217585", 
+"@label": "Tilletia walkeri", 
+"meta": [
+{
+"$": 514526, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia walkeri BC447", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217586", 
+"@id": "otu217586", 
+"@label": "Tilletia indica", 
+"meta": [
+{
+"$": 534296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia indica BC386", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217587", 
+"@id": "otu217587", 
+"@label": "Tilletia bromi", 
+"meta": [
+{
+"$": 391968, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia bromi 148", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217588", 
+"@id": "otu217588", 
+"@label": "Tilletia indica", 
+"meta": [
+{
+"$": 534296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia indica LC1012", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217589", 
+"@id": "otu217589", 
+"@label": "Tilletia horrida", 
+"meta": [
+{
+"$": 250900, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia horrida 358", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217590", 
+"@id": "otu217590", 
+"@label": "Tilletia barclayana", 
+"meta": [
+{
+"$": 391969, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia barclayana 828", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217591", 
+"@id": "otu217591", 
+"@label": "Tilletia indica", 
+"meta": [
+{
+"$": 534296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia indica BC398", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217592", 
+"@id": "otu217592", 
+"@label": "Tilletia goloskokovii", 
+"meta": [
+{
+"$": 125326, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia goloskokovii 321", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217593", 
+"@id": "otu217593", 
+"@label": "Tilletia caries", 
+"meta": [
+{
+"$": 78367, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia tritici T1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217594", 
+"@id": "otu217594", 
+"@label": "Tilletia controversa", 
+"meta": [
+{
+"$": 78372, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia controversa V412", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217595", 
+"@id": "otu217595", 
+"@label": "Tilletia guyotiana", 
+"meta": [
+{
+"$": 3839896, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia guyotiana 171", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217596", 
+"@id": "otu217596", 
+"@label": "Tilletia indica", 
+"meta": [
+{
+"$": 534296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia indica BC405", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217597", 
+"@id": "otu217597", 
+"@label": "Tilletia walkeri", 
+"meta": [
+{
+"$": 514526, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia walkeri LC1123", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217598", 
+"@id": "otu217598", 
+"@label": "Tilletia walkeri", 
+"meta": [
+{
+"$": 514526, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia walkeri BC027", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217599", 
+"@id": "otu217599", 
+"@label": "Tilletia indica", 
+"meta": [
+{
+"$": 534296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia indica BC392", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217600", 
+"@id": "otu217600", 
+"@label": "Tilletia barclayana", 
+"meta": [
+{
+"$": 391969, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia barclyana 637", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217601", 
+"@id": "otu217601", 
+"@label": "Tilletia walkeri", 
+"meta": [
+{
+"$": 514526, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia walkeri BC449", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217602", 
+"@id": "otu217602", 
+"@label": "Tilletia horrida", 
+"meta": [
+{
+"$": 250900, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia horrida WSP 69539", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217603", 
+"@id": "otu217603", 
+"@label": "Tilletia barclayana", 
+"meta": [
+{
+"$": 391969, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia barclayana 832", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217604", 
+"@id": "otu217604", 
+"@label": "Tilletia horrida", 
+"meta": [
+{
+"$": 250900, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia horrida 338", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217605", 
+"@id": "otu217605", 
+"@label": "Tilletia walkeri", 
+"meta": [
+{
+"$": 514526, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia walkeri BC188", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217606", 
+"@id": "otu217606", 
+"@label": "Tilletia cerebrina", 
+"meta": [
+{
+"$": 125324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia cerebrina 168", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu217607", 
+"@id": "otu217607", 
+"@label": "Tilletia fusca", 
+"meta": [
+{
+"$": 125325, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tilletia fusca 141", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1058", 
+"@otus": "otus1058", 
+"tree": [
+{
+"@about": "#tree2037", 
+"@id": "tree2037", 
+"edge": [
+{
+"@id": "edge513767", 
+"@source": "node513766", 
+"@target": "node513767"
+}, 
+{
+"@id": "edge513768", 
+"@source": "node513766", 
+"@target": "node513768"
+}, 
+{
+"@id": "edge513769", 
+"@source": "node513768", 
+"@target": "node513769"
+}, 
+{
+"@id": "edge513770", 
+"@source": "node513769", 
+"@target": "node513770"
+}, 
+{
+"@id": "edge513771", 
+"@source": "node513769", 
+"@target": "node513771"
+}, 
+{
+"@id": "edge513772", 
+"@source": "node513771", 
+"@target": "node513772"
+}, 
+{
+"@id": "edge513773", 
+"@source": "node513772", 
+"@target": "node513773"
+}, 
+{
+"@id": "edge513774", 
+"@source": "node513773", 
+"@target": "node513774"
+}, 
+{
+"@id": "edge513775", 
+"@source": "node513773", 
+"@target": "node513775"
+}, 
+{
+"@id": "edge513776", 
+"@source": "node513772", 
+"@target": "node513776"
+}, 
+{
+"@id": "edge513777", 
+"@source": "node513771", 
+"@target": "node513777"
+}, 
+{
+"@id": "edge513778", 
+"@source": "node513777", 
+"@target": "node513778"
+}, 
+{
+"@id": "edge513779", 
+"@source": "node513778", 
+"@target": "node513779"
+}, 
+{
+"@id": "edge513780", 
+"@source": "node513778", 
+"@target": "node513780"
+}, 
+{
+"@id": "edge513781", 
+"@source": "node513778", 
+"@target": "node513781"
+}, 
+{
+"@id": "edge513782", 
+"@source": "node513778", 
+"@target": "node513782"
+}, 
+{
+"@id": "edge513783", 
+"@source": "node513778", 
+"@target": "node513783"
+}, 
+{
+"@id": "edge513784", 
+"@source": "node513778", 
+"@target": "node513784"
+}, 
+{
+"@id": "edge513785", 
+"@source": "node513778", 
+"@target": "node513785"
+}, 
+{
+"@id": "edge513786", 
+"@source": "node513785", 
+"@target": "node513786"
+}, 
+{
+"@id": "edge513787", 
+"@source": "node513785", 
+"@target": "node513787"
+}, 
+{
+"@id": "edge513788", 
+"@source": "node513785", 
+"@target": "node513788"
+}, 
+{
+"@id": "edge513789", 
+"@source": "node513785", 
+"@target": "node513789"
+}, 
+{
+"@id": "edge513790", 
+"@source": "node513785", 
+"@target": "node513790"
+}, 
+{
+"@id": "edge513791", 
+"@source": "node513785", 
+"@target": "node513791"
+}, 
+{
+"@id": "edge513792", 
+"@source": "node513777", 
+"@target": "node513792"
+}, 
+{
+"@id": "edge513793", 
+"@source": "node513792", 
+"@target": "node513793"
+}, 
+{
+"@id": "edge513794", 
+"@source": "node513793", 
+"@target": "node513794"
+}, 
+{
+"@id": "edge513795", 
+"@source": "node513794", 
+"@target": "node513795"
+}, 
+{
+"@id": "edge513796", 
+"@source": "node513795", 
+"@target": "node513796"
+}, 
+{
+"@id": "edge513797", 
+"@source": "node513795", 
+"@target": "node513797"
+}, 
+{
+"@id": "edge513798", 
+"@source": "node513797", 
+"@target": "node513798"
+}, 
+{
+"@id": "edge513799", 
+"@source": "node513798", 
+"@target": "node513799"
+}, 
+{
+"@id": "edge513800", 
+"@source": "node513799", 
+"@target": "node513800"
+}, 
+{
+"@id": "edge513801", 
+"@source": "node513799", 
+"@target": "node513801"
+}, 
+{
+"@id": "edge513802", 
+"@source": "node513798", 
+"@target": "node513802"
+}, 
+{
+"@id": "edge513803", 
+"@source": "node513797", 
+"@target": "node513803"
+}, 
+{
+"@id": "edge513804", 
+"@source": "node513794", 
+"@target": "node513804"
+}, 
+{
+"@id": "edge513805", 
+"@source": "node513793", 
+"@target": "node513805"
+}, 
+{
+"@id": "edge513806", 
+"@source": "node513792", 
+"@target": "node513806"
+}, 
+{
+"@id": "edge513807", 
+"@source": "node513768", 
+"@target": "node513807"
+}
+], 
+"meta": [
+{
+"$": "delete me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node513766", 
+"@root": "true"
+}, 
+{
+"@id": "node513767", 
+"@otu": "otu217603"
+}, 
+{
+"@id": "node513768"
+}, 
+{
+"@id": "node513769"
+}, 
+{
+"@id": "node513770", 
+"@otu": "otu217590"
+}, 
+{
+"@id": "node513771"
+}, 
+{
+"@id": "node513772"
+}, 
+{
+"@id": "node513773"
+}, 
+{
+"@id": "node513774", 
+"@otu": "otu217602"
+}, 
+{
+"@id": "node513775", 
+"@otu": "otu217604"
+}, 
+{
+"@id": "node513776", 
+"@otu": "otu217589"
+}, 
+{
+"@id": "node513777"
+}, 
+{
+"@id": "node513778"
+}, 
+{
+"@id": "node513779", 
+"@otu": "otu217586"
+}, 
+{
+"@id": "node513780", 
+"@otu": "otu217591"
+}, 
+{
+"@id": "node513781", 
+"@otu": "otu217596"
+}, 
+{
+"@id": "node513782", 
+"@otu": "otu217599"
+}, 
+{
+"@id": "node513783", 
+"@otu": "otu217588"
+}, 
+{
+"@id": "node513784", 
+"@otu": "otu217582"
+}, 
+{
+"@id": "node513785"
+}, 
+{
+"@id": "node513786", 
+"@otu": "otu217597"
+}, 
+{
+"@id": "node513787", 
+"@otu": "otu217605"
+}, 
+{
+"@id": "node513788", 
+"@otu": "otu217601"
+}, 
+{
+"@id": "node513789", 
+"@otu": "otu217598"
+}, 
+{
+"@id": "node513790", 
+"@otu": "otu217583"
+}, 
+{
+"@id": "node513791", 
+"@otu": "otu217585"
+}, 
+{
+"@id": "node513792"
+}, 
+{
+"@id": "node513793"
+}, 
+{
+"@id": "node513794"
+}, 
+{
+"@id": "node513795"
+}, 
+{
+"@id": "node513796", 
+"@otu": "otu217594"
+}, 
+{
+"@id": "node513797"
+}, 
+{
+"@id": "node513798"
+}, 
+{
+"@id": "node513799"
+}, 
+{
+"@id": "node513800", 
+"@otu": "otu217584"
+}, 
+{
+"@id": "node513801", 
+"@otu": "otu217593"
+}, 
+{
+"@id": "node513802", 
+"@otu": "otu217595"
+}, 
+{
+"@id": "node513803", 
+"@otu": "otu217587"
+}, 
+{
+"@id": "node513804", 
+"@otu": "otu217592"
+}, 
+{
+"@id": "node513805", 
+"@otu": "otu217606"
+}, 
+{
+"@id": "node513806", 
+"@otu": "otu217607"
+}, 
+{
+"@id": "node513807", 
+"@otu": "otu217600"
+}
+]
+}, 
+{
+"@about": "#tree5774", 
+"@id": "tree5774", 
+"edge": [
+{
+"@id": "edge987293", 
+"@length": 0.5, 
+"@source": "node987292", 
+"@target": "node987293"
+}, 
+{
+"@id": "edge987294", 
+"@source": "node987293", 
+"@target": "node987294"
+}, 
+{
+"@id": "edge987295", 
+"@source": "node987294", 
+"@target": "node987295"
+}, 
+{
+"@id": "edge987296", 
+"@source": "node987295", 
+"@target": "node987296"
+}, 
+{
+"@id": "edge987297", 
+"@source": "node987296", 
+"@target": "node987297"
+}, 
+{
+"@id": "edge987298", 
+"@source": "node987297", 
+"@target": "node987298"
+}, 
+{
+"@id": "edge987299", 
+"@source": "node987297", 
+"@target": "node987299"
+}, 
+{
+"@id": "edge987300", 
+"@source": "node987299", 
+"@target": "node987300"
+}, 
+{
+"@id": "edge987301", 
+"@source": "node987300", 
+"@target": "node987301"
+}, 
+{
+"@id": "edge987302", 
+"@source": "node987301", 
+"@target": "node987302"
+}, 
+{
+"@id": "edge987303", 
+"@source": "node987301", 
+"@target": "node987303"
+}, 
+{
+"@id": "edge987304", 
+"@source": "node987300", 
+"@target": "node987304"
+}, 
+{
+"@id": "edge987305", 
+"@source": "node987299", 
+"@target": "node987305"
+}, 
+{
+"@id": "edge987306", 
+"@source": "node987296", 
+"@target": "node987306"
+}, 
+{
+"@id": "edge987307", 
+"@source": "node987295", 
+"@target": "node987307"
+}, 
+{
+"@id": "edge987308", 
+"@source": "node987294", 
+"@target": "node987308"
+}, 
+{
+"@id": "edge987309", 
+"@source": "node987293", 
+"@target": "node987309"
+}, 
+{
+"@id": "edge987310", 
+"@source": "node987309", 
+"@target": "node987310"
+}, 
+{
+"@id": "edge987311", 
+"@source": "node987310", 
+"@target": "node987311"
+}, 
+{
+"@id": "edge987312", 
+"@source": "node987311", 
+"@target": "node987312"
+}, 
+{
+"@id": "edge987313", 
+"@source": "node987311", 
+"@target": "node987313"
+}, 
+{
+"@id": "edge987314", 
+"@source": "node987310", 
+"@target": "node987314"
+}, 
+{
+"@id": "edge987315", 
+"@source": "node987309", 
+"@target": "node987315"
+}, 
+{
+"@id": "edge987316", 
+"@source": "node987315", 
+"@target": "node987316"
+}, 
+{
+"@id": "edge987317", 
+"@source": "node987315", 
+"@target": "node987317"
+}, 
+{
+"@id": "edge987318", 
+"@source": "node987317", 
+"@target": "node987318"
+}, 
+{
+"@id": "edge987319", 
+"@length": 2.0, 
+"@source": "node987317", 
+"@target": "node987319"
+}, 
+{
+"@id": "edge987320", 
+"@source": "node987292", 
+"@target": "node987320"
+}, 
+{
+"@id": "edge987321", 
+"@source": "node987320", 
+"@target": "node987321"
+}, 
+{
+"@id": "edge987322", 
+"@source": "node987320", 
+"@target": "node987322"
+}, 
+{
+"@id": "edge987323", 
+"@source": "node987320", 
+"@target": "node987323"
+}, 
+{
+"@id": "edge987324", 
+"@source": "node987320", 
+"@target": "node987324"
+}, 
+{
+"@id": "edge987325", 
+"@source": "node987320", 
+"@target": "node987325"
+}, 
+{
+"@id": "edge987326", 
+"@source": "node987320", 
+"@target": "node987326"
+}, 
+{
+"@id": "edge987327", 
+"@source": "node987320", 
+"@target": "node987327"
+}, 
+{
+"@id": "edge987328", 
+"@source": "node987327", 
+"@target": "node987328"
+}, 
+{
+"@id": "edge987329", 
+"@source": "node987327", 
+"@target": "node987329"
+}, 
+{
+"@id": "edge987330", 
+"@source": "node987327", 
+"@target": "node987330"
+}, 
+{
+"@id": "edge987331", 
+"@source": "node987327", 
+"@target": "node987331"
+}, 
+{
+"@id": "edge987332", 
+"@source": "node987327", 
+"@target": "node987332"
+}, 
+{
+"@id": "edge987333", 
+"@source": "node987327", 
+"@target": "node987333"
+}
+], 
+"meta": [
+{
+"$": "node987292", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node987292", 
+"@root": "true"
+}, 
+{
+"@id": "node987293"
+}, 
+{
+"@id": "node987294"
+}, 
+{
+"@id": "node987295"
+}, 
+{
+"@id": "node987296"
+}, 
+{
+"@id": "node987297"
+}, 
+{
+"@id": "node987298", 
+"@otu": "otu217594"
+}, 
+{
+"@id": "node987299"
+}, 
+{
+"@id": "node987300"
+}, 
+{
+"@id": "node987301"
+}, 
+{
+"@id": "node987302", 
+"@otu": "otu217584"
+}, 
+{
+"@id": "node987303", 
+"@otu": "otu217593"
+}, 
+{
+"@id": "node987304", 
+"@otu": "otu217595"
+}, 
+{
+"@id": "node987305", 
+"@otu": "otu217587"
+}, 
+{
+"@id": "node987306", 
+"@otu": "otu217592"
+}, 
+{
+"@id": "node987307", 
+"@otu": "otu217606"
+}, 
+{
+"@id": "node987308", 
+"@otu": "otu217607"
+}, 
+{
+"@id": "node987309"
+}, 
+{
+"@id": "node987310"
+}, 
+{
+"@id": "node987311"
+}, 
+{
+"@id": "node987312", 
+"@otu": "otu217602"
+}, 
+{
+"@id": "node987313", 
+"@otu": "otu217604"
+}, 
+{
+"@id": "node987314", 
+"@otu": "otu217589"
+}, 
+{
+"@id": "node987315"
+}, 
+{
+"@id": "node987316", 
+"@otu": "otu217590"
+}, 
+{
+"@id": "node987317"
+}, 
+{
+"@id": "node987318", 
+"@otu": "otu217600"
+}, 
+{
+"@id": "node987319", 
+"@otu": "otu217603"
+}, 
+{
+"@id": "node987320"
+}, 
+{
+"@id": "node987321", 
+"@otu": "otu217586"
+}, 
+{
+"@id": "node987322", 
+"@otu": "otu217591"
+}, 
+{
+"@id": "node987323", 
+"@otu": "otu217596"
+}, 
+{
+"@id": "node987324", 
+"@otu": "otu217599"
+}, 
+{
+"@id": "node987325", 
+"@otu": "otu217588"
+}, 
+{
+"@id": "node987326", 
+"@otu": "otu217582"
+}, 
+{
+"@id": "node987327"
+}, 
+{
+"@id": "node987328", 
+"@otu": "otu217597"
+}, 
+{
+"@id": "node987329", 
+"@otu": "otu217605"
+}, 
+{
+"@id": "node987330", 
+"@otu": "otu217601"
+}, 
+{
+"@id": "node987331", 
+"@otu": "otu217598"
+}, 
+{
+"@id": "node987332", 
+"@otu": "otu217583"
+}, 
+{
+"@id": "node987333", 
+"@otu": "otu217585"
+}
+]
+}
+]
+}
+}
+}

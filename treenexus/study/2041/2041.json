@@ -1,0 +1,810 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Cornejo C., & Scheidegger C. 2010. Lobaria macaronesica sp. nov., and the phylogeny of Lobaria sect.  Lobaria (Lobariaceae) in Macaronesia. The Bryologist, 113(3).", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1639/0007-2745-133.x.page#", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10652", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2041", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2376626, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2041", 
+"otu": [
+{
+"@about": "#otu307525", 
+"@id": "otu307525", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica SG3 03a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307526", 
+"@id": "otu307526", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica ST1 11e", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307527", 
+"@id": "otu307527", 
+"@label": "Lobaria pulmonaria", 
+"meta": [
+{
+"$": 935683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria pulmonaria SP1 05e", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307528", 
+"@id": "otu307528", 
+"@label": "Lobaria immixta", 
+"meta": [
+{
+"$": 746269, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria immixta SH1 02g", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307529", 
+"@id": "otu307529", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica G38", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307530", 
+"@id": "otu307530", 
+"@label": "Lobaria immixta", 
+"meta": [
+{
+"$": 746269, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria immixta SG3 01a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307531", 
+"@id": "otu307531", 
+"@label": "Lobaria pseudopulmonaria", 
+"meta": [
+{
+"$": 730601, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria pseudopulmonaria CY 53", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307532", 
+"@id": "otu307532", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica SP2 21a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307533", 
+"@id": "otu307533", 
+"@label": "Lobaria immixta", 
+"meta": [
+{
+"$": 746269, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria immixta X3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307534", 
+"@id": "otu307534", 
+"@label": "Lobarina scrobiculata", 
+"meta": [
+{
+"$": 398836, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobarina scrobiculata RS 44", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307535", 
+"@id": "otu307535", 
+"@label": "Lobaria pulmonaria", 
+"meta": [
+{
+"$": 935683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria pulmonaria TK 01a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307536", 
+"@id": "otu307536", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica PM16 14b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307537", 
+"@id": "otu307537", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica SP3 01a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307538", 
+"@id": "otu307538", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica ST6 01a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307539", 
+"@id": "otu307539", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica PS19a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307540", 
+"@id": "otu307540", 
+"@label": "Lobaria immixta", 
+"meta": [
+{
+"$": 746269, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria immixta SH2 07d", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307541", 
+"@id": "otu307541", 
+"@label": "Lobaria immixta", 
+"meta": [
+{
+"$": 746269, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria immixta ST2 01g", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307542", 
+"@id": "otu307542", 
+"@label": "Lobaria pulmonaria", 
+"meta": [
+{
+"$": 935683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria pulmonaria SH1 02a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307543", 
+"@id": "otu307543", 
+"@label": "Lobaria macaronesica", 
+"meta": [
+{
+"$": 976678, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria macaronesica PM12 13c", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307544", 
+"@id": "otu307544", 
+"@label": "Lobarina scrobiculata", 
+"meta": [
+{
+"$": 398836, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobarina scrobiculata CB 02", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307545", 
+"@id": "otu307545", 
+"@label": "Lobaria pulmonaria", 
+"meta": [
+{
+"$": 935683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria pulmonaria SP1 01a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307546", 
+"@id": "otu307546", 
+"@label": "Lobaria immixta", 
+"meta": [
+{
+"$": 746269, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria immixta SP3 10a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu307547", 
+"@id": "otu307547", 
+"@label": "Lobaria pulmonaria", 
+"meta": [
+{
+"$": 935683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobaria pulmonaria PA a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2041", 
+"@otus": "otus2041", 
+"tree": [
+{
+"@id": "tree4201", 
+"edge": [
+{
+"@id": "edge779658", 
+"@length": 0.001061, 
+"@source": "node779657", 
+"@target": "node779658"
+}, 
+{
+"@id": "edge779659", 
+"@length": 5.026e-06, 
+"@source": "node779657", 
+"@target": "node779659"
+}, 
+{
+"@id": "edge779660", 
+"@source": "node779659", 
+"@target": "node779660"
+}, 
+{
+"@id": "edge779661", 
+"@source": "node779660", 
+"@target": "node779661"
+}, 
+{
+"@id": "edge779662", 
+"@length": 0.002139, 
+"@source": "node779661", 
+"@target": "node779662"
+}, 
+{
+"@id": "edge779663", 
+"@source": "node779662", 
+"@target": "node779663"
+}, 
+{
+"@id": "edge779664", 
+"@source": "node779662", 
+"@target": "node779664"
+}, 
+{
+"@id": "edge779665", 
+"@length": 0.121646, 
+"@source": "node779662", 
+"@target": "node779665"
+}, 
+{
+"@id": "edge779666", 
+"@length": 0.001066, 
+"@source": "node779661", 
+"@target": "node779666"
+}, 
+{
+"@id": "edge779667", 
+"@length": 0.012091, 
+"@source": "node779660", 
+"@target": "node779667"
+}, 
+{
+"@id": "edge779668", 
+"@source": "node779667", 
+"@target": "node779668"
+}, 
+{
+"@id": "edge779669", 
+"@source": "node779668", 
+"@target": "node779669"
+}, 
+{
+"@id": "edge779670", 
+"@source": "node779669", 
+"@target": "node779670"
+}, 
+{
+"@id": "edge779671", 
+"@length": 0.013244, 
+"@source": "node779670", 
+"@target": "node779671"
+}, 
+{
+"@id": "edge779672", 
+"@length": 0.028579, 
+"@source": "node779670", 
+"@target": "node779672"
+}, 
+{
+"@id": "edge779673", 
+"@length": 0.012178, 
+"@source": "node779670", 
+"@target": "node779673"
+}, 
+{
+"@id": "edge779674", 
+"@length": 0.029792, 
+"@source": "node779670", 
+"@target": "node779674"
+}, 
+{
+"@id": "edge779675", 
+"@length": 0.013219, 
+"@source": "node779669", 
+"@target": "node779675"
+}, 
+{
+"@id": "edge779676", 
+"@length": 0.008803, 
+"@source": "node779668", 
+"@target": "node779676"
+}, 
+{
+"@id": "edge779677", 
+"@length": 0.00107, 
+"@source": "node779676", 
+"@target": "node779677"
+}, 
+{
+"@id": "edge779678", 
+"@source": "node779676", 
+"@target": "node779678"
+}, 
+{
+"@id": "edge779679", 
+"@length": 0.00107, 
+"@source": "node779678", 
+"@target": "node779679"
+}, 
+{
+"@id": "edge779680", 
+"@source": "node779678", 
+"@target": "node779680"
+}, 
+{
+"@id": "edge779681", 
+"@source": "node779667", 
+"@target": "node779681"
+}, 
+{
+"@id": "edge779682", 
+"@length": 0.008803, 
+"@source": "node779681", 
+"@target": "node779682"
+}, 
+{
+"@id": "edge779683", 
+"@length": 0.022749, 
+"@source": "node779682", 
+"@target": "node779683"
+}, 
+{
+"@id": "edge779684", 
+"@source": "node779682", 
+"@target": "node779684"
+}, 
+{
+"@id": "edge779685", 
+"@length": 0.00107, 
+"@source": "node779684", 
+"@target": "node779685"
+}, 
+{
+"@id": "edge779686", 
+"@length": 0.53211, 
+"@source": "node779684", 
+"@target": "node779686"
+}, 
+{
+"@id": "edge779687", 
+"@length": 4.031e-08, 
+"@source": "node779682", 
+"@target": "node779687"
+}, 
+{
+"@id": "edge779688", 
+"@length": 0.53211, 
+"@source": "node779682", 
+"@target": "node779688"
+}, 
+{
+"@id": "edge779689", 
+"@length": 0.032251, 
+"@source": "node779681", 
+"@target": "node779689"
+}, 
+{
+"@id": "edge779690", 
+"@length": 0.001097, 
+"@source": "node779659", 
+"@target": "node779690"
+}, 
+{
+"@id": "edge779691", 
+"@length": 0.002215, 
+"@source": "node779690", 
+"@target": "node779691"
+}, 
+{
+"@id": "edge779692", 
+"@length": 0.040056, 
+"@source": "node779690", 
+"@target": "node779692"
+}, 
+{
+"@id": "edge779693", 
+"@length": 0.038785, 
+"@source": "node779690", 
+"@target": "node779693"
+}, 
+{
+"@id": "edge779694", 
+"@source": "node779659", 
+"@target": "node779694"
+}
+], 
+"node": [
+{
+"@id": "node779657", 
+"@root": "true"
+}, 
+{
+"@id": "node779658", 
+"@otu": "otu307537"
+}, 
+{
+"@id": "node779659"
+}, 
+{
+"@id": "node779660"
+}, 
+{
+"@id": "node779661"
+}, 
+{
+"@id": "node779662"
+}, 
+{
+"@id": "node779663", 
+"@otu": "otu307529"
+}, 
+{
+"@id": "node779664", 
+"@otu": "otu307538"
+}, 
+{
+"@id": "node779665", 
+"@otu": "otu307531"
+}, 
+{
+"@id": "node779666", 
+"@otu": "otu307536"
+}, 
+{
+"@id": "node779667"
+}, 
+{
+"@id": "node779668"
+}, 
+{
+"@id": "node779669"
+}, 
+{
+"@id": "node779670"
+}, 
+{
+"@id": "node779671", 
+"@otu": "otu307532"
+}, 
+{
+"@id": "node779672", 
+"@otu": "otu307547"
+}, 
+{
+"@id": "node779673", 
+"@otu": "otu307546"
+}, 
+{
+"@id": "node779674", 
+"@otu": "otu307545"
+}, 
+{
+"@id": "node779675", 
+"@otu": "otu307526"
+}, 
+{
+"@id": "node779676"
+}, 
+{
+"@id": "node779677", 
+"@otu": "otu307541"
+}, 
+{
+"@id": "node779678"
+}, 
+{
+"@id": "node779679", 
+"@otu": "otu307528"
+}, 
+{
+"@id": "node779680", 
+"@otu": "otu307540"
+}, 
+{
+"@id": "node779681"
+}, 
+{
+"@id": "node779682"
+}, 
+{
+"@id": "node779683", 
+"@otu": "otu307539"
+}, 
+{
+"@id": "node779684"
+}, 
+{
+"@id": "node779685", 
+"@otu": "otu307533"
+}, 
+{
+"@id": "node779686", 
+"@otu": "otu307544"
+}, 
+{
+"@id": "node779687", 
+"@otu": "otu307530"
+}, 
+{
+"@id": "node779688", 
+"@otu": "otu307534"
+}, 
+{
+"@id": "node779689", 
+"@otu": "otu307535"
+}, 
+{
+"@id": "node779690"
+}, 
+{
+"@id": "node779691", 
+"@otu": "otu307525"
+}, 
+{
+"@id": "node779692", 
+"@otu": "otu307527"
+}, 
+{
+"@id": "node779693", 
+"@otu": "otu307542"
+}, 
+{
+"@id": "node779694", 
+"@otu": "otu307543"
+}
+]
+}
+]
+}
+}
+}

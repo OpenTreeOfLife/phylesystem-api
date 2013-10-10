@@ -1,0 +1,218 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Kvist L. 1990. Revision of Heppiella (Gesneriaceae). Systematic Botany, 15: 720-735", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2307/2419166", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Jiabin Deng", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S170", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1523", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1990, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 457458, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "delete me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1523", 
+"otu": [
+{
+"@about": "#otu256874", 
+"@id": "otu256874", 
+"@label": "Heppiella ulmifolia", 
+"meta": [
+{
+"$": 40967, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Heppiella ulmifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu256875", 
+"@id": "otu256875", 
+"@label": "Heppiella verticillata", 
+"meta": [
+{
+"$": 725253, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Heppiella verticillata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu256876", 
+"@id": "otu256876", 
+"@label": "Heppiella viscida", 
+"meta": [
+{
+"$": 324015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Heppiella viscida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu256877", 
+"@id": "otu256877", 
+"@label": "Heppiella repens", 
+"meta": [
+{
+"$": 3885266, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Heppiella repens", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu256878", 
+"@id": "otu256878", 
+"@label": "Gloxinia", 
+"meta": [
+{
+"$": 477486, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gloxinia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1523", 
+"@otus": "otus1523", 
+"tree": [
+{
+"@id": "tree3045", 
+"edge": [
+{
+"@id": "edge629293", 
+"@source": "node629292", 
+"@target": "node629293"
+}, 
+{
+"@id": "edge629294", 
+"@source": "node629292", 
+"@target": "node629294"
+}, 
+{
+"@id": "edge629295", 
+"@source": "node629294", 
+"@target": "node629295"
+}, 
+{
+"@id": "edge629296", 
+"@source": "node629294", 
+"@target": "node629296"
+}, 
+{
+"@id": "edge629297", 
+"@source": "node629294", 
+"@target": "node629297"
+}, 
+{
+"@id": "edge629298", 
+"@source": "node629294", 
+"@target": "node629298"
+}
+], 
+"node": [
+{
+"@id": "node629292", 
+"@root": "true"
+}, 
+{
+"@id": "node629293", 
+"@otu": "otu256878"
+}, 
+{
+"@id": "node629294"
+}, 
+{
+"@id": "node629295", 
+"@otu": "otu256877"
+}, 
+{
+"@id": "node629296", 
+"@otu": "otu256875"
+}, 
+{
+"@id": "node629297", 
+"@otu": "otu256876"
+}, 
+{
+"@id": "node629298", 
+"@otu": "otu256874"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,785 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Kang J., Crous R., Old K., & Dudzinski M. 2001. Non-conspecificity of Cylindrocladium quinqueseptatum and Calonectria quinqueseptata based on b-tubulin gene phylogeny and morphology. Canadian Journal of Botany, 79(10): 1241-1247.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1139/cjb-79-10-1241", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S771", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2262", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2001, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1941671, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2262", 
+"otu": [
+{
+"@about": "#otu325946", 
+"@id": "otu325946", 
+"@label": "Fusarium nygamai", 
+"meta": [
+{
+"$": 584895, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fusarium nygamai", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325947", 
+"@id": "otu325947", 
+"@label": "Calonectria multiseptata", 
+"meta": [
+{
+"$": 566494, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria multiseptata 1589", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325948", 
+"@id": "otu325948", 
+"@label": "Cylindrocladium heptaseptatum", 
+"meta": [
+{
+"$": 724151, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium heptaseptatum 1003", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325949", 
+"@id": "otu325949", 
+"@label": "Calonectria rumohrae", 
+"meta": [
+{
+"$": 724153, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria rumohrae 218", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325950", 
+"@id": "otu325950", 
+"@label": "Calonectria rumohrae", 
+"meta": [
+{
+"$": 724153, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria rumohrae 215", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325951", 
+"@id": "otu325951", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 16550", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325952", 
+"@id": "otu325952", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 3201", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325953", 
+"@id": "otu325953", 
+"@label": "Cylindrocladium spathiphylli", 
+"meta": [
+{
+"$": 501536, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium spathiphylli", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325954", 
+"@id": "otu325954", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 759", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325955", 
+"@id": "otu325955", 
+"@label": "Cylindrocladium heptaseptatum", 
+"meta": [
+{
+"$": 724151, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cylindrocladium heptaseptatum 1002", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325956", 
+"@id": "otu325956", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 3210", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325957", 
+"@id": "otu325957", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 516", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325958", 
+"@id": "otu325958", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 3214", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325959", 
+"@id": "otu325959", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 3213", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325960", 
+"@id": "otu325960", 
+"@label": "Calonectria quinqueseptata", 
+"meta": [
+{
+"$": 570496, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria quinqueseptata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325961", 
+"@id": "otu325961", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 3216", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325962", 
+"@id": "otu325962", 
+"@label": "Calonectria multiseptata", 
+"meta": [
+{
+"$": 566494, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria multiseptata 1602", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325963", 
+"@id": "otu325963", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 3217", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325964", 
+"@id": "otu325964", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 582.50", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325965", 
+"@id": "otu325965", 
+"@label": "Calonectria rumohrae", 
+"meta": [
+{
+"$": 724153, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria rumohrae 1603", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325966", 
+"@id": "otu325966", 
+"@label": "Calonectria reteaudii", 
+"meta": [
+{
+"$": 1096937, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Calonectria reteaudii 3205", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2262", 
+"@otus": "otus2262", 
+"tree": [
+{
+"@about": "#tree4795", 
+"@id": "tree4795", 
+"edge": [
+{
+"@id": "edge843037", 
+"@source": "node843036", 
+"@target": "node843037"
+}, 
+{
+"@id": "edge843038", 
+"@source": "node843037", 
+"@target": "node843038"
+}, 
+{
+"@id": "edge843039", 
+"@source": "node843038", 
+"@target": "node843039"
+}, 
+{
+"@id": "edge843040", 
+"@source": "node843039", 
+"@target": "node843040"
+}, 
+{
+"@id": "edge843041", 
+"@source": "node843039", 
+"@target": "node843041"
+}, 
+{
+"@id": "edge843042", 
+"@source": "node843041", 
+"@target": "node843042"
+}, 
+{
+"@id": "edge843043", 
+"@source": "node843042", 
+"@target": "node843043"
+}, 
+{
+"@id": "edge843044", 
+"@source": "node843042", 
+"@target": "node843044"
+}, 
+{
+"@id": "edge843045", 
+"@source": "node843041", 
+"@target": "node843045"
+}, 
+{
+"@id": "edge843046", 
+"@source": "node843045", 
+"@target": "node843046"
+}, 
+{
+"@id": "edge843047", 
+"@source": "node843045", 
+"@target": "node843047"
+}, 
+{
+"@id": "edge843048", 
+"@source": "node843047", 
+"@target": "node843048"
+}, 
+{
+"@id": "edge843049", 
+"@source": "node843047", 
+"@target": "node843049"
+}, 
+{
+"@id": "edge843050", 
+"@source": "node843038", 
+"@target": "node843050"
+}, 
+{
+"@id": "edge843051", 
+"@source": "node843050", 
+"@target": "node843051"
+}, 
+{
+"@id": "edge843052", 
+"@source": "node843051", 
+"@target": "node843052"
+}, 
+{
+"@id": "edge843053", 
+"@source": "node843052", 
+"@target": "node843053"
+}, 
+{
+"@id": "edge843054", 
+"@source": "node843052", 
+"@target": "node843054"
+}, 
+{
+"@id": "edge843055", 
+"@source": "node843051", 
+"@target": "node843055"
+}, 
+{
+"@id": "edge843056", 
+"@source": "node843055", 
+"@target": "node843056"
+}, 
+{
+"@id": "edge843057", 
+"@source": "node843055", 
+"@target": "node843057"
+}, 
+{
+"@id": "edge843058", 
+"@source": "node843050", 
+"@target": "node843058"
+}, 
+{
+"@id": "edge843059", 
+"@source": "node843037", 
+"@target": "node843059"
+}, 
+{
+"@id": "edge843060", 
+"@source": "node843059", 
+"@target": "node843060"
+}, 
+{
+"@id": "edge843061", 
+"@source": "node843060", 
+"@target": "node843061"
+}, 
+{
+"@id": "edge843062", 
+"@source": "node843061", 
+"@target": "node843062"
+}, 
+{
+"@id": "edge843063", 
+"@source": "node843061", 
+"@target": "node843063"
+}, 
+{
+"@id": "edge843064", 
+"@source": "node843063", 
+"@target": "node843064"
+}, 
+{
+"@id": "edge843065", 
+"@source": "node843063", 
+"@target": "node843065"
+}, 
+{
+"@id": "edge843066", 
+"@source": "node843063", 
+"@target": "node843066"
+}, 
+{
+"@id": "edge843067", 
+"@source": "node843061", 
+"@target": "node843067"
+}, 
+{
+"@id": "edge843068", 
+"@source": "node843060", 
+"@target": "node843068"
+}, 
+{
+"@id": "edge843069", 
+"@source": "node843068", 
+"@target": "node843069"
+}, 
+{
+"@id": "edge843070", 
+"@source": "node843069", 
+"@target": "node843070"
+}, 
+{
+"@id": "edge843071", 
+"@source": "node843069", 
+"@target": "node843071"
+}, 
+{
+"@id": "edge843072", 
+"@source": "node843068", 
+"@target": "node843072"
+}, 
+{
+"@id": "edge843073", 
+"@source": "node843059", 
+"@target": "node843073"
+}, 
+{
+"@id": "edge843074", 
+"@source": "node843036", 
+"@target": "node843074"
+}
+], 
+"meta": [
+{
+"$": "node843037", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "b-tub", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node843036", 
+"@root": "true"
+}, 
+{
+"@id": "node843037"
+}, 
+{
+"@id": "node843038"
+}, 
+{
+"@id": "node843039"
+}, 
+{
+"@id": "node843040", 
+"@otu": "otu325953"
+}, 
+{
+"@id": "node843041"
+}, 
+{
+"@id": "node843042"
+}, 
+{
+"@id": "node843043", 
+"@otu": "otu325955"
+}, 
+{
+"@id": "node843044", 
+"@otu": "otu325948"
+}, 
+{
+"@id": "node843045"
+}, 
+{
+"@id": "node843046", 
+"@otu": "otu325965"
+}, 
+{
+"@id": "node843047"
+}, 
+{
+"@id": "node843048", 
+"@otu": "otu325950"
+}, 
+{
+"@id": "node843049", 
+"@otu": "otu325949"
+}, 
+{
+"@id": "node843050"
+}, 
+{
+"@id": "node843051"
+}, 
+{
+"@id": "node843052"
+}, 
+{
+"@id": "node843053", 
+"@otu": "otu325947"
+}, 
+{
+"@id": "node843054", 
+"@otu": "otu325962"
+}, 
+{
+"@id": "node843055"
+}, 
+{
+"@id": "node843056", 
+"@otu": "otu325957"
+}, 
+{
+"@id": "node843057", 
+"@otu": "otu325954"
+}, 
+{
+"@id": "node843058", 
+"@otu": "otu325951"
+}, 
+{
+"@id": "node843059"
+}, 
+{
+"@id": "node843060"
+}, 
+{
+"@id": "node843061"
+}, 
+{
+"@id": "node843062", 
+"@otu": "otu325963"
+}, 
+{
+"@id": "node843063"
+}, 
+{
+"@id": "node843064", 
+"@otu": "otu325958"
+}, 
+{
+"@id": "node843065", 
+"@otu": "otu325966"
+}, 
+{
+"@id": "node843066", 
+"@otu": "otu325952"
+}, 
+{
+"@id": "node843067", 
+"@otu": "otu325964"
+}, 
+{
+"@id": "node843068"
+}, 
+{
+"@id": "node843069"
+}, 
+{
+"@id": "node843070", 
+"@otu": "otu325961"
+}, 
+{
+"@id": "node843071", 
+"@otu": "otu325959"
+}, 
+{
+"@id": "node843072", 
+"@otu": "otu325956"
+}, 
+{
+"@id": "node843073", 
+"@otu": "otu325960"
+}, 
+{
+"@id": "node843074", 
+"@otu": "otu325946"
+}
+]
+}
+]
+}
+}
+}

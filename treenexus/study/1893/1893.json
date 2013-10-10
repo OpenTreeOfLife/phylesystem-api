@@ -1,0 +1,1204 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Zhang, L. B., Simmons, M. P., Kocyan, A., & Renner, S. S. (2006). Phylogeny of the Cucurbitales based on DNA sequences of nine loci from three genomes: implications for morphological and sexual system evolution. Molecular phylogenetics and evolution, 39(2), 305-322.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.ympev.2005.10.002", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S2372", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1893", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2006, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 34029, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1893", 
+"otu": [
+{
+"@about": "#otu288959", 
+"@id": "otu288959", 
+"@label": "Anisophyllea corneri", 
+"meta": [
+{
+"$": 773847, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Anisophyllea corneri", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288960", 
+"@id": "otu288960", 
+"@label": "Anisophyllea fallax", 
+"meta": [
+{
+"$": 816966, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Anisophyllea fallax", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288961", 
+"@id": "otu288961", 
+"@label": "Combretocarpus rotundatus", 
+"meta": [
+{
+"$": 163839, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Combretocarpus rotundatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288962", 
+"@id": "otu288962", 
+"@label": "Begonia herbacea", 
+"meta": [
+{
+"$": 122447, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Begonia herbacea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288963", 
+"@id": "otu288963", 
+"@label": "Begonia oxyloba", 
+"meta": [
+{
+"$": 122449, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Begonia oxyloba", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288964", 
+"@id": "otu288964", 
+"@label": "Hillebrandia sandwicensis", 
+"meta": [
+{
+"$": 644037, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hillebrandia sandwicensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288965", 
+"@id": "otu288965", 
+"@label": "Datisca cannabina", 
+"meta": [
+{
+"$": 784109, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Datisca cannabina", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288966", 
+"@id": "otu288966", 
+"@label": "Datisca glomerata", 
+"meta": [
+{
+"$": 784108, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Datisca glomerata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288967", 
+"@id": "otu288967", 
+"@label": "Octomeles sumatrana", 
+"meta": [
+{
+"$": 784121, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Octomeles sumatrana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288968", 
+"@id": "otu288968", 
+"@label": "Tetrameles nudiflora", 
+"meta": [
+{
+"$": 784120, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tetrameles nudiflora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288969", 
+"@id": "otu288969", 
+"@label": "Coccinia sessilifolia", 
+"meta": [
+{
+"$": 132035, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coccinia sessilifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288970", 
+"@id": "otu288970", 
+"@label": "Lagenaria breviflora", 
+"meta": [
+{
+"$": 610734, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lagenaria breviflora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288971", 
+"@id": "otu288971", 
+"@label": "Dendrosicyos socotranus", 
+"meta": [
+{
+"$": 809057, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dendrosicyos socotranus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288972", 
+"@id": "otu288972", 
+"@label": "Gurania tubulosa", 
+"meta": [
+{
+"$": 783941, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gurania tubulosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288973", 
+"@id": "otu288973", 
+"@label": "Seyrigia humbertii", 
+"meta": [
+{
+"$": 210296, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Seyrigia humbertii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288974", 
+"@id": "otu288974", 
+"@label": "Ecballium elaterium", 
+"meta": [
+{
+"$": 238160, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ecballium elaterium", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288975", 
+"@id": "otu288975", 
+"@label": "Marah fabaceus", 
+"meta": [
+{
+"$": 696888, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Marah fabaceous", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288976", 
+"@id": "otu288976", 
+"@label": "Schizopepon bryoniifolius", 
+"meta": [
+{
+"$": 132044, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Schizopepon bryoniifolius", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288977", 
+"@id": "otu288977", 
+"@label": "Gynostemma pentaphyllum", 
+"meta": [
+{
+"$": 493377, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gynostemma pentaphyllum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288978", 
+"@id": "otu288978", 
+"@label": "Neoalsomitra sarcophylla", 
+"meta": [
+{
+"$": 644032, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Neoalsomitra sarcophylla", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288979", 
+"@id": "otu288979", 
+"@label": "Xerosicyos danguyi", 
+"meta": [
+{
+"$": 203874, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Xerosicyos danguyi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288980", 
+"@id": "otu288980", 
+"@label": "Coriaria myrtifolia", 
+"meta": [
+{
+"$": 439725, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coriaria myrtifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288981", 
+"@id": "otu288981", 
+"@label": "Coriaria nepalensis", 
+"meta": [
+{
+"$": 999056, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coriaria nepalensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288982", 
+"@id": "otu288982", 
+"@label": "Coriaria ruscifolia", 
+"meta": [
+{
+"$": 999058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coriaria ruscifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288983", 
+"@id": "otu288983", 
+"@label": "Coriaria sarmentosa", 
+"meta": [
+{
+"$": 493278, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Coriaria sarmentosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288984", 
+"@id": "otu288984", 
+"@label": "Corynocarpus laevigatus", 
+"meta": [
+{
+"$": 253321, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Corynocarpus laevigatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288985", 
+"@id": "otu288985", 
+"@label": "Fagus grandifolia", 
+"meta": [
+{
+"$": 422459, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Fagus grandifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288986", 
+"@id": "otu288986", 
+"@label": "Juglans nigra", 
+"meta": [
+{
+"$": 1072887, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Juglans nigra", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288987", 
+"@id": "otu288987", 
+"@label": "Prunus persica", 
+"meta": [
+{
+"$": 259054, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Prunus persica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288988", 
+"@id": "otu288988", 
+"@label": "Ziziphus obtusifolia", 
+"meta": [
+{
+"$": 1077386, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ziziphus obtusifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288989", 
+"@id": "otu288989", 
+"@label": "Brexia madagascariensis", 
+"meta": [
+{
+"$": 608775, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Brexia madagascariensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288990", 
+"@id": "otu288990", 
+"@label": "Oxalis stricta", 
+"meta": [
+{
+"$": 237293, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oxalis stricta", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288991", 
+"@id": "otu288991", 
+"@label": "Glycine max", 
+"meta": [
+{
+"$": 681762, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Glycine max", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu288992", 
+"@id": "otu288992", 
+"@label": "Larrea tridentata", 
+"meta": [
+{
+"$": 185815, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Larrea tridentata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1893", 
+"@otus": "otus1893", 
+"tree": [
+{
+"@about": "#tree3865", 
+"@id": "tree3865", 
+"edge": [
+{
+"@id": "edge725996", 
+"@source": "node725995", 
+"@target": "node725996"
+}, 
+{
+"@id": "edge725997", 
+"@source": "node725996", 
+"@target": "node725997"
+}, 
+{
+"@id": "edge725998", 
+"@source": "node725997", 
+"@target": "node725998"
+}, 
+{
+"@id": "edge725999", 
+"@source": "node725998", 
+"@target": "node725999"
+}, 
+{
+"@id": "edge726000", 
+"@source": "node725999", 
+"@target": "node726000"
+}, 
+{
+"@id": "edge726001", 
+"@source": "node726000", 
+"@target": "node726001"
+}, 
+{
+"@id": "edge726002", 
+"@source": "node726001", 
+"@target": "node726002"
+}, 
+{
+"@id": "edge726003", 
+"@source": "node726001", 
+"@target": "node726003"
+}, 
+{
+"@id": "edge726004", 
+"@source": "node726000", 
+"@target": "node726004"
+}, 
+{
+"@id": "edge726005", 
+"@source": "node725999", 
+"@target": "node726005"
+}, 
+{
+"@id": "edge726006", 
+"@source": "node726005", 
+"@target": "node726006"
+}, 
+{
+"@id": "edge726007", 
+"@source": "node726006", 
+"@target": "node726007"
+}, 
+{
+"@id": "edge726008", 
+"@source": "node726007", 
+"@target": "node726008"
+}, 
+{
+"@id": "edge726009", 
+"@source": "node726008", 
+"@target": "node726009"
+}, 
+{
+"@id": "edge726010", 
+"@source": "node726009", 
+"@target": "node726010"
+}, 
+{
+"@id": "edge726011", 
+"@source": "node726010", 
+"@target": "node726011"
+}, 
+{
+"@id": "edge726012", 
+"@source": "node726010", 
+"@target": "node726012"
+}, 
+{
+"@id": "edge726013", 
+"@source": "node726009", 
+"@target": "node726013"
+}, 
+{
+"@id": "edge726014", 
+"@source": "node726008", 
+"@target": "node726014"
+}, 
+{
+"@id": "edge726015", 
+"@source": "node726014", 
+"@target": "node726015"
+}, 
+{
+"@id": "edge726016", 
+"@source": "node726014", 
+"@target": "node726016"
+}, 
+{
+"@id": "edge726017", 
+"@source": "node726007", 
+"@target": "node726017"
+}, 
+{
+"@id": "edge726018", 
+"@source": "node726017", 
+"@target": "node726018"
+}, 
+{
+"@id": "edge726019", 
+"@source": "node726017", 
+"@target": "node726019"
+}, 
+{
+"@id": "edge726020", 
+"@source": "node726006", 
+"@target": "node726020"
+}, 
+{
+"@id": "edge726021", 
+"@source": "node726020", 
+"@target": "node726021"
+}, 
+{
+"@id": "edge726022", 
+"@source": "node726021", 
+"@target": "node726022"
+}, 
+{
+"@id": "edge726023", 
+"@source": "node726022", 
+"@target": "node726023"
+}, 
+{
+"@id": "edge726024", 
+"@source": "node726023", 
+"@target": "node726024"
+}, 
+{
+"@id": "edge726025", 
+"@source": "node726023", 
+"@target": "node726025"
+}, 
+{
+"@id": "edge726026", 
+"@source": "node726022", 
+"@target": "node726026"
+}, 
+{
+"@id": "edge726027", 
+"@source": "node726026", 
+"@target": "node726027"
+}, 
+{
+"@id": "edge726028", 
+"@source": "node726026", 
+"@target": "node726028"
+}, 
+{
+"@id": "edge726029", 
+"@source": "node726028", 
+"@target": "node726029"
+}, 
+{
+"@id": "edge726030", 
+"@source": "node726028", 
+"@target": "node726030"
+}, 
+{
+"@id": "edge726031", 
+"@source": "node726021", 
+"@target": "node726031"
+}, 
+{
+"@id": "edge726032", 
+"@source": "node726021", 
+"@target": "node726032"
+}, 
+{
+"@id": "edge726033", 
+"@source": "node726021", 
+"@target": "node726033"
+}, 
+{
+"@id": "edge726034", 
+"@source": "node726020", 
+"@target": "node726034"
+}, 
+{
+"@id": "edge726035", 
+"@source": "node726034", 
+"@target": "node726035"
+}, 
+{
+"@id": "edge726036", 
+"@source": "node726035", 
+"@target": "node726036"
+}, 
+{
+"@id": "edge726037", 
+"@source": "node726035", 
+"@target": "node726037"
+}, 
+{
+"@id": "edge726038", 
+"@source": "node726034", 
+"@target": "node726038"
+}, 
+{
+"@id": "edge726039", 
+"@source": "node726005", 
+"@target": "node726039"
+}, 
+{
+"@id": "edge726040", 
+"@source": "node726039", 
+"@target": "node726040"
+}, 
+{
+"@id": "edge726041", 
+"@source": "node726040", 
+"@target": "node726041"
+}, 
+{
+"@id": "edge726042", 
+"@source": "node726041", 
+"@target": "node726042"
+}, 
+{
+"@id": "edge726043", 
+"@source": "node726041", 
+"@target": "node726043"
+}, 
+{
+"@id": "edge726044", 
+"@source": "node726040", 
+"@target": "node726044"
+}, 
+{
+"@id": "edge726045", 
+"@source": "node726044", 
+"@target": "node726045"
+}, 
+{
+"@id": "edge726046", 
+"@source": "node726044", 
+"@target": "node726046"
+}, 
+{
+"@id": "edge726047", 
+"@source": "node726039", 
+"@target": "node726047"
+}, 
+{
+"@id": "edge726048", 
+"@source": "node725998", 
+"@target": "node726048"
+}, 
+{
+"@id": "edge726049", 
+"@source": "node726048", 
+"@target": "node726049"
+}, 
+{
+"@id": "edge726050", 
+"@source": "node726048", 
+"@target": "node726050"
+}, 
+{
+"@id": "edge726051", 
+"@source": "node725997", 
+"@target": "node726051"
+}, 
+{
+"@id": "edge726052", 
+"@source": "node726051", 
+"@target": "node726052"
+}, 
+{
+"@id": "edge726053", 
+"@source": "node726051", 
+"@target": "node726053"
+}, 
+{
+"@id": "edge726054", 
+"@source": "node725996", 
+"@target": "node726054"
+}, 
+{
+"@id": "edge726055", 
+"@source": "node726054", 
+"@target": "node726055"
+}, 
+{
+"@id": "edge726056", 
+"@source": "node726054", 
+"@target": "node726056"
+}, 
+{
+"@id": "edge726057", 
+"@source": "node725995", 
+"@target": "node726057"
+}, 
+{
+"@id": "edge726058", 
+"@source": "node725995", 
+"@target": "node726058"
+}
+], 
+"meta": [
+{
+"$": "node725999", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node725995", 
+"@root": "true"
+}, 
+{
+"@id": "node725996"
+}, 
+{
+"@id": "node725997"
+}, 
+{
+"@id": "node725998"
+}, 
+{
+"@id": "node725999"
+}, 
+{
+"@id": "node726000"
+}, 
+{
+"@id": "node726001"
+}, 
+{
+"@id": "node726002", 
+"@otu": "otu288959"
+}, 
+{
+"@id": "node726003", 
+"@otu": "otu288960"
+}, 
+{
+"@id": "node726004", 
+"@otu": "otu288961"
+}, 
+{
+"@id": "node726005"
+}, 
+{
+"@id": "node726006"
+}, 
+{
+"@id": "node726007"
+}, 
+{
+"@id": "node726008"
+}, 
+{
+"@id": "node726009"
+}, 
+{
+"@id": "node726010"
+}, 
+{
+"@id": "node726011", 
+"@otu": "otu288962"
+}, 
+{
+"@id": "node726012", 
+"@otu": "otu288963"
+}, 
+{
+"@id": "node726013", 
+"@otu": "otu288964"
+}, 
+{
+"@id": "node726014"
+}, 
+{
+"@id": "node726015", 
+"@otu": "otu288965"
+}, 
+{
+"@id": "node726016", 
+"@otu": "otu288966"
+}, 
+{
+"@id": "node726017"
+}, 
+{
+"@id": "node726018", 
+"@otu": "otu288967"
+}, 
+{
+"@id": "node726019", 
+"@otu": "otu288968"
+}, 
+{
+"@id": "node726020"
+}, 
+{
+"@id": "node726021"
+}, 
+{
+"@id": "node726022"
+}, 
+{
+"@id": "node726023"
+}, 
+{
+"@id": "node726024", 
+"@otu": "otu288969"
+}, 
+{
+"@id": "node726025", 
+"@otu": "otu288970"
+}, 
+{
+"@id": "node726026"
+}, 
+{
+"@id": "node726027", 
+"@otu": "otu288971"
+}, 
+{
+"@id": "node726028"
+}, 
+{
+"@id": "node726029", 
+"@otu": "otu288972"
+}, 
+{
+"@id": "node726030", 
+"@otu": "otu288973"
+}, 
+{
+"@id": "node726031", 
+"@otu": "otu288974"
+}, 
+{
+"@id": "node726032", 
+"@otu": "otu288975"
+}, 
+{
+"@id": "node726033", 
+"@otu": "otu288976"
+}, 
+{
+"@id": "node726034"
+}, 
+{
+"@id": "node726035"
+}, 
+{
+"@id": "node726036", 
+"@otu": "otu288977"
+}, 
+{
+"@id": "node726037", 
+"@otu": "otu288978"
+}, 
+{
+"@id": "node726038", 
+"@otu": "otu288979"
+}, 
+{
+"@id": "node726039"
+}, 
+{
+"@id": "node726040"
+}, 
+{
+"@id": "node726041"
+}, 
+{
+"@id": "node726042", 
+"@otu": "otu288980"
+}, 
+{
+"@id": "node726043", 
+"@otu": "otu288981"
+}, 
+{
+"@id": "node726044"
+}, 
+{
+"@id": "node726045", 
+"@otu": "otu288982"
+}, 
+{
+"@id": "node726046", 
+"@otu": "otu288983"
+}, 
+{
+"@id": "node726047", 
+"@otu": "otu288984"
+}, 
+{
+"@id": "node726048"
+}, 
+{
+"@id": "node726049", 
+"@otu": "otu288985"
+}, 
+{
+"@id": "node726050", 
+"@otu": "otu288986"
+}, 
+{
+"@id": "node726051"
+}, 
+{
+"@id": "node726052", 
+"@otu": "otu288987"
+}, 
+{
+"@id": "node726053", 
+"@otu": "otu288988"
+}, 
+{
+"@id": "node726054"
+}, 
+{
+"@id": "node726055", 
+"@otu": "otu288989"
+}, 
+{
+"@id": "node726056", 
+"@otu": "otu288990"
+}, 
+{
+"@id": "node726057", 
+"@otu": "otu288991"
+}, 
+{
+"@id": "node726058", 
+"@otu": "otu288992"
+}
+]
+}
+]
+}
+}
+}

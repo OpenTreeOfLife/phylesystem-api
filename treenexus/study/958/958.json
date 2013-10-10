@@ -1,0 +1,736 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Ott S., Brinkmann M., Wirtz N., & Lumbsch H. 2004. Mitochondrial and nuclear ribosomal DNA data do not support the separation of the Antartic lichens Umbilicaria kappenii and Umbilicaria antarctica as distinct species. The Lichenologist, Volume: 36   Pages: 227-234", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1017/S0024282904014306", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1182", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "958", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2004, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 962314, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "mtLSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus958", 
+"otu": [
+{
+"@about": "#otu208693", 
+"@id": "otu208693", 
+"@label": "Umbilicaria nylanderiana", 
+"meta": [
+{
+"$": 114064, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria nylanderiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208694", 
+"@id": "otu208694", 
+"@label": "Umbilicaria umbilicarioides", 
+"meta": [
+{
+"$": 114065, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria umbilicarioides", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208695", 
+"@id": "otu208695", 
+"@label": "Umbilicaria decussata", 
+"meta": [
+{
+"$": 1011707, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria decussata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208696", 
+"@id": "otu208696", 
+"@label": "Umbilicaria kappenii", 
+"meta": [
+{
+"$": 1041254, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria kappenii 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208697", 
+"@id": "otu208697", 
+"@label": "Umbilicaria kappenii", 
+"meta": [
+{
+"$": 1041254, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria kappenii 4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208698", 
+"@id": "otu208698", 
+"@label": "Umbilicaria antarctica", 
+"meta": [
+{
+"$": 1011701, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria antarctica 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208699", 
+"@id": "otu208699", 
+"@label": "Umbilicaria antarctica", 
+"meta": [
+{
+"$": 1011701, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria antarctica 5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208700", 
+"@id": "otu208700", 
+"@label": "Umbilicaria krascheninnikovii", 
+"meta": [
+{
+"$": 516643, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria krascheninnikovii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208701", 
+"@id": "otu208701", 
+"@label": "Umbilicaria antarctica", 
+"meta": [
+{
+"$": 1011701, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria antarctica 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208702", 
+"@id": "otu208702", 
+"@label": "Umbilicaria kappenii", 
+"meta": [
+{
+"$": 1041254, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria kappenii 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208703", 
+"@id": "otu208703", 
+"@label": "Umbilicaria kappenii", 
+"meta": [
+{
+"$": 1041254, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria kappenii 3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208704", 
+"@id": "otu208704", 
+"@label": "Umbilicaria antarctica", 
+"meta": [
+{
+"$": 1011701, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria antarctica 6", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208705", 
+"@id": "otu208705", 
+"@label": "Umbilicaria antarctica", 
+"meta": [
+{
+"$": 1011701, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria antarctica 4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208706", 
+"@id": "otu208706", 
+"@label": "Umbilicaria antarctica", 
+"meta": [
+{
+"$": 1011701, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbilicaria antarctica 3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees958", 
+"@otus": "otus958", 
+"tree": [
+{
+"@about": "#tree1886", 
+"@id": "tree1886", 
+"edge": [
+{
+"@id": "edge494949", 
+"@source": "node494948", 
+"@target": "node494949"
+}, 
+{
+"@id": "edge494950", 
+"@source": "node494948", 
+"@target": "node494950"
+}, 
+{
+"@id": "edge494951", 
+"@source": "node494950", 
+"@target": "node494951"
+}, 
+{
+"@id": "edge494952", 
+"@source": "node494950", 
+"@target": "node494952"
+}, 
+{
+"@id": "edge494953", 
+"@source": "node494950", 
+"@target": "node494953"
+}, 
+{
+"@id": "edge494954", 
+"@source": "node494950", 
+"@target": "node494954"
+}, 
+{
+"@id": "edge494955", 
+"@source": "node494950", 
+"@target": "node494955"
+}, 
+{
+"@id": "edge494956", 
+"@source": "node494950", 
+"@target": "node494956"
+}, 
+{
+"@id": "edge494957", 
+"@source": "node494950", 
+"@target": "node494957"
+}, 
+{
+"@id": "edge494958", 
+"@source": "node494957", 
+"@target": "node494958"
+}, 
+{
+"@id": "edge494959", 
+"@source": "node494957", 
+"@target": "node494959"
+}, 
+{
+"@id": "edge494960", 
+"@source": "node494959", 
+"@target": "node494960"
+}, 
+{
+"@id": "edge494961", 
+"@source": "node494959", 
+"@target": "node494961"
+}, 
+{
+"@id": "edge494962", 
+"@source": "node494961", 
+"@target": "node494962"
+}, 
+{
+"@id": "edge494963", 
+"@source": "node494961", 
+"@target": "node494963"
+}, 
+{
+"@id": "edge494964", 
+"@source": "node494963", 
+"@target": "node494964"
+}, 
+{
+"@id": "edge494965", 
+"@source": "node494963", 
+"@target": "node494965"
+}, 
+{
+"@id": "edge494966", 
+"@source": "node494948", 
+"@target": "node494966"
+}, 
+{
+"@id": "edge494967", 
+"@source": "node494966", 
+"@target": "node494967"
+}, 
+{
+"@id": "edge494968", 
+"@source": "node494966", 
+"@target": "node494968"
+}
+], 
+"meta": [
+{
+"$": "delete me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node494948", 
+"@root": "true"
+}, 
+{
+"@id": "node494949", 
+"@otu": "otu208701"
+}, 
+{
+"@id": "node494950"
+}, 
+{
+"@id": "node494951", 
+"@otu": "otu208698"
+}, 
+{
+"@id": "node494952", 
+"@otu": "otu208699"
+}, 
+{
+"@id": "node494953", 
+"@otu": "otu208704"
+}, 
+{
+"@id": "node494954", 
+"@otu": "otu208702"
+}, 
+{
+"@id": "node494955", 
+"@otu": "otu208696"
+}, 
+{
+"@id": "node494956", 
+"@otu": "otu208697"
+}, 
+{
+"@id": "node494957"
+}, 
+{
+"@id": "node494958", 
+"@otu": "otu208703"
+}, 
+{
+"@id": "node494959"
+}, 
+{
+"@id": "node494960", 
+"@otu": "otu208693"
+}, 
+{
+"@id": "node494961"
+}, 
+{
+"@id": "node494962", 
+"@otu": "otu208694"
+}, 
+{
+"@id": "node494963"
+}, 
+{
+"@id": "node494964", 
+"@otu": "otu208700"
+}, 
+{
+"@id": "node494965", 
+"@otu": "otu208695"
+}, 
+{
+"@id": "node494966"
+}, 
+{
+"@id": "node494967", 
+"@otu": "otu208706"
+}, 
+{
+"@id": "node494968", 
+"@otu": "otu208705"
+}
+]
+}, 
+{
+"@about": "#tree5753", 
+"@id": "tree5753", 
+"edge": [
+{
+"@id": "edge985108", 
+"@source": "node985107", 
+"@target": "node985108"
+}, 
+{
+"@id": "edge985109", 
+"@source": "node985108", 
+"@target": "node985109"
+}, 
+{
+"@id": "edge985110", 
+"@source": "node985109", 
+"@target": "node985110"
+}, 
+{
+"@id": "edge985111", 
+"@source": "node985109", 
+"@target": "node985111"
+}, 
+{
+"@id": "edge985112", 
+"@source": "node985111", 
+"@target": "node985112"
+}, 
+{
+"@id": "edge985113", 
+"@source": "node985111", 
+"@target": "node985113"
+}, 
+{
+"@id": "edge985114", 
+"@source": "node985108", 
+"@target": "node985114"
+}, 
+{
+"@id": "edge985115", 
+"@source": "node985114", 
+"@target": "node985115"
+}, 
+{
+"@id": "edge985116", 
+"@source": "node985114", 
+"@target": "node985116"
+}, 
+{
+"@id": "edge985117", 
+"@source": "node985116", 
+"@target": "node985117"
+}, 
+{
+"@id": "edge985118", 
+"@source": "node985116", 
+"@target": "node985118"
+}, 
+{
+"@id": "edge985119", 
+"@source": "node985116", 
+"@target": "node985119"
+}, 
+{
+"@id": "edge985120", 
+"@source": "node985116", 
+"@target": "node985120"
+}, 
+{
+"@id": "edge985121", 
+"@source": "node985116", 
+"@target": "node985121"
+}, 
+{
+"@id": "edge985122", 
+"@source": "node985116", 
+"@target": "node985122"
+}, 
+{
+"@id": "edge985123", 
+"@source": "node985116", 
+"@target": "node985123"
+}, 
+{
+"@id": "edge985124", 
+"@source": "node985123", 
+"@target": "node985124"
+}, 
+{
+"@id": "edge985125", 
+"@source": "node985123", 
+"@target": "node985125"
+}, 
+{
+"@id": "edge985126", 
+"@source": "node985125", 
+"@target": "node985126"
+}, 
+{
+"@id": "edge985127", 
+"@source": "node985125", 
+"@target": "node985127"
+}, 
+{
+"@id": "edge985128", 
+"@source": "node985107", 
+"@target": "node985128"
+}
+], 
+"meta": [
+{
+"$": "node985114", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "mtLSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node985107", 
+"@root": "true"
+}, 
+{
+"@id": "node985108"
+}, 
+{
+"@id": "node985109"
+}, 
+{
+"@id": "node985110", 
+"@otu": "otu208694"
+}, 
+{
+"@id": "node985111"
+}, 
+{
+"@id": "node985112", 
+"@otu": "otu208700"
+}, 
+{
+"@id": "node985113", 
+"@otu": "otu208695"
+}, 
+{
+"@id": "node985114"
+}, 
+{
+"@id": "node985115", 
+"@otu": "otu208703"
+}, 
+{
+"@id": "node985116"
+}, 
+{
+"@id": "node985117", 
+"@otu": "otu208698"
+}, 
+{
+"@id": "node985118", 
+"@otu": "otu208699"
+}, 
+{
+"@id": "node985119", 
+"@otu": "otu208704"
+}, 
+{
+"@id": "node985120", 
+"@otu": "otu208702"
+}, 
+{
+"@id": "node985121", 
+"@otu": "otu208696"
+}, 
+{
+"@id": "node985122", 
+"@otu": "otu208697"
+}, 
+{
+"@id": "node985123"
+}, 
+{
+"@id": "node985124", 
+"@otu": "otu208701"
+}, 
+{
+"@id": "node985125"
+}, 
+{
+"@id": "node985126", 
+"@otu": "otu208706"
+}, 
+{
+"@id": "node985127", 
+"@otu": "otu208705"
+}, 
+{
+"@id": "node985128", 
+"@otu": "otu208693"
+}
+]
+}
+]
+}
+}
+}

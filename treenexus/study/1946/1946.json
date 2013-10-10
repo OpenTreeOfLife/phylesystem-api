@@ -1,0 +1,2725 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Ekrem T., Willassen E., & Stur E. 2010. Phylogenetic utility of five genes for dipteran phylogeny: a test case in the Chironomidae leads to generic synonymies. Molecular Phylogenetics and Evolution, 57: 561-571.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.ympev.2010.06.006", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Chris Owen", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10378", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1946", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2563577, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1946", 
+"otu": [
+{
+"@about": "#otu293883", 
+"@id": "otu293883", 
+"@label": "Virgatanytarsus aboensis", 
+"meta": [
+{
+"$": 429790, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Virgatanytarsus aboensis To304", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293884", 
+"@id": "otu293884", 
+"@label": "Micropsectra atrofasciata", 
+"meta": [
+{
+"$": 681530, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra atrofasciata IS27", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293885", 
+"@id": "otu293885", 
+"@label": "Micropsectra contracta", 
+"meta": [
+{
+"$": 56934, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra contracta To357", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293886", 
+"@id": "otu293886", 
+"@label": "Paratanytarsus austriacus", 
+"meta": [
+{
+"$": 578012, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus austriacus Soe01", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293887", 
+"@id": "otu293887", 
+"@label": "Micropsectra insignilobus", 
+"meta": [
+{
+"$": 56932, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra insignilobus To184", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293888", 
+"@id": "otu293888", 
+"@label": "Paratanytarsus natvigi", 
+"meta": [
+{
+"$": 578015, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus natvigi To50", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293889", 
+"@id": "otu293889", 
+"@label": "Micropsectra roseiventris", 
+"meta": [
+{
+"$": 578008, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra roseiventris To84", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293890", 
+"@id": "otu293890", 
+"@label": "Micropsectra schrankelae", 
+"meta": [
+{
+"$": 56926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra schrankelae To47", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293891", 
+"@id": "otu293891", 
+"@label": "Micropsectra lindrothi", 
+"meta": [
+{
+"$": 484297, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra lindrothi IS48", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293892", 
+"@id": "otu293892", 
+"@label": "Micropsectra notescens", 
+"meta": [
+{
+"$": 480316, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra notescens To324", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293893", 
+"@id": "otu293893", 
+"@label": "Chironomus pallidulus", 
+"meta": [
+{
+"$": 681526, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra pallidula To74", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293894", 
+"@id": "otu293894", 
+"@label": "Micropsectra schrankelae", 
+"meta": [
+{
+"$": 56926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra schrankelae To44", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293895", 
+"@id": "otu293895", 
+"@label": "Micropsectra lindrothi", 
+"meta": [
+{
+"$": 484297, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra lindrothi To361", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293896", 
+"@id": "otu293896", 
+"@label": "Paratanytarsus dissimilis", 
+"meta": [
+{
+"$": 1006515, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus dissimilis To316", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293897", 
+"@id": "otu293897", 
+"@label": "Paratanytarsus intricatus", 
+"meta": [
+{
+"$": 1006517, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus intricatus To317", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293898", 
+"@id": "otu293898", 
+"@label": "Micropsectra recurvata", 
+"meta": [
+{
+"$": 578009, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra recurvata IS22", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293899", 
+"@id": "otu293899", 
+"@label": "Paratanytarsus setosimanus", 
+"meta": [
+{
+"$": 1006507, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus setosimanus To359", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293900", 
+"@id": "otu293900", 
+"@label": "Parapsectra mendli", 
+"meta": [
+{
+"$": 480314, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Parapsectra mendli To335", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293901", 
+"@id": "otu293901", 
+"@label": "Parapsectra chionophila", 
+"meta": [
+{
+"$": 359380, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Parapsectra chionophila Soe04", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293902", 
+"@id": "otu293902", 
+"@label": "Micropsectra contracta", 
+"meta": [
+{
+"$": 56934, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra contracta To356", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293903", 
+"@id": "otu293903", 
+"@label": "Tanytarsus curticornis", 
+"meta": [
+{
+"$": 311541, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tanytarsus curticornis To82", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293904", 
+"@id": "otu293904", 
+"@label": "Parapsectra bumasta", 
+"meta": [
+{
+"$": 1086276, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Parapsectra bumasta To307", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293905", 
+"@id": "otu293905", 
+"@label": "Cladotanytarsus atridorsum", 
+"meta": [
+{
+"$": 526739, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladotanytarsus atridorsum To81", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293906", 
+"@id": "otu293906", 
+"@label": "Micropsectra contracta", 
+"meta": [
+{
+"$": 56934, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra contracta To358", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293907", 
+"@id": "otu293907", 
+"@label": "Micropsectra notescens", 
+"meta": [
+{
+"$": 480316, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra notescens To353", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293908", 
+"@id": "otu293908", 
+"@label": "Paratanytarsus austriacus", 
+"meta": [
+{
+"$": 578012, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus austriacus To04", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293909", 
+"@id": "otu293909", 
+"@label": "Parapsectra chionophila", 
+"meta": [
+{
+"$": 359380, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Parapsectra chionophila To55", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293910", 
+"@id": "otu293910", 
+"@label": "Micropsectra radialis", 
+"meta": [
+{
+"$": 823448, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra radialis To37", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293911", 
+"@id": "otu293911", 
+"@label": "Micropsectra sofiae", 
+"meta": [
+{
+"$": 681518, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra sofiae To145", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293912", 
+"@id": "otu293912", 
+"@label": "Micropsectra pharetrophora", 
+"meta": [
+{
+"$": 56939, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra pharetrophora To12", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293913", 
+"@id": "otu293913", 
+"@label": "Rheotanytarsus pentapoda", 
+"meta": [
+{
+"$": 578018, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rheotanytarsus pentapoda To41", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293914", 
+"@id": "otu293914", 
+"@label": "Paratanytarsus tenuis", 
+"meta": [
+{
+"$": 1006509, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus tenuis To61", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293915", 
+"@id": "otu293915", 
+"@label": "Micropsectra", 
+"meta": [
+{
+"$": 108376, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra sp To391", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293916", 
+"@id": "otu293916", 
+"@label": "Micropsectra attenuata", 
+"meta": [
+{
+"$": 681532, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra attenuata To131", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293917", 
+"@id": "otu293917", 
+"@label": "Micropsectra oberaarensis", 
+"meta": [
+{
+"$": 480327, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra oberaarensis To336", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293918", 
+"@id": "otu293918", 
+"@label": "Parapsectra chionophila", 
+"meta": [
+{
+"$": 359380, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Parapsectra chionophila To40", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293919", 
+"@id": "otu293919", 
+"@label": "Micropsectra polita", 
+"meta": [
+{
+"$": 480324, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra polita To181", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293920", 
+"@id": "otu293920", 
+"@label": "Parapsectra uliginosa", 
+"meta": [
+{
+"$": 484299, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Parapsectra uliginosa NO39", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293921", 
+"@id": "otu293921", 
+"@label": "Tanytarsini", 
+"meta": [
+{
+"$": 175474, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tanytarsini sp To94", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293922", 
+"@id": "otu293922", 
+"@label": "Micropsectra seguyi", 
+"meta": [
+{
+"$": 480322, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra seguyi To334", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293923", 
+"@id": "otu293923", 
+"@label": "Micropsectra junci", 
+"meta": [
+{
+"$": 56933, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra junci To154", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293924", 
+"@id": "otu293924", 
+"@label": "Micropsectra appendica", 
+"meta": [
+{
+"$": 681520, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra appendica To133", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293925", 
+"@id": "otu293925", 
+"@label": "Micropsectra", 
+"meta": [
+{
+"$": 108376, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra sp To383", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293926", 
+"@id": "otu293926", 
+"@label": "Paratanytarsus hyperboreus", 
+"meta": [
+{
+"$": 108380, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus hyperboreus To45", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293927", 
+"@id": "otu293927", 
+"@label": "Micropsectra notescens", 
+"meta": [
+{
+"$": 480316, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra notescens To352", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293928", 
+"@id": "otu293928", 
+"@label": "Micropsectra junci", 
+"meta": [
+{
+"$": 56933, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra junci To157", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293929", 
+"@id": "otu293929", 
+"@label": "Cladotanytarsus pallidus", 
+"meta": [
+{
+"$": 56929, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cladotanytarsus pallidus To02", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293930", 
+"@id": "otu293930", 
+"@label": "Micropsectra kurobemaculata", 
+"meta": [
+{
+"$": 56938, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra kurobemaculata To07", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293931", 
+"@id": "otu293931", 
+"@label": "Paratanytarsus grimmii", 
+"meta": [
+{
+"$": 578010, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus grimmii To18", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293932", 
+"@id": "otu293932", 
+"@label": "Micropsectra", 
+"meta": [
+{
+"$": 108376, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra sp To378", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293933", 
+"@id": "otu293933", 
+"@label": "Micropsectra schrankelae", 
+"meta": [
+{
+"$": 56926, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra schrankelae To43", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293934", 
+"@id": "otu293934", 
+"@label": "Tanytarsus mendax", 
+"meta": [
+{
+"$": 108382, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tanytarsus mendax To01", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293935", 
+"@id": "otu293935", 
+"@label": "Micropsectra notescens", 
+"meta": [
+{
+"$": 480316, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra notescens To354", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293936", 
+"@id": "otu293936", 
+"@label": "Micropsectra radialis", 
+"meta": [
+{
+"$": 823448, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra radialis NO44", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293937", 
+"@id": "otu293937", 
+"@label": "Micropsectra insignilobus", 
+"meta": [
+{
+"$": 56932, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra insignilobus To31", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293938", 
+"@id": "otu293938", 
+"@label": "Micropsectra attenuata", 
+"meta": [
+{
+"$": 681532, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra attenuata To302", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293939", 
+"@id": "otu293939", 
+"@label": "Paratanytarsus austriacus", 
+"meta": [
+{
+"$": 578012, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus austriacus Bj55", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293940", 
+"@id": "otu293940", 
+"@label": "Micropsectra notescens", 
+"meta": [
+{
+"$": 480316, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra notescens To315", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293941", 
+"@id": "otu293941", 
+"@label": "Micropsectra", 
+"meta": [
+{
+"$": 108376, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra sp To350", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293942", 
+"@id": "otu293942", 
+"@label": "Micropsectra junci", 
+"meta": [
+{
+"$": 56933, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra junci To54", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293943", 
+"@id": "otu293943", 
+"@label": "Paratanytarsus austriacus", 
+"meta": [
+{
+"$": 578012, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus austriacus To364", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293944", 
+"@id": "otu293944", 
+"@label": "Parapsectra nana", 
+"meta": [
+{
+"$": 480312, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Parapsectra nana To135", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293945", 
+"@id": "otu293945", 
+"@label": "Micropsectra insignilobus", 
+"meta": [
+{
+"$": 56932, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra insignilobus To182", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293946", 
+"@id": "otu293946", 
+"@label": "Micropsectra sofiae", 
+"meta": [
+{
+"$": 681518, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra sofiae Soe11", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293947", 
+"@id": "otu293947", 
+"@label": "Paratanytarsus laetipes", 
+"meta": [
+{
+"$": 1006505, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus laetipes To319", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293948", 
+"@id": "otu293948", 
+"@label": "Micropsectra borealis", 
+"meta": [
+{
+"$": 108377, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra borealis NO41", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293949", 
+"@id": "otu293949", 
+"@label": "Micropsectra sofiae", 
+"meta": [
+{
+"$": 681518, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra sofiae To166", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293950", 
+"@id": "otu293950", 
+"@label": "Krenopsectra acuta", 
+"meta": [
+{
+"$": 629561, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Krenopsectra acuta To392", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293951", 
+"@id": "otu293951", 
+"@label": "Micropsectra contracta", 
+"meta": [
+{
+"$": 56934, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra contracta To06", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293952", 
+"@id": "otu293952", 
+"@label": "Micropsectra notescens", 
+"meta": [
+{
+"$": 480316, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra notescens To351", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293953", 
+"@id": "otu293953", 
+"@label": "Micropsectra groenlandica", 
+"meta": [
+{
+"$": 56935, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra logani To188", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293954", 
+"@id": "otu293954", 
+"@label": "Micropsectra lacustris", 
+"meta": [
+{
+"$": 484294, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra lacustris AT16", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293955", 
+"@id": "otu293955", 
+"@label": "Paratanytarsus bituberculatus", 
+"meta": [
+{
+"$": 1006513, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paratanytarsus bituberculatus To318", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu293956", 
+"@id": "otu293956", 
+"@label": "Micropsectra sofiae", 
+"meta": [
+{
+"$": 681518, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micropsectra sofiae Soe12", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1946", 
+"@otus": "otus1946", 
+"tree": [
+{
+"@about": "#tree3964", 
+"@id": "tree3964", 
+"edge": [
+{
+"@id": "edge740974", 
+"@length": 0.017365, 
+"@source": "node740973", 
+"@target": "node740974"
+}, 
+{
+"@id": "edge740975", 
+"@length": 0.022909, 
+"@source": "node740973", 
+"@target": "node740975"
+}, 
+{
+"@id": "edge740976", 
+"@length": 0.372237, 
+"@source": "node740973", 
+"@target": "node740976"
+}, 
+{
+"@id": "edge740977", 
+"@length": 0.120378, 
+"@source": "node740976", 
+"@target": "node740977"
+}, 
+{
+"@id": "edge740978", 
+"@length": 0.067089, 
+"@source": "node740977", 
+"@target": "node740978"
+}, 
+{
+"@id": "edge740979", 
+"@length": 0.14313, 
+"@source": "node740978", 
+"@target": "node740979"
+}, 
+{
+"@id": "edge740980", 
+"@length": 0.047648, 
+"@source": "node740979", 
+"@target": "node740980"
+}, 
+{
+"@id": "edge740981", 
+"@length": 0.071314, 
+"@source": "node740980", 
+"@target": "node740981"
+}, 
+{
+"@id": "edge740982", 
+"@length": 0.158544, 
+"@source": "node740981", 
+"@target": "node740982"
+}, 
+{
+"@id": "edge740983", 
+"@length": 0.032249, 
+"@source": "node740981", 
+"@target": "node740983"
+}, 
+{
+"@id": "edge740984", 
+"@length": 0.066691, 
+"@source": "node740983", 
+"@target": "node740984"
+}, 
+{
+"@id": "edge740985", 
+"@length": 0.095398, 
+"@source": "node740984", 
+"@target": "node740985"
+}, 
+{
+"@id": "edge740986", 
+"@length": 0.003019, 
+"@source": "node740985", 
+"@target": "node740986"
+}, 
+{
+"@id": "edge740987", 
+"@length": 0.002974, 
+"@source": "node740985", 
+"@target": "node740987"
+}, 
+{
+"@id": "edge740988", 
+"@length": 0.092007, 
+"@source": "node740984", 
+"@target": "node740988"
+}, 
+{
+"@id": "edge740989", 
+"@length": 0.065869, 
+"@source": "node740983", 
+"@target": "node740989"
+}, 
+{
+"@id": "edge740990", 
+"@length": 0.031114, 
+"@source": "node740989", 
+"@target": "node740990"
+}, 
+{
+"@id": "edge740991", 
+"@length": 0.044968, 
+"@source": "node740989", 
+"@target": "node740991"
+}, 
+{
+"@id": "edge740992", 
+"@length": 0.027046, 
+"@source": "node740980", 
+"@target": "node740992"
+}, 
+{
+"@id": "edge740993", 
+"@length": 0.039154, 
+"@source": "node740992", 
+"@target": "node740993"
+}, 
+{
+"@id": "edge740994", 
+"@length": 0.025275, 
+"@source": "node740993", 
+"@target": "node740994"
+}, 
+{
+"@id": "edge740995", 
+"@length": 0.016416, 
+"@source": "node740994", 
+"@target": "node740995"
+}, 
+{
+"@id": "edge740996", 
+"@length": 0.01664, 
+"@source": "node740995", 
+"@target": "node740996"
+}, 
+{
+"@id": "edge740997", 
+"@length": 0.040883, 
+"@source": "node740996", 
+"@target": "node740997"
+}, 
+{
+"@id": "edge740998", 
+"@length": 0.159417, 
+"@source": "node740997", 
+"@target": "node740998"
+}, 
+{
+"@id": "edge740999", 
+"@length": 0.030325, 
+"@source": "node740997", 
+"@target": "node740999"
+}, 
+{
+"@id": "edge741000", 
+"@length": 0.038064, 
+"@source": "node740999", 
+"@target": "node741000"
+}, 
+{
+"@id": "edge741001", 
+"@length": 0.177412, 
+"@source": "node741000", 
+"@target": "node741001"
+}, 
+{
+"@id": "edge741002", 
+"@length": 0.018778, 
+"@source": "node741000", 
+"@target": "node741002"
+}, 
+{
+"@id": "edge741003", 
+"@length": 0.083878, 
+"@source": "node741002", 
+"@target": "node741003"
+}, 
+{
+"@id": "edge741004", 
+"@length": 0.136432, 
+"@source": "node741002", 
+"@target": "node741004"
+}, 
+{
+"@id": "edge741005", 
+"@length": 0.02208, 
+"@source": "node740999", 
+"@target": "node741005"
+}, 
+{
+"@id": "edge741006", 
+"@length": 0.16865, 
+"@source": "node741005", 
+"@target": "node741006"
+}, 
+{
+"@id": "edge741007", 
+"@length": 0.060058, 
+"@source": "node741005", 
+"@target": "node741007"
+}, 
+{
+"@id": "edge741008", 
+"@length": 0.01424, 
+"@source": "node741007", 
+"@target": "node741008"
+}, 
+{
+"@id": "edge741009", 
+"@length": 0.045952, 
+"@source": "node741008", 
+"@target": "node741009"
+}, 
+{
+"@id": "edge741010", 
+"@length": 0.007015, 
+"@source": "node741009", 
+"@target": "node741010"
+}, 
+{
+"@id": "edge741011", 
+"@length": 0.000549, 
+"@source": "node741010", 
+"@target": "node741011"
+}, 
+{
+"@id": "edge741012", 
+"@length": 0.001629, 
+"@source": "node741010", 
+"@target": "node741012"
+}, 
+{
+"@id": "edge741013", 
+"@length": 0.003812, 
+"@source": "node741009", 
+"@target": "node741013"
+}, 
+{
+"@id": "edge741014", 
+"@length": 0.027993, 
+"@source": "node741008", 
+"@target": "node741014"
+}, 
+{
+"@id": "edge741015", 
+"@length": 0.015386, 
+"@source": "node741014", 
+"@target": "node741015"
+}, 
+{
+"@id": "edge741016", 
+"@length": 0.00502, 
+"@source": "node741015", 
+"@target": "node741016"
+}, 
+{
+"@id": "edge741017", 
+"@length": 0.004708, 
+"@source": "node741016", 
+"@target": "node741017"
+}, 
+{
+"@id": "edge741018", 
+"@length": 0.006, 
+"@source": "node741016", 
+"@target": "node741018"
+}, 
+{
+"@id": "edge741019", 
+"@length": 0.002717, 
+"@source": "node741015", 
+"@target": "node741019"
+}, 
+{
+"@id": "edge741020", 
+"@length": 0.021663, 
+"@source": "node741014", 
+"@target": "node741020"
+}, 
+{
+"@id": "edge741021", 
+"@length": 0.016481, 
+"@source": "node741007", 
+"@target": "node741021"
+}, 
+{
+"@id": "edge741022", 
+"@length": 0.091944, 
+"@source": "node741021", 
+"@target": "node741022"
+}, 
+{
+"@id": "edge741023", 
+"@length": 0.048262, 
+"@source": "node741021", 
+"@target": "node741023"
+}, 
+{
+"@id": "edge741024", 
+"@length": 0.195358, 
+"@source": "node740996", 
+"@target": "node741024"
+}, 
+{
+"@id": "edge741025", 
+"@length": 0.034779, 
+"@source": "node740995", 
+"@target": "node741025"
+}, 
+{
+"@id": "edge741026", 
+"@length": 0.022215, 
+"@source": "node741025", 
+"@target": "node741026"
+}, 
+{
+"@id": "edge741027", 
+"@length": 0.056218, 
+"@source": "node741026", 
+"@target": "node741027"
+}, 
+{
+"@id": "edge741028", 
+"@length": 0.019003, 
+"@source": "node741027", 
+"@target": "node741028"
+}, 
+{
+"@id": "edge741029", 
+"@length": 0.04126, 
+"@source": "node741028", 
+"@target": "node741029"
+}, 
+{
+"@id": "edge741030", 
+"@length": 0.056013, 
+"@source": "node741029", 
+"@target": "node741030"
+}, 
+{
+"@id": "edge741031", 
+"@length": 0.003063, 
+"@source": "node741030", 
+"@target": "node741031"
+}, 
+{
+"@id": "edge741032", 
+"@length": 0.001362, 
+"@source": "node741031", 
+"@target": "node741032"
+}, 
+{
+"@id": "edge741033", 
+"@length": 0.000446, 
+"@source": "node741032", 
+"@target": "node741033"
+}, 
+{
+"@id": "edge741034", 
+"@length": 0.002106, 
+"@source": "node741032", 
+"@target": "node741034"
+}, 
+{
+"@id": "edge741035", 
+"@length": 0.005892, 
+"@source": "node741031", 
+"@target": "node741035"
+}, 
+{
+"@id": "edge741036", 
+"@length": 0.002668, 
+"@source": "node741030", 
+"@target": "node741036"
+}, 
+{
+"@id": "edge741037", 
+"@length": 0.053201, 
+"@source": "node741029", 
+"@target": "node741037"
+}, 
+{
+"@id": "edge741038", 
+"@length": 0.003038, 
+"@source": "node741037", 
+"@target": "node741038"
+}, 
+{
+"@id": "edge741039", 
+"@length": 0.000687, 
+"@source": "node741037", 
+"@target": "node741039"
+}, 
+{
+"@id": "edge741040", 
+"@length": 0.001219, 
+"@source": "node741039", 
+"@target": "node741040"
+}, 
+{
+"@id": "edge741041", 
+"@length": 0.000661, 
+"@source": "node741039", 
+"@target": "node741041"
+}, 
+{
+"@id": "edge741042", 
+"@length": 0.116985, 
+"@source": "node741028", 
+"@target": "node741042"
+}, 
+{
+"@id": "edge741043", 
+"@length": 0.0055, 
+"@source": "node741042", 
+"@target": "node741043"
+}, 
+{
+"@id": "edge741044", 
+"@length": 0.001977, 
+"@source": "node741043", 
+"@target": "node741044"
+}, 
+{
+"@id": "edge741045", 
+"@length": 0.002786, 
+"@source": "node741043", 
+"@target": "node741045"
+}, 
+{
+"@id": "edge741046", 
+"@length": 0.014747, 
+"@source": "node741042", 
+"@target": "node741046"
+}, 
+{
+"@id": "edge741047", 
+"@length": 0.013857, 
+"@source": "node741027", 
+"@target": "node741047"
+}, 
+{
+"@id": "edge741048", 
+"@length": 0.082959, 
+"@source": "node741047", 
+"@target": "node741048"
+}, 
+{
+"@id": "edge741049", 
+"@length": 0.014244, 
+"@source": "node741048", 
+"@target": "node741049"
+}, 
+{
+"@id": "edge741050", 
+"@length": 0.008242, 
+"@source": "node741049", 
+"@target": "node741050"
+}, 
+{
+"@id": "edge741051", 
+"@length": 0.00284, 
+"@source": "node741049", 
+"@target": "node741051"
+}, 
+{
+"@id": "edge741052", 
+"@length": 0.018339, 
+"@source": "node741048", 
+"@target": "node741052"
+}, 
+{
+"@id": "edge741053", 
+"@length": 0.084266, 
+"@source": "node741047", 
+"@target": "node741053"
+}, 
+{
+"@id": "edge741054", 
+"@length": 0.0054, 
+"@source": "node741053", 
+"@target": "node741054"
+}, 
+{
+"@id": "edge741055", 
+"@length": 0.00251, 
+"@source": "node741053", 
+"@target": "node741055"
+}, 
+{
+"@id": "edge741056", 
+"@length": 0.004221, 
+"@source": "node741055", 
+"@target": "node741056"
+}, 
+{
+"@id": "edge741057", 
+"@length": 0.008759, 
+"@source": "node741055", 
+"@target": "node741057"
+}, 
+{
+"@id": "edge741058", 
+"@length": 0.024736, 
+"@source": "node741026", 
+"@target": "node741058"
+}, 
+{
+"@id": "edge741059", 
+"@length": 0.148641, 
+"@source": "node741058", 
+"@target": "node741059"
+}, 
+{
+"@id": "edge741060", 
+"@length": 0.189106, 
+"@source": "node741058", 
+"@target": "node741060"
+}, 
+{
+"@id": "edge741061", 
+"@length": 0.002404, 
+"@source": "node741060", 
+"@target": "node741061"
+}, 
+{
+"@id": "edge741062", 
+"@length": 0.002858, 
+"@source": "node741060", 
+"@target": "node741062"
+}, 
+{
+"@id": "edge741063", 
+"@length": 0.083804, 
+"@source": "node741025", 
+"@target": "node741063"
+}, 
+{
+"@id": "edge741064", 
+"@length": 0.073686, 
+"@source": "node741063", 
+"@target": "node741064"
+}, 
+{
+"@id": "edge741065", 
+"@length": 0.176787, 
+"@source": "node741063", 
+"@target": "node741065"
+}, 
+{
+"@id": "edge741066", 
+"@length": 0.042155, 
+"@source": "node740994", 
+"@target": "node741066"
+}, 
+{
+"@id": "edge741067", 
+"@length": 0.182172, 
+"@source": "node741066", 
+"@target": "node741067"
+}, 
+{
+"@id": "edge741068", 
+"@length": 0.152804, 
+"@source": "node741066", 
+"@target": "node741068"
+}, 
+{
+"@id": "edge741069", 
+"@length": 0.129816, 
+"@source": "node740993", 
+"@target": "node741069"
+}, 
+{
+"@id": "edge741070", 
+"@length": 0.093173, 
+"@source": "node741069", 
+"@target": "node741070"
+}, 
+{
+"@id": "edge741071", 
+"@length": 0.015503, 
+"@source": "node741070", 
+"@target": "node741071"
+}, 
+{
+"@id": "edge741072", 
+"@length": 0.063267, 
+"@source": "node741071", 
+"@target": "node741072"
+}, 
+{
+"@id": "edge741073", 
+"@length": 0.066497, 
+"@source": "node741071", 
+"@target": "node741073"
+}, 
+{
+"@id": "edge741074", 
+"@length": 0.05178, 
+"@source": "node741070", 
+"@target": "node741074"
+}, 
+{
+"@id": "edge741075", 
+"@length": 0.000905, 
+"@source": "node741074", 
+"@target": "node741075"
+}, 
+{
+"@id": "edge741076", 
+"@length": 0.001053, 
+"@source": "node741074", 
+"@target": "node741076"
+}, 
+{
+"@id": "edge741077", 
+"@length": 0.001323, 
+"@source": "node741076", 
+"@target": "node741077"
+}, 
+{
+"@id": "edge741078", 
+"@length": 0.001384, 
+"@source": "node741076", 
+"@target": "node741078"
+}, 
+{
+"@id": "edge741079", 
+"@length": 0.155161, 
+"@source": "node741069", 
+"@target": "node741079"
+}, 
+{
+"@id": "edge741080", 
+"@length": 0.05508, 
+"@source": "node740992", 
+"@target": "node741080"
+}, 
+{
+"@id": "edge741081", 
+"@length": 0.169424, 
+"@source": "node741080", 
+"@target": "node741081"
+}, 
+{
+"@id": "edge741082", 
+"@length": 0.21006, 
+"@source": "node741080", 
+"@target": "node741082"
+}, 
+{
+"@id": "edge741083", 
+"@length": 0.005514, 
+"@source": "node741082", 
+"@target": "node741083"
+}, 
+{
+"@id": "edge741084", 
+"@length": 0.004779, 
+"@source": "node741082", 
+"@target": "node741084"
+}, 
+{
+"@id": "edge741085", 
+"@length": 0.218415, 
+"@source": "node740979", 
+"@target": "node741085"
+}, 
+{
+"@id": "edge741086", 
+"@length": 0.050422, 
+"@source": "node740978", 
+"@target": "node741086"
+}, 
+{
+"@id": "edge741087", 
+"@length": 0.021748, 
+"@source": "node741086", 
+"@target": "node741087"
+}, 
+{
+"@id": "edge741088", 
+"@length": 0.028142, 
+"@source": "node741087", 
+"@target": "node741088"
+}, 
+{
+"@id": "edge741089", 
+"@length": 0.086426, 
+"@source": "node741088", 
+"@target": "node741089"
+}, 
+{
+"@id": "edge741090", 
+"@length": 0.044397, 
+"@source": "node741089", 
+"@target": "node741090"
+}, 
+{
+"@id": "edge741091", 
+"@length": 0.116954, 
+"@source": "node741090", 
+"@target": "node741091"
+}, 
+{
+"@id": "edge741092", 
+"@length": 0.038435, 
+"@source": "node741091", 
+"@target": "node741092"
+}, 
+{
+"@id": "edge741093", 
+"@length": 0.081475, 
+"@source": "node741092", 
+"@target": "node741093"
+}, 
+{
+"@id": "edge741094", 
+"@length": 0.00368, 
+"@source": "node741093", 
+"@target": "node741094"
+}, 
+{
+"@id": "edge741095", 
+"@length": 0.002519, 
+"@source": "node741094", 
+"@target": "node741095"
+}, 
+{
+"@id": "edge741096", 
+"@length": 0.003005, 
+"@source": "node741094", 
+"@target": "node741096"
+}, 
+{
+"@id": "edge741097", 
+"@length": 0.00726, 
+"@source": "node741093", 
+"@target": "node741097"
+}, 
+{
+"@id": "edge741098", 
+"@length": 0.102074, 
+"@source": "node741092", 
+"@target": "node741098"
+}, 
+{
+"@id": "edge741099", 
+"@length": 0.119921, 
+"@source": "node741091", 
+"@target": "node741099"
+}, 
+{
+"@id": "edge741100", 
+"@length": 0.042317, 
+"@source": "node741090", 
+"@target": "node741100"
+}, 
+{
+"@id": "edge741101", 
+"@length": 0.241229, 
+"@source": "node741100", 
+"@target": "node741101"
+}, 
+{
+"@id": "edge741102", 
+"@length": 0.200804, 
+"@source": "node741100", 
+"@target": "node741102"
+}, 
+{
+"@id": "edge741103", 
+"@length": 0.269532, 
+"@source": "node741089", 
+"@target": "node741103"
+}, 
+{
+"@id": "edge741104", 
+"@length": 0.043589, 
+"@source": "node741088", 
+"@target": "node741104"
+}, 
+{
+"@id": "edge741105", 
+"@length": 0.034062, 
+"@source": "node741104", 
+"@target": "node741105"
+}, 
+{
+"@id": "edge741106", 
+"@length": 0.241142, 
+"@source": "node741105", 
+"@target": "node741106"
+}, 
+{
+"@id": "edge741107", 
+"@length": 0.054638, 
+"@source": "node741105", 
+"@target": "node741107"
+}, 
+{
+"@id": "edge741108", 
+"@length": 0.177666, 
+"@source": "node741107", 
+"@target": "node741108"
+}, 
+{
+"@id": "edge741109", 
+"@length": 0.227283, 
+"@source": "node741107", 
+"@target": "node741109"
+}, 
+{
+"@id": "edge741110", 
+"@length": 0.246023, 
+"@source": "node741104", 
+"@target": "node741110"
+}, 
+{
+"@id": "edge741111", 
+"@length": 0.296256, 
+"@source": "node741087", 
+"@target": "node741111"
+}, 
+{
+"@id": "edge741112", 
+"@length": 0.553005, 
+"@source": "node741086", 
+"@target": "node741112"
+}, 
+{
+"@id": "edge741113", 
+"@length": 0.571499, 
+"@source": "node740977", 
+"@target": "node741113"
+}, 
+{
+"@id": "edge741114", 
+"@length": 0.042097, 
+"@source": "node740976", 
+"@target": "node741114"
+}, 
+{
+"@id": "edge741115", 
+"@length": 0.063773, 
+"@source": "node741114", 
+"@target": "node741115"
+}, 
+{
+"@id": "edge741116", 
+"@length": 0.333419, 
+"@source": "node741115", 
+"@target": "node741116"
+}, 
+{
+"@id": "edge741117", 
+"@length": 0.303078, 
+"@source": "node741115", 
+"@target": "node741117"
+}, 
+{
+"@id": "edge741118", 
+"@length": 0.348375, 
+"@source": "node741114", 
+"@target": "node741118"
+}
+], 
+"meta": [
+{
+"$": "ot:substitutionCount", 
+"@property": "ot:branchLengthMode", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "node740978", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node740973", 
+"@root": "true"
+}, 
+{
+"@id": "node740974", 
+"@otu": "otu293905"
+}, 
+{
+"@id": "node740975", 
+"@otu": "otu293929"
+}, 
+{
+"@id": "node740976"
+}, 
+{
+"@id": "node740977"
+}, 
+{
+"@id": "node740978"
+}, 
+{
+"@id": "node740979"
+}, 
+{
+"@id": "node740980"
+}, 
+{
+"@id": "node740981"
+}, 
+{
+"@id": "node740982", 
+"@otu": "otu293950"
+}, 
+{
+"@id": "node740983"
+}, 
+{
+"@id": "node740984"
+}, 
+{
+"@id": "node740985"
+}, 
+{
+"@id": "node740986", 
+"@otu": "otu293916"
+}, 
+{
+"@id": "node740987", 
+"@otu": "otu293938"
+}, 
+{
+"@id": "node740988", 
+"@otu": "otu293915"
+}, 
+{
+"@id": "node740989"
+}, 
+{
+"@id": "node740990", 
+"@otu": "otu293917"
+}, 
+{
+"@id": "node740991", 
+"@otu": "otu293922"
+}, 
+{
+"@id": "node740992"
+}, 
+{
+"@id": "node740993"
+}, 
+{
+"@id": "node740994"
+}, 
+{
+"@id": "node740995"
+}, 
+{
+"@id": "node740996"
+}, 
+{
+"@id": "node740997"
+}, 
+{
+"@id": "node740998", 
+"@otu": "otu293924"
+}, 
+{
+"@id": "node740999"
+}, 
+{
+"@id": "node741000"
+}, 
+{
+"@id": "node741001", 
+"@otu": "otu293884"
+}, 
+{
+"@id": "node741002"
+}, 
+{
+"@id": "node741003", 
+"@otu": "otu293953"
+}, 
+{
+"@id": "node741004", 
+"@otu": "otu293919"
+}, 
+{
+"@id": "node741005"
+}, 
+{
+"@id": "node741006", 
+"@otu": "otu293893"
+}, 
+{
+"@id": "node741007"
+}, 
+{
+"@id": "node741008"
+}, 
+{
+"@id": "node741009"
+}, 
+{
+"@id": "node741010"
+}, 
+{
+"@id": "node741011", 
+"@otu": "otu293933"
+}, 
+{
+"@id": "node741012", 
+"@otu": "otu293894"
+}, 
+{
+"@id": "node741013", 
+"@otu": "otu293890"
+}, 
+{
+"@id": "node741014"
+}, 
+{
+"@id": "node741015"
+}, 
+{
+"@id": "node741016"
+}, 
+{
+"@id": "node741017", 
+"@otu": "otu293946"
+}, 
+{
+"@id": "node741018", 
+"@otu": "otu293949"
+}, 
+{
+"@id": "node741019", 
+"@otu": "otu293956"
+}, 
+{
+"@id": "node741020", 
+"@otu": "otu293911"
+}, 
+{
+"@id": "node741021"
+}, 
+{
+"@id": "node741022", 
+"@otu": "otu293941"
+}, 
+{
+"@id": "node741023", 
+"@otu": "otu293932"
+}, 
+{
+"@id": "node741024", 
+"@otu": "otu293954"
+}, 
+{
+"@id": "node741025"
+}, 
+{
+"@id": "node741026"
+}, 
+{
+"@id": "node741027"
+}, 
+{
+"@id": "node741028"
+}, 
+{
+"@id": "node741029"
+}, 
+{
+"@id": "node741030"
+}, 
+{
+"@id": "node741031"
+}, 
+{
+"@id": "node741032"
+}, 
+{
+"@id": "node741033", 
+"@otu": "otu293951"
+}, 
+{
+"@id": "node741034", 
+"@otu": "otu293885"
+}, 
+{
+"@id": "node741035", 
+"@otu": "otu293906"
+}, 
+{
+"@id": "node741036", 
+"@otu": "otu293902"
+}, 
+{
+"@id": "node741037"
+}, 
+{
+"@id": "node741038", 
+"@otu": "otu293940"
+}, 
+{
+"@id": "node741039"
+}, 
+{
+"@id": "node741040", 
+"@otu": "otu293952"
+}, 
+{
+"@id": "node741041", 
+"@otu": "otu293927"
+}, 
+{
+"@id": "node741042"
+}, 
+{
+"@id": "node741043"
+}, 
+{
+"@id": "node741044", 
+"@otu": "otu293945"
+}, 
+{
+"@id": "node741045", 
+"@otu": "otu293887"
+}, 
+{
+"@id": "node741046", 
+"@otu": "otu293937"
+}, 
+{
+"@id": "node741047"
+}, 
+{
+"@id": "node741048"
+}, 
+{
+"@id": "node741049"
+}, 
+{
+"@id": "node741050", 
+"@otu": "otu293923"
+}, 
+{
+"@id": "node741051", 
+"@otu": "otu293928"
+}, 
+{
+"@id": "node741052", 
+"@otu": "otu293942"
+}, 
+{
+"@id": "node741053"
+}, 
+{
+"@id": "node741054", 
+"@otu": "otu293892"
+}, 
+{
+"@id": "node741055"
+}, 
+{
+"@id": "node741056", 
+"@otu": "otu293907"
+}, 
+{
+"@id": "node741057", 
+"@otu": "otu293935"
+}, 
+{
+"@id": "node741058"
+}, 
+{
+"@id": "node741059", 
+"@otu": "otu293930"
+}, 
+{
+"@id": "node741060"
+}, 
+{
+"@id": "node741061", 
+"@otu": "otu293891"
+}, 
+{
+"@id": "node741062", 
+"@otu": "otu293895"
+}, 
+{
+"@id": "node741063"
+}, 
+{
+"@id": "node741064", 
+"@otu": "otu293898"
+}, 
+{
+"@id": "node741065", 
+"@otu": "otu293925"
+}, 
+{
+"@id": "node741066"
+}, 
+{
+"@id": "node741067", 
+"@otu": "otu293912"
+}, 
+{
+"@id": "node741068", 
+"@otu": "otu293900"
+}, 
+{
+"@id": "node741069"
+}, 
+{
+"@id": "node741070"
+}, 
+{
+"@id": "node741071"
+}, 
+{
+"@id": "node741072", 
+"@otu": "otu293944"
+}, 
+{
+"@id": "node741073", 
+"@otu": "otu293904"
+}, 
+{
+"@id": "node741074"
+}, 
+{
+"@id": "node741075", 
+"@otu": "otu293901"
+}, 
+{
+"@id": "node741076"
+}, 
+{
+"@id": "node741077", 
+"@otu": "otu293918"
+}, 
+{
+"@id": "node741078", 
+"@otu": "otu293909"
+}, 
+{
+"@id": "node741079", 
+"@otu": "otu293920"
+}, 
+{
+"@id": "node741080"
+}, 
+{
+"@id": "node741081", 
+"@otu": "otu293948"
+}, 
+{
+"@id": "node741082"
+}, 
+{
+"@id": "node741083", 
+"@otu": "otu293936"
+}, 
+{
+"@id": "node741084", 
+"@otu": "otu293910"
+}, 
+{
+"@id": "node741085", 
+"@otu": "otu293889"
+}, 
+{
+"@id": "node741086"
+}, 
+{
+"@id": "node741087"
+}, 
+{
+"@id": "node741088"
+}, 
+{
+"@id": "node741089"
+}, 
+{
+"@id": "node741090"
+}, 
+{
+"@id": "node741091"
+}, 
+{
+"@id": "node741092"
+}, 
+{
+"@id": "node741093"
+}, 
+{
+"@id": "node741094"
+}, 
+{
+"@id": "node741095", 
+"@otu": "otu293939"
+}, 
+{
+"@id": "node741096", 
+"@otu": "otu293886"
+}, 
+{
+"@id": "node741097", 
+"@otu": "otu293908"
+}, 
+{
+"@id": "node741098", 
+"@otu": "otu293926"
+}, 
+{
+"@id": "node741099", 
+"@otu": "otu293943"
+}, 
+{
+"@id": "node741100"
+}, 
+{
+"@id": "node741101", 
+"@otu": "otu293896"
+}, 
+{
+"@id": "node741102", 
+"@otu": "otu293888"
+}, 
+{
+"@id": "node741103", 
+"@otu": "otu293931"
+}, 
+{
+"@id": "node741104"
+}, 
+{
+"@id": "node741105"
+}, 
+{
+"@id": "node741106", 
+"@otu": "otu293955"
+}, 
+{
+"@id": "node741107"
+}, 
+{
+"@id": "node741108", 
+"@otu": "otu293947"
+}, 
+{
+"@id": "node741109", 
+"@otu": "otu293914"
+}, 
+{
+"@id": "node741110", 
+"@otu": "otu293897"
+}, 
+{
+"@id": "node741111", 
+"@otu": "otu293899"
+}, 
+{
+"@id": "node741112", 
+"@otu": "otu293921"
+}, 
+{
+"@id": "node741113", 
+"@otu": "otu293913"
+}, 
+{
+"@id": "node741114"
+}, 
+{
+"@id": "node741115"
+}, 
+{
+"@id": "node741116", 
+"@otu": "otu293903"
+}, 
+{
+"@id": "node741117", 
+"@otu": "otu293934"
+}, 
+{
+"@id": "node741118", 
+"@otu": "otu293883"
+}
+]
+}
+]
+}
+}
+}

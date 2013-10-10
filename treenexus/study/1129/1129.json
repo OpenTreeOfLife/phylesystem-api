@@ -1,0 +1,1533 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Stern, S. R., Weese, T., & Bohs, L. A. (2010). Phylogenetic relationships in Solanum section Androceras (Solanaceae). Systematic botany, 35(4), 885-893.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1600/036364410X539934", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10282", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1129", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1086768, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1129", 
+"otu": [
+{
+"@about": "#otu225696", 
+"@id": "otu225696", 
+"@label": "Solanum citrullifolium setigerum", 
+"meta": {
+"$": "Solanum citrullifolium setigerum LB1707", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu225697", 
+"@id": "otu225697", 
+"@label": "Solanum betaceum", 
+"meta": [
+{
+"$": 590315, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum betaceum RGO442", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225698", 
+"@id": "otu225698", 
+"@label": "Solanum wrightii", 
+"meta": [
+{
+"$": 53115, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum wrightii LB78", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225699", 
+"@id": "otu225699", 
+"@label": "Solanum heterodoxum", 
+"meta": [
+{
+"$": 348195, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum heterodoxum  heterodoxum LB1786", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225700", 
+"@id": "otu225700", 
+"@label": "Solanum heterodoxum var. setigeroides", 
+"meta": [
+{
+"$": 765668, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum heterodoxum setigeroides LB976", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225701", 
+"@id": "otu225701", 
+"@label": "Solanum heterodoxum var. novomexicanum", 
+"meta": [
+{
+"$": 216746, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum heterodoxum novomexicanum  LB1703", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225702", 
+"@id": "otu225702", 
+"@label": "Solanum heterodoxum var. setigeroides", 
+"meta": [
+{
+"$": 765668, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum heterodoxum setigeroides LB1752", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225703", 
+"@id": "otu225703", 
+"@label": "Solanum angustifolium", 
+"meta": [
+{
+"$": 1057656, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum angustifolium LB1654", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225704", 
+"@id": "otu225704", 
+"@label": "Solanum lycocarpum", 
+"meta": [
+{
+"$": 691771, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum lycocarpum LB1143", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225705", 
+"@id": "otu225705", 
+"@label": "Solanum rostratum", 
+"meta": [
+{
+"$": 121200, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum rostratum LB1126", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225706", 
+"@id": "otu225706", 
+"@label": "Solanum davisense", 
+"meta": [
+{
+"$": 348204, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum davisense LB1660", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225707", 
+"@id": "otu225707", 
+"@label": "Solanum rostratum", 
+"meta": [
+{
+"$": 121200, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum rostratum LB1084", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225708", 
+"@id": "otu225708", 
+"@label": "Solanum rostratum", 
+"meta": [
+{
+"$": 121200, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum rostratum LB83", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225709", 
+"@id": "otu225709", 
+"@label": "Solanum citrullifolium", 
+"meta": [
+{
+"$": 836453, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum citrullifolium knoblichii LB1791", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225710", 
+"@id": "otu225710", 
+"@label": "Solanum drymophilum", 
+"meta": [
+{
+"$": 836443, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum drymophilum LB108", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225711", 
+"@id": "otu225711", 
+"@label": "Solanum tenuipes var. tenuipes", 
+"meta": [
+{
+"$": 216754, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum tenuipes tenuipes LB1705", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225712", 
+"@id": "otu225712", 
+"@label": "Solanum crinitum", 
+"meta": [
+{
+"$": 836460, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum crinitum LB350", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225713", 
+"@id": "otu225713", 
+"@label": "Solanum fructo-tecto", 
+"meta": [
+{
+"$": 348206, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum fructo tecto LB2426", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225714", 
+"@id": "otu225714", 
+"@label": "Solanum acerifolium", 
+"meta": [
+{
+"$": 835021, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum acerifolium LB641", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225715", 
+"@id": "otu225715", 
+"@label": "Solanum grayi grandiflorum", 
+"meta": {
+"$": "Solanum grayi grandiflorum LB1743", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu225716", 
+"@id": "otu225716", 
+"@label": "Solanum tenuipes var. latisectum", 
+"meta": [
+{
+"$": 418817, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum tenuipes latisectum LB1704", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225717", 
+"@id": "otu225717", 
+"@label": "Solanum sp. Elder 46", 
+"meta": [
+{
+"$": 1057540, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum elder 46 LB1749", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225718", 
+"@id": "otu225718", 
+"@label": "Solanum grayi", 
+"meta": [
+{
+"$": 985885, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum grayi grayi LB1658", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225719", 
+"@id": "otu225719", 
+"@label": "Solanum crinitum", 
+"meta": [
+{
+"$": 836460, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum crinitum LB2355", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225720", 
+"@id": "otu225720", 
+"@label": "Solanum johnstonii", 
+"meta": [
+{
+"$": 348197, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum johnstonii LB1655", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225721", 
+"@id": "otu225721", 
+"@label": "Solanum lumholtzianum", 
+"meta": [
+{
+"$": 348199, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum lumholtzianum LB1659", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225722", 
+"@id": "otu225722", 
+"@label": "Solanum grayi grandiflorum", 
+"meta": {
+"$": "Solanum grayi grandiflorum LB1657", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu225723", 
+"@id": "otu225723", 
+"@label": "Solanum sendtnerianum", 
+"meta": [
+{
+"$": 348185, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum sendtnerianum LB2226", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225724", 
+"@id": "otu225724", 
+"@label": "Solanum mitlense", 
+"meta": [
+{
+"$": 691777, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum mitlense LB929", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225725", 
+"@id": "otu225725", 
+"@label": "Solanum johnstonii", 
+"meta": [
+{
+"$": 348197, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum johnstonii LB1745", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225726", 
+"@id": "otu225726", 
+"@label": "Solanum citrullifolium var. citrullifolium", 
+"meta": [
+{
+"$": 603373, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum citrullifolium citrullifolium LB1796", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225727", 
+"@id": "otu225727", 
+"@label": "Solanum myriacanthum", 
+"meta": [
+{
+"$": 877389, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum myriacnathum LB634", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225728", 
+"@id": "otu225728", 
+"@label": "Solanum grayi grandiflorum", 
+"meta": {
+"$": "Solanum grayi grandiflorum LB2261", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu225729", 
+"@id": "otu225729", 
+"@label": "Solanum carolinense", 
+"meta": [
+{
+"$": 390164, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum carolinense LB646", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225730", 
+"@id": "otu225730", 
+"@label": "Solanum tribulosum", 
+"meta": [
+{
+"$": 872801, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum tribulosum LB1656", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225731", 
+"@id": "otu225731", 
+"@label": "Solanum tenuipes var. tenuipes", 
+"meta": [
+{
+"$": 216754, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum tenuipes tenuipes LB1750", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225732", 
+"@id": "otu225732", 
+"@label": "Solanum sisymbriifolium", 
+"meta": [
+{
+"$": 4047, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum sisymbriifolium LB679", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225733", 
+"@id": "otu225733", 
+"@label": "Solanum crinitum", 
+"meta": [
+{
+"$": 836460, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum crinitum LB2270", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225734", 
+"@id": "otu225734", 
+"@label": "Solanum bahamense", 
+"meta": [
+{
+"$": 1031428, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum bahamense LB658", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225735", 
+"@id": "otu225735", 
+"@label": "Solanum davisense", 
+"meta": [
+{
+"$": 348204, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum davisense LB1797", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225736", 
+"@id": "otu225736", 
+"@label": "Solanum citrullifolium var. citrullifolium", 
+"meta": [
+{
+"$": 603373, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum citrullifolium citrullifolium LB1382", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225737", 
+"@id": "otu225737", 
+"@label": "Solanum tribulosum", 
+"meta": [
+{
+"$": 872801, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum tribulosum LB1744", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu225738", 
+"@id": "otu225738", 
+"@label": "Solanum citrullifolium setigerum", 
+"meta": {
+"$": "Solanum citrullifolium setigerum LB1748", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu225739", 
+"@id": "otu225739", 
+"@label": "Solanum heterodoxum var. setigeroides", 
+"meta": [
+{
+"$": 765668, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Solanum heterodoxum setigeroides LB1807", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1129", 
+"@otus": "otus1129", 
+"tree": [
+{
+"@about": "#tree2251", 
+"@id": "tree2251", 
+"edge": [
+{
+"@id": "edge543231", 
+"@source": "node543230", 
+"@target": "node543231"
+}, 
+{
+"@id": "edge543232", 
+"@source": "node543230", 
+"@target": "node543232"
+}, 
+{
+"@id": "edge543233", 
+"@source": "node543232", 
+"@target": "node543233"
+}, 
+{
+"@id": "edge543234", 
+"@source": "node543233", 
+"@target": "node543234"
+}, 
+{
+"@id": "edge543235", 
+"@source": "node543234", 
+"@target": "node543235"
+}, 
+{
+"@id": "edge543236", 
+"@source": "node543235", 
+"@target": "node543236"
+}, 
+{
+"@id": "edge543237", 
+"@source": "node543236", 
+"@target": "node543237"
+}, 
+{
+"@id": "edge543238", 
+"@source": "node543237", 
+"@target": "node543238"
+}, 
+{
+"@id": "edge543239", 
+"@source": "node543238", 
+"@target": "node543239"
+}, 
+{
+"@id": "edge543240", 
+"@source": "node543239", 
+"@target": "node543240"
+}, 
+{
+"@id": "edge543241", 
+"@source": "node543240", 
+"@target": "node543241"
+}, 
+{
+"@id": "edge543242", 
+"@source": "node543241", 
+"@target": "node543242"
+}, 
+{
+"@id": "edge543243", 
+"@source": "node543242", 
+"@target": "node543243"
+}, 
+{
+"@id": "edge543244", 
+"@source": "node543243", 
+"@target": "node543244"
+}, 
+{
+"@id": "edge543245", 
+"@source": "node543243", 
+"@target": "node543245"
+}, 
+{
+"@id": "edge543246", 
+"@source": "node543245", 
+"@target": "node543246"
+}, 
+{
+"@id": "edge543247", 
+"@source": "node543245", 
+"@target": "node543247"
+}, 
+{
+"@id": "edge543248", 
+"@source": "node543247", 
+"@target": "node543248"
+}, 
+{
+"@id": "edge543249", 
+"@source": "node543247", 
+"@target": "node543249"
+}, 
+{
+"@id": "edge543250", 
+"@source": "node543249", 
+"@target": "node543250"
+}, 
+{
+"@id": "edge543251", 
+"@source": "node543249", 
+"@target": "node543251"
+}, 
+{
+"@id": "edge543252", 
+"@source": "node543242", 
+"@target": "node543252"
+}, 
+{
+"@id": "edge543253", 
+"@source": "node543252", 
+"@target": "node543253"
+}, 
+{
+"@id": "edge543254", 
+"@source": "node543253", 
+"@target": "node543254"
+}, 
+{
+"@id": "edge543255", 
+"@source": "node543254", 
+"@target": "node543255"
+}, 
+{
+"@id": "edge543256", 
+"@source": "node543254", 
+"@target": "node543256"
+}, 
+{
+"@id": "edge543257", 
+"@source": "node543253", 
+"@target": "node543257"
+}, 
+{
+"@id": "edge543258", 
+"@source": "node543257", 
+"@target": "node543258"
+}, 
+{
+"@id": "edge543259", 
+"@source": "node543257", 
+"@target": "node543259"
+}, 
+{
+"@id": "edge543260", 
+"@source": "node543252", 
+"@target": "node543260"
+}, 
+{
+"@id": "edge543261", 
+"@source": "node543241", 
+"@target": "node543261"
+}, 
+{
+"@id": "edge543262", 
+"@source": "node543261", 
+"@target": "node543262"
+}, 
+{
+"@id": "edge543263", 
+"@source": "node543262", 
+"@target": "node543263"
+}, 
+{
+"@id": "edge543264", 
+"@source": "node543263", 
+"@target": "node543264"
+}, 
+{
+"@id": "edge543265", 
+"@source": "node543264", 
+"@target": "node543265"
+}, 
+{
+"@id": "edge543266", 
+"@source": "node543265", 
+"@target": "node543266"
+}, 
+{
+"@id": "edge543267", 
+"@source": "node543265", 
+"@target": "node543267"
+}, 
+{
+"@id": "edge543268", 
+"@source": "node543264", 
+"@target": "node543268"
+}, 
+{
+"@id": "edge543269", 
+"@source": "node543268", 
+"@target": "node543269"
+}, 
+{
+"@id": "edge543270", 
+"@source": "node543268", 
+"@target": "node543270"
+}, 
+{
+"@id": "edge543271", 
+"@source": "node543263", 
+"@target": "node543271"
+}, 
+{
+"@id": "edge543272", 
+"@source": "node543271", 
+"@target": "node543272"
+}, 
+{
+"@id": "edge543273", 
+"@source": "node543271", 
+"@target": "node543273"
+}, 
+{
+"@id": "edge543274", 
+"@source": "node543262", 
+"@target": "node543274"
+}, 
+{
+"@id": "edge543275", 
+"@source": "node543274", 
+"@target": "node543275"
+}, 
+{
+"@id": "edge543276", 
+"@source": "node543275", 
+"@target": "node543276"
+}, 
+{
+"@id": "edge543277", 
+"@source": "node543275", 
+"@target": "node543277"
+}, 
+{
+"@id": "edge543278", 
+"@source": "node543274", 
+"@target": "node543278"
+}, 
+{
+"@id": "edge543279", 
+"@source": "node543261", 
+"@target": "node543279"
+}, 
+{
+"@id": "edge543280", 
+"@source": "node543279", 
+"@target": "node543280"
+}, 
+{
+"@id": "edge543281", 
+"@source": "node543279", 
+"@target": "node543281"
+}, 
+{
+"@id": "edge543282", 
+"@source": "node543240", 
+"@target": "node543282"
+}, 
+{
+"@id": "edge543283", 
+"@source": "node543282", 
+"@target": "node543283"
+}, 
+{
+"@id": "edge543284", 
+"@source": "node543282", 
+"@target": "node543284"
+}, 
+{
+"@id": "edge543285", 
+"@source": "node543239", 
+"@target": "node543285"
+}, 
+{
+"@id": "edge543286", 
+"@source": "node543238", 
+"@target": "node543286"
+}, 
+{
+"@id": "edge543287", 
+"@source": "node543286", 
+"@target": "node543287"
+}, 
+{
+"@id": "edge543288", 
+"@source": "node543286", 
+"@target": "node543288"
+}, 
+{
+"@id": "edge543289", 
+"@source": "node543288", 
+"@target": "node543289"
+}, 
+{
+"@id": "edge543290", 
+"@source": "node543288", 
+"@target": "node543290"
+}, 
+{
+"@id": "edge543291", 
+"@source": "node543237", 
+"@target": "node543291"
+}, 
+{
+"@id": "edge543292", 
+"@source": "node543291", 
+"@target": "node543292"
+}, 
+{
+"@id": "edge543293", 
+"@source": "node543291", 
+"@target": "node543293"
+}, 
+{
+"@id": "edge543294", 
+"@source": "node543293", 
+"@target": "node543294"
+}, 
+{
+"@id": "edge543295", 
+"@source": "node543293", 
+"@target": "node543295"
+}, 
+{
+"@id": "edge543296", 
+"@source": "node543236", 
+"@target": "node543296"
+}, 
+{
+"@id": "edge543297", 
+"@source": "node543296", 
+"@target": "node543297"
+}, 
+{
+"@id": "edge543298", 
+"@source": "node543297", 
+"@target": "node543298"
+}, 
+{
+"@id": "edge543299", 
+"@source": "node543298", 
+"@target": "node543299"
+}, 
+{
+"@id": "edge543300", 
+"@source": "node543299", 
+"@target": "node543300"
+}, 
+{
+"@id": "edge543301", 
+"@source": "node543299", 
+"@target": "node543301"
+}, 
+{
+"@id": "edge543302", 
+"@source": "node543298", 
+"@target": "node543302"
+}, 
+{
+"@id": "edge543303", 
+"@source": "node543297", 
+"@target": "node543303"
+}, 
+{
+"@id": "edge543304", 
+"@source": "node543296", 
+"@target": "node543304"
+}, 
+{
+"@id": "edge543305", 
+"@source": "node543304", 
+"@target": "node543305"
+}, 
+{
+"@id": "edge543306", 
+"@source": "node543305", 
+"@target": "node543306"
+}, 
+{
+"@id": "edge543307", 
+"@source": "node543305", 
+"@target": "node543307"
+}, 
+{
+"@id": "edge543308", 
+"@source": "node543304", 
+"@target": "node543308"
+}, 
+{
+"@id": "edge543309", 
+"@source": "node543235", 
+"@target": "node543309"
+}, 
+{
+"@id": "edge543310", 
+"@source": "node543234", 
+"@target": "node543310"
+}, 
+{
+"@id": "edge543311", 
+"@source": "node543310", 
+"@target": "node543311"
+}, 
+{
+"@id": "edge543312", 
+"@source": "node543311", 
+"@target": "node543312"
+}, 
+{
+"@id": "edge543313", 
+"@source": "node543311", 
+"@target": "node543313"
+}, 
+{
+"@id": "edge543314", 
+"@source": "node543310", 
+"@target": "node543314"
+}, 
+{
+"@id": "edge543315", 
+"@source": "node543233", 
+"@target": "node543315"
+}, 
+{
+"@id": "edge543316", 
+"@source": "node543232", 
+"@target": "node543316"
+}
+], 
+"meta": [
+{
+"$": "node543233", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node543230", 
+"@root": "true"
+}, 
+{
+"@id": "node543231", 
+"@otu": "otu225714"
+}, 
+{
+"@id": "node543232"
+}, 
+{
+"@id": "node543233"
+}, 
+{
+"@id": "node543234"
+}, 
+{
+"@id": "node543235"
+}, 
+{
+"@id": "node543236"
+}, 
+{
+"@id": "node543237"
+}, 
+{
+"@id": "node543238"
+}, 
+{
+"@id": "node543239"
+}, 
+{
+"@id": "node543240"
+}, 
+{
+"@id": "node543241"
+}, 
+{
+"@id": "node543242"
+}, 
+{
+"@id": "node543243"
+}, 
+{
+"@id": "node543244", 
+"@otu": "otu225703"
+}, 
+{
+"@id": "node543245"
+}, 
+{
+"@id": "node543246", 
+"@otu": "otu225713"
+}, 
+{
+"@id": "node543247"
+}, 
+{
+"@id": "node543248", 
+"@otu": "otu225707"
+}, 
+{
+"@id": "node543249"
+}, 
+{
+"@id": "node543250", 
+"@otu": "otu225705"
+}, 
+{
+"@id": "node543251", 
+"@otu": "otu225708"
+}, 
+{
+"@id": "node543252"
+}, 
+{
+"@id": "node543253"
+}, 
+{
+"@id": "node543254"
+}, 
+{
+"@id": "node543255", 
+"@otu": "otu225722"
+}, 
+{
+"@id": "node543256", 
+"@otu": "otu225715"
+}, 
+{
+"@id": "node543257"
+}, 
+{
+"@id": "node543258", 
+"@otu": "otu225728"
+}, 
+{
+"@id": "node543259", 
+"@otu": "otu225718"
+}, 
+{
+"@id": "node543260", 
+"@otu": "otu225721"
+}, 
+{
+"@id": "node543261"
+}, 
+{
+"@id": "node543262"
+}, 
+{
+"@id": "node543263"
+}, 
+{
+"@id": "node543264"
+}, 
+{
+"@id": "node543265"
+}, 
+{
+"@id": "node543266", 
+"@otu": "otu225736"
+}, 
+{
+"@id": "node543267", 
+"@otu": "otu225726"
+}, 
+{
+"@id": "node543268"
+}, 
+{
+"@id": "node543269", 
+"@otu": "otu225706"
+}, 
+{
+"@id": "node543270", 
+"@otu": "otu225735"
+}, 
+{
+"@id": "node543271"
+}, 
+{
+"@id": "node543272", 
+"@otu": "otu225696"
+}, 
+{
+"@id": "node543273", 
+"@otu": "otu225738"
+}, 
+{
+"@id": "node543274"
+}, 
+{
+"@id": "node543275"
+}, 
+{
+"@id": "node543276", 
+"@otu": "otu225702"
+}, 
+{
+"@id": "node543277", 
+"@otu": "otu225739"
+}, 
+{
+"@id": "node543278", 
+"@otu": "otu225700"
+}, 
+{
+"@id": "node543279"
+}, 
+{
+"@id": "node543280", 
+"@otu": "otu225730"
+}, 
+{
+"@id": "node543281", 
+"@otu": "otu225737"
+}, 
+{
+"@id": "node543282"
+}, 
+{
+"@id": "node543283", 
+"@otu": "otu225720"
+}, 
+{
+"@id": "node543284", 
+"@otu": "otu225725"
+}, 
+{
+"@id": "node543285", 
+"@otu": "otu225699"
+}, 
+{
+"@id": "node543286"
+}, 
+{
+"@id": "node543287", 
+"@otu": "otu225709"
+}, 
+{
+"@id": "node543288"
+}, 
+{
+"@id": "node543289", 
+"@otu": "otu225717"
+}, 
+{
+"@id": "node543290", 
+"@otu": "otu225701"
+}, 
+{
+"@id": "node543291"
+}, 
+{
+"@id": "node543292", 
+"@otu": "otu225716"
+}, 
+{
+"@id": "node543293"
+}, 
+{
+"@id": "node543294", 
+"@otu": "otu225711"
+}, 
+{
+"@id": "node543295", 
+"@otu": "otu225731"
+}, 
+{
+"@id": "node543296"
+}, 
+{
+"@id": "node543297"
+}, 
+{
+"@id": "node543298"
+}, 
+{
+"@id": "node543299"
+}, 
+{
+"@id": "node543300", 
+"@otu": "otu225733"
+}, 
+{
+"@id": "node543301", 
+"@otu": "otu225719"
+}, 
+{
+"@id": "node543302", 
+"@otu": "otu225704"
+}, 
+{
+"@id": "node543303", 
+"@otu": "otu225724"
+}, 
+{
+"@id": "node543304"
+}, 
+{
+"@id": "node543305"
+}, 
+{
+"@id": "node543306", 
+"@otu": "otu225712"
+}, 
+{
+"@id": "node543307", 
+"@otu": "otu225698"
+}, 
+{
+"@id": "node543308", 
+"@otu": "otu225723"
+}, 
+{
+"@id": "node543309", 
+"@otu": "otu225732"
+}, 
+{
+"@id": "node543310"
+}, 
+{
+"@id": "node543311"
+}, 
+{
+"@id": "node543312", 
+"@otu": "otu225734"
+}, 
+{
+"@id": "node543313", 
+"@otu": "otu225710"
+}, 
+{
+"@id": "node543314", 
+"@otu": "otu225729"
+}, 
+{
+"@id": "node543315", 
+"@otu": "otu225697"
+}, 
+{
+"@id": "node543316", 
+"@otu": "otu225727"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,979 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Liu W., & Kirschner R. 2013. Two new hosts of anamorphic Erysiphe quercicola: Cinnomomum camphora and Murraya paniculata. Mycoscience, .", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S14403", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2569", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2013, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2359338, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2569", 
+"otu": [
+{
+"@about": "#otu378211", 
+"@id": "otu378211", 
+"@label": "Erysiphe quercicola", 
+"meta": [
+{
+"$": 252401, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe quercicola MUMH 1955 AB292690", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378212", 
+"@id": "otu378212", 
+"@label": "Microsphaera alphitoides", 
+"meta": [
+{
+"$": 689495, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe alphitoides MUMH 2620 AB292701", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378213", 
+"@id": "otu378213", 
+"@label": "Oidium sp. MUMH3241", 
+"meta": [
+{
+"$": 87690, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium sp. MUMH3241 Anamorph on Acacia auriculiformis AB237805", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378214", 
+"@id": "otu378214", 
+"@label": "Erysiphe", 
+"meta": [
+{
+"$": 728378, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe sp. Anamorph on Murraya paniculata KC85765", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378215", 
+"@id": "otu378215", 
+"@label": "Oidium heveae", 
+"meta": [
+{
+"$": 715718, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium heveae Anamorph on Hevea brasilienssis AB193606", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378216", 
+"@id": "otu378216", 
+"@label": "Erysiphe epigena", 
+"meta": [
+{
+"$": 252399, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe epigena MUMH 3795 AB292722", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378217", 
+"@id": "otu378217", 
+"@label": "Oidium heveae", 
+"meta": [
+{
+"$": 715718, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium heveae Anamorph on Hevea brasilienssis AB193589", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378218", 
+"@id": "otu378218", 
+"@label": "Oidium bixae", 
+"meta": [
+{
+"$": 518519, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium bixae Anamorph on Bixa orrellana AB237787", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378219", 
+"@id": "otu378219", 
+"@label": "Erysiphe monascogera", 
+"meta": [
+{
+"$": 716874, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe monascogera AB331646", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378220", 
+"@id": "otu378220", 
+"@label": "Oidium sp. MUMH1183", 
+"meta": [
+{
+"$": 98825, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium sp. MUMH1183 Anamorph on Acacia mangium AB237809", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378221", 
+"@id": "otu378221", 
+"@label": "Oidium citri", 
+"meta": [
+{
+"$": 993688, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium citri Anamorph on Citrus limon AB237791", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378222", 
+"@id": "otu378222", 
+"@label": "Erysiphe quercicola", 
+"meta": [
+{
+"$": 252401, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe quercicola MUMH 3242 AB292693", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378223", 
+"@id": "otu378223", 
+"@label": "Oidium bixae", 
+"meta": [
+{
+"$": 518519, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium bixae Anamorph on Bixa orrellana AB237789", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378224", 
+"@id": "otu378224", 
+"@label": "Erysiphe euonymi-japonici", 
+"meta": [
+{
+"$": 948861, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe euonymi-japonici MUMH133 AB250228", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378225", 
+"@id": "otu378225", 
+"@label": "Microsphaera alphitoides", 
+"meta": [
+{
+"$": 689495, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe alphitoides MUMH 3250 AB292704", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378226", 
+"@id": "otu378226", 
+"@label": "Oidium sp. VPRI20907", 
+"meta": [
+{
+"$": 98824, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium sp. VPRI20907 Anamorph on Acacia mangium AB237808", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378227", 
+"@id": "otu378227", 
+"@label": "Microsphaera alphitoides", 
+"meta": [
+{
+"$": 689495, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe alphitoides MUMH 2471 AB292699", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378228", 
+"@id": "otu378228", 
+"@label": "Erysiphe monascogera", 
+"meta": [
+{
+"$": 716874, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe monascogera AB331645", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378229", 
+"@id": "otu378229", 
+"@label": "Erysiphe sp. Wisley-2007", 
+"meta": [
+{
+"$": 253169, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe sp. Wisley-2007 EF183498", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378230", 
+"@id": "otu378230", 
+"@label": "Erysiphe", 
+"meta": [
+{
+"$": 728378, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe sp. Anamorph on Cinnamomum camphora KC857653", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378231", 
+"@id": "otu378231", 
+"@label": "Erysiphe quercicola", 
+"meta": [
+{
+"$": 252401, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe quercicola MUMH 1956 AB292691", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378232", 
+"@id": "otu378232", 
+"@label": "Oidium citri", 
+"meta": [
+{
+"$": 993688, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium citri Anamorph on Citrus sinensis AB237793", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378233", 
+"@id": "otu378233", 
+"@label": "Oidium anacardii", 
+"meta": [
+{
+"$": 993713, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium anacardii Anamorph on Anacardium occidentale AB237786", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378234", 
+"@id": "otu378234", 
+"@label": "Oidium sp. MUMH2546", 
+"meta": [
+{
+"$": 993685, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium sp. MUMH2546 Anamorph on Acacia auriculiformis AB237803", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378235", 
+"@id": "otu378235", 
+"@label": "Oidium heveae", 
+"meta": [
+{
+"$": 715718, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium heveae Anamorph on Hevea brasilienssis AB193607", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378236", 
+"@id": "otu378236", 
+"@label": "Erysiphe monascogera", 
+"meta": [
+{
+"$": 716874, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe monascogera AB331647", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378237", 
+"@id": "otu378237", 
+"@label": "Microsphaera alphitoides", 
+"meta": [
+{
+"$": 689495, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe alphitoides MUMH 3169 AB292702", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378238", 
+"@id": "otu378238", 
+"@label": "Erysiphe euonymi-japonici", 
+"meta": [
+{
+"$": 948861, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe euonymi-japonici MUMH2470 AB250229", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378239", 
+"@id": "otu378239", 
+"@label": "Erysiphe hypogena", 
+"meta": [
+{
+"$": 252397, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe hypogena MUMH 3794 AB292725", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378240", 
+"@id": "otu378240", 
+"@label": "Oidium sp. MUMH1805", 
+"meta": [
+{
+"$": 87689, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Oidium sp. MUMH1805 Anamorph on Acacia auriculiformis AB237804", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu378241", 
+"@id": "otu378241", 
+"@label": "Erysiphe quercicola", 
+"meta": [
+{
+"$": 252401, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Erysiphe quercicola JQ034229", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2569", 
+"@otus": "otus2569", 
+"tree": [
+{
+"@id": "tree5912", 
+"edge": [
+{
+"@id": "edge1003754", 
+"@length": 0.01271009, 
+"@source": "node1003753", 
+"@target": "node1003754"
+}, 
+{
+"@id": "edge1003755", 
+"@length": 0.00172912, 
+"@source": "node1003754", 
+"@target": "node1003755"
+}, 
+{
+"@id": "edge1003756", 
+"@length": 0.00242974, 
+"@source": "node1003755", 
+"@target": "node1003756"
+}, 
+{
+"@id": "edge1003757", 
+"@length": 0.0033345, 
+"@source": "node1003756", 
+"@target": "node1003757"
+}, 
+{
+"@id": "edge1003758", 
+"@length": 0.00872654, 
+"@source": "node1003756", 
+"@target": "node1003758"
+}, 
+{
+"@id": "edge1003759", 
+"@length": 0.00534713, 
+"@source": "node1003755", 
+"@target": "node1003759"
+}, 
+{
+"@id": "edge1003760", 
+"@length": 1e-08, 
+"@source": "node1003759", 
+"@target": "node1003760"
+}, 
+{
+"@id": "edge1003761", 
+"@length": 1e-08, 
+"@source": "node1003759", 
+"@target": "node1003761"
+}, 
+{
+"@id": "edge1003762", 
+"@length": 1e-08, 
+"@source": "node1003759", 
+"@target": "node1003762"
+}, 
+{
+"@id": "edge1003763", 
+"@length": 1e-08, 
+"@source": "node1003754", 
+"@target": "node1003763"
+}, 
+{
+"@id": "edge1003764", 
+"@length": 1e-08, 
+"@source": "node1003763", 
+"@target": "node1003764"
+}, 
+{
+"@id": "edge1003765", 
+"@length": 1e-08, 
+"@source": "node1003763", 
+"@target": "node1003765"
+}, 
+{
+"@id": "edge1003766", 
+"@length": 1e-08, 
+"@source": "node1003763", 
+"@target": "node1003766"
+}, 
+{
+"@id": "edge1003767", 
+"@length": 1e-08, 
+"@source": "node1003763", 
+"@target": "node1003767"
+}, 
+{
+"@id": "edge1003768", 
+"@length": 1e-08, 
+"@source": "node1003763", 
+"@target": "node1003768"
+}, 
+{
+"@id": "edge1003769", 
+"@length": 0.00217326, 
+"@source": "node1003763", 
+"@target": "node1003769"
+}, 
+{
+"@id": "edge1003770", 
+"@length": 1e-08, 
+"@source": "node1003769", 
+"@target": "node1003770"
+}, 
+{
+"@id": "edge1003771", 
+"@length": 1e-08, 
+"@source": "node1003769", 
+"@target": "node1003771"
+}, 
+{
+"@id": "edge1003772", 
+"@length": 0.01271009, 
+"@source": "node1003753", 
+"@target": "node1003772"
+}, 
+{
+"@id": "edge1003773", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003773"
+}, 
+{
+"@id": "edge1003774", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003774"
+}, 
+{
+"@id": "edge1003775", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003775"
+}, 
+{
+"@id": "edge1003776", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003776"
+}, 
+{
+"@id": "edge1003777", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003777"
+}, 
+{
+"@id": "edge1003778", 
+"@length": 0.00214946, 
+"@source": "node1003772", 
+"@target": "node1003778"
+}, 
+{
+"@id": "edge1003779", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003779"
+}, 
+{
+"@id": "edge1003780", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003780"
+}, 
+{
+"@id": "edge1003781", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003781"
+}, 
+{
+"@id": "edge1003782", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003782"
+}, 
+{
+"@id": "edge1003783", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003783"
+}, 
+{
+"@id": "edge1003784", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003784"
+}, 
+{
+"@id": "edge1003785", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003785"
+}, 
+{
+"@id": "edge1003786", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003786"
+}, 
+{
+"@id": "edge1003787", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003787"
+}, 
+{
+"@id": "edge1003788", 
+"@length": 0.00216621, 
+"@source": "node1003772", 
+"@target": "node1003788"
+}, 
+{
+"@id": "edge1003789", 
+"@length": 1e-08, 
+"@source": "node1003772", 
+"@target": "node1003789"
+}, 
+{
+"@id": "edge1003790", 
+"@length": 0.00215365, 
+"@source": "node1003772", 
+"@target": "node1003790"
+}, 
+{
+"@id": "edge1003791", 
+"@length": 1e-08, 
+"@source": "node1003790", 
+"@target": "node1003791"
+}, 
+{
+"@id": "edge1003792", 
+"@length": 1e-08, 
+"@source": "node1003790", 
+"@target": "node1003792"
+}
+], 
+"node": [
+{
+"@id": "node1003753", 
+"@root": "true"
+}, 
+{
+"@id": "node1003754"
+}, 
+{
+"@id": "node1003755"
+}, 
+{
+"@id": "node1003756"
+}, 
+{
+"@id": "node1003757", 
+"@otu": "otu378216"
+}, 
+{
+"@id": "node1003758", 
+"@otu": "otu378239"
+}, 
+{
+"@id": "node1003759"
+}, 
+{
+"@id": "node1003760", 
+"@otu": "otu378228"
+}, 
+{
+"@id": "node1003761", 
+"@otu": "otu378219"
+}, 
+{
+"@id": "node1003762", 
+"@otu": "otu378236"
+}, 
+{
+"@id": "node1003763"
+}, 
+{
+"@id": "node1003764", 
+"@otu": "otu378227"
+}, 
+{
+"@id": "node1003765", 
+"@otu": "otu378212"
+}, 
+{
+"@id": "node1003766", 
+"@otu": "otu378237"
+}, 
+{
+"@id": "node1003767", 
+"@otu": "otu378225"
+}, 
+{
+"@id": "node1003768", 
+"@otu": "otu378229"
+}, 
+{
+"@id": "node1003769"
+}, 
+{
+"@id": "node1003770", 
+"@otu": "otu378224"
+}, 
+{
+"@id": "node1003771", 
+"@otu": "otu378238"
+}, 
+{
+"@id": "node1003772"
+}, 
+{
+"@id": "node1003773", 
+"@otu": "otu378217"
+}, 
+{
+"@id": "node1003774", 
+"@otu": "otu378215"
+}, 
+{
+"@id": "node1003775", 
+"@otu": "otu378235"
+}, 
+{
+"@id": "node1003776", 
+"@otu": "otu378233"
+}, 
+{
+"@id": "node1003777", 
+"@otu": "otu378218"
+}, 
+{
+"@id": "node1003778", 
+"@otu": "otu378223"
+}, 
+{
+"@id": "node1003779", 
+"@otu": "otu378234"
+}, 
+{
+"@id": "node1003780", 
+"@otu": "otu378240"
+}, 
+{
+"@id": "node1003781", 
+"@otu": "otu378213"
+}, 
+{
+"@id": "node1003782", 
+"@otu": "otu378226"
+}, 
+{
+"@id": "node1003783", 
+"@otu": "otu378220"
+}, 
+{
+"@id": "node1003784", 
+"@otu": "otu378211"
+}, 
+{
+"@id": "node1003785", 
+"@otu": "otu378231"
+}, 
+{
+"@id": "node1003786", 
+"@otu": "otu378222"
+}, 
+{
+"@id": "node1003787", 
+"@otu": "otu378241"
+}, 
+{
+"@id": "node1003788", 
+"@otu": "otu378214"
+}, 
+{
+"@id": "node1003789", 
+"@otu": "otu378230"
+}, 
+{
+"@id": "node1003790"
+}, 
+{
+"@id": "node1003791", 
+"@otu": "otu378221"
+}, 
+{
+"@id": "node1003792", 
+"@otu": "otu378232"
+}
+]
+}
+]
+}
+}
+}

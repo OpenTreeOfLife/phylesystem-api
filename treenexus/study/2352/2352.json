@@ -1,0 +1,1465 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Dsouli N., Delsuc F., Michaux J., Stordeur E., Couloux A., Veuille M., & Duvallet G. 2012. Phylogenetic analyses of mitochondrial and nuclear data in haematophagous flies support the paraphyly of the genus Stomoxys (Diptera: Muscidae). Infection, Genetics and Evolution. Journal of Molecular Epidemiology and Evolutionary Genetics of Infectious Diseases, 11(3): 663-670.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.meegid.2011.02.004", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Chris Owen", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S12823", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2352", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2012, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2515401, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2352", 
+"otu": [
+{
+"@about": "#otu332707", 
+"@id": "otu332707", 
+"@label": "Haematobia irritans", 
+"meta": [
+{
+"$": 484743, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Haematobia irritans", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332708", 
+"@id": "otu332708", 
+"@label": "Drosophila melanogaster", 
+"meta": [
+{
+"$": 505714, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Drosophila melanogaster", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332709", 
+"@id": "otu332709", 
+"@label": "Dolichopus nubilus", 
+"meta": [
+{
+"$": 835479, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dolichopus nubilus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332710", 
+"@id": "otu332710", 
+"@label": "Stomoxys sitiens", 
+"meta": [
+{
+"$": 550003, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys sitiens 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332711", 
+"@id": "otu332711", 
+"@label": "Drosophila virilis", 
+"meta": [
+{
+"$": 660821, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Drosophila virilis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332712", 
+"@id": "otu332712", 
+"@label": "Stomoxys niger bilineatus", 
+"meta": [
+{
+"$": 350027, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys niger bilineatus 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332713", 
+"@id": "otu332713", 
+"@label": "Stomoxys bengalensis", 
+"meta": [
+{
+"$": 972918, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys bengalensis 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332714", 
+"@id": "otu332714", 
+"@label": "Prostomoxys saegerae", 
+"meta": [
+{
+"$": 972907, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Prostomoxys saegerae 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332715", 
+"@id": "otu332715", 
+"@label": "Stomoxys transvittatus", 
+"meta": [
+{
+"$": 972910, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys transvittatus 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332716", 
+"@id": "otu332716", 
+"@label": "Simosyrphus grandicornis", 
+"meta": [
+{
+"$": 578406, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Simosyrphus grandicornis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332717", 
+"@id": "otu332717", 
+"@label": "Stomoxys indicus", 
+"meta": [
+{
+"$": 550001, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys indicus 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332718", 
+"@id": "otu332718", 
+"@label": "Stomoxys bengalensis", 
+"meta": [
+{
+"$": 972918, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys bengalensis 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332719", 
+"@id": "otu332719", 
+"@label": "Cheilosia naruska", 
+"meta": [
+{
+"$": 580721, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cheilosia naruska", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332720", 
+"@id": "otu332720", 
+"@label": "Stomoxis calcitrans", 
+"meta": [
+{
+"$": 42520, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys calcitrans AFIRCA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332721", 
+"@id": "otu332721", 
+"@label": "Stomoxys varipes", 
+"meta": [
+{
+"$": 972916, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys varipes 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332722", 
+"@id": "otu332722", 
+"@label": "Dolichopus excisus", 
+"meta": [
+{
+"$": 835480, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dolichopus excisus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332723", 
+"@id": "otu332723", 
+"@label": "Haematobosca croceicornis", 
+"meta": [
+{
+"$": 4364196, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Haematobosca croceicornis 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332724", 
+"@id": "otu332724", 
+"@label": "Drosophila yakuba", 
+"meta": [
+{
+"$": 660820, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Drosophila yakuba", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332725", 
+"@id": "otu332725", 
+"@label": "Stomoxys niger", 
+"meta": [
+{
+"$": 350025, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys niger NIGER 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332726", 
+"@id": "otu332726", 
+"@label": "Cheilosia longula", 
+"meta": [
+{
+"$": 485400, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cheilosia longula", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332727", 
+"@id": "otu332727", 
+"@label": "Stomoxis calcitrans", 
+"meta": [
+{
+"$": 42520, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys calcitrans THAILAND 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332728", 
+"@id": "otu332728", 
+"@label": "Prostomoxys saegerae", 
+"meta": [
+{
+"$": 972907, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Prostomoxys saegerae 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332729", 
+"@id": "otu332729", 
+"@label": "Haematobosca croceicornis", 
+"meta": [
+{
+"$": 4364196, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Haematobosca croceicornis 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332730", 
+"@id": "otu332730", 
+"@label": "Stomoxys varipes", 
+"meta": [
+{
+"$": 972916, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys varipes 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332731", 
+"@id": "otu332731", 
+"@label": "Stomoxys pallidus", 
+"meta": [
+{
+"$": 972912, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys pallidus 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332732", 
+"@id": "otu332732", 
+"@label": "Stomoxys pallidus", 
+"meta": [
+{
+"$": 972912, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys pallidus 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332733", 
+"@id": "otu332733", 
+"@label": "Stomoxis calcitrans", 
+"meta": [
+{
+"$": 42520, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys calcitrans THAILAND 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332734", 
+"@id": "otu332734", 
+"@label": "Stomoxys transvittatus", 
+"meta": [
+{
+"$": 972910, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys transvittatus 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332735", 
+"@id": "otu332735", 
+"@label": "Stomoxys inornatus", 
+"meta": [
+{
+"$": 972922, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys inornatus 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332736", 
+"@id": "otu332736", 
+"@label": "Stomoxys sitiens", 
+"meta": [
+{
+"$": 550003, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys sitiens BURKINA FASO", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332737", 
+"@id": "otu332737", 
+"@label": "Stomoxys niger bilineatus", 
+"meta": [
+{
+"$": 350027, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys niger bilineatus 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332738", 
+"@id": "otu332738", 
+"@label": "Stomoxys omega", 
+"meta": [
+{
+"$": 972920, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys omega 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332739", 
+"@id": "otu332739", 
+"@label": "Stomoxis calcitrans", 
+"meta": [
+{
+"$": 42520, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys calcitrans INDIA", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332740", 
+"@id": "otu332740", 
+"@label": "Stomoxys niger", 
+"meta": [
+{
+"$": 350025, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys niger NIGER 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332741", 
+"@id": "otu332741", 
+"@label": "Stomoxys indicus", 
+"meta": [
+{
+"$": 550001, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys indicus 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332742", 
+"@id": "otu332742", 
+"@label": "Stomoxys sitiens", 
+"meta": [
+{
+"$": 550003, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys sitiens 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332743", 
+"@id": "otu332743", 
+"@label": "Stomoxys omega", 
+"meta": [
+{
+"$": 972920, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys omega 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332744", 
+"@id": "otu332744", 
+"@label": "Musca domestica", 
+"meta": [
+{
+"$": 1011010, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Musca domestica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu332745", 
+"@id": "otu332745", 
+"@label": "Stomoxys inornatus", 
+"meta": [
+{
+"$": 972922, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Stomoxys inornatus 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2352", 
+"@otus": "otus2352", 
+"tree": [
+{
+"@about": "#tree4951", 
+"@id": "tree4951", 
+"edge": [
+{
+"@id": "edge857020", 
+"@length": 0.000669, 
+"@source": "node857018", 
+"@target": "node857020"
+}, 
+{
+"@id": "edge857023", 
+"@length": 0.000702, 
+"@source": "node857022", 
+"@target": "node857023"
+}, 
+{
+"@id": "edge857019", 
+"@length": 0.000707, 
+"@source": "node857018", 
+"@target": "node857019"
+}, 
+{
+"@id": "edge857015", 
+"@length": 0.000853, 
+"@source": "node857013", 
+"@target": "node857015"
+}, 
+{
+"@id": "edge857031", 
+"@length": 0.001296, 
+"@source": "node857030", 
+"@target": "node857031"
+}, 
+{
+"@id": "edge857029", 
+"@length": 0.00141, 
+"@source": "node857027", 
+"@target": "node857029"
+}, 
+{
+"@id": "edge857024", 
+"@length": 0.001416, 
+"@source": "node857022", 
+"@target": "node857024"
+}, 
+{
+"@id": "edge857032", 
+"@length": 0.001523, 
+"@source": "node857030", 
+"@target": "node857032"
+}, 
+{
+"@id": "edge857056", 
+"@length": 0.001874, 
+"@source": "node857055", 
+"@target": "node857056"
+}, 
+{
+"@id": "edge857054", 
+"@length": 0.001886, 
+"@source": "node857052", 
+"@target": "node857054"
+}, 
+{
+"@id": "edge857051", 
+"@length": 0.001948, 
+"@source": "node857049", 
+"@target": "node857051"
+}, 
+{
+"@id": "edge857011", 
+"@length": 0.001965, 
+"@source": "node857010", 
+"@target": "node857011"
+}, 
+{
+"@id": "edge857014", 
+"@length": 0.00213, 
+"@source": "node857013", 
+"@target": "node857014"
+}, 
+{
+"@id": "edge857044", 
+"@length": 0.002364, 
+"@source": "node857042", 
+"@target": "node857044"
+}, 
+{
+"@id": "edge857039", 
+"@length": 0.002693, 
+"@source": "node857037", 
+"@target": "node857039"
+}, 
+{
+"@id": "edge857035", 
+"@length": 0.003095, 
+"@source": "node857034", 
+"@target": "node857035"
+}, 
+{
+"@id": "edge857030", 
+"@length": 0.003414, 
+"@source": "node857026", 
+"@target": "node857030"
+}, 
+{
+"@id": "edge857036", 
+"@length": 0.003884, 
+"@source": "node857034", 
+"@target": "node857036"
+}, 
+{
+"@id": "edge857053", 
+"@length": 0.004454, 
+"@source": "node857052", 
+"@target": "node857053"
+}, 
+{
+"@id": "edge857004", 
+"@length": 0.004722, 
+"@source": "node857002", 
+"@target": "node857004"
+}, 
+{
+"@id": "edge857050", 
+"@length": 0.004799, 
+"@source": "node857049", 
+"@target": "node857050"
+}, 
+{
+"@id": "edge857046", 
+"@length": 0.00572, 
+"@source": "node857045", 
+"@target": "node857046"
+}, 
+{
+"@id": "edge857012", 
+"@length": 0.005816, 
+"@source": "node857010", 
+"@target": "node857012"
+}, 
+{
+"@id": "edge857057", 
+"@length": 0.005887, 
+"@source": "node857055", 
+"@target": "node857057"
+}, 
+{
+"@id": "edge857043", 
+"@length": 0.006385, 
+"@source": "node857042", 
+"@target": "node857043"
+}, 
+{
+"@id": "edge857033", 
+"@length": 0.006635, 
+"@source": "node857007", 
+"@target": "node857033"
+}, 
+{
+"@id": "edge857038", 
+"@length": 0.006722, 
+"@source": "node857037", 
+"@target": "node857038"
+}, 
+{
+"@id": "edge857047", 
+"@length": 0.007579, 
+"@source": "node857045", 
+"@target": "node857047"
+}, 
+{
+"@id": "edge857008", 
+"@length": 0.007893, 
+"@source": "node857007", 
+"@target": "node857008"
+}, 
+{
+"@id": "edge857007", 
+"@length": 0.009988, 
+"@source": "node857006", 
+"@target": "node857007"
+}, 
+{
+"@id": "edge857040", 
+"@length": 0.010184, 
+"@source": "node857006", 
+"@target": "node857040"
+}, 
+{
+"@id": "edge857016", 
+"@length": 0.010947, 
+"@source": "node857008", 
+"@target": "node857016"
+}, 
+{
+"@id": "edge857009", 
+"@length": 0.011318, 
+"@source": "node857008", 
+"@target": "node857009"
+}, 
+{
+"@id": "edge857041", 
+"@length": 0.012149, 
+"@source": "node857040", 
+"@target": "node857041"
+}, 
+{
+"@id": "edge857003", 
+"@length": 0.014274, 
+"@source": "node857002", 
+"@target": "node857003"
+}, 
+{
+"@id": "edge857017", 
+"@length": 0.016165, 
+"@source": "node857016", 
+"@target": "node857017"
+}, 
+{
+"@id": "edge857027", 
+"@length": 0.016922, 
+"@source": "node857026", 
+"@target": "node857027"
+}, 
+{
+"@id": "edge857000", 
+"@length": 0.019403, 
+"@source": "node856999", 
+"@target": "node857000"
+}, 
+{
+"@id": "edge857028", 
+"@length": 0.019571, 
+"@source": "node857027", 
+"@target": "node857028"
+}, 
+{
+"@id": "edge857005", 
+"@length": 0.02, 
+"@source": "node856999", 
+"@target": "node857005"
+}, 
+{
+"@id": "edge856999", 
+"@length": 0.020579, 
+"@source": "node856998", 
+"@target": "node856999"
+}, 
+{
+"@id": "edge857021", 
+"@length": 0.02254, 
+"@source": "node857017", 
+"@target": "node857021"
+}, 
+{
+"@id": "edge857022", 
+"@length": 0.023855, 
+"@source": "node857021", 
+"@target": "node857022"
+}, 
+{
+"@id": "edge857025", 
+"@length": 0.026701, 
+"@source": "node857021", 
+"@target": "node857025"
+}, 
+{
+"@id": "edge857048", 
+"@length": 0.028888, 
+"@source": "node857040", 
+"@target": "node857048"
+}, 
+{
+"@id": "edge856991", 
+"@length": 0.030112, 
+"@source": "node856989", 
+"@target": "node856991"
+}, 
+{
+"@id": "edge857006", 
+"@length": 0.031809, 
+"@source": "node857005", 
+"@target": "node857006"
+}, 
+{
+"@id": "edge857026", 
+"@length": 0.033746, 
+"@source": "node857016", 
+"@target": "node857026"
+}, 
+{
+"@id": "edge856993", 
+"@length": 0.036014, 
+"@source": "node856992", 
+"@target": "node856993"
+}, 
+{
+"@id": "edge857018", 
+"@length": 0.036507, 
+"@source": "node857017", 
+"@target": "node857018"
+}, 
+{
+"@id": "edge857049", 
+"@length": 0.041628, 
+"@source": "node857048", 
+"@target": "node857049"
+}, 
+{
+"@id": "edge857034", 
+"@length": 0.041998, 
+"@source": "node857033", 
+"@target": "node857034"
+}, 
+{
+"@id": "edge857037", 
+"@length": 0.047712, 
+"@source": "node857033", 
+"@target": "node857037"
+}, 
+{
+"@id": "edge857042", 
+"@length": 0.048283, 
+"@source": "node857041", 
+"@target": "node857042"
+}, 
+{
+"@id": "edge856985", 
+"@length": 0.050554, 
+"@source": "node856984", 
+"@target": "node856985"
+}, 
+{
+"@id": "edge857002", 
+"@length": 0.050649, 
+"@source": "node857000", 
+"@target": "node857002"
+}, 
+{
+"@id": "edge857013", 
+"@length": 0.056556, 
+"@source": "node857009", 
+"@target": "node857013"
+}, 
+{
+"@id": "edge857052", 
+"@length": 0.056773, 
+"@source": "node857048", 
+"@target": "node857052"
+}, 
+{
+"@id": "edge856990", 
+"@length": 0.057581, 
+"@source": "node856989", 
+"@target": "node856990"
+}, 
+{
+"@id": "edge856996", 
+"@length": 0.058631, 
+"@source": "node856994", 
+"@target": "node856996"
+}, 
+{
+"@id": "edge856995", 
+"@length": 0.059999, 
+"@source": "node856994", 
+"@target": "node856995"
+}, 
+{
+"@id": "edge856992", 
+"@length": 0.068464, 
+"@source": "node856988", 
+"@target": "node856992"
+}, 
+{
+"@id": "edge857001", 
+"@length": 0.06849, 
+"@source": "node857000", 
+"@target": "node857001"
+}, 
+{
+"@id": "edge856998", 
+"@length": 0.069874, 
+"@source": "node856992", 
+"@target": "node856998"
+}, 
+{
+"@id": "edge857010", 
+"@length": 0.069875, 
+"@source": "node857009", 
+"@target": "node857010"
+}, 
+{
+"@id": "edge857045", 
+"@length": 0.075404, 
+"@source": "node857041", 
+"@target": "node857045"
+}, 
+{
+"@id": "edge857055", 
+"@length": 0.078131, 
+"@source": "node857005", 
+"@target": "node857055"
+}, 
+{
+"@id": "edge857058", 
+"@length": 0.088596, 
+"@source": "node856998", 
+"@target": "node857058"
+}, 
+{
+"@id": "edge856994", 
+"@length": 0.091819, 
+"@source": "node856993", 
+"@target": "node856994"
+}, 
+{
+"@id": "edge856986", 
+"@length": 0.094178, 
+"@source": "node856984", 
+"@target": "node856986"
+}, 
+{
+"@id": "edge857059", 
+"@length": 0.095359, 
+"@source": "node856987", 
+"@target": "node857059"
+}, 
+{
+"@id": "edge856987", 
+"@length": 0.096015, 
+"@source": "node856984", 
+"@target": "node856987"
+}, 
+{
+"@id": "edge856988", 
+"@length": 0.117373, 
+"@source": "node856987", 
+"@target": "node856988"
+}, 
+{
+"@id": "edge856997", 
+"@length": 0.153405, 
+"@source": "node856993", 
+"@target": "node856997"
+}, 
+{
+"@id": "edge856989", 
+"@length": 0.155691, 
+"@source": "node856988", 
+"@target": "node856989"
+}
+], 
+"meta": [
+{
+"$": "ot:substitutionCount", 
+"@property": "ot:branchLengthMode", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "node856999", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node856984", 
+"@root": "true"
+}, 
+{
+"@id": "node857020", 
+"@otu": "otu332713"
+}, 
+{
+"@id": "node857023", 
+"@otu": "otu332742"
+}, 
+{
+"@id": "node857019", 
+"@otu": "otu332718"
+}, 
+{
+"@id": "node857015", 
+"@otu": "otu332730"
+}, 
+{
+"@id": "node857031", 
+"@otu": "otu332733"
+}, 
+{
+"@id": "node857029", 
+"@otu": "otu332739"
+}, 
+{
+"@id": "node857024", 
+"@otu": "otu332710"
+}, 
+{
+"@id": "node857032", 
+"@otu": "otu332727"
+}, 
+{
+"@id": "node857056", 
+"@otu": "otu332741"
+}, 
+{
+"@id": "node857054", 
+"@otu": "otu332732"
+}, 
+{
+"@id": "node857051", 
+"@otu": "otu332743"
+}, 
+{
+"@id": "node857011", 
+"@otu": "otu332728"
+}, 
+{
+"@id": "node857014", 
+"@otu": "otu332721"
+}, 
+{
+"@id": "node857044", 
+"@otu": "otu332735"
+}, 
+{
+"@id": "node857039", 
+"@otu": "otu332725"
+}, 
+{
+"@id": "node857035", 
+"@otu": "otu332737"
+}, 
+{
+"@id": "node857030"
+}, 
+{
+"@id": "node857036", 
+"@otu": "otu332712"
+}, 
+{
+"@id": "node857053", 
+"@otu": "otu332731"
+}, 
+{
+"@id": "node857004", 
+"@otu": "otu332729"
+}, 
+{
+"@id": "node857050", 
+"@otu": "otu332738"
+}, 
+{
+"@id": "node857046", 
+"@otu": "otu332734"
+}, 
+{
+"@id": "node857012", 
+"@otu": "otu332714"
+}, 
+{
+"@id": "node857057", 
+"@otu": "otu332717"
+}, 
+{
+"@id": "node857043", 
+"@otu": "otu332745"
+}, 
+{
+"@id": "node857033"
+}, 
+{
+"@id": "node857038", 
+"@otu": "otu332740"
+}, 
+{
+"@id": "node857047", 
+"@otu": "otu332715"
+}, 
+{
+"@id": "node857008"
+}, 
+{
+"@id": "node857007"
+}, 
+{
+"@id": "node857040"
+}, 
+{
+"@id": "node857016"
+}, 
+{
+"@id": "node857009"
+}, 
+{
+"@id": "node857041"
+}, 
+{
+"@id": "node857003", 
+"@otu": "otu332723"
+}, 
+{
+"@id": "node857017"
+}, 
+{
+"@id": "node857027"
+}, 
+{
+"@id": "node857000"
+}, 
+{
+"@id": "node857028", 
+"@otu": "otu332720"
+}, 
+{
+"@id": "node857005"
+}, 
+{
+"@id": "node856999"
+}, 
+{
+"@id": "node857021"
+}, 
+{
+"@id": "node857022"
+}, 
+{
+"@id": "node857025", 
+"@otu": "otu332736"
+}, 
+{
+"@id": "node857048"
+}, 
+{
+"@id": "node856991", 
+"@otu": "otu332709"
+}, 
+{
+"@id": "node857006"
+}, 
+{
+"@id": "node857026"
+}, 
+{
+"@id": "node856993"
+}, 
+{
+"@id": "node857018"
+}, 
+{
+"@id": "node857049"
+}, 
+{
+"@id": "node857034"
+}, 
+{
+"@id": "node857037"
+}, 
+{
+"@id": "node857042"
+}, 
+{
+"@id": "node856985", 
+"@otu": "otu332726"
+}, 
+{
+"@id": "node857002"
+}, 
+{
+"@id": "node857013"
+}, 
+{
+"@id": "node857052"
+}, 
+{
+"@id": "node856990", 
+"@otu": "otu332722"
+}, 
+{
+"@id": "node856996", 
+"@otu": "otu332724"
+}, 
+{
+"@id": "node856995", 
+"@otu": "otu332708"
+}, 
+{
+"@id": "node856992"
+}, 
+{
+"@id": "node857001", 
+"@otu": "otu332707"
+}, 
+{
+"@id": "node856998"
+}, 
+{
+"@id": "node857010"
+}, 
+{
+"@id": "node857045"
+}, 
+{
+"@id": "node857055"
+}, 
+{
+"@id": "node857058", 
+"@otu": "otu332744"
+}, 
+{
+"@id": "node856994"
+}, 
+{
+"@id": "node856986", 
+"@otu": "otu332719"
+}, 
+{
+"@id": "node857059", 
+"@otu": "otu332716"
+}, 
+{
+"@id": "node856987"
+}, 
+{
+"@id": "node856988"
+}, 
+{
+"@id": "node856997", 
+"@otu": "otu332711"
+}, 
+{
+"@id": "node856989"
+}
+]
+}
+]
+}
+}
+}

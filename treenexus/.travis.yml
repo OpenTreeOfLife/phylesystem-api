@@ -1,0 +1,25 @@
+language: python
+python:
+    - "3.3"
+
+# No git modules yet, so just a no-op, for now
+before_install:
+     - git submodule update --init --recursive
+
+install:
+   - pip install -r requirements.txt --use-mirrors
+
+script:
+    - ./bin/run_tests.sh
+
+notifications:
+  irc:
+    channels: "chat.freenode.net#otol"
+  recipients:
+    - duke@leto.net
+  email:
+    on_success: change
+    on_failure: always
+
+#env:
+#services:

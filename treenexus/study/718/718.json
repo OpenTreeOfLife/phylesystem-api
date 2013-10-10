@@ -1,0 +1,880 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Tippery, N. P., & Les, D. H. (2008). Phylogenetic analysis of the internal transcribed spacer (ITS) region in Menyanthaceae using predicted secondary structure. Molecular phylogenetics and evolution, 49(2), 526-537.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.ympev.2008.07.019", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S2143", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "718", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2008, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1031520, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus718", 
+"otu": [
+{
+"@about": "#otu189222", 
+"@id": "otu189222", 
+"@label": "Nymphoides cordata", 
+"meta": [
+{
+"$": 380457, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nymphoides cordata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189223", 
+"@id": "otu189223", 
+"@label": "Menyanthes trifoliata", 
+"meta": [
+{
+"$": 1069766, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Menyanthes trifoliata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189224", 
+"@id": "otu189224", 
+"@label": "Nymphoides cristata", 
+"meta": [
+{
+"$": 985174, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nymphoides cristata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189225", 
+"@id": "otu189225", 
+"@label": "Villarsia exaltata", 
+"meta": [
+{
+"$": 855864, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia exaltata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189226", 
+"@id": "otu189226", 
+"@label": "Villarsia albiflora", 
+"meta": [
+{
+"$": 855878, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia albiflora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189227", 
+"@id": "otu189227", 
+"@label": "Villarsia umbricola", 
+"meta": [
+{
+"$": 458721, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia umbricola", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189228", 
+"@id": "otu189228", 
+"@label": "Villarsia parnassiifolia", 
+"meta": [
+{
+"$": 855868, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia parnassifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189229", 
+"@id": "otu189229", 
+"@label": "Nymphoides peltata", 
+"meta": [
+{
+"$": 128320, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nymphoides peltata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189230", 
+"@id": "otu189230", 
+"@label": "Villarsia lasiosperma", 
+"meta": [
+{
+"$": 855871, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia lasiosperma", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189231", 
+"@id": "otu189231", 
+"@label": "Nymphoides thunbergiana", 
+"meta": [
+{
+"$": 855880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nymphoides thunbergiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189232", 
+"@id": "otu189232", 
+"@label": "Nymphoides geminata", 
+"meta": [
+{
+"$": 387102, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nymphoides geminata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189233", 
+"@id": "otu189233", 
+"@label": "Nymphoides crenata", 
+"meta": [
+{
+"$": 380459, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nymphoides crenata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189234", 
+"@id": "otu189234", 
+"@label": "Villarsia manningiana", 
+"meta": [
+{
+"$": 643080, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia manningiana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189235", 
+"@id": "otu189235", 
+"@label": "Liparophyllum gunnii", 
+"meta": [
+{
+"$": 380455, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Liparophyllum gunnii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189236", 
+"@id": "otu189236", 
+"@label": "Nymphoides indica", 
+"meta": [
+{
+"$": 228774, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nymphoides indica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189237", 
+"@id": "otu189237", 
+"@label": "Villarsia capitata", 
+"meta": [
+{
+"$": 278577, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia capitata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189238", 
+"@id": "otu189238", 
+"@label": "Villarsia calthifolia", 
+"meta": [
+{
+"$": 295599, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia calthifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189239", 
+"@id": "otu189239", 
+"@label": "Nephrophyllidium crista-galli", 
+"meta": [
+{
+"$": 128310, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nephrophyllidium crista-galli", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189240", 
+"@id": "otu189240", 
+"@label": "Villarsia reniformis", 
+"meta": [
+{
+"$": 855862, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia reniformis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189241", 
+"@id": "otu189241", 
+"@label": "Nymphoides exiliflora", 
+"meta": [
+{
+"$": 380469, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Nymphoides exiliflora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189242", 
+"@id": "otu189242", 
+"@label": "Villarsia capensis", 
+"meta": [
+{
+"$": 855866, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia capensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189243", 
+"@id": "otu189243", 
+"@label": "Villarsia congestiflora", 
+"meta": [
+{
+"$": 458715, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia congestiflora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189244", 
+"@id": "otu189244", 
+"@label": "Villarsia latifolia", 
+"meta": [
+{
+"$": 458717, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia latifolia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu189245", 
+"@id": "otu189245", 
+"@label": "Nymphoides exigua", 
+"meta": [
+{
+"$": 380467, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Villarsia exigua", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees718", 
+"@otus": "otus718", 
+"tree": [
+{
+"@about": "#tree1293", 
+"@id": "tree1293", 
+"edge": [
+{
+"@id": "edge436662", 
+"@source": "node436661", 
+"@target": "node436662"
+}, 
+{
+"@id": "edge436663", 
+"@source": "node436662", 
+"@target": "node436663"
+}, 
+{
+"@id": "edge436664", 
+"@source": "node436662", 
+"@target": "node436664"
+}, 
+{
+"@id": "edge436665", 
+"@source": "node436661", 
+"@target": "node436665"
+}, 
+{
+"@id": "edge436666", 
+"@source": "node436665", 
+"@target": "node436666"
+}, 
+{
+"@id": "edge436667", 
+"@source": "node436666", 
+"@target": "node436667"
+}, 
+{
+"@id": "edge436668", 
+"@source": "node436666", 
+"@target": "node436668"
+}, 
+{
+"@id": "edge436669", 
+"@source": "node436668", 
+"@target": "node436669"
+}, 
+{
+"@id": "edge436670", 
+"@source": "node436669", 
+"@target": "node436670"
+}, 
+{
+"@id": "edge436671", 
+"@source": "node436669", 
+"@target": "node436671"
+}, 
+{
+"@id": "edge436672", 
+"@source": "node436668", 
+"@target": "node436672"
+}, 
+{
+"@id": "edge436673", 
+"@source": "node436672", 
+"@target": "node436673"
+}, 
+{
+"@id": "edge436674", 
+"@source": "node436672", 
+"@target": "node436674"
+}, 
+{
+"@id": "edge436675", 
+"@source": "node436665", 
+"@target": "node436675"
+}, 
+{
+"@id": "edge436676", 
+"@source": "node436675", 
+"@target": "node436676"
+}, 
+{
+"@id": "edge436677", 
+"@source": "node436676", 
+"@target": "node436677"
+}, 
+{
+"@id": "edge436678", 
+"@source": "node436676", 
+"@target": "node436678"
+}, 
+{
+"@id": "edge436679", 
+"@source": "node436675", 
+"@target": "node436679"
+}, 
+{
+"@id": "edge436680", 
+"@source": "node436679", 
+"@target": "node436680"
+}, 
+{
+"@id": "edge436681", 
+"@source": "node436680", 
+"@target": "node436681"
+}, 
+{
+"@id": "edge436682", 
+"@source": "node436680", 
+"@target": "node436682"
+}, 
+{
+"@id": "edge436683", 
+"@source": "node436682", 
+"@target": "node436683"
+}, 
+{
+"@id": "edge436684", 
+"@source": "node436683", 
+"@target": "node436684"
+}, 
+{
+"@id": "edge436685", 
+"@source": "node436683", 
+"@target": "node436685"
+}, 
+{
+"@id": "edge436686", 
+"@source": "node436685", 
+"@target": "node436686"
+}, 
+{
+"@id": "edge436687", 
+"@source": "node436686", 
+"@target": "node436687"
+}, 
+{
+"@id": "edge436688", 
+"@source": "node436687", 
+"@target": "node436688"
+}, 
+{
+"@id": "edge436689", 
+"@source": "node436687", 
+"@target": "node436689"
+}, 
+{
+"@id": "edge436690", 
+"@source": "node436686", 
+"@target": "node436690"
+}, 
+{
+"@id": "edge436691", 
+"@source": "node436685", 
+"@target": "node436691"
+}, 
+{
+"@id": "edge436692", 
+"@source": "node436682", 
+"@target": "node436692"
+}, 
+{
+"@id": "edge436693", 
+"@source": "node436679", 
+"@target": "node436693"
+}, 
+{
+"@id": "edge436694", 
+"@source": "node436693", 
+"@target": "node436694"
+}, 
+{
+"@id": "edge436695", 
+"@source": "node436694", 
+"@target": "node436695"
+}, 
+{
+"@id": "edge436696", 
+"@source": "node436694", 
+"@target": "node436696"
+}, 
+{
+"@id": "edge436697", 
+"@source": "node436693", 
+"@target": "node436697"
+}, 
+{
+"@id": "edge436698", 
+"@source": "node436697", 
+"@target": "node436698"
+}, 
+{
+"@id": "edge436699", 
+"@source": "node436698", 
+"@target": "node436699"
+}, 
+{
+"@id": "edge436700", 
+"@source": "node436698", 
+"@target": "node436700"
+}, 
+{
+"@id": "edge436701", 
+"@source": "node436697", 
+"@target": "node436701"
+}, 
+{
+"@id": "edge436702", 
+"@source": "node436701", 
+"@target": "node436702"
+}, 
+{
+"@id": "edge436703", 
+"@source": "node436701", 
+"@target": "node436703"
+}, 
+{
+"@id": "edge436704", 
+"@source": "node436703", 
+"@target": "node436704"
+}, 
+{
+"@id": "edge436705", 
+"@source": "node436703", 
+"@target": "node436705"
+}, 
+{
+"@id": "edge436706", 
+"@source": "node436703", 
+"@target": "node436706"
+}
+], 
+"meta": [
+{
+"$": "node436665", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node436661", 
+"@root": "true"
+}, 
+{
+"@id": "node436662"
+}, 
+{
+"@id": "node436663", 
+"@otu": "otu189239"
+}, 
+{
+"@id": "node436664", 
+"@otu": "otu189223"
+}, 
+{
+"@id": "node436665"
+}, 
+{
+"@id": "node436666"
+}, 
+{
+"@id": "node436667", 
+"@otu": "otu189227"
+}, 
+{
+"@id": "node436668"
+}, 
+{
+"@id": "node436669"
+}, 
+{
+"@id": "node436670", 
+"@otu": "otu189240"
+}, 
+{
+"@id": "node436671", 
+"@otu": "otu189238"
+}, 
+{
+"@id": "node436672"
+}, 
+{
+"@id": "node436673", 
+"@otu": "otu189228"
+}, 
+{
+"@id": "node436674", 
+"@otu": "otu189226"
+}, 
+{
+"@id": "node436675"
+}, 
+{
+"@id": "node436676"
+}, 
+{
+"@id": "node436677", 
+"@otu": "otu189242"
+}, 
+{
+"@id": "node436678", 
+"@otu": "otu189234"
+}, 
+{
+"@id": "node436679"
+}, 
+{
+"@id": "node436680"
+}, 
+{
+"@id": "node436681", 
+"@otu": "otu189230"
+}, 
+{
+"@id": "node436682"
+}, 
+{
+"@id": "node436683"
+}, 
+{
+"@id": "node436684", 
+"@otu": "otu189225"
+}, 
+{
+"@id": "node436685"
+}, 
+{
+"@id": "node436686"
+}, 
+{
+"@id": "node436687"
+}, 
+{
+"@id": "node436688", 
+"@otu": "otu189245"
+}, 
+{
+"@id": "node436689", 
+"@otu": "otu189237"
+}, 
+{
+"@id": "node436690", 
+"@otu": "otu189243"
+}, 
+{
+"@id": "node436691", 
+"@otu": "otu189244"
+}, 
+{
+"@id": "node436692", 
+"@otu": "otu189235"
+}, 
+{
+"@id": "node436693"
+}, 
+{
+"@id": "node436694"
+}, 
+{
+"@id": "node436695", 
+"@otu": "otu189233"
+}, 
+{
+"@id": "node436696", 
+"@otu": "otu189229"
+}, 
+{
+"@id": "node436697"
+}, 
+{
+"@id": "node436698"
+}, 
+{
+"@id": "node436699", 
+"@otu": "otu189232"
+}, 
+{
+"@id": "node436700", 
+"@otu": "otu189241"
+}, 
+{
+"@id": "node436701"
+}, 
+{
+"@id": "node436702", 
+"@otu": "otu189236"
+}, 
+{
+"@id": "node436703"
+}, 
+{
+"@id": "node436704", 
+"@otu": "otu189231"
+}, 
+{
+"@id": "node436705", 
+"@otu": "otu189224"
+}, 
+{
+"@id": "node436706", 
+"@otu": "otu189222"
+}
+]
+}
+]
+}
+}
+}

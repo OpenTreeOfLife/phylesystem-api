@@ -1,0 +1,936 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Sasaki T., Yasukawa Y., Takahashi K., Miura S., & Okada N. 2006. Extensive Morphological Convergence and Rapid Radiation in the Evolutionary History of the family Geoemydidae (Old World Pond Turtles) Revealed by SINE Insertion Analysis. Systematic Biology, 55(6): 912-927.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1080/10635150601058014", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Chris Owen", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1609", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1848", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2006, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2719542, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1848", 
+"otu": [
+{
+"@about": "#otu283127", 
+"@id": "otu283127", 
+"@label": "Testudo horsfieldii", 
+"meta": [
+{
+"$": 809861, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Testudo horsfieldii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283128", 
+"@id": "otu283128", 
+"@label": "Geoemyda spengleri", 
+"meta": [
+{
+"$": 105478, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Geoemyda spengleri", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283129", 
+"@id": "otu283129", 
+"@label": "Pangshura smithii", 
+"meta": [
+{
+"$": 61733, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pangshura smithii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283130", 
+"@id": "otu283130", 
+"@label": "Geochelone carbonaria", 
+"meta": [
+{
+"$": 560352, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Geochelone carbonaria", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283131", 
+"@id": "otu283131", 
+"@label": "Pyxis arachnoides", 
+"meta": [
+{
+"$": 859764, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pyxis arachnoides", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283132", 
+"@id": "otu283132", 
+"@label": "Batagur baska", 
+"meta": [
+{
+"$": 361285, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Batagur baska", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283133", 
+"@id": "otu283133", 
+"@label": "Callagur borneoensis", 
+"meta": [
+{
+"$": 340373, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Callagur borneoensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283134", 
+"@id": "otu283134", 
+"@label": "Kinixys homeana", 
+"meta": [
+{
+"$": 1041243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Kinixys homeana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283135", 
+"@id": "otu283135", 
+"@label": "Trachemys scripta elegans", 
+"meta": [
+{
+"$": 735228, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Trachemys scripta elegans", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283136", 
+"@id": "otu283136", 
+"@label": "Orlitia borneensis", 
+"meta": [
+{
+"$": 105476, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Orlitia borneensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283137", 
+"@id": "otu283137", 
+"@label": "Siebenrockiella crassicollis", 
+"meta": [
+{
+"$": 54218, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Siebenrockiella crassicollis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283138", 
+"@id": "otu283138", 
+"@label": "Mauremys annamensis", 
+"meta": [
+{
+"$": 85372, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mauremys annamensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283139", 
+"@id": "otu283139", 
+"@label": "Rhinoclemmys punctularia punctularia", 
+"meta": [
+{
+"$": 115601, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rhinoclemmys punctularia punctularia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283140", 
+"@id": "otu283140", 
+"@label": "Notochelys platynota", 
+"meta": [
+{
+"$": 711698, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Notochelys platynota", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283141", 
+"@id": "otu283141", 
+"@label": "Mauremys sinensis", 
+"meta": [
+{
+"$": 879764, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mauremys sinensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283142", 
+"@id": "otu283142", 
+"@label": "Heosemys grandis", 
+"meta": [
+{
+"$": 54216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Heosemys grandis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283143", 
+"@id": "otu283143", 
+"@label": "Cuora mouhotii", 
+"meta": [
+{
+"$": 354928, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cuora mouhotii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283144", 
+"@id": "otu283144", 
+"@label": "Emys orbicularis", 
+"meta": [
+{
+"$": 733093, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Emys orbicularis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283145", 
+"@id": "otu283145", 
+"@label": "Mauremys japonica", 
+"meta": [
+{
+"$": 26434, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mauremys japonica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283146", 
+"@id": "otu283146", 
+"@label": "Rhinoclemmys funerea", 
+"meta": [
+{
+"$": 727054, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rhinoclemmys funerea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283147", 
+"@id": "otu283147", 
+"@label": "Sacalia bealei", 
+"meta": [
+{
+"$": 137549, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sacalia bealei", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283148", 
+"@id": "otu283148", 
+"@label": "Mauremys mutica kami", 
+"meta": [
+{
+"$": 410013, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mauremys mutica kami", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283149", 
+"@id": "otu283149", 
+"@label": "Mauremys reevesii", 
+"meta": [
+{
+"$": 829098, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mauremys reevesii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283150", 
+"@id": "otu283150", 
+"@label": "Malayemys macrocephala", 
+"meta": [
+{
+"$": 935350, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Malayemys macrocephala", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283151", 
+"@id": "otu283151", 
+"@label": "Heosemys annandalii", 
+"meta": [
+{
+"$": 354932, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Heosemys annandalii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283152", 
+"@id": "otu283152", 
+"@label": "Kinixys erosa", 
+"meta": [
+{
+"$": 410009, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Kinixys erosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283153", 
+"@id": "otu283153", 
+"@label": "Cuora amboinensis", 
+"meta": [
+{
+"$": 626958, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cuora amboinensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu283154", 
+"@id": "otu283154", 
+"@label": "Melanochelys trijuga", 
+"meta": [
+{
+"$": 105484, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Melanochelys trijuga", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1848", 
+"@otus": "otus1848", 
+"tree": [
+{
+"@about": "#tree3730", 
+"@id": "tree3730", 
+"edge": [
+{
+"@id": "edge706944", 
+"@source": "node706943", 
+"@target": "node706944"
+}, 
+{
+"@id": "edge706945", 
+"@source": "node706944", 
+"@target": "node706945"
+}, 
+{
+"@id": "edge706946", 
+"@source": "node706945", 
+"@target": "node706946"
+}, 
+{
+"@id": "edge706947", 
+"@source": "node706945", 
+"@target": "node706947"
+}, 
+{
+"@id": "edge706948", 
+"@source": "node706945", 
+"@target": "node706948"
+}, 
+{
+"@id": "edge706949", 
+"@source": "node706945", 
+"@target": "node706949"
+}, 
+{
+"@id": "edge706950", 
+"@source": "node706945", 
+"@target": "node706950"
+}, 
+{
+"@id": "edge706951", 
+"@source": "node706944", 
+"@target": "node706951"
+}, 
+{
+"@id": "edge706952", 
+"@source": "node706951", 
+"@target": "node706952"
+}, 
+{
+"@id": "edge706953", 
+"@source": "node706952", 
+"@target": "node706953"
+}, 
+{
+"@id": "edge706954", 
+"@source": "node706953", 
+"@target": "node706954"
+}, 
+{
+"@id": "edge706955", 
+"@source": "node706954", 
+"@target": "node706955"
+}, 
+{
+"@id": "edge706956", 
+"@source": "node706954", 
+"@target": "node706956"
+}, 
+{
+"@id": "edge706957", 
+"@source": "node706954", 
+"@target": "node706957"
+}, 
+{
+"@id": "edge706958", 
+"@source": "node706953", 
+"@target": "node706958"
+}, 
+{
+"@id": "edge706959", 
+"@source": "node706953", 
+"@target": "node706959"
+}, 
+{
+"@id": "edge706960", 
+"@source": "node706952", 
+"@target": "node706960"
+}, 
+{
+"@id": "edge706961", 
+"@source": "node706951", 
+"@target": "node706961"
+}, 
+{
+"@id": "edge706962", 
+"@source": "node706961", 
+"@target": "node706962"
+}, 
+{
+"@id": "edge706963", 
+"@source": "node706962", 
+"@target": "node706963"
+}, 
+{
+"@id": "edge706964", 
+"@source": "node706963", 
+"@target": "node706964"
+}, 
+{
+"@id": "edge706965", 
+"@source": "node706964", 
+"@target": "node706965"
+}, 
+{
+"@id": "edge706966", 
+"@source": "node706964", 
+"@target": "node706966"
+}, 
+{
+"@id": "edge706967", 
+"@source": "node706963", 
+"@target": "node706967"
+}, 
+{
+"@id": "edge706968", 
+"@source": "node706962", 
+"@target": "node706968"
+}, 
+{
+"@id": "edge706969", 
+"@source": "node706968", 
+"@target": "node706969"
+}, 
+{
+"@id": "edge706970", 
+"@source": "node706968", 
+"@target": "node706970"
+}, 
+{
+"@id": "edge706971", 
+"@source": "node706961", 
+"@target": "node706971"
+}, 
+{
+"@id": "edge706972", 
+"@source": "node706971", 
+"@target": "node706972"
+}, 
+{
+"@id": "edge706973", 
+"@source": "node706971", 
+"@target": "node706973"
+}, 
+{
+"@id": "edge706974", 
+"@source": "node706961", 
+"@target": "node706974"
+}, 
+{
+"@id": "edge706975", 
+"@source": "node706974", 
+"@target": "node706975"
+}, 
+{
+"@id": "edge706976", 
+"@source": "node706975", 
+"@target": "node706976"
+}, 
+{
+"@id": "edge706977", 
+"@source": "node706976", 
+"@target": "node706977"
+}, 
+{
+"@id": "edge706978", 
+"@source": "node706976", 
+"@target": "node706978"
+}, 
+{
+"@id": "edge706979", 
+"@source": "node706975", 
+"@target": "node706979"
+}, 
+{
+"@id": "edge706980", 
+"@source": "node706975", 
+"@target": "node706980"
+}, 
+{
+"@id": "edge706981", 
+"@source": "node706974", 
+"@target": "node706981"
+}, 
+{
+"@id": "edge706982", 
+"@source": "node706961", 
+"@target": "node706982"
+}, 
+{
+"@id": "edge706983", 
+"@source": "node706961", 
+"@target": "node706983"
+}, 
+{
+"@id": "edge706984", 
+"@source": "node706961", 
+"@target": "node706984"
+}, 
+{
+"@id": "edge706985", 
+"@source": "node706943", 
+"@target": "node706985"
+}, 
+{
+"@id": "edge706986", 
+"@source": "node706943", 
+"@target": "node706986"
+}
+], 
+"meta": [
+{
+"$": "ot:substitutionCount", 
+"@property": "ot:branchLengthMode", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "node706944", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node706943", 
+"@root": "true"
+}, 
+{
+"@id": "node706944"
+}, 
+{
+"@id": "node706945"
+}, 
+{
+"@id": "node706946", 
+"@otu": "otu283127"
+}, 
+{
+"@id": "node706947", 
+"@otu": "otu283152"
+}, 
+{
+"@id": "node706948", 
+"@otu": "otu283134"
+}, 
+{
+"@id": "node706949", 
+"@otu": "otu283130"
+}, 
+{
+"@id": "node706950", 
+"@otu": "otu283131"
+}, 
+{
+"@id": "node706951"
+}, 
+{
+"@id": "node706952"
+}, 
+{
+"@id": "node706953"
+}, 
+{
+"@id": "node706954"
+}, 
+{
+"@id": "node706955", 
+"@otu": "otu283129"
+}, 
+{
+"@id": "node706956", 
+"@otu": "otu283133"
+}, 
+{
+"@id": "node706957", 
+"@otu": "otu283132"
+}, 
+{
+"@id": "node706958", 
+"@otu": "otu283136"
+}, 
+{
+"@id": "node706959", 
+"@otu": "otu283150"
+}, 
+{
+"@id": "node706960", 
+"@otu": "otu283137"
+}, 
+{
+"@id": "node706961"
+}, 
+{
+"@id": "node706962"
+}, 
+{
+"@id": "node706963"
+}, 
+{
+"@id": "node706964"
+}, 
+{
+"@id": "node706965", 
+"@otu": "otu283141"
+}, 
+{
+"@id": "node706966", 
+"@otu": "otu283145"
+}, 
+{
+"@id": "node706967", 
+"@otu": "otu283149"
+}, 
+{
+"@id": "node706968"
+}, 
+{
+"@id": "node706969", 
+"@otu": "otu283148"
+}, 
+{
+"@id": "node706970", 
+"@otu": "otu283138"
+}, 
+{
+"@id": "node706971"
+}, 
+{
+"@id": "node706972", 
+"@otu": "otu283153"
+}, 
+{
+"@id": "node706973", 
+"@otu": "otu283143"
+}, 
+{
+"@id": "node706974"
+}, 
+{
+"@id": "node706975"
+}, 
+{
+"@id": "node706976"
+}, 
+{
+"@id": "node706977", 
+"@otu": "otu283151"
+}, 
+{
+"@id": "node706978", 
+"@otu": "otu283142"
+}, 
+{
+"@id": "node706979", 
+"@otu": "otu283147"
+}, 
+{
+"@id": "node706980", 
+"@otu": "otu283140"
+}, 
+{
+"@id": "node706981", 
+"@otu": "otu283154"
+}, 
+{
+"@id": "node706982", 
+"@otu": "otu283128"
+}, 
+{
+"@id": "node706983", 
+"@otu": "otu283139"
+}, 
+{
+"@id": "node706984", 
+"@otu": "otu283146"
+}, 
+{
+"@id": "node706985", 
+"@otu": "otu283144"
+}, 
+{
+"@id": "node706986", 
+"@otu": "otu283135"
+}
+]
+}
+]
+}
+}
+}

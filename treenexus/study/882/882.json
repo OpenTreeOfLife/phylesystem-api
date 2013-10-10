@@ -1,0 +1,685 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Tuthill D. 2003. Genetic variation and recombination in Penicillium miczynskii and Eupenicillium species. Mycological Progress, 3(1), 3-12.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s11557-006-0070-3", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1062", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "882", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2003, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 804016, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus882", 
+"otu": [
+{
+"@about": "#otu203317", 
+"@id": "otu203317", 
+"@label": "Penicillium manginii", 
+"meta": [
+{
+"$": 290507, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium manginii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203318", 
+"@id": "otu203318", 
+"@label": "Penicillium chermesinum", 
+"meta": [
+{
+"$": 288454, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium chermesinum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203319", 
+"@id": "otu203319", 
+"@label": "Penicillium paxilli", 
+"meta": [
+{
+"$": 937350, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium paxilli", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203320", 
+"@id": "otu203320", 
+"@label": "Penicillium citrinum", 
+"meta": [
+{
+"$": 226488, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium citrinum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203321", 
+"@id": "otu203321", 
+"@label": "Penicillium miczynskii", 
+"meta": [
+{
+"$": 486252, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium miczynskii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203322", 
+"@id": "otu203322", 
+"@label": "Penicillium decaturense", 
+"meta": [
+{
+"$": 925524, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium decanturense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203323", 
+"@id": "otu203323", 
+"@label": "Eupenicillium tropicum", 
+"meta": [
+{
+"$": 371979, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Eupenicillium tropicum SC42.1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203324", 
+"@id": "otu203324", 
+"@label": "Penicillium westlingii", 
+"meta": [
+{
+"$": 823311, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium westlingii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203325", 
+"@id": "otu203325", 
+"@label": "Eupenicillium tropicum", 
+"meta": [
+{
+"$": 371979, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Eupenicillium tropicum SS133.17", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203326", 
+"@id": "otu203326", 
+"@label": "Penicillium peoriense", 
+"meta": [
+{
+"$": 692841, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium peoriense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203327", 
+"@id": "otu203327", 
+"@label": "Penicillium sumatrense", 
+"meta": [
+{
+"$": 663891, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium sumatrense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203328", 
+"@id": "otu203328", 
+"@label": "Eupenicillium", 
+"meta": [
+{
+"$": 647526, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Eupenicillium SS133.1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203329", 
+"@id": "otu203329", 
+"@label": "Penicillium miczynskii", 
+"meta": [
+{
+"$": 486252, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium miczynskii N10", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203330", 
+"@id": "otu203330", 
+"@label": "Eupenicillium anatolicum", 
+"meta": [
+{
+"$": 63396, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Eupenicillium anatolicum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203331", 
+"@id": "otu203331", 
+"@label": "Penicillium cinnamopurpureum", 
+"meta": [
+{
+"$": 891238, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Eupenicillium cinnamopurpureum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203332", 
+"@id": "otu203332", 
+"@label": "Penicillium waksmanii", 
+"meta": [
+{
+"$": 823308, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium waksmanii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203333", 
+"@id": "otu203333", 
+"@label": "Penicillium sartoryi", 
+"meta": [
+{
+"$": 937352, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Penicillium sartoryi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu203334", 
+"@id": "otu203334", 
+"@label": "Eupenicillium shearii", 
+"meta": [
+{
+"$": 562103, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Eupenicillium shearii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees882", 
+"@otus": "otus882", 
+"tree": [
+{
+"@about": "#tree1702", 
+"@id": "tree1702", 
+"edge": [
+{
+"@id": "edge478098", 
+"@source": "node478097", 
+"@target": "node478098"
+}, 
+{
+"@id": "edge478099", 
+"@source": "node478098", 
+"@target": "node478099"
+}, 
+{
+"@id": "edge478100", 
+"@source": "node478099", 
+"@target": "node478100"
+}, 
+{
+"@id": "edge478101", 
+"@source": "node478100", 
+"@target": "node478101"
+}, 
+{
+"@id": "edge478102", 
+"@source": "node478101", 
+"@target": "node478102"
+}, 
+{
+"@id": "edge478103", 
+"@source": "node478102", 
+"@target": "node478103"
+}, 
+{
+"@id": "edge478104", 
+"@source": "node478103", 
+"@target": "node478104"
+}, 
+{
+"@id": "edge478105", 
+"@source": "node478104", 
+"@target": "node478105"
+}, 
+{
+"@id": "edge478106", 
+"@source": "node478104", 
+"@target": "node478106"
+}, 
+{
+"@id": "edge478107", 
+"@source": "node478103", 
+"@target": "node478107"
+}, 
+{
+"@id": "edge478108", 
+"@source": "node478102", 
+"@target": "node478108"
+}, 
+{
+"@id": "edge478109", 
+"@source": "node478102", 
+"@target": "node478109"
+}, 
+{
+"@id": "edge478110", 
+"@source": "node478101", 
+"@target": "node478110"
+}, 
+{
+"@id": "edge478111", 
+"@source": "node478110", 
+"@target": "node478111"
+}, 
+{
+"@id": "edge478112", 
+"@source": "node478110", 
+"@target": "node478112"
+}, 
+{
+"@id": "edge478113", 
+"@source": "node478100", 
+"@target": "node478113"
+}, 
+{
+"@id": "edge478114", 
+"@source": "node478100", 
+"@target": "node478114"
+}, 
+{
+"@id": "edge478115", 
+"@source": "node478114", 
+"@target": "node478115"
+}, 
+{
+"@id": "edge478116", 
+"@source": "node478114", 
+"@target": "node478116"
+}, 
+{
+"@id": "edge478117", 
+"@source": "node478099", 
+"@target": "node478117"
+}, 
+{
+"@id": "edge478118", 
+"@source": "node478098", 
+"@target": "node478118"
+}, 
+{
+"@id": "edge478119", 
+"@source": "node478118", 
+"@target": "node478119"
+}, 
+{
+"@id": "edge478120", 
+"@source": "node478119", 
+"@target": "node478120"
+}, 
+{
+"@id": "edge478121", 
+"@source": "node478120", 
+"@target": "node478121"
+}, 
+{
+"@id": "edge478122", 
+"@source": "node478120", 
+"@target": "node478122"
+}, 
+{
+"@id": "edge478123", 
+"@source": "node478119", 
+"@target": "node478123"
+}, 
+{
+"@id": "edge478124", 
+"@source": "node478118", 
+"@target": "node478124"
+}, 
+{
+"@id": "edge478125", 
+"@source": "node478124", 
+"@target": "node478125"
+}, 
+{
+"@id": "edge478126", 
+"@source": "node478124", 
+"@target": "node478126"
+}, 
+{
+"@id": "edge478127", 
+"@source": "node478097", 
+"@target": "node478127"
+}, 
+{
+"@id": "edge478128", 
+"@source": "node478097", 
+"@target": "node478128"
+}
+], 
+"meta": [
+{
+"$": "node478098", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node478097", 
+"@root": "true"
+}, 
+{
+"@id": "node478098"
+}, 
+{
+"@id": "node478099"
+}, 
+{
+"@id": "node478100"
+}, 
+{
+"@id": "node478101"
+}, 
+{
+"@id": "node478102"
+}, 
+{
+"@id": "node478103"
+}, 
+{
+"@id": "node478104"
+}, 
+{
+"@id": "node478105", 
+"@otu": "otu203321"
+}, 
+{
+"@id": "node478106", 
+"@otu": "otu203329"
+}, 
+{
+"@id": "node478107", 
+"@otu": "otu203332"
+}, 
+{
+"@id": "node478108", 
+"@otu": "otu203322"
+}, 
+{
+"@id": "node478109", 
+"@otu": "otu203317"
+}, 
+{
+"@id": "node478110"
+}, 
+{
+"@id": "node478111", 
+"@otu": "otu203334"
+}, 
+{
+"@id": "node478112", 
+"@otu": "otu203328"
+}, 
+{
+"@id": "node478113", 
+"@otu": "otu203319"
+}, 
+{
+"@id": "node478114"
+}, 
+{
+"@id": "node478115", 
+"@otu": "otu203327"
+}, 
+{
+"@id": "node478116", 
+"@otu": "otu203326"
+}, 
+{
+"@id": "node478117", 
+"@otu": "otu203330"
+}, 
+{
+"@id": "node478118"
+}, 
+{
+"@id": "node478119"
+}, 
+{
+"@id": "node478120"
+}, 
+{
+"@id": "node478121", 
+"@otu": "otu203320"
+}, 
+{
+"@id": "node478122", 
+"@otu": "otu203333"
+}, 
+{
+"@id": "node478123", 
+"@otu": "otu203324"
+}, 
+{
+"@id": "node478124"
+}, 
+{
+"@id": "node478125", 
+"@otu": "otu203325"
+}, 
+{
+"@id": "node478126", 
+"@otu": "otu203323"
+}, 
+{
+"@id": "node478127", 
+"@otu": "otu203331"
+}, 
+{
+"@id": "node478128", 
+"@otu": "otu203318"
+}
+]
+}
+]
+}
+}
+}

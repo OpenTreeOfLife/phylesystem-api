@@ -1,0 +1,938 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Harbaugh, D. T., Oppenheimer, H. L., Wood, K. R., & Wagner, W. L. (2010). Taxonomic revision of the endangered Hawaiian red-flowered sandalwoods (Santalum) and discovery of an ancient hybrid species. Systematic botany, 35(4), 827-838.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1600/036364410X539899", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10609", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "330", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 1939526, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ingroup added;", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus330", 
+"otu": [
+{
+"@about": "#otu74218", 
+"@id": "otu74218", 
+"@label": "Santalum haleakalae", 
+"meta": [
+{
+"$": 150883, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum haleakalae lanaiense 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74219", 
+"@id": "otu74219", 
+"@label": "Santalum austrocaledonicum", 
+"meta": [
+{
+"$": 1096150, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum austrocaledonicum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74220", 
+"@id": "otu74220", 
+"@label": "Santalum ellipticum", 
+"meta": [
+{
+"$": 317994, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum ellipticum 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74221", 
+"@id": "otu74221", 
+"@label": "Santalum paniculatum", 
+"meta": [
+{
+"$": 150875, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum paniculatum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74222", 
+"@id": "otu74222", 
+"@label": "Santalum spicatum", 
+"meta": [
+{
+"$": 150898, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum spicatum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74223", 
+"@id": "otu74223", 
+"@label": "Santalum obtusifolium", 
+"meta": [
+{
+"$": 150873, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum obtusifolium", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74224", 
+"@id": "otu74224", 
+"@label": "Santalum insulare", 
+"meta": [
+{
+"$": 620347, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum insulare marchionense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74225", 
+"@id": "otu74225", 
+"@label": "Santalum boninense", 
+"meta": [
+{
+"$": 318003, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum boninense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74226", 
+"@id": "otu74226", 
+"@label": "Santalum pyrularium", 
+"meta": {
+"$": "Santalum pyrularium 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu74227", 
+"@id": "otu74227", 
+"@label": "Santalum haleakalae", 
+"meta": [
+{
+"$": 150883, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum haleakalae lanaiense 3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74228", 
+"@id": "otu74228", 
+"@label": "Santalum haleakalae", 
+"meta": [
+{
+"$": 150883, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum haleakalae lanaiense 10", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74229", 
+"@id": "otu74229", 
+"@label": "Santalum freycinetianum var. pyrularium", 
+"meta": [
+{
+"$": 480527, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum involutum 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74230", 
+"@id": "otu74230", 
+"@label": "Santalum ellipticum", 
+"meta": [
+{
+"$": 317994, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum ellipticum 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74231", 
+"@id": "otu74231", 
+"@label": "Santalum acuminatum", 
+"meta": [
+{
+"$": 318005, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum acuminatum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74232", 
+"@id": "otu74232", 
+"@label": "Santalum haleakalae", 
+"meta": [
+{
+"$": 150883, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum haleakalae lanaiense 4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74233", 
+"@id": "otu74233", 
+"@label": "Santalum insulare", 
+"meta": [
+{
+"$": 620347, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum insulare raiateense", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74234", 
+"@id": "otu74234", 
+"@label": "Colpoon compressum", 
+"meta": [
+{
+"$": 856841, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Colpoon sp.", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74235", 
+"@id": "otu74235", 
+"@label": "Santalum leptocladum", 
+"meta": [
+{
+"$": 1086703, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum leptocladum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74236", 
+"@id": "otu74236", 
+"@label": "Santalum freycinetianum", 
+"meta": [
+{
+"$": 150894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum freycinetianum 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74237", 
+"@id": "otu74237", 
+"@label": "Santalum pyrularium", 
+"meta": {
+"$": "Santalum pyrularium 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu74238", 
+"@id": "otu74238", 
+"@label": "Santalum haleakalae", 
+"meta": [
+{
+"$": 150883, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum haleakalae haleakalae 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74239", 
+"@id": "otu74239", 
+"@label": "Santalum yasi", 
+"meta": [
+{
+"$": 150900, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum yasi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74240", 
+"@id": "otu74240", 
+"@label": "Santalum haleakalae", 
+"meta": [
+{
+"$": 150883, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum haleakalae var. lanaiense 5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74241", 
+"@id": "otu74241", 
+"@label": "Santalum lanceolatum", 
+"meta": [
+{
+"$": 150886, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum lanceolatum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74242", 
+"@id": "otu74242", 
+"@label": "Santalum macgregorii", 
+"meta": [
+{
+"$": 150878, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum macgregorii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74243", 
+"@id": "otu74243", 
+"@label": "Santalum murrayanum", 
+"meta": [
+{
+"$": 150880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum murrayanum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74244", 
+"@id": "otu74244", 
+"@label": "Santalum album", 
+"meta": [
+{
+"$": 1028931, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum album", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu74245", 
+"@id": "otu74245", 
+"@label": "Santalum freycinetianum var. pyrularium", 
+"meta": [
+{
+"$": 480527, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Santalum involutum 1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees330", 
+"@otus": "otus330", 
+"tree": [
+{
+"@about": "#tree325", 
+"@id": "tree325", 
+"edge": [
+{
+"@id": "edge195382", 
+"@source": "node195381", 
+"@target": "node195382"
+}, 
+{
+"@id": "edge195383", 
+"@source": "node195381", 
+"@target": "node195383"
+}, 
+{
+"@id": "edge195384", 
+"@source": "node195383", 
+"@target": "node195384"
+}, 
+{
+"@id": "edge195385", 
+"@source": "node195384", 
+"@target": "node195385"
+}, 
+{
+"@id": "edge195386", 
+"@source": "node195385", 
+"@target": "node195386"
+}, 
+{
+"@id": "edge195387", 
+"@source": "node195386", 
+"@target": "node195387"
+}, 
+{
+"@id": "edge195388", 
+"@source": "node195387", 
+"@target": "node195388"
+}, 
+{
+"@id": "edge195389", 
+"@source": "node195388", 
+"@target": "node195389"
+}, 
+{
+"@id": "edge195390", 
+"@source": "node195389", 
+"@target": "node195390"
+}, 
+{
+"@id": "edge195391", 
+"@source": "node195389", 
+"@target": "node195391"
+}, 
+{
+"@id": "edge195392", 
+"@source": "node195391", 
+"@target": "node195392"
+}, 
+{
+"@id": "edge195393", 
+"@source": "node195392", 
+"@target": "node195393"
+}, 
+{
+"@id": "edge195394", 
+"@source": "node195392", 
+"@target": "node195394"
+}, 
+{
+"@id": "edge195395", 
+"@source": "node195391", 
+"@target": "node195395"
+}, 
+{
+"@id": "edge195396", 
+"@source": "node195395", 
+"@target": "node195396"
+}, 
+{
+"@id": "edge195397", 
+"@source": "node195395", 
+"@target": "node195397"
+}, 
+{
+"@id": "edge195398", 
+"@source": "node195391", 
+"@target": "node195398"
+}, 
+{
+"@id": "edge195399", 
+"@source": "node195389", 
+"@target": "node195399"
+}, 
+{
+"@id": "edge195400", 
+"@source": "node195389", 
+"@target": "node195400"
+}, 
+{
+"@id": "edge195401", 
+"@source": "node195389", 
+"@target": "node195401"
+}, 
+{
+"@id": "edge195402", 
+"@source": "node195389", 
+"@target": "node195402"
+}, 
+{
+"@id": "edge195403", 
+"@source": "node195389", 
+"@target": "node195403"
+}, 
+{
+"@id": "edge195404", 
+"@source": "node195389", 
+"@target": "node195404"
+}, 
+{
+"@id": "edge195405", 
+"@source": "node195388", 
+"@target": "node195405"
+}, 
+{
+"@id": "edge195406", 
+"@source": "node195405", 
+"@target": "node195406"
+}, 
+{
+"@id": "edge195407", 
+"@source": "node195406", 
+"@target": "node195407"
+}, 
+{
+"@id": "edge195408", 
+"@source": "node195406", 
+"@target": "node195408"
+}, 
+{
+"@id": "edge195409", 
+"@source": "node195408", 
+"@target": "node195409"
+}, 
+{
+"@id": "edge195410", 
+"@source": "node195408", 
+"@target": "node195410"
+}, 
+{
+"@id": "edge195411", 
+"@source": "node195405", 
+"@target": "node195411"
+}, 
+{
+"@id": "edge195412", 
+"@source": "node195405", 
+"@target": "node195412"
+}, 
+{
+"@id": "edge195413", 
+"@source": "node195412", 
+"@target": "node195413"
+}, 
+{
+"@id": "edge195414", 
+"@source": "node195412", 
+"@target": "node195414"
+}, 
+{
+"@id": "edge195415", 
+"@source": "node195388", 
+"@target": "node195415"
+}, 
+{
+"@id": "edge195416", 
+"@source": "node195387", 
+"@target": "node195416"
+}, 
+{
+"@id": "edge195417", 
+"@source": "node195416", 
+"@target": "node195417"
+}, 
+{
+"@id": "edge195418", 
+"@source": "node195416", 
+"@target": "node195418"
+}, 
+{
+"@id": "edge195419", 
+"@source": "node195386", 
+"@target": "node195419"
+}, 
+{
+"@id": "edge195420", 
+"@source": "node195419", 
+"@target": "node195420"
+}, 
+{
+"@id": "edge195421", 
+"@source": "node195419", 
+"@target": "node195421"
+}, 
+{
+"@id": "edge195422", 
+"@source": "node195385", 
+"@target": "node195422"
+}, 
+{
+"@id": "edge195423", 
+"@source": "node195384", 
+"@target": "node195423"
+}, 
+{
+"@id": "edge195424", 
+"@source": "node195383", 
+"@target": "node195424"
+}, 
+{
+"@id": "edge195425", 
+"@source": "node195424", 
+"@target": "node195425"
+}, 
+{
+"@id": "edge195426", 
+"@source": "node195424", 
+"@target": "node195426"
+}
+], 
+"meta": [
+{
+"$": "node195383", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node195381", 
+"@root": "true"
+}, 
+{
+"@id": "node195382", 
+"@otu": "otu74234"
+}, 
+{
+"@id": "node195383"
+}, 
+{
+"@id": "node195384"
+}, 
+{
+"@id": "node195385"
+}, 
+{
+"@id": "node195386"
+}, 
+{
+"@id": "node195387"
+}, 
+{
+"@id": "node195388"
+}, 
+{
+"@id": "node195389"
+}, 
+{
+"@id": "node195390", 
+"@otu": "otu74240"
+}, 
+{
+"@id": "node195391"
+}, 
+{
+"@id": "node195392"
+}, 
+{
+"@id": "node195393", 
+"@otu": "otu74226"
+}, 
+{
+"@id": "node195394", 
+"@otu": "otu74237"
+}, 
+{
+"@id": "node195395"
+}, 
+{
+"@id": "node195396", 
+"@otu": "otu74224"
+}, 
+{
+"@id": "node195397", 
+"@otu": "otu74233"
+}, 
+{
+"@id": "node195398", 
+"@otu": "otu74225"
+}, 
+{
+"@id": "node195399", 
+"@otu": "otu74236"
+}, 
+{
+"@id": "node195400", 
+"@otu": "otu74238"
+}, 
+{
+"@id": "node195401", 
+"@otu": "otu74228"
+}, 
+{
+"@id": "node195402", 
+"@otu": "otu74227"
+}, 
+{
+"@id": "node195403", 
+"@otu": "otu74232"
+}, 
+{
+"@id": "node195404", 
+"@otu": "otu74218"
+}, 
+{
+"@id": "node195405"
+}, 
+{
+"@id": "node195406"
+}, 
+{
+"@id": "node195407", 
+"@otu": "otu74221"
+}, 
+{
+"@id": "node195408"
+}, 
+{
+"@id": "node195409", 
+"@otu": "otu74230"
+}, 
+{
+"@id": "node195410", 
+"@otu": "otu74220"
+}, 
+{
+"@id": "node195411", 
+"@otu": "otu74241"
+}, 
+{
+"@id": "node195412"
+}, 
+{
+"@id": "node195413", 
+"@otu": "otu74245"
+}, 
+{
+"@id": "node195414", 
+"@otu": "otu74229"
+}, 
+{
+"@id": "node195415", 
+"@otu": "otu74242"
+}, 
+{
+"@id": "node195416"
+}, 
+{
+"@id": "node195417", 
+"@otu": "otu74235"
+}, 
+{
+"@id": "node195418", 
+"@otu": "otu74219"
+}, 
+{
+"@id": "node195419"
+}, 
+{
+"@id": "node195420", 
+"@otu": "otu74244"
+}, 
+{
+"@id": "node195421", 
+"@otu": "otu74239"
+}, 
+{
+"@id": "node195422", 
+"@otu": "otu74223"
+}, 
+{
+"@id": "node195423", 
+"@otu": "otu74243"
+}, 
+{
+"@id": "node195424"
+}, 
+{
+"@id": "node195425", 
+"@otu": "otu74231"
+}, 
+{
+"@id": "node195426", 
+"@otu": "otu74222"
+}
+]
+}
+]
+}
+}
+}

@@ -1,0 +1,637 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Hendrixson B., & Bond J. 2009. Evaluating the Efficacy of Continuous Quantitative Characters for Reconstructing the Phylogeny of a Morphologically Homogeneous Spider Taxon (Araneae, Mygalomorphae, Antrodiaetidae, Antrodiaetus). Molecular Phylogenetics and Evolution, 53(1): 300-313.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.ympev.2009.06.001", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Chris Owen", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10055", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2154", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2009, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2536782, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2154", 
+"otu": [
+{
+"@about": "#otu316554", 
+"@id": "otu316554", 
+"@label": "Antrodiaetus robustus", 
+"meta": [
+{
+"$": 835058, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus robustus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316555", 
+"@id": "otu316555", 
+"@label": "Antrodiaetus stygius", 
+"meta": [
+{
+"$": 835056, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus stygius", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316556", 
+"@id": "otu316556", 
+"@label": "Antrodiaetus roretzi", 
+"meta": [
+{
+"$": 35159, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus roretzi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316557", 
+"@id": "otu316557", 
+"@label": "Sphodros sp. BEH-2006", 
+"meta": [
+{
+"$": 608341, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sphodros sp.", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316558", 
+"@id": "otu316558", 
+"@label": "Antrodiaetus occultus", 
+"meta": [
+{
+"$": 35149, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus occultus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316559", 
+"@id": "otu316559", 
+"@label": "Antrodiaetus apachecus", 
+"meta": [
+{
+"$": 835054, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus apachecus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316560", 
+"@id": "otu316560", 
+"@label": "Antrodiaetus pugnax", 
+"meta": [
+{
+"$": 35162, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus pugnax", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316561", 
+"@id": "otu316561", 
+"@label": "Antrodiaetus riversi", 
+"meta": [
+{
+"$": 3575468, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus riversi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316562", 
+"@id": "otu316562", 
+"@label": "Aliatypus sp. MY0106", 
+"meta": [
+{
+"$": 35158, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Aliatypus sp.", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316563", 
+"@id": "otu316563", 
+"@label": "Antrodiaetus yesoensis", 
+"meta": [
+{
+"$": 608338, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus yesoensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316564", 
+"@id": "otu316564", 
+"@label": "Antrodiaetus hageni", 
+"meta": [
+{
+"$": 35144, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus hageni", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316565", 
+"@id": "otu316565", 
+"@label": "Antrodiaetus gertschi", 
+"meta": [
+{
+"$": 3575464, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus gertschi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316566", 
+"@id": "otu316566", 
+"@label": "Antrodiaetus unicolor", 
+"meta": [
+{
+"$": 606858, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus unicolor", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316567", 
+"@id": "otu316567", 
+"@label": "Antrodiaetus hadros", 
+"meta": [
+{
+"$": 3575467, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus hadros", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316568", 
+"@id": "otu316568", 
+"@label": "Antrodiaetus montanus", 
+"meta": [
+{
+"$": 35151, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus montanus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316569", 
+"@id": "otu316569", 
+"@label": "Antrodiaetus cerberus", 
+"meta": [
+{
+"$": 35147, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus cerberus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu316570", 
+"@id": "otu316570", 
+"@label": "Antrodiaetus pacificus", 
+"meta": [
+{
+"$": 257604, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Antrodiaetus pacificus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2154", 
+"@otus": "otus2154", 
+"tree": [
+{
+"@about": "#tree4547", 
+"@id": "tree4547", 
+"edge": [
+{
+"@id": "edge813314", 
+"@source": "node813313", 
+"@target": "node813314"
+}, 
+{
+"@id": "edge813315", 
+"@source": "node813313", 
+"@target": "node813315"
+}, 
+{
+"@id": "edge813316", 
+"@source": "node813313", 
+"@target": "node813316"
+}, 
+{
+"@id": "edge813317", 
+"@source": "node813316", 
+"@target": "node813317"
+}, 
+{
+"@id": "edge813318", 
+"@source": "node813317", 
+"@target": "node813318"
+}, 
+{
+"@id": "edge813319", 
+"@source": "node813318", 
+"@target": "node813319"
+}, 
+{
+"@id": "edge813320", 
+"@source": "node813318", 
+"@target": "node813320"
+}, 
+{
+"@id": "edge813321", 
+"@source": "node813317", 
+"@target": "node813321"
+}, 
+{
+"@id": "edge813322", 
+"@source": "node813316", 
+"@target": "node813322"
+}, 
+{
+"@id": "edge813323", 
+"@source": "node813322", 
+"@target": "node813323"
+}, 
+{
+"@id": "edge813324", 
+"@source": "node813322", 
+"@target": "node813324"
+}, 
+{
+"@id": "edge813325", 
+"@source": "node813324", 
+"@target": "node813325"
+}, 
+{
+"@id": "edge813326", 
+"@source": "node813325", 
+"@target": "node813326"
+}, 
+{
+"@id": "edge813327", 
+"@source": "node813325", 
+"@target": "node813327"
+}, 
+{
+"@id": "edge813328", 
+"@source": "node813327", 
+"@target": "node813328"
+}, 
+{
+"@id": "edge813329", 
+"@source": "node813328", 
+"@target": "node813329"
+}, 
+{
+"@id": "edge813330", 
+"@source": "node813329", 
+"@target": "node813330"
+}, 
+{
+"@id": "edge813331", 
+"@source": "node813329", 
+"@target": "node813331"
+}, 
+{
+"@id": "edge813332", 
+"@source": "node813328", 
+"@target": "node813332"
+}, 
+{
+"@id": "edge813333", 
+"@source": "node813332", 
+"@target": "node813333"
+}, 
+{
+"@id": "edge813334", 
+"@source": "node813332", 
+"@target": "node813334"
+}, 
+{
+"@id": "edge813335", 
+"@source": "node813327", 
+"@target": "node813335"
+}, 
+{
+"@id": "edge813336", 
+"@source": "node813324", 
+"@target": "node813336"
+}, 
+{
+"@id": "edge813337", 
+"@source": "node813336", 
+"@target": "node813337"
+}, 
+{
+"@id": "edge813338", 
+"@source": "node813337", 
+"@target": "node813338"
+}, 
+{
+"@id": "edge813339", 
+"@source": "node813337", 
+"@target": "node813339"
+}, 
+{
+"@id": "edge813340", 
+"@source": "node813336", 
+"@target": "node813340"
+}, 
+{
+"@id": "edge813341", 
+"@source": "node813340", 
+"@target": "node813341"
+}, 
+{
+"@id": "edge813342", 
+"@source": "node813341", 
+"@target": "node813342"
+}, 
+{
+"@id": "edge813343", 
+"@source": "node813341", 
+"@target": "node813343"
+}, 
+{
+"@id": "edge813344", 
+"@source": "node813340", 
+"@target": "node813344"
+}
+], 
+"meta": [
+{
+"$": "ot:substitutionCount", 
+"@property": "ot:branchLengthMode", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node813313", 
+"@root": "true"
+}, 
+{
+"@id": "node813314", 
+"@otu": "otu316557"
+}, 
+{
+"@id": "node813315", 
+"@otu": "otu316562"
+}, 
+{
+"@id": "node813316"
+}, 
+{
+"@id": "node813317"
+}, 
+{
+"@id": "node813318"
+}, 
+{
+"@id": "node813319", 
+"@otu": "otu316567"
+}, 
+{
+"@id": "node813320", 
+"@otu": "otu316561"
+}, 
+{
+"@id": "node813321", 
+"@otu": "otu316565"
+}, 
+{
+"@id": "node813322"
+}, 
+{
+"@id": "node813323", 
+"@otu": "otu316556"
+}, 
+{
+"@id": "node813324"
+}, 
+{
+"@id": "node813325"
+}, 
+{
+"@id": "node813326", 
+"@otu": "otu316563"
+}, 
+{
+"@id": "node813327"
+}, 
+{
+"@id": "node813328"
+}, 
+{
+"@id": "node813329"
+}, 
+{
+"@id": "node813330", 
+"@otu": "otu316569"
+}, 
+{
+"@id": "node813331", 
+"@otu": "otu316564"
+}, 
+{
+"@id": "node813332"
+}, 
+{
+"@id": "node813333", 
+"@otu": "otu316554"
+}, 
+{
+"@id": "node813334", 
+"@otu": "otu316560"
+}, 
+{
+"@id": "node813335", 
+"@otu": "otu316566"
+}, 
+{
+"@id": "node813336"
+}, 
+{
+"@id": "node813337"
+}, 
+{
+"@id": "node813338", 
+"@otu": "otu316555"
+}, 
+{
+"@id": "node813339", 
+"@otu": "otu316559"
+}, 
+{
+"@id": "node813340"
+}, 
+{
+"@id": "node813341"
+}, 
+{
+"@id": "node813342", 
+"@otu": "otu316568"
+}, 
+{
+"@id": "node813343", 
+"@otu": "otu316558"
+}, 
+{
+"@id": "node813344", 
+"@otu": "otu316570"
+}
+]
+}
+]
+}
+}
+}

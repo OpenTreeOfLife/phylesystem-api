@@ -1,0 +1,3244 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Petkovits, Tam\u00e1s, L\u00e1szl\u00f3 G. Nagy, Kerstin Hoffmann, Lysett Wagner, Ildik\u00f3 Nyilasi, Thasso Griebel, Domenica Schnabelrauch et al. \"Data partitions, Bayesian analysis and phylogeny of the zygomycetous fungal family Mortierellaceae, inferred from nuclear ribosomal DNA sequences.\" PloS one 6, no. 11 (2011): e27507.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1371/journal.pone.0027507", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S11367", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2218", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2011, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2675675, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2218", 
+"otu": [
+{
+"@about": "#otu322117", 
+"@id": "otu322117", 
+"@label": "Mortierella hyalina", 
+"meta": [
+{
+"$": 184957, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella hyalina CBS 30652", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322118", 
+"@id": "otu322118", 
+"@label": "Mortierella cystojenkinii", 
+"meta": [
+{
+"$": 10747, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella cystojenkinii CBS 45671", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322119", 
+"@id": "otu322119", 
+"@label": "Mortierella multidivaricata", 
+"meta": [
+{
+"$": 110485, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gamsiella multidivaricata CBS 22778", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322120", 
+"@id": "otu322120", 
+"@label": "Rhizopus arrhizus", 
+"meta": [
+{
+"$": 530834, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Rhizopus oryzae NRRL28631 UWFP973", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322121", 
+"@id": "otu322121", 
+"@label": "Mortierella wolfii", 
+"meta": [
+{
+"$": 178191, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella wolfii CBS 61270", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322122", 
+"@id": "otu322122", 
+"@label": "Mortierella rostafinskii", 
+"meta": [
+{
+"$": 286606, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella rostafinskii CBS 52270", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322123", 
+"@id": "otu322123", 
+"@label": "Mortierella lignicola", 
+"meta": [
+{
+"$": 854927, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella lignicola CBS 20737", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322124", 
+"@id": "otu322124", 
+"@label": "Mortierella nantahalensis", 
+"meta": [
+{
+"$": 854908, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella nantahalensis CBS 61070", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322125", 
+"@id": "otu322125", 
+"@label": "Mortierella hyalina", 
+"meta": [
+{
+"$": 184957, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella hyalina CBS 115655", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322126", 
+"@id": "otu322126", 
+"@label": "Mortierella elongata", 
+"meta": [
+{
+"$": 896067, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella elongata FSU822", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322127", 
+"@id": "otu322127", 
+"@label": "Mortierella humilis", 
+"meta": [
+{
+"$": 184956, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella humilis FSU829", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322128", 
+"@id": "otu322128", 
+"@label": "Mortierella polycephala", 
+"meta": [
+{
+"$": 773457, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella polycephala FSU866", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322129", 
+"@id": "otu322129", 
+"@label": "Micromucor ramannianus var. ramannianus", 
+"meta": [
+{
+"$": 113832, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Micromucor ramanniana var ramanniana SZMC 12036", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322130", 
+"@id": "otu322130", 
+"@label": "Mortierella exigua", 
+"meta": [
+{
+"$": 362434, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella exigua CBS 65568", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322131", 
+"@id": "otu322131", 
+"@label": "Mortierella wolfii", 
+"meta": [
+{
+"$": 178191, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella wolfii CBS 61470", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322132", 
+"@id": "otu322132", 
+"@label": "Mortierella globulifera", 
+"meta": [
+{
+"$": 1006749, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella globulifera CBS 85870", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322133", 
+"@id": "otu322133", 
+"@label": "Mortierella parazychae", 
+"meta": [
+{
+"$": 666758, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella parazychae CBS 86871", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322134", 
+"@id": "otu322134", 
+"@label": "Mortierella paraensis", 
+"meta": [
+{
+"$": 144126, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella paraensis CBS 54789", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322135", 
+"@id": "otu322135", 
+"@label": "Mortierella antarctica", 
+"meta": [
+{
+"$": 165084, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella antarctica CBS 60970", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322136", 
+"@id": "otu322136", 
+"@label": "Mortierella polycephala", 
+"meta": [
+{
+"$": 773457, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella polycephala CBS 45666", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322137", 
+"@id": "otu322137", 
+"@label": "Mortierella zychae", 
+"meta": [
+{
+"$": 91038, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella zychae CBS 31652", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322138", 
+"@id": "otu322138", 
+"@label": "Mortierella spinosa", 
+"meta": [
+{
+"$": 184954, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella gamsii CBS 25336", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322139", 
+"@id": "otu322139", 
+"@label": "Mortierella armillariicola", 
+"meta": [
+{
+"$": 165086, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella armillariicola CBS 91473", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322140", 
+"@id": "otu322140", 
+"@label": "Mortierella schmuckeri", 
+"meta": [
+{
+"$": 286607, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella schmuckeri CBS 29559", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322141", 
+"@id": "otu322141", 
+"@label": "Mortierella clonocystis", 
+"meta": [
+{
+"$": 532203, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella clonocystis CBS 35776", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322142", 
+"@id": "otu322142", 
+"@label": "Dissophora ornata", 
+"meta": [
+{
+"$": 790223, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dissophora ornata CBS 34877", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322143", 
+"@id": "otu322143", 
+"@label": "Mortierella humilis", 
+"meta": [
+{
+"$": 184956, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella humilis CBS 22235", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322144", 
+"@id": "otu322144", 
+"@label": "Mortierella capitata", 
+"meta": [
+{
+"$": 184953, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella capitata CBS 64868", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322145", 
+"@id": "otu322145", 
+"@label": "Mortierella strangulata", 
+"meta": [
+{
+"$": 286602, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella strangulata CBS 45567", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322146", 
+"@id": "otu322146", 
+"@label": "Mortierella stylospora", 
+"meta": [
+{
+"$": 126879, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella stylospora CBS 21132", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322147", 
+"@id": "otu322147", 
+"@label": "Mortierella polycephala", 
+"meta": [
+{
+"$": 773457, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella polycephala FSU696", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322148", 
+"@id": "otu322148", 
+"@label": "Mortierella verticillata", 
+"meta": [
+{
+"$": 956401, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella verticillata CBS 37495", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322149", 
+"@id": "otu322149", 
+"@label": "Mortierella elongatula", 
+"meta": [
+{
+"$": 10762, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella elongatula CBS 48870", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322150", 
+"@id": "otu322150", 
+"@label": "Mortierella amoeboidea", 
+"meta": [
+{
+"$": 643674, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella amoeboidea CBS 88972", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322151", 
+"@id": "otu322151", 
+"@label": "Micromucor ramannianus", 
+"meta": [
+{
+"$": 199302, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella ramanniana NRRL1296", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322152", 
+"@id": "otu322152", 
+"@label": "Echinosporangium transversale", 
+"meta": [
+{
+"$": 861293, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lobosporangium transversale NRRL3116", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322153", 
+"@id": "otu322153", 
+"@label": "Mortierella sarnyensis", 
+"meta": [
+{
+"$": 362435, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella sarnyensis CBS 12272", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322154", 
+"@id": "otu322154", 
+"@label": "Mortierella epigama", 
+"meta": [
+{
+"$": 65061, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella epigama CBS 48970", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322155", 
+"@id": "otu322155", 
+"@label": "Mortierella horticola", 
+"meta": [
+{
+"$": 136136, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella horticola CBS 30552", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322156", 
+"@id": "otu322156", 
+"@label": "Mortierella parvispora", 
+"meta": [
+{
+"$": 607794, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella parvispora FSU835", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322157", 
+"@id": "otu322157", 
+"@label": "Mortierella longicollis", 
+"meta": [
+{
+"$": 829659, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella longicollis CBS 20932", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322158", 
+"@id": "otu322158", 
+"@label": "Mortierella indohii", 
+"meta": [
+{
+"$": 627752, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella indohii CBS 72071", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322159", 
+"@id": "otu322159", 
+"@label": "Mortierella verticillata", 
+"meta": [
+{
+"$": 956401, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella verticillata CBS 34666", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322160", 
+"@id": "otu322160", 
+"@label": "Mortierella globulifera", 
+"meta": [
+{
+"$": 1006749, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella globulifera FSU826", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322161", 
+"@id": "otu322161", 
+"@label": "Mortierella dichotoma", 
+"meta": [
+{
+"$": 10749, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella dichotoma CBS 22135", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322162", 
+"@id": "otu322162", 
+"@label": "Mortierella acrotona", 
+"meta": [
+{
+"$": 113840, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella acrotona CBS 38671", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322163", 
+"@id": "otu322163", 
+"@label": "Mortierella kuhlmanii", 
+"meta": [
+{
+"$": 854915, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella kuhlmanni CBS 15771", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322164", 
+"@id": "otu322164", 
+"@label": "Mortierella biramosa", 
+"meta": [
+{
+"$": 1015723, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella biramosa CBS 37095", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322165", 
+"@id": "otu322165", 
+"@label": "Mortierella selenospora", 
+"meta": [
+{
+"$": 561646, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella selenospora CBS 81168", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322166", 
+"@id": "otu322166", 
+"@label": "Mortierella polygonia", 
+"meta": [
+{
+"$": 865290, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella polygonia CBS 68571", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322167", 
+"@id": "otu322167", 
+"@label": "Mortierella cogitans", 
+"meta": [
+{
+"$": 532201, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella cogitans CBS 87997", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322168", 
+"@id": "otu322168", 
+"@label": "Mortierella globulifera", 
+"meta": [
+{
+"$": 1006749, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella globulifera CBS 41764", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322169", 
+"@id": "otu322169", 
+"@label": "Mortierella indohii", 
+"meta": [
+{
+"$": 627752, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella indohii FSU830", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322170", 
+"@id": "otu322170", 
+"@label": "Mortierella angusta", 
+"meta": [
+{
+"$": 675524, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella angusta CBS 29361", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322171", 
+"@id": "otu322171", 
+"@label": "Mortierella sclerotiella", 
+"meta": [
+{
+"$": 91050, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella sclerotiella CBS 52968", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322172", 
+"@id": "otu322172", 
+"@label": "Mortierella hypsicladia", 
+"meta": [
+{
+"$": 144124, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella hypsicladia CBS 116202", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322173", 
+"@id": "otu322173", 
+"@label": "Dissophora ornata", 
+"meta": [
+{
+"$": 790223, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dissophora ornata CBS 34777", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322174", 
+"@id": "otu322174", 
+"@label": "Mortierella epicladia", 
+"meta": [
+{
+"$": 10769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella epicladia CBS 35576", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322175", 
+"@id": "otu322175", 
+"@label": "Mortierella wolfii", 
+"meta": [
+{
+"$": 178191, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella wolfii CBS 20969", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322176", 
+"@id": "otu322176", 
+"@label": "Mortierella wolfii", 
+"meta": [
+{
+"$": 178191, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella wolfii CBS 61170", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322177", 
+"@id": "otu322177", 
+"@label": "Mortierella zonata", 
+"meta": [
+{
+"$": 91036, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella zonata CBS 22835", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322178", 
+"@id": "otu322178", 
+"@label": "Mortierella parvispora", 
+"meta": [
+{
+"$": 607794, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella parvispora FSU834", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322179", 
+"@id": "otu322179", 
+"@label": "Dissophora decumbens", 
+"meta": [
+{
+"$": 499605, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dissophora decumbens CBS 59288", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322180", 
+"@id": "otu322180", 
+"@label": "Mortierella histoplasmatoides", 
+"meta": [
+{
+"$": 718275, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella histoplasmatoides CBS 32178", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322181", 
+"@id": "otu322181", 
+"@label": "Mortierella camargensis", 
+"meta": [
+{
+"$": 532199, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella camargensis CBS 22158", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322182", 
+"@id": "otu322182", 
+"@label": "Mortierella pulchella", 
+"meta": [
+{
+"$": 545568, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella pulchella CBS 31252", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322183", 
+"@id": "otu322183", 
+"@label": "Mortierella spinosa", 
+"meta": [
+{
+"$": 184954, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella gamsii CBS 74968", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322184", 
+"@id": "otu322184", 
+"@label": "Mortierella parvispora", 
+"meta": [
+{
+"$": 607794, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella parvispora CBS 31152", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322185", 
+"@id": "otu322185", 
+"@label": "Mortierella beljakovae", 
+"meta": [
+{
+"$": 165082, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella beljakovae CBS 12372", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322186", 
+"@id": "otu322186", 
+"@label": "Mortierella echinosphaera", 
+"meta": [
+{
+"$": 643669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella echinosphaera CBS 57575", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322187", 
+"@id": "otu322187", 
+"@label": "Mortierella turficola", 
+"meta": [
+{
+"$": 503198, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella turficola CBS 43276", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322188", 
+"@id": "otu322188", 
+"@label": "Mortierella gemmifera", 
+"meta": [
+{
+"$": 1006771, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella gemmifera CBS 13445", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322189", 
+"@id": "otu322189", 
+"@label": "Mortierella ramanniana", 
+"meta": [
+{
+"$": 199302, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella ramanniana var angulispora CBS 22229", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322190", 
+"@id": "otu322190", 
+"@label": "Mortierella minutissima", 
+"meta": [
+{
+"$": 184958, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella minutissima var dubia CBS 30752", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322191", 
+"@id": "otu322191", 
+"@label": "Umbelopsis autotrophica", 
+"meta": [
+{
+"$": 561644, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis autotrophica CBS 31093", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322192", 
+"@id": "otu322192", 
+"@label": "Mortierella indohii", 
+"meta": [
+{
+"$": 627752, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella indohii FSU831", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322193", 
+"@id": "otu322193", 
+"@label": "Mortierella elongata", 
+"meta": [
+{
+"$": 896067, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella elongata FSU823", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322194", 
+"@id": "otu322194", 
+"@label": "Mortierella wolfii", 
+"meta": [
+{
+"$": 178191, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella wolfii CBS 65193", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322195", 
+"@id": "otu322195", 
+"@label": "Mortierella mutabilis", 
+"meta": [
+{
+"$": 854910, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella mutabilis CBS 30852", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322196", 
+"@id": "otu322196", 
+"@label": "Mortierella minutissima", 
+"meta": [
+{
+"$": 184958, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella minutissima FSU832", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322197", 
+"@id": "otu322197", 
+"@label": "Mortierella humilis", 
+"meta": [
+{
+"$": 184956, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella humilis FSU828", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322198", 
+"@id": "otu322198", 
+"@label": "Mortierella spinosa", 
+"meta": [
+{
+"$": 184954, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella gamsii CBS 31452", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322199", 
+"@id": "otu322199", 
+"@label": "Mortierella alpina", 
+"meta": [
+{
+"$": 810446, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella alpina CBS 21032", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322200", 
+"@id": "otu322200", 
+"@label": "Mortierella spinosa", 
+"meta": [
+{
+"$": 184954, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella gamsii FSU824", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322201", 
+"@id": "otu322201", 
+"@label": "Mortierella microzygospora", 
+"meta": [
+{
+"$": 854906, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella microzygospora CBS 88097", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322202", 
+"@id": "otu322202", 
+"@label": "Dissophora decumbens", 
+"meta": [
+{
+"$": 499605, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Dissophora decumbens CBS 30187", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322203", 
+"@id": "otu322203", 
+"@label": "Mortierella lignicola", 
+"meta": [
+{
+"$": 854927, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella lignicola CBS 31352", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322204", 
+"@id": "otu322204", 
+"@label": "Mortierella chlamydospora", 
+"meta": [
+{
+"$": 110478, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella chlamydospora CBS 12034", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322205", 
+"@id": "otu322205", 
+"@label": "Micromucor isabellinus", 
+"meta": [
+{
+"$": 794558, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis isabellina NRLL1757", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu322206", 
+"@id": "otu322206", 
+"@label": "Mortierella rishikesha", 
+"meta": [
+{
+"$": 40704, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mortierella rishikesha CBS 65268", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2218", 
+"@otus": "otus2218", 
+"tree": [
+{
+"@about": "#tree4689", 
+"@id": "tree4689", 
+"edge": [
+{
+"@id": "edge828379", 
+"@length": 2.78083415, 
+"@source": "node828378", 
+"@target": "node828379"
+}, 
+{
+"@id": "edge828380", 
+"@length": 2.78083415, 
+"@source": "node828378", 
+"@target": "node828380"
+}, 
+{
+"@id": "edge828381", 
+"@length": 1.4219266, 
+"@source": "node828380", 
+"@target": "node828381"
+}, 
+{
+"@id": "edge828382", 
+"@length": 0.5557721, 
+"@source": "node828380", 
+"@target": "node828382"
+}, 
+{
+"@id": "edge828383", 
+"@length": 0.43407772, 
+"@source": "node828382", 
+"@target": "node828383"
+}, 
+{
+"@id": "edge828384", 
+"@length": 0.29555823, 
+"@source": "node828383", 
+"@target": "node828384"
+}, 
+{
+"@id": "edge828385", 
+"@length": 0.0054253284, 
+"@source": "node828384", 
+"@target": "node828385"
+}, 
+{
+"@id": "edge828386", 
+"@length": 0.016769584, 
+"@source": "node828384", 
+"@target": "node828386"
+}, 
+{
+"@id": "edge828387", 
+"@length": 0.27418775, 
+"@source": "node828383", 
+"@target": "node828387"
+}, 
+{
+"@id": "edge828388", 
+"@length": 0.41472635, 
+"@source": "node828387", 
+"@target": "node828388"
+}, 
+{
+"@id": "edge828389", 
+"@length": 0.082554328, 
+"@source": "node828387", 
+"@target": "node828389"
+}, 
+{
+"@id": "edge828390", 
+"@length": 0.056995773, 
+"@source": "node828389", 
+"@target": "node828390"
+}, 
+{
+"@id": "edge828391", 
+"@length": 0.11934058, 
+"@source": "node828389", 
+"@target": "node828391"
+}, 
+{
+"@id": "edge828392", 
+"@length": 2.8309819, 
+"@source": "node828382", 
+"@target": "node828392"
+}, 
+{
+"@id": "edge828393", 
+"@length": 0.74997729, 
+"@source": "node828392", 
+"@target": "node828393"
+}, 
+{
+"@id": "edge828394", 
+"@length": 0.038032068, 
+"@source": "node828393", 
+"@target": "node828394"
+}, 
+{
+"@id": "edge828395", 
+"@length": 0.15298519, 
+"@source": "node828393", 
+"@target": "node828395"
+}, 
+{
+"@id": "edge828396", 
+"@length": 0.044170893, 
+"@source": "node828392", 
+"@target": "node828396"
+}, 
+{
+"@id": "edge828397", 
+"@length": 0.11310137, 
+"@source": "node828396", 
+"@target": "node828397"
+}, 
+{
+"@id": "edge828398", 
+"@length": 0.42967731, 
+"@source": "node828396", 
+"@target": "node828398"
+}, 
+{
+"@id": "edge828399", 
+"@length": 0.28189346, 
+"@source": "node828398", 
+"@target": "node828399"
+}, 
+{
+"@id": "edge828400", 
+"@length": 0.089630121, 
+"@source": "node828398", 
+"@target": "node828400"
+}, 
+{
+"@id": "edge828401", 
+"@length": 0.035002426, 
+"@source": "node828400", 
+"@target": "node828401"
+}, 
+{
+"@id": "edge828402", 
+"@length": 0.0055954062, 
+"@source": "node828400", 
+"@target": "node828402"
+}, 
+{
+"@id": "edge828403", 
+"@length": 0.0030614396, 
+"@source": "node828402", 
+"@target": "node828403"
+}, 
+{
+"@id": "edge828404", 
+"@length": 0.0017228219, 
+"@source": "node828402", 
+"@target": "node828404"
+}, 
+{
+"@id": "edge828405", 
+"@length": 0.0018003702, 
+"@source": "node828404", 
+"@target": "node828405"
+}, 
+{
+"@id": "edge828406", 
+"@length": 0.0017918363, 
+"@source": "node828404", 
+"@target": "node828406"
+}, 
+{
+"@id": "edge828407", 
+"@length": 0.064568916, 
+"@source": "node828392", 
+"@target": "node828407"
+}, 
+{
+"@id": "edge828408", 
+"@length": 0.2090767, 
+"@source": "node828407", 
+"@target": "node828408"
+}, 
+{
+"@id": "edge828409", 
+"@length": 0.10362512, 
+"@source": "node828407", 
+"@target": "node828409"
+}, 
+{
+"@id": "edge828410", 
+"@length": 0.016225033, 
+"@source": "node828409", 
+"@target": "node828410"
+}, 
+{
+"@id": "edge828411", 
+"@length": 0.0052622984, 
+"@source": "node828410", 
+"@target": "node828411"
+}, 
+{
+"@id": "edge828412", 
+"@length": 0.0029421784, 
+"@source": "node828410", 
+"@target": "node828412"
+}, 
+{
+"@id": "edge828413", 
+"@length": 0.0032787603, 
+"@source": "node828412", 
+"@target": "node828413"
+}, 
+{
+"@id": "edge828414", 
+"@length": 0.0096945158, 
+"@source": "node828412", 
+"@target": "node828414"
+}, 
+{
+"@id": "edge828415", 
+"@length": 0.01893607, 
+"@source": "node828414", 
+"@target": "node828415"
+}, 
+{
+"@id": "edge828416", 
+"@length": 0.0018944734, 
+"@source": "node828414", 
+"@target": "node828416"
+}, 
+{
+"@id": "edge828417", 
+"@length": 0.0020637248, 
+"@source": "node828416", 
+"@target": "node828417"
+}, 
+{
+"@id": "edge828418", 
+"@length": 0.013544586, 
+"@source": "node828416", 
+"@target": "node828418"
+}, 
+{
+"@id": "edge828419", 
+"@length": 0.019656524, 
+"@source": "node828409", 
+"@target": "node828419"
+}, 
+{
+"@id": "edge828420", 
+"@length": 0.0021408346, 
+"@source": "node828419", 
+"@target": "node828420"
+}, 
+{
+"@id": "edge828421", 
+"@length": 0.0011267199, 
+"@source": "node828419", 
+"@target": "node828421"
+}, 
+{
+"@id": "edge828422", 
+"@length": 0.00224567, 
+"@source": "node828419", 
+"@target": "node828422"
+}, 
+{
+"@id": "edge828423", 
+"@length": 0.0020425678, 
+"@source": "node828419", 
+"@target": "node828423"
+}, 
+{
+"@id": "edge828424", 
+"@length": 0.0020672332, 
+"@source": "node828423", 
+"@target": "node828424"
+}, 
+{
+"@id": "edge828425", 
+"@length": 0.0021444645, 
+"@source": "node828423", 
+"@target": "node828425"
+}, 
+{
+"@id": "edge828426", 
+"@length": 0.015533217, 
+"@source": "node828392", 
+"@target": "node828426"
+}, 
+{
+"@id": "edge828427", 
+"@length": 0.13930043, 
+"@source": "node828426", 
+"@target": "node828427"
+}, 
+{
+"@id": "edge828428", 
+"@length": 0.035809729, 
+"@source": "node828427", 
+"@target": "node828428"
+}, 
+{
+"@id": "edge828429", 
+"@length": 0.019157532, 
+"@source": "node828427", 
+"@target": "node828429"
+}, 
+{
+"@id": "edge828430", 
+"@length": 0.014272249, 
+"@source": "node828429", 
+"@target": "node828430"
+}, 
+{
+"@id": "edge828431", 
+"@length": 0.024462614, 
+"@source": "node828429", 
+"@target": "node828431"
+}, 
+{
+"@id": "edge828432", 
+"@length": 0.070665693, 
+"@source": "node828426", 
+"@target": "node828432"
+}, 
+{
+"@id": "edge828433", 
+"@length": 0.11406971, 
+"@source": "node828432", 
+"@target": "node828433"
+}, 
+{
+"@id": "edge828434", 
+"@length": 0.067922884, 
+"@source": "node828432", 
+"@target": "node828434"
+}, 
+{
+"@id": "edge828435", 
+"@length": 0.11281096, 
+"@source": "node828434", 
+"@target": "node828435"
+}, 
+{
+"@id": "edge828436", 
+"@length": 0.021625481, 
+"@source": "node828435", 
+"@target": "node828436"
+}, 
+{
+"@id": "edge828437", 
+"@length": 0.1034765, 
+"@source": "node828435", 
+"@target": "node828437"
+}, 
+{
+"@id": "edge828438", 
+"@length": 0.0065677558, 
+"@source": "node828437", 
+"@target": "node828438"
+}, 
+{
+"@id": "edge828439", 
+"@length": 0.0041253501, 
+"@source": "node828437", 
+"@target": "node828439"
+}, 
+{
+"@id": "edge828440", 
+"@length": 0.12601799, 
+"@source": "node828434", 
+"@target": "node828440"
+}, 
+{
+"@id": "edge828441", 
+"@length": 0.010976679, 
+"@source": "node828440", 
+"@target": "node828441"
+}, 
+{
+"@id": "edge828442", 
+"@length": 0.055087324, 
+"@source": "node828441", 
+"@target": "node828442"
+}, 
+{
+"@id": "edge828443", 
+"@length": 0.033561716, 
+"@source": "node828441", 
+"@target": "node828443"
+}, 
+{
+"@id": "edge828444", 
+"@length": 0.010971784, 
+"@source": "node828440", 
+"@target": "node828444"
+}, 
+{
+"@id": "edge828445", 
+"@length": 0.0090253142, 
+"@source": "node828444", 
+"@target": "node828445"
+}, 
+{
+"@id": "edge828446", 
+"@length": 0.020913291, 
+"@source": "node828444", 
+"@target": "node828446"
+}, 
+{
+"@id": "edge828447", 
+"@length": 0.021422313, 
+"@source": "node828392", 
+"@target": "node828447"
+}, 
+{
+"@id": "edge828448", 
+"@length": 0.032740574, 
+"@source": "node828447", 
+"@target": "node828448"
+}, 
+{
+"@id": "edge828449", 
+"@length": 0.0245394, 
+"@source": "node828448", 
+"@target": "node828449"
+}, 
+{
+"@id": "edge828450", 
+"@length": 0.1206423, 
+"@source": "node828449", 
+"@target": "node828450"
+}, 
+{
+"@id": "edge828451", 
+"@length": 0.18661972, 
+"@source": "node828449", 
+"@target": "node828451"
+}, 
+{
+"@id": "edge828452", 
+"@length": 0.0011648018, 
+"@source": "node828451", 
+"@target": "node828452"
+}, 
+{
+"@id": "edge828453", 
+"@length": 0.013968661, 
+"@source": "node828451", 
+"@target": "node828453"
+}, 
+{
+"@id": "edge828454", 
+"@length": 0.024241666, 
+"@source": "node828448", 
+"@target": "node828454"
+}, 
+{
+"@id": "edge828455", 
+"@length": 0.27637337, 
+"@source": "node828454", 
+"@target": "node828455"
+}, 
+{
+"@id": "edge828456", 
+"@length": 0.030249941, 
+"@source": "node828455", 
+"@target": "node828456"
+}, 
+{
+"@id": "edge828457", 
+"@length": 0.0057477068, 
+"@source": "node828455", 
+"@target": "node828457"
+}, 
+{
+"@id": "edge828458", 
+"@length": 0.0025185155, 
+"@source": "node828457", 
+"@target": "node828458"
+}, 
+{
+"@id": "edge828459", 
+"@length": 0.0094040215, 
+"@source": "node828457", 
+"@target": "node828459"
+}, 
+{
+"@id": "edge828460", 
+"@length": 0.077501539, 
+"@source": "node828454", 
+"@target": "node828460"
+}, 
+{
+"@id": "edge828461", 
+"@length": 0.068618906, 
+"@source": "node828460", 
+"@target": "node828461"
+}, 
+{
+"@id": "edge828462", 
+"@length": 0.055536177, 
+"@source": "node828460", 
+"@target": "node828462"
+}, 
+{
+"@id": "edge828463", 
+"@length": 0.018829947, 
+"@source": "node828462", 
+"@target": "node828463"
+}, 
+{
+"@id": "edge828464", 
+"@length": 0.0013017969, 
+"@source": "node828463", 
+"@target": "node828464"
+}, 
+{
+"@id": "edge828465", 
+"@length": 0.0017321187, 
+"@source": "node828463", 
+"@target": "node828465"
+}, 
+{
+"@id": "edge828466", 
+"@length": 0.019561365, 
+"@source": "node828462", 
+"@target": "node828466"
+}, 
+{
+"@id": "edge828467", 
+"@length": 0.0018247782, 
+"@source": "node828466", 
+"@target": "node828467"
+}, 
+{
+"@id": "edge828468", 
+"@length": 0.0075030923, 
+"@source": "node828466", 
+"@target": "node828468"
+}, 
+{
+"@id": "edge828469", 
+"@length": 0.012729883, 
+"@source": "node828447", 
+"@target": "node828469"
+}, 
+{
+"@id": "edge828470", 
+"@length": 0.049125227, 
+"@source": "node828469", 
+"@target": "node828470"
+}, 
+{
+"@id": "edge828471", 
+"@length": 0.25380067, 
+"@source": "node828470", 
+"@target": "node828471"
+}, 
+{
+"@id": "edge828472", 
+"@length": 0.052071497, 
+"@source": "node828470", 
+"@target": "node828472"
+}, 
+{
+"@id": "edge828473", 
+"@length": 0.25593363, 
+"@source": "node828472", 
+"@target": "node828473"
+}, 
+{
+"@id": "edge828474", 
+"@length": 0.37665408, 
+"@source": "node828472", 
+"@target": "node828474"
+}, 
+{
+"@id": "edge828475", 
+"@length": 0.079774285, 
+"@source": "node828474", 
+"@target": "node828475"
+}, 
+{
+"@id": "edge828476", 
+"@length": 0.10257232, 
+"@source": "node828474", 
+"@target": "node828476"
+}, 
+{
+"@id": "edge828477", 
+"@length": 0.077213499, 
+"@source": "node828469", 
+"@target": "node828477"
+}, 
+{
+"@id": "edge828478", 
+"@length": 0.072444711, 
+"@source": "node828477", 
+"@target": "node828478"
+}, 
+{
+"@id": "edge828479", 
+"@length": 0.015918165, 
+"@source": "node828478", 
+"@target": "node828479"
+}, 
+{
+"@id": "edge828480", 
+"@length": 0.0097923873, 
+"@source": "node828478", 
+"@target": "node828480"
+}, 
+{
+"@id": "edge828481", 
+"@length": 0.014413695, 
+"@source": "node828477", 
+"@target": "node828481"
+}, 
+{
+"@id": "edge828482", 
+"@length": 0.074915721, 
+"@source": "node828481", 
+"@target": "node828482"
+}, 
+{
+"@id": "edge828483", 
+"@length": 0.013653584, 
+"@source": "node828482", 
+"@target": "node828483"
+}, 
+{
+"@id": "edge828484", 
+"@length": 0.02263163, 
+"@source": "node828482", 
+"@target": "node828484"
+}, 
+{
+"@id": "edge828485", 
+"@length": 0.036678727, 
+"@source": "node828481", 
+"@target": "node828485"
+}, 
+{
+"@id": "edge828486", 
+"@length": 0.11652755, 
+"@source": "node828485", 
+"@target": "node828486"
+}, 
+{
+"@id": "edge828487", 
+"@length": 0.035111699, 
+"@source": "node828486", 
+"@target": "node828487"
+}, 
+{
+"@id": "edge828488", 
+"@length": 0.030581689, 
+"@source": "node828486", 
+"@target": "node828488"
+}, 
+{
+"@id": "edge828489", 
+"@length": 0.062773722, 
+"@source": "node828485", 
+"@target": "node828489"
+}, 
+{
+"@id": "edge828490", 
+"@length": 0.019537748, 
+"@source": "node828489", 
+"@target": "node828490"
+}, 
+{
+"@id": "edge828491", 
+"@length": 0.023601484, 
+"@source": "node828489", 
+"@target": "node828491"
+}, 
+{
+"@id": "edge828492", 
+"@length": 0.061663004, 
+"@source": "node828392", 
+"@target": "node828492"
+}, 
+{
+"@id": "edge828493", 
+"@length": 0.15246842, 
+"@source": "node828492", 
+"@target": "node828493"
+}, 
+{
+"@id": "edge828494", 
+"@length": 0.0022911301, 
+"@source": "node828493", 
+"@target": "node828494"
+}, 
+{
+"@id": "edge828495", 
+"@length": 0.071475423, 
+"@source": "node828493", 
+"@target": "node828495"
+}, 
+{
+"@id": "edge828496", 
+"@length": 0.080227268, 
+"@source": "node828495", 
+"@target": "node828496"
+}, 
+{
+"@id": "edge828497", 
+"@length": 0.011937498, 
+"@source": "node828495", 
+"@target": "node828497"
+}, 
+{
+"@id": "edge828498", 
+"@length": 0.0040827675, 
+"@source": "node828497", 
+"@target": "node828498"
+}, 
+{
+"@id": "edge828499", 
+"@length": 0.017858997, 
+"@source": "node828498", 
+"@target": "node828499"
+}, 
+{
+"@id": "edge828500", 
+"@length": 0.0022458088, 
+"@source": "node828498", 
+"@target": "node828500"
+}, 
+{
+"@id": "edge828501", 
+"@length": 0.0010325955, 
+"@source": "node828498", 
+"@target": "node828501"
+}, 
+{
+"@id": "edge828502", 
+"@length": 0.019805777, 
+"@source": "node828497", 
+"@target": "node828502"
+}, 
+{
+"@id": "edge828503", 
+"@length": 0.0047775107, 
+"@source": "node828502", 
+"@target": "node828503"
+}, 
+{
+"@id": "edge828504", 
+"@length": 0.0087203865, 
+"@source": "node828502", 
+"@target": "node828504"
+}, 
+{
+"@id": "edge828505", 
+"@length": 0.009402298, 
+"@source": "node828504", 
+"@target": "node828505"
+}, 
+{
+"@id": "edge828506", 
+"@length": 0.019744449, 
+"@source": "node828504", 
+"@target": "node828506"
+}, 
+{
+"@id": "edge828507", 
+"@length": 0.0020938508, 
+"@source": "node828506", 
+"@target": "node828507"
+}, 
+{
+"@id": "edge828508", 
+"@length": 0.001099943, 
+"@source": "node828506", 
+"@target": "node828508"
+}, 
+{
+"@id": "edge828509", 
+"@length": 0.026246643, 
+"@source": "node828492", 
+"@target": "node828509"
+}, 
+{
+"@id": "edge828510", 
+"@length": 0.052469248, 
+"@source": "node828509", 
+"@target": "node828510"
+}, 
+{
+"@id": "edge828511", 
+"@length": 0.011521634, 
+"@source": "node828510", 
+"@target": "node828511"
+}, 
+{
+"@id": "edge828512", 
+"@length": 0.03108202, 
+"@source": "node828510", 
+"@target": "node828512"
+}, 
+{
+"@id": "edge828513", 
+"@length": 0.015741419, 
+"@source": "node828509", 
+"@target": "node828513"
+}, 
+{
+"@id": "edge828514", 
+"@length": 0.058389477, 
+"@source": "node828513", 
+"@target": "node828514"
+}, 
+{
+"@id": "edge828515", 
+"@length": 0.075962828, 
+"@source": "node828514", 
+"@target": "node828515"
+}, 
+{
+"@id": "edge828516", 
+"@length": 0.11679118, 
+"@source": "node828514", 
+"@target": "node828516"
+}, 
+{
+"@id": "edge828517", 
+"@length": 0.024523762, 
+"@source": "node828513", 
+"@target": "node828517"
+}, 
+{
+"@id": "edge828518", 
+"@length": 0.013909519, 
+"@source": "node828517", 
+"@target": "node828518"
+}, 
+{
+"@id": "edge828519", 
+"@length": 0.017238942, 
+"@source": "node828518", 
+"@target": "node828519"
+}, 
+{
+"@id": "edge828520", 
+"@length": 0.0010691877, 
+"@source": "node828519", 
+"@target": "node828520"
+}, 
+{
+"@id": "edge828521", 
+"@length": 0.0033899868, 
+"@source": "node828519", 
+"@target": "node828521"
+}, 
+{
+"@id": "edge828522", 
+"@length": 0.0053361187, 
+"@source": "node828518", 
+"@target": "node828522"
+}, 
+{
+"@id": "edge828523", 
+"@length": 0.010074376, 
+"@source": "node828522", 
+"@target": "node828523"
+}, 
+{
+"@id": "edge828524", 
+"@length": 0.0060335118, 
+"@source": "node828522", 
+"@target": "node828524"
+}, 
+{
+"@id": "edge828525", 
+"@length": 0.0094809998, 
+"@source": "node828524", 
+"@target": "node828525"
+}, 
+{
+"@id": "edge828526", 
+"@length": 0.0088146853, 
+"@source": "node828525", 
+"@target": "node828526"
+}, 
+{
+"@id": "edge828527", 
+"@length": 0.0060476629, 
+"@source": "node828525", 
+"@target": "node828527"
+}, 
+{
+"@id": "edge828528", 
+"@length": 0.054269508, 
+"@source": "node828524", 
+"@target": "node828528"
+}, 
+{
+"@id": "edge828529", 
+"@length": 0.010905759, 
+"@source": "node828528", 
+"@target": "node828529"
+}, 
+{
+"@id": "edge828530", 
+"@length": 0.010359027, 
+"@source": "node828528", 
+"@target": "node828530"
+}, 
+{
+"@id": "edge828531", 
+"@length": 0.014907159, 
+"@source": "node828530", 
+"@target": "node828531"
+}, 
+{
+"@id": "edge828532", 
+"@length": 0.014173196, 
+"@source": "node828530", 
+"@target": "node828532"
+}, 
+{
+"@id": "edge828533", 
+"@length": 0.011674577, 
+"@source": "node828517", 
+"@target": "node828533"
+}, 
+{
+"@id": "edge828534", 
+"@length": 0.02947593, 
+"@source": "node828533", 
+"@target": "node828534"
+}, 
+{
+"@id": "edge828535", 
+"@length": 0.048589547, 
+"@source": "node828533", 
+"@target": "node828535"
+}, 
+{
+"@id": "edge828536", 
+"@length": 0.077566302, 
+"@source": "node828535", 
+"@target": "node828536"
+}, 
+{
+"@id": "edge828537", 
+"@length": 0.062766719, 
+"@source": "node828535", 
+"@target": "node828537"
+}, 
+{
+"@id": "edge828538", 
+"@length": 0.012396898, 
+"@source": "node828537", 
+"@target": "node828538"
+}, 
+{
+"@id": "edge828539", 
+"@length": 0.017316759, 
+"@source": "node828537", 
+"@target": "node828539"
+}, 
+{
+"@id": "edge828540", 
+"@length": 0.0055262285, 
+"@source": "node828533", 
+"@target": "node828540"
+}, 
+{
+"@id": "edge828541", 
+"@length": 0.04070523, 
+"@source": "node828540", 
+"@target": "node828541"
+}, 
+{
+"@id": "edge828542", 
+"@length": 0.023388742, 
+"@source": "node828540", 
+"@target": "node828542"
+}, 
+{
+"@id": "edge828543", 
+"@length": 0.014041135, 
+"@source": "node828540", 
+"@target": "node828543"
+}, 
+{
+"@id": "edge828544", 
+"@length": 0.0047223235, 
+"@source": "node828543", 
+"@target": "node828544"
+}, 
+{
+"@id": "edge828545", 
+"@length": 0.011213068, 
+"@source": "node828543", 
+"@target": "node828545"
+}, 
+{
+"@id": "edge828546", 
+"@length": 0.00097682467, 
+"@source": "node828545", 
+"@target": "node828546"
+}, 
+{
+"@id": "edge828547", 
+"@length": 0.0010259136, 
+"@source": "node828545", 
+"@target": "node828547"
+}
+], 
+"meta": [
+{
+"$": "node828382", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node828378", 
+"@root": "true"
+}, 
+{
+"@id": "node828379", 
+"@otu": "otu322120"
+}, 
+{
+"@id": "node828380"
+}, 
+{
+"@id": "node828381", 
+"@otu": "otu322157"
+}, 
+{
+"@id": "node828382"
+}, 
+{
+"@id": "node828383"
+}, 
+{
+"@id": "node828384"
+}, 
+{
+"@id": "node828385", 
+"@otu": "otu322129"
+}, 
+{
+"@id": "node828386", 
+"@otu": "otu322151"
+}, 
+{
+"@id": "node828387"
+}, 
+{
+"@id": "node828388", 
+"@otu": "otu322189"
+}, 
+{
+"@id": "node828389"
+}, 
+{
+"@id": "node828390", 
+"@otu": "otu322205"
+}, 
+{
+"@id": "node828391", 
+"@otu": "otu322191"
+}, 
+{
+"@id": "node828392"
+}, 
+{
+"@id": "node828393"
+}, 
+{
+"@id": "node828394", 
+"@otu": "otu322165"
+}, 
+{
+"@id": "node828395", 
+"@otu": "otu322131"
+}, 
+{
+"@id": "node828396"
+}, 
+{
+"@id": "node828397", 
+"@otu": "otu322201"
+}, 
+{
+"@id": "node828398"
+}, 
+{
+"@id": "node828399", 
+"@otu": "otu322144"
+}, 
+{
+"@id": "node828400"
+}, 
+{
+"@id": "node828401", 
+"@otu": "otu322194"
+}, 
+{
+"@id": "node828402"
+}, 
+{
+"@id": "node828403", 
+"@otu": "otu322175"
+}, 
+{
+"@id": "node828404"
+}, 
+{
+"@id": "node828405", 
+"@otu": "otu322121"
+}, 
+{
+"@id": "node828406", 
+"@otu": "otu322176"
+}, 
+{
+"@id": "node828407"
+}, 
+{
+"@id": "node828408", 
+"@otu": "otu322154"
+}, 
+{
+"@id": "node828409"
+}, 
+{
+"@id": "node828410"
+}, 
+{
+"@id": "node828411", 
+"@otu": "otu322141"
+}, 
+{
+"@id": "node828412"
+}, 
+{
+"@id": "node828413", 
+"@otu": "otu322174"
+}, 
+{
+"@id": "node828414"
+}, 
+{
+"@id": "node828415", 
+"@otu": "otu322190"
+}, 
+{
+"@id": "node828416"
+}, 
+{
+"@id": "node828417", 
+"@otu": "otu322155"
+}, 
+{
+"@id": "node828418", 
+"@otu": "otu322196"
+}, 
+{
+"@id": "node828419"
+}, 
+{
+"@id": "node828420", 
+"@otu": "otu322143"
+}, 
+{
+"@id": "node828421", 
+"@otu": "otu322197"
+}, 
+{
+"@id": "node828422", 
+"@otu": "otu322127"
+}, 
+{
+"@id": "node828423"
+}, 
+{
+"@id": "node828424", 
+"@otu": "otu322159"
+}, 
+{
+"@id": "node828425", 
+"@otu": "otu322148"
+}, 
+{
+"@id": "node828426"
+}, 
+{
+"@id": "node828427"
+}, 
+{
+"@id": "node828428", 
+"@otu": "otu322135"
+}, 
+{
+"@id": "node828429"
+}, 
+{
+"@id": "node828430", 
+"@otu": "otu322199"
+}, 
+{
+"@id": "node828431", 
+"@otu": "otu322150"
+}, 
+{
+"@id": "node828432"
+}, 
+{
+"@id": "node828433", 
+"@otu": "otu322161"
+}, 
+{
+"@id": "node828434"
+}, 
+{
+"@id": "node828435"
+}, 
+{
+"@id": "node828436", 
+"@otu": "otu322184"
+}, 
+{
+"@id": "node828437"
+}, 
+{
+"@id": "node828438", 
+"@otu": "otu322178"
+}, 
+{
+"@id": "node828439", 
+"@otu": "otu322156"
+}, 
+{
+"@id": "node828440"
+}, 
+{
+"@id": "node828441"
+}, 
+{
+"@id": "node828442", 
+"@otu": "otu322118"
+}, 
+{
+"@id": "node828443", 
+"@otu": "otu322149"
+}, 
+{
+"@id": "node828444"
+}, 
+{
+"@id": "node828445", 
+"@otu": "otu322187"
+}, 
+{
+"@id": "node828446", 
+"@otu": "otu322182"
+}, 
+{
+"@id": "node828447"
+}, 
+{
+"@id": "node828448"
+}, 
+{
+"@id": "node828449"
+}, 
+{
+"@id": "node828450", 
+"@otu": "otu322146"
+}, 
+{
+"@id": "node828451"
+}, 
+{
+"@id": "node828452", 
+"@otu": "otu322119"
+}, 
+{
+"@id": "node828453", 
+"@otu": "otu322195"
+}, 
+{
+"@id": "node828454"
+}, 
+{
+"@id": "node828455"
+}, 
+{
+"@id": "node828456", 
+"@otu": "otu322132"
+}, 
+{
+"@id": "node828457"
+}, 
+{
+"@id": "node828458", 
+"@otu": "otu322160"
+}, 
+{
+"@id": "node828459", 
+"@otu": "otu322168"
+}, 
+{
+"@id": "node828460"
+}, 
+{
+"@id": "node828461", 
+"@otu": "otu322170"
+}, 
+{
+"@id": "node828462"
+}, 
+{
+"@id": "node828463"
+}, 
+{
+"@id": "node828464", 
+"@otu": "otu322202"
+}, 
+{
+"@id": "node828465", 
+"@otu": "otu322179"
+}, 
+{
+"@id": "node828466"
+}, 
+{
+"@id": "node828467", 
+"@otu": "otu322173"
+}, 
+{
+"@id": "node828468", 
+"@otu": "otu322142"
+}, 
+{
+"@id": "node828469"
+}, 
+{
+"@id": "node828470"
+}, 
+{
+"@id": "node828471", 
+"@otu": "otu322133"
+}, 
+{
+"@id": "node828472"
+}, 
+{
+"@id": "node828473", 
+"@otu": "otu322152"
+}, 
+{
+"@id": "node828474"
+}, 
+{
+"@id": "node828475", 
+"@otu": "otu322122"
+}, 
+{
+"@id": "node828476", 
+"@otu": "otu322145"
+}, 
+{
+"@id": "node828477"
+}, 
+{
+"@id": "node828478"
+}, 
+{
+"@id": "node828479", 
+"@otu": "otu322188"
+}, 
+{
+"@id": "node828480", 
+"@otu": "otu322163"
+}, 
+{
+"@id": "node828481"
+}, 
+{
+"@id": "node828482"
+}, 
+{
+"@id": "node828483", 
+"@otu": "otu322203"
+}, 
+{
+"@id": "node828484", 
+"@otu": "otu322123"
+}, 
+{
+"@id": "node828485"
+}, 
+{
+"@id": "node828486"
+}, 
+{
+"@id": "node828487", 
+"@otu": "otu322185"
+}, 
+{
+"@id": "node828488", 
+"@otu": "otu322134"
+}, 
+{
+"@id": "node828489"
+}, 
+{
+"@id": "node828490", 
+"@otu": "otu322204"
+}, 
+{
+"@id": "node828491", 
+"@otu": "otu322186"
+}, 
+{
+"@id": "node828492"
+}, 
+{
+"@id": "node828493"
+}, 
+{
+"@id": "node828494", 
+"@otu": "otu322117"
+}, 
+{
+"@id": "node828495"
+}, 
+{
+"@id": "node828496", 
+"@otu": "otu322172"
+}, 
+{
+"@id": "node828497"
+}, 
+{
+"@id": "node828498"
+}, 
+{
+"@id": "node828499", 
+"@otu": "otu322158"
+}, 
+{
+"@id": "node828500", 
+"@otu": "otu322169"
+}, 
+{
+"@id": "node828501", 
+"@otu": "otu322192"
+}, 
+{
+"@id": "node828502"
+}, 
+{
+"@id": "node828503", 
+"@otu": "otu322166"
+}, 
+{
+"@id": "node828504"
+}, 
+{
+"@id": "node828505", 
+"@otu": "otu322136"
+}, 
+{
+"@id": "node828506"
+}, 
+{
+"@id": "node828507", 
+"@otu": "otu322147"
+}, 
+{
+"@id": "node828508", 
+"@otu": "otu322128"
+}, 
+{
+"@id": "node828509"
+}, 
+{
+"@id": "node828510"
+}, 
+{
+"@id": "node828511", 
+"@otu": "otu322125"
+}, 
+{
+"@id": "node828512", 
+"@otu": "otu322177"
+}, 
+{
+"@id": "node828513"
+}, 
+{
+"@id": "node828514"
+}, 
+{
+"@id": "node828515", 
+"@otu": "otu322167"
+}, 
+{
+"@id": "node828516", 
+"@otu": "otu322139"
+}, 
+{
+"@id": "node828517"
+}, 
+{
+"@id": "node828518"
+}, 
+{
+"@id": "node828519"
+}, 
+{
+"@id": "node828520", 
+"@otu": "otu322138"
+}, 
+{
+"@id": "node828521", 
+"@otu": "otu322183"
+}, 
+{
+"@id": "node828522"
+}, 
+{
+"@id": "node828523", 
+"@otu": "otu322200"
+}, 
+{
+"@id": "node828524"
+}, 
+{
+"@id": "node828525"
+}, 
+{
+"@id": "node828526", 
+"@otu": "otu322181"
+}, 
+{
+"@id": "node828527", 
+"@otu": "otu322140"
+}, 
+{
+"@id": "node828528"
+}, 
+{
+"@id": "node828529", 
+"@otu": "otu322137"
+}, 
+{
+"@id": "node828530"
+}, 
+{
+"@id": "node828531", 
+"@otu": "otu322162"
+}, 
+{
+"@id": "node828532", 
+"@otu": "otu322130"
+}, 
+{
+"@id": "node828533"
+}, 
+{
+"@id": "node828534", 
+"@otu": "otu322198"
+}, 
+{
+"@id": "node828535"
+}, 
+{
+"@id": "node828536", 
+"@otu": "otu322153"
+}, 
+{
+"@id": "node828537"
+}, 
+{
+"@id": "node828538", 
+"@otu": "otu322124"
+}, 
+{
+"@id": "node828539", 
+"@otu": "otu322164"
+}, 
+{
+"@id": "node828540"
+}, 
+{
+"@id": "node828541", 
+"@otu": "otu322180"
+}, 
+{
+"@id": "node828542", 
+"@otu": "otu322171"
+}, 
+{
+"@id": "node828543"
+}, 
+{
+"@id": "node828544", 
+"@otu": "otu322206"
+}, 
+{
+"@id": "node828545"
+}, 
+{
+"@id": "node828546", 
+"@otu": "otu322126"
+}, 
+{
+"@id": "node828547", 
+"@otu": "otu322193"
+}
+]
+}
+]
+}
+}
+}

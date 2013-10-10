@@ -1,0 +1,1383 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Lutz, Matthias, Robert Bauer, Dominik Begerow, and Franz Oberwinkler. \"Tuberculina\u2014Thanatophytum/Rhizoctonia crocorum\u2014Helicobasidium: a unique mycoparasitic-phytoparasitic life strategy.\" Mycological research 108, no. 3 (2004): 227-238.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1017/S0953756204009359", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1114", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2250", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2004, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 3993115, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2250", 
+"otu": [
+{
+"@about": "#otu324997", 
+"@id": "otu324997", 
+"@label": "Pachnocybe ferruginea", 
+"meta": [
+{
+"$": 16743, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Pachnocybe ferruginea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324998", 
+"@id": "otu324998", 
+"@label": "Herpobasidium filicinum", 
+"meta": [
+{
+"$": 134333, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Herpobasidium filicinum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324999", 
+"@id": "otu324999", 
+"@label": "Eocronartium muscicola", 
+"meta": [
+{
+"$": 1014310, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Eocronartium muscicola", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325000", 
+"@id": "otu325000", 
+"@label": "Melampsora lini", 
+"meta": [
+{
+"$": 809207, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Melampsora lini", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325001", 
+"@id": "otu325001", 
+"@label": "Septobasidium carestianum", 
+"meta": [
+{
+"$": 758161, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Septobasidium carestianum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325002", 
+"@id": "otu325002", 
+"@label": "Gymnosporangium sabinae", 
+"meta": [
+{
+"$": 656394, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Gymnosporangium sabinae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325003", 
+"@id": "otu325003", 
+"@label": "Tranzschelia pruni-spinosae", 
+"meta": [
+{
+"$": 286689, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tranzschelia pruni spinosae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325004", 
+"@id": "otu325004", 
+"@label": "Tuberculina maxima", 
+"meta": [
+{
+"$": 408870, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina maxima AY292435 AY292407", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325005", 
+"@id": "otu325005", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292448 AY292416", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325006", 
+"@id": "otu325006", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292454 AY292422", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325007", 
+"@id": "otu325007", 
+"@label": "Helicobasidium mompa", 
+"meta": [
+{
+"$": 452730, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium mompa AY292428 AY254178", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325008", 
+"@id": "otu325008", 
+"@label": "Helicobasidium mompa", 
+"meta": [
+{
+"$": 452730, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium mompa AY292429 AY254179", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325009", 
+"@id": "otu325009", 
+"@label": "Rhizoctonia crocorum", 
+"meta": [
+{
+"$": 295960, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium purpureum AY292430 AY292403", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325010", 
+"@id": "otu325010", 
+"@label": "Tuberculina maxima", 
+"meta": [
+{
+"$": 408870, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina maxima AY292436 AY222044", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325011", 
+"@id": "otu325011", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292440 AY292411", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325012", 
+"@id": "otu325012", 
+"@label": "Helicobasidium longisporum", 
+"meta": [
+{
+"$": 80772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium longisporum AY292426 AY222046", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325013", 
+"@id": "otu325013", 
+"@label": "Thanatophytum crocorum", 
+"meta": [
+{
+"$": 295960, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Thanatophytum crocorum AY292434 AY292406", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325014", 
+"@id": "otu325014", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292452 AY292420", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325015", 
+"@id": "otu325015", 
+"@label": "Helicobasidium longisporum", 
+"meta": [
+{
+"$": 80772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium longisporum AY254187 AY292401", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325016", 
+"@id": "otu325016", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292438 AY292409", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325017", 
+"@id": "otu325017", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292439 AY292410", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325018", 
+"@id": "otu325018", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292442 AY292412", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325019", 
+"@id": "otu325019", 
+"@label": "Tuberculina sbrozzii", 
+"meta": [
+{
+"$": 408881, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina sbrozzii AY292457 AY222045", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325020", 
+"@id": "otu325020", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292453 AY292421", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325021", 
+"@id": "otu325021", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292444 AY292414", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325022", 
+"@id": "otu325022", 
+"@label": "Thanatophytum crocorum", 
+"meta": [
+{
+"$": 295960, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Thanatophytum crocorum AY292432 AY292405", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325023", 
+"@id": "otu325023", 
+"@label": "Helicobasidium longisporum", 
+"meta": [
+{
+"$": 80772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium longisporum AY254188 AY292402", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325024", 
+"@id": "otu325024", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292445 AY254185", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325025", 
+"@id": "otu325025", 
+"@label": "Tuberculina sbrozzii", 
+"meta": [
+{
+"$": 408881, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina sbrozzii AY292456 AY292424", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325026", 
+"@id": "otu325026", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292447 AY292415", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325027", 
+"@id": "otu325027", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292450 AY292418", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325028", 
+"@id": "otu325028", 
+"@label": "Tuberculina maxima", 
+"meta": [
+{
+"$": 408870, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina maxima AY292437 AY292408", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325029", 
+"@id": "otu325029", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292451 AY292419", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325030", 
+"@id": "otu325030", 
+"@label": "Rhizoctonia crocorum", 
+"meta": [
+{
+"$": 295960, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium purpureum AY292431 AY292404", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325031", 
+"@id": "otu325031", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292441 AY254184", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325032", 
+"@id": "otu325032", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292449 AY292417", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325033", 
+"@id": "otu325033", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292446 AY222043", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325034", 
+"@id": "otu325034", 
+"@label": "Helicobasidium longisporum", 
+"meta": [
+{
+"$": 80772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium longisporum AY292427 AY254177", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325035", 
+"@id": "otu325035", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292443 AY292413", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325036", 
+"@id": "otu325036", 
+"@label": "Thanatophytum crocorum", 
+"meta": [
+{
+"$": 295960, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Thanatophytum crocorum AY292433 AY254181", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325037", 
+"@id": "otu325037", 
+"@label": "Rhizoctonia crocorum", 
+"meta": [
+{
+"$": 295960, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Helicobasidium purpureum AY254189 AY254180", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325038", 
+"@id": "otu325038", 
+"@label": "Tuberculina persicina", 
+"meta": [
+{
+"$": 408880, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina persicina AY292455 AY292423", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu325039", 
+"@id": "otu325039", 
+"@label": "Tuberculina sbrozzii", 
+"meta": [
+{
+"$": 408881, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Tuberculina sbrozzii AY292458 AY292425", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2250", 
+"@otus": "otus2250", 
+"tree": [
+{
+"@about": "#tree4765", 
+"@id": "tree4765", 
+"edge": [
+{
+"@id": "edge839895", 
+"@source": "node839894", 
+"@target": "node839895"
+}, 
+{
+"@id": "edge839896", 
+"@source": "node839895", 
+"@target": "node839896"
+}, 
+{
+"@id": "edge839897", 
+"@source": "node839896", 
+"@target": "node839897"
+}, 
+{
+"@id": "edge839898", 
+"@source": "node839897", 
+"@target": "node839898"
+}, 
+{
+"@id": "edge839899", 
+"@source": "node839898", 
+"@target": "node839899"
+}, 
+{
+"@id": "edge839900", 
+"@source": "node839899", 
+"@target": "node839900"
+}, 
+{
+"@id": "edge839901", 
+"@source": "node839900", 
+"@target": "node839901"
+}, 
+{
+"@id": "edge839902", 
+"@source": "node839901", 
+"@target": "node839902"
+}, 
+{
+"@id": "edge839903", 
+"@source": "node839901", 
+"@target": "node839903"
+}, 
+{
+"@id": "edge839904", 
+"@source": "node839903", 
+"@target": "node839904"
+}, 
+{
+"@id": "edge839905", 
+"@source": "node839903", 
+"@target": "node839905"
+}, 
+{
+"@id": "edge839906", 
+"@source": "node839903", 
+"@target": "node839906"
+}, 
+{
+"@id": "edge839907", 
+"@source": "node839903", 
+"@target": "node839907"
+}, 
+{
+"@id": "edge839908", 
+"@source": "node839903", 
+"@target": "node839908"
+}, 
+{
+"@id": "edge839909", 
+"@source": "node839903", 
+"@target": "node839909"
+}, 
+{
+"@id": "edge839910", 
+"@source": "node839903", 
+"@target": "node839910"
+}, 
+{
+"@id": "edge839911", 
+"@source": "node839903", 
+"@target": "node839911"
+}, 
+{
+"@id": "edge839912", 
+"@source": "node839903", 
+"@target": "node839912"
+}, 
+{
+"@id": "edge839913", 
+"@source": "node839903", 
+"@target": "node839913"
+}, 
+{
+"@id": "edge839914", 
+"@source": "node839913", 
+"@target": "node839914"
+}, 
+{
+"@id": "edge839915", 
+"@source": "node839913", 
+"@target": "node839915"
+}, 
+{
+"@id": "edge839916", 
+"@source": "node839913", 
+"@target": "node839916"
+}, 
+{
+"@id": "edge839917", 
+"@source": "node839900", 
+"@target": "node839917"
+}, 
+{
+"@id": "edge839918", 
+"@source": "node839917", 
+"@target": "node839918"
+}, 
+{
+"@id": "edge839919", 
+"@source": "node839917", 
+"@target": "node839919"
+}, 
+{
+"@id": "edge839920", 
+"@source": "node839919", 
+"@target": "node839920"
+}, 
+{
+"@id": "edge839921", 
+"@source": "node839919", 
+"@target": "node839921"
+}, 
+{
+"@id": "edge839922", 
+"@source": "node839919", 
+"@target": "node839922"
+}, 
+{
+"@id": "edge839923", 
+"@source": "node839917", 
+"@target": "node839923"
+}, 
+{
+"@id": "edge839924", 
+"@source": "node839917", 
+"@target": "node839924"
+}, 
+{
+"@id": "edge839925", 
+"@source": "node839899", 
+"@target": "node839925"
+}, 
+{
+"@id": "edge839926", 
+"@source": "node839925", 
+"@target": "node839926"
+}, 
+{
+"@id": "edge839927", 
+"@source": "node839925", 
+"@target": "node839927"
+}, 
+{
+"@id": "edge839928", 
+"@source": "node839925", 
+"@target": "node839928"
+}, 
+{
+"@id": "edge839929", 
+"@source": "node839898", 
+"@target": "node839929"
+}, 
+{
+"@id": "edge839930", 
+"@source": "node839929", 
+"@target": "node839930"
+}, 
+{
+"@id": "edge839931", 
+"@source": "node839930", 
+"@target": "node839931"
+}, 
+{
+"@id": "edge839932", 
+"@source": "node839930", 
+"@target": "node839932"
+}, 
+{
+"@id": "edge839933", 
+"@source": "node839930", 
+"@target": "node839933"
+}, 
+{
+"@id": "edge839934", 
+"@source": "node839930", 
+"@target": "node839934"
+}, 
+{
+"@id": "edge839935", 
+"@source": "node839930", 
+"@target": "node839935"
+}, 
+{
+"@id": "edge839936", 
+"@source": "node839930", 
+"@target": "node839936"
+}, 
+{
+"@id": "edge839937", 
+"@source": "node839930", 
+"@target": "node839937"
+}, 
+{
+"@id": "edge839938", 
+"@source": "node839929", 
+"@target": "node839938"
+}, 
+{
+"@id": "edge839939", 
+"@source": "node839938", 
+"@target": "node839939"
+}, 
+{
+"@id": "edge839940", 
+"@source": "node839938", 
+"@target": "node839940"
+}, 
+{
+"@id": "edge839941", 
+"@source": "node839929", 
+"@target": "node839941"
+}, 
+{
+"@id": "edge839942", 
+"@source": "node839941", 
+"@target": "node839942"
+}, 
+{
+"@id": "edge839943", 
+"@source": "node839942", 
+"@target": "node839943"
+}, 
+{
+"@id": "edge839944", 
+"@source": "node839942", 
+"@target": "node839944"
+}, 
+{
+"@id": "edge839945", 
+"@source": "node839942", 
+"@target": "node839945"
+}, 
+{
+"@id": "edge839946", 
+"@source": "node839942", 
+"@target": "node839946"
+}, 
+{
+"@id": "edge839947", 
+"@source": "node839941", 
+"@target": "node839947"
+}, 
+{
+"@id": "edge839948", 
+"@source": "node839897", 
+"@target": "node839948"
+}, 
+{
+"@id": "edge839949", 
+"@source": "node839897", 
+"@target": "node839949"
+}, 
+{
+"@id": "edge839950", 
+"@source": "node839896", 
+"@target": "node839950"
+}, 
+{
+"@id": "edge839951", 
+"@source": "node839950", 
+"@target": "node839951"
+}, 
+{
+"@id": "edge839952", 
+"@source": "node839950", 
+"@target": "node839952"
+}, 
+{
+"@id": "edge839953", 
+"@source": "node839952", 
+"@target": "node839953"
+}, 
+{
+"@id": "edge839954", 
+"@source": "node839952", 
+"@target": "node839954"
+}, 
+{
+"@id": "edge839955", 
+"@source": "node839895", 
+"@target": "node839955"
+}, 
+{
+"@id": "edge839956", 
+"@source": "node839894", 
+"@target": "node839956"
+}
+], 
+"meta": [
+{
+"$": "node839896", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node839894", 
+"@root": "true"
+}, 
+{
+"@id": "node839895"
+}, 
+{
+"@id": "node839896"
+}, 
+{
+"@id": "node839897"
+}, 
+{
+"@id": "node839898"
+}, 
+{
+"@id": "node839899"
+}, 
+{
+"@id": "node839900"
+}, 
+{
+"@id": "node839901"
+}, 
+{
+"@id": "node839902", 
+"@otu": "otu325006"
+}, 
+{
+"@id": "node839903"
+}, 
+{
+"@id": "node839904", 
+"@otu": "otu325029"
+}, 
+{
+"@id": "node839905", 
+"@otu": "otu325033"
+}, 
+{
+"@id": "node839906", 
+"@otu": "otu325011"
+}, 
+{
+"@id": "node839907", 
+"@otu": "otu325037"
+}, 
+{
+"@id": "node839908", 
+"@otu": "otu325009"
+}, 
+{
+"@id": "node839909", 
+"@otu": "otu325038"
+}, 
+{
+"@id": "node839910", 
+"@otu": "otu325018"
+}, 
+{
+"@id": "node839911", 
+"@otu": "otu325032"
+}, 
+{
+"@id": "node839912", 
+"@otu": "otu325027"
+}, 
+{
+"@id": "node839913"
+}, 
+{
+"@id": "node839914", 
+"@otu": "otu325025"
+}, 
+{
+"@id": "node839915", 
+"@otu": "otu325019"
+}, 
+{
+"@id": "node839916", 
+"@otu": "otu325039"
+}, 
+{
+"@id": "node839917"
+}, 
+{
+"@id": "node839918", 
+"@otu": "otu325005"
+}, 
+{
+"@id": "node839919"
+}, 
+{
+"@id": "node839920", 
+"@otu": "otu325017"
+}, 
+{
+"@id": "node839921", 
+"@otu": "otu325036"
+}, 
+{
+"@id": "node839922", 
+"@otu": "otu325031"
+}, 
+{
+"@id": "node839923", 
+"@otu": "otu325030"
+}, 
+{
+"@id": "node839924", 
+"@otu": "otu325016"
+}, 
+{
+"@id": "node839925"
+}, 
+{
+"@id": "node839926", 
+"@otu": "otu325028"
+}, 
+{
+"@id": "node839927", 
+"@otu": "otu325010"
+}, 
+{
+"@id": "node839928", 
+"@otu": "otu325004"
+}, 
+{
+"@id": "node839929"
+}, 
+{
+"@id": "node839930"
+}, 
+{
+"@id": "node839931", 
+"@otu": "otu325034"
+}, 
+{
+"@id": "node839932", 
+"@otu": "otu325035"
+}, 
+{
+"@id": "node839933", 
+"@otu": "otu325023"
+}, 
+{
+"@id": "node839934", 
+"@otu": "otu325021"
+}, 
+{
+"@id": "node839935", 
+"@otu": "otu325015"
+}, 
+{
+"@id": "node839936", 
+"@otu": "otu325022"
+}, 
+{
+"@id": "node839937", 
+"@otu": "otu325013"
+}, 
+{
+"@id": "node839938"
+}, 
+{
+"@id": "node839939", 
+"@otu": "otu325007"
+}, 
+{
+"@id": "node839940", 
+"@otu": "otu325008"
+}, 
+{
+"@id": "node839941"
+}, 
+{
+"@id": "node839942"
+}, 
+{
+"@id": "node839943", 
+"@otu": "otu325012"
+}, 
+{
+"@id": "node839944", 
+"@otu": "otu325024"
+}, 
+{
+"@id": "node839945", 
+"@otu": "otu325014"
+}, 
+{
+"@id": "node839946", 
+"@otu": "otu325026"
+}, 
+{
+"@id": "node839947", 
+"@otu": "otu325020"
+}, 
+{
+"@id": "node839948", 
+"@otu": "otu324997"
+}, 
+{
+"@id": "node839949", 
+"@otu": "otu325001"
+}, 
+{
+"@id": "node839950"
+}, 
+{
+"@id": "node839951", 
+"@otu": "otu325000"
+}, 
+{
+"@id": "node839952"
+}, 
+{
+"@id": "node839953", 
+"@otu": "otu325003"
+}, 
+{
+"@id": "node839954", 
+"@otu": "otu325002"
+}, 
+{
+"@id": "node839955", 
+"@otu": "otu324998"
+}, 
+{
+"@id": "node839956", 
+"@otu": "otu324999"
+}
+]
+}
+]
+}
+}
+}

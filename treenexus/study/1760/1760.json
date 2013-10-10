@@ -1,0 +1,996 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Heredia G., Reyes M., Aria R., & Bills G. 2001. Talaromyces ocotl sp. nov. and observations on T. rotundus from conifer forest soils of Veracruz State, Mexico. Mycologia, 93: 528-540.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.2307/3761738", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S950", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1760", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2001, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2421742, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1760", 
+"otu": [
+{
+"@about": "#otu273990", 
+"@id": "otu273990", 
+"@label": "Tauromyces catenulatus", 
+"meta": [
+{
+"$": 3784832, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces catenulatus GB6125", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273991", 
+"@id": "otu273991", 
+"@label": "Sagenoma viride", 
+"meta": [
+{
+"$": 1015767, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Sagenoma viride", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273992", 
+"@id": "otu273992", 
+"@label": "Talaromyces rotundus", 
+"meta": [
+{
+"$": 234327, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces rotundus GB6317", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273993", 
+"@id": "otu273993", 
+"@label": "Talaromyces mimosinus", 
+"meta": [
+{
+"$": 73776, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces mimosinus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273994", 
+"@id": "otu273994", 
+"@label": "Talaromyces luteus", 
+"meta": [
+{
+"$": 73773, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces luteus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273995", 
+"@id": "otu273995", 
+"@label": "Talaromyces gossypii", 
+"meta": [
+{
+"$": 699898, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces gossypii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273996", 
+"@id": "otu273996", 
+"@label": "Talaromyces trachyspermus", 
+"meta": [
+{
+"$": 73768, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces trachyspermus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273997", 
+"@id": "otu273997", 
+"@label": "Talaromyces purpureus", 
+"meta": [
+{
+"$": 73777, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces purpureus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273998", 
+"@id": "otu273998", 
+"@label": "Talaromyces flavus", 
+"meta": [
+{
+"$": 376372, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces flavus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu273999", 
+"@id": "otu273999", 
+"@label": "Geosmithia cylindrospora", 
+"meta": [
+{
+"$": 773865, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Geosmithia cylindrospora", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274000", 
+"@id": "otu274000", 
+"@label": "Talaromyces thermophilus", 
+"meta": [
+{
+"$": 73767, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces thermophilus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274001", 
+"@id": "otu274001", 
+"@label": "Talaromyces stipitatus", 
+"meta": [
+{
+"$": 73766, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces stipitatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274002", 
+"@id": "otu274002", 
+"@label": "Talaromyces intermedius", 
+"meta": [
+{
+"$": 73772, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces intermedius", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274003", 
+"@id": "otu274003", 
+"@label": "Paecilomyces variotii", 
+"meta": [
+{
+"$": 465462, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Paecilomyces variotii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274004", 
+"@id": "otu274004", 
+"@label": "Hamigera avellanea", 
+"meta": [
+{
+"$": 405612, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Hamigera avellanea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274005", 
+"@id": "otu274005", 
+"@label": "Talaromyces wortmannii", 
+"meta": [
+{
+"$": 73769, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces wortmannii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274006", 
+"@id": "otu274006", 
+"@label": "Penicillium emersonii", 
+"meta": [
+{
+"$": 773841, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Geosmithia emersonii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274007", 
+"@id": "otu274007", 
+"@label": "Monascus purpureus", 
+"meta": [
+{
+"$": 376359, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Monascus purpureus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274008", 
+"@id": "otu274008", 
+"@label": "Talaromyces bacillisporus", 
+"meta": [
+{
+"$": 1032848, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces bacillisporus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274009", 
+"@id": "otu274009", 
+"@label": "Talaromyces helicus", 
+"meta": [
+{
+"$": 316534, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Talaromyces helicus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274010", 
+"@id": "otu274010", 
+"@label": "Geosmithia argillacea", 
+"meta": [
+{
+"$": 562109, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Geosmithia argillacea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu274011", 
+"@id": "otu274011", 
+"@label": "Chromocleista malachitea", 
+"meta": [
+{
+"$": 4061468, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Chromocleista malachitea", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1760", 
+"@otus": "otus1760", 
+"tree": [
+{
+"@about": "#tree3546", 
+"@id": "tree3546", 
+"edge": [
+{
+"@id": "edge680951", 
+"@source": "node680950", 
+"@target": "node680951"
+}, 
+{
+"@id": "edge680952", 
+"@source": "node680950", 
+"@target": "node680952"
+}, 
+{
+"@id": "edge680953", 
+"@source": "node680950", 
+"@target": "node680953"
+}, 
+{
+"@id": "edge680954", 
+"@source": "node680953", 
+"@target": "node680954"
+}, 
+{
+"@id": "edge680955", 
+"@source": "node680954", 
+"@target": "node680955"
+}, 
+{
+"@id": "edge680956", 
+"@source": "node680955", 
+"@target": "node680956"
+}, 
+{
+"@id": "edge680957", 
+"@source": "node680955", 
+"@target": "node680957"
+}, 
+{
+"@id": "edge680958", 
+"@source": "node680954", 
+"@target": "node680958"
+}, 
+{
+"@id": "edge680959", 
+"@source": "node680958", 
+"@target": "node680959"
+}, 
+{
+"@id": "edge680960", 
+"@source": "node680959", 
+"@target": "node680960"
+}, 
+{
+"@id": "edge680961", 
+"@source": "node680960", 
+"@target": "node680961"
+}, 
+{
+"@id": "edge680962", 
+"@source": "node680961", 
+"@target": "node680962"
+}, 
+{
+"@id": "edge680963", 
+"@source": "node680962", 
+"@target": "node680963"
+}, 
+{
+"@id": "edge680964", 
+"@source": "node680962", 
+"@target": "node680964"
+}, 
+{
+"@id": "edge680965", 
+"@source": "node680964", 
+"@target": "node680965"
+}, 
+{
+"@id": "edge680966", 
+"@source": "node680964", 
+"@target": "node680966"
+}, 
+{
+"@id": "edge680967", 
+"@source": "node680961", 
+"@target": "node680967"
+}, 
+{
+"@id": "edge680968", 
+"@source": "node680960", 
+"@target": "node680968"
+}, 
+{
+"@id": "edge680969", 
+"@source": "node680959", 
+"@target": "node680969"
+}, 
+{
+"@id": "edge680970", 
+"@source": "node680969", 
+"@target": "node680970"
+}, 
+{
+"@id": "edge680971", 
+"@source": "node680970", 
+"@target": "node680971"
+}, 
+{
+"@id": "edge680972", 
+"@source": "node680971", 
+"@target": "node680972"
+}, 
+{
+"@id": "edge680973", 
+"@source": "node680972", 
+"@target": "node680973"
+}, 
+{
+"@id": "edge680974", 
+"@source": "node680972", 
+"@target": "node680974"
+}, 
+{
+"@id": "edge680975", 
+"@source": "node680974", 
+"@target": "node680975"
+}, 
+{
+"@id": "edge680976", 
+"@source": "node680975", 
+"@target": "node680976"
+}, 
+{
+"@id": "edge680977", 
+"@source": "node680976", 
+"@target": "node680977"
+}, 
+{
+"@id": "edge680978", 
+"@source": "node680976", 
+"@target": "node680978"
+}, 
+{
+"@id": "edge680979", 
+"@source": "node680975", 
+"@target": "node680979"
+}, 
+{
+"@id": "edge680980", 
+"@source": "node680974", 
+"@target": "node680980"
+}, 
+{
+"@id": "edge680981", 
+"@source": "node680971", 
+"@target": "node680981"
+}, 
+{
+"@id": "edge680982", 
+"@source": "node680970", 
+"@target": "node680982"
+}, 
+{
+"@id": "edge680983", 
+"@source": "node680982", 
+"@target": "node680983"
+}, 
+{
+"@id": "edge680984", 
+"@source": "node680982", 
+"@target": "node680984"
+}, 
+{
+"@id": "edge680985", 
+"@source": "node680969", 
+"@target": "node680985"
+}, 
+{
+"@id": "edge680986", 
+"@source": "node680958", 
+"@target": "node680986"
+}, 
+{
+"@id": "edge680987", 
+"@source": "node680953", 
+"@target": "node680987"
+}
+], 
+"meta": [
+{
+"$": "node680953", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Choose me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node680950", 
+"@root": "true"
+}, 
+{
+"@id": "node680951", 
+"@otu": "otu274007"
+}, 
+{
+"@id": "node680952", 
+"@otu": "otu274003"
+}, 
+{
+"@id": "node680953"
+}, 
+{
+"@id": "node680954"
+}, 
+{
+"@id": "node680955"
+}, 
+{
+"@id": "node680956", 
+"@otu": "otu273999"
+}, 
+{
+"@id": "node680957", 
+"@otu": "otu274006"
+}, 
+{
+"@id": "node680958"
+}, 
+{
+"@id": "node680959"
+}, 
+{
+"@id": "node680960"
+}, 
+{
+"@id": "node680961"
+}, 
+{
+"@id": "node680962"
+}, 
+{
+"@id": "node680963", 
+"@otu": "otu274008"
+}, 
+{
+"@id": "node680964"
+}, 
+{
+"@id": "node680965", 
+"@otu": "otu274005"
+}, 
+{
+"@id": "node680966", 
+"@otu": "otu273992"
+}, 
+{
+"@id": "node680967", 
+"@otu": "otu273993"
+}, 
+{
+"@id": "node680968", 
+"@otu": "otu273990"
+}, 
+{
+"@id": "node680969"
+}, 
+{
+"@id": "node680970"
+}, 
+{
+"@id": "node680971"
+}, 
+{
+"@id": "node680972"
+}, 
+{
+"@id": "node680973", 
+"@otu": "otu274009"
+}, 
+{
+"@id": "node680974"
+}, 
+{
+"@id": "node680975"
+}, 
+{
+"@id": "node680976"
+}, 
+{
+"@id": "node680977", 
+"@otu": "otu274002"
+}, 
+{
+"@id": "node680978", 
+"@otu": "otu273998"
+}, 
+{
+"@id": "node680979", 
+"@otu": "otu273991"
+}, 
+{
+"@id": "node680980", 
+"@otu": "otu274001"
+}, 
+{
+"@id": "node680981", 
+"@otu": "otu273997"
+}, 
+{
+"@id": "node680982"
+}, 
+{
+"@id": "node680983", 
+"@otu": "otu273995"
+}, 
+{
+"@id": "node680984", 
+"@otu": "otu273996"
+}, 
+{
+"@id": "node680985", 
+"@otu": "otu273994"
+}, 
+{
+"@id": "node680986", 
+"@otu": "otu274000"
+}, 
+{
+"@id": "node680987", 
+"@otu": "otu274010"
+}
+]
+}, 
+{
+"@about": "#tree3547", 
+"@id": "tree3547", 
+"edge": [
+{
+"@id": "edge680989", 
+"@source": "node680988", 
+"@target": "node680989"
+}, 
+{
+"@id": "edge680990", 
+"@source": "node680988", 
+"@target": "node680990"
+}, 
+{
+"@id": "edge680991", 
+"@source": "node680988", 
+"@target": "node680991"
+}, 
+{
+"@id": "edge680992", 
+"@source": "node680991", 
+"@target": "node680992"
+}, 
+{
+"@id": "edge680993", 
+"@source": "node680992", 
+"@target": "node680993"
+}, 
+{
+"@id": "edge680994", 
+"@source": "node680993", 
+"@target": "node680994"
+}, 
+{
+"@id": "edge680995", 
+"@source": "node680994", 
+"@target": "node680995"
+}, 
+{
+"@id": "edge680996", 
+"@source": "node680994", 
+"@target": "node680996"
+}, 
+{
+"@id": "edge680997", 
+"@source": "node680996", 
+"@target": "node680997"
+}, 
+{
+"@id": "edge680998", 
+"@source": "node680997", 
+"@target": "node680998"
+}, 
+{
+"@id": "edge680999", 
+"@source": "node680997", 
+"@target": "node680999"
+}, 
+{
+"@id": "edge681000", 
+"@source": "node680996", 
+"@target": "node681000"
+}, 
+{
+"@id": "edge681001", 
+"@source": "node681000", 
+"@target": "node681001"
+}, 
+{
+"@id": "edge681002", 
+"@source": "node681000", 
+"@target": "node681002"
+}, 
+{
+"@id": "edge681003", 
+"@source": "node680994", 
+"@target": "node681003"
+}, 
+{
+"@id": "edge681004", 
+"@source": "node680993", 
+"@target": "node681004"
+}, 
+{
+"@id": "edge681005", 
+"@source": "node680993", 
+"@target": "node681005"
+}, 
+{
+"@id": "edge681006", 
+"@source": "node680992", 
+"@target": "node681006"
+}, 
+{
+"@id": "edge681007", 
+"@source": "node680991", 
+"@target": "node681007"
+}
+], 
+"meta": [
+{
+"$": "node680991", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node680988", 
+"@root": "true"
+}, 
+{
+"@id": "node680989", 
+"@otu": "otu274007"
+}, 
+{
+"@id": "node680990", 
+"@otu": "otu274011"
+}, 
+{
+"@id": "node680991"
+}, 
+{
+"@id": "node680992"
+}, 
+{
+"@id": "node680993"
+}, 
+{
+"@id": "node680994"
+}, 
+{
+"@id": "node680995", 
+"@otu": "otu273999"
+}, 
+{
+"@id": "node680996"
+}, 
+{
+"@id": "node680997"
+}, 
+{
+"@id": "node680998", 
+"@otu": "otu274009"
+}, 
+{
+"@id": "node680999", 
+"@otu": "otu273991"
+}, 
+{
+"@id": "node681000"
+}, 
+{
+"@id": "node681001", 
+"@otu": "otu274008"
+}, 
+{
+"@id": "node681002", 
+"@otu": "otu273992"
+}, 
+{
+"@id": "node681003", 
+"@otu": "otu273990"
+}, 
+{
+"@id": "node681004", 
+"@otu": "otu274006"
+}, 
+{
+"@id": "node681005", 
+"@otu": "otu274010"
+}, 
+{
+"@id": "node681006", 
+"@otu": "otu274003"
+}, 
+{
+"@id": "node681007", 
+"@otu": "otu274004"
+}
+]
+}
+]
+}
+}
+}

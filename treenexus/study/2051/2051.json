@@ -1,0 +1,293 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Le roux M.M., & Van wyk B. 2012. A Taxonomic Revision of Amphipilosae, a New Section of Crotalaria (Fabaceae). Systematic Botany.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "bryan drew", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S12676", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2051", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2012, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2051", 
+"otu": [
+{
+"@about": "#otu309015", 
+"@id": "otu309015", 
+"@label": "Crotalaria pearsonii", 
+"meta": [
+{
+"$": 3927732, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crotalaria pearsonii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu309016", 
+"@id": "otu309016", 
+"@label": "Crotalaria kolbergii", 
+"meta": {
+"$": "Crotalaria kolbergii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu309017", 
+"@id": "otu309017", 
+"@label": "Crotalaria meyeriana", 
+"meta": {
+"$": "Crotalaria meyeriana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu309018", 
+"@id": "otu309018", 
+"@label": "Crotalaria colorata", 
+"meta": [
+{
+"$": 697894, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crotalaria colorata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu309019", 
+"@id": "otu309019", 
+"@label": "Crotalaria monophylla", 
+"meta": {
+"$": "Crotalaria monophylla", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu309020", 
+"@id": "otu309020", 
+"@label": "Crotalaria giessii", 
+"meta": {
+"$": "Crotalaria giessii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+}, 
+{
+"@about": "#otu309021", 
+"@id": "otu309021", 
+"@label": "Crotalaria excisa", 
+"meta": [
+{
+"$": 1093704, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crotalaria excisa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu309022", 
+"@id": "otu309022", 
+"@label": "Crotalaria humilis", 
+"meta": [
+{
+"$": 605124, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crotalaria humilis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2051", 
+"@otus": "otus2051", 
+"tree": [
+{
+"@id": "tree4226", 
+"edge": [
+{
+"@id": "edge785268", 
+"@source": "node785267", 
+"@target": "node785268"
+}, 
+{
+"@id": "edge785269", 
+"@source": "node785267", 
+"@target": "node785269"
+}, 
+{
+"@id": "edge785270", 
+"@source": "node785269", 
+"@target": "node785270"
+}, 
+{
+"@id": "edge785271", 
+"@source": "node785270", 
+"@target": "node785271"
+}, 
+{
+"@id": "edge785272", 
+"@source": "node785271", 
+"@target": "node785272"
+}, 
+{
+"@id": "edge785273", 
+"@source": "node785272", 
+"@target": "node785273"
+}, 
+{
+"@id": "edge785274", 
+"@source": "node785272", 
+"@target": "node785274"
+}, 
+{
+"@id": "edge785275", 
+"@source": "node785271", 
+"@target": "node785275"
+}, 
+{
+"@id": "edge785276", 
+"@source": "node785270", 
+"@target": "node785276"
+}, 
+{
+"@id": "edge785277", 
+"@source": "node785276", 
+"@target": "node785277"
+}, 
+{
+"@id": "edge785278", 
+"@source": "node785276", 
+"@target": "node785278"
+}, 
+{
+"@id": "edge785279", 
+"@source": "node785269", 
+"@target": "node785279"
+}, 
+{
+"@id": "edge785280", 
+"@source": "node785279", 
+"@target": "node785280"
+}, 
+{
+"@id": "edge785281", 
+"@source": "node785279", 
+"@target": "node785281"
+}
+], 
+"node": [
+{
+"@id": "node785267", 
+"@root": "true"
+}, 
+{
+"@id": "node785268", 
+"@otu": "otu309019"
+}, 
+{
+"@id": "node785269"
+}, 
+{
+"@id": "node785270"
+}, 
+{
+"@id": "node785271"
+}, 
+{
+"@id": "node785272"
+}, 
+{
+"@id": "node785273", 
+"@otu": "otu309018"
+}, 
+{
+"@id": "node785274", 
+"@otu": "otu309017"
+}, 
+{
+"@id": "node785275", 
+"@otu": "otu309020"
+}, 
+{
+"@id": "node785276"
+}, 
+{
+"@id": "node785277", 
+"@otu": "otu309021"
+}, 
+{
+"@id": "node785278", 
+"@otu": "otu309022"
+}, 
+{
+"@id": "node785279"
+}, 
+{
+"@id": "node785280", 
+"@otu": "otu309016"
+}, 
+{
+"@id": "node785281", 
+"@otu": "otu309015"
+}
+]
+}
+]
+}
+}
+}

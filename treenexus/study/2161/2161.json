@@ -1,0 +1,3872 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Jansen G., Savolainen R., & Vepalainen K. 2010. Phylogeny, divergence-time estimation, biogeography and social parasite-host relationships of the Holarctic ant genus Myrmica (Hymenoptera: Formicidae). Molecular Phylogenetics and Evolution, .", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.ympev.2010.01.029", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Chris Owen", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S10277", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2161", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2010, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2387133, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2161", 
+"otu": [
+{
+"@about": "#otu317001", 
+"@id": "otu317001", 
+"@label": "Myrmica n. sp. M302", 
+"meta": [
+{
+"$": 1005392, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica M302", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317002", 
+"@id": "otu317002", 
+"@label": "Myrmica karavajevi", 
+"meta": [
+{
+"$": 733669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica karavajevi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317003", 
+"@id": "otu317003", 
+"@label": "Myrmica sulcinodis", 
+"meta": [
+{
+"$": 733665, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica sulcinodis 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317004", 
+"@id": "otu317004", 
+"@label": "Myrmica punctinops", 
+"meta": [
+{
+"$": 663831, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica punctinops", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317005", 
+"@id": "otu317005", 
+"@label": "Myrmica aloba", 
+"meta": [
+{
+"$": 954609, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica aloba", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317006", 
+"@id": "otu317006", 
+"@label": "Myrmica n. sp. 2 GJ-2010", 
+"meta": [
+{
+"$": 1082702, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica n.sp.2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317007", 
+"@id": "otu317007", 
+"@label": "Myrmica lobifrons", 
+"meta": [
+{
+"$": 844613, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica lobifrons", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317008", 
+"@id": "otu317008", 
+"@label": "Myrmica bergi", 
+"meta": [
+{
+"$": 233912, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica bergi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317009", 
+"@id": "otu317009", 
+"@label": "Myrmica siciliana", 
+"meta": [
+{
+"$": 305687, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica siciliana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317010", 
+"@id": "otu317010", 
+"@label": "Myrmica yamanei", 
+"meta": [
+{
+"$": 1068237, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica yamanei", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317011", 
+"@id": "otu317011", 
+"@label": "Myrmica sulcinodis", 
+"meta": [
+{
+"$": 733665, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica sulcinodis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317012", 
+"@id": "otu317012", 
+"@label": "Myrmica arisana", 
+"meta": [
+{
+"$": 1076728, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica arisana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317013", 
+"@id": "otu317013", 
+"@label": "Myrmica pisarskii", 
+"meta": [
+{
+"$": 489822, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica pisarskii 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317014", 
+"@id": "otu317014", 
+"@label": "Myrmica taediosa", 
+"meta": [
+{
+"$": 249723, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica taediosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317015", 
+"@id": "otu317015", 
+"@label": "Myrmica wittmeri", 
+"meta": [
+{
+"$": 249719, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica wittmeri", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317016", 
+"@id": "otu317016", 
+"@label": "Myrmica aimonissabaudiae", 
+"meta": [
+{
+"$": 969570, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica aimonissabaudiae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317017", 
+"@id": "otu317017", 
+"@label": "Myrmica karavajevi", 
+"meta": [
+{
+"$": 733669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica karavajevi 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317018", 
+"@id": "otu317018", 
+"@label": "Myrmica americana", 
+"meta": [
+{
+"$": 253207, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica americana 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317019", 
+"@id": "otu317019", 
+"@label": "Myrmica americana", 
+"meta": [
+{
+"$": 253207, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica americana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317020", 
+"@id": "otu317020", 
+"@label": "Myrmica n. sp. M365", 
+"meta": [
+{
+"$": 1082704, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica M365", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317021", 
+"@id": "otu317021", 
+"@label": "Myrmica n. sp. 3 GJ-2010", 
+"meta": [
+{
+"$": 305682, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica n.sp.3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317022", 
+"@id": "otu317022", 
+"@label": "Myrmica saposhnikovi", 
+"meta": [
+{
+"$": 249715, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica saposhnikovi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317023", 
+"@id": "otu317023", 
+"@label": "Myrmica n. sp. M350", 
+"meta": [
+{
+"$": 1082705, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica M350", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317024", 
+"@id": "otu317024", 
+"@label": "Myrmica n. sp. 5 GJ-2010", 
+"meta": [
+{
+"$": 305680, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica n.sp.5", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317025", 
+"@id": "otu317025", 
+"@label": "Crematogaster scutellaris", 
+"meta": [
+{
+"$": 313149, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crematogaster scutellaris", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317026", 
+"@id": "otu317026", 
+"@label": "Myrmica lacustris", 
+"meta": [
+{
+"$": 1025999, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica lacustris", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317027", 
+"@id": "otu317027", 
+"@label": "Myrmica kotokui", 
+"meta": [
+{
+"$": 609953, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica kotokui 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317028", 
+"@id": "otu317028", 
+"@label": "Myrmica luteola", 
+"meta": [
+{
+"$": 1025995, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica luteola", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317029", 
+"@id": "otu317029", 
+"@label": "Myrmica schencki", 
+"meta": [
+{
+"$": 249709, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica schencki", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317030", 
+"@id": "otu317030", 
+"@label": "Manica rubida", 
+"meta": [
+{
+"$": 691933, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Manica rubida", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317031", 
+"@id": "otu317031", 
+"@label": "Myrmica nearctica", 
+"meta": [
+{
+"$": 1025993, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica nearctica 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317032", 
+"@id": "otu317032", 
+"@label": "Myrmica divergens", 
+"meta": [
+{
+"$": 802727, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica divergens", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317033", 
+"@id": "otu317033", 
+"@label": "Myrmica n. sp. 6 GJ-2010", 
+"meta": [
+{
+"$": 305681, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica n.sp.6", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317034", 
+"@id": "otu317034", 
+"@label": "Myrmica serica", 
+"meta": [
+{
+"$": 249721, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica serica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317035", 
+"@id": "otu317035", 
+"@label": "Myrmica n. sp. M295", 
+"meta": [
+{
+"$": 1082709, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica M295", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317036", 
+"@id": "otu317036", 
+"@label": "Myrmica rugosa", 
+"meta": [
+{
+"$": 249713, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica rugosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317037", 
+"@id": "otu317037", 
+"@label": "Myrmica wheeleri", 
+"meta": [
+{
+"$": 249717, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica wheeleri", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317038", 
+"@id": "otu317038", 
+"@label": "Myrmica kotokui", 
+"meta": [
+{
+"$": 609953, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica kotokui", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317039", 
+"@id": "otu317039", 
+"@label": "Myrmica vandeli", 
+"meta": [
+{
+"$": 305689, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica vandeli", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317040", 
+"@id": "otu317040", 
+"@label": "Myrmica formosae", 
+"meta": [
+{
+"$": 500163, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica formosae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317041", 
+"@id": "otu317041", 
+"@label": "Myrmica alaskensis", 
+"meta": [
+{
+"$": 1076716, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica alaskensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317042", 
+"@id": "otu317042", 
+"@label": "Myrmica ruginodis", 
+"meta": [
+{
+"$": 998556, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica ruginodis 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317043", 
+"@id": "otu317043", 
+"@label": "Myrmica schoedli", 
+"meta": [
+{
+"$": 249711, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica schoedli", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317044", 
+"@id": "otu317044", 
+"@label": "Formica fusca", 
+"meta": [
+{
+"$": 418142, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Formica fusca", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317045", 
+"@id": "otu317045", 
+"@label": "Myrmica schencki", 
+"meta": [
+{
+"$": 249709, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica schencki 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317046", 
+"@id": "otu317046", 
+"@label": "Myrmica wesmaeli", 
+"meta": [
+{
+"$": 1068236, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica wesmaeli", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317047", 
+"@id": "otu317047", 
+"@label": "Myrmica tahoensis", 
+"meta": [
+{
+"$": 416239, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica tahoensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317048", 
+"@id": "otu317048", 
+"@label": "Myrmica anatolica", 
+"meta": [
+{
+"$": 233954, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica anatolica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317049", 
+"@id": "otu317049", 
+"@label": "Myrmica detritinodis", 
+"meta": [
+{
+"$": 500165, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica detritinodis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317050", 
+"@id": "otu317050", 
+"@label": "Myrmica semiparasitica", 
+"meta": [
+{
+"$": 1018022, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica semiparasitica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317051", 
+"@id": "otu317051", 
+"@label": "Myrmica lobulicornis", 
+"meta": [
+{
+"$": 593694, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica lobulicornis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317052", 
+"@id": "otu317052", 
+"@label": "Myrmica sabuleti", 
+"meta": [
+{
+"$": 733666, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica sabuleti", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317053", 
+"@id": "otu317053", 
+"@label": "Myrmica hellenica", 
+"meta": [
+{
+"$": 733671, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica hellenica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317054", 
+"@id": "otu317054", 
+"@label": "Myrmica arnoldii", 
+"meta": [
+{
+"$": 817833, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica arnoldii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317055", 
+"@id": "otu317055", 
+"@label": "Myrmica eidmanni", 
+"meta": [
+{
+"$": 500159, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica eidmanni", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317056", 
+"@id": "otu317056", 
+"@label": "Myrmica spinosior", 
+"meta": [
+{
+"$": 22816, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica spinosior", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317057", 
+"@id": "otu317057", 
+"@label": "Myrmica kasczenkoi", 
+"meta": [
+{
+"$": 1026003, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica kasczenkoi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317058", 
+"@id": "otu317058", 
+"@label": "Myrmica n. sp. M273", 
+"meta": [
+{
+"$": 1082711, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica M273", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317059", 
+"@id": "otu317059", 
+"@label": "Myrmica salina", 
+"meta": [
+{
+"$": 441519, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica salina", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317060", 
+"@id": "otu317060", 
+"@label": "Myrmica n. sp. M275", 
+"meta": [
+{
+"$": 1082710, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica M275", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317061", 
+"@id": "otu317061", 
+"@label": "Myrmica nearctica", 
+"meta": [
+{
+"$": 1025993, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica nearctica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317062", 
+"@id": "otu317062", 
+"@label": "Manica invidia", 
+"meta": [
+{
+"$": 1076712, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Manica invidia", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317063", 
+"@id": "otu317063", 
+"@label": "Myrmica taediosa", 
+"meta": [
+{
+"$": 249723, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica taediosa 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317064", 
+"@id": "otu317064", 
+"@label": "Myrmica rugulosa", 
+"meta": [
+{
+"$": 733667, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica rugulosa 3", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317065", 
+"@id": "otu317065", 
+"@label": "Myrmica striolagaster", 
+"meta": [
+{
+"$": 216031, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica striolagaster", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317066", 
+"@id": "otu317066", 
+"@label": "Myrmica scabrinodis", 
+"meta": [
+{
+"$": 341457, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica scabrinodis 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317067", 
+"@id": "otu317067", 
+"@label": "Myrmica rupestris", 
+"meta": [
+{
+"$": 441524, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica rupestris", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317068", 
+"@id": "otu317068", 
+"@label": "Myrmica jessensis", 
+"meta": [
+{
+"$": 266735, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica jessensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317069", 
+"@id": "otu317069", 
+"@label": "Myrmica quebecensis", 
+"meta": [
+{
+"$": 72334, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica quebecensis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317070", 
+"@id": "otu317070", 
+"@label": "Myrmica tobiasi", 
+"meta": [
+{
+"$": 491821, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica tobiasi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317071", 
+"@id": "otu317071", 
+"@label": "Myrmica crassirugis", 
+"meta": [
+{
+"$": 817837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica crassirugis 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317072", 
+"@id": "otu317072", 
+"@label": "Myrmica monticola", 
+"meta": [
+{
+"$": 593692, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica monticola", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317073", 
+"@id": "otu317073", 
+"@label": "Myrmica nearctica", 
+"meta": [
+{
+"$": 1025993, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica n.sp.AC", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317074", 
+"@id": "otu317074", 
+"@label": "Myrmica forcipata", 
+"meta": [
+{
+"$": 489511, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica forcipata 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317075", 
+"@id": "otu317075", 
+"@label": "Myrmica rugulosa", 
+"meta": [
+{
+"$": 733667, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica rugulosa 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317076", 
+"@id": "otu317076", 
+"@label": "Myrmica yamanei", 
+"meta": [
+{
+"$": 1068237, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica yamanei 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317077", 
+"@id": "otu317077", 
+"@label": "Crematogaster auberti", 
+"meta": [
+{
+"$": 651551, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Crematogaster auberti", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317078", 
+"@id": "otu317078", 
+"@label": "Myrmica brevispinosa", 
+"meta": [
+{
+"$": 817835, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica brevispinosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317079", 
+"@id": "otu317079", 
+"@label": "Myrmica n. sp. M316", 
+"meta": [
+{
+"$": 1082706, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica M316", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317080", 
+"@id": "otu317080", 
+"@label": "Myrmica forcipata", 
+"meta": [
+{
+"$": 489511, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica forcipata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317081", 
+"@id": "otu317081", 
+"@label": "Myrmica laurae", 
+"meta": [
+{
+"$": 593693, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica laurae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317082", 
+"@id": "otu317082", 
+"@label": "Myrmica indica", 
+"meta": [
+{
+"$": 541953, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica indica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317083", 
+"@id": "otu317083", 
+"@label": "Myrmica n. sp. M300", 
+"meta": [
+{
+"$": 1082708, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica M300", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317084", 
+"@id": "otu317084", 
+"@label": "Myrmica indica", 
+"meta": [
+{
+"$": 541953, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica indica 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317085", 
+"@id": "otu317085", 
+"@label": "Myrmica angulata", 
+"meta": [
+{
+"$": 830943, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica angulata", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317086", 
+"@id": "otu317086", 
+"@label": "Myrmica dshungarica", 
+"meta": [
+{
+"$": 817842, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica dshungarica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317087", 
+"@id": "otu317087", 
+"@label": "Myrmica rugiventris", 
+"meta": [
+{
+"$": 1025990, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica rugiventris", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317088", 
+"@id": "otu317088", 
+"@label": "Pyramica weberi", 
+"meta": [
+{
+"$": 3255242, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica weberi", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317089", 
+"@id": "otu317089", 
+"@label": "Myrmica incompleta", 
+"meta": [
+{
+"$": 281623, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica incompleta", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317090", 
+"@id": "otu317090", 
+"@label": "Myrmica pisarskii", 
+"meta": [
+{
+"$": 489822, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica pisarskii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317091", 
+"@id": "otu317091", 
+"@label": "Myrmica xavieri", 
+"meta": [
+{
+"$": 305684, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica xavieri", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317092", 
+"@id": "otu317092", 
+"@label": "Myrmica excelsa", 
+"meta": [
+{
+"$": 489473, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica excelsa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317093", 
+"@id": "otu317093", 
+"@label": "Lasius alienus", 
+"meta": [
+{
+"$": 850893, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lasius alienus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317094", 
+"@id": "otu317094", 
+"@label": "Myrmica crassirugis", 
+"meta": [
+{
+"$": 817837, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica crassirugis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317095", 
+"@id": "otu317095", 
+"@label": "Myrmica ruginodis", 
+"meta": [
+{
+"$": 998556, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica ruginodis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317096", 
+"@id": "otu317096", 
+"@label": "Myrmica rugulosa", 
+"meta": [
+{
+"$": 733667, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica rugulosa", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317097", 
+"@id": "otu317097", 
+"@label": "Myrmica discontinua", 
+"meta": [
+{
+"$": 817839, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica discontinua", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317098", 
+"@id": "otu317098", 
+"@label": "Myrmica punctiventris", 
+"meta": [
+{
+"$": 536556, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica punctiventris", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317099", 
+"@id": "otu317099", 
+"@label": "Myrmica n. sp. 4 GJ-2010", 
+"meta": [
+{
+"$": 305683, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica n.sp.4", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317100", 
+"@id": "otu317100", 
+"@label": "Myrmica angulinodis", 
+"meta": [
+{
+"$": 1076730, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica angulinodis 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317101", 
+"@id": "otu317101", 
+"@label": "Myrmica lobicornis", 
+"meta": [
+{
+"$": 663842, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica lobicornis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317102", 
+"@id": "otu317102", 
+"@label": "Myrmica hirsuta", 
+"meta": [
+{
+"$": 733670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica hirsuta", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317103", 
+"@id": "otu317103", 
+"@label": "Myrmica fracticornis", 
+"meta": [
+{
+"$": 500165, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica fracticornis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317104", 
+"@id": "otu317104", 
+"@label": "Myrmica hellenica", 
+"meta": [
+{
+"$": 733671, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica constricta", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317105", 
+"@id": "otu317105", 
+"@label": "Myrmica tulinae", 
+"meta": [
+{
+"$": 1068235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica tulinae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317106", 
+"@id": "otu317106", 
+"@label": "Myrmica kirghisorum", 
+"meta": [
+{
+"$": 1026001, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica kirghisorum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317107", 
+"@id": "otu317107", 
+"@label": "Myrmica georgica", 
+"meta": [
+{
+"$": 802730, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica georgica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317108", 
+"@id": "otu317108", 
+"@label": "Myrmica rubra", 
+"meta": [
+{
+"$": 631917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica rubra microgyne", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317109", 
+"@id": "otu317109", 
+"@label": "Myrmica rubra", 
+"meta": [
+{
+"$": 631917, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica rubra", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317110", 
+"@id": "otu317110", 
+"@label": "Myrmica aloba", 
+"meta": [
+{
+"$": 954609, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica aloba 2", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317111", 
+"@id": "otu317111", 
+"@label": "Myrmica angulinodis", 
+"meta": [
+{
+"$": 1076730, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica angulinodis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu317112", 
+"@id": "otu317112", 
+"@label": "Myrmica scabrinodis", 
+"meta": [
+{
+"$": 341457, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Myrmica scabrinodis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2161", 
+"@otus": "otus2161", 
+"tree": [
+{
+"@about": "#tree4556", 
+"@id": "tree4556", 
+"edge": [
+{
+"@id": "edge814122", 
+"@source": "node814121", 
+"@target": "node814122"
+}, 
+{
+"@id": "edge814123", 
+"@source": "node814122", 
+"@target": "node814123"
+}, 
+{
+"@id": "edge814124", 
+"@source": "node814123", 
+"@target": "node814124"
+}, 
+{
+"@id": "edge814125", 
+"@source": "node814123", 
+"@target": "node814125"
+}, 
+{
+"@id": "edge814126", 
+"@source": "node814122", 
+"@target": "node814126"
+}, 
+{
+"@id": "edge814127", 
+"@source": "node814126", 
+"@target": "node814127"
+}, 
+{
+"@id": "edge814128", 
+"@source": "node814126", 
+"@target": "node814128"
+}, 
+{
+"@id": "edge814129", 
+"@source": "node814121", 
+"@target": "node814129"
+}, 
+{
+"@id": "edge814130", 
+"@source": "node814129", 
+"@target": "node814130"
+}, 
+{
+"@id": "edge814131", 
+"@source": "node814130", 
+"@target": "node814131"
+}, 
+{
+"@id": "edge814132", 
+"@source": "node814131", 
+"@target": "node814132"
+}, 
+{
+"@id": "edge814133", 
+"@source": "node814132", 
+"@target": "node814133"
+}, 
+{
+"@id": "edge814134", 
+"@source": "node814132", 
+"@target": "node814134"
+}, 
+{
+"@id": "edge814135", 
+"@source": "node814134", 
+"@target": "node814135"
+}, 
+{
+"@id": "edge814136", 
+"@source": "node814134", 
+"@target": "node814136"
+}, 
+{
+"@id": "edge814137", 
+"@source": "node814136", 
+"@target": "node814137"
+}, 
+{
+"@id": "edge814138", 
+"@source": "node814136", 
+"@target": "node814138"
+}, 
+{
+"@id": "edge814139", 
+"@source": "node814138", 
+"@target": "node814139"
+}, 
+{
+"@id": "edge814140", 
+"@source": "node814138", 
+"@target": "node814140"
+}, 
+{
+"@id": "edge814141", 
+"@source": "node814140", 
+"@target": "node814141"
+}, 
+{
+"@id": "edge814142", 
+"@source": "node814140", 
+"@target": "node814142"
+}, 
+{
+"@id": "edge814143", 
+"@source": "node814131", 
+"@target": "node814143"
+}, 
+{
+"@id": "edge814144", 
+"@source": "node814143", 
+"@target": "node814144"
+}, 
+{
+"@id": "edge814145", 
+"@source": "node814144", 
+"@target": "node814145"
+}, 
+{
+"@id": "edge814146", 
+"@source": "node814144", 
+"@target": "node814146"
+}, 
+{
+"@id": "edge814147", 
+"@source": "node814146", 
+"@target": "node814147"
+}, 
+{
+"@id": "edge814148", 
+"@source": "node814147", 
+"@target": "node814148"
+}, 
+{
+"@id": "edge814149", 
+"@source": "node814148", 
+"@target": "node814149"
+}, 
+{
+"@id": "edge814150", 
+"@source": "node814148", 
+"@target": "node814150"
+}, 
+{
+"@id": "edge814151", 
+"@source": "node814147", 
+"@target": "node814151"
+}, 
+{
+"@id": "edge814152", 
+"@source": "node814151", 
+"@target": "node814152"
+}, 
+{
+"@id": "edge814153", 
+"@source": "node814151", 
+"@target": "node814153"
+}, 
+{
+"@id": "edge814154", 
+"@source": "node814153", 
+"@target": "node814154"
+}, 
+{
+"@id": "edge814155", 
+"@source": "node814153", 
+"@target": "node814155"
+}, 
+{
+"@id": "edge814156", 
+"@source": "node814151", 
+"@target": "node814156"
+}, 
+{
+"@id": "edge814157", 
+"@source": "node814156", 
+"@target": "node814157"
+}, 
+{
+"@id": "edge814158", 
+"@source": "node814156", 
+"@target": "node814158"
+}, 
+{
+"@id": "edge814159", 
+"@source": "node814146", 
+"@target": "node814159"
+}, 
+{
+"@id": "edge814160", 
+"@source": "node814159", 
+"@target": "node814160"
+}, 
+{
+"@id": "edge814161", 
+"@source": "node814159", 
+"@target": "node814161"
+}, 
+{
+"@id": "edge814162", 
+"@source": "node814161", 
+"@target": "node814162"
+}, 
+{
+"@id": "edge814163", 
+"@source": "node814161", 
+"@target": "node814163"
+}, 
+{
+"@id": "edge814164", 
+"@source": "node814143", 
+"@target": "node814164"
+}, 
+{
+"@id": "edge814165", 
+"@source": "node814164", 
+"@target": "node814165"
+}, 
+{
+"@id": "edge814166", 
+"@source": "node814165", 
+"@target": "node814166"
+}, 
+{
+"@id": "edge814167", 
+"@source": "node814165", 
+"@target": "node814167"
+}, 
+{
+"@id": "edge814168", 
+"@source": "node814164", 
+"@target": "node814168"
+}, 
+{
+"@id": "edge814169", 
+"@source": "node814168", 
+"@target": "node814169"
+}, 
+{
+"@id": "edge814170", 
+"@source": "node814168", 
+"@target": "node814170"
+}, 
+{
+"@id": "edge814171", 
+"@source": "node814170", 
+"@target": "node814171"
+}, 
+{
+"@id": "edge814172", 
+"@source": "node814171", 
+"@target": "node814172"
+}, 
+{
+"@id": "edge814173", 
+"@source": "node814171", 
+"@target": "node814173"
+}, 
+{
+"@id": "edge814174", 
+"@source": "node814170", 
+"@target": "node814174"
+}, 
+{
+"@id": "edge814175", 
+"@source": "node814174", 
+"@target": "node814175"
+}, 
+{
+"@id": "edge814176", 
+"@source": "node814174", 
+"@target": "node814176"
+}, 
+{
+"@id": "edge814177", 
+"@source": "node814130", 
+"@target": "node814177"
+}, 
+{
+"@id": "edge814178", 
+"@source": "node814177", 
+"@target": "node814178"
+}, 
+{
+"@id": "edge814179", 
+"@source": "node814178", 
+"@target": "node814179"
+}, 
+{
+"@id": "edge814180", 
+"@source": "node814179", 
+"@target": "node814180"
+}, 
+{
+"@id": "edge814181", 
+"@source": "node814179", 
+"@target": "node814181"
+}, 
+{
+"@id": "edge814182", 
+"@source": "node814178", 
+"@target": "node814182"
+}, 
+{
+"@id": "edge814183", 
+"@source": "node814182", 
+"@target": "node814183"
+}, 
+{
+"@id": "edge814184", 
+"@source": "node814182", 
+"@target": "node814184"
+}, 
+{
+"@id": "edge814185", 
+"@source": "node814184", 
+"@target": "node814185"
+}, 
+{
+"@id": "edge814186", 
+"@source": "node814184", 
+"@target": "node814186"
+}, 
+{
+"@id": "edge814187", 
+"@source": "node814177", 
+"@target": "node814187"
+}, 
+{
+"@id": "edge814188", 
+"@source": "node814187", 
+"@target": "node814188"
+}, 
+{
+"@id": "edge814189", 
+"@source": "node814188", 
+"@target": "node814189"
+}, 
+{
+"@id": "edge814190", 
+"@source": "node814189", 
+"@target": "node814190"
+}, 
+{
+"@id": "edge814191", 
+"@source": "node814190", 
+"@target": "node814191"
+}, 
+{
+"@id": "edge814192", 
+"@source": "node814191", 
+"@target": "node814192"
+}, 
+{
+"@id": "edge814193", 
+"@source": "node814192", 
+"@target": "node814193"
+}, 
+{
+"@id": "edge814194", 
+"@source": "node814193", 
+"@target": "node814194"
+}, 
+{
+"@id": "edge814195", 
+"@source": "node814194", 
+"@target": "node814195"
+}, 
+{
+"@id": "edge814196", 
+"@source": "node814195", 
+"@target": "node814196"
+}, 
+{
+"@id": "edge814197", 
+"@source": "node814195", 
+"@target": "node814197"
+}, 
+{
+"@id": "edge814198", 
+"@source": "node814197", 
+"@target": "node814198"
+}, 
+{
+"@id": "edge814199", 
+"@source": "node814197", 
+"@target": "node814199"
+}, 
+{
+"@id": "edge814200", 
+"@source": "node814199", 
+"@target": "node814200"
+}, 
+{
+"@id": "edge814201", 
+"@source": "node814200", 
+"@target": "node814201"
+}, 
+{
+"@id": "edge814202", 
+"@source": "node814200", 
+"@target": "node814202"
+}, 
+{
+"@id": "edge814203", 
+"@source": "node814199", 
+"@target": "node814203"
+}, 
+{
+"@id": "edge814204", 
+"@source": "node814203", 
+"@target": "node814204"
+}, 
+{
+"@id": "edge814205", 
+"@source": "node814204", 
+"@target": "node814205"
+}, 
+{
+"@id": "edge814206", 
+"@source": "node814204", 
+"@target": "node814206"
+}, 
+{
+"@id": "edge814207", 
+"@source": "node814206", 
+"@target": "node814207"
+}, 
+{
+"@id": "edge814208", 
+"@source": "node814206", 
+"@target": "node814208"
+}, 
+{
+"@id": "edge814209", 
+"@source": "node814203", 
+"@target": "node814209"
+}, 
+{
+"@id": "edge814210", 
+"@source": "node814209", 
+"@target": "node814210"
+}, 
+{
+"@id": "edge814211", 
+"@source": "node814209", 
+"@target": "node814211"
+}, 
+{
+"@id": "edge814212", 
+"@source": "node814194", 
+"@target": "node814212"
+}, 
+{
+"@id": "edge814213", 
+"@source": "node814212", 
+"@target": "node814213"
+}, 
+{
+"@id": "edge814214", 
+"@source": "node814212", 
+"@target": "node814214"
+}, 
+{
+"@id": "edge814215", 
+"@source": "node814214", 
+"@target": "node814215"
+}, 
+{
+"@id": "edge814216", 
+"@source": "node814214", 
+"@target": "node814216"
+}, 
+{
+"@id": "edge814217", 
+"@source": "node814193", 
+"@target": "node814217"
+}, 
+{
+"@id": "edge814218", 
+"@source": "node814217", 
+"@target": "node814218"
+}, 
+{
+"@id": "edge814219", 
+"@source": "node814217", 
+"@target": "node814219"
+}, 
+{
+"@id": "edge814220", 
+"@source": "node814219", 
+"@target": "node814220"
+}, 
+{
+"@id": "edge814221", 
+"@source": "node814219", 
+"@target": "node814221"
+}, 
+{
+"@id": "edge814222", 
+"@source": "node814192", 
+"@target": "node814222"
+}, 
+{
+"@id": "edge814223", 
+"@source": "node814222", 
+"@target": "node814223"
+}, 
+{
+"@id": "edge814224", 
+"@source": "node814222", 
+"@target": "node814224"
+}, 
+{
+"@id": "edge814225", 
+"@source": "node814224", 
+"@target": "node814225"
+}, 
+{
+"@id": "edge814226", 
+"@source": "node814224", 
+"@target": "node814226"
+}, 
+{
+"@id": "edge814227", 
+"@source": "node814191", 
+"@target": "node814227"
+}, 
+{
+"@id": "edge814228", 
+"@source": "node814227", 
+"@target": "node814228"
+}, 
+{
+"@id": "edge814229", 
+"@source": "node814227", 
+"@target": "node814229"
+}, 
+{
+"@id": "edge814230", 
+"@source": "node814190", 
+"@target": "node814230"
+}, 
+{
+"@id": "edge814231", 
+"@source": "node814230", 
+"@target": "node814231"
+}, 
+{
+"@id": "edge814232", 
+"@source": "node814230", 
+"@target": "node814232"
+}, 
+{
+"@id": "edge814233", 
+"@source": "node814189", 
+"@target": "node814233"
+}, 
+{
+"@id": "edge814234", 
+"@source": "node814233", 
+"@target": "node814234"
+}, 
+{
+"@id": "edge814235", 
+"@source": "node814234", 
+"@target": "node814235"
+}, 
+{
+"@id": "edge814236", 
+"@source": "node814235", 
+"@target": "node814236"
+}, 
+{
+"@id": "edge814237", 
+"@source": "node814236", 
+"@target": "node814237"
+}, 
+{
+"@id": "edge814238", 
+"@source": "node814237", 
+"@target": "node814238"
+}, 
+{
+"@id": "edge814239", 
+"@source": "node814237", 
+"@target": "node814239"
+}, 
+{
+"@id": "edge814240", 
+"@source": "node814239", 
+"@target": "node814240"
+}, 
+{
+"@id": "edge814241", 
+"@source": "node814239", 
+"@target": "node814241"
+}, 
+{
+"@id": "edge814242", 
+"@source": "node814236", 
+"@target": "node814242"
+}, 
+{
+"@id": "edge814243", 
+"@source": "node814242", 
+"@target": "node814243"
+}, 
+{
+"@id": "edge814244", 
+"@source": "node814242", 
+"@target": "node814244"
+}, 
+{
+"@id": "edge814245", 
+"@source": "node814244", 
+"@target": "node814245"
+}, 
+{
+"@id": "edge814246", 
+"@source": "node814244", 
+"@target": "node814246"
+}, 
+{
+"@id": "edge814247", 
+"@source": "node814235", 
+"@target": "node814247"
+}, 
+{
+"@id": "edge814248", 
+"@source": "node814247", 
+"@target": "node814248"
+}, 
+{
+"@id": "edge814249", 
+"@source": "node814247", 
+"@target": "node814249"
+}, 
+{
+"@id": "edge814250", 
+"@source": "node814249", 
+"@target": "node814250"
+}, 
+{
+"@id": "edge814251", 
+"@source": "node814249", 
+"@target": "node814251"
+}, 
+{
+"@id": "edge814252", 
+"@source": "node814234", 
+"@target": "node814252"
+}, 
+{
+"@id": "edge814253", 
+"@source": "node814252", 
+"@target": "node814253"
+}, 
+{
+"@id": "edge814254", 
+"@source": "node814253", 
+"@target": "node814254"
+}, 
+{
+"@id": "edge814255", 
+"@source": "node814254", 
+"@target": "node814255"
+}, 
+{
+"@id": "edge814256", 
+"@source": "node814255", 
+"@target": "node814256"
+}, 
+{
+"@id": "edge814257", 
+"@source": "node814256", 
+"@target": "node814257"
+}, 
+{
+"@id": "edge814258", 
+"@source": "node814257", 
+"@target": "node814258"
+}, 
+{
+"@id": "edge814259", 
+"@source": "node814258", 
+"@target": "node814259"
+}, 
+{
+"@id": "edge814260", 
+"@source": "node814258", 
+"@target": "node814260"
+}, 
+{
+"@id": "edge814261", 
+"@source": "node814260", 
+"@target": "node814261"
+}, 
+{
+"@id": "edge814262", 
+"@source": "node814261", 
+"@target": "node814262"
+}, 
+{
+"@id": "edge814263", 
+"@source": "node814262", 
+"@target": "node814263"
+}, 
+{
+"@id": "edge814264", 
+"@source": "node814262", 
+"@target": "node814264"
+}, 
+{
+"@id": "edge814265", 
+"@source": "node814264", 
+"@target": "node814265"
+}, 
+{
+"@id": "edge814266", 
+"@source": "node814264", 
+"@target": "node814266"
+}, 
+{
+"@id": "edge814267", 
+"@source": "node814261", 
+"@target": "node814267"
+}, 
+{
+"@id": "edge814268", 
+"@source": "node814267", 
+"@target": "node814268"
+}, 
+{
+"@id": "edge814269", 
+"@source": "node814267", 
+"@target": "node814269"
+}, 
+{
+"@id": "edge814270", 
+"@source": "node814269", 
+"@target": "node814270"
+}, 
+{
+"@id": "edge814271", 
+"@source": "node814269", 
+"@target": "node814271"
+}, 
+{
+"@id": "edge814272", 
+"@source": "node814260", 
+"@target": "node814272"
+}, 
+{
+"@id": "edge814273", 
+"@source": "node814272", 
+"@target": "node814273"
+}, 
+{
+"@id": "edge814274", 
+"@source": "node814273", 
+"@target": "node814274"
+}, 
+{
+"@id": "edge814275", 
+"@source": "node814273", 
+"@target": "node814275"
+}, 
+{
+"@id": "edge814276", 
+"@source": "node814275", 
+"@target": "node814276"
+}, 
+{
+"@id": "edge814277", 
+"@source": "node814276", 
+"@target": "node814277"
+}, 
+{
+"@id": "edge814278", 
+"@source": "node814276", 
+"@target": "node814278"
+}, 
+{
+"@id": "edge814279", 
+"@source": "node814278", 
+"@target": "node814279"
+}, 
+{
+"@id": "edge814280", 
+"@source": "node814278", 
+"@target": "node814280"
+}, 
+{
+"@id": "edge814281", 
+"@source": "node814275", 
+"@target": "node814281"
+}, 
+{
+"@id": "edge814282", 
+"@source": "node814281", 
+"@target": "node814282"
+}, 
+{
+"@id": "edge814283", 
+"@source": "node814281", 
+"@target": "node814283"
+}, 
+{
+"@id": "edge814284", 
+"@source": "node814272", 
+"@target": "node814284"
+}, 
+{
+"@id": "edge814285", 
+"@source": "node814284", 
+"@target": "node814285"
+}, 
+{
+"@id": "edge814286", 
+"@source": "node814284", 
+"@target": "node814286"
+}, 
+{
+"@id": "edge814287", 
+"@source": "node814286", 
+"@target": "node814287"
+}, 
+{
+"@id": "edge814288", 
+"@source": "node814286", 
+"@target": "node814288"
+}, 
+{
+"@id": "edge814289", 
+"@source": "node814257", 
+"@target": "node814289"
+}, 
+{
+"@id": "edge814290", 
+"@source": "node814289", 
+"@target": "node814290"
+}, 
+{
+"@id": "edge814291", 
+"@source": "node814289", 
+"@target": "node814291"
+}, 
+{
+"@id": "edge814292", 
+"@source": "node814291", 
+"@target": "node814292"
+}, 
+{
+"@id": "edge814293", 
+"@source": "node814291", 
+"@target": "node814293"
+}, 
+{
+"@id": "edge814294", 
+"@source": "node814256", 
+"@target": "node814294"
+}, 
+{
+"@id": "edge814295", 
+"@source": "node814294", 
+"@target": "node814295"
+}, 
+{
+"@id": "edge814296", 
+"@source": "node814294", 
+"@target": "node814296"
+}, 
+{
+"@id": "edge814297", 
+"@source": "node814296", 
+"@target": "node814297"
+}, 
+{
+"@id": "edge814298", 
+"@source": "node814296", 
+"@target": "node814298"
+}, 
+{
+"@id": "edge814299", 
+"@source": "node814255", 
+"@target": "node814299"
+}, 
+{
+"@id": "edge814300", 
+"@source": "node814299", 
+"@target": "node814300"
+}, 
+{
+"@id": "edge814301", 
+"@source": "node814299", 
+"@target": "node814301"
+}, 
+{
+"@id": "edge814302", 
+"@source": "node814301", 
+"@target": "node814302"
+}, 
+{
+"@id": "edge814303", 
+"@source": "node814301", 
+"@target": "node814303"
+}, 
+{
+"@id": "edge814304", 
+"@source": "node814303", 
+"@target": "node814304"
+}, 
+{
+"@id": "edge814305", 
+"@source": "node814303", 
+"@target": "node814305"
+}, 
+{
+"@id": "edge814306", 
+"@source": "node814254", 
+"@target": "node814306"
+}, 
+{
+"@id": "edge814307", 
+"@source": "node814306", 
+"@target": "node814307"
+}, 
+{
+"@id": "edge814308", 
+"@source": "node814306", 
+"@target": "node814308"
+}, 
+{
+"@id": "edge814309", 
+"@source": "node814253", 
+"@target": "node814309"
+}, 
+{
+"@id": "edge814310", 
+"@source": "node814309", 
+"@target": "node814310"
+}, 
+{
+"@id": "edge814311", 
+"@source": "node814309", 
+"@target": "node814311"
+}, 
+{
+"@id": "edge814312", 
+"@source": "node814252", 
+"@target": "node814312"
+}, 
+{
+"@id": "edge814313", 
+"@source": "node814312", 
+"@target": "node814313"
+}, 
+{
+"@id": "edge814314", 
+"@source": "node814312", 
+"@target": "node814314"
+}, 
+{
+"@id": "edge814315", 
+"@source": "node814233", 
+"@target": "node814315"
+}, 
+{
+"@id": "edge814316", 
+"@source": "node814315", 
+"@target": "node814316"
+}, 
+{
+"@id": "edge814317", 
+"@source": "node814316", 
+"@target": "node814317"
+}, 
+{
+"@id": "edge814318", 
+"@source": "node814316", 
+"@target": "node814318"
+}, 
+{
+"@id": "edge814319", 
+"@source": "node814315", 
+"@target": "node814319"
+}, 
+{
+"@id": "edge814320", 
+"@source": "node814319", 
+"@target": "node814320"
+}, 
+{
+"@id": "edge814321", 
+"@source": "node814319", 
+"@target": "node814321"
+}, 
+{
+"@id": "edge814322", 
+"@source": "node814321", 
+"@target": "node814322"
+}, 
+{
+"@id": "edge814323", 
+"@source": "node814322", 
+"@target": "node814323"
+}, 
+{
+"@id": "edge814324", 
+"@source": "node814323", 
+"@target": "node814324"
+}, 
+{
+"@id": "edge814325", 
+"@source": "node814323", 
+"@target": "node814325"
+}, 
+{
+"@id": "edge814326", 
+"@source": "node814322", 
+"@target": "node814326"
+}, 
+{
+"@id": "edge814327", 
+"@source": "node814326", 
+"@target": "node814327"
+}, 
+{
+"@id": "edge814328", 
+"@source": "node814326", 
+"@target": "node814328"
+}, 
+{
+"@id": "edge814329", 
+"@source": "node814328", 
+"@target": "node814329"
+}, 
+{
+"@id": "edge814330", 
+"@source": "node814328", 
+"@target": "node814330"
+}, 
+{
+"@id": "edge814331", 
+"@source": "node814321", 
+"@target": "node814331"
+}, 
+{
+"@id": "edge814332", 
+"@source": "node814331", 
+"@target": "node814332"
+}, 
+{
+"@id": "edge814333", 
+"@source": "node814331", 
+"@target": "node814333"
+}, 
+{
+"@id": "edge814334", 
+"@source": "node814188", 
+"@target": "node814334"
+}, 
+{
+"@id": "edge814335", 
+"@source": "node814334", 
+"@target": "node814335"
+}, 
+{
+"@id": "edge814336", 
+"@source": "node814334", 
+"@target": "node814336"
+}, 
+{
+"@id": "edge814337", 
+"@source": "node814187", 
+"@target": "node814337"
+}, 
+{
+"@id": "edge814338", 
+"@source": "node814337", 
+"@target": "node814338"
+}, 
+{
+"@id": "edge814339", 
+"@source": "node814337", 
+"@target": "node814339"
+}, 
+{
+"@id": "edge814340", 
+"@source": "node814129", 
+"@target": "node814340"
+}, 
+{
+"@id": "edge814341", 
+"@source": "node814340", 
+"@target": "node814341"
+}, 
+{
+"@id": "edge814342", 
+"@source": "node814340", 
+"@target": "node814342"
+}
+], 
+"meta": [
+{
+"$": "ot:substitutionCount", 
+"@property": "ot:branchLengthMode", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "node814129", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node814121", 
+"@root": "true"
+}, 
+{
+"@id": "node814122"
+}, 
+{
+"@id": "node814123"
+}, 
+{
+"@id": "node814124", 
+"@otu": "otu317044"
+}, 
+{
+"@id": "node814125", 
+"@otu": "otu317093"
+}, 
+{
+"@id": "node814126"
+}, 
+{
+"@id": "node814127", 
+"@otu": "otu317077"
+}, 
+{
+"@id": "node814128", 
+"@otu": "otu317025"
+}, 
+{
+"@id": "node814129"
+}, 
+{
+"@id": "node814130"
+}, 
+{
+"@id": "node814131"
+}, 
+{
+"@id": "node814132"
+}, 
+{
+"@id": "node814133", 
+"@otu": "otu317037"
+}, 
+{
+"@id": "node814134"
+}, 
+{
+"@id": "node814135", 
+"@otu": "otu317067"
+}, 
+{
+"@id": "node814136"
+}, 
+{
+"@id": "node814137", 
+"@otu": "otu317086"
+}, 
+{
+"@id": "node814138"
+}, 
+{
+"@id": "node814139", 
+"@otu": "otu317016"
+}, 
+{
+"@id": "node814140"
+}, 
+{
+"@id": "node814141", 
+"@otu": "otu317036"
+}, 
+{
+"@id": "node814142", 
+"@otu": "otu317015"
+}, 
+{
+"@id": "node814143"
+}, 
+{
+"@id": "node814144"
+}, 
+{
+"@id": "node814145", 
+"@otu": "otu317028"
+}, 
+{
+"@id": "node814146"
+}, 
+{
+"@id": "node814147"
+}, 
+{
+"@id": "node814148"
+}, 
+{
+"@id": "node814149", 
+"@otu": "otu317085"
+}, 
+{
+"@id": "node814150", 
+"@otu": "otu317006"
+}, 
+{
+"@id": "node814151"
+}, 
+{
+"@id": "node814152", 
+"@otu": "otu317043"
+}, 
+{
+"@id": "node814153"
+}, 
+{
+"@id": "node814154", 
+"@otu": "otu317040"
+}, 
+{
+"@id": "node814155", 
+"@otu": "otu317034"
+}, 
+{
+"@id": "node814156"
+}, 
+{
+"@id": "node814157", 
+"@otu": "otu317010"
+}, 
+{
+"@id": "node814158", 
+"@otu": "otu317076"
+}, 
+{
+"@id": "node814159"
+}, 
+{
+"@id": "node814160", 
+"@otu": "otu317088"
+}, 
+{
+"@id": "node814161"
+}, 
+{
+"@id": "node814162", 
+"@otu": "otu317082"
+}, 
+{
+"@id": "node814163", 
+"@otu": "otu317084"
+}, 
+{
+"@id": "node814164"
+}, 
+{
+"@id": "node814165"
+}, 
+{
+"@id": "node814166", 
+"@otu": "otu317038"
+}, 
+{
+"@id": "node814167", 
+"@otu": "otu317027"
+}, 
+{
+"@id": "node814168"
+}, 
+{
+"@id": "node814169", 
+"@otu": "otu317012"
+}, 
+{
+"@id": "node814170"
+}, 
+{
+"@id": "node814171"
+}, 
+{
+"@id": "node814172", 
+"@otu": "otu317108"
+}, 
+{
+"@id": "node814173", 
+"@otu": "otu317109"
+}, 
+{
+"@id": "node814174"
+}, 
+{
+"@id": "node814175", 
+"@otu": "otu317095"
+}, 
+{
+"@id": "node814176", 
+"@otu": "otu317042"
+}, 
+{
+"@id": "node814177"
+}, 
+{
+"@id": "node814178"
+}, 
+{
+"@id": "node814179"
+}, 
+{
+"@id": "node814180", 
+"@otu": "otu317041"
+}, 
+{
+"@id": "node814181", 
+"@otu": "otu317069"
+}, 
+{
+"@id": "node814182"
+}, 
+{
+"@id": "node814183", 
+"@otu": "otu317054"
+}, 
+{
+"@id": "node814184"
+}, 
+{
+"@id": "node814185", 
+"@otu": "otu317089"
+}, 
+{
+"@id": "node814186", 
+"@otu": "otu317020"
+}, 
+{
+"@id": "node814187"
+}, 
+{
+"@id": "node814188"
+}, 
+{
+"@id": "node814189"
+}, 
+{
+"@id": "node814190"
+}, 
+{
+"@id": "node814191"
+}, 
+{
+"@id": "node814192"
+}, 
+{
+"@id": "node814193"
+}, 
+{
+"@id": "node814194"
+}, 
+{
+"@id": "node814195"
+}, 
+{
+"@id": "node814196", 
+"@otu": "otu317081"
+}, 
+{
+"@id": "node814197"
+}, 
+{
+"@id": "node814198", 
+"@otu": "otu317039"
+}, 
+{
+"@id": "node814199"
+}, 
+{
+"@id": "node814200"
+}, 
+{
+"@id": "node814201", 
+"@otu": "otu317005"
+}, 
+{
+"@id": "node814202", 
+"@otu": "otu317110"
+}, 
+{
+"@id": "node814203"
+}, 
+{
+"@id": "node814204"
+}, 
+{
+"@id": "node814205", 
+"@otu": "otu317056"
+}, 
+{
+"@id": "node814206"
+}, 
+{
+"@id": "node814207", 
+"@otu": "otu317102"
+}, 
+{
+"@id": "node814208", 
+"@otu": "otu317052"
+}, 
+{
+"@id": "node814209"
+}, 
+{
+"@id": "node814210", 
+"@otu": "otu317112"
+}, 
+{
+"@id": "node814211", 
+"@otu": "otu317066"
+}, 
+{
+"@id": "node814212"
+}, 
+{
+"@id": "node814213", 
+"@otu": "otu317105"
+}, 
+{
+"@id": "node814214"
+}, 
+{
+"@id": "node814215", 
+"@otu": "otu317053"
+}, 
+{
+"@id": "node814216", 
+"@otu": "otu317021"
+}, 
+{
+"@id": "node814217"
+}, 
+{
+"@id": "node814218", 
+"@otu": "otu317070"
+}, 
+{
+"@id": "node814219"
+}, 
+{
+"@id": "node814220", 
+"@otu": "otu317107"
+}, 
+{
+"@id": "node814221", 
+"@otu": "otu317104"
+}, 
+{
+"@id": "node814222"
+}, 
+{
+"@id": "node814223", 
+"@otu": "otu317064"
+}, 
+{
+"@id": "node814224"
+}, 
+{
+"@id": "node814225", 
+"@otu": "otu317096"
+}, 
+{
+"@id": "node814226", 
+"@otu": "otu317075"
+}, 
+{
+"@id": "node814227"
+}, 
+{
+"@id": "node814228", 
+"@otu": "otu317002"
+}, 
+{
+"@id": "node814229", 
+"@otu": "otu317017"
+}, 
+{
+"@id": "node814230"
+}, 
+{
+"@id": "node814231", 
+"@otu": "otu317008"
+}, 
+{
+"@id": "node814232", 
+"@otu": "otu317059"
+}, 
+{
+"@id": "node814233"
+}, 
+{
+"@id": "node814234"
+}, 
+{
+"@id": "node814235"
+}, 
+{
+"@id": "node814236"
+}, 
+{
+"@id": "node814237"
+}, 
+{
+"@id": "node814238", 
+"@otu": "otu317073"
+}, 
+{
+"@id": "node814239"
+}, 
+{
+"@id": "node814240", 
+"@otu": "otu317019"
+}, 
+{
+"@id": "node814241", 
+"@otu": "otu317018"
+}, 
+{
+"@id": "node814242"
+}, 
+{
+"@id": "node814243", 
+"@otu": "otu317060"
+}, 
+{
+"@id": "node814244"
+}, 
+{
+"@id": "node814245", 
+"@otu": "otu317024"
+}, 
+{
+"@id": "node814246", 
+"@otu": "otu317099"
+}, 
+{
+"@id": "node814247"
+}, 
+{
+"@id": "node814248", 
+"@otu": "otu317007"
+}, 
+{
+"@id": "node814249"
+}, 
+{
+"@id": "node814250", 
+"@otu": "otu317049"
+}, 
+{
+"@id": "node814251", 
+"@otu": "otu317103"
+}, 
+{
+"@id": "node814252"
+}, 
+{
+"@id": "node814253"
+}, 
+{
+"@id": "node814254"
+}, 
+{
+"@id": "node814255"
+}, 
+{
+"@id": "node814256"
+}, 
+{
+"@id": "node814257"
+}, 
+{
+"@id": "node814258"
+}, 
+{
+"@id": "node814259", 
+"@otu": "otu317032"
+}, 
+{
+"@id": "node814260"
+}, 
+{
+"@id": "node814261"
+}, 
+{
+"@id": "node814262"
+}, 
+{
+"@id": "node814263", 
+"@otu": "otu317048"
+}, 
+{
+"@id": "node814264"
+}, 
+{
+"@id": "node814265", 
+"@otu": "otu317101"
+}, 
+{
+"@id": "node814266", 
+"@otu": "otu317046"
+}, 
+{
+"@id": "node814267"
+}, 
+{
+"@id": "node814268", 
+"@otu": "otu317014"
+}, 
+{
+"@id": "node814269"
+}, 
+{
+"@id": "node814270", 
+"@otu": "otu317092"
+}, 
+{
+"@id": "node814271", 
+"@otu": "otu317063"
+}, 
+{
+"@id": "node814272"
+}, 
+{
+"@id": "node814273"
+}, 
+{
+"@id": "node814274", 
+"@otu": "otu317051"
+}, 
+{
+"@id": "node814275"
+}, 
+{
+"@id": "node814276"
+}, 
+{
+"@id": "node814277", 
+"@otu": "otu317055"
+}, 
+{
+"@id": "node814278"
+}, 
+{
+"@id": "node814279", 
+"@otu": "otu317111"
+}, 
+{
+"@id": "node814280", 
+"@otu": "otu317100"
+}, 
+{
+"@id": "node814281"
+}, 
+{
+"@id": "node814282", 
+"@otu": "otu317080"
+}, 
+{
+"@id": "node814283", 
+"@otu": "otu317074"
+}, 
+{
+"@id": "node814284"
+}, 
+{
+"@id": "node814285", 
+"@otu": "otu317068"
+}, 
+{
+"@id": "node814286"
+}, 
+{
+"@id": "node814287", 
+"@otu": "otu317106"
+}, 
+{
+"@id": "node814288", 
+"@otu": "otu317022"
+}, 
+{
+"@id": "node814289"
+}, 
+{
+"@id": "node814290", 
+"@otu": "otu317091"
+}, 
+{
+"@id": "node814291"
+}, 
+{
+"@id": "node814292", 
+"@otu": "otu317011"
+}, 
+{
+"@id": "node814293", 
+"@otu": "otu317003"
+}, 
+{
+"@id": "node814294"
+}, 
+{
+"@id": "node814295", 
+"@otu": "otu317013"
+}, 
+{
+"@id": "node814296"
+}, 
+{
+"@id": "node814297", 
+"@otu": "otu317057"
+}, 
+{
+"@id": "node814298", 
+"@otu": "otu317090"
+}, 
+{
+"@id": "node814299"
+}, 
+{
+"@id": "node814300", 
+"@otu": "otu317026"
+}, 
+{
+"@id": "node814301"
+}, 
+{
+"@id": "node814302", 
+"@otu": "otu317009"
+}, 
+{
+"@id": "node814303"
+}, 
+{
+"@id": "node814304", 
+"@otu": "otu317029"
+}, 
+{
+"@id": "node814305", 
+"@otu": "otu317045"
+}, 
+{
+"@id": "node814306"
+}, 
+{
+"@id": "node814307", 
+"@otu": "otu317033"
+}, 
+{
+"@id": "node814308", 
+"@otu": "otu317065"
+}, 
+{
+"@id": "node814309"
+}, 
+{
+"@id": "node814310", 
+"@otu": "otu317061"
+}, 
+{
+"@id": "node814311", 
+"@otu": "otu317023"
+}, 
+{
+"@id": "node814312"
+}, 
+{
+"@id": "node814313", 
+"@otu": "otu317078"
+}, 
+{
+"@id": "node814314", 
+"@otu": "otu317083"
+}, 
+{
+"@id": "node814315"
+}, 
+{
+"@id": "node814316"
+}, 
+{
+"@id": "node814317", 
+"@otu": "otu317094"
+}, 
+{
+"@id": "node814318", 
+"@otu": "otu317071"
+}, 
+{
+"@id": "node814319"
+}, 
+{
+"@id": "node814320", 
+"@otu": "otu317097"
+}, 
+{
+"@id": "node814321"
+}, 
+{
+"@id": "node814322"
+}, 
+{
+"@id": "node814323"
+}, 
+{
+"@id": "node814324", 
+"@otu": "otu317072"
+}, 
+{
+"@id": "node814325", 
+"@otu": "otu317001"
+}, 
+{
+"@id": "node814326"
+}, 
+{
+"@id": "node814327", 
+"@otu": "otu317047"
+}, 
+{
+"@id": "node814328"
+}, 
+{
+"@id": "node814329", 
+"@otu": "otu317031"
+}, 
+{
+"@id": "node814330", 
+"@otu": "otu317058"
+}, 
+{
+"@id": "node814331"
+}, 
+{
+"@id": "node814332", 
+"@otu": "otu317035"
+}, 
+{
+"@id": "node814333", 
+"@otu": "otu317079"
+}, 
+{
+"@id": "node814334"
+}, 
+{
+"@id": "node814335", 
+"@otu": "otu317004"
+}, 
+{
+"@id": "node814336", 
+"@otu": "otu317087"
+}, 
+{
+"@id": "node814337"
+}, 
+{
+"@id": "node814338", 
+"@otu": "otu317098"
+}, 
+{
+"@id": "node814339", 
+"@otu": "otu317050"
+}, 
+{
+"@id": "node814340"
+}, 
+{
+"@id": "node814341", 
+"@otu": "otu317062"
+}, 
+{
+"@id": "node814342", 
+"@otu": "otu317030"
+}
+]
+}
+]
+}
+}
+}

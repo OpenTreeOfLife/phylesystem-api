@@ -1,0 +1,901 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Duc, Pham Minh, Kishio Hatai, Osamu Kurata, Kozue Tensha, Uchida Yoshitaka, Takashi Yaguchi, and Shun-Ichi Udagawa. \"Fungal infection of mantis shrimp (Oratosquilla oratoria) caused by two anamorphic fungi found in Japan.\" Mycopathologia 167, no. 5 (2009): 229-247.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s11046-008-9174-4", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S2226", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2239", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2009, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 646977, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2239", 
+"otu": [
+{
+"@about": "#otu324217", 
+"@id": "otu324217", 
+"@label": "Plectosporium", 
+"meta": [
+{
+"$": 191669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. NJM662", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324218", 
+"@id": "otu324218", 
+"@label": "Plectosporium tabacinum", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium tabacium NBRC9985", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324219", 
+"@id": "otu324219", 
+"@label": "Plectosporium tabacinum", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium tabacium 00017", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324220", 
+"@id": "otu324220", 
+"@label": "Plectosporium tabacinum", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium tabacium RH126", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324221", 
+"@id": "otu324221", 
+"@label": "Plectosporium alismatis", 
+"meta": [
+{
+"$": 191670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium alismatis CBS113363", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324222", 
+"@id": "otu324222", 
+"@label": "Verticillium nigrescens", 
+"meta": [
+{
+"$": 420571, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Verticillium nigrescens UHMH6687", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324223", 
+"@id": "otu324223", 
+"@label": "Plectosporium tabacinum", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium tabacium NRRL20430", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324224", 
+"@id": "otu324224", 
+"@label": "Plectosporium", 
+"meta": [
+{
+"$": 191669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. NJM573", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324225", 
+"@id": "otu324225", 
+"@label": "Plectosporium alismatis", 
+"meta": [
+{
+"$": 191670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium alismatis RH62", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324226", 
+"@id": "otu324226", 
+"@label": "Verticillium alboatrum", 
+"meta": [
+{
+"$": 615472, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Verticillium alboatrum ATCC44943", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324227", 
+"@id": "otu324227", 
+"@label": "Plectosporium", 
+"meta": [
+{
+"$": 191669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. 142C", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324228", 
+"@id": "otu324228", 
+"@label": "Plectosporium tabacinum", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium tabacium 148A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324229", 
+"@id": "otu324229", 
+"@label": "Plectosporium tabacinum", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium tabacium NBRC30005", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324230", 
+"@id": "otu324230", 
+"@label": "Plectosphaerella cucumerina", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. DAR76524", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324231", 
+"@id": "otu324231", 
+"@label": "Plectosporium", 
+"meta": [
+{
+"$": 191669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. DAR76527", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324232", 
+"@id": "otu324232", 
+"@label": "Verticillium nigrescens", 
+"meta": [
+{
+"$": 420571, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Verticillium nigrescens IMI44575", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324233", 
+"@id": "otu324233", 
+"@label": "Plectosporium", 
+"meta": [
+{
+"$": 191669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. NJM678", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324234", 
+"@id": "otu324234", 
+"@label": "Plectosphaerella cucumerina", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. DAR76526", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324235", 
+"@id": "otu324235", 
+"@label": "Plectosporium alismatis", 
+"meta": [
+{
+"$": 191670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium alismatis Gams1B", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324236", 
+"@id": "otu324236", 
+"@label": "Plectosporium alismatis", 
+"meta": [
+{
+"$": 191670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium alismatis RH01", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324237", 
+"@id": "otu324237", 
+"@label": "Plectosporium delsorboi", 
+"meta": [
+{
+"$": 4048191, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium delsorboi CBS116708", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324238", 
+"@id": "otu324238", 
+"@label": "Plectosporium alismatis", 
+"meta": [
+{
+"$": 191670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium alismatis Gams2A", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324239", 
+"@id": "otu324239", 
+"@label": "Plectosporium tabacinum", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium tabacium 380408", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324240", 
+"@id": "otu324240", 
+"@label": "Plectosporium", 
+"meta": [
+{
+"$": 191669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. NJM665", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324241", 
+"@id": "otu324241", 
+"@label": "Plectosporium", 
+"meta": [
+{
+"$": 191669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. NJM667", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324242", 
+"@id": "otu324242", 
+"@label": "Plectosporium", 
+"meta": [
+{
+"$": 191669, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium sp. RM112", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu324243", 
+"@id": "otu324243", 
+"@label": "Plectosporium tabacinum", 
+"meta": [
+{
+"$": 193216, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Plectosporium tabacium 40658", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2239", 
+"@otus": "otus2239", 
+"tree": [
+{
+"@about": "#tree4730", 
+"@id": "tree4730", 
+"edge": [
+{
+"@id": "edge834730", 
+"@source": "node834729", 
+"@target": "node834730"
+}, 
+{
+"@id": "edge834731", 
+"@source": "node834729", 
+"@target": "node834731"
+}, 
+{
+"@id": "edge834732", 
+"@source": "node834731", 
+"@target": "node834732"
+}, 
+{
+"@id": "edge834733", 
+"@source": "node834732", 
+"@target": "node834733"
+}, 
+{
+"@id": "edge834734", 
+"@source": "node834733", 
+"@target": "node834734"
+}, 
+{
+"@id": "edge834735", 
+"@source": "node834733", 
+"@target": "node834735"
+}, 
+{
+"@id": "edge834736", 
+"@source": "node834735", 
+"@target": "node834736"
+}, 
+{
+"@id": "edge834737", 
+"@source": "node834735", 
+"@target": "node834737"
+}, 
+{
+"@id": "edge834738", 
+"@source": "node834737", 
+"@target": "node834738"
+}, 
+{
+"@id": "edge834739", 
+"@source": "node834737", 
+"@target": "node834739"
+}, 
+{
+"@id": "edge834740", 
+"@source": "node834737", 
+"@target": "node834740"
+}, 
+{
+"@id": "edge834741", 
+"@source": "node834737", 
+"@target": "node834741"
+}, 
+{
+"@id": "edge834742", 
+"@source": "node834732", 
+"@target": "node834742"
+}, 
+{
+"@id": "edge834743", 
+"@source": "node834742", 
+"@target": "node834743"
+}, 
+{
+"@id": "edge834744", 
+"@source": "node834742", 
+"@target": "node834744"
+}, 
+{
+"@id": "edge834745", 
+"@source": "node834742", 
+"@target": "node834745"
+}, 
+{
+"@id": "edge834746", 
+"@source": "node834742", 
+"@target": "node834746"
+}, 
+{
+"@id": "edge834747", 
+"@source": "node834742", 
+"@target": "node834747"
+}, 
+{
+"@id": "edge834748", 
+"@source": "node834742", 
+"@target": "node834748"
+}, 
+{
+"@id": "edge834749", 
+"@source": "node834742", 
+"@target": "node834749"
+}, 
+{
+"@id": "edge834750", 
+"@source": "node834742", 
+"@target": "node834750"
+}, 
+{
+"@id": "edge834751", 
+"@source": "node834750", 
+"@target": "node834751"
+}, 
+{
+"@id": "edge834752", 
+"@source": "node834751", 
+"@target": "node834752"
+}, 
+{
+"@id": "edge834753", 
+"@source": "node834751", 
+"@target": "node834753"
+}, 
+{
+"@id": "edge834754", 
+"@source": "node834753", 
+"@target": "node834754"
+}, 
+{
+"@id": "edge834755", 
+"@source": "node834753", 
+"@target": "node834755"
+}, 
+{
+"@id": "edge834756", 
+"@source": "node834750", 
+"@target": "node834756"
+}, 
+{
+"@id": "edge834757", 
+"@source": "node834756", 
+"@target": "node834757"
+}, 
+{
+"@id": "edge834758", 
+"@source": "node834756", 
+"@target": "node834758"
+}, 
+{
+"@id": "edge834759", 
+"@source": "node834756", 
+"@target": "node834759"
+}, 
+{
+"@id": "edge834760", 
+"@source": "node834756", 
+"@target": "node834760"
+}, 
+{
+"@id": "edge834761", 
+"@source": "node834756", 
+"@target": "node834761"
+}, 
+{
+"@id": "edge834762", 
+"@source": "node834742", 
+"@target": "node834762"
+}, 
+{
+"@id": "edge834763", 
+"@source": "node834762", 
+"@target": "node834763"
+}, 
+{
+"@id": "edge834764", 
+"@source": "node834762", 
+"@target": "node834764"
+}, 
+{
+"@id": "edge834765", 
+"@source": "node834762", 
+"@target": "node834765"
+}, 
+{
+"@id": "edge834766", 
+"@source": "node834731", 
+"@target": "node834766"
+}, 
+{
+"@id": "edge834767", 
+"@source": "node834766", 
+"@target": "node834767"
+}, 
+{
+"@id": "edge834768", 
+"@source": "node834766", 
+"@target": "node834768"
+}
+], 
+"meta": [
+{
+"$": "node834731", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "NJ", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node834729", 
+"@root": "true"
+}, 
+{
+"@id": "node834730", 
+"@otu": "otu324226"
+}, 
+{
+"@id": "node834731"
+}, 
+{
+"@id": "node834732"
+}, 
+{
+"@id": "node834733"
+}, 
+{
+"@id": "node834734", 
+"@otu": "otu324237"
+}, 
+{
+"@id": "node834735"
+}, 
+{
+"@id": "node834736", 
+"@otu": "otu324225"
+}, 
+{
+"@id": "node834737"
+}, 
+{
+"@id": "node834738", 
+"@otu": "otu324238"
+}, 
+{
+"@id": "node834739", 
+"@otu": "otu324236"
+}, 
+{
+"@id": "node834740", 
+"@otu": "otu324221"
+}, 
+{
+"@id": "node834741", 
+"@otu": "otu324235"
+}, 
+{
+"@id": "node834742"
+}, 
+{
+"@id": "node834743", 
+"@otu": "otu324240"
+}, 
+{
+"@id": "node834744", 
+"@otu": "otu324241"
+}, 
+{
+"@id": "node834745", 
+"@otu": "otu324224"
+}, 
+{
+"@id": "node834746", 
+"@otu": "otu324217"
+}, 
+{
+"@id": "node834747", 
+"@otu": "otu324233"
+}, 
+{
+"@id": "node834748", 
+"@otu": "otu324242"
+}, 
+{
+"@id": "node834749", 
+"@otu": "otu324227"
+}, 
+{
+"@id": "node834750"
+}, 
+{
+"@id": "node834751"
+}, 
+{
+"@id": "node834752", 
+"@otu": "otu324239"
+}, 
+{
+"@id": "node834753"
+}, 
+{
+"@id": "node834754", 
+"@otu": "otu324219"
+}, 
+{
+"@id": "node834755", 
+"@otu": "otu324220"
+}, 
+{
+"@id": "node834756"
+}, 
+{
+"@id": "node834757", 
+"@otu": "otu324223"
+}, 
+{
+"@id": "node834758", 
+"@otu": "otu324218"
+}, 
+{
+"@id": "node834759", 
+"@otu": "otu324243"
+}, 
+{
+"@id": "node834760", 
+"@otu": "otu324229"
+}, 
+{
+"@id": "node834761", 
+"@otu": "otu324228"
+}, 
+{
+"@id": "node834762"
+}, 
+{
+"@id": "node834763", 
+"@otu": "otu324231"
+}, 
+{
+"@id": "node834764", 
+"@otu": "otu324234"
+}, 
+{
+"@id": "node834765", 
+"@otu": "otu324230"
+}, 
+{
+"@id": "node834766"
+}, 
+{
+"@id": "node834767", 
+"@otu": "otu324232"
+}, 
+{
+"@id": "node834768", 
+"@otu": "otu324222"
+}
+]
+}
+]
+}
+}
+}

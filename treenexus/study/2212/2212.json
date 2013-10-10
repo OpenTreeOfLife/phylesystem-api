@@ -1,0 +1,653 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Machado A.R., Pinho D.B., Silva M., & Pereira O.L. 2012. First Report of Leaf Spot Disease Caused by Cercosporella pfaffiae on Brazilian Ginseng (Pfaffia glomerata) in Brazil. Plant Disease, 96(11): 1702.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1094/PDIS-06-12-0614-PDN", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S12680", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "2212", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2012, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2586606, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus2212", 
+"otu": [
+{
+"@about": "#otu320861", 
+"@id": "otu320861", 
+"@label": "Septoria leucanthemi", 
+"meta": [
+{
+"$": 401342, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Septoria leucanthemi CBS109090", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320862", 
+"@id": "otu320862", 
+"@label": "Mycosphaerella coacervata", 
+"meta": [
+{
+"$": 933349, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella coacervata CBS113", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320863", 
+"@id": "otu320863", 
+"@label": "Ramularia aplospora", 
+"meta": [
+{
+"$": 185006, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ramularia aplospora CBS545 82", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320864", 
+"@id": "otu320864", 
+"@label": "Cercosporella virgaureae", 
+"meta": [
+{
+"$": 418454, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cercosporella virgaureae CBS1133", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320865", 
+"@id": "otu320865", 
+"@label": "Septoria convolvuli", 
+"meta": [
+{
+"$": 529827, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Septoria convolvuli CBS102325", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320866", 
+"@id": "otu320866", 
+"@label": "Cercosporella acroptili", 
+"meta": [
+{
+"$": 851652, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cercosporella acroptili CBS12025", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320867", 
+"@id": "otu320867", 
+"@label": "Teratosphaeria macowanii", 
+"meta": [
+{
+"$": 693038, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria macowanii CPC1488", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320868", 
+"@id": "otu320868", 
+"@label": "Cercosporella pfaffiae", 
+"meta": [
+{
+"$": 965196, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cercosporella pfaffiae VIC31849 169L", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320869", 
+"@id": "otu320869", 
+"@label": "Septoria apiicola", 
+"meta": [
+{
+"$": 803193, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Septoria apiicola CBS400 54", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320870", 
+"@id": "otu320870", 
+"@label": "Mycosphaerella punctiformis", 
+"meta": [
+{
+"$": 1051941, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella punctiformis CBS1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320871", 
+"@id": "otu320871", 
+"@label": "Septoria cucubali", 
+"meta": [
+{
+"$": 529826, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Septoria cucubali CBS102368", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320872", 
+"@id": "otu320872", 
+"@label": "Mycosphaerella rubi", 
+"meta": [
+{
+"$": 279560, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella rubi CBS238 37", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320873", 
+"@id": "otu320873", 
+"@label": "Ramularia pratensis var. pratensis", 
+"meta": [
+{
+"$": 265792, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Ramularia pratensis pratensis CP", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320874", 
+"@id": "otu320874", 
+"@label": "Septoria senecionis", 
+"meta": [
+{
+"$": 401333, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Septoria senecionis CBS102366", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320875", 
+"@id": "otu320875", 
+"@label": "Teratosphaeria fibrillosa", 
+"meta": [
+{
+"$": 159025, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Teratosphaeria fibrillosa CBS121", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320876", 
+"@id": "otu320876", 
+"@label": "Cercosporella centaureicola", 
+"meta": [
+{
+"$": 708004, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Cercosporella centaureicola CBS1", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu320877", 
+"@id": "otu320877", 
+"@label": "Mycosphaerella linorum", 
+"meta": [
+{
+"$": 933353, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mycosphaerella linorum CBS261 39", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2212", 
+"@otus": "otus2212", 
+"tree": [
+{
+"@about": "#tree4680", 
+"@id": "tree4680", 
+"edge": [
+{
+"@id": "edge825908", 
+"@length": 0.0522555, 
+"@source": "node825907", 
+"@target": "node825908"
+}, 
+{
+"@id": "edge825909", 
+"@length": 0.018773, 
+"@source": "node825908", 
+"@target": "node825909"
+}, 
+{
+"@id": "edge825910", 
+"@length": 0.009489, 
+"@source": "node825909", 
+"@target": "node825910"
+}, 
+{
+"@id": "edge825911", 
+"@length": 0.00947, 
+"@source": "node825910", 
+"@target": "node825911"
+}, 
+{
+"@id": "edge825912", 
+"@length": 0.004455, 
+"@source": "node825910", 
+"@target": "node825912"
+}, 
+{
+"@id": "edge825913", 
+"@length": 0.004282, 
+"@source": "node825912", 
+"@target": "node825913"
+}, 
+{
+"@id": "edge825914", 
+"@length": 0.002894, 
+"@source": "node825912", 
+"@target": "node825914"
+}, 
+{
+"@id": "edge825915", 
+"@length": 0.007765, 
+"@source": "node825910", 
+"@target": "node825915"
+}, 
+{
+"@id": "edge825916", 
+"@length": 0.008221, 
+"@source": "node825909", 
+"@target": "node825916"
+}, 
+{
+"@id": "edge825917", 
+"@length": 0.031554, 
+"@source": "node825908", 
+"@target": "node825917"
+}, 
+{
+"@id": "edge825918", 
+"@length": 0.013756, 
+"@source": "node825917", 
+"@target": "node825918"
+}, 
+{
+"@id": "edge825919", 
+"@length": 0.002344, 
+"@source": "node825918", 
+"@target": "node825919"
+}, 
+{
+"@id": "edge825920", 
+"@length": 0.009776, 
+"@source": "node825918", 
+"@target": "node825920"
+}, 
+{
+"@id": "edge825921", 
+"@length": 0.001385, 
+"@source": "node825920", 
+"@target": "node825921"
+}, 
+{
+"@id": "edge825922", 
+"@length": 0.002791, 
+"@source": "node825920", 
+"@target": "node825922"
+}, 
+{
+"@id": "edge825923", 
+"@length": 0.001405, 
+"@source": "node825920", 
+"@target": "node825923"
+}, 
+{
+"@id": "edge825924", 
+"@length": 0.007024, 
+"@source": "node825918", 
+"@target": "node825924"
+}, 
+{
+"@id": "edge825925", 
+"@length": 0.002919, 
+"@source": "node825918", 
+"@target": "node825925"
+}, 
+{
+"@id": "edge825926", 
+"@length": 0.002465, 
+"@source": "node825918", 
+"@target": "node825926"
+}, 
+{
+"@id": "edge825927", 
+"@length": 0.001537, 
+"@source": "node825918", 
+"@target": "node825927"
+}, 
+{
+"@id": "edge825928", 
+"@length": 0.014849, 
+"@source": "node825917", 
+"@target": "node825928"
+}, 
+{
+"@id": "edge825929", 
+"@length": 0.012601, 
+"@source": "node825928", 
+"@target": "node825929"
+}, 
+{
+"@id": "edge825930", 
+"@length": 0.002475, 
+"@source": "node825928", 
+"@target": "node825930"
+}, 
+{
+"@id": "edge825931", 
+"@length": 0.0522555, 
+"@source": "node825907", 
+"@target": "node825931"
+}, 
+{
+"@id": "edge825932", 
+"@length": 0.045187, 
+"@source": "node825931", 
+"@target": "node825932"
+}, 
+{
+"@id": "edge825933", 
+"@length": 0.002912, 
+"@source": "node825931", 
+"@target": "node825933"
+}
+], 
+"meta": [
+{
+"$": "node825908", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node825907", 
+"@root": "true"
+}, 
+{
+"@id": "node825908"
+}, 
+{
+"@id": "node825909"
+}, 
+{
+"@id": "node825910"
+}, 
+{
+"@id": "node825911", 
+"@otu": "otu320863"
+}, 
+{
+"@id": "node825912"
+}, 
+{
+"@id": "node825913", 
+"@otu": "otu320876"
+}, 
+{
+"@id": "node825914", 
+"@otu": "otu320866"
+}, 
+{
+"@id": "node825915", 
+"@otu": "otu320873"
+}, 
+{
+"@id": "node825916", 
+"@otu": "otu320870"
+}, 
+{
+"@id": "node825917"
+}, 
+{
+"@id": "node825918"
+}, 
+{
+"@id": "node825919", 
+"@otu": "otu320872"
+}, 
+{
+"@id": "node825920"
+}, 
+{
+"@id": "node825921", 
+"@otu": "otu320877"
+}, 
+{
+"@id": "node825922", 
+"@otu": "otu320862"
+}, 
+{
+"@id": "node825923", 
+"@otu": "otu320871"
+}, 
+{
+"@id": "node825924", 
+"@otu": "otu320869"
+}, 
+{
+"@id": "node825925", 
+"@otu": "otu320865"
+}, 
+{
+"@id": "node825926", 
+"@otu": "otu320861"
+}, 
+{
+"@id": "node825927", 
+"@otu": "otu320874"
+}, 
+{
+"@id": "node825928"
+}, 
+{
+"@id": "node825929", 
+"@otu": "otu320868"
+}, 
+{
+"@id": "node825930", 
+"@otu": "otu320864"
+}, 
+{
+"@id": "node825931"
+}, 
+{
+"@id": "node825932", 
+"@otu": "otu320875"
+}, 
+{
+"@id": "node825933", 
+"@otu": "otu320867"
+}
+]
+}
+]
+}
+}
+}

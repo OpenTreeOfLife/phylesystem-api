@@ -1,0 +1,699 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Sugiyama M., Tokumasu S., & Gams W. 2003. Umbelopsis gibberispora sp. nov. from Japanese leaf litter and a clarification of Micromucor ramannianus var. angulisporus. Mycoscience, 44:217\u2013226", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1007/s10267-003-0105-4", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S984", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "964", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2003, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 529745, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus964", 
+"otu": [
+{
+"@about": "#otu208918", 
+"@id": "otu208918", 
+"@label": "Mucor circinelloides f. lusitanicus", 
+"meta": [
+{
+"$": 710877, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mucor circinelloides f lusitanicus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208919", 
+"@id": "otu208919", 
+"@label": "Umbelopsis ramanniana", 
+"meta": [
+{
+"$": 199302, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis ramanniana CBS112 08", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208920", 
+"@id": "otu208920", 
+"@label": "Umbelopsis vinacea", 
+"meta": [
+{
+"$": 15576, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis vinacea CBS236 82", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208921", 
+"@id": "otu208921", 
+"@label": "Umbelopsis ramanniana", 
+"meta": [
+{
+"$": 199302, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis ramanniana NRRL5844", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208922", 
+"@id": "otu208922", 
+"@label": "Umbelopsis gibberispora", 
+"meta": [
+{
+"$": 829656, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis gibberispora CBS101745", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208923", 
+"@id": "otu208923", 
+"@label": "Umbelopsis vinacea", 
+"meta": [
+{
+"$": 15576, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis vinacea CBS222 29", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208924", 
+"@id": "otu208924", 
+"@label": "Umbelopsis westeae", 
+"meta": [
+{
+"$": 829654, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis westeae", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208925", 
+"@id": "otu208925", 
+"@label": "Umbelopsis swartii", 
+"meta": [
+{
+"$": 829655, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis swartii", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208926", 
+"@id": "otu208926", 
+"@label": "Umbelopsis roseonana", 
+"meta": [
+{
+"$": 286604, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis roseonana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208927", 
+"@id": "otu208927", 
+"@label": "Umbelopsis ramanniana", 
+"meta": [
+{
+"$": 199302, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis ramanniana CBS219 47", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208928", 
+"@id": "otu208928", 
+"@label": "Umbelopsis gibberispora", 
+"meta": [
+{
+"$": 829656, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis gibberispora CBS101744", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208929", 
+"@id": "otu208929", 
+"@label": "Umbelopsis ramanniana", 
+"meta": [
+{
+"$": 199302, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis ramanniana CBS243 58", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208930", 
+"@id": "otu208930", 
+"@label": "Umbelopsis angularis", 
+"meta": [
+{
+"$": 829658, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis angularis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208931", 
+"@id": "otu208931", 
+"@label": "Umbelopsis fusiformis", 
+"meta": [
+{
+"$": 861291, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis fusiformis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208932", 
+"@id": "otu208932", 
+"@label": "Umbelopsis autotrophica", 
+"meta": [
+{
+"$": 561644, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis autotrophica", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208933", 
+"@id": "otu208933", 
+"@label": "Umbelopsis isabellina", 
+"meta": [
+{
+"$": 794558, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis isabellina", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208934", 
+"@id": "otu208934", 
+"@label": "Umbelopsis nana", 
+"meta": [
+{
+"$": 184959, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Umbelopsis nana", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu208935", 
+"@id": "otu208935", 
+"@label": "Mucor hiemalis", 
+"meta": [
+{
+"$": 530855, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Mucor hiemalis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees964", 
+"@otus": "otus964", 
+"tree": [
+{
+"@about": "#tree1894", 
+"@id": "tree1894", 
+"edge": [
+{
+"@id": "edge495609", 
+"@source": "node495608", 
+"@target": "node495609"
+}, 
+{
+"@id": "edge495610", 
+"@source": "node495608", 
+"@target": "node495610"
+}, 
+{
+"@id": "edge495611", 
+"@source": "node495610", 
+"@target": "node495611"
+}, 
+{
+"@id": "edge495612", 
+"@source": "node495610", 
+"@target": "node495612"
+}, 
+{
+"@id": "edge495613", 
+"@source": "node495612", 
+"@target": "node495613"
+}, 
+{
+"@id": "edge495614", 
+"@source": "node495613", 
+"@target": "node495614"
+}, 
+{
+"@id": "edge495615", 
+"@source": "node495614", 
+"@target": "node495615"
+}, 
+{
+"@id": "edge495616", 
+"@source": "node495615", 
+"@target": "node495616"
+}, 
+{
+"@id": "edge495617", 
+"@source": "node495615", 
+"@target": "node495617"
+}, 
+{
+"@id": "edge495618", 
+"@source": "node495617", 
+"@target": "node495618"
+}, 
+{
+"@id": "edge495619", 
+"@source": "node495618", 
+"@target": "node495619"
+}, 
+{
+"@id": "edge495620", 
+"@source": "node495619", 
+"@target": "node495620"
+}, 
+{
+"@id": "edge495621", 
+"@source": "node495619", 
+"@target": "node495621"
+}, 
+{
+"@id": "edge495622", 
+"@source": "node495618", 
+"@target": "node495622"
+}, 
+{
+"@id": "edge495623", 
+"@source": "node495622", 
+"@target": "node495623"
+}, 
+{
+"@id": "edge495624", 
+"@source": "node495622", 
+"@target": "node495624"
+}, 
+{
+"@id": "edge495625", 
+"@source": "node495617", 
+"@target": "node495625"
+}, 
+{
+"@id": "edge495626", 
+"@source": "node495625", 
+"@target": "node495626"
+}, 
+{
+"@id": "edge495627", 
+"@source": "node495626", 
+"@target": "node495627"
+}, 
+{
+"@id": "edge495628", 
+"@source": "node495626", 
+"@target": "node495628"
+}, 
+{
+"@id": "edge495629", 
+"@source": "node495628", 
+"@target": "node495629"
+}, 
+{
+"@id": "edge495630", 
+"@source": "node495628", 
+"@target": "node495630"
+}, 
+{
+"@id": "edge495631", 
+"@source": "node495625", 
+"@target": "node495631"
+}, 
+{
+"@id": "edge495632", 
+"@source": "node495614", 
+"@target": "node495632"
+}, 
+{
+"@id": "edge495633", 
+"@source": "node495613", 
+"@target": "node495633"
+}, 
+{
+"@id": "edge495634", 
+"@source": "node495612", 
+"@target": "node495634"
+}, 
+{
+"@id": "edge495635", 
+"@source": "node495634", 
+"@target": "node495635"
+}, 
+{
+"@id": "edge495636", 
+"@source": "node495634", 
+"@target": "node495636"
+}, 
+{
+"@id": "edge495637", 
+"@source": "node495636", 
+"@target": "node495637"
+}, 
+{
+"@id": "edge495638", 
+"@source": "node495637", 
+"@target": "node495638"
+}, 
+{
+"@id": "edge495639", 
+"@source": "node495637", 
+"@target": "node495639"
+}, 
+{
+"@id": "edge495640", 
+"@source": "node495636", 
+"@target": "node495640"
+}, 
+{
+"@id": "edge495641", 
+"@source": "node495640", 
+"@target": "node495641"
+}, 
+{
+"@id": "edge495642", 
+"@source": "node495640", 
+"@target": "node495642"
+}
+], 
+"meta": [
+{
+"$": "node495612", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "LSU", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node495608", 
+"@root": "true"
+}, 
+{
+"@id": "node495609", 
+"@otu": "otu208918"
+}, 
+{
+"@id": "node495610"
+}, 
+{
+"@id": "node495611", 
+"@otu": "otu208935"
+}, 
+{
+"@id": "node495612"
+}, 
+{
+"@id": "node495613"
+}, 
+{
+"@id": "node495614"
+}, 
+{
+"@id": "node495615"
+}, 
+{
+"@id": "node495616", 
+"@otu": "otu208930"
+}, 
+{
+"@id": "node495617"
+}, 
+{
+"@id": "node495618"
+}, 
+{
+"@id": "node495619"
+}, 
+{
+"@id": "node495620", 
+"@otu": "otu208928"
+}, 
+{
+"@id": "node495621", 
+"@otu": "otu208922"
+}, 
+{
+"@id": "node495622"
+}, 
+{
+"@id": "node495623", 
+"@otu": "otu208927"
+}, 
+{
+"@id": "node495624", 
+"@otu": "otu208929"
+}, 
+{
+"@id": "node495625"
+}, 
+{
+"@id": "node495626"
+}, 
+{
+"@id": "node495627", 
+"@otu": "otu208921"
+}, 
+{
+"@id": "node495628"
+}, 
+{
+"@id": "node495629", 
+"@otu": "otu208925"
+}, 
+{
+"@id": "node495630", 
+"@otu": "otu208924"
+}, 
+{
+"@id": "node495631", 
+"@otu": "otu208932"
+}, 
+{
+"@id": "node495632", 
+"@otu": "otu208919"
+}, 
+{
+"@id": "node495633", 
+"@otu": "otu208931"
+}, 
+{
+"@id": "node495634"
+}, 
+{
+"@id": "node495635", 
+"@otu": "otu208933"
+}, 
+{
+"@id": "node495636"
+}, 
+{
+"@id": "node495637"
+}, 
+{
+"@id": "node495638", 
+"@otu": "otu208934"
+}, 
+{
+"@id": "node495639", 
+"@otu": "otu208926"
+}, 
+{
+"@id": "node495640"
+}, 
+{
+"@id": "node495641", 
+"@otu": "otu208923"
+}, 
+{
+"@id": "node495642", 
+"@otu": "otu208920"
+}
+]
+}
+]
+}
+}
+}

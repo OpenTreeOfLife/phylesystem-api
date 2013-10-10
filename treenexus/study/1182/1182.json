@@ -1,0 +1,4056 @@
+{
+"nexml": {
+"@about": "#study", 
+"@generator": "Phylografter nexml-json exporter", 
+"@id": "study", 
+"@nexmljson": "http://opentree.wikispaces.com/NexSON", 
+"@version": "0.9", 
+"@xmlns": {
+"$": "http://www.nexml.org/2009", 
+"nex": "http://www.nexml.org/2009", 
+"ot": "http://purl.org/opentree-terms#", 
+"xsd": "http://www.w3.org/2001/XMLSchema#", 
+"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}, 
+"meta": [
+{
+"$": "Nuytinck J., & Verbeken A. 2007. Species delimitation and phylogenetic relationships in Lactarius sect. Deliciosi in Europe. Mycological Research, Mycological research 111.11 (2007): 1285-1297.", 
+"@property": "ot:studyPublicationReference", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://dx.doi.org/10.1016/j.mycres.2007.09.001", 
+"@property": "ot:studyPublication", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "Romina Gazis", 
+"@property": "ot:curatorName", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"@href": "http://purl.org/phylo/treebase/phylows/study/TB2:S1836", 
+"@property": "ot:dataDeposit", 
+"@xsi:type": "nex:ResourceMeta"
+}, 
+{
+"$": "1182", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 2007, 
+"@property": "ot:studyYear", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": 286283, 
+"@property": "ot:focalClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "AFLP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "morphology", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "gpd", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "UPGMA", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"otus": {
+"@id": "otus1182", 
+"otu": [
+{
+"@about": "#otu230105", 
+"@id": "otu230105", 
+"@label": "Lactarius quietus", 
+"meta": [
+{
+"$": 82941, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius quietus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230106", 
+"@id": "otu230106", 
+"@label": "Lactarius controversus", 
+"meta": [
+{
+"$": 867347, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius controversus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230107", 
+"@id": "otu230107", 
+"@label": "Lactarius repraesentaneus", 
+"meta": [
+{
+"$": 56882, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius repraesentaneus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230108", 
+"@id": "otu230108", 
+"@label": "Lactarius rufus", 
+"meta": [
+{
+"$": 401005, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius rufus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230109", 
+"@id": "otu230109", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 229bis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230110", 
+"@id": "otu230110", 
+"@label": "Lactarius cyanopus", 
+"meta": [
+{
+"$": 655720, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius cyanopus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230111", 
+"@id": "otu230111", 
+"@label": "Lactarius vinosus", 
+"meta": [
+{
+"$": 986931, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius vinosus 230b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230112", 
+"@id": "otu230112", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 530a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230113", 
+"@id": "otu230113", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 053", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230114", 
+"@id": "otu230114", 
+"@label": "Lactarius sanguifluus", 
+"meta": [
+{
+"$": 451905, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius sanguifluus 008b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230115", 
+"@id": "otu230115", 
+"@label": "Lactarius semisanguifluus", 
+"meta": [
+{
+"$": 561234, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius semisanguifluus 1032a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230116", 
+"@id": "otu230116", 
+"@label": "Lactarius sanguifluus", 
+"meta": [
+{
+"$": 451905, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius sanguifluus 050", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230117", 
+"@id": "otu230117", 
+"@label": "Lactarius porninsis", 
+"meta": [
+{
+"$": 186670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius porninsis 082", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230118", 
+"@id": "otu230118", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 039", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230119", 
+"@id": "otu230119", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 104b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230120", 
+"@id": "otu230120", 
+"@label": "Lactarius salmonicolor", 
+"meta": [
+{
+"$": 561236, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius salmonicolor 123", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230121", 
+"@id": "otu230121", 
+"@label": "Lactarius vinosus", 
+"meta": [
+{
+"$": 986931, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius vinosus 104a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230122", 
+"@id": "otu230122", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 018", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230123", 
+"@id": "otu230123", 
+"@label": "Lactarius porninsis", 
+"meta": [
+{
+"$": 186670, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius porninsis 019", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230124", 
+"@id": "otu230124", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 457a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230125", 
+"@id": "otu230125", 
+"@label": "Lactarius sanguineovirescens", 
+"meta": [
+{
+"$": 473890, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius sanguineovirescens PAM", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230126", 
+"@id": "otu230126", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 099", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230127", 
+"@id": "otu230127", 
+"@label": "Lactarius quieticolor", 
+"meta": [
+{
+"$": 40243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius quieticolor 011a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230128", 
+"@id": "otu230128", 
+"@label": "Lactarius quieticolor", 
+"meta": [
+{
+"$": 40243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius quieticolor 004b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230129", 
+"@id": "otu230129", 
+"@label": "Lactarius semisanguifluus", 
+"meta": [
+{
+"$": 561234, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius semisanguifluus 081a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230130", 
+"@id": "otu230130", 
+"@label": "Lactarius semisanguifluus", 
+"meta": [
+{
+"$": 561234, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius semisanguifluus 093", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230131", 
+"@id": "otu230131", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 046", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230132", 
+"@id": "otu230132", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 005", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230133", 
+"@id": "otu230133", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 5999", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230134", 
+"@id": "otu230134", 
+"@label": "Lactarius salmonicolor", 
+"meta": [
+{
+"$": 561236, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius salmonicolor 087", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230135", 
+"@id": "otu230135", 
+"@label": "Lactarius salmonicolor", 
+"meta": [
+{
+"$": 561236, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius salmonicolor 027", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230136", 
+"@id": "otu230136", 
+"@label": "Lactarius tesquorum", 
+"meta": [
+{
+"$": 451898, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius tesquorum", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230137", 
+"@id": "otu230137", 
+"@label": "Lactarius semisanguifluus", 
+"meta": [
+{
+"$": 561234, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius semisanguifluus 049", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230138", 
+"@id": "otu230138", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 010b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230139", 
+"@id": "otu230139", 
+"@label": "Lactarius sanguineovirescens", 
+"meta": [
+{
+"$": 473890, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius sanguineovirescens 13100", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230140", 
+"@id": "otu230140", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 008", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230141", 
+"@id": "otu230141", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 076", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230142", 
+"@id": "otu230142", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 217a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230143", 
+"@id": "otu230143", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 457b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230144", 
+"@id": "otu230144", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 176b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230145", 
+"@id": "otu230145", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 330b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230146", 
+"@id": "otu230146", 
+"@label": "Lactarius fulvissimus", 
+"meta": [
+{
+"$": 5265, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fulvissimus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230147", 
+"@id": "otu230147", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 104a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230148", 
+"@id": "otu230148", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 073", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230149", 
+"@id": "otu230149", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 183b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230150", 
+"@id": "otu230150", 
+"@label": "Lactarius hepaticus", 
+"meta": [
+{
+"$": 451906, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius hepaticus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230151", 
+"@id": "otu230151", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 005a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230152", 
+"@id": "otu230152", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 119b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230153", 
+"@id": "otu230153", 
+"@label": "Lactarius acerrimus", 
+"meta": [
+{
+"$": 586524, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius acerrimus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230154", 
+"@id": "otu230154", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 333a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230155", 
+"@id": "otu230155", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 312a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230156", 
+"@id": "otu230156", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 030", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230157", 
+"@id": "otu230157", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 332d", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230158", 
+"@id": "otu230158", 
+"@label": "Lactarius salmonicolor", 
+"meta": [
+{
+"$": 561236, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius salmonicolor 056a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230159", 
+"@id": "otu230159", 
+"@label": "Lactarius fluens", 
+"meta": [
+{
+"$": 374697, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fluens", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230160", 
+"@id": "otu230160", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 1577b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230161", 
+"@id": "otu230161", 
+"@label": "Lactarius quieticolor", 
+"meta": [
+{
+"$": 40243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius quieticolor 009b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230162", 
+"@id": "otu230162", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 002a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230163", 
+"@id": "otu230163", 
+"@label": "Lactarius vinosus", 
+"meta": [
+{
+"$": 986931, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius vinosus 110", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230164", 
+"@id": "otu230164", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 005b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230165", 
+"@id": "otu230165", 
+"@label": "Lactarius quieticolor", 
+"meta": [
+{
+"$": 40243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius quieticolor 004a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230166", 
+"@id": "otu230166", 
+"@label": "Lactarius quieticolor", 
+"meta": [
+{
+"$": 40243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius quieticolor 1503a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230167", 
+"@id": "otu230167", 
+"@label": "Lactarius pterosporus", 
+"meta": [
+{
+"$": 374698, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius pterosporus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230168", 
+"@id": "otu230168", 
+"@label": "Lactarius intermedius", 
+"meta": [
+{
+"$": 40244, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius intermedius", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230169", 
+"@id": "otu230169", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 176a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230170", 
+"@id": "otu230170", 
+"@label": "Lactarius chrysorrheus", 
+"meta": [
+{
+"$": 451907, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius chrysorrheus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230171", 
+"@id": "otu230171", 
+"@label": "Lactarius serifluus", 
+"meta": [
+{
+"$": 986924, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius serifluus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230172", 
+"@id": "otu230172", 
+"@label": "Lactarius sanguifluus", 
+"meta": [
+{
+"$": 451905, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius sanguifluus 006a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230173", 
+"@id": "otu230173", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 183a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230174", 
+"@id": "otu230174", 
+"@label": "Lactarius deliciosus", 
+"meta": [
+{
+"$": 200785, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deliciosus 312b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230175", 
+"@id": "otu230175", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 561b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230176", 
+"@id": "otu230176", 
+"@label": "Lactarius mitissimus", 
+"meta": [
+{
+"$": 84867, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius mitissimus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230177", 
+"@id": "otu230177", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 561c", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230178", 
+"@id": "otu230178", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 1577a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230179", 
+"@id": "otu230179", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 002b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230180", 
+"@id": "otu230180", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 1004b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230181", 
+"@id": "otu230181", 
+"@label": "Lactarius vinosus", 
+"meta": [
+{
+"$": 986931, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius vinosus 104c", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230182", 
+"@id": "otu230182", 
+"@label": "Lactarius quieticolor", 
+"meta": [
+{
+"$": 40243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius quieticolor 011b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230183", 
+"@id": "otu230183", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 330c", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230184", 
+"@id": "otu230184", 
+"@label": "Lactarius deliciosus var. deterrimus", 
+"meta": [
+{
+"$": 558125, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius deterrimus 217b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230185", 
+"@id": "otu230185", 
+"@label": "Lactarius sanguifluus", 
+"meta": [
+{
+"$": 451905, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius sanguifluus 246a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230186", 
+"@id": "otu230186", 
+"@label": "Lactarius trivialis", 
+"meta": [
+{
+"$": 745150, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius trivialis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230187", 
+"@id": "otu230187", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 031", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230188", 
+"@id": "otu230188", 
+"@label": "Lactarius quieticolor", 
+"meta": [
+{
+"$": 40243, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius quieticolor 1503b", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230189", 
+"@id": "otu230189", 
+"@label": "Lactarius fennoscandicus", 
+"meta": [
+{
+"$": 115819, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fennoscandicus 119a", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230190", 
+"@id": "otu230190", 
+"@label": "Lactarius uvidus", 
+"meta": [
+{
+"$": 186662, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius uvidus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230191", 
+"@id": "otu230191", 
+"@label": "Lactarius tabidus", 
+"meta": [
+{
+"$": 186674, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius tabidus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230192", 
+"@id": "otu230192", 
+"@label": "Lactarius blennius", 
+"meta": [
+{
+"$": 912865, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius blennius", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230193", 
+"@id": "otu230193", 
+"@label": "Lactarius lignyotus", 
+"meta": [
+{
+"$": 912858, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius lignyotus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230194", 
+"@id": "otu230194", 
+"@label": "Lactarius scrobiculatus", 
+"meta": [
+{
+"$": 561237, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius scrobiculatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230195", 
+"@id": "otu230195", 
+"@label": "Lactarius subdulcis", 
+"meta": [
+{
+"$": 389956, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius subdulcis", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230196", 
+"@id": "otu230196", 
+"@label": "Lactarius subsericatus", 
+"meta": [
+{
+"$": 561235, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius subsericatus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@about": "#otu230197", 
+"@id": "otu230197", 
+"@label": "Lactarius fuliginosus", 
+"meta": [
+{
+"$": 912860, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Lactarius fuliginosus", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees1182", 
+"@otus": "otus1182", 
+"tree": [
+{
+"@about": "#tree2390", 
+"@id": "tree2390", 
+"edge": [
+{
+"@id": "edge558398", 
+"@source": "node558397", 
+"@target": "node558398"
+}, 
+{
+"@id": "edge558399", 
+"@source": "node558398", 
+"@target": "node558399"
+}, 
+{
+"@id": "edge558400", 
+"@source": "node558399", 
+"@target": "node558400"
+}, 
+{
+"@id": "edge558401", 
+"@source": "node558400", 
+"@target": "node558401"
+}, 
+{
+"@id": "edge558402", 
+"@source": "node558401", 
+"@target": "node558402"
+}, 
+{
+"@id": "edge558403", 
+"@source": "node558402", 
+"@target": "node558403"
+}, 
+{
+"@id": "edge558404", 
+"@source": "node558403", 
+"@target": "node558404"
+}, 
+{
+"@id": "edge558405", 
+"@source": "node558404", 
+"@target": "node558405"
+}, 
+{
+"@id": "edge558406", 
+"@source": "node558405", 
+"@target": "node558406"
+}, 
+{
+"@id": "edge558407", 
+"@source": "node558406", 
+"@target": "node558407"
+}, 
+{
+"@id": "edge558408", 
+"@source": "node558407", 
+"@target": "node558408"
+}, 
+{
+"@id": "edge558409", 
+"@source": "node558408", 
+"@target": "node558409"
+}, 
+{
+"@id": "edge558410", 
+"@source": "node558409", 
+"@target": "node558410"
+}, 
+{
+"@id": "edge558411", 
+"@source": "node558410", 
+"@target": "node558411"
+}, 
+{
+"@id": "edge558412", 
+"@source": "node558411", 
+"@target": "node558412"
+}, 
+{
+"@id": "edge558413", 
+"@source": "node558412", 
+"@target": "node558413"
+}, 
+{
+"@id": "edge558414", 
+"@source": "node558412", 
+"@target": "node558414"
+}, 
+{
+"@id": "edge558415", 
+"@source": "node558411", 
+"@target": "node558415"
+}, 
+{
+"@id": "edge558416", 
+"@source": "node558411", 
+"@target": "node558416"
+}, 
+{
+"@id": "edge558417", 
+"@source": "node558411", 
+"@target": "node558417"
+}, 
+{
+"@id": "edge558418", 
+"@source": "node558411", 
+"@target": "node558418"
+}, 
+{
+"@id": "edge558419", 
+"@source": "node558410", 
+"@target": "node558419"
+}, 
+{
+"@id": "edge558420", 
+"@source": "node558409", 
+"@target": "node558420"
+}, 
+{
+"@id": "edge558421", 
+"@source": "node558408", 
+"@target": "node558421"
+}, 
+{
+"@id": "edge558422", 
+"@source": "node558407", 
+"@target": "node558422"
+}, 
+{
+"@id": "edge558423", 
+"@source": "node558422", 
+"@target": "node558423"
+}, 
+{
+"@id": "edge558424", 
+"@source": "node558422", 
+"@target": "node558424"
+}, 
+{
+"@id": "edge558425", 
+"@source": "node558422", 
+"@target": "node558425"
+}, 
+{
+"@id": "edge558426", 
+"@source": "node558425", 
+"@target": "node558426"
+}, 
+{
+"@id": "edge558427", 
+"@source": "node558425", 
+"@target": "node558427"
+}, 
+{
+"@id": "edge558428", 
+"@source": "node558422", 
+"@target": "node558428"
+}, 
+{
+"@id": "edge558429", 
+"@source": "node558422", 
+"@target": "node558429"
+}, 
+{
+"@id": "edge558430", 
+"@source": "node558406", 
+"@target": "node558430"
+}, 
+{
+"@id": "edge558431", 
+"@source": "node558430", 
+"@target": "node558431"
+}, 
+{
+"@id": "edge558432", 
+"@source": "node558430", 
+"@target": "node558432"
+}, 
+{
+"@id": "edge558433", 
+"@source": "node558405", 
+"@target": "node558433"
+}, 
+{
+"@id": "edge558434", 
+"@source": "node558433", 
+"@target": "node558434"
+}, 
+{
+"@id": "edge558435", 
+"@source": "node558434", 
+"@target": "node558435"
+}, 
+{
+"@id": "edge558436", 
+"@source": "node558435", 
+"@target": "node558436"
+}, 
+{
+"@id": "edge558437", 
+"@source": "node558436", 
+"@target": "node558437"
+}, 
+{
+"@id": "edge558438", 
+"@source": "node558437", 
+"@target": "node558438"
+}, 
+{
+"@id": "edge558439", 
+"@source": "node558438", 
+"@target": "node558439"
+}, 
+{
+"@id": "edge558440", 
+"@source": "node558439", 
+"@target": "node558440"
+}, 
+{
+"@id": "edge558441", 
+"@source": "node558439", 
+"@target": "node558441"
+}, 
+{
+"@id": "edge558442", 
+"@source": "node558439", 
+"@target": "node558442"
+}, 
+{
+"@id": "edge558443", 
+"@source": "node558439", 
+"@target": "node558443"
+}, 
+{
+"@id": "edge558444", 
+"@source": "node558439", 
+"@target": "node558444"
+}, 
+{
+"@id": "edge558445", 
+"@source": "node558439", 
+"@target": "node558445"
+}, 
+{
+"@id": "edge558446", 
+"@source": "node558445", 
+"@target": "node558446"
+}, 
+{
+"@id": "edge558447", 
+"@source": "node558445", 
+"@target": "node558447"
+}, 
+{
+"@id": "edge558448", 
+"@source": "node558438", 
+"@target": "node558448"
+}, 
+{
+"@id": "edge558449", 
+"@source": "node558437", 
+"@target": "node558449"
+}, 
+{
+"@id": "edge558450", 
+"@source": "node558436", 
+"@target": "node558450"
+}, 
+{
+"@id": "edge558451", 
+"@source": "node558436", 
+"@target": "node558451"
+}, 
+{
+"@id": "edge558452", 
+"@source": "node558436", 
+"@target": "node558452"
+}, 
+{
+"@id": "edge558453", 
+"@source": "node558452", 
+"@target": "node558453"
+}, 
+{
+"@id": "edge558454", 
+"@source": "node558452", 
+"@target": "node558454"
+}, 
+{
+"@id": "edge558455", 
+"@source": "node558436", 
+"@target": "node558455"
+}, 
+{
+"@id": "edge558456", 
+"@source": "node558435", 
+"@target": "node558456"
+}, 
+{
+"@id": "edge558457", 
+"@source": "node558456", 
+"@target": "node558457"
+}, 
+{
+"@id": "edge558458", 
+"@source": "node558457", 
+"@target": "node558458"
+}, 
+{
+"@id": "edge558459", 
+"@source": "node558457", 
+"@target": "node558459"
+}, 
+{
+"@id": "edge558460", 
+"@source": "node558456", 
+"@target": "node558460"
+}, 
+{
+"@id": "edge558461", 
+"@source": "node558434", 
+"@target": "node558461"
+}, 
+{
+"@id": "edge558462", 
+"@source": "node558461", 
+"@target": "node558462"
+}, 
+{
+"@id": "edge558463", 
+"@source": "node558462", 
+"@target": "node558463"
+}, 
+{
+"@id": "edge558464", 
+"@source": "node558463", 
+"@target": "node558464"
+}, 
+{
+"@id": "edge558465", 
+"@source": "node558463", 
+"@target": "node558465"
+}, 
+{
+"@id": "edge558466", 
+"@source": "node558463", 
+"@target": "node558466"
+}, 
+{
+"@id": "edge558467", 
+"@source": "node558463", 
+"@target": "node558467"
+}, 
+{
+"@id": "edge558468", 
+"@source": "node558463", 
+"@target": "node558468"
+}, 
+{
+"@id": "edge558469", 
+"@source": "node558463", 
+"@target": "node558469"
+}, 
+{
+"@id": "edge558470", 
+"@source": "node558463", 
+"@target": "node558470"
+}, 
+{
+"@id": "edge558471", 
+"@source": "node558463", 
+"@target": "node558471"
+}, 
+{
+"@id": "edge558472", 
+"@source": "node558463", 
+"@target": "node558472"
+}, 
+{
+"@id": "edge558473", 
+"@source": "node558463", 
+"@target": "node558473"
+}, 
+{
+"@id": "edge558474", 
+"@source": "node558463", 
+"@target": "node558474"
+}, 
+{
+"@id": "edge558475", 
+"@source": "node558463", 
+"@target": "node558475"
+}, 
+{
+"@id": "edge558476", 
+"@source": "node558462", 
+"@target": "node558476"
+}, 
+{
+"@id": "edge558477", 
+"@source": "node558461", 
+"@target": "node558477"
+}, 
+{
+"@id": "edge558478", 
+"@source": "node558433", 
+"@target": "node558478"
+}, 
+{
+"@id": "edge558479", 
+"@source": "node558478", 
+"@target": "node558479"
+}, 
+{
+"@id": "edge558480", 
+"@source": "node558479", 
+"@target": "node558480"
+}, 
+{
+"@id": "edge558481", 
+"@source": "node558480", 
+"@target": "node558481"
+}, 
+{
+"@id": "edge558482", 
+"@source": "node558480", 
+"@target": "node558482"
+}, 
+{
+"@id": "edge558483", 
+"@source": "node558482", 
+"@target": "node558483"
+}, 
+{
+"@id": "edge558484", 
+"@source": "node558482", 
+"@target": "node558484"
+}, 
+{
+"@id": "edge558485", 
+"@source": "node558480", 
+"@target": "node558485"
+}, 
+{
+"@id": "edge558486", 
+"@source": "node558485", 
+"@target": "node558486"
+}, 
+{
+"@id": "edge558487", 
+"@source": "node558485", 
+"@target": "node558487"
+}, 
+{
+"@id": "edge558488", 
+"@source": "node558479", 
+"@target": "node558488"
+}, 
+{
+"@id": "edge558489", 
+"@source": "node558488", 
+"@target": "node558489"
+}, 
+{
+"@id": "edge558490", 
+"@source": "node558489", 
+"@target": "node558490"
+}, 
+{
+"@id": "edge558491", 
+"@source": "node558489", 
+"@target": "node558491"
+}, 
+{
+"@id": "edge558492", 
+"@source": "node558488", 
+"@target": "node558492"
+}, 
+{
+"@id": "edge558493", 
+"@source": "node558492", 
+"@target": "node558493"
+}, 
+{
+"@id": "edge558494", 
+"@source": "node558492", 
+"@target": "node558494"
+}, 
+{
+"@id": "edge558495", 
+"@source": "node558478", 
+"@target": "node558495"
+}, 
+{
+"@id": "edge558496", 
+"@source": "node558495", 
+"@target": "node558496"
+}, 
+{
+"@id": "edge558497", 
+"@source": "node558495", 
+"@target": "node558497"
+}, 
+{
+"@id": "edge558498", 
+"@source": "node558497", 
+"@target": "node558498"
+}, 
+{
+"@id": "edge558499", 
+"@source": "node558497", 
+"@target": "node558499"
+}, 
+{
+"@id": "edge558500", 
+"@source": "node558499", 
+"@target": "node558500"
+}, 
+{
+"@id": "edge558501", 
+"@source": "node558500", 
+"@target": "node558501"
+}, 
+{
+"@id": "edge558502", 
+"@source": "node558500", 
+"@target": "node558502"
+}, 
+{
+"@id": "edge558503", 
+"@source": "node558499", 
+"@target": "node558503"
+}, 
+{
+"@id": "edge558504", 
+"@source": "node558404", 
+"@target": "node558504"
+}, 
+{
+"@id": "edge558505", 
+"@source": "node558504", 
+"@target": "node558505"
+}, 
+{
+"@id": "edge558506", 
+"@source": "node558505", 
+"@target": "node558506"
+}, 
+{
+"@id": "edge558507", 
+"@source": "node558505", 
+"@target": "node558507"
+}, 
+{
+"@id": "edge558508", 
+"@source": "node558504", 
+"@target": "node558508"
+}, 
+{
+"@id": "edge558509", 
+"@source": "node558403", 
+"@target": "node558509"
+}, 
+{
+"@id": "edge558510", 
+"@source": "node558509", 
+"@target": "node558510"
+}, 
+{
+"@id": "edge558511", 
+"@source": "node558509", 
+"@target": "node558511"
+}, 
+{
+"@id": "edge558512", 
+"@source": "node558402", 
+"@target": "node558512"
+}, 
+{
+"@id": "edge558513", 
+"@source": "node558512", 
+"@target": "node558513"
+}, 
+{
+"@id": "edge558514", 
+"@source": "node558513", 
+"@target": "node558514"
+}, 
+{
+"@id": "edge558515", 
+"@source": "node558514", 
+"@target": "node558515"
+}, 
+{
+"@id": "edge558516", 
+"@source": "node558515", 
+"@target": "node558516"
+}, 
+{
+"@id": "edge558517", 
+"@source": "node558515", 
+"@target": "node558517"
+}, 
+{
+"@id": "edge558518", 
+"@source": "node558517", 
+"@target": "node558518"
+}, 
+{
+"@id": "edge558519", 
+"@source": "node558517", 
+"@target": "node558519"
+}, 
+{
+"@id": "edge558520", 
+"@source": "node558514", 
+"@target": "node558520"
+}, 
+{
+"@id": "edge558521", 
+"@source": "node558513", 
+"@target": "node558521"
+}, 
+{
+"@id": "edge558522", 
+"@source": "node558512", 
+"@target": "node558522"
+}, 
+{
+"@id": "edge558523", 
+"@source": "node558522", 
+"@target": "node558523"
+}, 
+{
+"@id": "edge558524", 
+"@source": "node558523", 
+"@target": "node558524"
+}, 
+{
+"@id": "edge558525", 
+"@source": "node558523", 
+"@target": "node558525"
+}, 
+{
+"@id": "edge558526", 
+"@source": "node558522", 
+"@target": "node558526"
+}, 
+{
+"@id": "edge558527", 
+"@source": "node558401", 
+"@target": "node558527"
+}, 
+{
+"@id": "edge558528", 
+"@source": "node558400", 
+"@target": "node558528"
+}, 
+{
+"@id": "edge558529", 
+"@source": "node558399", 
+"@target": "node558529"
+}, 
+{
+"@id": "edge558530", 
+"@source": "node558398", 
+"@target": "node558530"
+}, 
+{
+"@id": "edge558531", 
+"@source": "node558530", 
+"@target": "node558531"
+}, 
+{
+"@id": "edge558532", 
+"@source": "node558531", 
+"@target": "node558532"
+}, 
+{
+"@id": "edge558533", 
+"@source": "node558532", 
+"@target": "node558533"
+}, 
+{
+"@id": "edge558534", 
+"@source": "node558533", 
+"@target": "node558534"
+}, 
+{
+"@id": "edge558535", 
+"@source": "node558534", 
+"@target": "node558535"
+}, 
+{
+"@id": "edge558536", 
+"@source": "node558534", 
+"@target": "node558536"
+}, 
+{
+"@id": "edge558537", 
+"@source": "node558533", 
+"@target": "node558537"
+}, 
+{
+"@id": "edge558538", 
+"@source": "node558532", 
+"@target": "node558538"
+}, 
+{
+"@id": "edge558539", 
+"@source": "node558531", 
+"@target": "node558539"
+}, 
+{
+"@id": "edge558540", 
+"@source": "node558530", 
+"@target": "node558540"
+}, 
+{
+"@id": "edge558541", 
+"@source": "node558397", 
+"@target": "node558541"
+}, 
+{
+"@id": "edge558542", 
+"@source": "node558541", 
+"@target": "node558542"
+}, 
+{
+"@id": "edge558543", 
+"@source": "node558541", 
+"@target": "node558543"
+}, 
+{
+"@id": "edge558544", 
+"@source": "node558397", 
+"@target": "node558544"
+}
+], 
+"meta": [
+{
+"$": "node558398", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "MP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Choose me", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node558397", 
+"@root": "true"
+}, 
+{
+"@id": "node558398"
+}, 
+{
+"@id": "node558399"
+}, 
+{
+"@id": "node558400"
+}, 
+{
+"@id": "node558401"
+}, 
+{
+"@id": "node558402"
+}, 
+{
+"@id": "node558403"
+}, 
+{
+"@id": "node558404"
+}, 
+{
+"@id": "node558405"
+}, 
+{
+"@id": "node558406"
+}, 
+{
+"@id": "node558407"
+}, 
+{
+"@id": "node558408"
+}, 
+{
+"@id": "node558409"
+}, 
+{
+"@id": "node558410"
+}, 
+{
+"@id": "node558411"
+}, 
+{
+"@id": "node558412"
+}, 
+{
+"@id": "node558413", 
+"@otu": "otu230174"
+}, 
+{
+"@id": "node558414", 
+"@otu": "otu230124"
+}, 
+{
+"@id": "node558415", 
+"@otu": "otu230132"
+}, 
+{
+"@id": "node558416", 
+"@otu": "otu230131"
+}, 
+{
+"@id": "node558417", 
+"@otu": "otu230147"
+}, 
+{
+"@id": "node558418", 
+"@otu": "otu230109"
+}, 
+{
+"@id": "node558419", 
+"@otu": "otu230119"
+}, 
+{
+"@id": "node558420", 
+"@otu": "otu230155"
+}, 
+{
+"@id": "node558421", 
+"@otu": "otu230143"
+}, 
+{
+"@id": "node558422"
+}, 
+{
+"@id": "node558423", 
+"@otu": "otu230127"
+}, 
+{
+"@id": "node558424", 
+"@otu": "otu230182"
+}, 
+{
+"@id": "node558425"
+}, 
+{
+"@id": "node558426", 
+"@otu": "otu230166"
+}, 
+{
+"@id": "node558427", 
+"@otu": "otu230188"
+}, 
+{
+"@id": "node558428", 
+"@otu": "otu230165"
+}, 
+{
+"@id": "node558429", 
+"@otu": "otu230161"
+}, 
+{
+"@id": "node558430"
+}, 
+{
+"@id": "node558431", 
+"@otu": "otu230123"
+}, 
+{
+"@id": "node558432", 
+"@otu": "otu230117"
+}, 
+{
+"@id": "node558433"
+}, 
+{
+"@id": "node558434"
+}, 
+{
+"@id": "node558435"
+}, 
+{
+"@id": "node558436"
+}, 
+{
+"@id": "node558437"
+}, 
+{
+"@id": "node558438"
+}, 
+{
+"@id": "node558439"
+}, 
+{
+"@id": "node558440", 
+"@otu": "otu230145"
+}, 
+{
+"@id": "node558441", 
+"@otu": "otu230122"
+}, 
+{
+"@id": "node558442", 
+"@otu": "otu230187"
+}, 
+{
+"@id": "node558443", 
+"@otu": "otu230183"
+}, 
+{
+"@id": "node558444", 
+"@otu": "otu230179"
+}, 
+{
+"@id": "node558445"
+}, 
+{
+"@id": "node558446", 
+"@otu": "otu230173"
+}, 
+{
+"@id": "node558447", 
+"@otu": "otu230149"
+}, 
+{
+"@id": "node558448", 
+"@otu": "otu230118"
+}, 
+{
+"@id": "node558449", 
+"@otu": "otu230112"
+}, 
+{
+"@id": "node558450", 
+"@otu": "otu230189"
+}, 
+{
+"@id": "node558451", 
+"@otu": "otu230152"
+}, 
+{
+"@id": "node558452"
+}, 
+{
+"@id": "node558453", 
+"@otu": "otu230178"
+}, 
+{
+"@id": "node558454", 
+"@otu": "otu230160"
+}, 
+{
+"@id": "node558455", 
+"@otu": "otu230156"
+}, 
+{
+"@id": "node558456"
+}, 
+{
+"@id": "node558457"
+}, 
+{
+"@id": "node558458", 
+"@otu": "otu230113"
+}, 
+{
+"@id": "node558459", 
+"@otu": "otu230169"
+}, 
+{
+"@id": "node558460", 
+"@otu": "otu230140"
+}, 
+{
+"@id": "node558461"
+}, 
+{
+"@id": "node558462"
+}, 
+{
+"@id": "node558463"
+}, 
+{
+"@id": "node558464", 
+"@otu": "otu230154"
+}, 
+{
+"@id": "node558465", 
+"@otu": "otu230175"
+}, 
+{
+"@id": "node558466", 
+"@otu": "otu230180"
+}, 
+{
+"@id": "node558467", 
+"@otu": "otu230162"
+}, 
+{
+"@id": "node558468", 
+"@otu": "otu230157"
+}, 
+{
+"@id": "node558469", 
+"@otu": "otu230164"
+}, 
+{
+"@id": "node558470", 
+"@otu": "otu230177"
+}, 
+{
+"@id": "node558471", 
+"@otu": "otu230151"
+}, 
+{
+"@id": "node558472", 
+"@otu": "otu230184"
+}, 
+{
+"@id": "node558473", 
+"@otu": "otu230142"
+}, 
+{
+"@id": "node558474", 
+"@otu": "otu230133"
+}, 
+{
+"@id": "node558475", 
+"@otu": "otu230144"
+}, 
+{
+"@id": "node558476", 
+"@otu": "otu230148"
+}, 
+{
+"@id": "node558477", 
+"@otu": "otu230141"
+}, 
+{
+"@id": "node558478"
+}, 
+{
+"@id": "node558479"
+}, 
+{
+"@id": "node558480"
+}, 
+{
+"@id": "node558481", 
+"@otu": "otu230172"
+}, 
+{
+"@id": "node558482"
+}, 
+{
+"@id": "node558483", 
+"@otu": "otu230114"
+}, 
+{
+"@id": "node558484", 
+"@otu": "otu230116"
+}, 
+{
+"@id": "node558485"
+}, 
+{
+"@id": "node558486", 
+"@otu": "otu230185"
+}, 
+{
+"@id": "node558487", 
+"@otu": "otu230110"
+}, 
+{
+"@id": "node558488"
+}, 
+{
+"@id": "node558489"
+}, 
+{
+"@id": "node558490", 
+"@otu": "otu230163"
+}, 
+{
+"@id": "node558491", 
+"@otu": "otu230111"
+}, 
+{
+"@id": "node558492"
+}, 
+{
+"@id": "node558493", 
+"@otu": "otu230181"
+}, 
+{
+"@id": "node558494", 
+"@otu": "otu230121"
+}, 
+{
+"@id": "node558495"
+}, 
+{
+"@id": "node558496", 
+"@otu": "otu230115"
+}, 
+{
+"@id": "node558497"
+}, 
+{
+"@id": "node558498", 
+"@otu": "otu230125"
+}, 
+{
+"@id": "node558499"
+}, 
+{
+"@id": "node558500"
+}, 
+{
+"@id": "node558501", 
+"@otu": "otu230137"
+}, 
+{
+"@id": "node558502", 
+"@otu": "otu230129"
+}, 
+{
+"@id": "node558503", 
+"@otu": "otu230130"
+}, 
+{
+"@id": "node558504"
+}, 
+{
+"@id": "node558505"
+}, 
+{
+"@id": "node558506", 
+"@otu": "otu230134"
+}, 
+{
+"@id": "node558507", 
+"@otu": "otu230120"
+}, 
+{
+"@id": "node558508", 
+"@otu": "otu230158"
+}, 
+{
+"@id": "node558509"
+}, 
+{
+"@id": "node558510", 
+"@otu": "otu230136"
+}, 
+{
+"@id": "node558511", 
+"@otu": "otu230153"
+}, 
+{
+"@id": "node558512"
+}, 
+{
+"@id": "node558513"
+}, 
+{
+"@id": "node558514"
+}, 
+{
+"@id": "node558515"
+}, 
+{
+"@id": "node558516", 
+"@otu": "otu230186"
+}, 
+{
+"@id": "node558517"
+}, 
+{
+"@id": "node558518", 
+"@otu": "otu230192"
+}, 
+{
+"@id": "node558519", 
+"@otu": "otu230159"
+}, 
+{
+"@id": "node558520", 
+"@otu": "otu230107"
+}, 
+{
+"@id": "node558521", 
+"@otu": "otu230190"
+}, 
+{
+"@id": "node558522"
+}, 
+{
+"@id": "node558523"
+}, 
+{
+"@id": "node558524", 
+"@otu": "otu230194"
+}, 
+{
+"@id": "node558525", 
+"@otu": "otu230168"
+}, 
+{
+"@id": "node558526", 
+"@otu": "otu230106"
+}, 
+{
+"@id": "node558527", 
+"@otu": "otu230105"
+}, 
+{
+"@id": "node558528", 
+"@otu": "otu230170"
+}, 
+{
+"@id": "node558529", 
+"@otu": "otu230171"
+}, 
+{
+"@id": "node558530"
+}, 
+{
+"@id": "node558531"
+}, 
+{
+"@id": "node558532"
+}, 
+{
+"@id": "node558533"
+}, 
+{
+"@id": "node558534"
+}, 
+{
+"@id": "node558535", 
+"@otu": "otu230146"
+}, 
+{
+"@id": "node558536", 
+"@otu": "otu230196"
+}, 
+{
+"@id": "node558537", 
+"@otu": "otu230150"
+}, 
+{
+"@id": "node558538", 
+"@otu": "otu230195"
+}, 
+{
+"@id": "node558539", 
+"@otu": "otu230176"
+}, 
+{
+"@id": "node558540", 
+"@otu": "otu230191"
+}, 
+{
+"@id": "node558541"
+}, 
+{
+"@id": "node558542", 
+"@otu": "otu230167"
+}, 
+{
+"@id": "node558543", 
+"@otu": "otu230197"
+}, 
+{
+"@id": "node558544", 
+"@otu": "otu230193"
+}
+]
+}, 
+{
+"@about": "#tree2391", 
+"@id": "tree2391", 
+"edge": [
+{
+"@id": "edge558546", 
+"@source": "node558545", 
+"@target": "node558546"
+}, 
+{
+"@id": "edge558547", 
+"@source": "node558546", 
+"@target": "node558547"
+}, 
+{
+"@id": "edge558548", 
+"@source": "node558547", 
+"@target": "node558548"
+}, 
+{
+"@id": "edge558549", 
+"@source": "node558548", 
+"@target": "node558549"
+}, 
+{
+"@id": "edge558550", 
+"@source": "node558549", 
+"@target": "node558550"
+}, 
+{
+"@id": "edge558551", 
+"@source": "node558550", 
+"@target": "node558551"
+}, 
+{
+"@id": "edge558552", 
+"@source": "node558550", 
+"@target": "node558552"
+}, 
+{
+"@id": "edge558553", 
+"@source": "node558552", 
+"@target": "node558553"
+}, 
+{
+"@id": "edge558554", 
+"@source": "node558553", 
+"@target": "node558554"
+}, 
+{
+"@id": "edge558555", 
+"@source": "node558553", 
+"@target": "node558555"
+}, 
+{
+"@id": "edge558556", 
+"@source": "node558552", 
+"@target": "node558556"
+}, 
+{
+"@id": "edge558557", 
+"@source": "node558556", 
+"@target": "node558557"
+}, 
+{
+"@id": "edge558558", 
+"@source": "node558556", 
+"@target": "node558558"
+}, 
+{
+"@id": "edge558559", 
+"@source": "node558549", 
+"@target": "node558559"
+}, 
+{
+"@id": "edge558560", 
+"@source": "node558559", 
+"@target": "node558560"
+}, 
+{
+"@id": "edge558561", 
+"@source": "node558560", 
+"@target": "node558561"
+}, 
+{
+"@id": "edge558562", 
+"@source": "node558561", 
+"@target": "node558562"
+}, 
+{
+"@id": "edge558563", 
+"@source": "node558561", 
+"@target": "node558563"
+}, 
+{
+"@id": "edge558564", 
+"@source": "node558563", 
+"@target": "node558564"
+}, 
+{
+"@id": "edge558565", 
+"@source": "node558563", 
+"@target": "node558565"
+}, 
+{
+"@id": "edge558566", 
+"@source": "node558563", 
+"@target": "node558566"
+}, 
+{
+"@id": "edge558567", 
+"@source": "node558560", 
+"@target": "node558567"
+}, 
+{
+"@id": "edge558568", 
+"@source": "node558559", 
+"@target": "node558568"
+}, 
+{
+"@id": "edge558569", 
+"@source": "node558548", 
+"@target": "node558569"
+}, 
+{
+"@id": "edge558570", 
+"@source": "node558569", 
+"@target": "node558570"
+}, 
+{
+"@id": "edge558571", 
+"@source": "node558570", 
+"@target": "node558571"
+}, 
+{
+"@id": "edge558572", 
+"@source": "node558571", 
+"@target": "node558572"
+}, 
+{
+"@id": "edge558573", 
+"@source": "node558571", 
+"@target": "node558573"
+}, 
+{
+"@id": "edge558574", 
+"@source": "node558573", 
+"@target": "node558574"
+}, 
+{
+"@id": "edge558575", 
+"@source": "node558574", 
+"@target": "node558575"
+}, 
+{
+"@id": "edge558576", 
+"@source": "node558574", 
+"@target": "node558576"
+}, 
+{
+"@id": "edge558577", 
+"@source": "node558573", 
+"@target": "node558577"
+}, 
+{
+"@id": "edge558578", 
+"@source": "node558570", 
+"@target": "node558578"
+}, 
+{
+"@id": "edge558579", 
+"@source": "node558578", 
+"@target": "node558579"
+}, 
+{
+"@id": "edge558580", 
+"@source": "node558578", 
+"@target": "node558580"
+}, 
+{
+"@id": "edge558581", 
+"@source": "node558580", 
+"@target": "node558581"
+}, 
+{
+"@id": "edge558582", 
+"@source": "node558580", 
+"@target": "node558582"
+}, 
+{
+"@id": "edge558583", 
+"@source": "node558569", 
+"@target": "node558583"
+}, 
+{
+"@id": "edge558584", 
+"@source": "node558583", 
+"@target": "node558584"
+}, 
+{
+"@id": "edge558585", 
+"@source": "node558583", 
+"@target": "node558585"
+}, 
+{
+"@id": "edge558586", 
+"@source": "node558547", 
+"@target": "node558586"
+}, 
+{
+"@id": "edge558587", 
+"@source": "node558586", 
+"@target": "node558587"
+}, 
+{
+"@id": "edge558588", 
+"@source": "node558587", 
+"@target": "node558588"
+}, 
+{
+"@id": "edge558589", 
+"@source": "node558588", 
+"@target": "node558589"
+}, 
+{
+"@id": "edge558590", 
+"@source": "node558589", 
+"@target": "node558590"
+}, 
+{
+"@id": "edge558591", 
+"@source": "node558590", 
+"@target": "node558591"
+}, 
+{
+"@id": "edge558592", 
+"@source": "node558590", 
+"@target": "node558592"
+}, 
+{
+"@id": "edge558593", 
+"@source": "node558589", 
+"@target": "node558593"
+}, 
+{
+"@id": "edge558594", 
+"@source": "node558588", 
+"@target": "node558594"
+}, 
+{
+"@id": "edge558595", 
+"@source": "node558587", 
+"@target": "node558595"
+}, 
+{
+"@id": "edge558596", 
+"@source": "node558586", 
+"@target": "node558596"
+}, 
+{
+"@id": "edge558597", 
+"@source": "node558596", 
+"@target": "node558597"
+}, 
+{
+"@id": "edge558598", 
+"@source": "node558596", 
+"@target": "node558598"
+}, 
+{
+"@id": "edge558599", 
+"@source": "node558546", 
+"@target": "node558599"
+}, 
+{
+"@id": "edge558600", 
+"@source": "node558599", 
+"@target": "node558600"
+}, 
+{
+"@id": "edge558601", 
+"@source": "node558600", 
+"@target": "node558601"
+}, 
+{
+"@id": "edge558602", 
+"@source": "node558600", 
+"@target": "node558602"
+}, 
+{
+"@id": "edge558603", 
+"@source": "node558599", 
+"@target": "node558603"
+}, 
+{
+"@id": "edge558604", 
+"@source": "node558545", 
+"@target": "node558604"
+}, 
+{
+"@id": "edge558605", 
+"@source": "node558545", 
+"@target": "node558605"
+}
+], 
+"meta": [
+{
+"$": "node558546", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "BI", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "ITS", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "gpd", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "morphology", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node558545", 
+"@root": "true"
+}, 
+{
+"@id": "node558546"
+}, 
+{
+"@id": "node558547"
+}, 
+{
+"@id": "node558548"
+}, 
+{
+"@id": "node558549"
+}, 
+{
+"@id": "node558550"
+}, 
+{
+"@id": "node558551", 
+"@otu": "otu230110"
+}, 
+{
+"@id": "node558552"
+}, 
+{
+"@id": "node558553"
+}, 
+{
+"@id": "node558554", 
+"@otu": "otu230114"
+}, 
+{
+"@id": "node558555", 
+"@otu": "otu230116"
+}, 
+{
+"@id": "node558556"
+}, 
+{
+"@id": "node558557", 
+"@otu": "otu230111"
+}, 
+{
+"@id": "node558558", 
+"@otu": "otu230121"
+}, 
+{
+"@id": "node558559"
+}, 
+{
+"@id": "node558560"
+}, 
+{
+"@id": "node558561"
+}, 
+{
+"@id": "node558562", 
+"@otu": "otu230139"
+}, 
+{
+"@id": "node558563"
+}, 
+{
+"@id": "node558564", 
+"@otu": "otu230115"
+}, 
+{
+"@id": "node558565", 
+"@otu": "otu230129"
+}, 
+{
+"@id": "node558566", 
+"@otu": "otu230137"
+}, 
+{
+"@id": "node558567", 
+"@otu": "otu230130"
+}, 
+{
+"@id": "node558568", 
+"@otu": "otu230125"
+}, 
+{
+"@id": "node558569"
+}, 
+{
+"@id": "node558570"
+}, 
+{
+"@id": "node558571"
+}, 
+{
+"@id": "node558572", 
+"@otu": "otu230138"
+}, 
+{
+"@id": "node558573"
+}, 
+{
+"@id": "node558574"
+}, 
+{
+"@id": "node558575", 
+"@otu": "otu230113"
+}, 
+{
+"@id": "node558576", 
+"@otu": "otu230126"
+}, 
+{
+"@id": "node558577", 
+"@otu": "otu230133"
+}, 
+{
+"@id": "node558578"
+}, 
+{
+"@id": "node558579", 
+"@otu": "otu230112"
+}, 
+{
+"@id": "node558580"
+}, 
+{
+"@id": "node558581", 
+"@otu": "otu230122"
+}, 
+{
+"@id": "node558582", 
+"@otu": "otu230118"
+}, 
+{
+"@id": "node558583"
+}, 
+{
+"@id": "node558584", 
+"@otu": "otu230117"
+}, 
+{
+"@id": "node558585", 
+"@otu": "otu230123"
+}, 
+{
+"@id": "node558586"
+}, 
+{
+"@id": "node558587"
+}, 
+{
+"@id": "node558588"
+}, 
+{
+"@id": "node558589"
+}, 
+{
+"@id": "node558590"
+}, 
+{
+"@id": "node558591", 
+"@otu": "otu230124"
+}, 
+{
+"@id": "node558592", 
+"@otu": "otu230109"
+}, 
+{
+"@id": "node558593", 
+"@otu": "otu230132"
+}, 
+{
+"@id": "node558594", 
+"@otu": "otu230119"
+}, 
+{
+"@id": "node558595", 
+"@otu": "otu230131"
+}, 
+{
+"@id": "node558596"
+}, 
+{
+"@id": "node558597", 
+"@otu": "otu230127"
+}, 
+{
+"@id": "node558598", 
+"@otu": "otu230128"
+}, 
+{
+"@id": "node558599"
+}, 
+{
+"@id": "node558600"
+}, 
+{
+"@id": "node558601", 
+"@otu": "otu230134"
+}, 
+{
+"@id": "node558602", 
+"@otu": "otu230120"
+}, 
+{
+"@id": "node558603", 
+"@otu": "otu230135"
+}, 
+{
+"@id": "node558604", 
+"@otu": "otu230136"
+}, 
+{
+"@id": "node558605", 
+"@otu": "otu230108"
+}
+]
+}, 
+{
+"@about": "#tree2392", 
+"@id": "tree2392", 
+"edge": [
+{
+"@id": "edge558607", 
+"@source": "node558606", 
+"@target": "node558607"
+}, 
+{
+"@id": "edge558608", 
+"@source": "node558606", 
+"@target": "node558608"
+}, 
+{
+"@id": "edge558609", 
+"@source": "node558606", 
+"@target": "node558609"
+}, 
+{
+"@id": "edge558610", 
+"@source": "node558609", 
+"@target": "node558610"
+}, 
+{
+"@id": "edge558611", 
+"@source": "node558610", 
+"@target": "node558611"
+}, 
+{
+"@id": "edge558612", 
+"@source": "node558610", 
+"@target": "node558612"
+}, 
+{
+"@id": "edge558613", 
+"@source": "node558612", 
+"@target": "node558613"
+}, 
+{
+"@id": "edge558614", 
+"@source": "node558612", 
+"@target": "node558614"
+}, 
+{
+"@id": "edge558615", 
+"@source": "node558609", 
+"@target": "node558615"
+}, 
+{
+"@id": "edge558616", 
+"@source": "node558615", 
+"@target": "node558616"
+}, 
+{
+"@id": "edge558617", 
+"@source": "node558616", 
+"@target": "node558617"
+}, 
+{
+"@id": "edge558618", 
+"@source": "node558617", 
+"@target": "node558618"
+}, 
+{
+"@id": "edge558619", 
+"@source": "node558617", 
+"@target": "node558619"
+}, 
+{
+"@id": "edge558620", 
+"@source": "node558619", 
+"@target": "node558620"
+}, 
+{
+"@id": "edge558621", 
+"@source": "node558619", 
+"@target": "node558621"
+}, 
+{
+"@id": "edge558622", 
+"@source": "node558617", 
+"@target": "node558622"
+}, 
+{
+"@id": "edge558623", 
+"@source": "node558622", 
+"@target": "node558623"
+}, 
+{
+"@id": "edge558624", 
+"@source": "node558622", 
+"@target": "node558624"
+}, 
+{
+"@id": "edge558625", 
+"@source": "node558624", 
+"@target": "node558625"
+}, 
+{
+"@id": "edge558626", 
+"@source": "node558624", 
+"@target": "node558626"
+}, 
+{
+"@id": "edge558627", 
+"@source": "node558616", 
+"@target": "node558627"
+}, 
+{
+"@id": "edge558628", 
+"@source": "node558627", 
+"@target": "node558628"
+}, 
+{
+"@id": "edge558629", 
+"@source": "node558627", 
+"@target": "node558629"
+}, 
+{
+"@id": "edge558630", 
+"@source": "node558629", 
+"@target": "node558630"
+}, 
+{
+"@id": "edge558631", 
+"@source": "node558630", 
+"@target": "node558631"
+}, 
+{
+"@id": "edge558632", 
+"@source": "node558630", 
+"@target": "node558632"
+}, 
+{
+"@id": "edge558633", 
+"@source": "node558629", 
+"@target": "node558633"
+}, 
+{
+"@id": "edge558634", 
+"@source": "node558633", 
+"@target": "node558634"
+}, 
+{
+"@id": "edge558635", 
+"@source": "node558633", 
+"@target": "node558635"
+}, 
+{
+"@id": "edge558636", 
+"@source": "node558615", 
+"@target": "node558636"
+}, 
+{
+"@id": "edge558637", 
+"@source": "node558636", 
+"@target": "node558637"
+}, 
+{
+"@id": "edge558638", 
+"@source": "node558637", 
+"@target": "node558638"
+}, 
+{
+"@id": "edge558639", 
+"@source": "node558637", 
+"@target": "node558639"
+}, 
+{
+"@id": "edge558640", 
+"@source": "node558639", 
+"@target": "node558640"
+}, 
+{
+"@id": "edge558641", 
+"@source": "node558640", 
+"@target": "node558641"
+}, 
+{
+"@id": "edge558642", 
+"@source": "node558640", 
+"@target": "node558642"
+}, 
+{
+"@id": "edge558643", 
+"@source": "node558639", 
+"@target": "node558643"
+}, 
+{
+"@id": "edge558644", 
+"@source": "node558643", 
+"@target": "node558644"
+}, 
+{
+"@id": "edge558645", 
+"@source": "node558643", 
+"@target": "node558645"
+}, 
+{
+"@id": "edge558646", 
+"@source": "node558636", 
+"@target": "node558646"
+}, 
+{
+"@id": "edge558647", 
+"@source": "node558646", 
+"@target": "node558647"
+}, 
+{
+"@id": "edge558648", 
+"@source": "node558646", 
+"@target": "node558648"
+}, 
+{
+"@id": "edge558649", 
+"@source": "node558615", 
+"@target": "node558649"
+}, 
+{
+"@id": "edge558650", 
+"@source": "node558649", 
+"@target": "node558650"
+}, 
+{
+"@id": "edge558651", 
+"@source": "node558650", 
+"@target": "node558651"
+}, 
+{
+"@id": "edge558652", 
+"@source": "node558651", 
+"@target": "node558652"
+}, 
+{
+"@id": "edge558653", 
+"@source": "node558651", 
+"@target": "node558653"
+}, 
+{
+"@id": "edge558654", 
+"@source": "node558653", 
+"@target": "node558654"
+}, 
+{
+"@id": "edge558655", 
+"@source": "node558653", 
+"@target": "node558655"
+}, 
+{
+"@id": "edge558656", 
+"@source": "node558650", 
+"@target": "node558656"
+}, 
+{
+"@id": "edge558657", 
+"@source": "node558656", 
+"@target": "node558657"
+}, 
+{
+"@id": "edge558658", 
+"@source": "node558656", 
+"@target": "node558658"
+}, 
+{
+"@id": "edge558659", 
+"@source": "node558658", 
+"@target": "node558659"
+}, 
+{
+"@id": "edge558660", 
+"@source": "node558658", 
+"@target": "node558660"
+}, 
+{
+"@id": "edge558661", 
+"@source": "node558660", 
+"@target": "node558661"
+}, 
+{
+"@id": "edge558662", 
+"@source": "node558660", 
+"@target": "node558662"
+}, 
+{
+"@id": "edge558663", 
+"@source": "node558649", 
+"@target": "node558663"
+}, 
+{
+"@id": "edge558664", 
+"@source": "node558663", 
+"@target": "node558664"
+}, 
+{
+"@id": "edge558665", 
+"@source": "node558663", 
+"@target": "node558665"
+}
+], 
+"meta": [
+{
+"$": "UPGMA", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "AFLP", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "topology differs from figure", 
+"@property": "ot:tag", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node558606", 
+"@root": "true"
+}, 
+{
+"@id": "node558607", 
+"@otu": "otu230108"
+}, 
+{
+"@id": "node558608", 
+"@otu": "otu230136"
+}, 
+{
+"@id": "node558609"
+}, 
+{
+"@id": "node558610"
+}, 
+{
+"@id": "node558611", 
+"@otu": "otu230135"
+}, 
+{
+"@id": "node558612"
+}, 
+{
+"@id": "node558613", 
+"@otu": "otu230134"
+}, 
+{
+"@id": "node558614", 
+"@otu": "otu230120"
+}, 
+{
+"@id": "node558615"
+}, 
+{
+"@id": "node558616"
+}, 
+{
+"@id": "node558617"
+}, 
+{
+"@id": "node558618", 
+"@otu": "otu230129"
+}, 
+{
+"@id": "node558619"
+}, 
+{
+"@id": "node558620", 
+"@otu": "otu230139"
+}, 
+{
+"@id": "node558621", 
+"@otu": "otu230125"
+}, 
+{
+"@id": "node558622"
+}, 
+{
+"@id": "node558623", 
+"@otu": "otu230115"
+}, 
+{
+"@id": "node558624"
+}, 
+{
+"@id": "node558625", 
+"@otu": "otu230137"
+}, 
+{
+"@id": "node558626", 
+"@otu": "otu230130"
+}, 
+{
+"@id": "node558627"
+}, 
+{
+"@id": "node558628", 
+"@otu": "otu230110"
+}, 
+{
+"@id": "node558629"
+}, 
+{
+"@id": "node558630"
+}, 
+{
+"@id": "node558631", 
+"@otu": "otu230111"
+}, 
+{
+"@id": "node558632", 
+"@otu": "otu230121"
+}, 
+{
+"@id": "node558633"
+}, 
+{
+"@id": "node558634", 
+"@otu": "otu230114"
+}, 
+{
+"@id": "node558635", 
+"@otu": "otu230116"
+}, 
+{
+"@id": "node558636"
+}, 
+{
+"@id": "node558637"
+}, 
+{
+"@id": "node558638", 
+"@otu": "otu230131"
+}, 
+{
+"@id": "node558639"
+}, 
+{
+"@id": "node558640"
+}, 
+{
+"@id": "node558641", 
+"@otu": "otu230124"
+}, 
+{
+"@id": "node558642", 
+"@otu": "otu230109"
+}, 
+{
+"@id": "node558643"
+}, 
+{
+"@id": "node558644", 
+"@otu": "otu230119"
+}, 
+{
+"@id": "node558645", 
+"@otu": "otu230132"
+}, 
+{
+"@id": "node558646"
+}, 
+{
+"@id": "node558647", 
+"@otu": "otu230127"
+}, 
+{
+"@id": "node558648", 
+"@otu": "otu230128"
+}, 
+{
+"@id": "node558649"
+}, 
+{
+"@id": "node558650"
+}, 
+{
+"@id": "node558651"
+}, 
+{
+"@id": "node558652", 
+"@otu": "otu230112"
+}, 
+{
+"@id": "node558653"
+}, 
+{
+"@id": "node558654", 
+"@otu": "otu230122"
+}, 
+{
+"@id": "node558655", 
+"@otu": "otu230118"
+}, 
+{
+"@id": "node558656"
+}, 
+{
+"@id": "node558657", 
+"@otu": "otu230138"
+}, 
+{
+"@id": "node558658"
+}, 
+{
+"@id": "node558659", 
+"@otu": "otu230133"
+}, 
+{
+"@id": "node558660"
+}, 
+{
+"@id": "node558661", 
+"@otu": "otu230113"
+}, 
+{
+"@id": "node558662", 
+"@otu": "otu230126"
+}, 
+{
+"@id": "node558663"
+}, 
+{
+"@id": "node558664", 
+"@otu": "otu230117"
+}, 
+{
+"@id": "node558665", 
+"@otu": "otu230123"
+}
+]
+}
+]
+}
+}
+}
