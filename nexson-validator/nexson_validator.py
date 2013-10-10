@@ -607,6 +607,7 @@ class NexSON(NexsonDictWrapper):
                           'ot:studyYear',
                           'ot:curatorName', 
                           'ot:studyPublicationReference', 
+                          'ot:dataDeposit',
                           'ot:tag')
     EXPECTED_TAGS = tuple()
     TAG_CONTEXT = 'nexml'
@@ -635,6 +636,7 @@ class NexSON(NexsonDictWrapper):
         self._study_publication = self.get_singelton_meta('ot:studyPublication')
         self._study_year = self.get_singelton_meta('ot:studyYear')
         self._curator_name = self.get_singelton_meta('ot:curatorName')
+        self._data_deposit = self.get_singelton_meta('ot:dataDeposit')
         self._study_publication_reference = self.get_singelton_meta('ot:studyPublicationReference')
         self._tags = self.get_list_meta('ot:tag', warn_if_missing=False)
         if isinstance(self._tags, str) or isinstance(self._tags, unicode):
