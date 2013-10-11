@@ -34,6 +34,7 @@ class WarningCodes():
               'UNVALIDATED_ANNOTATION',
               'UNRECOGNIZED_TAG',
               'CONFLICTING_PROPERTY_VALUES',
+              'NO_TREES',
               ]
     numeric_codes_registered = []
 for _n, _f in enumerate(WarningCodes.facets):
@@ -81,6 +82,8 @@ def write_warning(out, prefix, wc, data, container, subelement):
         out.write(m)
     elif wc == WarningCodes.MULTIPLE_TREES:
         out.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
+    elif wc == WarningCodes.NO_TREES:
+        out.write('{p}No trees were found, or all trees were flagged for deletion'.format(p=prefix))
     elif wc == WarningCodes.UNRECOGNIZED_TAG:
         out.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=data))
     elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
@@ -716,6 +719,8 @@ class NexSON(NexsonDictWrapper):
             possible_trees = [t for t in self.trees._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)]
             if len(possible_trees) > 1:
                 rich_logger.warn(WarningCodes.MULTIPLE_TREES, self.trees._as_list, container=self.trees)
+            elif len(possible_trees) == 0:
+                rich_logger.warn(WarningCodes.NO_TREES, None, container=self.trees)
 
 
 def indented_keys(out, o, indentation='', indent=2):
