@@ -448,7 +448,9 @@ class Tree(NexsonDictWrapper):
     EXPECETED_KEYS = ('@id',)
     PERMISSIBLE_KEYS = ('@id', '@about', 'node', 'edge', 'meta')
     EXPECTED_META_KEYS = ('ot:inGroupClade', 'ot:branchLengthMode', 'ot:tag')
-    EXPECTED_TAGS = tuple()
+    DELETE_ME_TAGS = ('delete', 'del', 'delet', 'delete', 'delete me', 'do not use')
+    USE_ME_TAGS = ('choose me',)
+    EXPECTED_TAGS = tuple(list(DELETE_ME_TAGS) + list(USE_ME_TAGS))
     TAG_CONTEXT = 'tree'
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
@@ -477,18 +479,18 @@ class Tree(NexsonDictWrapper):
         self._tag_list = self.get_list_meta('ot:tag', warn_if_missing=False)
         if isinstance(self._tag_list, str) or isinstance(self._tag_list, unicode):
             self._tag_list = [self._tag_list]
-        unexpected_tags = [i for i in self._tag_list if i not in self.EXPECTED_TAGS]
+        unexpected_tags = [i for i in self._tag_list if i.lower() not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
             rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, container=self, subelement='meta')
         self._tagged_for_deletion = False
         self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
         tl = [i.lower() for i in self._tag_list]
         del_tag, inc_tag = None, None
-        for t in ['delete', 'del', 'delet', 'delete', 'delete me', 'do not use']:
+        for t in Tree.DELETE_ME_TAGS:
             if t in tl:
                 self._tagged_for_deletion = True
                 del_tag = self._tag_list[tl.index(t)]
-        for t in ['choose me']:
+        for t in Tree.USE_ME_TAGS:
             if t in tl:
                 self._tagged_for_inclusion = True
                 inc_tag = self._tag_list[tl.index(t)]
