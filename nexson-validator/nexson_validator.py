@@ -33,6 +33,7 @@ class WarningCodes():
               'MULTIPLE_TREES',
               'UNVALIDATED_ANNOTATION',
               'UNRECOGNIZED_TAG',
+              'CONFLICTING_PROPERTY_VALUES',
               ]
     numeric_codes_registered = []
 for _n, _f in enumerate(WarningCodes.facets):
@@ -65,6 +66,9 @@ def write_warning(out, prefix, wc, data, container, subelement):
     elif wc == WarningCodes.PROPERTY_VALUE_NOT_USEFUL:
         k, v = data['key'], data['value']
         out.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
+    elif wc == WarningCodes.CONFLICTING_PROPERTY_VALUES:
+        s = u", ".join([u'"{k}"="{v}"'.format(k=i[0], v=i[1]) for i in data])
+        out.write('{p}Conflicting values for properties: {s}'.format(p=prefix, s=s))
     elif wc == WarningCodes.UNRECOGNIZED_PROPERTY_VALUE:
         k, v = data['key'], data['value']
         out.write('{p}Unrecognized value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
@@ -476,9 +480,23 @@ class Tree(NexsonDictWrapper):
         unexpected_tags = [i for i in self._tag_list if i not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
             rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, container=self, subelement='meta')
-        self._tagged_for_deletion = 'delete' in self._tag_list
+        self._tagged_for_deletion = False
         self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
-
+        tl = [i.lower() for i in self._tag_list]
+        del_tag, inc_tag = None, None
+        for t in ['delete', 'del', 'delet', 'delete', 'delete me', 'do not use']:
+            if t in tl:
+                self._tagged_for_deletion = True
+                del_tag = self._tag_list[tl.index(t)]
+        for t in ['choose me']:
+            if t in tl:
+                self._tagged_for_inclusion = True
+                inc_tag = self._tag_list[tl.index(t)]
+        if self._tagged_for_inclusion and self._tagged_for_deletion:
+            rich_logger.warn(WarningCodes.CONFLICTING_PROPERTY_VALUES,
+                             [('ot:tag', del_tag), ('ot:tag', inc_tag)],
+                             container=self,
+                             subelement='meta')
         self._node_dict = {}
         self._node_list = []
         self._edge_dict = {}
