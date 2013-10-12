@@ -27,6 +27,7 @@ class WarningCodes():
               'TIP_WITHOUT_OTU',
               'TIP_WITHOUT_OTT_ID',
               'MULTIPLE_TIPS_MAPPED_TO_OTT_ID',
+              'MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID',
               'INVALID_PROPERTY_VALUE',
               'PROPERTY_VALUE_NOT_USEFUL',
               'UNRECOGNIZED_PROPERTY_VALUE',
@@ -91,6 +92,17 @@ def write_warning(out, prefix, wc, data, container, subelement):
         id_list.sort()
         s = ', '.join(['"{i}"'.format(i=i) for i in id_list])
         out.write('{p}Multiple nodes ({s}) are mapped to the OTT ID "{o}"'.format(p=prefix,
+                                                                            s=s,
+                                                                            o=data['ott_id'],
+                                                                            ))
+    elif wc == WarningCodes.MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
+        sl = [(i[0].nexson_id, i) for i in data['clades']]
+        sl.sort()
+        str_list = []
+        for el in sl:
+            str_list.append('"{s}"'.format(s='", "'.join([i.nexson_id for i in el[1]])))
+        s = ' +++ '.join([i for i in str_list])
+        out.write('{p}Multiple nodes that do not form the tips of a clade are mapped to the OTT ID "{o}". The clades are {s}'.format(p=prefix,
                                                                             s=s,
                                                                             o=data['ott_id'],
                                                                             ))
@@ -426,7 +438,30 @@ class Node(NexsonDictWrapper):
                                   {'key': '@otu',
                                    'value': v},
                                   container=self)
-
+    def get_parent(self):
+        e = self._edge
+        if e is None:
+            return None
+        return e._source
+    def get_clade_if_tips_contained(self, avoid_child, tips_set):
+        '''Returns bool, list of nodes in the clade
+        True, list of all nodes in the clade (if all tips are in tip_set)
+        False, None
+        '''
+        if len(self._children) == 0:
+            if self in tips_set:
+                return True, [self]
+            return False, None
+        r = []
+        for el in self._children:
+            if el._target != avoid_child:
+                b, c = el._target.get_clade_if_tips_contained(None, tips_set)
+                if b:
+                    r.extend(c)
+                else:
+                    return False, None
+        r.append(self)
+        return True, r
     def construct_path_to_root(self, encountered_nodes):
         n = self
         p = []
@@ -552,10 +587,12 @@ class Tree(NexsonDictWrapper):
         encountered_nodes = set()
         ott_id2node = {}
         multi_labelled_ott_id = set()
+        valid_tree = True
         for nd in self._node_list:
             cycle_node, path_to_root = nd.construct_path_to_root(encountered_nodes)
             #print cycle_node, [i.nexson_id for i in path_to_root], [i.nexson_id for i in encountered_nodes], [i.nexson_id for i in lowest_node_set]
             if cycle_node:
+                valid_tree = False
                 rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, container=self, subelement='node')
             if path_to_root:
                 lowest_node_set.add(path_to_root[-1])
@@ -570,11 +607,14 @@ class Tree(NexsonDictWrapper):
                         multi_labelled_ott_id.add(nd._otu._ott_id)
                     nl.append(nd)
         for ott_id in multi_labelled_ott_id:
+            tip_list = ott_id2node.get(ott_id)
             rich_logger.warn(WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, 
                              {'ott_id': ott_id,
-                              'node_list': ott_id2node.get(ott_id)},
+                              'node_list': tip_list},
                               container=self)
+
         if len(lowest_node_set) > 1:
+            valid_tree = False
             lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
             lowest_node_set.sort()
             lowest_node_set = [i[1] for i in lowest_node_set]
@@ -586,6 +626,40 @@ class Tree(NexsonDictWrapper):
                                   {'tagged': self._root_node,
                                    'node_without_parent': ln},
                                   container=self)
+        if valid_tree:
+            for ott_id in multi_labelled_ott_id:
+                tip_list = ott_id2node.get(ott_id)
+                clade_tips = self.break_by_clades(tip_list)
+                if len(clade_tips) > 1:
+                    rich_logger.warn(WarningCodes.MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, 
+                                     {'ott_id': ott_id, 'clades': clade_tips},
+                                     container=self)
+    def break_by_clades(self, tip_list):
+        '''Takes a list of nodes. returns a list of lists. 
+        Each sub list is a set of leaves in the tree that form the tips of a clade on the tree..
+        '''
+        c = list(tip_list)
+        cs = set(c)
+        if len(tip_list) < 2:
+            return [c]
+        clade_lists = []
+        while len(c) > 0:
+            n = c.pop(0)
+            p = n.get_parent()
+            assert p is not None
+            next_el = [n]
+            while p is not None:
+                all_in_cs, des_nodes = p.get_clade_if_tips_contained(n, cs)
+                if all_in_cs:
+                    next_el.extend(des_nodes)
+                    for d in des_nodes:
+                        if d in cs:
+                            c.remove(d)
+                else:
+                    break
+                p = p.get_parent()
+            clade_lists.append(next_el)
+        return clade_lists
 
 class OTUCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'otu')
