@@ -1,6 +1,6 @@
 # The Open Tree Of Life API
 
-[![Build Status](https://secure.travis-ci.org/OpenTreeOfLife/api.opentreeoflife.org.png)](http://travis-ci.org/OpenTreeOfLife/api.opentreeoflife.org.png)
+[![Build Status](https://secure.travis-ci.org/OpenTreeOfLife/api.opentreeoflife.org.png)](http://travis-ci.org/OpenTreeOfLife/api.opentreeoflife.org)
 
 This repository will hold the code that runs api.opentreeoflife.org, which talks
 to the backend datastore [treenexus](https://github.com/OpenTreeOfLife/treenexus).
