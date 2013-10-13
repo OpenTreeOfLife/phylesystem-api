@@ -26,8 +26,6 @@ do
         passed=$(expr $passed + 1)
     else
         echo "Did not create the expected output!"
-        echo $output
-        read x
     fi
     total=$(expr $total + 1)
 done
