@@ -56,7 +56,13 @@
 "comment": "Missing required key \"@id\" in \"node(id=None)\"\n", 
 "data": "@id", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": false, 
+"nodeID": null, 
+"top": "trees", 
+"treeID": "tree1", 
+"treesID": "trees2"
+}, 
 "severity": "ERROR"
 }, 
 {
@@ -64,7 +70,12 @@
 "comment": "Disconnected graph found instead of tree including root nodes:\"None\", \"node0\" in \"tree(id=tree1)\"\n", 
 "data": null, 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": false, 
+"top": "trees", 
+"treeID": "tree1", 
+"treesID": "trees2"
+}, 
 "severity": "ERROR"
 }, 
 {
@@ -72,7 +83,10 @@
 "comment": "Missing optional key \"@property=ot:focalClade\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "@property=ot:focalClade", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -80,7 +94,10 @@
 "comment": "Missing optional key \"@property=ot:studyPublication\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "@property=ot:studyPublication", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -88,7 +105,10 @@
 "comment": "Missing optional key \"@property=ot:studyYear\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "@property=ot:studyYear", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -96,7 +116,10 @@
 "comment": "Missing optional key \"@property=ot:curatorName\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "@property=ot:curatorName", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -104,7 +127,10 @@
 "comment": "Missing optional key \"@property=ot:dataDeposit\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "@property=ot:dataDeposit", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -112,7 +138,10 @@
 "comment": "Missing optional key \"@property=ot:studyPublicationReference\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "@property=ot:studyPublicationReference", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -125,7 +154,12 @@ null,
 ]
 }, 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": false, 
+"top": "trees", 
+"treeID": "tree1", 
+"treesID": "trees2"
+}, 
 "severity": "WARNING"
 }
 ]

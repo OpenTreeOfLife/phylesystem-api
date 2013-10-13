@@ -181,19 +181,29 @@ class WarningMessage(object):
                  container,
                  subelement='',
                  source_identifier=None,
-                 severity=SeverityCodes.WARNING):
+                 severity=SeverityCodes.WARNING,
+                 prop_name=''):
         self.warning_code = warning_code
         self.warning_data = data
-        self.container = container
+        self._container = container
         self.subelement = subelement
         self.source_identifier = source_identifier
         self.severity = severity
+        if prop_name:
+            self.prop_name = prop_name
+        else:
+            if warning_code == WarningCodes.REFERENCED_ID_NOT_FOUND:
+                self.prop_name = data['key']
+            elif warning_code == WarningCodes.UNRECOGNIZED_TAG:
+                self.prop_name = 'ot:tag'
+            else:
+                self.prop_name = None
     def write(self, outstream, prefix):
         write_warning(outstream,
                       prefix,
                       self.warning_code,
                       self.warning_data,
-                      self.container,
+                      self._container,
                       self.subelement)
     def __unicode__(self, prefix=''):
         b = StringIO()
@@ -209,8 +219,9 @@ class WarningMessage(object):
             'code': WarningCodes.facets[self.warning_code],
             'comment': self.__unicode__(),
             'data': convert_data_for_json(self.warning_code, self.warning_data),
-            'refersTo': self.container.get_path_dict(self.subelement)
+            'refersTo': self._container.get_path_dict(self.subelement, self.prop_name)
         }
+
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
         self.out = sys.stderr
@@ -304,9 +315,8 @@ class NexsonDictWrapper(object):
             self._logger = DefaultRichLogger()
         else:
             self._logger = rich_logger
-    def get_path_dict(self, subelement):
-        d = {}
-        return d
+    def get_path_dict(self, subelement, prop_name):
+        assert False
     def get_nexson_id(self):
         return self._raw.get('@id')
     nexson_id = property(get_nexson_id)
@@ -420,6 +430,19 @@ class OTU(NexsonDictWrapper):
         self.consume_meta_and_check_keys(o, rich_logger)
         self._ott_id = self.get_singelton_meta('ot:ottolid')
         self._original_label = self.get_singelton_meta('ot:originalLabel')
+    def get_path_dict(self, subelement, prop_name):
+        d = {
+            'top': 'otus',
+            'otusID': self._container.nexson_id,
+            'otuID': self.nexson_id,
+            'inMeta': False,
+        }
+        if subelement:
+            assert subelement == 'meta'
+            d['inMeta'] = True
+        if prop_name:
+            d['property'] = prop_name
+        return d
 
 class Edge(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', '@source', '@target')
@@ -458,6 +481,20 @@ class Edge(NexsonDictWrapper):
                                   container=self)
             else:
                 self._target._edge = self
+    def get_path_dict(self, subelement, prop_name):
+        d = {
+            'top': 'trees',
+            'treesID': self._container._container.nexson_id,
+            'treeID': self._container.nexson_id,
+            'edgeID': self.nexson_id,
+            'inMeta': False,
+        }
+        if subelement:
+            assert subelement == 'meta'
+            d['inMeta'] = True
+        if prop_name:
+            d['property'] = prop_name
+        return d
 
 
 class Node(NexsonDictWrapper):
@@ -466,6 +503,20 @@ class Node(NexsonDictWrapper):
     PERMISSIBLE_KEYS = ('@id', '@otu', '@root')
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'node'
+    def get_path_dict(self, subelement, prop_name):
+        d = {
+            'top': 'trees',
+            'treesID': self._container._container.nexson_id,
+            'treeID': self._container.nexson_id,
+            'nodeID': self.nexson_id,
+            'inMeta': False,
+        }
+        if subelement:
+            assert subelement == 'meta'
+            d['inMeta'] = True
+        if prop_name:
+            d['property'] = prop_name
+        return d
     def __init__(self, o, rich_logger, otu_dict, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         self.consume_meta_and_check_keys(o, rich_logger)
@@ -533,6 +584,18 @@ class Tree(NexsonDictWrapper):
     USE_ME_TAGS = ('choose me',)
     EXPECTED_TAGS = tuple(list(DELETE_ME_TAGS) + list(USE_ME_TAGS))
     TAG_CONTEXT = 'tree'
+    def get_path_dict(self, subelement, prop_name):
+        d = {
+            'top': 'trees',
+            'treesID': self._container.nexson_id,
+            'treeID': self.nexson_id,
+            'inMeta': False,
+        }
+        if subelement == 'meta':
+            d['inMeta'] = True
+        if prop_name:
+            d['property'] = prop_name
+        return d
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         self.consume_meta_and_check_keys(o, rich_logger)
@@ -636,7 +699,7 @@ class Tree(NexsonDictWrapper):
             #print cycle_node, [i.nexson_id for i in path_to_root], [i.nexson_id for i in encountered_nodes], [i.nexson_id for i in lowest_node_set]
             if cycle_node:
                 valid_tree = False
-                rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, container=self, subelement='node')
+                rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, container=self)
             if path_to_root:
                 lowest_node_set.add(path_to_root[-1])
             if len(nd._children) == 0:
@@ -710,6 +773,16 @@ class OTUCollection(NexsonDictWrapper):
     PERMISSIBLE_KEYS = ('@id', 'otu')
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'otus'
+    def get_path_dict(self, subelement, prop_name):
+        d = {
+            'top': 'otus',
+            'otusID': self.nexson_id,
+        }
+        if subelement == 'meta':
+            d['inMeta'] = True
+        if prop_name:
+            d['property'] = prop_name
+        return d
     def __init__(self, o, rich_logger, container):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         self._as_list = []
@@ -735,6 +808,17 @@ class TreeCollection(NexsonDictWrapper):
     PERMISSIBLE_KEYS = ('@id', 'tree', '@otus')
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'trees'
+    def get_path_dict(self, subelement, prop_name):
+        d = {
+            'top': 'trees',
+            'treesID': self.nexson_id,
+            'inMeta': False,
+        }
+        if subelement == 'meta':
+            d['inMeta'] = True
+        if prop_name:
+            d['property'] = prop_name
+        return d
     def __init__(self, o, rich_logger, container):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         self._as_list = []
@@ -789,6 +873,18 @@ class NexSON(NexsonDictWrapper):
                           'ot:tag')
     EXPECTED_TAGS = tuple()
     TAG_CONTEXT = 'nexml'
+    def get_path_dict(self, subelement, prop_name):
+        if subelement == 'meta':
+            d = {
+                'top': 'meta',
+                'inMeta': True,
+            }
+        else: 
+            d = {'inMeta':False}
+        if prop_name:
+            d['property'] = prop_name
+        return d
+
     def __init__(self, o, rich_logger=None):
         '''Creates an object that validates `o` as a dictionary
         that represents a valid NexSON object.
