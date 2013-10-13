@@ -46,7 +46,12 @@
 "comment": "Multiple nodes in a tree were flagged as being the root node (\"node1\" was not the first) in \"node\" in \"tree(id=tree1)\"\n", 
 "data": "node1", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": false, 
+"top": "trees", 
+"treeID": "tree1", 
+"treesID": "trees2"
+}, 
 "severity": "ERROR"
 }, 
 {
@@ -54,7 +59,10 @@
 "comment": "Missing optional key \"@property=ot:dataDeposit\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "@property=ot:dataDeposit", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }
 ]

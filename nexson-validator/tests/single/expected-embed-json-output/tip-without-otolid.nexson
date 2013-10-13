@@ -86,7 +86,12 @@
 "comment": "Missing optional key \"@property=ot:ottolid\" in \"meta\" in \"otu(id=otu3)\"\n", 
 "data": "@property=ot:ottolid", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"otuID": "otu3", 
+"otusID": "otus1", 
+"top": "otus"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -94,7 +99,13 @@
 "comment": "Tip node mapped to an OTU (\"otu3\") which does not have an OTT ID in \"node(id=node4)\"\n", 
 "data": null, 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": false, 
+"nodeID": "node4", 
+"top": "trees", 
+"treeID": "tree1", 
+"treesID": "trees2"
+}, 
 "severity": "WARNING"
 }
 ]

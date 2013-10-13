@@ -46,7 +46,11 @@
 "comment": "Unrecognized value for a tag: \"bogus1\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "bogus1", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"property": "ot:tag", 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -54,7 +58,11 @@
 "comment": "Unrecognized value for a tag: \"bogus2\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "bogus2", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"property": "ot:tag", 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }, 
 {
@@ -62,7 +70,11 @@
 "comment": "Unrecognized value for a tag: \"heat shock protein 80\u20131\" in \"meta\" in \"nexml(id=None)\"\n", 
 "data": "heat shock protein 80\u20131", 
 "preserve": false, 
-"refersTo": {}, 
+"refersTo": {
+"inMeta": true, 
+"property": "ot:tag", 
+"top": "meta"
+}, 
 "severity": "WARNING"
 }
 ]
