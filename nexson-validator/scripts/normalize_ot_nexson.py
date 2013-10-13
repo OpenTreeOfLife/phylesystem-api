@@ -37,7 +37,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Validate a json file as Open Tree of Life NexSON')
     parser.add_argument('--verbose', dest='verbose', action='store_true', default=False, help='verbose output')
-    parser.add_argument('--validate', dest='validate', action='store_true', default=False, help='verbose output')
+    parser.add_argument('--validate', dest='validate', action='store_true', default=False, help='warnings and error messages in JSON')
+    parser.add_argument('--embed', dest='embed', action='store_true', default=False, help='embed the warnings and error messages in the NexSON meta element')
     parser.add_argument('--meta', dest='meta', action='store_true', default=False, help='warn about unvalidated meta elements')
     parser.add_argument('input', metavar='filepath', type=unicode, nargs=1, help='filename')
     args = parser.parse_args()
@@ -73,12 +74,14 @@ if __name__ == '__main__':
         invoc = list(sys.argv[1:])
         invoc.remove(inp_filepath)
         uuid = "meta-" + str(uuid.uuid1())
+        script_name = os.path.basename(sys.argv[0])
+        annotation_label = "Open Tree NexSON validation"
         annotation = {
             "@property": "ot:annotation",
-            "$": "Open Tree NexSON validation",
+            "$": annotation_label,
             "@xsi:type": "nex:ResourceMeta",
             "author": {
-                "name": os.path.basename(sys.argv[0]), 
+                "name": script_name, 
                 "url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org", 
                 "description": "validator of NexSON constraints as well as constraints that would allow a study to be imported into the Open Tree of Life's phylogenetic synthesis tools",
                 "version": VERSION,
@@ -105,6 +108,39 @@ if __name__ == '__main__':
             d['severity'] = "WARNING"
             d['preserve'] = False
             message_list.append(d)
-        json.dump(annotation, sys.stdout, sort_keys=True, indent=0)
+        if args.embed:
+            n = obj['nexml']
+            former_meta = n.setdefault('meta', [])
+            if not isinstance(former_meta, list):
+                former_meta = [former_meta]
+                n['meta'] = former_meta
+            else:
+                indices_to_pop = []
+                for annotation_ind, el in enumerate(former_meta):
+                    try:
+                        if (el.get('$') == annotation_label) and (el.get('author',{}).get('name') == script_name):
+                            m_list = el.get('messages', [])
+                            to_retain = []
+                            for m in m_list:
+                                if m.get('preserve'):
+                                    to_retain.append(m)
+                            if len(to_retain) == 0:
+                                indices_to_pop.append(annotation_ind)
+                            elif len(to_retain) < len(m_list):
+                                el['messages'] = to_retain
+                                el['dateModified'] = datetime.datetime.utcnow().isoformat()
+                    except:
+                        # different annotation structures could yield IndexErrors or other exceptions.
+                        # these are not the annotations that you are looking for
+                        pass
+
+                if len(indices_to_pop) > 0:
+                    # walk backwards so pops won't change the meaning of stored indices
+                    for annotation_ind in indices_to_pop[-1::-1]:
+                        former_meta.pop(annotation_ind)
+            former_meta.append(annotation)
+            json.dump(obj, sys.stdout, sort_keys=True, indent=0)
+        else:
+            json.dump(annotation, sys.stdout, sort_keys=True, indent=0)
     else:
         json.dump(obj, sys.stdout, sort_keys=True, indent=0)
