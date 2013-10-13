@@ -105,6 +105,6 @@ if __name__ == '__main__':
             d['severity'] = "WARNING"
             d['preserve'] = False
             message_list.append(d)
-        json.dump(annotation, sys.stdout, sort_keys=True, indent=4)
+        json.dump(annotation, sys.stdout, sort_keys=True, indent=0)
     else:
         json.dump(obj, sys.stdout, sort_keys=True, indent=0)
