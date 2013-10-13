@@ -1,0 +1,228 @@
+{
+"nexml": {
+"@id": "some-id", 
+"meta": [
+{
+"$": "0", 
+"@property": "ot:studyId", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Open Tree NexSON validation", 
+"@property": "ot:annotation", 
+"@xsi:type": "nex:ResourceMeta", 
+"author": {
+"description": "validator of NexSON constraints as well as constraints that would allow a study to be imported into the Open Tree of Life's phylogenetic synthesis tools", 
+"invocation": {
+"checksPerformed": [
+"MISSING_MANDATORY_KEY", 
+"MISSING_OPTIONAL_KEY", 
+"UNRECOGNIZED_KEY", 
+"MISSING_LIST_EXPECTED", 
+"DUPLICATING_SINGLETON_KEY", 
+"REFERENCED_ID_NOT_FOUND", 
+"REPEATED_ID", 
+"MULTIPLE_ROOT_NODES", 
+"NO_ROOT_NODE", 
+"MULTIPLE_EDGES_FOR_NODES", 
+"CYCLE_DETECTED", 
+"DISCONNECTED_GRAPH_DETECTED", 
+"INCORRECT_ROOT_NODE_LABEL", 
+"TIP_WITHOUT_OTU", 
+"TIP_WITHOUT_OTT_ID", 
+"MULTIPLE_TIPS_MAPPED_TO_OTT_ID", 
+"MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID", 
+"INVALID_PROPERTY_VALUE", 
+"PROPERTY_VALUE_NOT_USEFUL", 
+"UNRECOGNIZED_PROPERTY_VALUE", 
+"MULTIPLE_TREES", 
+"UNRECOGNIZED_TAG", 
+"CONFLICTING_PROPERTY_VALUES", 
+"NO_TREES"
+], 
+"commandLine": [
+"--validate", 
+"--embed"
+], 
+}, 
+"name": "normalize_ot_nexson.py", 
+"url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org", 
+"version": "0.0.1a"
+}, 
+"isValid": false, 
+"messages": [
+{
+"code": "MISSING_MANDATORY_KEY", 
+"comment": "Missing required key \"edge\" in \"tree(id=tree1)\"\n", 
+"data": "edge", 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "ERROR"
+}, 
+{
+"code": "TIP_WITHOUT_OTU", 
+"comment": "Tip node without a valid @otu value in \"node(id=node0)\"\n", 
+"data": null, 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "ERROR"
+}, 
+{
+"code": "TIP_WITHOUT_OTU", 
+"comment": "Tip node without a valid @otu value in \"node(id=node1)\"\n", 
+"data": null, 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "ERROR"
+}, 
+{
+"code": "DISCONNECTED_GRAPH_DETECTED", 
+"comment": "Disconnected graph found instead of tree including root nodes:\"node0\", \"node1\", \"node2\", \"node3\", \"node4\" in \"tree(id=tree1)\"\n", 
+"data": null, 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "ERROR"
+}, 
+{
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:focalClade\" in \"meta\" in \"nexml(id=None)\"\n", 
+"data": "@property=ot:focalClade", 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "WARNING"
+}, 
+{
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:studyPublication\" in \"meta\" in \"nexml(id=None)\"\n", 
+"data": "@property=ot:studyPublication", 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "WARNING"
+}, 
+{
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:studyYear\" in \"meta\" in \"nexml(id=None)\"\n", 
+"data": "@property=ot:studyYear", 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "WARNING"
+}, 
+{
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:curatorName\" in \"meta\" in \"nexml(id=None)\"\n", 
+"data": "@property=ot:curatorName", 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "WARNING"
+}, 
+{
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:dataDeposit\" in \"meta\" in \"nexml(id=None)\"\n", 
+"data": "@property=ot:dataDeposit", 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "WARNING"
+}, 
+{
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:studyPublicationReference\" in \"meta\" in \"nexml(id=None)\"\n", 
+"data": "@property=ot:studyPublicationReference", 
+"preserve": false, 
+"refersTo": {}, 
+"severity": "WARNING"
+}
+]
+}
+], 
+"otus": {
+"@id": "otus1", 
+"otu": [
+{
+"@id": "otu1", 
+"@label": "Potamogeton berchtoldii Fieber", 
+"meta": [
+{
+"$": 1007359, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Potamogeton berchtoldii CoventryLk.06.015", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@id": "otu2", 
+"@label": "Potamogeton foliosus Raf.", 
+"meta": [
+{
+"$": 1024525, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Potamogeton foliosus MtHigby.CT", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}, 
+{
+"@id": "otu3", 
+"@label": "Potamogeton gemmiparus", 
+"meta": [
+{
+"$": 161393, 
+"@property": "ot:ottolid", 
+"@xsi:type": "nex:LiteralMeta"
+}, 
+{
+"$": "Potamogeton gemmiparus Pickerel.06.014.8", 
+"@property": "ot:originalLabel", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
+}
+]
+}, 
+"trees": {
+"@id": "trees2", 
+"@otus": "otus1", 
+"tree": [
+{
+"@id": "tree1", 
+"meta": [
+{
+"$": "node1", 
+"@property": "ot:inGroupClade", 
+"@xsi:type": "nex:LiteralMeta"
+}
+], 
+"node": [
+{
+"@id": "node0", 
+"@root": "true"
+}, 
+{
+"@id": "node1"
+}, 
+{
+"@id": "node2", 
+"@otu": "otu1"
+}, 
+{
+"@id": "node3", 
+"@otu": "otu2"
+}, 
+{
+"@id": "node4", 
+"@otu": "otu3"
+}
+]
+}
+]
+}
+}
+}
