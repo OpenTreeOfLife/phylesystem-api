@@ -30,7 +30,7 @@ class WarningCodes():
               'TIP_WITHOUT_OTU',
               'TIP_WITHOUT_OTT_ID',
               'MULTIPLE_TIPS_MAPPED_TO_OTT_ID',
-              'MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID',
+              'NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID',
               'INVALID_PROPERTY_VALUE',
               'PROPERTY_VALUE_NOT_USEFUL',
               'UNRECOGNIZED_PROPERTY_VALUE',
@@ -62,7 +62,7 @@ def convert_data_for_json(wc, data):
         id_list = [i.nexson_id for i in data['node_list']]
         id_list.sort()
         return {'nodes': id_list}
-    elif wc == WarningCodes.MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
+    elif wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
         sl = [(i[0].nexson_id, i) for i in data['clades']]
         sl.sort()
         str_list = []
@@ -125,7 +125,7 @@ def write_warning(out, prefix, wc, data, container, subelement):
                                                                             s=s,
                                                                             o=data['ott_id'],
                                                                             ))
-    elif wc == WarningCodes.MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
+    elif wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
         sl = [(i[0].nexson_id, i) for i in data['clades']]
         sl.sort()
         str_list = []
@@ -738,7 +738,7 @@ class Tree(NexsonDictWrapper):
                 tip_list = ott_id2node.get(ott_id)
                 clade_tips = self.break_by_clades(tip_list)
                 if len(clade_tips) > 1:
-                    rich_logger.warn(WarningCodes.MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, 
+                    rich_logger.warn(WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, 
                                      {'ott_id': ott_id, 'clades': clade_tips},
                                      container=self)
     def break_by_clades(self, tip_list):
