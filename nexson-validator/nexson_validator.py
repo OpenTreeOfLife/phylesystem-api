@@ -542,6 +542,7 @@ class Node(NexsonDictWrapper):
         True, list of all nodes in the clade (if all tips are in tip_set)
         False, None
         '''
+        #@TEMP should not use recursion, here...
         if len(self._children) == 0:
             if self in tips_set:
                 return True, [self]
@@ -763,6 +764,7 @@ class Tree(NexsonDictWrapper):
                             c.remove(d)
                 else:
                     break
+                n = p
                 p = p.get_parent()
             clade_lists.append(next_el)
         return clade_lists
