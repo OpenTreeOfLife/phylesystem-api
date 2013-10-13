@@ -3,6 +3,9 @@ import sys
 import codecs
 from cStringIO import StringIO
 
+VERSION = '0.0.1a'
+
+
 class NexSONError(Exception):
     def __init__(self, v):
         self.value = v
@@ -42,9 +45,36 @@ for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
     WarningCodes.numeric_codes_registered.append(_n)
 
+def convert_data_for_json(wc, data):
+    if wc == WarningCodes.MISSING_LIST_EXPECTED:
+        return type(data)
+    elif wc in [WarningCodes.NO_ROOT_NODE,
+                WarningCodes.TIP_WITHOUT_OTU,
+                WarningCodes.MULTIPLE_TREES,
+                WarningCodes.NO_TREES,
+                WarningCodes.TIP_WITHOUT_OTT_ID,
+                WarningCodes.MULTIPLE_EDGES_FOR_NODES,
+                WarningCodes.INCORRECT_ROOT_NODE_LABEL,
+                WarningCodes.DISCONNECTED_GRAPH_DETECTED,
+                ]:
+        return None
+    elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
+        id_list = [i.nexson_id for i in data['node_list']]
+        id_list.sort()
+        return {'nodes': id_list}
+    elif wc == WarningCodes.MULTIPLE_NONMOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
+        sl = [(i[0].nexson_id, i) for i in data['clades']]
+        sl.sort()
+        str_list = []
+        for el in sl:
+            str_list.append([i.nexson_id for i in el[1]])
+        return {'nodes': str_list}
+    elif wc == WarningCodes.CYCLE_DETECTED:
+        return data.nexson_id
+    else:
+        return data
+
 def write_warning(out, prefix, wc, data, container, subelement):
-    if not out:
-        return
     if wc == WarningCodes.MISSING_MANDATORY_KEY:
         out.write('{p}Missing required key "{k}"'.format(p=prefix, k=data))
     elif wc == WarningCodes.MISSING_OPTIONAL_KEY:
@@ -64,7 +94,7 @@ def write_warning(out, prefix, wc, data, container, subelement):
     elif wc == WarningCodes.NO_ROOT_NODE:
         out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
     elif wc == WarningCodes.TIP_WITHOUT_OTU:
-        out.write('{p}Tip node ("{n}") without a valid @otu value'.format(p=prefix, n=data.nexson_id))
+        out.write('{p}Tip node without a valid @otu value'.format(p=prefix, n=data.nexson_id))
     elif wc == WarningCodes.PROPERTY_VALUE_NOT_USEFUL:
         k, v = data['key'], data['value']
         out.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
@@ -107,7 +137,7 @@ def write_warning(out, prefix, wc, data, container, subelement):
                                                                             o=data['ott_id'],
                                                                             ))
     elif wc == WarningCodes.TIP_WITHOUT_OTT_ID:
-        out.write('{p}Tip node ("{n}") mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
+        out.write('{p}Tip node mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
                                                         n=data.nexson_id,
                                                         o=data._otu.nexson_id))
     elif wc == WarningCodes.MULTIPLE_EDGES_FOR_NODES:
@@ -139,8 +169,10 @@ def write_warning(out, prefix, wc, data, container, subelement):
     if container is not None:
         out.write(' in "{el}"'.format(el=container.get_tag_context()))
     out.write('\n')
+
 class SeverityCodes(object):
     ERROR, WARNING = range(2)
+    facets = ['ERROR', 'WARNING']
 
 class WarningMessage(object):
     def __init__(self,
@@ -171,7 +203,14 @@ class WarningMessage(object):
         return s.getvalue()
     def getvalue(self, prefix=''):
         return self.__unicode__(prefix=prefix)
-
+    def as_dict(self):
+        return {
+            'severity': SeverityCodes.facets[self.severity],
+            'code': WarningCodes.facets[self.warning_code],
+            'comment': self.__unicode__(),
+            'data': convert_data_for_json(self.warning_code, self.warning_data),
+            'refersTo': self.container.get_path_dict(self.subelement)
+        }
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
         self.out = sys.stderr
@@ -265,9 +304,13 @@ class NexsonDictWrapper(object):
             self._logger = DefaultRichLogger()
         else:
             self._logger = rich_logger
+    def get_path_dict(self, subelement):
+        d = {}
+        return d
     def get_nexson_id(self):
         return self._raw.get('@id')
     nexson_id = property(get_nexson_id)
+
     def get_tag_context(self):
         return '{f}(id={i})'.format(f=self.TAG_CONTEXT, i=self.nexson_id)
 
@@ -598,9 +641,9 @@ class Tree(NexsonDictWrapper):
                 lowest_node_set.add(path_to_root[-1])
             if len(nd._children) == 0:
                 if nd._otu is None:
-                    rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, container=self)
+                    rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, container=nd)
                 elif nd._otu._ott_id is None:
-                    rich_logger.warn(WarningCodes.TIP_WITHOUT_OTT_ID, nd, container=self)
+                    rich_logger.warn(WarningCodes.TIP_WITHOUT_OTT_ID, nd, container=nd)
                 else:
                     nl = ott_id2node.setdefault(nd._otu._ott_id, [])
                     if len(nl) == 1:
