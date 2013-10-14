@@ -20,8 +20,14 @@ def api():
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
-        oauth_token = auth.user.github_auth_token
+        oauth_token  = auth.user.github_auth_token
+        author_name  = auth.user.name
+        author_email = auth.user.email
 
+        if not oauth_token:
+            raise HTTP(400,"You must authenticate to before updating via the OTOL API")
+
+        # Connect to the Github v3 API via with this OAuth token
         gh = Github(oauth_token)
 
         try:
@@ -32,8 +38,6 @@ def api():
         # sort the keys of the POSTed NexSON and indent 4 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=4)
 
-        author_name  = kwargs.get('author_name','')
-        author_email = kwargs.get('author_email','')
 
         # overwrite the nexson of study_id with the POSTed data
         # 1) verify that it is valid json
