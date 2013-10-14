@@ -20,6 +20,11 @@ def api():
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
+        # This will most probably be passed in my the main opentree web2py app
+        oauth_token = "codecafe"
+
+        gh = Github(oauth_token)
+
         try:
             nexson        = json.loads( kwargs.get('nexson','{}') )
         except:
@@ -34,6 +39,7 @@ def api():
         # overwrite the nexson of study_id with the POSTed data
         # 1) verify that it is valid json
         # 2) Update local treenexus git submodule at ./treenexus
+        _update_treenexus()
         # 3) See if the hash of the current value of the file matches the hash of the POSTed data. If so, do nothing and return successfully.
         # 4) If not, overwrite the correct nexson file on disk
         # 5) Make a git commit with the updated nexson (add as much automated metadata to the commit message as possible)
@@ -41,6 +47,12 @@ def api():
 
         return dict()
     return locals()
+
+def _update_treenexus():
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    # submodule update must be run from the top-level dir of our repo
+    os.system("cd ..; git submodule update")
+
 
 def _get_nexson(study_id):
 
