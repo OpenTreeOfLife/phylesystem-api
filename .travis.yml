@@ -11,9 +11,11 @@ install:
    - pip install -r requirements.txt --use-mirrors
 
 before_script:
-    - cd web2py; python web2py.py --nogui --debug=0 --port 9999 -a 'supersekret' &
+    - ls -la web2py
+    - cd web2py; python web2py.py --nogui --debug=0 --port 9999 -a 'supersekret' > /tmp/web2py.log &
     - cd ..
     - sleep 3 # give the webserver time to startup
+    - cat /tmp/web2py.log  # see what web2py said for debugging purposes
 
 script:
     - cd nexson-validator && python setup.py develop && ./test.sh

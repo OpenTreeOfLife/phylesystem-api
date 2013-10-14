@@ -49,13 +49,14 @@ def api():
     return locals()
 
 def _update_treenexus():
+    """Update the treenexus git submodule"""
     this_dir = os.path.dirname(os.path.abspath(__file__))
     # submodule update must be run from the top-level dir of our repo
     os.system("cd ..; git submodule update")
 
 
 def _get_nexson(study_id):
-
+    """Return the NexSON of a given study_id"""
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
     try:
