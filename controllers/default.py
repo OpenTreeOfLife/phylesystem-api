@@ -20,8 +20,7 @@ def api():
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
-        # This will most probably be passed in my the main opentree web2py app
-        oauth_token = "codecafe"
+        oauth_token = auth.user.github_auth_token
 
         gh = Github(oauth_token)
 
