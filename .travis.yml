@@ -12,7 +12,7 @@ install:
 
 before_script:
     - ls -la web2py
-    - cd web2py; python web2py.py --nogui --debug=0 --port 9999 -a 'supersekret' > /tmp/web2py.log &
+    - cd web2py; python web2py.py --nogui --debug=0 -p 9999 -a 'supersekret'
     - cd ..
     - sleep 3 # give the webserver time to startup
     - cat /tmp/web2py.log  # see what web2py said for debugging purposes
