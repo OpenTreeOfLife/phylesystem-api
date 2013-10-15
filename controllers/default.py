@@ -1,6 +1,7 @@
 import os
 import time
 import json
+import hashlib
 from github import Github
 
 def index():
@@ -38,34 +39,41 @@ def api():
         # sort the keys of the POSTed NexSON and indent 4 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=4)
 
-
-        # overwrite the nexson of study_id with the POSTed data
-        # 1) verify that it is valid json
-        # 2) Update local treenexus git submodule at ./treenexus
         _update_treenexus()
-        # 3) See if the hash of the current value of the file matches the hash of the POSTed data. If so, do nothing and return successfully.
-        # 4) If not, overwrite the correct nexson file on disk
-        # 5) Make a git commit with the updated nexson (add as much automated metadata to the commit message as possible)
-        # 6) return successfully
 
-        return dict()
+        # We compare sha1's instead of the actual data to reduce memory use
+        # when comparing large studies
+        posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
+        nexson_sha1        = hashlib.sha1( _get_nexson(resource_id) ).hexdigest()
+
+        # the POSTed data is the same as what we have on disk, do nothing and return successfully
+        if posted_nexson_sha1 == nexson_sha1:
+            return { error: 0, description: "success" };
+        else:
+            # we have new data
+            # TODO: Use http://jacquev6.github.io/PyGithub/github_objects/Repository.html#github.Repository.Repository.create_git_commit
+            return dict()
     return locals()
 
 def _update_treenexus():
     """Update the treenexus git submodule"""
-    this_dir = os.path.dirname(os.path.abspath(__file__))
     # submodule update must be run from the top-level dir of our repo
-    os.system("cd ..; git submodule update")
+    rc = os.system("cd ..; git submodule update")
+    if rc:
+        raise HTTP(400,"Unable to update local treenexus.git")
 
+def _study_id_to_filename(study_id):
+    """Return the filename of a given study_id"""
+    this_dir  = os.path.dirname(os.path.abspath(__file__))
+    filename  = this_dir + "/../treenexus/study/" + study_id + "/" + study_id + ".json"
+    return filename
 
 def _get_nexson(study_id):
     """Return the NexSON of a given study_id"""
-    this_dir = os.path.dirname(os.path.abspath(__file__))
-
     try:
-        filename    = this_dir + "/../treenexus/study/" + study_id + "/" + study_id + ".json"
+        filename    = _study_id_to_filename(study_id)
         nexson_file = open(filename,'r')
     except IOError:
-        return '{}'
+        return { error: 1, description: "unknown study" }
 
     return nexson_file.readlines()
