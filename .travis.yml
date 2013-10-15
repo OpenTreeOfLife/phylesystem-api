@@ -11,16 +11,14 @@ install:
    - pip install -r requirements.txt --use-mirrors
 
 before_script:
-    - ls -la web2py
-    - cd web2py; python web2py.py --nogui --debug=0 -p 9999 -a 'supersekret'
+    - cd web2py; python web2py.py --nogui --debug=0 -p 8080 -a 'supersekret' &
     - cd ..
     - sleep 3 # give the webserver time to startup
-    - cat /tmp/web2py.log  # see what web2py said for debugging purposes
 
 script:
     - cd nexson-validator && python setup.py develop && ./test.sh
     - cd ..
-    - OTOL_API_PORT=9999 nosetests tests/
+    - OTOL_API_PORT=8080 nosetests tests/
 
 notifications:
   irc:
