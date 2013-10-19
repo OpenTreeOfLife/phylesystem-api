@@ -16,7 +16,7 @@ do
     output="tests/${subdir}/output/${filename}"
     reference="tests/${subdir}/input/${filename}"
     echo "testing: python ${script} ${input}"
-    python "${script}" "${input}" > "${output}" 2>&1
+    python "${script}" "${input}" --retain-deprecated > "${output}" 2>&1
     if diff "${output}" "${reference}"
     then
         # diff will succeed if the files are identical

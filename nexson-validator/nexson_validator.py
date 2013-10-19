@@ -230,6 +230,7 @@ class DefaultRichLogger(object):
         self.warnings = []
         self.errors = []
         self.prefix = ''
+        self.retain_deprecated = False
     def warn(self, warning_code, data, container, subelement=''):
         m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.WARNING)
         if self.store_messages_as_obj:
@@ -353,6 +354,23 @@ class NexsonDictWrapper(object):
         elif isinstance(v, MetaValueList):
             self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, container=self, subelement='meta')
         return v
+    def replace_meta_property_name(self, old_name, new_name):
+        meta_el_list = self._meta2list.get(old_name)
+        if not bool(meta_el_list):
+            return False
+        for meta_el in meta_el_list:
+            v = self._meta2value[old_name]
+            if isinstance(v, MetaValueList):
+                v.remove(meta_el.value)
+            else:
+                del self._meta2value[old_name]
+            v = self._meta2list[old_name]
+            v.remove(meta_el)
+            if len(v) == 0:
+                del self._meta2list[old_name]
+            meta_el.property_name = new_name
+            _add_meta_to_structs(meta_el, self._meta2value, self._meta2list)
+            return True
     def get_list_meta(self, property_name, warn_if_missing=True):
         v = self._meta2value.get(property_name)
         if v is None:
@@ -377,7 +395,9 @@ class Meta(NexsonDictWrapper):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
     def get_property_name(self):
         return self._raw.get('@property')
-    property_name = property(get_property_name)
+    def set_property_name(self, v):
+        self._raw['@property'] = v
+    property_name = property(get_property_name, set_property_name)
     def get_property_value(self):
         v = self._raw.get('@xsi:type')
         if v == 'nex:ResourceMeta':
@@ -386,6 +406,17 @@ class Meta(NexsonDictWrapper):
     value = property(get_property_value)
 
 OTUMeta = Meta
+
+def _add_meta_to_structs(meta_el, to_meta_value, to_meta_list):
+    mk = meta_el.property_name
+    v = meta_el.value
+    cv = to_meta_value.setdefault(mk, v)
+    if cv is not v:
+        if not isinstance(cv, MetaValueList):
+            to_meta_value[mk] = MetaValueList([cv, v])
+        else:
+            to_meta_value[mk].append(v)
+    to_meta_list.setdefault(mk, []).append(meta_el)
 
 def _read_meta_list(o, container, rich_logger):
     '''Looks for a `meta` key to list in `o` (warns if not a list, but does not warn if absent)
@@ -408,27 +439,26 @@ def _read_meta_list(o, container, rich_logger):
         for el in m:
             meta_el = Meta(el, rich_logger, container=container)
             meta_list.append(meta_el)
-            mk = meta_el.property_name
-            v = meta_el.value
-            cv = to_meta_value.setdefault(mk, v)
-            if cv is not v:
-                if not isinstance(cv, MetaValueList):
-                    to_meta_value[mk] = MetaValueList([cv, v])
-                else:
-                    to_meta_value[mk].append(v)
-            to_meta_list.setdefault(mk, []).append(meta_el)
+            _add_meta_to_structs(meta_el, to_meta_value, to_meta_list)
     return (meta_list, to_meta_value, to_meta_list)
 
 class OTU(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
     EXPECETED_KEYS = ('@id',)
     PERMISSIBLE_KEYS = ('@id', '@about', '@label', 'meta')
-    EXPECTED_META_KEYS = ('ot:ottolid', 'ot:originalLabel')
+    EXPECTED_META_KEYS = ('ot:ottid', 'ot:ottolid','ot:originalLabel')
     TAG_CONTEXT = 'otu'
+
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
         self.consume_meta_and_check_keys(o, rich_logger)
-        self._ott_id = self.get_singelton_meta('ot:ottolid')
+        self._ott_id = self.get_singelton_meta('ot:ottid', warn_if_missing=False)
+        if self._ott_id is None:
+            self._ott_id = self.get_singelton_meta('ot:ottolid', warn_if_missing=False)
+            if self._ott_id is not None and (rich_logger is None or (not rich_logger.retain_deprecated)):
+                self.replace_meta_property_name('ot:ottolid', 'ot:ottid')
+        if self._ott_id is None:
+            self.get_singelton_meta('ot:ottid') # trigger a warning
         self._original_label = self.get_singelton_meta('ot:originalLabel')
     def get_path_dict(self, subelement, prop_name):
         d = {
@@ -562,7 +592,6 @@ class Node(NexsonDictWrapper):
         p = []
         s = set()
         while n:
-            #print 'cp2r ', n.nexson_id
             if n in s:
                 return n, p
             if n in encountered_nodes:
@@ -697,7 +726,6 @@ class Tree(NexsonDictWrapper):
         valid_tree = True
         for nd in self._node_list:
             cycle_node, path_to_root = nd.construct_path_to_root(encountered_nodes)
-            #print cycle_node, [i.nexson_id for i in path_to_root], [i.nexson_id for i in encountered_nodes], [i.nexson_id for i in lowest_node_set]
             if cycle_node:
                 valid_tree = False
                 rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, container=self)
@@ -886,7 +914,6 @@ class NexSON(NexsonDictWrapper):
         if prop_name:
             d['property'] = prop_name
         return d
-
     def __init__(self, o, rich_logger=None):
         '''Creates an object that validates `o` as a dictionary
         that represents a valid NexSON object.
@@ -895,6 +922,8 @@ class NexSON(NexsonDictWrapper):
         '''
         if rich_logger is None:
             rich_logger = DefaultRichLogger()
+        self.otus = None
+        self.trees = None
         NexsonDictWrapper.__init__(self, o, rich_logger, None)
         for k in o.keys():
             if k not in ['nexml']:
@@ -923,7 +952,6 @@ class NexSON(NexsonDictWrapper):
         v = self._nexml.get('otus')
         if v is None:
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', container=self)
-            self.otus = None
         else:
             self.otus = OTUCollection(v, rich_logger, container=self)
         v = self._nexml.get('trees')
