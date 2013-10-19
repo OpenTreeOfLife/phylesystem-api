@@ -39,6 +39,7 @@ if __name__ == '__main__':
     parser.add_argument('--verbose', dest='verbose', action='store_true', default=False, help='verbose output')
     parser.add_argument('--validate', dest='validate', action='store_true', default=False, help='warnings and error messages in JSON')
     parser.add_argument('--embed', dest='embed', action='store_true', default=False, help='embed the warnings and error messages in the NexSON meta element')
+    parser.add_argument('--retain-deprecated', dest='retain_deprecated', action='store_true', default=False, help='do not update any deprecated syntax')
     parser.add_argument('--meta', dest='meta', action='store_true', default=False, help='warn about unvalidated meta elements')
     parser.add_argument('input', metavar='filepath', type=unicode, nargs=1, help='filename')
     args = parser.parse_args()
@@ -63,6 +64,8 @@ if __name__ == '__main__':
     else:
         v = ValidationLogger(store_messages=True)
     checks_performend = [WarningCodes.facets[i] for i in check_codes]
+    if args.retain_deprecated:
+        v.retain_deprecated = True
     try:
         n = NexSON(obj, v)
     except NexSONError as nx:
