@@ -46,10 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.UNRECOGNIZED_PROPERTY_VALUE:
-        k, v = data['key'], data['value']
-        out.write('{p}Unrecognized value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
-    elif wc == WarningCodes.INVALID_PROPERTY_VALUE:
+    if wc == WarningCodes.INVALID_PROPERTY_VALUE:
         k, v = data['key'], data['value']
         out.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
     elif wc == WarningCodes.UNVALIDATED_ANNOTATION:
@@ -309,6 +306,20 @@ class PropertyValueNotUsefulWarning(WarningMessage):
         self.value = value
     def write(self, outstream, prefix):
         outstream.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.warning_data
+
+class UnrecognizedPropertyValueWarning(WarningMessage):
+    def __init__(self, key, value, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        d = {'key': key, 'value': value}
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_PROPERTY_VALUE, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        if not prop_name:
+            self.prop_name = key
+        self.key = key
+        self.value = value
+    def write(self, outstream, prefix):
+        outstream.write('{p}Unrecognized value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.warning_data
@@ -740,11 +751,7 @@ class Tree(NexsonDictWrapper):
                 if self._branch_len_mode in ['ot:other', 'ot:undefined']:
                     rich_logger.warning(PropertyValueNotUsefulWarning(k, self._branch_len_mode, container=self, subelement='meta'))
                 else:
-                    rich_logger.error(WarningCodes.UNRECOGNIZED_PROPERTY_VALUE,
-                                     {'key': k,
-                                      'value': self._branch_len_mode},
-                                      container=self,
-                                      subelement='meta')
+                    rich_logger.emit_error(UnrecognizedPropertyValueWarning(k, self._branch_len_mode, container=self, subelement='meta'))
         self._tag_list = self.get_list_meta('ot:tag', warn_if_missing=False)
         if isinstance(self._tag_list, str) or isinstance(self._tag_list, unicode):
             self._tag_list = [self._tag_list]
