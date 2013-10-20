@@ -46,18 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.INVALID_PROPERTY_VALUE:
-        k, v = data['key'], data['value']
-        out.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
-    elif wc == WarningCodes.UNVALIDATED_ANNOTATION:
-        k, v = data['key'], data['value']
-        m = u'{p}Annotation found, but not validated: "{k}" -> "{v}"'.format(p=prefix, k=k, v=v)
-        out.write(m)
-    elif wc == WarningCodes.MULTIPLE_TREES:
-        out.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
-    elif wc == WarningCodes.NO_TREES:
-        out.write('{p}No trees were found, or all trees were flagged for deletion'.format(p=prefix))
-    elif wc == WarningCodes.UNRECOGNIZED_TAG:
+    if wc == WarningCodes.UNRECOGNIZED_TAG:
         out.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=data))
     elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
         id_list = [i.nexson_id for i in data['node_list']]
@@ -164,9 +153,7 @@ class WarningMessage(object):
     def convert_data_for_json(self):
         wc = self.warning_code
         data = self.warning_data
-        if wc in [WarningCodes.MULTIPLE_TREES,
-                    WarningCodes.NO_TREES,
-                    WarningCodes.TIP_WITHOUT_OTT_ID,
+        if wc in [WarningCodes.TIP_WITHOUT_OTT_ID,
                     WarningCodes.MULTIPLE_EDGES_FOR_NODES,
                     WarningCodes.INCORRECT_ROOT_NODE_LABEL,
                     WarningCodes.DISCONNECTED_GRAPH_DETECTED,
@@ -286,6 +273,25 @@ class NoRootNodeWarning(WarningMessage):
     def convert_data_for_json(self):
         return None
 
+class MultipleTreesWarning(WarningMessage):
+    def __init__(self, trees_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TREES, data=trees_list, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.trees_list = trees_list
+    def write(self, outstream, prefix):
+        outstream.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return None
+
+class NoTreesWarning(WarningMessage):
+    def __init__(self, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.NO_TREES, data=None, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def write(self, outstream, prefix):
+        outstream.write('{p}No trees were found, or all trees were flagged for deletion'.format(p=prefix))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return None
+
 class TipWithoutOTUWarning(WarningMessage):
     def __init__(self, tip_node, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
         WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTU, data=None, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
@@ -324,6 +330,34 @@ class UnrecognizedPropertyValueWarning(WarningMessage):
     def convert_data_for_json(self):
         return self.warning_data
 
+class InvalidPropertyValueWarning(WarningMessage):
+    def __init__(self, key, value, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        d = {'key': key, 'value': value}
+        WarningMessage.__init__(self, WarningCodes.INVALID_PROPERTY_VALUE, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        if not prop_name:
+            self.prop_name = key
+        self.key = key
+        self.value = value
+    def write(self, outstream, prefix):
+        outstream.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.warning_data
+
+class UnvalidatedAnnotationWarning(WarningMessage):
+    def __init__(self, key, value, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        d = {'key': key, 'value': value}
+        WarningMessage.__init__(self, WarningCodes.UNVALIDATED_ANNOTATION, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        if not prop_name:
+            self.prop_name = key
+        self.key = key
+        self.value = value
+    def write(self, outstream, prefix):
+        outstream.write(u'{p}Annotation found, but not validated: "{k}" -> "{v}"'.format(p=prefix, k=self.key, v=self.value))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.warning_data
+
 class ConflictingPropertyValuesWarning(WarningMessage):
     def __init__(self, key_value_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
         WarningMessage.__init__(self, WarningCodes.CONFLICTING_PROPERTY_VALUES, data=key_value_list, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
@@ -334,7 +368,6 @@ class ConflictingPropertyValuesWarning(WarningMessage):
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.warning_data
-
 
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
@@ -463,7 +496,7 @@ class NexsonDictWrapper(object):
         if (expected_keys is not None) and (rich_logger is not None):
             for k, v in mv.iteritems():
                 if k not in expected_keys:
-                    rich_logger.warn(WarningCodes.UNVALIDATED_ANNOTATION, {'key':k, 'value': v}, container=self, subelement='meta')
+                    rich_logger.warning(UnvalidatedAnnotationWarning(k, v, container=self, subelement='meta'))
     def get_singelton_meta(self, property_name, default=None, warn_if_missing=True):
         v = self._meta2value.get(property_name)
         if v is None:
@@ -1057,9 +1090,9 @@ class NexSON(NexsonDictWrapper):
             self.trees = TreeCollection(v, rich_logger, container=self)
             possible_trees = [t for t in self.trees._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)]
             if len(possible_trees) > 1:
-                rich_logger.warn(WarningCodes.MULTIPLE_TREES, self.trees._as_list, container=self.trees)
+                rich_logger.warning(MultipleTreesWarning(self.trees._as_list, container=self.trees))
             elif len(possible_trees) == 0:
-                rich_logger.warn(WarningCodes.NO_TREES, None, container=self.trees)
+                rich_logger.warning(NoTreesWarning(container=self.trees))
 
 
 def indented_keys(out, o, indentation='', indent=2):
