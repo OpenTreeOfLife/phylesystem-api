@@ -46,9 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.DUPLICATING_SINGLETON_KEY:
-        out.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=data))
-    elif wc == WarningCodes.REPEATED_ID:
+    if wc == WarningCodes.REPEATED_ID:
         out.write('{p}An ID ("{k}") was repeated'.format(p=prefix, k=data))
     elif wc == WarningCodes.REFERENCED_ID_NOT_FOUND:
         out.write('{p}An ID Reference did not match a previous ID ("{k}": "{v}")'.format(p=prefix, k=data['key'], v=data['value']))
@@ -248,6 +246,17 @@ class MissingOptionalKeyWarning(WarningMessage):
     def convert_data_for_json(self):
         return self.key
 
+class DuplicatingSingletonKeyWarning(WarningMessage):
+    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.key = key
+    def write(self, outstream, prefix):
+        outstream.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=self.key))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.key
+
+
 class MissingMandatoryKeyWarning(WarningMessage):
     def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
         WarningMessage.__init__(self, WarningCodes.MISSING_MANDATORY_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
@@ -390,7 +399,7 @@ class NexsonDictWrapper(object):
                 self._logger.warning(MissingOptionalKeyWarning('@property=' + property_name, container=self, subelement='meta'))
             v = default
         elif isinstance(v, MetaValueList):
-            self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, container=self, subelement='meta')
+            self._logger.emit_error(DuplicatingSingletonKeyWarning('@property=' + property_name, container=self, subelement='meta'))
         return v
     def replace_meta_property_name(self, old_name, new_name):
         meta_el_list = self._meta2list.get(old_name)
@@ -472,7 +481,7 @@ def _read_meta_list(o, container, rich_logger):
     if isinstance(m, dict):
         m = [m]
     if not isinstance(m, list):
-        rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, m, container=container, subelement='meta')
+        rich_logger.emit_error(MissingExpectedListWarning(m, container=container, subelement='meta'))
     else:
         for el in m:
             meta_el = Meta(el, rich_logger, container=container)
@@ -725,7 +734,7 @@ class Tree(NexsonDictWrapper):
         v = o.get('node', [])
         self._root_node = None
         if not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, container=self, subelement='node')
+            rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='node'))
         else:
             for el in v:
                 n_node = Node(el, rich_logger, otu_dict, container=self)
@@ -745,7 +754,7 @@ class Tree(NexsonDictWrapper):
             rich_logger.warn(WarningCodes.NO_ROOT_NODE, None, container=self)
         v = o.get('edge', [])
         if not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, container=self, subelement='edge')
+            rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='edge'))
         else:
             for el in v:
                 n_edge = Edge(el, rich_logger, nodes=self._node_dict, container=self)
@@ -858,7 +867,7 @@ class OTUCollection(NexsonDictWrapper):
         self.consume_meta_and_check_keys(o, rich_logger)
         v = o.get('otu', [])
         if not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, container=self, subelement='otu')
+            rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='otu'))
         else:
             for el in v:
                 n_otu = OTU(el, rich_logger, container=self)
@@ -906,7 +915,7 @@ class TreeCollection(NexsonDictWrapper):
                 self._otu_collection = container.otus
         v = o.get('tree', [])
         if not isinstance(v, list):
-            rich_logger.error(WarningCodes.MISSING_LIST_EXPECTED, v, container=self, subelement='tree')
+            rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='tree'))
         else:
             for el in v:
                 tree = Tree(el, rich_logger, container=self)
