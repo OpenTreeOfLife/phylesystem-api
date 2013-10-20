@@ -46,9 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.MISSING_OPTIONAL_KEY:
-        out.write('{p}Missing optional key "{k}"'.format(p=prefix, k=data))
-    elif wc == WarningCodes.MISSING_LIST_EXPECTED:
+    if wc == WarningCodes.MISSING_LIST_EXPECTED:
         out.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(data)))
     elif wc == WarningCodes.DUPLICATING_SINGLETON_KEY:
         out.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=data))
@@ -235,6 +233,16 @@ class UnrecognizedKeyWarning(WarningMessage):
     def convert_data_for_json(self):
         return self.key
 
+class MissingOptionalKeyWarning(WarningMessage):
+    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MISSING_OPTIONAL_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.key = key
+    def write(self, outstream, prefix):
+        outstream.write('{p}Missing optional key "{k}"'.format(p=prefix, k=self.key))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.key
+
 class MissingMandatoryKeyWarning(WarningMessage):
     def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
         WarningMessage.__init__(self, WarningCodes.MISSING_MANDATORY_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
@@ -300,16 +308,16 @@ class FilteringLogger(ValidationLogger):
                 self.codes_to_skip.add(el)
                 self.registered.remove(el)
 
-    def warn(self, warning_code, data, container, subelement=''):
-        if warning_code in self.codes_to_skip:
+    def warning(self, m):
+        if m.warning_code in self.codes_to_skip:
             return
-        if warning_code in self.registered:
-            ValidationLogger.warn(self, warning_code, data, container, subelement)
-    def error(self, warning_code, data, container, subelement=''):
-        if warning_code in self.codes_to_skip:
+        if m.warning_code in self.registered:
+            ValidationLogger.warning(self, m)
+    def emit_error(self, m):
+        if m.warning_code in self.codes_to_skip:
             return
-        if warning_code in self.registered:
-            ValidationLogger.error(self, warning_code, data, container, subelement)
+        if m.warning_code in self.registered:
+            ValidationLogger.emit_error(self, m)
 
 def check_key_presence(d, schema, rich_logger):
     '''Issues errors if `d` does not contain keys in the schema.PERMISSIBLE_KEYS iterable,
@@ -322,7 +330,7 @@ def check_key_presence(d, schema, rich_logger):
             rich_logger.warning(UnrecognizedKeyWarning(k, container=schema))
     for k in schema.EXPECETED_KEYS:
         if k not in d:
-            rich_logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, k, container=schema)
+            rich_logger.warning(MissingOptionalKeyWarning(k, container=schema))
     for k in schema.REQUIRED_KEYS:
         if k not in d:
             rich_logger.emit_error(MissingMandatoryKeyWarning(k, container=schema, severity=SeverityCodes.ERROR))
@@ -374,7 +382,7 @@ class NexsonDictWrapper(object):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
-                self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, container=self, subelement='meta')
+                self._logger.warning(MissingOptionalKeyWarning('@property=' + property_name, container=self, subelement='meta'))
             v = default
         elif isinstance(v, MetaValueList):
             self._logger.error(WarningCodes.DUPLICATING_SINGLETON_KEY, '@property=' + property_name, container=self, subelement='meta')
@@ -400,7 +408,7 @@ class NexsonDictWrapper(object):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
-                self._logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, '@property=' + property_name, container=self, subelement='meta')
+                self._logger.warning(MissingOptionalKeyWarning('@property=' + property_name, container=self, subelement='meta'))
             v = []
         return v
     def consume_meta_and_check_keys(self, d, rich_logger):
