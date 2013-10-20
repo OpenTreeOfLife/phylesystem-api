@@ -3,7 +3,7 @@ import sys
 import codecs
 from cStringIO import StringIO
 
-VERSION = '0.0.1a'
+VERSION = '0.0.2a'
 
 
 class NexSONError(Exception):
@@ -45,42 +45,11 @@ for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
     WarningCodes.numeric_codes_registered.append(_n)
 
-def convert_data_for_json(wc, data):
-    if wc == WarningCodes.MISSING_LIST_EXPECTED:
-        return type(data)
-    elif wc in [WarningCodes.NO_ROOT_NODE,
-                WarningCodes.TIP_WITHOUT_OTU,
-                WarningCodes.MULTIPLE_TREES,
-                WarningCodes.NO_TREES,
-                WarningCodes.TIP_WITHOUT_OTT_ID,
-                WarningCodes.MULTIPLE_EDGES_FOR_NODES,
-                WarningCodes.INCORRECT_ROOT_NODE_LABEL,
-                WarningCodes.DISCONNECTED_GRAPH_DETECTED,
-                ]:
-        return None
-    elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
-        id_list = [i.nexson_id for i in data['node_list']]
-        id_list.sort()
-        return {'nodes': id_list}
-    elif wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
-        sl = [(i[0].nexson_id, i) for i in data['clades']]
-        sl.sort()
-        str_list = []
-        for el in sl:
-            str_list.append([i.nexson_id for i in el[1]])
-        return {'nodes': str_list}
-    elif wc == WarningCodes.CYCLE_DETECTED:
-        return data.nexson_id
-    else:
-        return data
-
 def write_warning(out, prefix, wc, data, container, subelement):
     if wc == WarningCodes.MISSING_MANDATORY_KEY:
         out.write('{p}Missing required key "{k}"'.format(p=prefix, k=data))
     elif wc == WarningCodes.MISSING_OPTIONAL_KEY:
         out.write('{p}Missing optional key "{k}"'.format(p=prefix, k=data))
-    elif wc == WarningCodes.UNRECOGNIZED_KEY:
-        out.write('{p}Unrecognized key "{k}"'.format(p=prefix, k=data))
     elif wc == WarningCodes.MISSING_LIST_EXPECTED:
         out.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(data)))
     elif wc == WarningCodes.DUPLICATING_SINGLETON_KEY:
@@ -218,9 +187,55 @@ class WarningMessage(object):
             'severity': SeverityCodes.facets[self.severity],
             'code': WarningCodes.facets[self.warning_code],
             'comment': self.__unicode__(),
-            'data': convert_data_for_json(self.warning_code, self.warning_data),
+            'data': self.convert_data_for_json(),
             'refersTo': self._container.get_path_dict(self.subelement, self.prop_name)
         }
+    def convert_data_for_json(self):
+        wc = self.warning_code
+        data = self.warning_data
+        if wc == WarningCodes.MISSING_LIST_EXPECTED:
+            return type(data)
+        elif wc in [WarningCodes.NO_ROOT_NODE,
+                    WarningCodes.TIP_WITHOUT_OTU,
+                    WarningCodes.MULTIPLE_TREES,
+                    WarningCodes.NO_TREES,
+                    WarningCodes.TIP_WITHOUT_OTT_ID,
+                    WarningCodes.MULTIPLE_EDGES_FOR_NODES,
+                    WarningCodes.INCORRECT_ROOT_NODE_LABEL,
+                    WarningCodes.DISCONNECTED_GRAPH_DETECTED,
+                    ]:
+            return None
+        elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
+            id_list = [i.nexson_id for i in data['node_list']]
+            id_list.sort()
+            return {'nodes': id_list}
+        elif wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
+            sl = [(i[0].nexson_id, i) for i in data['clades']]
+            sl.sort()
+            str_list = []
+            for el in sl:
+                str_list.append([i.nexson_id for i in el[1]])
+            return {'nodes': str_list}
+        elif wc == WarningCodes.CYCLE_DETECTED:
+            return data.nexson_id
+        else:
+            return data
+    def _write_message_suffix(self, out):
+        if self.subelement:
+            out.write(' in "{el}"'.format(el=self.subelement))
+        if self._container is not None:
+            out.write(' in "{el}"'.format(el=self._container.get_tag_context()))
+        out.write('\n')
+
+class UnrecognizedKeyWarning(WarningMessage):
+    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.key = key
+    def write(self, outstream, prefix):
+        outstream.write('{p}Unrecognized key "{k}"'.format(p=prefix, k=self.key))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.key
 
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
@@ -233,6 +248,8 @@ class DefaultRichLogger(object):
         self.retain_deprecated = False
     def warn(self, warning_code, data, container, subelement=''):
         m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.WARNING)
+        self.warning(m)
+    def warning(self, m):
         if self.store_messages_as_obj:
             self.warnings.append(m)
         else:
@@ -247,8 +264,7 @@ class DefaultRichLogger(object):
 class ValidationLogger(DefaultRichLogger):
     def __init__(self, store_messages=False):
         DefaultRichLogger.__init__(self, store_messages=store_messages)
-    def warn(self, warning_code, data, container, subelement=''):
-        m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.WARNING)
+    def warning(self, m):
         if not self.store_messages_as_obj:
             m = m.getvalue(self.prefix)
         self.warnings.append(m)
@@ -294,7 +310,7 @@ def check_key_presence(d, schema, rich_logger):
     '''
     for k in d.keys():
         if k not in schema.PERMISSIBLE_KEYS:
-            rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, container=schema)
+            rich_logger.warning(UnrecognizedKeyWarning(k, container=schema))
     for k in schema.EXPECETED_KEYS:
         if k not in d:
             rich_logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, k, container=schema)
@@ -927,7 +943,7 @@ class NexSON(NexsonDictWrapper):
         NexsonDictWrapper.__init__(self, o, rich_logger, None)
         for k in o.keys():
             if k not in ['nexml']:
-                rich_logger.warn(WarningCodes.UNRECOGNIZED_KEY, k, container=self)
+                rich_logger.warning(UnrecognizedKeyWarning(k, container=self))
         self._nexml = None
         if 'nexml' not in o:
             rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml', container=self)

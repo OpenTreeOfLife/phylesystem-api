@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='nexson_validator',
-    version='0.0.1',
+    version='0.0.2a',
     description='Validation, comparison, and merging of NexSON objects',
     long_description=(open('README.md').read() + '\n\n' +
                       open('AUTHORS.txt').read()),
