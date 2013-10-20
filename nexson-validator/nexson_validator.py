@@ -46,9 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.UNRECOGNIZED_TAG:
-        out.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=data))
-    elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
+    if wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
         id_list = [i.nexson_id for i in data['node_list']]
         id_list.sort()
         s = ', '.join(['"{i}"'.format(i=i) for i in id_list])
@@ -123,10 +121,7 @@ class WarningMessage(object):
         if prop_name:
             self.prop_name = prop_name
         else:
-            if warning_code == WarningCodes.UNRECOGNIZED_TAG:
-                self.prop_name = 'ot:tag'
-            else:
-                self.prop_name = None
+            self.prop_name = None
     def write(self, outstream, prefix):
         write_warning(outstream,
                       prefix,
@@ -260,6 +255,18 @@ class MissingMandatoryKeyWarning(WarningMessage):
         self.key = key
     def write(self, outstream, prefix):
         outstream.write('{p}Missing required key "{k}"'.format(p=prefix, k=self.key))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.key
+
+class UnrecognizedTagWarning(WarningMessage):
+    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.key = key
+        if not prop_name:
+            self.prop_name = 'ot:tag'
+    def write(self, outstream, prefix):
+        outstream.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=self.key))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.key
@@ -790,7 +797,7 @@ class Tree(NexsonDictWrapper):
             self._tag_list = [self._tag_list]
         unexpected_tags = [i for i in self._tag_list if i.lower() not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
-            rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, container=self, subelement='meta')
+            rich_logger.warning(UnrecognizedTagWarning(tag, container=self, subelement='meta'))
         self._tagged_for_deletion = False
         self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
         tl = [i.lower() for i in self._tag_list]
@@ -1077,7 +1084,7 @@ class NexSON(NexsonDictWrapper):
             self._tags = [self._tags]
         unexpected_tags = [i for i in self._tags if i not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
-            rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, container=self, subelement='meta')
+            rich_logger.warning(UnrecognizedTagWarning(tag, container=self, subelement='meta'))
         v = self._nexml.get('otus')
         if v is None:
             rich_logger.emit_error(MissingMandatoryKeyWarning('otus', container=self))
