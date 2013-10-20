@@ -46,10 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.PROPERTY_VALUE_NOT_USEFUL:
-        k, v = data['key'], data['value']
-        out.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
-    elif wc == WarningCodes.CONFLICTING_PROPERTY_VALUES:
+    if wc == WarningCodes.CONFLICTING_PROPERTY_VALUES:
         s = u", ".join([u'"{k}"="{v}"'.format(k=i[0], v=i[1]) for i in data])
         out.write('{p}Conflicting values for properties: {s}'.format(p=prefix, s=s))
     elif wc == WarningCodes.UNRECOGNIZED_PROPERTY_VALUE:
@@ -305,6 +302,20 @@ class TipWithoutOTUWarning(WarningMessage):
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return None
+
+class PropertyValueNotUsefulWarning(WarningMessage):
+    def __init__(self, key, value, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        d = {'key': key, 'value': value}
+        WarningMessage.__init__(self, WarningCodes.PROPERTY_VALUE_NOT_USEFUL, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        if not prop_name:
+            self.prop_name = key
+        self.key = key
+        self.value = value
+    def write(self, outstream, prefix):
+        outstream.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.warning_data
 
 
 class DefaultRichLogger(object):
@@ -720,11 +731,7 @@ class Tree(NexsonDictWrapper):
                                              'ot:bootstrapValues',
                                              'ot:posteriorSupport']:
                 if self._branch_len_mode in ['ot:other', 'ot:undefined']:
-                    rich_logger.warn(WarningCodes.PROPERTY_VALUE_NOT_USEFUL,
-                                     {'key': k,
-                                      'value': self._branch_len_mode},
-                                     container=self,
-                                     subelement='meta')
+                    rich_logger.warning(PropertyValueNotUsefulWarning(k, self._branch_len_mode, container=self, subelement='meta'))
                 else:
                     rich_logger.error(WarningCodes.UNRECOGNIZED_PROPERTY_VALUE,
                                      {'key': k,
