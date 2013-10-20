@@ -46,10 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.CONFLICTING_PROPERTY_VALUES:
-        s = u", ".join([u'"{k}"="{v}"'.format(k=i[0], v=i[1]) for i in data])
-        out.write('{p}Conflicting values for properties: {s}'.format(p=prefix, s=s))
-    elif wc == WarningCodes.UNRECOGNIZED_PROPERTY_VALUE:
+    if wc == WarningCodes.UNRECOGNIZED_PROPERTY_VALUE:
         k, v = data['key'], data['value']
         out.write('{p}Unrecognized value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
     elif wc == WarningCodes.INVALID_PROPERTY_VALUE:
@@ -170,8 +167,7 @@ class WarningMessage(object):
     def convert_data_for_json(self):
         wc = self.warning_code
         data = self.warning_data
-        if wc in [WarningCodes.TIP_WITHOUT_OTU,
-                    WarningCodes.MULTIPLE_TREES,
+        if wc in [WarningCodes.MULTIPLE_TREES,
                     WarningCodes.NO_TREES,
                     WarningCodes.TIP_WITHOUT_OTT_ID,
                     WarningCodes.MULTIPLE_EDGES_FOR_NODES,
@@ -313,6 +309,17 @@ class PropertyValueNotUsefulWarning(WarningMessage):
         self.value = value
     def write(self, outstream, prefix):
         outstream.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.warning_data
+
+class ConflictingPropertyValuesWarning(WarningMessage):
+    def __init__(self, key_value_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.CONFLICTING_PROPERTY_VALUES, data=key_value_list, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.key_value_list = key_value_list
+    def write(self, outstream, prefix):
+        s = u", ".join([u'"{k}"="{v}"'.format(k=i[0], v=i[1]) for i in self.key_value_list])
+        outstream.write('{p}Conflicting values for properties: {s}'.format(p=prefix, s=s))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.warning_data
@@ -757,10 +764,7 @@ class Tree(NexsonDictWrapper):
                 self._tagged_for_inclusion = True
                 inc_tag = self._tag_list[tl.index(t)]
         if self._tagged_for_inclusion and self._tagged_for_deletion:
-            rich_logger.warn(WarningCodes.CONFLICTING_PROPERTY_VALUES,
-                             [('ot:tag', del_tag), ('ot:tag', inc_tag)],
-                             container=self,
-                             subelement='meta')
+            rich_logger.warning(ConflictingPropertyValuesWarning([('ot:tag', del_tag), ('ot:tag', inc_tag)], container=self, subelement='meta'))
         self._node_dict = {}
         self._node_list = []
         self._edge_dict = {}
