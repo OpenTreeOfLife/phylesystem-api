@@ -46,9 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.MISSING_LIST_EXPECTED:
-        out.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(data)))
-    elif wc == WarningCodes.DUPLICATING_SINGLETON_KEY:
+    if wc == WarningCodes.DUPLICATING_SINGLETON_KEY:
         out.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=data))
     elif wc == WarningCodes.REPEATED_ID:
         out.write('{p}An ID ("{k}") was repeated'.format(p=prefix, k=data))
@@ -189,9 +187,7 @@ class WarningMessage(object):
     def convert_data_for_json(self):
         wc = self.warning_code
         data = self.warning_data
-        if wc == WarningCodes.MISSING_LIST_EXPECTED:
-            return type(data)
-        elif wc in [WarningCodes.NO_ROOT_NODE,
+        if wc in [WarningCodes.NO_ROOT_NODE,
                     WarningCodes.TIP_WITHOUT_OTU,
                     WarningCodes.MULTIPLE_TREES,
                     WarningCodes.NO_TREES,
@@ -222,6 +218,15 @@ class WarningMessage(object):
         if self._container is not None:
             out.write(' in "{el}"'.format(el=self._container.get_tag_context()))
         out.write('\n')
+
+class MissingExpectedListWarning(WarningMessage):
+    def __init__(self, data, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MISSING_LIST_EXPECTED, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def write(self, outstream, prefix):
+        outstream.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(self.data)))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return type(self.data)
 
 class UnrecognizedKeyWarning(WarningMessage):
     def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
