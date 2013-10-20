@@ -46,11 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.NO_ROOT_NODE:
-        out.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
-    elif wc == WarningCodes.TIP_WITHOUT_OTU:
-        out.write('{p}Tip node without a valid @otu value'.format(p=prefix, n=data.nexson_id))
-    elif wc == WarningCodes.PROPERTY_VALUE_NOT_USEFUL:
+    if wc == WarningCodes.PROPERTY_VALUE_NOT_USEFUL:
         k, v = data['key'], data['value']
         out.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=k, v=v))
     elif wc == WarningCodes.CONFLICTING_PROPERTY_VALUES:
@@ -177,8 +173,7 @@ class WarningMessage(object):
     def convert_data_for_json(self):
         wc = self.warning_code
         data = self.warning_data
-        if wc in [WarningCodes.NO_ROOT_NODE,
-                    WarningCodes.TIP_WITHOUT_OTU,
+        if wc in [WarningCodes.TIP_WITHOUT_OTU,
                     WarningCodes.MULTIPLE_TREES,
                     WarningCodes.NO_TREES,
                     WarningCodes.TIP_WITHOUT_OTT_ID,
@@ -291,6 +286,26 @@ class MissingMandatoryKeyWarning(WarningMessage):
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.key
+
+class NoRootNodeWarning(WarningMessage):
+    def __init__(self, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.NO_ROOT_NODE, data=None, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def write(self, outstream, prefix):
+        outstream.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return None
+
+class TipWithoutOTUWarning(WarningMessage):
+    def __init__(self, tip_node, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTU, data=None, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.tip_node = tip_node
+    def write(self, outstream, prefix):
+        outstream.write('{p}Tip node ("{n}") without a valid @otu value'.format(p=prefix, n=self.tip_node.nexson_id))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return None
+
 
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
@@ -770,7 +785,7 @@ class Tree(NexsonDictWrapper):
                     else:
                         rich_logger.emit_error(MultipleRootNodesWarning(nid, container=self, subelement='node'))
         if self._root_node is None:
-            rich_logger.warn(WarningCodes.NO_ROOT_NODE, None, container=self)
+            rich_logger.warning(NoRootNodeWarning(container=self))
         v = o.get('edge', [])
         if not isinstance(v, list):
             rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='edge'))
@@ -799,7 +814,7 @@ class Tree(NexsonDictWrapper):
                 lowest_node_set.add(path_to_root[-1])
             if len(nd._children) == 0:
                 if nd._otu is None:
-                    rich_logger.error(WarningCodes.TIP_WITHOUT_OTU, nd, container=nd)
+                    rich_logger.emit_error(TipWithoutOTUWarning(nd, container=nd))
                 elif nd._otu._ott_id is None:
                     rich_logger.warn(WarningCodes.TIP_WITHOUT_OTT_ID, nd, container=nd)
                 else:
