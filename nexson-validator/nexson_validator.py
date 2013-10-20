@@ -46,9 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.MISSING_MANDATORY_KEY:
-        out.write('{p}Missing required key "{k}"'.format(p=prefix, k=data))
-    elif wc == WarningCodes.MISSING_OPTIONAL_KEY:
+    if wc == WarningCodes.MISSING_OPTIONAL_KEY:
         out.write('{p}Missing optional key "{k}"'.format(p=prefix, k=data))
     elif wc == WarningCodes.MISSING_LIST_EXPECTED:
         out.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(data)))
@@ -237,6 +235,16 @@ class UnrecognizedKeyWarning(WarningMessage):
     def convert_data_for_json(self):
         return self.key
 
+class MissingMandatoryKeyWarning(WarningMessage):
+    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MISSING_MANDATORY_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.key = key
+    def write(self, outstream, prefix):
+        outstream.write('{p}Missing required key "{k}"'.format(p=prefix, k=self.key))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.key
+
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
         self.out = sys.stderr
@@ -256,6 +264,8 @@ class DefaultRichLogger(object):
             m.write(self.out, self.prefix)
     def error(self, warning_code, data, container, subelement=''):
         m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.ERROR)
+        self.emit_error(m)
+    def emit_error(self, m):
         if self.store_messages_as_obj:
             self.errors.append(m)
         else:
@@ -268,8 +278,7 @@ class ValidationLogger(DefaultRichLogger):
         if not self.store_messages_as_obj:
             m = m.getvalue(self.prefix)
         self.warnings.append(m)
-    def error(self, warning_code, data, container, subelement=''):
-        m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.ERROR)
+    def emit_error(self, m):
         if not self.store_messages_as_obj:
             m = m.getvalue(self.prefix)
         self.errors.append(m)
@@ -316,7 +325,7 @@ def check_key_presence(d, schema, rich_logger):
             rich_logger.warn(WarningCodes.MISSING_OPTIONAL_KEY, k, container=schema)
     for k in schema.REQUIRED_KEYS:
         if k not in d:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, k, container=schema)
+            rich_logger.emit_error(MissingMandatoryKeyWarning(k, container=schema, severity=SeverityCodes.ERROR))
     
 
 class NexsonDictWrapper(object):
@@ -946,7 +955,7 @@ class NexSON(NexsonDictWrapper):
                 rich_logger.warning(UnrecognizedKeyWarning(k, container=self))
         self._nexml = None
         if 'nexml' not in o:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'nexml', container=self)
+            rich_logger.emit_error(MissingMandatoryKeyWarning('nexml', container=self, severity=SeverityCodes.ERROR))
             return ## EARLY EXIT!!
         self._nexml = o['nexml']
 
@@ -967,12 +976,12 @@ class NexSON(NexsonDictWrapper):
             rich_logger.warn(WarningCodes.UNRECOGNIZED_TAG, tag, container=self, subelement='meta')
         v = self._nexml.get('otus')
         if v is None:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'otus', container=self)
+            rich_logger.emit_error(MissingMandatoryKeyWarning('otus', container=self, severity=SeverityCodes.ERROR))
         else:
             self.otus = OTUCollection(v, rich_logger, container=self)
         v = self._nexml.get('trees')
         if v is None:
-            rich_logger.error(WarningCodes.MISSING_MANDATORY_KEY, 'tree', container=self)
+            rich_logger.emit_error(MissingMandatoryKeyWarning('tree', container=self, severity=SeverityCodes.ERROR))
         else:
             self.trees = TreeCollection(v, rich_logger, container=self)
             possible_trees = [t for t in self.trees._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)]
