@@ -46,11 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.TIP_WITHOUT_OTT_ID:
-        out.write('{p}Tip node mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
-                                                        n=data.nexson_id,
-                                                        o=data._otu.nexson_id))
-    elif wc == WarningCodes.MULTIPLE_EDGES_FOR_NODES:
+    if wc == WarningCodes.MULTIPLE_EDGES_FOR_NODES:
         nd = data['node']
         ed = data['edge']
         out.write('{p}A node ("{n}") has multiple edges to parents ("{f}" and "{s}")'.format(p=prefix,
@@ -129,8 +125,7 @@ class WarningMessage(object):
     def convert_data_for_json(self):
         wc = self.warning_code
         data = self.warning_data
-        if wc in [WarningCodes.TIP_WITHOUT_OTT_ID,
-                    WarningCodes.MULTIPLE_EDGES_FOR_NODES,
+        if wc in [WarningCodes.MULTIPLE_EDGES_FOR_NODES,
                     WarningCodes.INCORRECT_ROOT_NODE_LABEL,
                     WarningCodes.DISCONNECTED_GRAPH_DETECTED,
                     ]:
@@ -388,6 +383,19 @@ class NonMonophyleticTipsMappedToOTTIDWarning(WarningMessage):
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return {'nodes': self.id_list}
+
+class TipsWithoutOTTIDWarning(WarningMessage):
+    def __init__(self, tip, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTT_ID, data=tip, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.tip = tip
+    def write(self, outstream, prefix):
+        outstream.write('{p}Tip node mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
+                                                        n=self.tip.nexson_id,
+                                                        o=self.tip._otu.nexson_id))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return None
+
 
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
@@ -887,7 +895,7 @@ class Tree(NexsonDictWrapper):
                 if nd._otu is None:
                     rich_logger.emit_error(TipWithoutOTUWarning(nd, container=nd))
                 elif nd._otu._ott_id is None:
-                    rich_logger.warn(WarningCodes.TIP_WITHOUT_OTT_ID, nd, container=nd)
+                    rich_logger.warning(TipsWithoutOTTIDWarning(nd, container=nd))
                 else:
                     nl = ott_id2node.setdefault(nd._otu._ott_id, [])
                     if len(nl) == 1:
