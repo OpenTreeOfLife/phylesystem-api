@@ -46,15 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
-        id_list = [i.nexson_id for i in data['node_list']]
-        id_list.sort()
-        s = ', '.join(['"{i}"'.format(i=i) for i in id_list])
-        out.write('{p}Multiple nodes ({s}) are mapped to the OTT ID "{o}"'.format(p=prefix,
-                                                                            s=s,
-                                                                            o=data['ott_id'],
-                                                                            ))
-    elif wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
+    if wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
         sl = [(i[0].nexson_id, i) for i in data['clades']]
         sl.sort()
         str_list = []
@@ -154,10 +146,6 @@ class WarningMessage(object):
                     WarningCodes.DISCONNECTED_GRAPH_DETECTED,
                     ]:
             return None
-        elif wc == WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID:
-            id_list = [i.nexson_id for i in data['node_list']]
-            id_list.sort()
-            return {'nodes': id_list}
         elif wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
             sl = [(i[0].nexson_id, i) for i in data['clades']]
             sl.sort()
@@ -375,6 +363,23 @@ class ConflictingPropertyValuesWarning(WarningMessage):
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.warning_data
+
+class MultipleTipsMappedToOTTIDWarning(WarningMessage):
+    def __init__(self, ott_id, node_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        data = {'ott_id':ott_id, 'node_list': node_list}
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.ott_id = ott_id
+        self.node_list = node_list
+        self.id_list = [i.nexson_id for i in self.node_list]
+        self.id_list.sort()
+    def write(self, outstream, prefix):
+        s = u', '.join([u'"{i}"'.format(i=i) for i in self.id_list])
+        outstream.write('{p}Multiple nodes ({s}) are mapped to the OTT ID "{o}"'.format(p=prefix, 
+                                                                                        s=s,
+                                                                                        o=self.ott_id))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return {'nodes': self.id_list}
 
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
@@ -882,11 +887,7 @@ class Tree(NexsonDictWrapper):
                     nl.append(nd)
         for ott_id in multi_labelled_ott_id:
             tip_list = ott_id2node.get(ott_id)
-            rich_logger.warn(WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, 
-                             {'ott_id': ott_id,
-                              'node_list': tip_list},
-                              container=self)
-
+            rich_logger.warning(MultipleTipsMappedToOTTIDWarning(ott_id, tip_list, container=self))
         if len(lowest_node_set) > 1:
             valid_tree = False
             lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
