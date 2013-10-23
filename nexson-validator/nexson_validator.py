@@ -46,9 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.CYCLE_DETECTED:
-        out.write('{p}Cycle in a tree detected passing througn node "{n}"'.format(p=prefix, n=data.nexson_id))
-    elif wc == WarningCodes.DISCONNECTED_GRAPH_DETECTED:
+    if wc == WarningCodes.DISCONNECTED_GRAPH_DETECTED:
         out.write('{p}Disconnected graph found instead of tree including root nodes:'.format(p=prefix))
         for index, el in enumerate(data):
             if index ==0:
@@ -115,8 +113,6 @@ class WarningMessage(object):
         if wc in [WarningCodes.DISCONNECTED_GRAPH_DETECTED,
                     ]:
             return None
-        elif wc == WarningCodes.CYCLE_DETECTED:
-            return data.nexson_id
         else:
             return data
     def _write_message_suffix(self, out):
@@ -410,6 +406,15 @@ class IncorrectRootNodeLabelWarning(WarningMessage):
     def convert_data_for_json(self):
         return None
 
+class TreeCycleWarning(WarningMessage):
+    def __init__(self, node, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.CYCLE_DETECTED, data=node, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.node = node
+    def write(self, outstream, prefix):
+        outstream.write('{p}Cycle in a tree detected passing througn node "{n}"'.format(p=prefix, n=self.node.nexson_id))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.node.nexson_id
 
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
@@ -898,7 +903,7 @@ class Tree(NexsonDictWrapper):
             cycle_node, path_to_root = nd.construct_path_to_root(encountered_nodes)
             if cycle_node:
                 valid_tree = False
-                rich_logger.error(WarningCodes.CYCLE_DETECTED, cycle_node, container=self)
+                rich_logger.emit_error(TreeCycleWarning(cycle_node, container=self))
             if path_to_root:
                 lowest_node_set.add(path_to_root[-1])
             if len(nd._children) == 0:
