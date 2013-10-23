@@ -46,20 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.MULTIPLE_EDGES_FOR_NODES:
-        nd = data['node']
-        ed = data['edge']
-        out.write('{p}A node ("{n}") has multiple edges to parents ("{f}" and "{s}")'.format(p=prefix,
-                                                                                n=nd.nexson_id,
-                                                                                f=nd._edge.nexson_id,
-                                                                                s=ed.nexson_id))
-    elif wc == WarningCodes.INCORRECT_ROOT_NODE_LABEL:
-        nd = data['tagged']
-        node_without_parent = data['node_without_parent']
-        out.write('{p}The node flagged as the root ("{t}") is not the node without a parent ("{r}")'.format(p=prefix,
-                                                                                t=nd.nexson_id,
-                                                                                r=node_without_parent.nexson_id))
-    elif wc == WarningCodes.CYCLE_DETECTED:
+    if wc == WarningCodes.CYCLE_DETECTED:
         out.write('{p}Cycle in a tree detected passing througn node "{n}"'.format(p=prefix, n=data.nexson_id))
     elif wc == WarningCodes.DISCONNECTED_GRAPH_DETECTED:
         out.write('{p}Disconnected graph found instead of tree including root nodes:'.format(p=prefix))
@@ -125,9 +112,7 @@ class WarningMessage(object):
     def convert_data_for_json(self):
         wc = self.warning_code
         data = self.warning_data
-        if wc in [WarningCodes.MULTIPLE_EDGES_FOR_NODES,
-                    WarningCodes.INCORRECT_ROOT_NODE_LABEL,
-                    WarningCodes.DISCONNECTED_GRAPH_DETECTED,
+        if wc in [WarningCodes.DISCONNECTED_GRAPH_DETECTED,
                     ]:
             return None
         elif wc == WarningCodes.CYCLE_DETECTED:
@@ -392,6 +377,35 @@ class TipsWithoutOTTIDWarning(WarningMessage):
         outstream.write('{p}Tip node mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
                                                         n=self.tip.nexson_id,
                                                         o=self.tip._otu.nexson_id))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return None
+
+class MultipleEdgesPerNodeWarning(WarningMessage):
+    def __init__(self, node, edge, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        data = {'node': node, 'edge': edge}
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_EDGES_FOR_NODES, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.node = node
+        self.edge = edge
+    def write(self, outstream, prefix):
+        outstream.write('{p}A node ("{n}") has multiple edges to parents ("{f}" and "{s}")'.format(p=prefix,
+                                                                                n=self.node.nexson_id,
+                                                                                f=self.node._edge.nexson_id,
+                                                                                s=self.edge.nexson_id))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return None
+
+class IncorrectRootNodeLabelWarning(WarningMessage):
+    def __init__(self, tagged_node, node_without_parent, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        data = {'tagged': tagged_node, 'node_without_parent': node_without_parent}
+        WarningMessage.__init__(self, WarningCodes.INCORRECT_ROOT_NODE_LABEL, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.tagged_node = tagged_node
+        self.node_without_parent = node_without_parent
+    def write(self, outstream, prefix):
+        outstream.write('{p}The node flagged as the root ("{t}") is not the node without a parent ("{r}")'.format(p=prefix,
+                                                                            t=self.tagged_node.nexson_id,
+                                                                            r=self.node_without_parent.nexson_id))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return None
@@ -678,11 +692,7 @@ class Edge(NexsonDictWrapper):
             if self._target is None:
                 rich_logger.emit_error(ReferencedIDNotFoundWarning('@target', tid, container=self))
             elif self._target._edge is not None:
-                rich_logger.error(WarningCodes.MULTIPLE_EDGES_FOR_NODES, 
-                                  {'node': self._target,
-                                  'edge': self
-                                  }, 
-                                  container=self)
+                rich_logger.emit_error(MultipleEdgesPerNodeWarning(self._target, self, container=self))
             else:
                 self._target._edge = self
     def get_path_dict(self, subelement, prop_name):
@@ -913,10 +923,7 @@ class Tree(NexsonDictWrapper):
         elif len(lowest_node_set) == 1:
             ln = list(lowest_node_set)[0]
             if self._root_node is not None and self._root_node is not ln:
-                rich_logger.error(WarningCodes.INCORRECT_ROOT_NODE_LABEL,
-                                  {'tagged': self._root_node,
-                                   'node_without_parent': ln},
-                                  container=self)
+                rich_logger.emit_error(IncorrectRootNodeLabelWarning(self._root_node, ln, container=self))
         if valid_tree:
             for ott_id in multi_labelled_ott_id:
                 tip_list = ott_id2node.get(ott_id)
