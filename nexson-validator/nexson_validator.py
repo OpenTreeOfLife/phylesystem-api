@@ -46,18 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
-        sl = [(i[0].nexson_id, i) for i in data['clades']]
-        sl.sort()
-        str_list = []
-        for el in sl:
-            str_list.append('"{s}"'.format(s='", "'.join([i.nexson_id for i in el[1]])))
-        s = ' +++ '.join([i for i in str_list])
-        out.write('{p}Multiple nodes that do not form the tips of a clade are mapped to the OTT ID "{o}". The clades are {s}'.format(p=prefix,
-                                                                            s=s,
-                                                                            o=data['ott_id'],
-                                                                            ))
-    elif wc == WarningCodes.TIP_WITHOUT_OTT_ID:
+    if wc == WarningCodes.TIP_WITHOUT_OTT_ID:
         out.write('{p}Tip node mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
                                                         n=data.nexson_id,
                                                         o=data._otu.nexson_id))
@@ -146,13 +135,6 @@ class WarningMessage(object):
                     WarningCodes.DISCONNECTED_GRAPH_DETECTED,
                     ]:
             return None
-        elif wc == WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID:
-            sl = [(i[0].nexson_id, i) for i in data['clades']]
-            sl.sort()
-            str_list = []
-            for el in sl:
-                str_list.append([i.nexson_id for i in el[1]])
-            return {'nodes': str_list}
         elif wc == WarningCodes.CYCLE_DETECTED:
             return data.nexson_id
         else:
@@ -377,6 +359,32 @@ class MultipleTipsMappedToOTTIDWarning(WarningMessage):
         outstream.write('{p}Multiple nodes ({s}) are mapped to the OTT ID "{o}"'.format(p=prefix, 
                                                                                         s=s,
                                                                                         o=self.ott_id))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return {'nodes': self.id_list}
+
+class NonMonophyleticTipsMappedToOTTIDWarning(WarningMessage):
+    def __init__(self, ott_id, clade_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        data = {'ott_id':ott_id, 'node_list': clade_list}
+        WarningMessage.__init__(self, WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.ott_id = ott_id
+        self.clade_list = clade_list
+        sl = [(i[0].nexson_id, i) for i in clade_list]
+        sl.sort()
+        id_list = []
+        for el in sl:
+            id_list.append([i.nexson_id for i in el[1]])
+        self.id_list = id_list
+    def write(self, outstream, prefix):
+        str_list = []
+        for sub_list in self.id_list:
+            s = '", "'.join([str(i) for i in sub_list])
+            str_list.append('"{s}"'.format(s=s))
+        s = ' +++ '.join([i for i in str_list])
+        outstream.write('{p}Multiple nodes that do not form the tips of a clade are mapped to the OTT ID "{o}". The clades are {s}'.format(p=prefix,
+                                                                            s=s,
+                                                                            o=self.ott_id,
+                                                                            ))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return {'nodes': self.id_list}
@@ -906,9 +914,7 @@ class Tree(NexsonDictWrapper):
                 tip_list = ott_id2node.get(ott_id)
                 clade_tips = self.break_by_clades(tip_list)
                 if len(clade_tips) > 1:
-                    rich_logger.warn(WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, 
-                                     {'ott_id': ott_id, 'clades': clade_tips},
-                                     container=self)
+                    rich_logger.warning(NonMonophyleticTipsMappedToOTTIDWarning(ott_id, clade_tips, container=self))
     def break_by_clades(self, tip_list):
         '''Takes a list of nodes. returns a list of lists. 
         Each sub list is a set of leaves in the tree that form the tips of a clade on the tree..
