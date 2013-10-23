@@ -45,14 +45,6 @@ for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
     WarningCodes.numeric_codes_registered.append(_n)
 
-def write_warning(out, prefix, wc, data, container, subelement):
-    assert(False)
-    if subelement:
-        out.write(' in "{el}"'.format(el=subelement))
-    if container is not None:
-        out.write(' in "{el}"'.format(el=container.get_tag_context()))
-    out.write('\n')
-
 class SeverityCodes(object):
     ERROR, WARNING = range(2)
     facets = ['ERROR', 'WARNING']
@@ -76,13 +68,6 @@ class WarningMessage(object):
             self.prop_name = prop_name
         else:
             self.prop_name = None
-    def write(self, outstream, prefix):
-        write_warning(outstream,
-                      prefix,
-                      self.warning_code,
-                      self.warning_data,
-                      self._container,
-                      self.subelement)
     def __unicode__(self, prefix=''):
         b = StringIO()
         ci = codecs.lookup('utf8')
