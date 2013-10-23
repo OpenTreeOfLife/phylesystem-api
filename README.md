@@ -42,6 +42,37 @@ To send these new changes to Github:
 
     git push
 
+Let's say you are on a branch on this repo called ```feature_api```
+and you want to our submodule to point to the latest commit in the
+```feature_treenexus``` branch:
+
+    git checkout feature_api
+    cd treenexus
+
+    git pull
+    git checkout feature_treenexus
+    cd ..
+
+    # this tells our repo to update the commit that our submodule
+    # points to in treenexus
+    git add treenexus
+    git commit -m "Update treenexus submodule pointer"
+
+Similarly, you can checkout an arbitrary SHA1 and have our submodule
+point to that by doing this:
+
+    git checkout feature_api
+    cd treenexus
+
+    git pull
+    git checkout SHA1 # this will create a "detached HEAD"
+    cd ..
+
+    # this tells our repo to update the commit that our submodule
+    # points to in treenexus
+    git add treenexus
+    git commit -m "Update treenexus submodule pointer"
+
 # Authors
 
 See the CREDITS file
