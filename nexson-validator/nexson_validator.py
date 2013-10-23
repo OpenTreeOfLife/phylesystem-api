@@ -46,15 +46,7 @@ for _n, _f in enumerate(WarningCodes.facets):
     WarningCodes.numeric_codes_registered.append(_n)
 
 def write_warning(out, prefix, wc, data, container, subelement):
-    if wc == WarningCodes.DISCONNECTED_GRAPH_DETECTED:
-        out.write('{p}Disconnected graph found instead of tree including root nodes:'.format(p=prefix))
-        for index, el in enumerate(data):
-            if index ==0:
-                out.write('"{i}"'.format(i=el.nexson_id))
-            else:
-                out.write(', "{i}"'.format(i=el.nexson_id))
-    else:
-        assert(False)
+    assert(False)
     if subelement:
         out.write(' in "{el}"'.format(el=subelement))
     if container is not None:
@@ -110,11 +102,7 @@ class WarningMessage(object):
     def convert_data_for_json(self):
         wc = self.warning_code
         data = self.warning_data
-        if wc in [WarningCodes.DISCONNECTED_GRAPH_DETECTED,
-                    ]:
-            return None
-        else:
-            return data
+        return data
     def _write_message_suffix(self, out):
         if self.subelement:
             out.write(' in "{el}"'.format(el=self.subelement))
@@ -415,6 +403,21 @@ class TreeCycleWarning(WarningMessage):
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.node.nexson_id
+
+class DisconnectedTreeWarning(WarningMessage):
+    def __init__(self, root_node_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.DISCONNECTED_GRAPH_DETECTED, data=root_node_list, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        self.root_node_list = root_node_list
+    def write(self, outstream, prefix):
+        outstream.write('{p}Disconnected graph found instead of tree including root nodes:'.format(p=prefix))
+        for index, el in enumerate(self.root_node_list):
+            if index ==0:
+                outstream.write('"{i}"'.format(i=el.nexson_id))
+            else:
+                outstream.write(', "{i}"'.format(i=el.nexson_id))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return None
 
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
@@ -924,7 +927,7 @@ class Tree(NexsonDictWrapper):
             lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
             lowest_node_set.sort()
             lowest_node_set = [i[1] for i in lowest_node_set]
-            rich_logger.error(WarningCodes.DISCONNECTED_GRAPH_DETECTED, lowest_node_set, container=self)
+            rich_logger.emit_error(DisconnectedTreeWarning(lowest_node_set, container=self))
         elif len(lowest_node_set) == 1:
             ln = list(lowest_node_set)[0]
             if self._root_node is not None and self._root_node is not ln:
