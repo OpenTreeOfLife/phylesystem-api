@@ -32,6 +32,10 @@ script:
     - cd ..
     - OTOL_API_PORT=8080 nosetests tests/
 
+after_script:
+    - cat web2py-*/web2py.log
+    - ps auxw|grep python
+
 notifications:
   irc:
     channels: "chat.freenode.net#otol"
