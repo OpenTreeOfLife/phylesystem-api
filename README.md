@@ -73,6 +73,15 @@ point to that by doing this:
     git add treenexus
     git commit -m "Update treenexus submodule pointer"
 
+# Deploying
+
+This git repository is meant to be a "web2py application", so you need to
+create a symlink in ```$WEB2PY_ROOT/applications``` to the API repo directory:
+
+   cd $WEB2PY_ROOT/application
+   # this will make the app available under /api
+   ln -sf /dir/with/api.opentreeoflife.org api
+
 # Authors
 
 See the CREDITS file
