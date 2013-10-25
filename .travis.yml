@@ -24,6 +24,7 @@ before_script:
     - cd ..
     - python web2py.py --nogui --debug=0 -p 8080 -a 'supersekret' &> web2py.log &
     - sleep 3 # give the webserver time to startup
+    - ls -lad .
     - cat web2py.log
     - cd ..
 
@@ -35,6 +36,7 @@ script:
 after_script:
     - cat web2py-*/web2py.log
     - ps auxw|grep python
+    - sudo dmesg | tail -n50
 
 notifications:
   irc:
