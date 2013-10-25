@@ -14,10 +14,13 @@ install:
 before_script:
     - wget https://github.com/web2py/web2py/archive/R-2.7.4.zip
     - unzip R-2.7.4.zip
+    - export API_BASE_DIR=`pwd`
     - cd web2py-R-2.7.4
     - cd applications
+    # move the default welcome app out of the way
+    - mv welcome welcome.back
     # make the root of this repo the default application
-    - ln -sf ../../ welcome
+    - ln -sf $API_BASE_DIR welcome
     - python web2py.py --nogui --debug=0 -p 8080 -a 'supersekret' &> web2py.log &
     - sleep 3 # give the webserver time to startup
     - cat web2py.log
