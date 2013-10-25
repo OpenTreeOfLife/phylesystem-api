@@ -17,7 +17,7 @@ before_script:
     - cd web2py-R-2.7.4
     - cd applications
     # make the root of this repo the default application
-    - ln -s ../.. welcome
+    - ln -sf ../../ welcome
     - python web2py.py --nogui --debug=0 -p 8080 -a 'supersekret' &> web2py.log &
     - sleep 3 # give the webserver time to startup
     - cat web2py.log
