@@ -21,10 +21,11 @@ before_script:
     - mv welcome welcome.back
     # make the root of this repo the default application
     - ln -sf $API_BASE_DIR welcome
+    - cd ..
     - python web2py.py --nogui --debug=0 -p 8080 -a 'supersekret' &> web2py.log &
     - sleep 3 # give the webserver time to startup
     - cat web2py.log
-    - cd ../..
+    - cd ..
 
 script:
     - cd nexson-validator && python setup.py develop && ./test.sh
