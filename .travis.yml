@@ -27,7 +27,7 @@ before_script:
     - ls -lad *
     - cat web2py.log
     - cd ..
-    - git status -a
+    - git status -sbu
 
 script:
     - cd nexson-validator && python setup.py develop && ./test.sh
@@ -35,7 +35,7 @@ script:
     - OTOL_API_PORT=8000 nosetests tests/
 
 after_script:
-    - git status -a
+    - git status -sbu
     - cat web2py-*/web2py.log
     - ps auxw|grep python
     - sudo dmesg | tail -n50
