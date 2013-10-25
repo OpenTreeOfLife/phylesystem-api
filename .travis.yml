@@ -1,5 +1,6 @@
 language: python
 python:
+    - "2.6"
     - "2.7"
 #    - "3.3"
 #    - "pypy"
@@ -11,9 +12,16 @@ install:
    - pip install -r requirements.txt --use-mirrors
 
 before_script:
-    - cd web2py; python web2py.py --nogui --debug=0 -p 8080 -a 'supersekret' &
-    - cd ..
+    - wget https://github.com/web2py/web2py/archive/R-2.7.4.zip
+    - unzip R-2.7.4.zip
+    - cd web2py-R-2.7.4
+    - cd applications
+    # make the root of this repo the default application
+    - ln -s ../.. welcome
+    - python web2py.py --nogui --debug=0 -p 8080 -a 'supersekret' &> web2py.log &
     - sleep 3 # give the webserver time to startup
+    - cat web2py.log
+    - cd ../..
 
 script:
     - cd nexson-validator && python setup.py develop && ./test.sh
