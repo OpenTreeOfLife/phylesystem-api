@@ -10,6 +10,9 @@ before_install:
 
 install:
    - pip install -r requirements.txt --use-mirrors
+   # Travis builder defaults don't play nicely with multiprocessing.Queue
+   - "sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm"
+
 
 before_script:
     - wget https://github.com/web2py/web2py/archive/R-2.7.4.zip
