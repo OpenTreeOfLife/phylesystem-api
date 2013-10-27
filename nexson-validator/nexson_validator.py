@@ -551,6 +551,8 @@ class NexsonDictWrapper(object):
         md = {"$": value, 
               "@property": key, 
               "@xsi:type": "nex:LiteralMeta"}
+        if isinstance(value, bool):
+            md["@datatype"] = "xsd:boolean"
         rm = self._raw.setdefault('meta', []).append(md)
     def del_meta(self, key):
         ml = self._raw.get('meta', [])
