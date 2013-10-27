@@ -94,12 +94,54 @@
 "severity": "WARNING"
 }, 
 {
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:isLeaf\" in \"meta\" in \"node(id=node2)\"\n", 
+"data": "@property=ot:isLeaf", 
+"preserve": false, 
+"refersTo": {
+"inMeta": true, 
+"nodeID": "node2", 
+"top": "trees", 
+"treeID": "tree1", 
+"treesID": "trees2"
+}, 
+"severity": "WARNING"
+}, 
+{
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:isLeaf\" in \"meta\" in \"node(id=node3)\"\n", 
+"data": "@property=ot:isLeaf", 
+"preserve": false, 
+"refersTo": {
+"inMeta": true, 
+"nodeID": "node3", 
+"top": "trees", 
+"treeID": "tree1", 
+"treesID": "trees2"
+}, 
+"severity": "WARNING"
+}, 
+{
 "code": "TIP_WITHOUT_OTT_ID", 
 "comment": "Tip node mapped to an OTU (\"otu3\") which does not have an OTT ID in \"node(id=node4)\"\n", 
 "data": null, 
 "preserve": false, 
 "refersTo": {
 "inMeta": false, 
+"nodeID": "node4", 
+"top": "trees", 
+"treeID": "tree1", 
+"treesID": "trees2"
+}, 
+"severity": "WARNING"
+}, 
+{
+"code": "MISSING_OPTIONAL_KEY", 
+"comment": "Missing optional key \"@property=ot:isLeaf\" in \"meta\" in \"node(id=node4)\"\n", 
+"data": "@property=ot:isLeaf", 
+"preserve": false, 
+"refersTo": {
+"inMeta": true, 
 "nodeID": "node4", 
 "top": "trees", 
 "treeID": "tree1", 
@@ -203,15 +245,36 @@
 }, 
 {
 "@id": "node2", 
-"@otu": "otu1"
+"@otu": "otu1", 
+"meta": [
+{
+"$": true, 
+"@property": "ot:isLeaf", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
 }, 
 {
 "@id": "node3", 
-"@otu": "otu2"
+"@otu": "otu2", 
+"meta": [
+{
+"$": true, 
+"@property": "ot:isLeaf", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
 }, 
 {
 "@id": "node4", 
-"@otu": "otu3"
+"@otu": "otu3", 
+"meta": [
+{
+"$": true, 
+"@property": "ot:isLeaf", 
+"@xsi:type": "nex:LiteralMeta"
+}
+]
 }
 ]
 }
