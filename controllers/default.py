@@ -16,6 +16,7 @@ def api():
         # return the correct nexson of study_id
         return _get_nexson(resource_id)
 
+    @auth.requires_login()
     def POST(resource,resource_id, **kwargs):
         if not resource=='study': raise HTTP(400, 'resource != study')
 
