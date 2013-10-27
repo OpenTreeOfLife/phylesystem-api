@@ -12,6 +12,9 @@ class NexSONError(Exception):
     def __str__(self):
         return repr(self.v)
 
+################################################################################
+# Warning codes and message types...
+################################################################################
 # An enum of WARNING_CODES
 class WarningCodes():
     facets = ['MISSING_MANDATORY_KEY',
@@ -404,6 +407,9 @@ class DisconnectedTreeWarning(WarningMessage):
     def convert_data_for_json(self):
         return None
 
+################################################################################
+# Warning/error logger types...
+################################################################################
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
         self.out = sys.stderr
@@ -541,6 +547,20 @@ class NexsonDictWrapper(object):
         elif isinstance(v, MetaValueList):
             self._logger.emit_error(DuplicatingSingletonKeyWarning('@property=' + property_name, container=self, subelement='meta'))
         return v
+    def add_meta(self, key, value):
+        md = {"$": value, 
+              "@property": key, 
+              "@xsi:type": "nex:LiteralMeta"}
+        rm = self._raw.setdefault('meta', []).append(md)
+    def del_meta(self, key):
+        ml = self._raw.get('meta', [])
+        to_del = []
+        for ind, el in enumerate(ml):
+            if el['@property'] == key:
+                to_del.append(ind)
+        to_del.reverse()
+        for ind in to_del:
+            ml.pop(ind)
     def replace_meta_property_name(self, old_name, new_name):
         meta_el_list = self._meta2list.get(old_name)
         if not bool(meta_el_list):
@@ -707,7 +727,7 @@ class Edge(NexsonDictWrapper):
 class Node(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
     EXPECETED_KEYS = tuple()
-    PERMISSIBLE_KEYS = ('@id', '@otu', '@root')
+    PERMISSIBLE_KEYS = ('@id', '@otu', '@root', 'meta')
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'node'
     def get_path_dict(self, subelement, prop_name):
@@ -894,6 +914,7 @@ class Tree(NexsonDictWrapper):
                 rich_logger.emit_error(TreeCycleWarning(cycle_node, container=self))
             if path_to_root:
                 lowest_node_set.add(path_to_root[-1])
+            is_flagged_as_leaf = nd.get_singelton_meta('ot:isLeaf', warn_if_missing=False)
             if len(nd._children) == 0:
                 if nd._otu is None:
                     rich_logger.emit_error(TipWithoutOTUWarning(nd, container=nd))
@@ -904,6 +925,14 @@ class Tree(NexsonDictWrapper):
                     if len(nl) == 1:
                         multi_labelled_ott_id.add(nd._otu._ott_id)
                     nl.append(nd)
+                if not is_flagged_as_leaf:
+                    rich_logger.warning(MissingOptionalKeyWarning('@property=ot:isLeaf', container=nd, subelement='meta'))
+                    if not rich_logger.retain_deprecated:
+                        nd.add_meta('ot:isLeaf', True)
+            elif is_flagged_as_leaf:
+                rich_logger.emit_error(InvalidPropertyValueWarning('ot:isLeaf', True, container=nd, subelement='meta'))
+                if not rich_logger.retain_deprecated:
+                    nd.del_meta('ot:isLeaf') # Non const. Fixing.
         for ott_id in multi_labelled_ott_id:
             tip_list = ott_id2node.get(ott_id)
             rich_logger.warning(MultipleTipsMappedToOTTIDWarning(ott_id, tip_list, container=self))

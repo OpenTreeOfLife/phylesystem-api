@@ -78,108 +78,8 @@
 "name": "normalize_ot_nexson.py", 
 "url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org", 
 }, 
-"isValid": false, 
-"messages": [
-{
-"code": "MISSING_OPTIONAL_KEY", 
-"comment": "Missing optional key \"@property=ot:isLeaf\" in \"meta\" in \"node(id=node2)\"\n", 
-"data": "@property=ot:isLeaf", 
-"preserve": false, 
-"refersTo": {
-"inMeta": true, 
-"nodeID": "node2", 
-"top": "trees", 
-"treeID": "tree1", 
-"treesID": "trees2"
-}, 
-"severity": "WARNING"
-}, 
-{
-"code": "MISSING_OPTIONAL_KEY", 
-"comment": "Missing optional key \"@property=ot:isLeaf\" in \"meta\" in \"node(id=node3)\"\n", 
-"data": "@property=ot:isLeaf", 
-"preserve": false, 
-"refersTo": {
-"inMeta": true, 
-"nodeID": "node3", 
-"top": "trees", 
-"treeID": "tree1", 
-"treesID": "trees2"
-}, 
-"severity": "WARNING"
-}, 
-{
-"code": "MISSING_OPTIONAL_KEY", 
-"comment": "Missing optional key \"@property=ot:isLeaf\" in \"meta\" in \"node(id=node5)\"\n", 
-"data": "@property=ot:isLeaf", 
-"preserve": false, 
-"refersTo": {
-"inMeta": true, 
-"nodeID": "node5", 
-"top": "trees", 
-"treeID": "tree1", 
-"treesID": "trees2"
-}, 
-"severity": "WARNING"
-}, 
-{
-"code": "MISSING_OPTIONAL_KEY", 
-"comment": "Missing optional key \"@property=ot:isLeaf\" in \"meta\" in \"node(id=node6)\"\n", 
-"data": "@property=ot:isLeaf", 
-"preserve": false, 
-"refersTo": {
-"inMeta": true, 
-"nodeID": "node6", 
-"top": "trees", 
-"treeID": "tree1", 
-"treesID": "trees2"
-}, 
-"severity": "WARNING"
-}, 
-{
-"code": "MULTIPLE_TIPS_MAPPED_TO_OTT_ID", 
-"comment": "Multiple nodes (\"node2\", \"node5\", \"node6\") are mapped to the OTT ID \"161393\" in \"tree(id=tree1)\"\n", 
-"data": {
-"nodes": [
-"node2", 
-"node5", 
-"node6"
-]
-}, 
-"preserve": false, 
-"refersTo": {
-"inMeta": false, 
-"top": "trees", 
-"treeID": "tree1", 
-"treesID": "trees2"
-}, 
-"severity": "WARNING"
-}, 
-{
-"code": "NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID", 
-"comment": "Multiple nodes that do not form the tips of a clade are mapped to the OTT ID \"161393\". The clades are \"node2\" +++ \"node5\", \"node6\", \"node4\" in \"tree(id=tree1)\"\n", 
-"data": {
-"nodes": [
-[
-"node2"
-], 
-[
-"node5", 
-"node6", 
-"node4"
-]
-]
-}, 
-"preserve": false, 
-"refersTo": {
-"inMeta": false, 
-"top": "trees", 
-"treeID": "tree1", 
-"treesID": "trees2"
-}, 
-"severity": "WARNING"
-}
-]
+"isValid": true, 
+"messages": []
 }
 ], 
 "otus": {
@@ -261,16 +161,6 @@
 "@id": "edge3", 
 "@source": "node1", 
 "@target": "node4"
-}, 
-{
-"@id": "edge4", 
-"@source": "node4", 
-"@target": "node5"
-}, 
-{
-"@id": "edge5", 
-"@source": "node4", 
-"@target": "node6"
 }
 ], 
 "meta": [
@@ -290,17 +180,6 @@
 }, 
 {
 "@id": "node2", 
-"@otu": "otu3", 
-"meta": [
-{
-"$": true, 
-"@property": "ot:isLeaf", 
-"@xsi:type": "nex:LiteralMeta"
-}
-]
-}, 
-{
-"@id": "node3", 
 "@otu": "otu1", 
 "meta": [
 {
@@ -311,12 +190,8 @@
 ]
 }, 
 {
-"@id": "node4", 
-"@otu": "otu3"
-}, 
-{
-"@id": "node5", 
-"@otu": "otu3", 
+"@id": "node3", 
+"@otu": "otu2", 
 "meta": [
 {
 "$": true, 
@@ -326,7 +201,7 @@
 ]
 }, 
 {
-"@id": "node6", 
+"@id": "node4", 
 "@otu": "otu3", 
 "meta": [
 {
