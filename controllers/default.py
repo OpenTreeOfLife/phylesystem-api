@@ -11,22 +11,32 @@ def index():
 @request.restful()
 def api():
     response.view = 'generic.json'
-    def GET(resource,resource_id):
-        if not resource=='study': raise HTTP(400)
-        # return the correct nexson of study_id
-        return _get_nexson(resource_id)
 
-    @auth.requires_login()
-    def POST(resource,resource_id, **kwargs):
+    def GET(resource,resource_id,jsoncallback=None,callback=None,_=None):
+        if not resource=='study': raise HTTP(400, 'resource != study [GET]')
+
+        # support JSONP request from another domain
+        if jsoncallback or callback:
+            response.view = 'generic.jsonp'
+
+        # return the correct nexson of study_id, using the specified view
+        return dict(FULL_RESPONSE=_get_nexson(resource_id))
+
+    def POST(resource, resource_id, **kwargs):
+        # support JSONP request from another domain
+        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
+            response.view = 'generic.jsonp'
+
         if not resource=='study': raise HTTP(400, 'resource != study')
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
-        oauth_token  = auth.user.github_auth_token
-        author_name  = auth.user.name
-        author_email = auth.user.email
+        author_name  = kwargs.get('author_name','')
+        author_email = kwargs.get('author_email','')
+        # this is the GitHub API auth-token for a logged-in curator
+        auth_token   = kwargs.get('auth_token','')
 
-        if not oauth_token:
+        if not auth_token:
             raise HTTP(400,"You must authenticate to before updating via the OTOL API")
 
         # Connect to the Github v3 API via with this OAuth token
