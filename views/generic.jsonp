@@ -3,7 +3,7 @@
 try:
     from gluon.serializers import json
     cb_func_name = request.vars['jsoncallback'] or request.vars['callback']
-     
+
     # web2py view expects a dict, but we might have a single JSON response ready
     full_response = response._vars.get('FULL_RESPONSE', None)
     if full_response:
@@ -27,4 +27,5 @@ try:
     response.headers['Content-Type']='application/jsonp'
 except:
     raise HTTP(405,'no json')
+pass
 }}
