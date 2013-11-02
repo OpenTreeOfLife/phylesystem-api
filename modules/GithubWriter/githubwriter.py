@@ -7,10 +7,13 @@ class GithubWriter(object):
     def __init__(self, oauth='', org="OpenTreeOfLife", repo="testing", **kwargs):
         if not oauth:
             oauth = os.getenv('GITHUB_OAUTH_TOKEN', 'invalid')
+        if oauth == 'invalid':
+            print "Could not find OAUTH token!"
         self.oauth = oauth
-        self.org   = org
-        self.repo  = repo
         self.gh    = Github(oauth)
+
+        self.org   = self.gh.get_organization(org)
+        self.repo  = self.org.get_repo(repo)
 
     def create_blob(self, content, encoding):
         return self.gh.create_git_blob(content, encoding)
@@ -18,7 +21,8 @@ class GithubWriter(object):
     def get_latest_sha(self, branch="master"):
         # i.e. curl https://api.github.com/repos/OpenTreeOfLife/api.opentreeoflife.org/git/refs/heads/master
         # we need to get the latest sha on master to use as our initial sha1 of our new branch
-        ref = self.gh.get_git_ref("heads/%s" % branch)
+
+        ref = self.repo.get_git_ref("heads/%s" % branch)
         sha        = ref.object.sha
         return sha
 
