@@ -24,7 +24,12 @@ def api():
         auth_token = kwargs.get('auth_token', None)
 
         # return the correct nexson of study_id, using the specified view
-        return dict(FULL_RESPONSE=_get_nexson(resource_id, auth_token))
+        # TODO: Support anonymous reviewers (no token)
+        try:
+            # TODO: use readlines() in some way, to handle humongous files?
+            return dict(FULL_RESPONSE=github_client.fetch_study(resource_id, auth_token))
+        except Exception, e:
+            return 'ERROR fetching study:\n%s' % e
 
     def POST(resource, resource_id, **kwargs):
         # support JSONP request from another domain
@@ -82,17 +87,4 @@ def _study_id_to_filename(study_id):
     this_dir  = os.path.dirname(os.path.abspath(__file__))
     filename  = this_dir + "/../treenexus/study/" + study_id + "/" + study_id + ".json"
     return filename
-
-def _get_nexson(study_id, token):
-    """Return the NexSON of a given study_id"""
-    #token = auth.user and auth.user.github_auth_token or 'ANONYMOUS'
-    try:
-        # TODO: use readlines() in some way, to handle humongous files?
-        return github_client.fetch_study(study_id, token)
-    except Exception, e:
-        return 'ERROR fetching study:\n%s' % e
-        raise e
-
-    # not logged in? something's wrong..
-    return None
 
