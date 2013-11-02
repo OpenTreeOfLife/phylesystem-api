@@ -24,13 +24,13 @@ def fetch_study(study_id, token):
         gh_username = gh_user.login
     except BadCredentialsException, e:
         print('Bad credentials! Please proofread (or refresh) the auth token.')
-        return
+        return 'Bad credentials! Please proofread (or refresh) the auth token.'
     except GithubException, e:
-        print('Something else went wrong (too many login attempts?)')
-        return
+        print('Something else went wrong <%s>: %s' % (type(e), e,))
+        return 'Something else went wrong <%s>: %s' % (type(e), e,)
     except Exception, e:
         print('Something else went wrong <%s>: %s' % (type(e), e,))
-        return
+        return 'Something else went wrong <%s>: %s' % (type(e), e,)
 
     # find the 'treenexus' repo (confirm it exists and is available)
     repo_path = 'OpenTreeOfLife/treenexus'  # TODO: pull from config file?
@@ -38,7 +38,7 @@ def fetch_study(study_id, token):
         data_repo = gh.get_repo( repo_path )
     except UnknownObjectException, e:
         pprint('Data repo "%s" not found! (%s)' % (repo_path, e))
-        return
+        return 'Data repo "%s" not found! (%s)' % (repo_path, e)
 
     pprint( data_repo )
     # does the user have a WIP (work in progress) branch for this study?
@@ -58,7 +58,7 @@ def fetch_study(study_id, token):
     
     if study_branch is None:
         print('No study branches were found (this is very unexpected)')
-        return
+        return 'No study branches were found (this is very unexpected)'
 
     study_ref = study_branch.commit.commit.sha
     print('Current study is on branch "%s", at commit %s' % (study_branch.name, study_ref))
@@ -71,7 +71,7 @@ def fetch_study(study_id, token):
         main_study_file = data_repo.get_file_contents( path=study_path, ref=study_ref )
     except Exception, e:
         print('No file found at this path (this is somewhat unexpected)')
-        return
+        return 'No file found at this path (this is somewhat unexpected)'
 
     # ...or should we use Repository.get_contents?
     study_nexson = main_study_file.content.decode( encoding=main_study_file.encoding )
@@ -97,7 +97,7 @@ def main(*args):
     # args should be a tuple (strings passed on the command line)
     if len(args) < 2:
         print('Usage: github_client.py AUTH_TOKEN')
-        return
+        return 'Usage: github_client.py AUTH_TOKEN'
 
     # expecting OAuth token as second argument
     print('Quick test of API call and auth token...')
@@ -108,13 +108,13 @@ def main(*args):
         TEST_login = gh_user.login   # needed to raise bad-credential exception
     except BadCredentialsException, e:
         print('Bad credentials! Please proofread (or refresh) the auth token.')
-        return
+        return 'Bad credentials! Please proofread (or refresh) the auth token.'
     except GithubException, e:
-        print('Something else went wrong (too many login attempts?)')
-        return
+        print('Something else went wrong <%s>: %s' % (type(e), e,))
+        return 'Something else went wrong <%s>: %s' % (type(e), e,)
     except Exception, e:
         print('Something else went wrong <%s>: %s' % (type(e), e,))
-        return
+        return 'Something else went wrong <%s>: %s' % (type(e), e,)
 
     print('Current Github API status: %s' % (gh.get_api_status().status,))
     print('This token is for user [%s] "%s <%s>"' % (gh_user.login, gh_user.name, gh_user.email,))
