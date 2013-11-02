@@ -2,6 +2,7 @@ import os
 import time
 import json
 import hashlib
+import github_client
 from github import Github
 
 def index():
@@ -12,15 +13,18 @@ def index():
 def api():
     response.view = 'generic.json'
 
-    def GET(resource,resource_id,jsoncallback=None,callback=None,_=None):
+    def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         if not resource=='study': raise HTTP(400, 'resource != study [GET]')
 
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
 
+        # fetch is the GitHub API auth-token for a logged-in curator
+        auth_token = kwargs.get('auth_token', None)
+
         # return the correct nexson of study_id, using the specified view
-        return dict(FULL_RESPONSE=_get_nexson(resource_id))
+        return dict(FULL_RESPONSE=_get_nexson(resource_id, auth_token))
 
     def POST(resource, resource_id, **kwargs):
         # support JSONP request from another domain
@@ -55,7 +59,7 @@ def api():
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
-        nexson_sha1        = hashlib.sha1( _get_nexson(resource_id) ).hexdigest()
+        nexson_sha1        = hashlib.sha1( _get_nexson(resource_id, auth_token) ).hexdigest()
 
         # the POSTed data is the same as what we have on disk, do nothing and return successfully
         if posted_nexson_sha1 == nexson_sha1:
@@ -79,12 +83,16 @@ def _study_id_to_filename(study_id):
     filename  = this_dir + "/../treenexus/study/" + study_id + "/" + study_id + ".json"
     return filename
 
-def _get_nexson(study_id):
+def _get_nexson(study_id, token):
     """Return the NexSON of a given study_id"""
+    #token = auth.user and auth.user.github_auth_token or 'ANONYMOUS'
     try:
-        filename    = _study_id_to_filename(study_id)
-        nexson_file = open(filename,'r')
-    except IOError:
-        return { error: 1, description: "unknown study" }
+        # TODO: use readlines() in some way, to handle humongous files?
+        return github_client.fetch_study(study_id, token)
+    except Exception, e:
+        return 'ERROR fetching study:\n%s' % e
+        raise e
 
-    return nexson_file.readlines()
+    # not logged in? something's wrong..
+    return None
+
