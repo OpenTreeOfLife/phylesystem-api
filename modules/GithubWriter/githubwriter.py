@@ -1,4 +1,5 @@
 from github import Github
+import github
 import os
 import sys
 
@@ -26,6 +27,15 @@ class GithubWriter(object):
         sha        = ref.object.sha
         return sha
 
+    def branch_exists(self, branch):
+        "Return true if a branch exists, false otherwise"
+        try:
+            ref = self.repo.get_git_ref("heads/%s" % branch)
+        except github.UnknownObjectException, e:
+            return 0
+
+        return 1
+
     def get_tree_sha(self, commit_sha):
         "Get the Tree SHA of a given commit SHA"
         commit = self.gh.get_git_commit(commit_sha)
@@ -37,8 +47,8 @@ class GithubWriter(object):
         ref = "heads/%s" % branch
 
         # create a new "Git Reference" (i.e. branch) from the given sha
-        return self.gh.create_git_ref(ref,sha)
+        return self.repo.create_git_ref(ref,sha)
 
     # http://developer.github.com/v3/git/trees/#create-a-tree
     def create_tree(self, tree):
-        self.gh.create_git_tree(tree)
+        self.repo.create_git_tree(tree)

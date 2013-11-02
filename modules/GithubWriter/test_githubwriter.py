@@ -13,4 +13,8 @@ def test_basic():
     sha = gw.get_latest_sha()
     assert_equals( len(sha) , 40, 'Got a reasonable looking sha back:%s ' % sha)
 
+    assert_false( gw.branch_exists("really_please_dont_exist") )
+
+    assert_true( gw.branch_exists("master") )
+
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
