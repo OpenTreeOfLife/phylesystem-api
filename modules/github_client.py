@@ -64,7 +64,7 @@ def fetch_study(study_id, token):
     print('Current study is on branch "%s", at commit %s' % (study_branch.name, study_ref))
 
     # TODO: confine this to the appropriate branch!?
-    study_path = '/study/1001/1001.json'
+    study_path = '/study/%s/%s.json' % (study_id, study_id,)
     pprint('study_path: [%s]' % study_path)
 
     try:
