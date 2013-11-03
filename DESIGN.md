@@ -4,6 +4,12 @@ This file documents the design of the OTOL API, including requirements defined b
 the [Open Tree of Life](http://opentreeoflife.org) community and software team
 and the reasons for various "details of implementation".
 
+_Note that methods are also being documented in a wiki page in the main 'opentree' project._
+https://github.com/OpenTreeOfLife/opentree/wiki/Open-Tree-of-Life-APIs
+
+_TODO: Consolidate these pages?_
+
+
 ### OToL API Version 1 Methods
 
 To get the entire NexSON of study N :
@@ -40,6 +46,9 @@ API versions.
 Any POST request attempting to update a study with invalid JSON will be denied
 and an HTTP error code 400 will be returned.
 
+
 ## Authors
 
 Jonathan "Duke" Leto
+
+Jim Allman
