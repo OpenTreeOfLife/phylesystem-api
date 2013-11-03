@@ -36,12 +36,24 @@ def api():
         except Exception, e:
             return 'ERROR fetching study:\n%s' % e
 
-    def POST(resource, resource_id, **kwargs):
+    def POST(resource, resource_id=None, **kwargs):
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
 
         if not resource=='study': raise HTTP(400, 'resource != study')
+
+        # TODO: use presence or absence of resource_id as a cue to creation vs.
+        # updates? Or better yet, support method overrides (on POST requests)
+        # for PUT, PATCH, DELETE and redirect as needed:
+        # http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#method-override
+        #
+        ## if resource_id:
+        ##     # this is an update(?) of an existing study
+        ##     ...
+        ## else:
+        ##     # we're creating a new study (possibly with import instructions in the payload)
+        ##     ...
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
