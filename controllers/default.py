@@ -48,12 +48,28 @@ def api():
         # for PUT, PATCH, DELETE and redirect as needed:
         # http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#method-override
         #
-        ## if resource_id:
-        ##     # this is an update(?) of an existing study
-        ##     ...
-        ## else:
-        ##     # we're creating a new study (possibly with import instructions in the payload)
-        ##     ...
+        if False:
+            if resource_id:
+                # this is an update(?) of an existing study, use code below
+                pass
+            else:
+                # we're creating a new study (possibly with import instructions in the payload)
+                cc0_agreement = kwargs.get('cc0_agreement', '')
+                import_option = kwargs.get('import_option', '')
+                treebase_id = kwargs.get('treebase_id', '')
+                dryad_DOI = kwargs.get('dryad_DOI', '')
+                import_option = kwargs.get('import_option', '')
+
+                return kwargs
+                # TODO: assign a new ID for this study, create its folder in repo(?)
+            
+                # forward ID and info to treemachine, expect to get study JSON back
+            
+                # IF treemachine returns JSON, save as {ID}.json and return URL as '201 Created'
+                # or perhaps '303 See other' w/ redirect?
+                # (should we do this on a WIP branch? save empty folder in 'master'?)
+            
+                # IF treemachine throws an error, return error info as '500 Internal Server Error'
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
