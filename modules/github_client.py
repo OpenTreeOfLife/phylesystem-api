@@ -1,13 +1,17 @@
 #!/usr/bin/env python
+import os
+from ConfigParser import SafeConfigParser
 import sys
 import github
 from github import Github, GithubException, BadCredentialsException, UnknownObjectException
 # diagnostic helpers
 from pprint import pprint
-
+# NOTE: un-comment this to emit API chatter to stdout!
+##github.enable_console_debug_logging()
 
 # can we import web2py API (current, etc)?
 in_web2py = False
+app_name = 'api'  # default name, in case we're outside of web2py
 try:
     from gluon import *
     if current:
@@ -15,13 +19,48 @@ try:
 except:
     pass
 
+def get_registered_app_secrets():
+    # for anonymous visitors, fetch client ID and secret for this app (as registered with Github)
+    Github_client_id = 'CLIENT_ID_NOT_FOUND'
+    Github_client_secret = 'CLIENT_SECRET_NOT_FOUND'
+    if in_web2py:
+        app_name = current.request.application
+    conf = SafeConfigParser({})
+    try:
+        # NOTE: This assumes that request.application EXACTLY matches the filesystem path
+        print(">> LOOKING FOR %s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+        print(">>          OR %s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+        if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+            conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+        else:
+            conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+        Github_client_id = conf.get("apis", "github_client_id")
+        Github_client_secret = conf.get("apis", "github_client_secret")
+    except Exception, e:
+        print('ERROR reading config file. Try running your script from the main web2py directory!')
+        print('Exception details: %s' % (e,))
+
+    return (Github_client_id, Github_client_secret)
+
 
 def fetch_study(study_id, token):
-    #headers = build_common_api_headers()
+    # Fetch study data using auth token, if provided, or using app secret for an
+    # anonymous visitor (to take advantage of our high rate limit)
+    pprint('>>>>> token: [%s]' % (token,))
     try:
-        gh = Github(token)
-        gh_user = gh.get_user()
-        gh_username = gh_user.login
+        if token == 'ANONYMOUS':
+            (Github_client_id, Github_client_secret,) = get_registered_app_secrets()
+            pprint('>>>>> Github_client_id: [%s]' % (Github_client_id,))
+            pprint('>>>>> Github_client_secret: [%s]' % (Github_client_secret,))
+            gh = Github(client_id=Github_client_id, client_secret=Github_client_secret)
+            # there's no user to grab
+            gh_user = None
+            gh_username = 'ANONYMOUS_VISITOR'
+        else:
+            # grab info and name of logged-in user
+            gh = Github(token)
+            gh_user = gh.get_user()
+            gh_username = gh_user.login
     except BadCredentialsException, e:
         print('Bad credentials! Please proofread (or refresh) the auth token.')
         return 'Bad credentials! Please proofread (or refresh) the auth token.'
