@@ -3,6 +3,7 @@ import time
 import json
 import hashlib
 import github_client
+from pprint import pprint
 from github import Github
 
 def index():
@@ -20,11 +21,15 @@ def api():
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
 
-        # fetch is the GitHub API auth-token for a logged-in curator
-        auth_token = kwargs.get('auth_token', None)
+        # fetch using the GitHub API auth-token for a logged-in curator
+        auth_token = kwargs.get('auth_token', 'ANONYMOUS')
+        if auth_token == 'ANONYMOUS':
+            # non-web callers might be using an HTTP header ("Authorization: token abc123def456")
+            auth_header = request.env.get('http_authorization', None) or request.wsgi.environ.get('HTTP_AUTHORIZATION', None)
+            if auth_header:
+                auth_token = auth_header.split()[1]
 
         # return the correct nexson of study_id, using the specified view
-        # TODO: Support anonymous reviewers (no token)
         try:
             # TODO: use readlines() in some way, to handle humongous files?
             return dict(FULL_RESPONSE=github_client.fetch_study(resource_id, auth_token))
