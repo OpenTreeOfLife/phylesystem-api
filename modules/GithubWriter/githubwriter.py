@@ -3,6 +3,8 @@ import github
 import os
 import sys
 
+github.enable_console_debug_logging()
+
 class GithubWriter(object):
     "Convenience class for interacting with the Github API from the OTOL API"
     def __init__(self, oauth='', org="OpenTreeOfLife", repo="testing", **kwargs):
@@ -17,7 +19,13 @@ class GithubWriter(object):
         self.repo  = self.org.get_repo(repo)
 
     def create_blob(self, content, encoding):
-        return self.gh.create_git_blob(content, encoding)
+        return self.repo.create_git_blob(content, encoding)
+
+    def get_commit(self,sha):
+        return self.repo.get_git_commit(sha)
+
+    def get_ref(self, sha, branch="master"):
+        return self.repo.get_git_ref("heads/%s" % branch)
 
     def get_latest_sha(self, branch="master"):
         # i.e. curl https://api.github.com/repos/OpenTreeOfLife/api.opentreeoflife.org/git/refs/heads/master
@@ -36,10 +44,10 @@ class GithubWriter(object):
 
         return 1
 
-    def get_tree_sha(self, commit_sha):
-        "Get the Tree SHA of a given commit SHA"
-        commit = self.gh.get_git_commit(commit_sha)
-        return commit.tree.sha
+    def get_tree(self, commit_sha):
+        "Get the Tree of a given commit SHA"
+        commit = self.repo.get_git_commit(commit_sha)
+        return commit.tree
 
     def create_branch(self, branch, sha):
         "Create a branch on Github from a given name and SHA"
@@ -50,5 +58,8 @@ class GithubWriter(object):
         return self.repo.create_git_ref(ref,sha)
 
     # http://developer.github.com/v3/git/trees/#create-a-tree
-    def create_tree(self, tree):
-        self.repo.create_git_tree(tree)
+    def create_tree(self, tree, base_tree):
+        return self.repo.create_git_tree(tree, base_tree)
+
+    def create_commit(self, message, tree, parents):
+        return self.repo.create_git_commit(message, tree, parents)
