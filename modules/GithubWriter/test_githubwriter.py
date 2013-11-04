@@ -8,7 +8,7 @@ from githubwriter import GithubWriter
 
 def test_basic():
 
-    gw  = GithubWriter(repo="testing")
+    gw  = GithubWriter(user="leto",repo="testing")
 
     assert_is_instance(gw, GithubWriter)
 
