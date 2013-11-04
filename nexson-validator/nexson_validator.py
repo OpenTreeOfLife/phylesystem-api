@@ -686,7 +686,7 @@ class OTU(NexsonDictWrapper):
 class Edge(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', '@source', '@target')
     EXPECETED_KEYS = tuple()
-    PERMISSIBLE_KEYS = tuple(['@length'] + list(REQUIRED_KEYS))
+    PERMISSIBLE_KEYS = tuple(['@length'] + list(REQUIRED_KEYS) + ['@about']) 
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'edge'
     def __init__(self, o, rich_logger, nodes, container=None):
@@ -729,7 +729,7 @@ class Edge(NexsonDictWrapper):
 class Node(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id',)
     EXPECETED_KEYS = tuple()
-    PERMISSIBLE_KEYS = ('@id', '@otu', '@root', 'meta')
+    PERMISSIBLE_KEYS = ('@id', '@otu', '@root', 'meta', '@about')
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'node'
     def get_path_dict(self, subelement, prop_name):
