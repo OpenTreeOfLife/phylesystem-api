@@ -15,8 +15,12 @@ class GithubWriter(object):
         self.oauth = oauth
         self.gh    = Github(oauth)
 
-        self.org   = self.gh.get_organization(org)
-        self.repo  = self.org.get_repo(repo)
+        if kwargs["user"]:
+            self.user = self.gh.get_user(kwargs["user"])
+            self.repo  = self.user.get_repo(repo)
+        else:
+            self.org   = self.gh.get_organization(org)
+            self.repo  = self.org.get_repo(repo)
 
     def create_blob(self, content, encoding):
         return self.repo.create_git_blob(content, encoding)
