@@ -2,6 +2,8 @@ import os
 import time
 import json
 import hashlib
+import github_client
+from pprint import pprint
 from github import Github
 
 def index():
@@ -12,22 +14,62 @@ def index():
 def api():
     response.view = 'generic.json'
 
-    def GET(resource,resource_id,jsoncallback=None,callback=None,_=None):
+    def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         if not resource=='study': raise HTTP(400, 'resource != study [GET]')
 
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
 
-        # return the correct nexson of study_id, using the specified view
-        return dict(FULL_RESPONSE=_get_nexson(resource_id))
+        # fetch using the GitHub API auth-token for a logged-in curator
+        auth_token = kwargs.get('auth_token', 'ANONYMOUS')
+        if auth_token == 'ANONYMOUS':
+            # non-web callers might be using an HTTP header ("Authorization: token abc123def456")
+            auth_header = request.env.get('http_authorization', None) or request.wsgi.environ.get('HTTP_AUTHORIZATION', None)
+            if auth_header:
+                auth_token = auth_header.split()[1]
 
-    def POST(resource, resource_id, **kwargs):
+        # return the correct nexson of study_id, using the specified view
+        try:
+            # TODO: use readlines() in some way, to handle humongous files?
+            return dict(FULL_RESPONSE=github_client.fetch_study(resource_id, auth_token))
+        except Exception, e:
+            return 'ERROR fetching study:\n%s' % e
+
+    def POST(resource, resource_id=None, **kwargs):
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
 
         if not resource=='study': raise HTTP(400, 'resource != study')
+
+        # TODO: use presence or absence of resource_id as a cue to creation vs.
+        # updates? Or better yet, support method overrides (on POST requests)
+        # for PUT, PATCH, DELETE and redirect as needed:
+        # http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#method-override
+        #
+        if False:
+            if resource_id:
+                # this is an update(?) of an existing study, use code below
+                pass
+            else:
+                # we're creating a new study (possibly with import instructions in the payload)
+                cc0_agreement = kwargs.get('cc0_agreement', '')
+                import_option = kwargs.get('import_option', '')
+                treebase_id = kwargs.get('treebase_id', '')
+                dryad_DOI = kwargs.get('dryad_DOI', '')
+                import_option = kwargs.get('import_option', '')
+
+                return kwargs
+                # TODO: assign a new ID for this study, create its folder in repo(?)
+            
+                # forward ID and info to treemachine, expect to get study JSON back
+            
+                # IF treemachine returns JSON, save as {ID}.json and return URL as '201 Created'
+                # or perhaps '303 See other' w/ redirect?
+                # (should we do this on a WIP branch? save empty folder in 'master'?)
+            
+                # IF treemachine throws an error, return error info as '500 Internal Server Error'
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
@@ -55,7 +97,7 @@ def api():
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
-        nexson_sha1        = hashlib.sha1( _get_nexson(resource_id) ).hexdigest()
+        nexson_sha1        = hashlib.sha1( _get_nexson(resource_id, auth_token) ).hexdigest()
 
         # the POSTed data is the same as what we have on disk, do nothing and return successfully
         if posted_nexson_sha1 == nexson_sha1:
@@ -79,12 +121,3 @@ def _study_id_to_filename(study_id):
     filename  = this_dir + "/../treenexus/study/" + study_id + "/" + study_id + ".json"
     return filename
 
-def _get_nexson(study_id):
-    """Return the NexSON of a given study_id"""
-    try:
-        filename    = _study_id_to_filename(study_id)
-        nexson_file = open(filename,'r')
-    except IOError:
-        return { error: 1, description: "unknown study" }
-
-    return nexson_file.readlines()
