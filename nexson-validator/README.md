@@ -20,6 +20,16 @@ two objects to be merged as well as their common ancestor.
 
 For info on NexSON, consult https://opentree.wikispaces.com/NexSON
 
+# Usage
+
+    $  python scripts/normalize_ot_nexson.py --validate --embed FILEPATH-HERE.json
+
+will write a form of the input file (specified as the FILEPATH-HERE.json argument)
+to standard out with validation messages embedded in the output NexSON.
+
+Running without the --embed option will cause just the validation messages to be
+written to standard out (in the form of JSON).
+
 # Testing
 
 Running the script:
