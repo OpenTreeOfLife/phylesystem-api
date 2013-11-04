@@ -6,12 +6,8 @@ import github_client
 from pprint import pprint
 from github import Github
 
-def index():
-    def GET():
-        return locals()
-
 @request.restful()
-def api():
+def index():
     response.view = 'generic.json'
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
@@ -114,10 +110,4 @@ def _update_treenexus():
     rc = os.system("cd ..; git submodule update")
     if rc:
         raise HTTP(400,"Unable to update local treenexus.git")
-
-def _study_id_to_filename(study_id):
-    """Return the filename of a given study_id"""
-    this_dir  = os.path.dirname(os.path.abspath(__file__))
-    filename  = this_dir + "/../treenexus/study/" + study_id + "/" + study_id + ".json"
-    return filename
 
