@@ -14,7 +14,7 @@ _TODO: Consolidate these pages?_
 
 To get the entire NexSON of study N :
 
-    curl http://api.opentreeoflife.org/1/study/N.json
+    curl http://api.opentreeoflife.org/v1/study/N.json
 
 On the backend, the API will ask treenexus for the directory containing study
 ```N```.  If the JSON representing that study is greater than 50MB, it will be
