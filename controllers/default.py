@@ -7,10 +7,12 @@ from pprint import pprint
 from github import Github
 
 @request.restful()
-def index():
+def v1():
+    "The OTOL API v1"
     response.view = 'generic.json'
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
+        "OTOL API methods relating to reading"
         if not resource=='study': raise HTTP(400, 'resource != study [GET]')
 
         # support JSONP request from another domain
@@ -33,6 +35,7 @@ def index():
             return 'ERROR fetching study:\n%s' % e
 
     def POST(resource, resource_id=None, **kwargs):
+        "OTOL API methods relating to writing"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
