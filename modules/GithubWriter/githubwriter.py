@@ -28,7 +28,7 @@ class GithubWriter(object):
     def get_commit(self,sha):
         return self.repo.get_git_commit(sha)
 
-    def get_ref(self, sha, branch="master"):
+    def get_ref(self, branch="master"):
         return self.repo.get_git_ref("heads/%s" % branch)
 
     def get_latest_sha(self, branch="master"):
@@ -77,8 +77,7 @@ branch.
 If no branch is given, assume master. If a branch is given, update/create the file in a commit on the given branch.
 
         """
-        sha       = self.get_latest_sha()
-        head_ref  = self.get_ref(sha)
+        sha       = self.get_latest_sha(branch)
         base_tree = self.get_tree(sha)
         blob      = self.create_blob(content, "utf-8")
 
@@ -92,15 +91,14 @@ If no branch is given, assume master. If a branch is given, update/create the fi
             base_tree = base_tree,
         )
 
-        new_commit = gw.create_commit(
+        new_commit = self.create_commit(
             message = commit_message,
             tree    = new_tree,
             parents = [ self.get_commit(sha) ],
         )
 
         if self.branch_exists(branch):
-            latest_sha    = self.get_latest_sha(branch)
-            ref_to_update = self.get_ref(latest_sha)
+            ref_to_update = self.get_ref(branch)
         else:
             ref_to_update = self.create_branch(branch, new_commit.sha )
 

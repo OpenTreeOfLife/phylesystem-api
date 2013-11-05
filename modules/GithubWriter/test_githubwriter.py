@@ -16,9 +16,6 @@ def test_basic():
     assert_equals( len(sha) , 40, 'Got a reasonable looking sha back:%s ' % sha)
     print("sha of master = %s" % sha)
 
-    # Grab the latest branch ref, which we will update as our last step
-    head_ref = gw.get_ref(sha)
-
     assert_false( gw.branch_exists("really_please_dont_exist") )
 
     assert_true( gw.branch_exists("master") )
@@ -53,6 +50,13 @@ def test_basic():
     # Update the branch to point to our new commit ref
     branch.edit(sha=new_commit.sha, force=False)
 
-test_basic()
+
+def test_advanced():
+    gw  = GithubWriter(user="leto",repo="testing")
+
+    gw.create_or_update_file("foo.json",'{"foo5":"bar5"}',"Update foo.json with some content", "testing_124")
+
+#test_basic()
+test_advanced()
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
