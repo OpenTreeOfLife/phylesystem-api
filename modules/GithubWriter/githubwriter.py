@@ -23,15 +23,20 @@ class GithubWriter(object):
             self.repo  = self.org.get_repo(repo)
 
     def create_blob(self, content, encoding):
+        "Create a git blob"
         return self.repo.create_git_blob(content, encoding)
 
     def get_commit(self,sha):
+        "Get the Git commit associated with a given SHA"
         return self.repo.get_git_commit(sha)
 
     def get_ref(self, branch="master"):
+        "Get a git reference from a given branch, or master"
         return self.repo.get_git_ref("heads/%s" % branch)
 
     def get_latest_sha(self, branch="master"):
+        "Return the latest commit SHA on a given branch. Assumes master if no branch is given"
+
         # i.e. curl https://api.github.com/repos/OpenTreeOfLife/api.opentreeoflife.org/git/refs/heads/master
         # we need to get the latest sha on master to use as our initial sha1 of our new branch
 
@@ -61,21 +66,23 @@ class GithubWriter(object):
         # create a new "Git Reference" (i.e. branch) from the given sha
         return self.repo.create_git_ref(ref,sha)
 
-    # http://developer.github.com/v3/git/trees/#create-a-tree
     def create_tree(self, tree, base_tree):
+        """Create a Git Tree
+See http://developer.github.com/v3/git/trees/#create-a-tree for more details
+"""
         return self.repo.create_git_tree(tree, base_tree)
     def create_commit(self, message, tree, parents):
+        """Create a Git Commit via the Github API"""
         return self.repo.create_git_commit(message, tree, parents)
 
     def create_or_update_file(self, filename, content, commit_message, branch="master"):
         """
-
-Given a filename, content and commit message, create
+Given a filename, content, commit message and branch, create
 or update the file with the given content on the given
 branch.
 
-If no branch is given, assume master. If a branch is given, update/create the file in a commit on the given branch.
-
+If no branch is given, assume master. If a branch is given,
+update/create the file in a commit on the given branch.
         """
         sha       = self.get_latest_sha(branch)
         base_tree = self.get_tree(sha)
