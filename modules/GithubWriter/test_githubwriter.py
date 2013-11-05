@@ -28,7 +28,7 @@ def test_basic():
     assert_equals( len(tree.sha) , 40, 'Got a reasonable looking sha back:%s ' % tree.sha)
     print("tree sha of master = %s" % tree.sha)
 
-    blob = gw.create_blob("some content", "utf-8")
+    blob = gw.create_blob("some other content", "utf-8")
 
     # Create a new Tree, which will be part of our new commit
     new_tree = gw.create_tree(
@@ -48,9 +48,10 @@ def test_basic():
         parents = [ gw.get_commit(sha) ],
     )
 
-    # Update the branch to point to our new commit ref
-    head_ref.edit(sha=new_commit.sha, force=False)
+    branch = gw.create_branch("testing_%d" % os.getpid(), new_commit.sha )
 
+    # Update the branch to point to our new commit ref
+    branch.edit(sha=new_commit.sha, force=False)
 
 test_basic()
 

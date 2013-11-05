@@ -55,8 +55,8 @@ class GithubWriter(object):
 
     def create_branch(self, branch, sha):
         "Create a branch on Github from a given name and SHA"
-        # we must always use heads/branch_name to talk about branches via the API
-        ref = "heads/%s" % branch
+        # we must use refs/heads/branch_name when creating branches
+        ref = "refs/heads/%s" % branch
 
         # create a new "Git Reference" (i.e. branch) from the given sha
         return self.repo.create_git_ref(ref,sha)
@@ -64,6 +64,45 @@ class GithubWriter(object):
     # http://developer.github.com/v3/git/trees/#create-a-tree
     def create_tree(self, tree, base_tree):
         return self.repo.create_git_tree(tree, base_tree)
-
     def create_commit(self, message, tree, parents):
         return self.repo.create_git_commit(message, tree, parents)
+
+    def create_or_update_file(self, filename, content, commit_message, branch="master"):
+        """
+
+Given a filename, content and commit message, create
+or update the file with the given content on the given
+branch.
+
+If no branch is given, assume master. If a branch is given, update/create the file in a commit on the given branch.
+
+        """
+        sha       = self.get_latest_sha()
+        head_ref  = self.get_ref(sha)
+        base_tree = self.get_tree(sha)
+        blob      = self.create_blob(content, "utf-8")
+
+        new_tree  = self.create_tree(
+             tree = [github.InputGitTreeElement(
+                path = filename,
+                mode = '100644', # plain files
+                type = 'blob',
+                sha  = blob.sha,
+            )],
+            base_tree = base_tree,
+        )
+
+        new_commit = gw.create_commit(
+            message = commit_message,
+            tree    = new_tree,
+            parents = [ self.get_commit(sha) ],
+        )
+
+        if self.branch_exists(branch):
+            latest_sha    = self.get_latest_sha(branch)
+            ref_to_update = self.get_ref(latest_sha)
+        else:
+            ref_to_update = self.create_branch(branch, new_commit.sha )
+
+        # Update the given branch HEAD reference to point to the newest commit
+        ref_to_update.edit(sha=new_commit.sha, force=False)
