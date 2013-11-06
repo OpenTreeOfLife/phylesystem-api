@@ -31,6 +31,8 @@ class GithubWriter(object):
                     # We got a bad gateway timeout, which happens occasionally
                     # Retry one more time
                     return f(*args,**kwargs)
+                else:
+                    raise
         return inner
 
     @retry
