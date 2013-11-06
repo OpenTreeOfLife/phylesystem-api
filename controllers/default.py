@@ -2,9 +2,11 @@ import os
 import time
 import json
 import hashlib
-import github_client
-from pprint import pprint
+import github
 from github import Github
+import github_client
+import GithubWriter
+from pprint import pprint
 
 @request.restful()
 def v1():
@@ -78,10 +80,7 @@ def v1():
         auth_token   = kwargs.get('auth_token','')
 
         if not auth_token:
-            raise HTTP(400,"You must authenticate to before updating via the OTOL API")
-
-        # Connect to the Github v3 API via with this OAuth token
-        gh = Github(oauth_token)
+            raise HTTP(400,"You must authenticate before updating via the OTOL API")
 
         try:
             nexson        = json.loads( kwargs.get('nexson','{}') )
@@ -91,8 +90,6 @@ def v1():
         # sort the keys of the POSTed NexSON and indent 4 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=4)
 
-        _update_treenexus()
-
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
@@ -100,17 +97,28 @@ def v1():
 
         # the POSTed data is the same as what we have on disk, do nothing and return successfully
         if posted_nexson_sha1 == nexson_sha1:
-            return { error: 0, description: "success" };
+            return { "error": 0, "description": "success, nothing to update" };
         else:
-            # we have new data
-            # TODO: Use http://jacquev6.github.io/PyGithub/github_objects/Repository.html#github.Repository.Repository.create_git_commit
-            return dict()
-    return locals()
 
-def _update_treenexus():
-    """Update the treenexus git submodule"""
-    # submodule update must be run from the top-level dir of our repo
-    rc = os.system("cd ..; git submodule update")
-    if rc:
-        raise HTTP(400,"Unable to update local treenexus.git")
+        # Connect to the Github v3 API via with this OAuth token
+        # the org and repo should probably be in our config file
+        gw = GithubWriter(oauth=auth_token, org="OpenTreeOfLife", repo="treenexus")
+
+        study_filename = "/study/%s/%s.json" % (resource_id, resource_id)
+        branch_name    = "%s_study_%s" % (gw.gh.get_user(), resource_id)
+
+        try:
+            gw.create_or_update_file(
+                study_filename,
+                nexson,
+                "Update study #%s via OTOL API" % resource_id,
+                branch_name
+            )
+        except github.GithubException, e:
+            return {"error": 1, "description": "Got GithubException with status %d" % e.status }
+        except:
+            return {"error": 1, "description": "Got a non-GithubException: %s" % e }
+
+        # What other useful information should be returned on a successful write?
+        return {"error": 0, "branch_name": branch_name, "description": "Updated study #%s" % resource_id }
 
