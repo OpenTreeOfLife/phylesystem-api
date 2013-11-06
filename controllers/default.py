@@ -63,13 +63,10 @@ def v1():
 
                 return kwargs
                 # TODO: assign a new ID for this study, create its folder in repo(?)
-            
                 # forward ID and info to treemachine, expect to get study JSON back
-            
                 # IF treemachine returns JSON, save as {ID}.json and return URL as '201 Created'
                 # or perhaps '303 See other' w/ redirect?
                 # (should we do this on a WIP branch? save empty folder in 'master'?)
-            
                 # IF treemachine throws an error, return error info as '500 Internal Server Error'
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
@@ -99,26 +96,25 @@ def v1():
         if posted_nexson_sha1 == nexson_sha1:
             return { "error": 0, "description": "success, nothing to update" };
         else:
+            # Connect to the Github v3 API via with this OAuth token
+            # the org and repo should probably be in our config file
+            gw = GithubWriter(oauth=auth_token, org="OpenTreeOfLife", repo="treenexus")
 
-        # Connect to the Github v3 API via with this OAuth token
-        # the org and repo should probably be in our config file
-        gw = GithubWriter(oauth=auth_token, org="OpenTreeOfLife", repo="treenexus")
+            study_filename = "/study/%s/%s.json" % (resource_id, resource_id)
+            branch_name    = "%s_study_%s" % (gw.gh.get_user(), resource_id)
 
-        study_filename = "/study/%s/%s.json" % (resource_id, resource_id)
-        branch_name    = "%s_study_%s" % (gw.gh.get_user(), resource_id)
+            try:
+                gw.create_or_update_file(
+                    study_filename,
+                    nexson,
+                    "Update study #%s via OTOL API" % resource_id,
+                    branch_name
+                )
+            except github.GithubException, e:
+                return {"error": 1, "description": "Got GithubException with status %d" % e.status }
+            except:
+                return {"error": 1, "description": "Got a non-GithubException: %s" % e }
 
-        try:
-            gw.create_or_update_file(
-                study_filename,
-                nexson,
-                "Update study #%s via OTOL API" % resource_id,
-                branch_name
-            )
-        except github.GithubException, e:
-            return {"error": 1, "description": "Got GithubException with status %d" % e.status }
-        except:
-            return {"error": 1, "description": "Got a non-GithubException: %s" % e }
-
-        # What other useful information should be returned on a successful write?
-        return {"error": 0, "branch_name": branch_name, "description": "Updated study #%s" % resource_id }
+            # What other useful information should be returned on a successful write?
+            return {"error": 0, "branch_name": branch_name, "description": "Updated study #%s" % resource_id }
 
