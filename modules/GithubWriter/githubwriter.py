@@ -22,18 +22,33 @@ class GithubWriter(object):
             self.org   = self.gh.get_organization(org)
             self.repo  = self.org.get_repo(repo)
 
+    def retry(f):
+        def inner(*args, **kwargs):
+            try:
+                return f(*args,**kwargs)
+            except github.GithubException, e:
+                if e.status == 502:
+                    # We got a bad gateway timeout, which happens occasionally
+                    # Retry one more time
+                    return f(*args,**kwargs)
+        return inner
+
+    @retry
     def create_blob(self, content, encoding):
         "Create a git blob"
         return self.repo.create_git_blob(content, encoding)
 
+    @retry
     def get_commit(self,sha):
         "Get the Git commit associated with a given SHA"
         return self.repo.get_git_commit(sha)
 
+    @retry
     def get_ref(self, branch="master"):
         "Get a git reference from a given branch, or master"
         return self.repo.get_git_ref("heads/%s" % branch)
 
+    @retry
     def get_latest_sha(self, branch="master"):
         "Return the latest commit SHA on a given branch. Assumes master if no branch is given"
 
@@ -41,9 +56,10 @@ class GithubWriter(object):
         # we need to get the latest sha on master to use as our initial sha1 of our new branch
 
         ref = self.repo.get_git_ref("heads/%s" % branch)
-        sha        = ref.object.sha
+        sha = ref.object.sha
         return sha
 
+    @retry
     def branch_exists(self, branch):
         "Return true if a branch exists, false otherwise"
         try:
@@ -53,11 +69,13 @@ class GithubWriter(object):
 
         return 1
 
+    @retry
     def get_tree(self, commit_sha):
         "Get the Tree of a given commit SHA"
         commit = self.repo.get_git_commit(commit_sha)
         return commit.tree
 
+    @retry
     def create_branch(self, branch, sha):
         "Create a branch on Github from a given name and SHA"
         # we must use refs/heads/branch_name when creating branches
@@ -66,11 +84,14 @@ class GithubWriter(object):
         # create a new "Git Reference" (i.e. branch) from the given sha
         return self.repo.create_git_ref(ref,sha)
 
+    @retry
     def create_tree(self, tree, base_tree):
         """Create a Git Tree
 See http://developer.github.com/v3/git/trees/#create-a-tree for more details
 """
         return self.repo.create_git_tree(tree, base_tree)
+
+    @retry
     def create_commit(self, message, tree, parents):
         """Create a Git Commit via the Github API"""
         return self.repo.create_git_commit(message, tree, parents)
@@ -84,7 +105,13 @@ branch.
 If no branch is given, assume master. If a branch is given,
 update/create the file in a commit on the given branch.
         """
-        sha       = self.get_latest_sha(branch)
+        branch_exists = self.branch_exists(branch)
+
+        if branch_exists:
+            sha   = self.get_latest_sha(branch)
+        else:
+            sha   = self.get_latest_sha()
+
         base_tree = self.get_tree(sha)
         blob      = self.create_blob(content, "utf-8")
 
@@ -104,7 +131,7 @@ update/create the file in a commit on the given branch.
             parents = [ self.get_commit(sha) ],
         )
 
-        if self.branch_exists(branch):
+        if branch_exists:
             ref_to_update = self.get_ref(branch)
         else:
             ref_to_update = self.create_branch(branch, new_commit.sha )

@@ -54,7 +54,7 @@ def test_basic():
 def test_advanced():
     gw  = GithubWriter(user="leto",repo="testing")
 
-    gw.create_or_update_file("foo.json",'{"foo5":"bar5"}',"Update foo.json with some content", "testing_124")
+    gw.create_or_update_file("foo.json",'{"foo10":"barzbag101010"}',"Update foo.json some more", "testing_126")
 
 #test_basic()
 test_advanced()
