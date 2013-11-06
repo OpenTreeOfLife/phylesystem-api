@@ -118,3 +118,4 @@ def v1():
             # What other useful information should be returned on a successful write?
             return {"error": 0, "branch_name": branch_name, "description": "Updated study #%s" % resource_id }
 
+    return locals()
