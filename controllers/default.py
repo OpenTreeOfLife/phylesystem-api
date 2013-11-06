@@ -90,7 +90,7 @@ def v1():
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
-        nexson_sha1        = hashlib.sha1( _get_nexson(resource_id, auth_token) ).hexdigest()
+        nexson_sha1        = hashlib.sha1( github_client.fetch_study(resource_id, auth_token) ).hexdigest()
 
         # the POSTed data is the same as what we have on disk, do nothing and return successfully
         if posted_nexson_sha1 == nexson_sha1:
