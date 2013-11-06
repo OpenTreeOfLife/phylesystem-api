@@ -15,7 +15,7 @@ class GithubWriter(object):
         self.oauth = oauth
         self.gh    = Github(oauth)
 
-        if kwargs["user"]:
+        if "user" in kwargs:
             self.user = self.gh.get_user(kwargs["user"])
             self.repo  = self.user.get_repo(repo)
         else:

@@ -5,7 +5,7 @@ import hashlib
 import github
 from github import Github
 import github_client
-import GithubWriter
+from githubwriter import GithubWriter
 from pprint import pprint
 
 @request.restful()
