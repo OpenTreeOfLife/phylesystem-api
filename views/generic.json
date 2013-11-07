@@ -11,7 +11,7 @@ try:
                 response.write(line,escape=False)
 	    pass
         else:
-            response.write(json(full_response),escape=False)
+            response.write(full_response,escape=False)
 	pass
     else:
         response.write(json(response._vars),escape=False)
