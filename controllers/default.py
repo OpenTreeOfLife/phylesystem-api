@@ -84,8 +84,8 @@ def v1():
         except:
             raise HTTP(400, 'NexSON must be valid JSON')
 
-        # sort the keys of the POSTed NexSON and indent 4 spaces
-        nexson = json.dumps(nexson, sort_keys=True, indent=4)
+        # sort the keys of the POSTed NexSON and indent 0 spaces
+        nexson = json.dumps(nexson, sort_keys=True, indent=0)
 
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
@@ -100,7 +100,8 @@ def v1():
             # the org and repo should probably be in our config file
             gw = GithubWriter(oauth=auth_token, org="OpenTreeOfLife", repo="treenexus")
 
-            study_filename = "/study/%s/%s.json" % (resource_id, resource_id)
+            # WARNING: Don't use a leading /, which will cause Github to create a corrupt tree!
+            study_filename = "study/%s/%s.json" % (resource_id, resource_id)
             github_username= gw.gh.get_user().login
             branch_name    = "%s_study_%s" % (github_username, resource_id)
 
