@@ -82,6 +82,23 @@ create a symlink in ```$WEB2PY_ROOT/applications``` to the API repo directory:
    # this will make the app available under /api
    ln -sf /dir/with/api.opentreeoflife.org api
 
+# Using the API
+
+If you want to update study 10 with a file called 10-modified.json, the
+following command will accomplish that:
+
+    curl -v -X POST http://localhost:8080/api/default/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN \
+    --data-urlencode nexson@10-modified.json
+
+Note that it assumes a Github Oauth token is stored in the environment variable
+```$GITHUB_OAUTH_TOKEN```
+
+The above will create a commit with the update JSON on a branch of the form
+```USERNAME_study_ID``` where USERNAME is the authenticated users Github login
+and ID is the study ID number.
+[Here](https://github.com/OpenTreeOfLife/treenexus/compare/leto_study_9?expand=1)
+is an example commit created by the OTOL API.
+
 # Authors
 
 See the CREDITS file
