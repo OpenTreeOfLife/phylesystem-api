@@ -101,7 +101,8 @@ def v1():
             gw = GithubWriter(oauth=auth_token, org="OpenTreeOfLife", repo="treenexus")
 
             study_filename = "/study/%s/%s.json" % (resource_id, resource_id)
-            branch_name    = "%s_study_%s" % (gw.gh.get_user(), resource_id)
+            github_username= gw.gh.get_user().login
+            branch_name    = "%s_study_%s" % (github_username, resource_id)
 
             try:
                 gw.create_or_update_file(
