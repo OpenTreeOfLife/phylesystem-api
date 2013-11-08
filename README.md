@@ -94,9 +94,21 @@ Note that it assumes a Github Oauth token is stored in the environment variable
 
     $GITHUB_OAUTH_TOKEN
 
+To get a Github OAuth token, you can use ```curl``` as well:
+
+    curl -v -u USERNAME -X POST https://api.github.com/authorizations \
+        --data '{"scopes":["public_repo"],"note":"description"}'
+
+where USERNAME is your Github login/username. The above will return JSON
+containing a "token" key, which is your new OAuth token.
+
 The above will create a commit with the update JSON on a branch of the form
-```USERNAME\_study\_ID``` where USERNAME is the authenticated users Github login
-and ID is the study ID number.
+
+    USERNAME_study_ID
+
+where USERNAME is the authenticated users Github login and ID is the study ID
+number.
+
 [Here](https://github.com/OpenTreeOfLife/treenexus/compare/leto_study_9?expand=1)
 is an example commit created by the OTOL API.
 
