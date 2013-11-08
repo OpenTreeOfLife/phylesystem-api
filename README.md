@@ -91,10 +91,11 @@ following command will accomplish that:
     --data-urlencode nexson@10-modified.json
 
 Note that it assumes a Github Oauth token is stored in the environment variable
-```$GITHUB_OAUTH_TOKEN```
+
+    $GITHUB_OAUTH_TOKEN
 
 The above will create a commit with the update JSON on a branch of the form
-```USERNAME_study_ID``` where USERNAME is the authenticated users Github login
+```USERNAME\_study\_ID``` where USERNAME is the authenticated users Github login
 and ID is the study ID number.
 [Here](https://github.com/OpenTreeOfLife/treenexus/compare/leto_study_9?expand=1)
 is an example commit created by the OTOL API.
