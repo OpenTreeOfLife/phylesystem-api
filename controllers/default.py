@@ -15,7 +15,10 @@ def v1():
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OTOL API methods relating to reading"
-        if not resource=='study': raise HTTP(400, 'resource != study [GET]')
+        valid_resources = ('study', 'search'):
+
+        if not resource in valid_resources:
+            raise HTTP(400, 'Resource requested not in list of valid resources: %s' % valid_resources)
 
         # support JSONP request from another domain
         if jsoncallback or callback:
