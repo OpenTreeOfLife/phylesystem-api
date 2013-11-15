@@ -2,6 +2,7 @@
 import sys
 import codecs
 from cStringIO import StringIO
+import re
 
 VERSION = '0.0.2a'
 
@@ -800,6 +801,57 @@ class Node(NexsonDictWrapper):
             else:
                 break
         return None, p
+    def get_newick_edge_info(self):
+        if self._edge:
+            el = str(self._edge._raw.get('@length',''))
+            if el:
+                return ':{e}'.format(e=el)
+        return ''
+
+_NEWICK_TOKEN_BREAKER = re.compile(r'[^a-zA-Z0-9]')
+def escape_for_newick(s):
+    if _NEWICK_TOKEN_BREAKER.search(s):
+        qs = s.split("'")
+        return "'{s}'".format(s="''".join(qs))
+    return s
+
+def write_newick(out, nd, use_ott_id):
+    n = nd
+    avuncular_stack = []
+    ancestor_stack = []
+    moving_rootward = False
+    while True:
+        if moving_rootward:
+            s = n.get_newick_edge_info()
+            out.write('){s}'.format(s=s))
+            next_nd = None
+        else:
+            c = [i._target for i in n._children]
+            if len(c) > 0:
+                out.write('(')
+                ancestor_stack.append(n)
+                next_nd = c[0]
+                sibs = c[1:]
+                avuncular_stack.append(sibs)
+            else:
+                out.write(escape_for_newick(n._otu._original_label))
+                s = n.get_newick_edge_info()
+                out.write(s)
+                next_nd = None
+        moving_rootward = False
+        if next_nd is None:
+            if len(avuncular_stack) > 0:
+                p = avuncular_stack[-1]
+                if len(p) > 0:
+                    out.write(',')
+                    next_nd = p.pop(0)
+                else:
+                    avuncular_stack.pop()
+                    next_nd = ancestor_stack.pop()
+                    moving_rootward = True
+            else:
+                break
+        n = next_nd
 
 class Tree(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'edge', 'node')
@@ -981,6 +1033,14 @@ class Tree(NexsonDictWrapper):
                 p = p.get_parent()
             clade_lists.append(next_el)
         return clade_lists
+
+    def get_newick(self, use_ott_id=False):
+        b = StringIO()
+        ci = codecs.lookup('utf8')
+        s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
+        write_newick(s, self._root_node, use_ott_id=use_ott_id)
+        return s.getvalue()
+
 
 class OTUCollection(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', 'otu')
