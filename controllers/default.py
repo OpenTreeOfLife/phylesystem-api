@@ -109,7 +109,7 @@ def v1():
             branch_name    = "%s_study_%s" % (github_username, resource_id)
 
             try:
-                gw.create_or_update_file(
+                new_sha = gw.create_or_update_file(
                     study_filename,
                     nexson,
                     "Update study #%s via OTOL API" % resource_id,
@@ -121,6 +121,11 @@ def v1():
                 return {"error": 1, "description": "Got a non-GithubException: %s" % e }
 
             # What other useful information should be returned on a successful write?
-            return {"error": 0, "branch_name": branch_name, "description": "Updated study #%s" % resource_id }
+            return {
+                "error": 0,
+                "branch_name": branch_name,
+                "description": "Updated study #%s" % resource_id,
+                "sha":  new_sha
+            }
 
     return locals()
