@@ -140,3 +140,4 @@ update/create the file in a commit on the given branch.
 
         # Update the given branch HEAD reference to point to the newest commit
         ref_to_update.edit(sha=new_commit.sha, force=False)
+        return new_commit.sha
