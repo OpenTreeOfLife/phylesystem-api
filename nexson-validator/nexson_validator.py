@@ -670,6 +670,7 @@ class OTU(NexsonDictWrapper):
         if self._ott_id is None:
             self.get_singelton_meta('ot:ottid') # trigger a warning
         self._original_label = self.get_singelton_meta('ot:originalLabel')
+        self._label = o.get('@label', None)
     def get_path_dict(self, subelement, prop_name):
         d = {
             'top': 'otus',
@@ -683,6 +684,15 @@ class OTU(NexsonDictWrapper):
         if prop_name:
             d['property'] = prop_name
         return d
+    def get_ott_id(self):
+        return self._ott_id
+    ott_id = property(get_ott_id)
+    def get_original_label(self):
+        return self._original_label
+    original_label = property(get_original_label)
+    def get_current_label(self):
+        return self._label
+    current_label = property(get_current_label)
 
 class Edge(NexsonDictWrapper):
     REQUIRED_KEYS = ('@id', '@source', '@target')
@@ -807,6 +817,46 @@ class Node(NexsonDictWrapper):
             if el:
                 return ':{e}'.format(e=el)
         return ''
+    def get_original_label(self):
+        try:
+            return self._otu.original_label
+        except:
+            None
+    def get_ott_id(self):
+        try:
+            return self._otu.ott_id
+        except:
+            None
+    def get_current_label(self):
+        try:
+            return self._otu.current_label
+        except:
+            None
+
+class LabelUsing:
+    '''An enumeration of ways for labeling entities for export into a terser format (such as newick)
+    currently defined for values used as tip labels.
+    Used as an argument to get_newick:
+        ORIGINAL_LABEL, OTT_ID, OTT_LABEL
+    '''
+    ORIGINAL_LABEL = 0
+    OTT_ID = 1
+    CURRENT_LABEL = 2
+    NAMES = ('original', 'ottid', 'current')
+    @staticmethod
+    def get_node_label_fn(label_type):
+        if label_type == LabelUsing.ORIGINAL_LABEL:
+            return lambda nd : nd.get_original_label() or u''
+        elif label_type == LabelUsing.OTT_ID:
+            return lambda nd : unicode(nd.get_ott_id() or '')
+        else:
+            assert(label_type == LabelUsing.CURRENT_LABEL)
+            return lambda nd : nd.get_current_label() or u''
+    @staticmethod
+    def encode(s):
+        sl = s.lower()
+        return LabelUsing.NAMES.index(sl)
+
 
 _NEWICK_TOKEN_BREAKER = re.compile(r'[^a-zA-Z0-9]')
 def escape_for_newick(s):
@@ -815,15 +865,19 @@ def escape_for_newick(s):
         return "'{s}'".format(s="''".join(qs))
     return s
 
-def write_newick(out, nd, use_ott_id):
+def write_newick(out, nd, label_using):
     n = nd
     avuncular_stack = []
     ancestor_stack = []
     moving_rootward = False
+
+    label_fn = LabelUsing.get_node_label_fn(label_using)
+
     while True:
         if moving_rootward:
             s = n.get_newick_edge_info()
-            out.write('){s}'.format(s=s))
+            label = escape_for_newick(label_fn(n))
+            out.write('){l}{s}'.format(l=label, s=s))
             next_nd = None
         else:
             c = [i._target for i in n._children]
@@ -834,9 +888,9 @@ def write_newick(out, nd, use_ott_id):
                 sibs = c[1:]
                 avuncular_stack.append(sibs)
             else:
-                out.write(escape_for_newick(n._otu._original_label))
                 s = n.get_newick_edge_info()
-                out.write(s)
+                label = escape_for_newick(label_fn(n))
+                out.write('{l}{s}'.format(l=label, s=s))
                 next_nd = None
         moving_rootward = False
         if next_nd is None:
@@ -1034,11 +1088,11 @@ class Tree(NexsonDictWrapper):
             clade_lists.append(next_el)
         return clade_lists
 
-    def get_newick(self, use_ott_id=False):
+    def get_newick(self, label_using=LabelUsing.ORIGINAL_LABEL):
         b = StringIO()
         ci = codecs.lookup('utf8')
         s = codecs.StreamReaderWriter(b, ci.streamreader, ci.streamwriter)
-        write_newick(s, self._root_node, use_ott_id=use_ott_id)
+        write_newick(s, self._root_node, label_using)
         return s.getvalue()
 
 
