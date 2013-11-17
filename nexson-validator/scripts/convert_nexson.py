@@ -2,7 +2,9 @@
 import sys
 SCRIPT_NAME = __name__  #@TODO replace with logger...
 ERR_STREAM = sys.stderr #@TODO replace with logger...
-from nexson_validator import NexSON, NexSONError, ValidationLogger, FilteringLogger, WarningCodes, VERSION
+from nexson_validator import NexSON, NexSONError, ValidationLogger, \
+    FilteringLogger, WarningCodes, VERSION, LabelUsing
+
 def error(msg):
     global SCRIPT_NAME, ERR_STREAM
     ERR_STREAM.write('{n}: ERROR: {m}'.format(n=SCRIPT_NAME,
@@ -37,11 +39,16 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Convert a NexSON file to another file format')
     parser.add_argument('--format', dest='out_format', type=str, default='newick', help='output format: currently "newick" is the only valid value')
-    parser.add_argument('--ott-id', dest='use_ott_it', action='store_true', default=False, help="Use OTT IDs instead of labels in output")
+    parser.add_argument('--label', dest='label', type=str, default='Original', help='Label for tip: "Original", "OTTID", or "Current"')
     parser.add_argument('input', metavar='filepath', type=unicode, nargs=1, help='filename')
     args = parser.parse_args()
     SCRIPT_NAME = os.path.split(sys.argv[0])[-1]
     flower = args.out_format.lower()
+    try:
+        label_code = LabelUsing.encode(args.label)
+    except:
+        sys.exit('Unrecognized labeling option "{f}"'.format(f=args.label))
+
     if flower not in ['newick']:
         sys.exit('Output format "{o}" not recognized'.format(o=args.out_format))
     try:
@@ -69,4 +76,4 @@ if __name__ == '__main__':
             error(m.getvalue())
         sys.exit(1)
     for tree in n.trees._as_list:
-        print tree.get_newick()
+        print tree.get_newick(label_using=label_code)
