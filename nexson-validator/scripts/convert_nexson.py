@@ -12,20 +12,6 @@ def error(msg):
     if not msg.endswith('\n'):
         ERR_STREAM.write('\n')
 
-def warn(msg):
-    global SCRIPT_NAME, ERR_STREAM
-    ERR_STREAM.write('{n}: WARNING: {m}'.format(n=SCRIPT_NAME,
-                                                m=msg))
-    if not msg.endswith('\n'):
-        ERR_STREAM.write('\n')
-
-def info(msg):
-    global SCRIPT_NAME, ERR_STREAM
-    ERR_STREAM.write('{n}: {m}'.format(n=SCRIPT_NAME,
-                                                m=msg))
-    if not msg.endswith('\n'):
-        ERR_STREAM.write('\n')
-
 if __name__ == '__main__':
     import json
     import os
