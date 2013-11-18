@@ -13,6 +13,10 @@ def v1():
     "The OpenTree API v1"
     response.view = 'generic.json'
 
+    def __validate(nexson):
+        # stub function for hooking into NexSON validation
+        pass
+
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OpenTree API methods relating to reading"
         valid_resources = ('study', 'search')
@@ -99,6 +103,11 @@ def v1():
         if posted_nexson_sha1 == nexson_sha1:
             return { "error": 0, "description": "success, nothing to update" };
         else:
+            # validate the NexSON. If we find errors, prevent the update
+            # if only warnings are found, make an additional commit containing the
+            # warning annotation data
+            __validate(nexson)
+
             # Connect to the Github v3 API via with this OAuth token
             # the org and repo should probably be in our config file
             gw = GithubWriter(oauth=auth_token, org="OpenTreeOfLife", repo="treenexus")
