@@ -10,11 +10,11 @@ from pprint import pprint
 
 @request.restful()
 def v1():
-    "The OTOL API v1"
+    "The OpenTree API v1"
     response.view = 'generic.json'
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
-        "OTOL API methods relating to reading"
+        "OpenTree API methods relating to reading"
         valid_resources = ('study', 'search')
 
         if not resource in valid_resources:
@@ -40,7 +40,7 @@ def v1():
             return 'ERROR fetching study:\n%s' % e
 
     def POST(resource, resource_id=None, **kwargs):
-        "OTOL API methods relating to writing"
+        "OpenTree API methods relating to writing"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
@@ -80,7 +80,7 @@ def v1():
         auth_token   = kwargs.get('auth_token','')
 
         if not auth_token:
-            raise HTTP(400,"You must authenticate before updating via the OTOL API")
+            raise HTTP(400,"You must authenticate before updating via the OpenTree API")
 
         try:
             nexson        = json.loads( kwargs.get('nexson','{}') )
@@ -95,7 +95,7 @@ def v1():
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
         nexson_sha1        = hashlib.sha1( github_client.fetch_study(resource_id, auth_token) ).hexdigest()
 
-        # the POSTed data is the same as what we have on disk, do nothing and return successfully
+        # the POSTed data is the same as what we currently have, do nothing and return successfully
         if posted_nexson_sha1 == nexson_sha1:
             return { "error": 0, "description": "success, nothing to update" };
         else:
@@ -112,7 +112,7 @@ def v1():
                 new_sha = gw.create_or_update_file(
                     study_filename,
                     nexson,
-                    "Update study #%s via OTOL API" % resource_id,
+                    "Update study #%s via OpenTree API" % resource_id,
                     branch_name
                 )
             except github.GithubException, e:
