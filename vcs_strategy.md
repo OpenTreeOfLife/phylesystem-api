@@ -16,6 +16,23 @@ format) which live in the treenexus Github repo.
 
 The code implementing the OpenTree API lives on [Github](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/) and includes the data repository as a Git submodule.
 
+# WIP branches
+
+When a change to NexSON data is submitted via the OpenTree API, it is made on
+what we refer to as a "WIP branch", which has a name of the form
+"USERNAME_study_N" where USERNAME is a github username and N is the study ID.
+
+If the same user makes multiple edits to a single study, they will appear as
+multiple commits on that WIP branch. If that user makes edits to another study
+M, they will go onto the branch "USERNAME_study_M".
+
+This allows multiple curators to work on the same study without stepping on
+each others toes during the curation process. There is still the possibilty
+that curators will make incompatible changes, which means the first one to
+merge their WIP branch will merge cleanly, but when the second curator branch
+is attempted to be merged, conflicts could arise if the curators edited the
+same parts of the NexSON.
+
 # Why submodules?
 
 Using treenexus as a submodule allows us to have various branches and tags in
