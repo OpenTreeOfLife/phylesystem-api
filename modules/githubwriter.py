@@ -6,7 +6,7 @@ import sys
 github.enable_console_debug_logging()
 
 class GithubWriter(object):
-    "Convenience class for interacting with the Github API from the OTOL API"
+    "Convenience class for interacting with the Github API from the OpenTree API"
     def __init__(self, oauth='', org="OpenTreeOfLife", repo="testing", **kwargs):
         if not oauth:
             oauth = os.getenv('GITHUB_OAUTH_TOKEN', 'invalid')
