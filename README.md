@@ -15,63 +15,7 @@ The first time you clone this repo, run this command to get the treenexus data:
 
 The ```--recursive``` option is currently optional.
 
-# Why submodules?
-
-Using treenexus as a submodule allows us to have various branches and tags in
-our datastore and point different branches of this repo at specific commits in
-the datastore.
-
-## Updating the treenexus submodule
-
-The following commands can be copy and pasted to update our
-submodule to the latest commit on the master branch of treenexus.git
-
-    cd treenexus
-
-    # this will pull in new changes from the main treenexus.git
-    # on the master branch
-    git pull        # or git pull --rebase
-    cd ..
-
-    # this tells our repo to update the commit that our submodule
-    # points to in treenexus
-    git add treenexus
-    git commit -m "Update treenexus submodule pointer"
-
-To send these new changes to Github:
-
-    git push
-
-Let's say you are on a branch on this repo called ```feature_api```
-and you want to our submodule to point to the latest commit in the
-```feature_treenexus``` branch:
-
-    git checkout feature_api
-    cd treenexus
-
-    git pull
-    git checkout feature_treenexus
-    cd ..
-
-    # this tells our repo to update the commit that our submodule
-    # points to in treenexus
-    git add treenexus
-    git commit -m "Update treenexus submodule pointer"
-
-Similarly, you can checkout an arbitrary SHA1 and have our submodule
-point to that by doing this:
-
-    git checkout feature_api
-    cd treenexus
-
-    git pull
-    git checkout SHA1 # this will create a "detached HEAD"
-    cd ..
-
-    # this tells our repo to update the commit that our submodule
-    # points to in treenexus
-    git add treenexus
-    git commit -m "Update treenexus submodule pointer"
+See the [Version Control Strategy](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/vcs_strategy.md) for more details about design decisions and how to use submodules.
 
 # Deploying
 
@@ -110,7 +54,7 @@ where USERNAME is the authenticated users Github login and ID is the study ID
 number.
 
 [Here](https://github.com/OpenTreeOfLife/treenexus/compare/leto_study_9?expand=1)
-is an example commit created by the OTOL API.
+is an example commit created by the OpenTree API.
 
 # Authors
 
