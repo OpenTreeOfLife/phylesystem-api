@@ -54,7 +54,7 @@ where USERNAME is the authenticated users Github login and ID is the study ID
 number.
 
 [Here](https://github.com/OpenTreeOfLife/treenexus/compare/leto_study_9?expand=1)
-is an example commit created by the OTOL API.
+is an example commit created by the OpenTree API.
 
 # Authors
 
