@@ -66,6 +66,7 @@ class SeverityCodes(object):
     '''
     ERROR, WARNING = range(2)
     facets = ['ERROR', 'WARNING']
+    numeric_codes_registered = set(range(len(facets)))
 
 ################################################################################
 # In a burst of over-exuberant OO-coding, MTH added a class for 
@@ -84,7 +85,6 @@ class WarningMessage(object):
                  data,
                  container,
                  subelement='',
-                 source_identifier=None,
                  severity=SeverityCodes.WARNING,
                  prop_name=''):
         '''
@@ -99,14 +99,15 @@ class WarningMessage(object):
                     for elements (such as meta elements) that do not have IDs.
                 `prop_name` is used when the error is associated with a property of
                     a meta element
+            `severity` is either SeverityCodes.WARNING or SeverityCodes.ERROR
         '''
         self.warning_code = warning_code
         assert warning_code in WarningCodes.numeric_codes_registered
         self.warning_data = data
         self._container = container
         self.subelement = subelement
-        self.source_identifier = source_identifier
         self.severity = severity
+        assert severity in SeverityCodes.numeric_codes_registered
         if prop_name:
             self.prop_name = prop_name
         else:
@@ -139,8 +140,8 @@ class WarningMessage(object):
         out.write('\n')
 
 class MissingExpectedListWarning(WarningMessage):
-    def __init__(self, data, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MISSING_LIST_EXPECTED, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, data, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MISSING_LIST_EXPECTED, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
     def write(self, outstream, prefix):
         outstream.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(self.data)))
         self._write_message_suffix(outstream)
@@ -148,8 +149,8 @@ class MissingExpectedListWarning(WarningMessage):
         return type(self.data)
 
 class UnrecognizedKeyWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_KEY, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.key = key
     def write(self, outstream, prefix):
         outstream.write('{p}Unrecognized key "{k}"'.format(p=prefix, k=self.key))
@@ -158,8 +159,8 @@ class UnrecognizedKeyWarning(WarningMessage):
         return self.key
 
 class MissingOptionalKeyWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MISSING_OPTIONAL_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MISSING_OPTIONAL_KEY, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.key = key
     def write(self, outstream, prefix):
         outstream.write('{p}Missing optional key "{k}"'.format(p=prefix, k=self.key))
@@ -168,8 +169,8 @@ class MissingOptionalKeyWarning(WarningMessage):
         return self.key
 
 class DuplicatingSingletonKeyWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.key = key
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=self.key))
@@ -178,8 +179,8 @@ class DuplicatingSingletonKeyWarning(WarningMessage):
         return self.key
 
 class RepeatedIDWarning(WarningMessage):
-    def __init__(self, identifier, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.REPEATED_ID, data=identifier, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, identifier, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.REPEATED_ID, data=identifier, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.identifier = identifier
     def write(self, outstream, prefix):
         outstream.write('{p}An ID ("{k}") was repeated'.format(p=prefix, k=self.identifier))
@@ -188,9 +189,9 @@ class RepeatedIDWarning(WarningMessage):
         return self.identifier
 
 class ReferencedIDNotFoundWarning(WarningMessage):
-    def __init__(self, key, identifier, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, identifier, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         d = {'key': key, 'value': identifier}
-        WarningMessage.__init__(self, WarningCodes.REFERENCED_ID_NOT_FOUND, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.REFERENCED_ID_NOT_FOUND, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         if not prop_name:
             self.prop_name = key
         self.key = key
@@ -202,8 +203,8 @@ class ReferencedIDNotFoundWarning(WarningMessage):
         return self.warning_data
 
 class MultipleRootNodesWarning(WarningMessage):
-    def __init__(self, nd_id, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MULTIPLE_ROOT_NODES, data=nd_id, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, nd_id, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_ROOT_NODES, data=nd_id, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.nd_id = nd_id
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple nodes in a tree were flagged as being the root node ("{k}" was not the first)'.format(p=prefix, k=self.nd_id))
@@ -212,8 +213,8 @@ class MultipleRootNodesWarning(WarningMessage):
         return self.warning_data
 
 class MissingMandatoryKeyWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MISSING_MANDATORY_KEY, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MISSING_MANDATORY_KEY, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.key = key
     def write(self, outstream, prefix):
         outstream.write('{p}Missing required key "{k}"'.format(p=prefix, k=self.key))
@@ -222,8 +223,8 @@ class MissingMandatoryKeyWarning(WarningMessage):
         return self.key
 
 class UnrecognizedTagWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=key, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.key = key
         if not prop_name:
             self.prop_name = 'ot:tag'
@@ -234,8 +235,8 @@ class UnrecognizedTagWarning(WarningMessage):
         return self.key
 
 class NoRootNodeWarning(WarningMessage):
-    def __init__(self, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.NO_ROOT_NODE, data=None, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.NO_ROOT_NODE, data=None, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
     def write(self, outstream, prefix):
         outstream.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
         self._write_message_suffix(outstream)
@@ -243,8 +244,8 @@ class NoRootNodeWarning(WarningMessage):
         return None
 
 class MultipleTreesWarning(WarningMessage):
-    def __init__(self, trees_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TREES, data=trees_list, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, trees_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TREES, data=trees_list, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.trees_list = trees_list
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
@@ -253,8 +254,8 @@ class MultipleTreesWarning(WarningMessage):
         return None
 
 class NoTreesWarning(WarningMessage):
-    def __init__(self, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.NO_TREES, data=None, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.NO_TREES, data=None, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
     def write(self, outstream, prefix):
         outstream.write('{p}No trees were found, or all trees were flagged for deletion'.format(p=prefix))
         self._write_message_suffix(outstream)
@@ -262,8 +263,8 @@ class NoTreesWarning(WarningMessage):
         return None
 
 class TipWithoutOTUWarning(WarningMessage):
-    def __init__(self, tip_node, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTU, data=None, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, tip_node, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTU, data=None, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.tip_node = tip_node
     def write(self, outstream, prefix):
         outstream.write('{p}Tip node ("{n}") without a valid @otu value'.format(p=prefix, n=self.tip_node.nexson_id))
@@ -272,9 +273,9 @@ class TipWithoutOTUWarning(WarningMessage):
         return None
 
 class PropertyValueNotUsefulWarning(WarningMessage):
-    def __init__(self, key, value, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, value, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         d = {'key': key, 'value': value}
-        WarningMessage.__init__(self, WarningCodes.PROPERTY_VALUE_NOT_USEFUL, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.PROPERTY_VALUE_NOT_USEFUL, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         if not prop_name:
             self.prop_name = key
         self.key = key
@@ -286,9 +287,9 @@ class PropertyValueNotUsefulWarning(WarningMessage):
         return self.warning_data
 
 class UnrecognizedPropertyValueWarning(WarningMessage):
-    def __init__(self, key, value, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, value, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         d = {'key': key, 'value': value}
-        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_PROPERTY_VALUE, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_PROPERTY_VALUE, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         if not prop_name:
             self.prop_name = key
         self.key = key
@@ -300,9 +301,9 @@ class UnrecognizedPropertyValueWarning(WarningMessage):
         return self.warning_data
 
 class InvalidPropertyValueWarning(WarningMessage):
-    def __init__(self, key, value, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, value, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         d = {'key': key, 'value': value}
-        WarningMessage.__init__(self, WarningCodes.INVALID_PROPERTY_VALUE, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.INVALID_PROPERTY_VALUE, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         if not prop_name:
             self.prop_name = key
         self.key = key
@@ -314,9 +315,9 @@ class InvalidPropertyValueWarning(WarningMessage):
         return self.warning_data
 
 class UnvalidatedAnnotationWarning(WarningMessage):
-    def __init__(self, key, value, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, value, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         d = {'key': key, 'value': value}
-        WarningMessage.__init__(self, WarningCodes.UNVALIDATED_ANNOTATION, data=d, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.UNVALIDATED_ANNOTATION, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         if not prop_name:
             self.prop_name = key
         self.key = key
@@ -328,8 +329,8 @@ class UnvalidatedAnnotationWarning(WarningMessage):
         return self.warning_data
 
 class ConflictingPropertyValuesWarning(WarningMessage):
-    def __init__(self, key_value_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.CONFLICTING_PROPERTY_VALUES, data=key_value_list, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, key_value_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.CONFLICTING_PROPERTY_VALUES, data=key_value_list, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.key_value_list = key_value_list
     def write(self, outstream, prefix):
         s = u", ".join([u'"{k}"="{v}"'.format(k=i[0], v=i[1]) for i in self.key_value_list])
@@ -339,9 +340,9 @@ class ConflictingPropertyValuesWarning(WarningMessage):
         return self.warning_data
 
 class MultipleTipsMappedToOTTIDWarning(WarningMessage):
-    def __init__(self, ott_id, node_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, ott_id, node_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         data = {'ott_id':ott_id, 'node_list': node_list}
-        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.ott_id = ott_id
         self.node_list = node_list
         self.id_list = [i.nexson_id for i in self.node_list]
@@ -356,9 +357,9 @@ class MultipleTipsMappedToOTTIDWarning(WarningMessage):
         return {'nodes': self.id_list}
 
 class NonMonophyleticTipsMappedToOTTIDWarning(WarningMessage):
-    def __init__(self, ott_id, clade_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, ott_id, clade_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         data = {'ott_id':ott_id, 'node_list': clade_list}
-        WarningMessage.__init__(self, WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.ott_id = ott_id
         self.clade_list = clade_list
         sl = [(i[0].nexson_id, i) for i in clade_list]
@@ -382,8 +383,8 @@ class NonMonophyleticTipsMappedToOTTIDWarning(WarningMessage):
         return {'nodes': self.id_list}
 
 class TipsWithoutOTTIDWarning(WarningMessage):
-    def __init__(self, tip, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTT_ID, data=tip, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, tip, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTT_ID, data=tip, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.tip = tip
     def write(self, outstream, prefix):
         outstream.write('{p}Tip node mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
@@ -394,9 +395,9 @@ class TipsWithoutOTTIDWarning(WarningMessage):
         return None
 
 class MultipleEdgesPerNodeWarning(WarningMessage):
-    def __init__(self, node, edge, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, node, edge, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         data = {'node': node, 'edge': edge}
-        WarningMessage.__init__(self, WarningCodes.MULTIPLE_EDGES_FOR_NODES, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_EDGES_FOR_NODES, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.node = node
         self.edge = edge
     def write(self, outstream, prefix):
@@ -409,9 +410,9 @@ class MultipleEdgesPerNodeWarning(WarningMessage):
         return None
 
 class IncorrectRootNodeLabelWarning(WarningMessage):
-    def __init__(self, tagged_node, node_without_parent, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, tagged_node, node_without_parent, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
         data = {'tagged': tagged_node, 'node_without_parent': node_without_parent}
-        WarningMessage.__init__(self, WarningCodes.INCORRECT_ROOT_NODE_LABEL, data=data, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.INCORRECT_ROOT_NODE_LABEL, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.tagged_node = tagged_node
         self.node_without_parent = node_without_parent
     def write(self, outstream, prefix):
@@ -423,8 +424,8 @@ class IncorrectRootNodeLabelWarning(WarningMessage):
         return None
 
 class TreeCycleWarning(WarningMessage):
-    def __init__(self, node, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.CYCLE_DETECTED, data=node, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, node, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.CYCLE_DETECTED, data=node, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.node = node
     def write(self, outstream, prefix):
         outstream.write('{p}Cycle in a tree detected passing througn node "{n}"'.format(p=prefix, n=self.node.nexson_id))
@@ -433,8 +434,8 @@ class TreeCycleWarning(WarningMessage):
         return self.node.nexson_id
 
 class DisconnectedTreeWarning(WarningMessage):
-    def __init__(self, root_node_list, container, subelement='', source_identifier=None, severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.DISCONNECTED_GRAPH_DETECTED, data=root_node_list, container=container, subelement=subelement, source_identifier=source_identifier, severity=severity, prop_name=prop_name)
+    def __init__(self, root_node_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+        WarningMessage.__init__(self, WarningCodes.DISCONNECTED_GRAPH_DETECTED, data=root_node_list, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
         self.root_node_list = root_node_list
     def write(self, outstream, prefix):
         outstream.write('{p}Disconnected graph found instead of tree including root nodes:'.format(p=prefix))
@@ -453,14 +454,13 @@ class DisconnectedTreeWarning(WarningMessage):
 class DefaultRichLogger(object):
     def __init__(self, store_messages=False):
         self.out = sys.stderr
-        self.source_identifier = None
         self.store_messages_as_obj = store_messages
         self.warnings = []
         self.errors = []
         self.prefix = ''
         self.retain_deprecated = False
     def warn(self, warning_code, data, container, subelement=''):
-        m = WarningMessage(warning_code, data, container, subelement, self.source_identifier, severity=SeverityCodes.WARNING)
+        m = WarningMessage(warning_code, data, container, subelement, severity=SeverityCodes.WARNING)
         self.warning(m)
     def warning(self, m):
         if self.store_messages_as_obj:
@@ -468,7 +468,7 @@ class DefaultRichLogger(object):
         else:
             m.write(self.out, self.prefix)
     def error(self, warning_code, data, container, subelement=''):
-        m = WarningMessage(warning_code, data, container, subelement, self.source_identifier)
+        m = WarningMessage(warning_code, data, container, subelement)
         self.emit_error(m)
     def emit_error(self, m):
         m.severity = SeverityCodes.ERROR
