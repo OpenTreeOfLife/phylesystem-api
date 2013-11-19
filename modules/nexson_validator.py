@@ -68,6 +68,40 @@ class SeverityCodes(object):
     facets = ['ERROR', 'WARNING']
     numeric_codes_registered = set(range(len(facets)))
 
+class NexsonAddress(object):
+    '''Encapsulates a reference to an addressable object in a NexSON blob.
+    A class is needed because the reference is encoded in multiple fields:
+    '''
+    def __init__(self, container, subelement=None, property_name=None):
+        '''
+        `container` is the NexSON element that generated the warning, if
+            that element has an ID.
+        `subelement` is used to provide and address (container.subelement)
+            for elements (such as meta elements) that do not have IDs.
+        `property_name` is used when the error is associated with a property of
+            a meta element
+        '''
+        self._container = container
+        self._subelement = subelement
+        if property_name:
+            assert subelement == 'meta'
+            self._property_name = property_name
+        else:
+            self._property_name = None
+    def get_property_name(self):
+        return self._property_name
+    property_name = property(get_property_name)
+    def get_path_dict(self):
+            return self._container.get_path_dict(self._subelement, self._property_name)
+    path = property(get_path_dict)
+    def write_path_suffix_str(self, out):
+        if self._subelement:
+            out.write(' in "{el}"'.format(el=self._subelement))
+        if self._container is not None:
+            out.write(' in "{el}"'.format(el=self._container.get_tag_context()))
+        out.write('\n')
+
+
 ################################################################################
 # In a burst of over-exuberant OO-coding, MTH added a class for 
 #   each class of Warning/Error.
@@ -83,35 +117,22 @@ class WarningMessage(object):
     def __init__(self,
                  warning_code,
                  data,
-                 container,
-                 subelement='',
-                 severity=SeverityCodes.WARNING,
-                 prop_name=''):
+                 address,
+                 severity=SeverityCodes.WARNING):
         '''
             `warning_code` should be a facet of WarningCodes
             `data` is an object whose details depend on the specific subclass
                 of warning that is being created
-            The "address" of the offending element is encoded in the following
-                fields:
-                `container` is the NexSON element that generated the warning, if
-                    that element has an ID.
-                `subelement` is used to provide and address (container.subelement)
-                    for elements (such as meta elements) that do not have IDs.
-                `prop_name` is used when the error is associated with a property of
-                    a meta element
+            `address` is a NexsonAddress offending element
+
             `severity` is either SeverityCodes.WARNING or SeverityCodes.ERROR
         '''
         self.warning_code = warning_code
         assert warning_code in WarningCodes.numeric_codes_registered
         self.warning_data = data
-        self._container = container
-        self.subelement = subelement
         self.severity = severity
         assert severity in SeverityCodes.numeric_codes_registered
-        if prop_name:
-            self.prop_name = prop_name
-        else:
-            self.prop_name = None
+        self.address = address
     def __unicode__(self, prefix=''):
         b = StringIO()
         ci = codecs.lookup('utf8')
@@ -126,22 +147,18 @@ class WarningMessage(object):
             'code': WarningCodes.facets[self.warning_code],
             'comment': self.__unicode__(),
             'data': self.convert_data_for_json(),
-            'refersTo': self._container.get_path_dict(self.subelement, self.prop_name)
+            'refersTo': self.address.path
         }
     def convert_data_for_json(self):
         wc = self.warning_code
         data = self.warning_data
         return data
     def _write_message_suffix(self, out):
-        if self.subelement:
-            out.write(' in "{el}"'.format(el=self.subelement))
-        if self._container is not None:
-            out.write(' in "{el}"'.format(el=self._container.get_tag_context()))
-        out.write('\n')
+        self.address.write_path_suffix_str(out)
 
 class MissingExpectedListWarning(WarningMessage):
-    def __init__(self, data, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MISSING_LIST_EXPECTED, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, data, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.MISSING_LIST_EXPECTED, data=data, address=address, severity=severity)
     def write(self, outstream, prefix):
         outstream.write('{p}Expected a list found "{k}"'.format(p=prefix, k=type(self.data)))
         self._write_message_suffix(outstream)
@@ -149,8 +166,8 @@ class MissingExpectedListWarning(WarningMessage):
         return type(self.data)
 
 class UnrecognizedKeyWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_KEY, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, key, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_KEY, data=key, address=address, severity=severity)
         self.key = key
     def write(self, outstream, prefix):
         outstream.write('{p}Unrecognized key "{k}"'.format(p=prefix, k=self.key))
@@ -159,18 +176,24 @@ class UnrecognizedKeyWarning(WarningMessage):
         return self.key
 
 class MissingOptionalKeyWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MISSING_OPTIONAL_KEY, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, key, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.MISSING_OPTIONAL_KEY, data=key, address=address, severity=severity)
         self.key = key
     def write(self, outstream, prefix):
-        outstream.write('{p}Missing optional key "{k}"'.format(p=prefix, k=self.key))
+        if self.key:
+            outstream.write('{p}Missing optional key "{k}"'.format(p=prefix, k=self.key))
+        else:
+            outstream.write('{p}Missing optional key "@property={k}"'.format(p=prefix, k=self.address.property_name)) # MTH hack to get tests to pass
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
-        return self.key
+        if self.key:
+            return self.key
+        else:
+            return "@property={k}".format(k=self.address.property_name) # MTH hack to get tests to pass
 
 class DuplicatingSingletonKeyWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, key, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=key, address=address, severity=severity)
         self.key = key
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=self.key))
@@ -179,8 +202,8 @@ class DuplicatingSingletonKeyWarning(WarningMessage):
         return self.key
 
 class RepeatedIDWarning(WarningMessage):
-    def __init__(self, identifier, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.REPEATED_ID, data=identifier, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, identifier, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.REPEATED_ID, data=identifier, address=address, severity=severity)
         self.identifier = identifier
     def write(self, outstream, prefix):
         outstream.write('{p}An ID ("{k}") was repeated'.format(p=prefix, k=self.identifier))
@@ -189,11 +212,9 @@ class RepeatedIDWarning(WarningMessage):
         return self.identifier
 
 class ReferencedIDNotFoundWarning(WarningMessage):
-    def __init__(self, key, identifier, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, identifier, address, severity=SeverityCodes.ERROR):
         d = {'key': key, 'value': identifier}
-        WarningMessage.__init__(self, WarningCodes.REFERENCED_ID_NOT_FOUND, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
-        if not prop_name:
-            self.prop_name = key
+        WarningMessage.__init__(self, WarningCodes.REFERENCED_ID_NOT_FOUND, data=d, address=address, severity=severity)
         self.key = key
         self.identifier = identifier
     def write(self, outstream, prefix):
@@ -203,8 +224,8 @@ class ReferencedIDNotFoundWarning(WarningMessage):
         return self.warning_data
 
 class MultipleRootNodesWarning(WarningMessage):
-    def __init__(self, nd_id, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MULTIPLE_ROOT_NODES, data=nd_id, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, nd_id, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_ROOT_NODES, data=nd_id, address=address, severity=severity)
         self.nd_id = nd_id
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple nodes in a tree were flagged as being the root node ("{k}" was not the first)'.format(p=prefix, k=self.nd_id))
@@ -213,8 +234,8 @@ class MultipleRootNodesWarning(WarningMessage):
         return self.warning_data
 
 class MissingMandatoryKeyWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MISSING_MANDATORY_KEY, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, key, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.MISSING_MANDATORY_KEY, data=key, address=address, severity=severity)
         self.key = key
     def write(self, outstream, prefix):
         outstream.write('{p}Missing required key "{k}"'.format(p=prefix, k=self.key))
@@ -223,11 +244,9 @@ class MissingMandatoryKeyWarning(WarningMessage):
         return self.key
 
 class UnrecognizedTagWarning(WarningMessage):
-    def __init__(self, key, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=key, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, key, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=key, address=address, severity=severity)
         self.key = key
-        if not prop_name:
-            self.prop_name = 'ot:tag'
     def write(self, outstream, prefix):
         outstream.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=self.key))
         self._write_message_suffix(outstream)
@@ -235,8 +254,8 @@ class UnrecognizedTagWarning(WarningMessage):
         return self.key
 
 class NoRootNodeWarning(WarningMessage):
-    def __init__(self, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.NO_ROOT_NODE, data=None, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.NO_ROOT_NODE, data=None, address=address, severity=severity)
     def write(self, outstream, prefix):
         outstream.write('{p}No node in a tree was flagged as being the root node'.format(p=prefix))
         self._write_message_suffix(outstream)
@@ -244,8 +263,8 @@ class NoRootNodeWarning(WarningMessage):
         return None
 
 class MultipleTreesWarning(WarningMessage):
-    def __init__(self, trees_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TREES, data=trees_list, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, trees_list, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TREES, data=trees_list, address=address, severity=severity)
         self.trees_list = trees_list
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple trees were found without an indication of which tree is preferred'.format(p=prefix))
@@ -254,8 +273,8 @@ class MultipleTreesWarning(WarningMessage):
         return None
 
 class NoTreesWarning(WarningMessage):
-    def __init__(self, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.NO_TREES, data=None, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.NO_TREES, data=None, address=address, severity=severity)
     def write(self, outstream, prefix):
         outstream.write('{p}No trees were found, or all trees were flagged for deletion'.format(p=prefix))
         self._write_message_suffix(outstream)
@@ -263,8 +282,8 @@ class NoTreesWarning(WarningMessage):
         return None
 
 class TipWithoutOTUWarning(WarningMessage):
-    def __init__(self, tip_node, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTU, data=None, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, tip_node, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTU, data=None, address=address, severity=severity)
         self.tip_node = tip_node
     def write(self, outstream, prefix):
         outstream.write('{p}Tip node ("{n}") without a valid @otu value'.format(p=prefix, n=self.tip_node.nexson_id))
@@ -273,11 +292,9 @@ class TipWithoutOTUWarning(WarningMessage):
         return None
 
 class PropertyValueNotUsefulWarning(WarningMessage):
-    def __init__(self, key, value, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, value, address, severity=SeverityCodes.WARNING):
         d = {'key': key, 'value': value}
-        WarningMessage.__init__(self, WarningCodes.PROPERTY_VALUE_NOT_USEFUL, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
-        if not prop_name:
-            self.prop_name = key
+        WarningMessage.__init__(self, WarningCodes.PROPERTY_VALUE_NOT_USEFUL, data=d, address=address, severity=severity)
         self.key = key
         self.value = value
     def write(self, outstream, prefix):
@@ -287,11 +304,9 @@ class PropertyValueNotUsefulWarning(WarningMessage):
         return self.warning_data
 
 class UnrecognizedPropertyValueWarning(WarningMessage):
-    def __init__(self, key, value, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, value, address, severity=SeverityCodes.WARNING):
         d = {'key': key, 'value': value}
-        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_PROPERTY_VALUE, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
-        if not prop_name:
-            self.prop_name = key
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_PROPERTY_VALUE, data=d, address=address, severity=severity)
         self.key = key
         self.value = value
     def write(self, outstream, prefix):
@@ -301,11 +316,9 @@ class UnrecognizedPropertyValueWarning(WarningMessage):
         return self.warning_data
 
 class InvalidPropertyValueWarning(WarningMessage):
-    def __init__(self, key, value, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, key, value, address, severity=SeverityCodes.ERROR):
         d = {'key': key, 'value': value}
-        WarningMessage.__init__(self, WarningCodes.INVALID_PROPERTY_VALUE, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
-        if not prop_name:
-            self.prop_name = key
+        WarningMessage.__init__(self, WarningCodes.INVALID_PROPERTY_VALUE, data=d, address=address, severity=severity)
         self.key = key
         self.value = value
     def write(self, outstream, prefix):
@@ -315,12 +328,10 @@ class InvalidPropertyValueWarning(WarningMessage):
         return self.warning_data
 
 class UnvalidatedAnnotationWarning(WarningMessage):
-    def __init__(self, key, value, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        d = {'key': key, 'value': value}
-        WarningMessage.__init__(self, WarningCodes.UNVALIDATED_ANNOTATION, data=d, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
-        if not prop_name:
-            self.prop_name = key
-        self.key = key
+    def __init__(self, value, address, severity=SeverityCodes.WARNING):
+        d = {'key': address.property_name, 'value': value}
+        WarningMessage.__init__(self, WarningCodes.UNVALIDATED_ANNOTATION, data=d, address=address, severity=severity)
+        self.key = address.property_name
         self.value = value
     def write(self, outstream, prefix):
         outstream.write(u'{p}Annotation found, but not validated: "{k}" -> "{v}"'.format(p=prefix, k=self.key, v=self.value))
@@ -329,8 +340,8 @@ class UnvalidatedAnnotationWarning(WarningMessage):
         return self.warning_data
 
 class ConflictingPropertyValuesWarning(WarningMessage):
-    def __init__(self, key_value_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.CONFLICTING_PROPERTY_VALUES, data=key_value_list, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, key_value_list, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.CONFLICTING_PROPERTY_VALUES, data=key_value_list, address=address, severity=severity)
         self.key_value_list = key_value_list
     def write(self, outstream, prefix):
         s = u", ".join([u'"{k}"="{v}"'.format(k=i[0], v=i[1]) for i in self.key_value_list])
@@ -340,9 +351,9 @@ class ConflictingPropertyValuesWarning(WarningMessage):
         return self.warning_data
 
 class MultipleTipsMappedToOTTIDWarning(WarningMessage):
-    def __init__(self, ott_id, node_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, ott_id, node_list, address, severity=SeverityCodes.WARNING):
         data = {'ott_id':ott_id, 'node_list': node_list}
-        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_TIPS_MAPPED_TO_OTT_ID, data=data, address=address, severity=severity)
         self.ott_id = ott_id
         self.node_list = node_list
         self.id_list = [i.nexson_id for i in self.node_list]
@@ -357,9 +368,9 @@ class MultipleTipsMappedToOTTIDWarning(WarningMessage):
         return {'nodes': self.id_list}
 
 class NonMonophyleticTipsMappedToOTTIDWarning(WarningMessage):
-    def __init__(self, ott_id, clade_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, ott_id, clade_list, address, severity=SeverityCodes.WARNING):
         data = {'ott_id':ott_id, 'node_list': clade_list}
-        WarningMessage.__init__(self, WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.NON_MONOPHYLETIC_TIPS_MAPPED_TO_OTT_ID, data=data, address=address, severity=severity)
         self.ott_id = ott_id
         self.clade_list = clade_list
         sl = [(i[0].nexson_id, i) for i in clade_list]
@@ -383,8 +394,8 @@ class NonMonophyleticTipsMappedToOTTIDWarning(WarningMessage):
         return {'nodes': self.id_list}
 
 class TipsWithoutOTTIDWarning(WarningMessage):
-    def __init__(self, tip, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTT_ID, data=tip, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, tip, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.TIP_WITHOUT_OTT_ID, data=tip, address=address, severity=severity)
         self.tip = tip
     def write(self, outstream, prefix):
         outstream.write('{p}Tip node mapped to an OTU ("{o}") which does not have an OTT ID'.format(p=prefix, 
@@ -395,9 +406,9 @@ class TipsWithoutOTTIDWarning(WarningMessage):
         return None
 
 class MultipleEdgesPerNodeWarning(WarningMessage):
-    def __init__(self, node, edge, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, node, edge, address, severity=SeverityCodes.ERROR):
         data = {'node': node, 'edge': edge}
-        WarningMessage.__init__(self, WarningCodes.MULTIPLE_EDGES_FOR_NODES, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.MULTIPLE_EDGES_FOR_NODES, data=data, address=address, severity=severity)
         self.node = node
         self.edge = edge
     def write(self, outstream, prefix):
@@ -410,9 +421,9 @@ class MultipleEdgesPerNodeWarning(WarningMessage):
         return None
 
 class IncorrectRootNodeLabelWarning(WarningMessage):
-    def __init__(self, tagged_node, node_without_parent, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
+    def __init__(self, tagged_node, node_without_parent, address, severity=SeverityCodes.ERROR):
         data = {'tagged': tagged_node, 'node_without_parent': node_without_parent}
-        WarningMessage.__init__(self, WarningCodes.INCORRECT_ROOT_NODE_LABEL, data=data, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+        WarningMessage.__init__(self, WarningCodes.INCORRECT_ROOT_NODE_LABEL, data=data, address=address, severity=severity)
         self.tagged_node = tagged_node
         self.node_without_parent = node_without_parent
     def write(self, outstream, prefix):
@@ -424,8 +435,8 @@ class IncorrectRootNodeLabelWarning(WarningMessage):
         return None
 
 class TreeCycleWarning(WarningMessage):
-    def __init__(self, node, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.CYCLE_DETECTED, data=node, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, node, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.CYCLE_DETECTED, data=node, address=address, severity=severity)
         self.node = node
     def write(self, outstream, prefix):
         outstream.write('{p}Cycle in a tree detected passing througn node "{n}"'.format(p=prefix, n=self.node.nexson_id))
@@ -434,8 +445,8 @@ class TreeCycleWarning(WarningMessage):
         return self.node.nexson_id
 
 class DisconnectedTreeWarning(WarningMessage):
-    def __init__(self, root_node_list, container, subelement='', severity=SeverityCodes.WARNING, prop_name=''):
-        WarningMessage.__init__(self, WarningCodes.DISCONNECTED_GRAPH_DETECTED, data=root_node_list, container=container, subelement=subelement, severity=severity, prop_name=prop_name)
+    def __init__(self, root_node_list, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.DISCONNECTED_GRAPH_DETECTED, data=root_node_list, address=address, severity=severity)
         self.root_node_list = root_node_list
     def write(self, outstream, prefix):
         outstream.write('{p}Disconnected graph found instead of tree including root nodes:'.format(p=prefix))
@@ -459,16 +470,16 @@ class DefaultRichLogger(object):
         self.errors = []
         self.prefix = ''
         self.retain_deprecated = False
-    def warn(self, warning_code, data, container, subelement=''):
-        m = WarningMessage(warning_code, data, container, subelement, severity=SeverityCodes.WARNING)
+    def warn(self, warning_code, data, address):
+        m = WarningMessage(warning_code, data, address, severity=SeverityCodes.WARNING)
         self.warning(m)
     def warning(self, m):
         if self.store_messages_as_obj:
             self.warnings.append(m)
         else:
             m.write(self.out, self.prefix)
-    def error(self, warning_code, data, container, subelement=''):
-        m = WarningMessage(warning_code, data, container, subelement)
+    def error(self, warning_code, address, subelement=''):
+        m = WarningMessage(warning_code, data, address)
         self.emit_error(m)
     def emit_error(self, m):
         m.severity = SeverityCodes.ERROR
@@ -519,21 +530,21 @@ class FilteringLogger(ValidationLogger):
         if m.warning_code in self.registered:
             ValidationLogger.emit_error(self, m)
 
-def check_key_presence(d, schema, rich_logger):
-    '''Issues errors if `d` does not contain keys in the schema.PERMISSIBLE_KEYS iterable,
-    warnings if `d` lacks keys listed in schema.EXPECETED_KEYS, or if `d` contains
-    keys not listed in schema.PERMISSIBLE_KEYS.
-    schema.get_tag_context() is used to tag any warning/errors
+def check_key_presence(d, container, rich_logger):
+    '''Issues errors if `d` does not contain keys in the container.PERMISSIBLE_KEYS iterable,
+    warnings if `d` lacks keys listed in container.EXPECETED_KEYS, or if `d` contains
+    keys not listed in container.PERMISSIBLE_KEYS.
+    container.get_tag_context() is used to tag any warning/errors
     '''
     for k in d.keys():
-        if k not in schema.PERMISSIBLE_KEYS:
-            rich_logger.warning(UnrecognizedKeyWarning(k, container=schema))
-    for k in schema.EXPECETED_KEYS:
+        if k not in container.PERMISSIBLE_KEYS:
+            rich_logger.warning(UnrecognizedKeyWarning(k, address=container.address))
+    for k in container.EXPECETED_KEYS:
         if k not in d:
-            rich_logger.warning(MissingOptionalKeyWarning(k, container=schema))
-    for k in schema.REQUIRED_KEYS:
+            rich_logger.warning(MissingOptionalKeyWarning(k, address=container.address))
+    for k in container.REQUIRED_KEYS:
         if k not in d:
-            rich_logger.emit_error(MissingMandatoryKeyWarning(k, container=schema))
+            rich_logger.emit_error(MissingMandatoryKeyWarning(k, address=container.address))
 
 
 ################################################################################
@@ -558,12 +569,24 @@ class NexsonDictWrapper(object):
             self._logger = DefaultRichLogger()
         else:
             self._logger = rich_logger
-    def get_path_dict(self, subelement, prop_name):
+    def get_path_dict(self, subelement, property_name):
         assert False
     def get_nexson_id(self):
         return self._raw.get('@id')
     nexson_id = property(get_nexson_id)
-
+    def get_address(self):
+        if not hasattr(self, '_address'):
+            self._address = NexsonAddress(container=self)
+        return self._address
+    address = property(get_address)
+    def get_address_of_meta(self):
+        if not hasattr(self, '_address_of_meta'):
+            self._address_of_meta = NexsonAddress(container=self, subelement='meta')
+        return self._address_of_meta
+    address_of_meta = property(get_address_of_meta)
+    def address_of_meta_key(self, key):
+        return NexsonAddress(container=self, subelement='meta', property_name=key)
+    
     def get_tag_context(self):
         return '{f}(id={i})'.format(f=self.TAG_CONTEXT, i=self.nexson_id)
 
@@ -586,15 +609,15 @@ class NexsonDictWrapper(object):
         if (expected_keys is not None) and (rich_logger is not None):
             for k, v in mv.iteritems():
                 if k not in expected_keys:
-                    rich_logger.warning(UnvalidatedAnnotationWarning(k, v, container=self, subelement='meta'))
+                    rich_logger.warning(UnvalidatedAnnotationWarning(v, self.address_of_meta_key(k)))
     def get_singelton_meta(self, property_name, default=None, warn_if_missing=True):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
-                self._logger.warning(MissingOptionalKeyWarning('@property=' + property_name, container=self, subelement='meta'))
+                self._logger.warning(MissingOptionalKeyWarning(key=None, address=self.address_of_meta_key(property_name)))
             v = default
         elif isinstance(v, MetaValueList):
-            self._logger.emit_error(DuplicatingSingletonKeyWarning('@property=' + property_name, container=self, subelement='meta'))
+            self._logger.emit_error(DuplicatingSingletonKeyWarning(self.address_of_meta_key(property_name))) #mth
         return v
     def add_meta(self, key, value):
         md = {"$": value, 
@@ -633,7 +656,7 @@ class NexsonDictWrapper(object):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
-                self._logger.warning(MissingOptionalKeyWarning('@property=' + property_name, container=self, subelement='meta'))
+                self._logger.warning(MissingOptionalKeyWarning(key=None, address=self.address_of_meta_key(property_name))) #mth
             v = []
         return v
     def consume_meta_and_check_keys(self, d, rich_logger):
@@ -698,7 +721,7 @@ def _read_meta_list(o, container, rich_logger):
     if isinstance(m, dict):
         m = [m]
     if not isinstance(m, list):
-        rich_logger.emit_error(MissingExpectedListWarning(m, container=container, subelement='meta'))
+        rich_logger.emit_error(MissingExpectedListWarning(m, address=container.address_of_meta))
     else:
         for el in m:
             meta_el = Meta(el, rich_logger, container=container)
@@ -725,7 +748,7 @@ class OTU(NexsonDictWrapper):
             self.get_singelton_meta('ot:ottid') # trigger a warning
         self._original_label = self.get_singelton_meta('ot:originalLabel')
         self._label = o.get('@label', None)
-    def get_path_dict(self, subelement, prop_name):
+    def get_path_dict(self, subelement, property_name):
         d = {
             'top': 'otus',
             'otusID': self._container.nexson_id,
@@ -735,8 +758,8 @@ class OTU(NexsonDictWrapper):
         if subelement:
             assert subelement == 'meta'
             d['inMeta'] = True
-        if prop_name:
-            d['property'] = prop_name
+        if property_name:
+            d['property'] = property_name
         return d
     def get_ott_id(self):
         return self._ott_id
@@ -763,19 +786,19 @@ class Edge(NexsonDictWrapper):
         if sid is not None:
             self._source = nodes.get(sid)
             if self._source is None:
-                rich_logger.emit_error(ReferencedIDNotFoundWarning('@source', sid, container=self))
+                rich_logger.emit_error(ReferencedIDNotFoundWarning('@source', sid, address=self.address))
             else:
                 self._source._children.append(self)
         tid = o.get('@target')
         if tid is not None:
             self._target = nodes.get(tid)
             if self._target is None:
-                rich_logger.emit_error(ReferencedIDNotFoundWarning('@target', tid, container=self))
+                rich_logger.emit_error(ReferencedIDNotFoundWarning('@target', tid, address=self.address))
             elif self._target._edge is not None:
-                rich_logger.emit_error(MultipleEdgesPerNodeWarning(self._target, self, container=self))
+                rich_logger.emit_error(MultipleEdgesPerNodeWarning(self._target, self, address=self.address))
             else:
                 self._target._edge = self
-    def get_path_dict(self, subelement, prop_name):
+    def get_path_dict(self, subelement, property_name):
         d = {
             'top': 'trees',
             'treesID': self._container._container.nexson_id,
@@ -786,8 +809,8 @@ class Edge(NexsonDictWrapper):
         if subelement:
             assert subelement == 'meta'
             d['inMeta'] = True
-        if prop_name:
-            d['property'] = prop_name
+        if property_name:
+            d['property'] = property_name
         return d
 
 
@@ -797,7 +820,7 @@ class Node(NexsonDictWrapper):
     PERMISSIBLE_KEYS = ('@id', '@otu', '@root', 'meta', '@about')
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'node'
-    def get_path_dict(self, subelement, prop_name):
+    def get_path_dict(self, subelement, property_name):
         d = {
             'top': 'trees',
             'treesID': self._container._container.nexson_id,
@@ -808,8 +831,8 @@ class Node(NexsonDictWrapper):
         if subelement:
             assert subelement == 'meta'
             d['inMeta'] = True
-        if prop_name:
-            d['property'] = prop_name
+        if property_name:
+            d['property'] = property_name
         return d
     def __init__(self, o, rich_logger, otu_dict, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
@@ -822,7 +845,7 @@ class Node(NexsonDictWrapper):
         if v is not None:
             self._otu = otu_dict.get(v)
             if self._otu is None:
-                rich_logger.emit_error(ReferencedIDNotFoundWarning('@otu', v, container=self))
+                rich_logger.emit_error(ReferencedIDNotFoundWarning('@otu', v, address=self.address))
     def get_parent(self):
         e = self._edge
         if e is None:
@@ -970,7 +993,7 @@ class Tree(NexsonDictWrapper):
     USE_ME_TAGS = ('choose me',)
     EXPECTED_TAGS = tuple(list(DELETE_ME_TAGS) + list(USE_ME_TAGS))
     TAG_CONTEXT = 'tree'
-    def get_path_dict(self, subelement, prop_name):
+    def get_path_dict(self, subelement, property_name):
         d = {
             'top': 'trees',
             'treesID': self._container.nexson_id,
@@ -979,8 +1002,8 @@ class Tree(NexsonDictWrapper):
         }
         if subelement == 'meta':
             d['inMeta'] = True
-        if prop_name:
-            d['property'] = prop_name
+        if property_name:
+            d['property'] = property_name
         return d
     def __init__(self, o, rich_logger, container=None):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
@@ -995,15 +1018,15 @@ class Tree(NexsonDictWrapper):
                                              'ot:bootstrapValues',
                                              'ot:posteriorSupport']:
                 if self._branch_len_mode in ['ot:other', 'ot:undefined']:
-                    rich_logger.warning(PropertyValueNotUsefulWarning(k, self._branch_len_mode, container=self, subelement='meta'))
+                    rich_logger.warning(PropertyValueNotUsefulWarning(self._branch_len_mode, address=self.address_of_meta_key(k))) #mth
                 else:
-                    rich_logger.emit_error(UnrecognizedPropertyValueWarning(k, self._branch_len_mode, container=self, subelement='meta'))
+                    rich_logger.emit_error(UnrecognizedPropertyValueWarning(self._branch_len_mode, address=self.address_of_meta_key(k))) # mth
         self._tag_list = self.get_list_meta('ot:tag', warn_if_missing=False)
         if isinstance(self._tag_list, str) or isinstance(self._tag_list, unicode):
             self._tag_list = [self._tag_list]
         unexpected_tags = [i for i in self._tag_list if i.lower() not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
-            rich_logger.warning(UnrecognizedTagWarning(tag, container=self, subelement='meta'))
+            rich_logger.warning(UnrecognizedTagWarning(tag, address=self.address_of_meta_key('ot:tag'))) #mth
         self._tagged_for_deletion = False
         self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
         tl = [i.lower() for i in self._tag_list]
@@ -1017,7 +1040,7 @@ class Tree(NexsonDictWrapper):
                 self._tagged_for_inclusion = True
                 inc_tag = self._tag_list[tl.index(t)]
         if self._tagged_for_inclusion and self._tagged_for_deletion:
-            rich_logger.warning(ConflictingPropertyValuesWarning([('ot:tag', del_tag), ('ot:tag', inc_tag)], container=self, subelement='meta'))
+            rich_logger.warning(ConflictingPropertyValuesWarning([('ot:tag', del_tag), ('ot:tag', inc_tag)], address=self.address_of_meta))
         self._node_dict = {}
         self._node_list = []
         self._edge_dict = {}
@@ -1032,14 +1055,14 @@ class Tree(NexsonDictWrapper):
         v = o.get('node', [])
         self._root_node = None
         if not isinstance(v, list):
-            rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='node'))
+            rich_logger.emit_error(MissingExpectedListWarning(v, NexsonAddress(container=self, subelement='node')))
         else:
             for el in v:
                 n_node = Node(el, rich_logger, otu_dict, container=self)
                 nid = n_node.nexson_id
                 if nid is not None:
                     if nid in self._node_dict:
-                        rich_logger.emit_error(RepeatedIDWarning(nid, container=self, subelement='node'))
+                        rich_logger.emit_error(RepeatedIDWarning(nid, NexsonAddress(container=self, subelement='node')))
                     else:
                         self._node_dict[nid] = n_node
                 self._node_list.append(n_node)
@@ -1047,19 +1070,19 @@ class Tree(NexsonDictWrapper):
                     if self._root_node is None:
                         self._root_node = n_node
                     else:
-                        rich_logger.emit_error(MultipleRootNodesWarning(nid, container=self, subelement='node'))
+                        rich_logger.emit_error(MultipleRootNodesWarning(nid, NexsonAddress(container=self, subelement='node')))
         if self._root_node is None:
-            rich_logger.warning(NoRootNodeWarning(container=self))
+            rich_logger.warning(NoRootNodeWarning(address=self.address))
         v = o.get('edge', [])
         if not isinstance(v, list):
-            rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='edge'))
+            rich_logger.emit_error(MissingExpectedListWarning(v, NexsonAddress(container=self, subelement='edge')))
         else:
             for el in v:
                 n_edge = Edge(el, rich_logger, nodes=self._node_dict, container=self)
                 eid = n_edge.nexson_id
                 if eid is not None:
                     if eid in self._edge_dict:
-                        rich_logger.emit_error(RepeatedIDWarning(eid, container=self, subelement='edge'))
+                        rich_logger.emit_error(RepeatedIDWarning(eid, NexsonAddress(container=self, subelement='edge')))
                     else:
                         self._edge_dict[eid] = n_edge
                 self._edge_list.append(n_edge)
@@ -1073,47 +1096,46 @@ class Tree(NexsonDictWrapper):
             cycle_node, path_to_root = nd.construct_path_to_root(encountered_nodes)
             if cycle_node:
                 valid_tree = False
-                rich_logger.emit_error(TreeCycleWarning(cycle_node, container=self))
+                rich_logger.emit_error(TreeCycleWarning(cycle_node, address=self.address))
             if path_to_root:
                 lowest_node_set.add(path_to_root[-1])
             is_flagged_as_leaf = nd.get_singelton_meta('ot:isLeaf', warn_if_missing=False)
             if len(nd._children) == 0:
                 if nd._otu is None:
-                    rich_logger.emit_error(TipWithoutOTUWarning(nd, container=nd))
+                    rich_logger.emit_error(TipWithoutOTUWarning(nd, address=nd.address))
                 elif nd._otu._ott_id is None:
-                    rich_logger.warning(TipsWithoutOTTIDWarning(nd, container=nd))
+                    rich_logger.warning(TipsWithoutOTTIDWarning(nd, address=nd.address))
                 else:
                     nl = ott_id2node.setdefault(nd._otu._ott_id, [])
                     if len(nl) == 1:
                         multi_labelled_ott_id.add(nd._otu._ott_id)
                     nl.append(nd)
                 if not is_flagged_as_leaf:
-                    rich_logger.warning(MissingOptionalKeyWarning('@property=ot:isLeaf', container=nd, subelement='meta'))
+                    rich_logger.warning(MissingOptionalKeyWarning(key=None, address=nd.address_of_meta_key('ot:isLeaf'))) #mth
                     if not rich_logger.retain_deprecated:
                         nd.add_meta('ot:isLeaf', True)
             elif is_flagged_as_leaf:
-                rich_logger.emit_error(InvalidPropertyValueWarning('ot:isLeaf', True, container=nd, subelement='meta'))
-                if not rich_logger.retain_deprecated:
-                    nd.del_meta('ot:isLeaf') # Non const. Fixing.
+                rich_logger.emit_error(InvalidPropertyValueWarning(True, address=nd.address_of_meta_key('ot:isLeaf'))) #mth
+                nd.del_meta('ot:isLeaf') # Non const. Fixing.
         for ott_id in multi_labelled_ott_id:
             tip_list = ott_id2node.get(ott_id)
-            rich_logger.warning(MultipleTipsMappedToOTTIDWarning(ott_id, tip_list, container=self))
+            rich_logger.warning(MultipleTipsMappedToOTTIDWarning(ott_id, tip_list, address=self.address))
         if len(lowest_node_set) > 1:
             valid_tree = False
             lowest_node_set = [(i.nexson_id, i) for i in lowest_node_set]
             lowest_node_set.sort()
             lowest_node_set = [i[1] for i in lowest_node_set]
-            rich_logger.emit_error(DisconnectedTreeWarning(lowest_node_set, container=self))
+            rich_logger.emit_error(DisconnectedTreeWarning(lowest_node_set, address=self.address))
         elif len(lowest_node_set) == 1:
             ln = list(lowest_node_set)[0]
             if self._root_node is not None and self._root_node is not ln:
-                rich_logger.emit_error(IncorrectRootNodeLabelWarning(self._root_node, ln, container=self))
+                rich_logger.emit_error(IncorrectRootNodeLabelWarning(self._root_node, ln, address=self.address))
         if valid_tree:
             for ott_id in multi_labelled_ott_id:
                 tip_list = ott_id2node.get(ott_id)
                 clade_tips = self.break_by_clades(tip_list)
                 if len(clade_tips) > 1:
-                    rich_logger.warning(NonMonophyleticTipsMappedToOTTIDWarning(ott_id, clade_tips, container=self))
+                    rich_logger.warning(NonMonophyleticTipsMappedToOTTIDWarning(ott_id, clade_tips, address=self.address))
     def break_by_clades(self, tip_list):
         '''Takes a list of nodes. returns a list of lists. 
         Each sub list is a set of leaves in the tree that form the tips of a clade on the tree..
@@ -1156,15 +1178,15 @@ class OTUCollection(NexsonDictWrapper):
     PERMISSIBLE_KEYS = ('@id', 'otu')
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'otus'
-    def get_path_dict(self, subelement, prop_name):
+    def get_path_dict(self, subelement, property_name):
         d = {
             'top': 'otus',
             'otusID': self.nexson_id,
         }
         if subelement == 'meta':
             d['inMeta'] = True
-        if prop_name:
-            d['property'] = prop_name
+        if property_name:
+            d['property'] = property_name
         return d
     def __init__(self, o, rich_logger, container):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
@@ -1173,14 +1195,14 @@ class OTUCollection(NexsonDictWrapper):
         self.consume_meta_and_check_keys(o, rich_logger)
         v = o.get('otu', [])
         if not isinstance(v, list):
-            rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='otu'))
+            rich_logger.emit_error(MissingExpectedListWarning(v, address=NexsonAddress(self, subelement='otu')))
         else:
             for el in v:
                 n_otu = OTU(el, rich_logger, container=self)
                 nid = n_otu.nexson_id
                 if nid is not None:
                     if nid in self._as_dict:
-                        rich_logger.emit_error(RepeatedIDWarning(nid, container=self, subelement='otu'))
+                        rich_logger.emit_error(RepeatedIDWarning(nid, address=NexsonAddress(self, subelement='otu')))
                     else:
                         self._as_dict[nid] = n_otu
                 self._as_list.append(n_otu)
@@ -1191,7 +1213,7 @@ class TreeCollection(NexsonDictWrapper):
     PERMISSIBLE_KEYS = ('@id', 'tree', '@otus')
     EXPECTED_META_KEYS = tuple()
     TAG_CONTEXT = 'trees'
-    def get_path_dict(self, subelement, prop_name):
+    def get_path_dict(self, subelement, property_name):
         d = {
             'top': 'trees',
             'treesID': self.nexson_id,
@@ -1199,8 +1221,8 @@ class TreeCollection(NexsonDictWrapper):
         }
         if subelement == 'meta':
             d['inMeta'] = True
-        if prop_name:
-            d['property'] = prop_name
+        if property_name:
+            d['property'] = property_name
         return d
     def __init__(self, o, rich_logger, container):
         NexsonDictWrapper.__init__(self, o, rich_logger, container)
@@ -1213,19 +1235,19 @@ class TreeCollection(NexsonDictWrapper):
             if container is None \
                or container.otus is None \
                or v != container.otus.nexson_id:
-                rich_logger.emit_error(ReferencedIDNotFoundWarning('@otus', v, container=self))
+                rich_logger.emit_error(ReferencedIDNotFoundWarning('@otus', v, address=self.address))
             else:
                 self._otu_collection = container.otus
         v = o.get('tree', [])
         if not isinstance(v, list):
-            rich_logger.emit_error(MissingExpectedListWarning(v, container=self, subelement='tree'))
+            rich_logger.emit_error(MissingExpectedListWarning(v, address=NexsonAddress(self, subelement='tree')))
         else:
             for el in v:
                 tree = Tree(el, rich_logger, container=self)
                 tid = tree.nexson_id
                 if tid is not None:
                     if tid in self._as_dict:
-                        rich_logger.emit_error(RepeatedIDWarning(nid, container=self, subelement='tree'))
+                        rich_logger.emit_error(RepeatedIDWarning(nid, address=NexsonAddress(self, subelement='tree')))
                     else:
                         self._as_dict[tid] = tree
                 self._as_list.append(tree)
@@ -1253,7 +1275,7 @@ class NexSON(NexsonDictWrapper):
                           'ot:tag')
     EXPECTED_TAGS = tuple()
     TAG_CONTEXT = 'nexml'
-    def get_path_dict(self, subelement, prop_name):
+    def get_path_dict(self, subelement, property_name):
         if subelement == 'meta':
             d = {
                 'top': 'meta',
@@ -1261,8 +1283,8 @@ class NexSON(NexsonDictWrapper):
             }
         else: 
             d = {'inMeta':False}
-        if prop_name:
-            d['property'] = prop_name
+        if property_name:
+            d['property'] = property_name
         return d
     def __init__(self, o, rich_logger=None):
         '''Creates an object that validates `o` as a dictionary
@@ -1277,10 +1299,10 @@ class NexSON(NexsonDictWrapper):
         NexsonDictWrapper.__init__(self, o, rich_logger, None)
         for k in o.keys():
             if k not in ['nexml']:
-                rich_logger.warning(UnrecognizedKeyWarning(k, container=self))
+                rich_logger.warning(UnrecognizedKeyWarning(k, address=self.address))
         self._nexml = None
         if 'nexml' not in o:
-            rich_logger.emit_error(MissingMandatoryKeyWarning('nexml', container=self))
+            rich_logger.emit_error(MissingMandatoryKeyWarning('nexml', address=self.address))
             return ## EARLY EXIT!!
         self._nexml = o['nexml']
 
@@ -1298,22 +1320,22 @@ class NexSON(NexsonDictWrapper):
             self._tags = [self._tags]
         unexpected_tags = [i for i in self._tags if i not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
-            rich_logger.warning(UnrecognizedTagWarning(tag, container=self, subelement='meta'))
+            rich_logger.warning(UnrecognizedTagWarning(tag, address=self.address_of_meta_key('ot:tag')))
         v = self._nexml.get('otus')
         if v is None:
-            rich_logger.emit_error(MissingMandatoryKeyWarning('otus', container=self))
+            rich_logger.emit_error(MissingMandatoryKeyWarning('otus', address=self.address))
         else:
             self.otus = OTUCollection(v, rich_logger, container=self)
         v = self._nexml.get('trees')
         if v is None:
-            rich_logger.emit_error(MissingMandatoryKeyWarning('tree', container=self))
+            rich_logger.emit_error(MissingMandatoryKeyWarning('tree', address=self.address))
         else:
             self.trees = TreeCollection(v, rich_logger, container=self)
             possible_trees = [t for t in self.trees._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)]
             if len(possible_trees) > 1:
-                rich_logger.warning(MultipleTreesWarning(self.trees._as_list, container=self.trees))
+                rich_logger.warning(MultipleTreesWarning(self.trees._as_list, address=self.trees.address))
             elif len(possible_trees) == 0:
-                rich_logger.warning(NoTreesWarning(container=self.trees))
+                rich_logger.warning(NoTreesWarning(address=self.trees.address))
 
 
 def indented_keys(out, o, indentation='', indent=2):
