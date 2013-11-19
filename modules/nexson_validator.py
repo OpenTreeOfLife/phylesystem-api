@@ -15,10 +15,19 @@ class NexSONError(Exception):
 
 ################################################################################
 # Warning codes and message types...
+# Each type of Warning/Error should have its own
 ################################################################################
+
 # An enum of WARNING_CODES
 class WarningCodes():
-    facets = ['MISSING_MANDATORY_KEY',
+    '''Enumeration of Warning/Error types. For internal use.
+
+    WarningCodes.facets maps int -> warning name.
+    Each of these names will also be an attribute of WarningCodes.
+    WarningCodes.numeric_codes_registered is (after some mild monkey-patching)
+        a set of the integers registered.
+    '''
+    facets = ('MISSING_MANDATORY_KEY',
               'MISSING_OPTIONAL_KEY',
               'UNRECOGNIZED_KEY',
               'MISSING_LIST_EXPECTED',
@@ -43,17 +52,33 @@ class WarningCodes():
               'UNRECOGNIZED_TAG',
               'CONFLICTING_PROPERTY_VALUES',
               'NO_TREES',
-              ]
+              )
     numeric_codes_registered = []
+# monkey-patching WarningCodes...
 for _n, _f in enumerate(WarningCodes.facets):
     setattr(WarningCodes, _f, _n)
     WarningCodes.numeric_codes_registered.append(_n)
+WarningCodes.numeric_codes_registered = set(WarningCodes.numeric_codes_registered)
+# End of WarningCodes enum
 
 class SeverityCodes(object):
+    '''An enum of Warning/Error severity
+    '''
     ERROR, WARNING = range(2)
     facets = ['ERROR', 'WARNING']
 
+################################################################################
+# In a burst of over-exuberant OO-coding, MTH added a class for 
+#   each class of Warning/Error.
+# 
+# Each subclass typically tweaks the writing of the message and the payload
+#   that constitutes the "data" blob in the JSON.
+################################################################################
 class WarningMessage(object):
+    '''This base class provides the basic functionality of keeping
+    track of the "address" of the element that triggered the warning, 
+    the severity code, and methods for writing to free text stream or JSON.
+    '''
     def __init__(self,
                  warning_code,
                  data,
@@ -62,7 +87,21 @@ class WarningMessage(object):
                  source_identifier=None,
                  severity=SeverityCodes.WARNING,
                  prop_name=''):
+        '''
+            `warning_code` should be a facet of WarningCodes
+            `data` is an object whose details depend on the specific subclass
+                of warning that is being created
+            The "address" of the offending element is encoded in the following
+                fields:
+                `container` is the NexSON element that generated the warning, if
+                    that element has an ID.
+                `subelement` is used to provide and address (container.subelement)
+                    for elements (such as meta elements) that do not have IDs.
+                `prop_name` is used when the error is associated with a property of
+                    a meta element
+        '''
         self.warning_code = warning_code
+        assert warning_code in WarningCodes.numeric_codes_registered
         self.warning_data = data
         self._container = container
         self.subelement = subelement
@@ -495,7 +534,16 @@ def check_key_presence(d, schema, rich_logger):
     for k in schema.REQUIRED_KEYS:
         if k not in d:
             rich_logger.emit_error(MissingMandatoryKeyWarning(k, container=schema))
-    
+
+
+################################################################################
+# Wrappers around the entities that we care about in a NexSON file. The
+#   first argument in the constructor of each is the dict (presumably
+#   directly from a json load operation) that represents the object.
+#   each class simply provides the validation logic for elements of the
+#   corresponding type.
+################################################################################
+
 
 class NexsonDictWrapper(object):
     '''Base class adding the nexson_id property'''
@@ -595,6 +643,12 @@ class NexsonDictWrapper(object):
         self._consume_meta(d, rich_logger, self.EXPECTED_META_KEYS)
 
 class MetaValueList(list):
+    '''Thin wrapper for a list created to distinguish:
+        (1) a list of meta values with the same key for the 
+            same NexSON object; from
+        (2) a meta values that is a list (in the JSON)
+    Simply used in isinstance calls
+    '''
     pass
 
 class Meta(NexsonDictWrapper):
