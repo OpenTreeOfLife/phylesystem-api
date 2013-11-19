@@ -8,6 +8,7 @@ from github import Github, GithubException, BadCredentialsException, UnknownObje
 from pprint import pprint
 # NOTE: un-comment this to emit API chatter to stdout!
 ##github.enable_console_debug_logging()
+import simplejson as json
 
 # can we import web2py API (current, etc)?
 in_web2py = False
@@ -42,11 +43,38 @@ def get_registered_app_secrets():
 
     return (Github_client_id, Github_client_secret)
 
+def compare(repo_path, base, head, token):
+    """Compare two commits (by SHA or branch name) and return a list of changed files
 
-def fetch_study(study_id, token):
-    # Fetch study data using auth token, if provided, or using app secret for an
-    # anonymous visitor (to take advantage of our high rate limit)
-    pprint('>>>>> token: [%s]' % (token,))
+    Example URL: http://localhost:8080/api/compare/v1/c3608e5/master
+
+    which calls out to https://api.github.com/repos/OpenTreeOfLife/treenexus/compare/c3608e5...master
+
+"""
+    (gh,gh_user,gh_username) = authenticate(token)
+
+    repo = gh.get_repo(repo_path)
+
+    comparison = repo.compare(base,head)
+
+    excludes = [ ".to_download.json" ]
+
+    files         = [ f for f in comparison.files if f.filename not in excludes ]
+    changed_files = [ f.filename for f in files if f.status == "modified" ]
+    added_files   = [ f.filename for f in files if f.status == "added"    ]
+    removed_files = [ f.filename for f in files if f.status == "removed"  ]
+    renamed_files = [ f.filename for f in files if f.status == "renamed"  ]
+
+    return json.dumps(
+        {
+            "changed": changed_files,
+            "added":   added_files,
+            "removed": removed_files,
+            "renamed": renamed_files,
+        }
+    )
+
+def authenticate(token):
     try:
         if token == 'ANONYMOUS':
             (Github_client_id, Github_client_secret,) = get_registered_app_secrets()
@@ -61,6 +89,9 @@ def fetch_study(study_id, token):
             gh = Github(token)
             gh_user = gh.get_user()
             gh_username = gh_user.login
+
+        return (gh,gh_user,gh_username)
+
     except BadCredentialsException, e:
         print('Bad credentials! Please proofread (or refresh) the auth token.')
         return 'Bad credentials! Please proofread (or refresh) the auth token.'
@@ -70,6 +101,14 @@ def fetch_study(study_id, token):
     except Exception, e:
         print('Something else went wrong <%s>: %s' % (type(e), e,))
         return 'Something else went wrong <%s>: %s' % (type(e), e,)
+
+
+def fetch_study(study_id, token):
+    # Fetch study data using auth token, if provided, or using app secret for an
+    # anonymous visitor (to take advantage of our high rate limit)
+    pprint('>>>>> token: [%s]' % (token,))
+
+    (gh,gh_user,gh_username) = authenticate(token)
 
     # find the 'treenexus' repo (confirm it exists and is available)
     repo_path = 'OpenTreeOfLife/treenexus'  # TODO: pull from config file?
