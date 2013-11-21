@@ -5,7 +5,7 @@ import sys
 from gitdata import GitData
 import simplejson as json
 
-def test_basic():
+def test_fetch():
     gd = GitData(repo="./treenexus")
 
     study_id = 438
@@ -17,4 +17,12 @@ def test_basic():
         valid = 0
     assert valid, "fetch_study(%s) returned valid JSON" % study_id
 
-test_basic()
+def test_write():
+    gd = GitData(repo="./treenexus")
+    author   = "John Doe <john@doe.com>"
+    content  = '{"foo":"bar"}'
+    study_id = 999
+    gd.write_study(study_id,content,author)
+
+test_fetch()
+test_write()
