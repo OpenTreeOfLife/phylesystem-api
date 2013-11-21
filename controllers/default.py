@@ -13,6 +13,11 @@ def v1():
     "The OpenTree API v1"
     response.view = 'generic.json'
 
+    # CORS support for cross-domain API requests (from anywhere)
+    response.headers['Access-Control-Allow-Origin'] = "*"
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
+
     def __validate(nexson):
         # stub function for hooking into NexSON validation
         pass
@@ -43,38 +48,44 @@ def v1():
         except Exception, e:
             return 'ERROR fetching study:\n%s' % e
 
-    def POST(resource, resource_id=None, **kwargs):
-        "OpenTree API methods relating to writing"
+    def POST(resource, resource_id=None, _method='POST', **kwargs):
+        "OTOL API methods relating to creating (and importing) resources"
+        # support JSONP request from another domain
+        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
+            response.view = 'generic.jsonp'
+
+        # check for HTTP method override (passed on query string)
+        if _method == 'PUT':
+            PUT(resource, resource_id, kwargs)
+        elif _method == 'DELETE':
+            DELETE(resource, resource_id, kwargs)
+        # elif _method == 'PATCH': ...
+
+        if not resource=='study': raise HTTP(400, 'resource != study')
+
+        # we're creating a new study (possibly with import instructions in the payload)
+        cc0_agreement = kwargs.get('cc0_agreement', '')
+        import_option = kwargs.get('import_option', '')
+        treebase_id = kwargs.get('treebase_id', '')
+        dryad_DOI = kwargs.get('dryad_DOI', '')
+        import_option = kwargs.get('import_option', '')
+
+        return kwargs
+        # TODO: 
+        # assign a new ID for this study, create its folder in repo(?)
+        # forward ID and info to treemachine, expect to get study JSON back
+        # IF treemachine returns JSON, save as {ID}.json and return URL as '201 Created'
+        # or perhaps '303 See other' w/ redirect?
+        # (should we do this on a WIP branch? save empty folder in 'master'?)
+        # IF treemachine throws an error, return error info as '500 Internal Server Error'
+
+    def PUT(resource, resource_id=None, **kwargs):
+        "OTOL API methods relating to updating existing resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
 
         if not resource=='study': raise HTTP(400, 'resource != study')
-
-        # TODO: use presence or absence of resource_id as a cue to creation vs.
-        # updates? Or better yet, support method overrides (on POST requests)
-        # for PUT, PATCH, DELETE and redirect as needed:
-        # http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#method-override
-        #
-        if False:
-            if resource_id:
-                # this is an update(?) of an existing study, use code below
-                pass
-            else:
-                # we're creating a new study (possibly with import instructions in the payload)
-                cc0_agreement = kwargs.get('cc0_agreement', '')
-                import_option = kwargs.get('import_option', '')
-                treebase_id = kwargs.get('treebase_id', '')
-                dryad_DOI = kwargs.get('dryad_DOI', '')
-                import_option = kwargs.get('import_option', '')
-
-                return kwargs
-                # TODO: assign a new ID for this study, create its folder in repo(?)
-                # forward ID and info to treemachine, expect to get study JSON back
-                # IF treemachine returns JSON, save as {ID}.json and return URL as '201 Created'
-                # or perhaps '303 See other' w/ redirect?
-                # (should we do this on a WIP branch? save empty folder in 'master'?)
-                # IF treemachine throws an error, return error info as '500 Internal Server Error'
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
@@ -136,5 +147,21 @@ def v1():
                 "description": "Updated study #%s" % resource_id,
                 "sha":  new_sha
             }
+
+    def DELETE(resource, resource_id=None, **kwargs):
+        "OTOL API methods relating to deleting existing resources"
+        # support JSONP request from another domain
+        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
+            response.view = 'generic.jsonp'
+
+        if not resource=='study': raise HTTP(400, 'resource != study')
+
+    def OPTIONS(args, **kwargs):
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200)
 
     return locals()
