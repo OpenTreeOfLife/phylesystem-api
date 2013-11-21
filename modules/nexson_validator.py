@@ -192,9 +192,9 @@ class MissingOptionalKeyWarning(WarningMessage):
             return "@property={k}".format(k=self.address.property_name) # MTH hack to get tests to pass
 
 class DuplicatingSingletonKeyWarning(WarningMessage):
-    def __init__(self, key, address, severity=SeverityCodes.ERROR):
+    def __init__(self, address, severity=SeverityCodes.ERROR):
         WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=key, address=address, severity=severity)
-        self.key = key
+        self.key = address.property_name
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=self.key))
         self._write_message_suffix(outstream)
@@ -244,14 +244,14 @@ class MissingMandatoryKeyWarning(WarningMessage):
         return self.key
 
 class UnrecognizedTagWarning(WarningMessage):
-    def __init__(self, key, address, severity=SeverityCodes.WARNING):
-        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=key, address=address, severity=severity)
-        self.key = key
+    def __init__(self, tag, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=tag, address=address, severity=severity)
+        self.tag = tag
     def write(self, outstream, prefix):
-        outstream.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=self.key))
+        outstream.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=self.tag))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
-        return self.key
+        return self.tag
 
 class NoRootNodeWarning(WarningMessage):
     def __init__(self, address, severity=SeverityCodes.ERROR):
@@ -292,10 +292,10 @@ class TipWithoutOTUWarning(WarningMessage):
         return None
 
 class PropertyValueNotUsefulWarning(WarningMessage):
-    def __init__(self, key, value, address, severity=SeverityCodes.WARNING):
-        d = {'key': key, 'value': value}
+    def __init__(self, value, address, severity=SeverityCodes.WARNING):
+        d = {'key': address.property_name, 'value': value}
         WarningMessage.__init__(self, WarningCodes.PROPERTY_VALUE_NOT_USEFUL, data=d, address=address, severity=severity)
-        self.key = key
+        self.key = address.property_name
         self.value = value
     def write(self, outstream, prefix):
         outstream.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
@@ -305,9 +305,9 @@ class PropertyValueNotUsefulWarning(WarningMessage):
 
 class UnrecognizedPropertyValueWarning(WarningMessage):
     def __init__(self, key, value, address, severity=SeverityCodes.WARNING):
-        d = {'key': key, 'value': value}
+        d = {'key': address.property_name, 'value': value}
         WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_PROPERTY_VALUE, data=d, address=address, severity=severity)
-        self.key = key
+        self.key = address.property_name
         self.value = value
     def write(self, outstream, prefix):
         outstream.write('{p}Unrecognized value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
@@ -316,10 +316,10 @@ class UnrecognizedPropertyValueWarning(WarningMessage):
         return self.warning_data
 
 class InvalidPropertyValueWarning(WarningMessage):
-    def __init__(self, key, value, address, severity=SeverityCodes.ERROR):
-        d = {'key': key, 'value': value}
+    def __init__(self, value, address, severity=SeverityCodes.ERROR):
+        d = {'key': address.property_name, 'value': value}
         WarningMessage.__init__(self, WarningCodes.INVALID_PROPERTY_VALUE, data=d, address=address, severity=severity)
-        self.key = key
+        self.key = address.property_name
         self.value = value
     def write(self, outstream, prefix):
         outstream.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
@@ -617,7 +617,7 @@ class NexsonDictWrapper(object):
                 self._logger.warning(MissingOptionalKeyWarning(key=None, address=self.address_of_meta_key(property_name)))
             v = default
         elif isinstance(v, MetaValueList):
-            self._logger.emit_error(DuplicatingSingletonKeyWarning(self.address_of_meta_key(property_name))) #mth
+            self._logger.emit_error(DuplicatingSingletonKeyWarning(self.address_of_meta_key(property_name)))
         return v
     def add_meta(self, key, value):
         md = {"$": value, 
@@ -656,7 +656,7 @@ class NexsonDictWrapper(object):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
-                self._logger.warning(MissingOptionalKeyWarning(key=None, address=self.address_of_meta_key(property_name))) #mth
+                self._logger.warning(MissingOptionalKeyWarning(key=None, address=self.address_of_meta_key(property_name)))
             v = []
         return v
     def consume_meta_and_check_keys(self, d, rich_logger):
@@ -1018,15 +1018,15 @@ class Tree(NexsonDictWrapper):
                                              'ot:bootstrapValues',
                                              'ot:posteriorSupport']:
                 if self._branch_len_mode in ['ot:other', 'ot:undefined']:
-                    rich_logger.warning(PropertyValueNotUsefulWarning(self._branch_len_mode, address=self.address_of_meta_key(k))) #mth
+                    rich_logger.warning(PropertyValueNotUsefulWarning(self._branch_len_mode, address=self.address_of_meta_key(k)))
                 else:
-                    rich_logger.emit_error(UnrecognizedPropertyValueWarning(self._branch_len_mode, address=self.address_of_meta_key(k))) # mth
+                    rich_logger.emit_error(UnrecognizedPropertyValueWarning(self._branch_len_mode, address=self.address_of_meta_key(k)))
         self._tag_list = self.get_list_meta('ot:tag', warn_if_missing=False)
         if isinstance(self._tag_list, str) or isinstance(self._tag_list, unicode):
             self._tag_list = [self._tag_list]
         unexpected_tags = [i for i in self._tag_list if i.lower() not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
-            rich_logger.warning(UnrecognizedTagWarning(tag, address=self.address_of_meta_key('ot:tag'))) #mth
+            rich_logger.warning(UnrecognizedTagWarning(tag, address=self.address_of_meta_key('ot:tag')))
         self._tagged_for_deletion = False
         self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
         tl = [i.lower() for i in self._tag_list]
@@ -1111,11 +1111,11 @@ class Tree(NexsonDictWrapper):
                         multi_labelled_ott_id.add(nd._otu._ott_id)
                     nl.append(nd)
                 if not is_flagged_as_leaf:
-                    rich_logger.warning(MissingOptionalKeyWarning(key=None, address=nd.address_of_meta_key('ot:isLeaf'))) #mth
+                    rich_logger.warning(MissingOptionalKeyWarning(key=None, address=nd.address_of_meta_key('ot:isLeaf')))
                     if not rich_logger.retain_deprecated:
                         nd.add_meta('ot:isLeaf', True)
             elif is_flagged_as_leaf:
-                rich_logger.emit_error(InvalidPropertyValueWarning(True, address=nd.address_of_meta_key('ot:isLeaf'))) #mth
+                rich_logger.emit_error(InvalidPropertyValueWarning(True, address=nd.address_of_meta_key('ot:isLeaf')))
                 nd.del_meta('ot:isLeaf') # Non const. Fixing.
         for ott_id in multi_labelled_ott_id:
             tip_list = ott_id2node.get(ott_id)
