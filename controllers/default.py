@@ -7,6 +7,7 @@ from github import Github
 import github_client
 from githubwriter import GithubWriter
 from pprint import pprint
+from gitdata import GitData
 
 @request.restful()
 def v1():
@@ -38,8 +39,10 @@ def v1():
 
         # return the correct nexson of study_id, using the specified view
         try:
-            # TODO: use readlines() in some way, to handle humongous files?
-            return dict(FULL_RESPONSE=github_client.fetch_study(resource_id, auth_token))
+            # TODO: store the full path to our data repo in our config file
+            gd = GitData("/Users/jleto/git/opentree/api.opentreeoflife.org/treenexus")
+            study_nexson = gd.fetch_study(resource_id)
+            return dict(FULL_RESPONSE=study_nexson)
         except Exception, e:
             return 'ERROR fetching study:\n%s' % e
 
