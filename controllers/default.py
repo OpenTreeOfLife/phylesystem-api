@@ -22,12 +22,17 @@ def v1():
         # stub function for hooking into NexSON validation
         pass
 
-    def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
+    def GET(resource,resource_id,sub_resource=None,sub_resource_id=None,jsoncallback=None,callback=None,_=None,*args,**kwargs):
         "OpenTree API methods relating to reading"
         valid_resources = ('study', 'search')
+        valid_subresources = ('file',)  # TODO: support 'tree' in API?
 
         if not resource in valid_resources:
             raise HTTP(400, 'Resource requested not in list of valid resources: %s' % valid_resources)
+
+        if subresource:
+            if not subresource in valid_subresources:
+                raise HTTP(400, 'Subresource requested not in list of valid subresources: %s' % valid_subresources)
 
         # support JSONP request from another domain
         if jsoncallback or callback:
@@ -41,14 +46,23 @@ def v1():
             if auth_header:
                 auth_token = auth_header.split()[1]
 
-        # return the correct nexson of study_id, using the specified view
-        try:
-            # TODO: use readlines() in some way, to handle humongous files?
-            return dict(FULL_RESPONSE=github_client.fetch_study(resource_id, auth_token))
-        except Exception, e:
-            return 'ERROR fetching study:\n%s' % e
+        if subresource:
+            # TODO: return the specified file from this study
+            # TODO: set content-disposition for download, and set filename?
+            # We stash supporting files in the API server's filesystem (in a
+            # shared folder, if multiple server instances). It should appear
+            # in a subfolder named with the study's ID, e.g
+            # "uploads/ot-351/Sequence data.xsl"
+            pass
+        else:
+            # return the correct nexson of study_id, using the specified view
+            try:
+                # TODO: use readlines() in some way, to handle humongous files?
+                return dict(FULL_RESPONSE=github_client.fetch_study(resource_id, auth_token))
+            except Exception, e:
+                return 'ERROR fetching study:\n%s' % e
 
-    def POST(resource, resource_id=None, _method='POST', **kwargs):
+    def POST(resource, resource_id=None, sub_resource=None, sub_resource_id=None, _method='POST', **kwargs):
         "OTOL API methods relating to creating (and importing) resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
@@ -56,12 +70,16 @@ def v1():
 
         # check for HTTP method override (passed on query string)
         if _method == 'PUT':
-            PUT(resource, resource_id, kwargs)
+            return PUT(resource, resource_id, sub_resource, sub_resource_id, kwargs)
         elif _method == 'DELETE':
-            DELETE(resource, resource_id, kwargs)
+            return DELETE(resource, resource_id, sub_resource, sub_resource_id, kwargs)
         # elif _method == 'PATCH': ...
 
         if not resource=='study': raise HTTP(400, 'resource != study')
+
+        # NOTE that we won't actually create or update files here. This should
+        # be done with PUT (idempotent), since we know its URL and will be
+        # posted the new/updated file in its entirety.
 
         # we're creating a new study (possibly with import instructions in the payload)
         cc0_agreement = kwargs.get('cc0_agreement', '')
@@ -79,14 +97,13 @@ def v1():
         # (should we do this on a WIP branch? save empty folder in 'master'?)
         # IF treemachine throws an error, return error info as '500 Internal Server Error'
 
-    def PUT(resource, resource_id=None, **kwargs):
+    def PUT(resource, resource_id=None, sub_resource=None, sub_resource_id=None, **kwargs):
         "OTOL API methods relating to updating existing resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
 
         if not resource=='study': raise HTTP(400, 'resource != study')
-
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
         author_name  = kwargs.get('author_name','')
@@ -97,6 +114,34 @@ def v1():
         if not auth_token:
             raise HTTP(400,"You must authenticate before updating via the OpenTree API")
 
+        if subresource:
+            # add or update a file in this study's folder
+            if not subresource=='file': raise HTTP(400, 'subresource != file')
+            if not sub_resource_id: raise HTTP(400, 'invalid sub_resource_id: should be a filename')
+
+            # For now, we stash supporting files in the API server's filesystem (in
+            # web2py's uploads/ directory, which should be a shared folder if
+            # we have multiple server instances). It should appear in a
+            # subfolder named with the study's ID, e.g "uploads/ot-351/Sequence data.xsl"
+            try:
+                # create study folder, if not found
+
+                # delete any old file with this name? or rename w/ temporary name
+
+                # save the new file with this name (uploaded data, or fetch URL and save)
+
+                pass
+            except:
+                # TODO: restore old version of the file, if any?
+                return {"error": 1, "description": "Unable to save this file: %s" % e }
+
+            # What useful information should be returned on a successful write?
+            return {
+                "error": 0,
+                # TODO: return filename? size?
+            }
+
+        # we're updating a study's Nexson
         try:
             nexson        = json.loads( kwargs.get('nexson','{}') )
         except:
@@ -148,13 +193,17 @@ def v1():
                 "sha":  new_sha
             }
 
-    def DELETE(resource, resource_id=None, **kwargs):
+    def DELETE(resource, resource_id=None, sub_resource=None, sub_resource_id=None, **kwargs):
         "OTOL API methods relating to deleting existing resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
 
         if not resource=='study': raise HTTP(400, 'resource != study')
+
+        if subresource:
+            if not subresource=='file': raise HTTP(400, 'subresource != file')
+
 
     def OPTIONS(args, **kwargs):
         "A simple method for approving CORS preflight request"
