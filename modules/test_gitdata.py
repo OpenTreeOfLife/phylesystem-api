@@ -22,7 +22,17 @@ def test_write():
     author   = "John Doe <john@doe.com>"
     content  = '{"foo":"bar"}'
     study_id = 999
-    gd.write_study(study_id,content,author)
+    branch   = "johndoe_study_%s" % study_id
+    new_sha  = gd.write_study(study_id,content,branch,author)
 
+def test_branch_exists():
+    gd = GitData(repo="./treenexus")
+    exists = gd.branch_exists("nothisdoesnotexist")
+    assert exists == 0, "branch does not exist"
+
+    exists = gd.branch_exists("master")
+    assert exists, "master branch exists"
+
+test_branch_exists()
 test_fetch()
 test_write()

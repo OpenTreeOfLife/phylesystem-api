@@ -40,7 +40,7 @@ def v1():
         # return the correct nexson of study_id, using the specified view
         try:
             # TODO: store the full path to our data repo in our config file
-            gd = GitData("/Users/jleto/git/opentree/api.opentreeoflife.org/treenexus")
+            gd = GitData(repo="/Users/jleto/git/opentree/treenexus")
             study_nexson = gd.fetch_study(resource_id)
             return dict(FULL_RESPONSE=study_nexson)
         except Exception, e:
@@ -111,26 +111,13 @@ def v1():
             # warning annotation data
             __validate(nexson)
 
-            # Connect to the Github v3 API via with this OAuth token
-            # the org and repo should probably be in our config file
-            gw = GithubWriter(oauth=auth_token, org="OpenTreeOfLife", repo="treenexus")
+            gd = GitData(repo="/Users/jleto/git/opentree/treenexus")
 
-            # WARNING: Don't use a leading /, which will cause Github to create a corrupt tree!
             study_filename = "study/%s/%s.json" % (resource_id, resource_id)
-            github_username= gw.gh.get_user().login
-            branch_name    = "%s_study_%s" % (github_username, resource_id)
+            # TODO: use something based on author_name
+            branch_name    = "%s_study_%s" % ("testing", resource_id)
 
-            try:
-                new_sha = gw.create_or_update_file(
-                    study_filename,
-                    nexson,
-                    "Update study #%s via OpenTree API" % resource_id,
-                    branch_name
-                )
-            except github.GithubException, e:
-                return {"error": 1, "description": "Got GithubException with status %d" % e.status }
-            except:
-                return {"error": 1, "description": "Got a non-GithubException: %s" % e }
+            new_sha = gd.write_study(resource_id,content,branch_name,author)
 
             # What other useful information should be returned on a successful write?
             return {
