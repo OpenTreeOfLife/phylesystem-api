@@ -22,14 +22,21 @@ class GitData(object):
         return 1
 
     def write_study(self,study_id, content, branch, author="OpenTree API <api@opentreeoflife.org>"):
-        study_filename = "study/%s/%s.json" % (study_id, study_id)
-        # TODO: create the containing directory if we are writing a new study
-        file = open("%s/%s" % (self.repo,study_filename), 'w')
-        file.write(content)
-        file.close()
+        study_dir      = "study/%s" % study_id
+        study_filename = "%s/%s.json" % (study_dir, study_id)
 
         orig_cwd = os.getcwd()
+
+        # go into our data repo
         os.chdir(self.repo)
+
+        # create a study directory if this is a new study
+        if not os.path.isdir(study_dir):
+            os.mkdir(study_dir)
+
+        file = open(study_filename, 'w')
+        file.write(content)
+        file.close()
 
         if self.branch_exists(branch):
             git.checkout(branch)
@@ -43,6 +50,7 @@ class GitData(object):
         new_sha = git("rev-parse","HEAD")
 
         os.chdir(orig_cwd)
+
         return new_sha
 
     def push(self):
