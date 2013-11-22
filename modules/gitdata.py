@@ -31,11 +31,16 @@ class GitData(object):
         orig_cwd = os.getcwd()
         os.chdir(self.repo)
 
-        git.checkout(branch)
+        if self.branch_exists(branch):
+            git.checkout(branch)
+        else:
+            git.checkout("-b",branch)
+
         git.add(study_filename)
+
         git.commit(author=author, message="Update Study #%s via OpenTree API" % study_id)
-        # TODO: grab the SHA of the commit we just created
-        new_sha = "deadbeef"
+
+        new_sha = git("rev-parse","HEAD")
 
         os.chdir(orig_cwd)
         return new_sha
