@@ -24,6 +24,7 @@ def test_write():
     study_id = 999
     branch   = "johndoe_study_%s" % study_id
     new_sha  = gd.write_study(study_id,content,branch,author)
+    assert new_sha != "", "new_sha is non-empty"
 
 def test_branch_exists():
     gd = GitData(repo="./treenexus")
