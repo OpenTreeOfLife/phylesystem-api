@@ -1,4 +1,5 @@
 from sh import git
+import sh
 import os
 
 class GitData(object):
@@ -13,7 +14,14 @@ class GitData(object):
             return ''
         return file.read()
 
-    def write_study(self,study_id, content, author="OpenTree API <api@opentreeoflife.org>"):
+    def branch_exists(self, branch):
+        try:
+            git(("rev-parse",branch))
+        except sh.ErrorReturnCode:
+            return 0
+        return 1
+
+    def write_study(self,study_id, content, branch, author="OpenTree API <api@opentreeoflife.org>"):
         study_filename = "study/%s/%s.json" % (study_id, study_id)
         # TODO: create the containing directory if we are writing a new study
         file = open("%s/%s" % (self.repo,study_filename), 'w')
@@ -23,10 +31,14 @@ class GitData(object):
         orig_cwd = os.getcwd()
         os.chdir(self.repo)
 
+        git.checkout(branch)
         git.add(study_filename)
         git.commit(author=author, message="Update Study #%s via OpenTree API" % study_id)
+        # TODO: grab the SHA of the commit we just created
+        new_sha = "deadbeef"
 
         os.chdir(orig_cwd)
+        return new_sha
 
     def push(self):
         # TODO: set up GIT_SSH to use proper deployment key for repo
