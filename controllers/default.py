@@ -22,7 +22,7 @@ def v1():
         # stub function for hooking into NexSON validation
         pass
 
-    def GET(resource,resource_id,sub_resource=None,sub_resource_id=None,jsoncallback=None,callback=None,_=None,*args,**kwargs):
+    def GET(resource,resource_id,subresource=None,subresource_id=None,jsoncallback=None,callback=None,_=None,*args,**kwargs):
         "OpenTree API methods relating to reading"
         valid_resources = ('study', 'search')
         valid_subresources = ('file',)  # TODO: support 'tree' in API?
@@ -62,7 +62,7 @@ def v1():
             except Exception, e:
                 return 'ERROR fetching study:\n%s' % e
 
-    def POST(resource, resource_id=None, sub_resource=None, sub_resource_id=None, _method='POST', **kwargs):
+    def POST(resource, resource_id=None, subresource=None, subresource_id=None, _method='POST', **kwargs):
         "OTOL API methods relating to creating (and importing) resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
@@ -70,9 +70,9 @@ def v1():
 
         # check for HTTP method override (passed on query string)
         if _method == 'PUT':
-            return PUT(resource, resource_id, sub_resource, sub_resource_id, kwargs)
+            return PUT(resource, resource_id, subresource, subresource_id, kwargs)
         elif _method == 'DELETE':
-            return DELETE(resource, resource_id, sub_resource, sub_resource_id, kwargs)
+            return DELETE(resource, resource_id, subresource, subresource_id, kwargs)
         # elif _method == 'PATCH': ...
 
         if not resource=='study': raise HTTP(400, 'resource != study')
@@ -97,7 +97,7 @@ def v1():
         # (should we do this on a WIP branch? save empty folder in 'master'?)
         # IF treemachine throws an error, return error info as '500 Internal Server Error'
 
-    def PUT(resource, resource_id=None, sub_resource=None, sub_resource_id=None, **kwargs):
+    def PUT(resource, resource_id=None, subresource=None, subresource_id=None, **kwargs):
         "OTOL API methods relating to updating existing resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
@@ -117,7 +117,7 @@ def v1():
         if subresource:
             # add or update a file in this study's folder
             if not subresource=='file': raise HTTP(400, 'subresource != file')
-            if not sub_resource_id: raise HTTP(400, 'invalid sub_resource_id: should be a filename')
+            if not subresource_id: raise HTTP(400, 'invalid subresource_id: should be a filename')
 
             # For now, we stash supporting files in the API server's filesystem (in
             # web2py's uploads/ directory, which should be a shared folder if
@@ -193,7 +193,7 @@ def v1():
                 "sha":  new_sha
             }
 
-    def DELETE(resource, resource_id=None, sub_resource=None, sub_resource_id=None, **kwargs):
+    def DELETE(resource, resource_id=None, subresource=None, subresource_id=None, **kwargs):
         "OTOL API methods relating to deleting existing resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
