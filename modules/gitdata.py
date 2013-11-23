@@ -15,20 +15,16 @@ class GitData(object):
         return file.read()
 
     def branch_exists(self, branch):
+        """Returns true or false depending on if a branch exists"""
         try:
             git(("rev-parse",branch))
         except sh.ErrorReturnCode:
-            return 0
-        return 1
+            return False
+        return True
 
     def write_study(self,study_id, content, branch, author="OpenTree API <api@opentreeoflife.org>"):
         study_dir      = "study/%s" % study_id
         study_filename = "%s/%s.json" % (study_dir, study_id)
-
-        orig_cwd = os.getcwd()
-
-        # go into our data repo
-        os.chdir(self.repo)
 
         # create a study directory if this is a new study
         if not os.path.isdir(study_dir):
@@ -48,8 +44,6 @@ class GitData(object):
         git.commit(author=author, message="Update Study #%s via OpenTree API" % study_id)
 
         new_sha = git("rev-parse","HEAD")
-
-        os.chdir(orig_cwd)
 
         return new_sha
 
