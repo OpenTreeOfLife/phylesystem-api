@@ -174,7 +174,7 @@ def v1():
             if block_until_annotation_commit:
                 # add the annotation and commit the resulting blob...
                 add_or_replace_annotation(rich_nexson, annotation)
-                nexson = json.dumps(rich_nexson, sort_keys=True, indent=0)
+                nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
                 return do_commit(nexson)
             else:
                 return unadulterated_content_commit
