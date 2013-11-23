@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys
+import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/9'

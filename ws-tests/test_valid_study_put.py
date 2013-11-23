@@ -2,14 +2,14 @@
 from opentreetesting import test_http_json_method, config
 import codecs
 import json
-import sys
+import sys, os
 
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/1003'
 inpf = codecs.open('../nexson-validator/tests/single/input/1003.json', 'rU', encoding='utf-8')
 n = json.load(inpf)
 data = { 'nexson' : n,
-         'auth_token': 'bogus_token'
+         'auth_token': os.environ.get('GITHUB_AUTH_TOKEN', 'bogus_token'),
 }
 if test_http_json_method(SUBMIT_URI,
                          'PUT',
