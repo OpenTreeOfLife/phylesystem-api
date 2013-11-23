@@ -15,7 +15,7 @@ do
     input="tests/${subdir}/input/${filename}"
     output="tests/${subdir}/output/${filename}"
     reference="tests/${subdir}/expected-embed-json-output/${filename}"
-    echo "testing: python ${script} ${input}"
+    echo "testing: python ${script} --validate --embed ${input}"
     python "${script}" --validate --embed "${input}" > "tests/${subdir}/output/.raw" 2>&1
     cat "tests/${subdir}/output/.raw" | sed -e '/"dateCreated"/d' | sed -e '/"id": "meta-/d' | sed -e '/"version": "/d' | sed -e '/"pythonImplementation"/d' | sed -e '/pythonVersion/d' > "${output}"
     if diff "${output}" "${reference}"
