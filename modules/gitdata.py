@@ -6,6 +6,10 @@ class GitData(object):
     def __init__(self, repo):
         self.repo = repo
 
+    def current_branch(self):
+        branch_name = git("symbolic-ref", "--short", "HEAD")
+        return branch_name.strip()
+
     def fetch_study(self, study_id):
         study_filename = "%s/study/%s/%s.json" % (self.repo, study_id, study_id)
         try:
@@ -45,7 +49,7 @@ class GitData(object):
 
         new_sha = git("rev-parse","HEAD")
 
-        return new_sha
+        return new_sha.strip()
 
     def push(self):
         # TODO: set up GIT_SSH to use proper deployment key for repo
