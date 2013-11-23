@@ -8,6 +8,9 @@ import github_client
 from githubwriter import GithubWriter
 from pprint import pprint
 
+# NexSON validation
+from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
+
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -19,8 +22,20 @@ def v1():
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
     def __validate(nexson):
+        '''Returns three objects:
+            an annotation dict (NexSON formmatted), 
+            the validation_log object created when NexSON validation was performed, and
+            the object of class NexSON which was created from nexson. This object will
+                alias parts of the nexson dict that is passed in as an argument.
+        '''
         # stub function for hooking into NexSON validation
-        pass
+        codes_to_skip = [WarningCodes.UNVALIDATED_ANNOTATION]
+        script_name = 'api.opentreeoflife.org/validate' # TODO
+        validation_log, nexson_obj = create_validation_nexson(nexson, codes_to_skip, retain_deprecated=True)
+        annotation = prepare_annotation(validation_log,
+                                        author_name=script_name,
+                                        annotation_label="Open Tree NexSON validation")
+        return annotation, validation_log, nexson_obj
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OpenTree API methods relating to reading"
@@ -81,10 +96,11 @@ def v1():
 
     def PUT(resource, resource_id=None, **kwargs):
         "OTOL API methods relating to updating existing resources"
+        #TODO, need to make this spawn a thread to do the second commit rather than block
+        block_until_annotation_commit = True
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
-
         if not resource=='study': raise HTTP(400, 'resource != study')
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
@@ -98,13 +114,18 @@ def v1():
             raise HTTP(400,"You must authenticate before updating via the OpenTree API")
 
         try:
-            nexson        = json.loads( kwargs.get('nexson','{}') )
+            nexson = kwargs.get('nexson', {})
+            if not isinstance(nexson, dict):
+                nexson = json.loads(nd)
         except:
             raise HTTP(400, 'NexSON must be valid JSON')
 
+        annotation, validation_log, rich_nexson = __validate(nexson)
+        if validation_log.errors:
+            raise HTTP(400, json.dumps(annotation))
+
         # sort the keys of the POSTed NexSON and indent 0 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=0)
-
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
@@ -117,7 +138,7 @@ def v1():
             # validate the NexSON. If we find errors, prevent the update
             # if only warnings are found, make an additional commit containing the
             # warning annotation data
-            __validate(nexson)
+            
 
             # Connect to the Github v3 API via with this OAuth token
             # the org and repo should probably be in our config file
@@ -127,26 +148,36 @@ def v1():
             study_filename = "study/%s/%s.json" % (resource_id, resource_id)
             github_username= gw.gh.get_user().login
             branch_name    = "%s_study_%s" % (github_username, resource_id)
+            def do_commit(file_content):
+                try:
+                    new_sha = gw.create_or_update_file(
+                        study_filename,
+                        file_content,
+                        "Update study #%s via OpenTree API" % resource_id,
+                        branch_name
+                    )
+                except github.GithubException, e:
+                    return {"error": 1, "description": "Got GithubException with status %d" % e.status }
+                except:
+                    return {"error": 1, "description": "Got a non-GithubException: %s" % e }
 
-            try:
-                new_sha = gw.create_or_update_file(
-                    study_filename,
-                    nexson,
-                    "Update study #%s via OpenTree API" % resource_id,
-                    branch_name
-                )
-            except github.GithubException, e:
-                return {"error": 1, "description": "Got GithubException with status %d" % e.status }
-            except:
-                return {"error": 1, "description": "Got a non-GithubException: %s" % e }
-
-            # What other useful information should be returned on a successful write?
-            return {
-                "error": 0,
-                "branch_name": branch_name,
-                "description": "Updated study #%s" % resource_id,
-                "sha":  new_sha
-            }
+                # What other useful information should be returned on a successful write?
+                return {
+                    "error": 0,
+                    "branch_name": branch_name,
+                    "description": "Updated study #%s" % resource_id,
+                    "sha":  new_sha
+                }
+            unadulterated_content_commit = do_commit(nexson)
+            if unadulterated_content_commit['error'] != 0:
+                return unadulterated_content_commit
+            if block_until_annotation_commit:
+                # add the annotation and commit the resulting blob...
+                add_or_replace_annotation(rich_nexson, annotation)
+                nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
+                return do_commit(nexson)
+            else:
+                return unadulterated_content_commit
 
     def DELETE(resource, resource_id=None, **kwargs):
         "OTOL API methods relating to deleting existing resources"

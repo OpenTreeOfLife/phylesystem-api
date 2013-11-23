@@ -12,7 +12,7 @@ _CONFIG_FN = None
 _VERBOSE = 'VERBOSE_TESTING' in os.environ
 def debug(s):
     if _VERBOSE:
-        sys.stderr.write('testing-harness:{s}\n'.format(s=s))
+        sys.stderr.write('testing-harness: {s}\n'.format(s=s))
 
 def config(section=None, param=None):
     '''
