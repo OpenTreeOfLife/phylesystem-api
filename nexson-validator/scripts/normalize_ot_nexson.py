@@ -49,8 +49,10 @@ if __name__ == '__main__':
         invoc = list(sys.argv[1:])
         invoc.remove(inp_filepath)
         script_name = os.path.basename(sys.argv[0])
-        
-        validation_log, nexson_obj = create_validation_nexson(obj, codes_to_skip, retain_deprecated=bool(args.retain_deprecated))
+        assert 'nexml' in obj
+        validation_log, nexson_obj = create_validation_nexson(obj,
+                                                              codes_to_skip,
+                                                              retain_deprecated=bool(args.retain_deprecated))
         annotation = prepare_annotation(validation_log,
                                         author_name=script_name,
                                         invocation=invoc,
