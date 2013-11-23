@@ -167,6 +167,7 @@ class WarningCodes():
               'UNRECOGNIZED_TAG',
               'CONFLICTING_PROPERTY_VALUES',
               'NO_TREES',
+              'DEPRECATED_PROPERTY',
               )
     numeric_codes_registered = []
 # monkey-patching WarningCodes...
@@ -308,13 +309,23 @@ class MissingOptionalKeyWarning(WarningMessage):
 
 class DuplicatingSingletonKeyWarning(WarningMessage):
     def __init__(self, address, severity=SeverityCodes.ERROR):
-        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=key, address=address, severity=severity)
+        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=None, address=address, severity=severity)
         self.key = address.property_name
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=self.key))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.key
+class DeprecatedMetaPropertyWarning(WarningMessage):
+    def __init__(self, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.DEPRECATED_PROPERTY, data=None, address=address, severity=severity)
+        self.key = address.property_name
+    def write(self, outstream, prefix):
+        outstream.write('{p}Found a deprecated a property ("{k}")'.format(p=prefix, k=self.key))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.key
+
 
 class RepeatedIDWarning(WarningMessage):
     def __init__(self, identifier, address, severity=SeverityCodes.ERROR):
@@ -857,8 +868,11 @@ class OTU(NexsonDictWrapper):
         self._ott_id = self.get_singelton_meta('ot:ottid', warn_if_missing=False)
         if self._ott_id is None:
             self._ott_id = self.get_singelton_meta('ot:ottolid', warn_if_missing=False)
-            if self._ott_id is not None and (rich_logger is None or (not rich_logger.retain_deprecated)):
-                self.replace_meta_property_name('ot:ottolid', 'ot:ottid')
+            if self._ott_id is not None:
+                if (rich_logger is None or (not rich_logger.retain_deprecated)):
+                    self.replace_meta_property_name('ot:ottolid', 'ot:ottid')
+                else:
+                    rich_logger.warning(DeprecatedMetaPropertyWarning(address=self.address))
         if self._ott_id is None:
             self.get_singelton_meta('ot:ottid') # trigger a warning
         self._original_label = self.get_singelton_meta('ot:originalLabel')
