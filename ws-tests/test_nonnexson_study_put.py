@@ -4,7 +4,7 @@ from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/9'
 data = { 'nexson': {'bogus' : 5},
-         'auth_token': 'auth_token': os.environ.get('GITHUB_AUTH_TOKEN', 'bogus_token')
+         'auth_token': 'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token')
 
 }
 if test_http_json_method(SUBMIT_URI,
