@@ -9,14 +9,34 @@ from githubwriter import GithubWriter
 from pprint import pprint
 from gitdata import GitData
 
+# NexSON validation
+from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
+
 @request.restful()
 def v1():
     "The OpenTree API v1"
     response.view = 'generic.json'
 
+    # CORS support for cross-domain API requests (from anywhere)
+    response.headers['Access-Control-Allow-Origin'] = "*"
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
+
     def __validate(nexson):
+        '''Returns three objects:
+            an annotation dict (NexSON formmatted), 
+            the validation_log object created when NexSON validation was performed, and
+            the object of class NexSON which was created from nexson. This object will
+                alias parts of the nexson dict that is passed in as an argument.
+        '''
         # stub function for hooking into NexSON validation
-        pass
+        codes_to_skip = [WarningCodes.UNVALIDATED_ANNOTATION]
+        script_name = 'api.opentreeoflife.org/validate' # TODO
+        validation_log, nexson_obj = create_validation_nexson(nexson, codes_to_skip, retain_deprecated=True)
+        annotation = prepare_annotation(validation_log,
+                                        author_name=script_name,
+                                        annotation_label="Open Tree NexSON validation")
+        return annotation, validation_log, nexson_obj
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OpenTree API methods relating to reading"
@@ -46,38 +66,45 @@ def v1():
         except Exception, e:
             return 'ERROR fetching study:\n%s' % e
 
-    def POST(resource, resource_id=None, **kwargs):
-        "OpenTree API methods relating to writing"
+    def POST(resource, resource_id=None, _method='POST', **kwargs):
+        "OTOL API methods relating to creating (and importing) resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
 
+        # check for HTTP method override (passed on query string)
+        if _method == 'PUT':
+            PUT(resource, resource_id, kwargs)
+        elif _method == 'DELETE':
+            DELETE(resource, resource_id, kwargs)
+        # elif _method == 'PATCH': ...
+
         if not resource=='study': raise HTTP(400, 'resource != study')
 
-        # TODO: use presence or absence of resource_id as a cue to creation vs.
-        # updates? Or better yet, support method overrides (on POST requests)
-        # for PUT, PATCH, DELETE and redirect as needed:
-        # http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#method-override
-        #
-        if False:
-            if resource_id:
-                # this is an update(?) of an existing study, use code below
-                pass
-            else:
-                # we're creating a new study (possibly with import instructions in the payload)
-                cc0_agreement = kwargs.get('cc0_agreement', '')
-                import_option = kwargs.get('import_option', '')
-                treebase_id = kwargs.get('treebase_id', '')
-                dryad_DOI = kwargs.get('dryad_DOI', '')
-                import_option = kwargs.get('import_option', '')
+        # we're creating a new study (possibly with import instructions in the payload)
+        cc0_agreement = kwargs.get('cc0_agreement', '')
+        import_option = kwargs.get('import_option', '')
+        treebase_id = kwargs.get('treebase_id', '')
+        dryad_DOI = kwargs.get('dryad_DOI', '')
+        import_option = kwargs.get('import_option', '')
 
-                return kwargs
-                # TODO: assign a new ID for this study, create its folder in repo(?)
-                # forward ID and info to treemachine, expect to get study JSON back
-                # IF treemachine returns JSON, save as {ID}.json and return URL as '201 Created'
-                # or perhaps '303 See other' w/ redirect?
-                # (should we do this on a WIP branch? save empty folder in 'master'?)
-                # IF treemachine throws an error, return error info as '500 Internal Server Error'
+        return kwargs
+        # TODO: 
+        # assign a new ID for this study, create its folder in repo(?)
+        # forward ID and info to treemachine, expect to get study JSON back
+        # IF treemachine returns JSON, save as {ID}.json and return URL as '201 Created'
+        # or perhaps '303 See other' w/ redirect?
+        # (should we do this on a WIP branch? save empty folder in 'master'?)
+        # IF treemachine throws an error, return error info as '500 Internal Server Error'
+
+    def PUT(resource, resource_id=None, **kwargs):
+        "OTOL API methods relating to updating existing resources"
+        #TODO, need to make this spawn a thread to do the second commit rather than block
+        block_until_annotation_commit = True
+        # support JSONP request from another domain
+        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
+            response.view = 'generic.jsonp'
+        if not resource=='study': raise HTTP(400, 'resource != study')
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
@@ -90,13 +117,18 @@ def v1():
             raise HTTP(400,"You must authenticate before updating via the OpenTree API")
 
         try:
-            nexson        = json.loads( kwargs.get('nexson','{}') )
+            nexson = kwargs.get('nexson', {})
+            if not isinstance(nexson, dict):
+                nexson = json.loads(nd)
         except:
             raise HTTP(400, 'NexSON must be valid JSON')
 
+        annotation, validation_log, rich_nexson = __validate(nexson)
+        if validation_log.errors:
+            raise HTTP(400, json.dumps(annotation))
+
         # sort the keys of the POSTed NexSON and indent 0 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=0)
-
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
@@ -109,22 +141,49 @@ def v1():
             # validate the NexSON. If we find errors, prevent the update
             # if only warnings are found, make an additional commit containing the
             # warning annotation data
-            __validate(nexson)
 
             gd = GitData(repo="/Users/jleto/git/opentree/treenexus")
 
-            study_filename = "study/%s/%s.json" % (resource_id, resource_id)
-            # TODO: use something based on author_name
-            branch_name    = "%s_study_%s" % ("testing", resource_id)
+            branch_friendly_name = "".join([c for c in author_name if c.isalpha()])
+            branch_name          = "%s_study_%s" % (branch_friendly_name, resource_id)
 
-            new_sha = gd.write_study(resource_id,content,branch_name,author)
+            def do_commit(file_content):
+                new_sha = gd.write_study(resource_id,content,branch_name,author)
 
-            # What other useful information should be returned on a successful write?
-            return {
-                "error": 0,
-                "branch_name": branch_name,
-                "description": "Updated study #%s" % resource_id,
-                "sha":  new_sha
-            }
+                # What other useful information should be returned on a successful write?
+                return {
+                    "error": 0,
+                    "branch_name": branch_name,
+                    "description": "Updated study #%s" % resource_id,
+                    "sha":  new_sha
+                }
+                gd.push()
+
+            unadulterated_content_commit = do_commit(nexson)
+            if unadulterated_content_commit['error'] != 0:
+                return unadulterated_content_commit
+            if block_until_annotation_commit:
+                # add the annotation and commit the resulting blob...
+                add_or_replace_annotation(rich_nexson, annotation)
+                nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
+                return do_commit(nexson)
+            else:
+                return unadulterated_content_commit
+
+    def DELETE(resource, resource_id=None, **kwargs):
+        "OTOL API methods relating to deleting existing resources"
+        # support JSONP request from another domain
+        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
+            response.view = 'generic.jsonp'
+
+        if not resource=='study': raise HTTP(400, 'resource != study')
+
+    def OPTIONS(args, **kwargs):
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200)
 
     return locals()
