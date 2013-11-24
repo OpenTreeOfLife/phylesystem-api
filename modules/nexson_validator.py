@@ -1,11 +1,234 @@
 #!/usr/bin/env python
-import sys
-import codecs
+import xml.etree.ElementTree as ET
 from cStringIO import StringIO
+import datetime
+import platform
+import codecs
+import json
+import uuid
+import sys
 import re
 
 VERSION = '0.0.2a'
 
+###############################################################################
+# Code for badgerfish conversion of TreeBase XML to 
+###############################################################################
+def _hacky_strip_namespace(s):
+    '''This is the hacky function used in badgerfish conversion that uses '{ns}tag'
+    as the pattern for a tag with namespace `ns`
+    '''
+    if s.startswith('{'):
+        sl = s.split('}') # hack to deal with namespaces...
+        assert len(sl) == 2
+        return sl[-1]
+    return s
+
+def _gen_bf_el(x):
+    '''
+    Builds a dictionary from the ElementTree element x
+    The function
+    Uses as hacky splitting of attribute or tag names using {}
+        to remove namespaces.
+    returns a pair of: the tag of `x` and the badgerfish
+        representation of the subelements of x
+    '''
+    obj = {}
+    # grab the tag of x
+    t = _hacky_strip_namespace(x.tag)
+    # add the attributes to the dictionary
+    a = x.attrib
+    for k, v in a.iteritems():
+        obj['@' + _hacky_strip_namespace(k)] = v
+    # store the text content of the element under the key '$'
+    if x.text:
+        text_content = x.text.strip()
+    else:
+        text_content = ''
+    if text_content:
+        obj['$'] = text_content
+    # accumulate a list of the children names in ko, and 
+    #   the a dictionary of tag to xml elements.
+    # repetition of a tag means that it will map to a list of
+    #   xml elements
+    cd = {}
+    ko = []
+    ks = set()
+    for child in x:
+        k = _hacky_strip_namespace(child.tag)
+        if k not in ks:
+            ko.append(k)
+            ks.add(k)
+        p = cd.get(k)
+        if p is None:
+            cd[k] = child
+        elif isinstance(p, list):
+            p.append(child)
+        else:
+            cd[k] = [p, child]
+    # Converts the child XML elements to dicts by recursion and
+    #   adds these to the dict.
+    for k in ko:
+        v = cd[k]
+        if isinstance(v, list):
+            dcl = []
+            ct = None
+            for xc in v:
+                ct, dc = _gen_bf_el(xc)
+                dcl.append(dc)
+        else:
+            ct, dcl = _gen_bf_el(v)
+        # this assertion will trip is the hacky stripping of namespaces
+        #   results in a name clash among the tags of the children
+        assert ct not in obj
+        obj[ct] = dcl
+    return t, obj
+
+def to_badgerfish_dict(filepath=None, file_object=None, encoding=u'utf8'):
+    '''Takes either:
+            (1) a file_object, or
+            (2) (if file_object is None) a filepath and encoding
+    Returns a dictionary with the keys/values encoded according to the badgerfish convention
+    See http://badgerfish.ning.com/
+
+    Caveats/bugs:
+        
+    '''
+    if file_object is None:
+        file_object = codecs.open(filepath, 'rU', encoding=encoding)
+    root = ET.parse(file_object).getroot()
+    key, val = _gen_bf_el(root)
+    return {key: val}
+
+def get_ot_study_info_from_nexml(filepath=None, file_object=None, encoding=u'utf8'):
+    '''Converts an XML doc to JSON using the badgerfish convention (see to_badgerfish_dict)
+    and then prunes elements not used by open tree of life study curartion.
+
+    Currently:
+        removes nexml/characters @TODO: should replace it with a URI for 
+            where the removed character data can be found.
+    '''
+    o = to_badgerfish_dict(fn)
+    del o['nexml']['characters']
+    return o
+
+def get_ot_study_info_from_treebase_nexml(filepath=None, file_object=None, encoding=u'utf8'):
+    '''Just a stub at this point. Intended to normalize treebase-specific metadata 
+    into the locations where open tree of life software that expects it. 
+    @TODO: need to investigate which metadata should move or be copied
+    '''
+    o = get_ot_study_info_from_nexml(filepath=filepath, file_object=file_object, encoding=encoding)
+    return o
+
+################################################################################
+# End of badgerfish...
+################################################################################
+
+def create_validation_nexson(obj, warning_codes_to_skip, retain_deprecated=True):
+    '''Creates a validatation logger and then creates an object of type NexSON
+    Returns the pair:
+        validatation_log, NexSON object
+    Note that obj can be modified if retain_deprecated is not True.
+    Also note that the "raw" dict within the returned NexSON object will hold
+        references to parts of `obj`
+    '''
+    if warning_codes_to_skip:
+        v = FilteringLogger(codes_to_skip=list(warning_codes_to_skip), store_messages=True)
+    else:
+        v = ValidationLogger(store_messages=True)
+    v.retain_deprecated = retain_deprecated
+    n = NexSON(obj, v)
+    return v, n
+
+
+def add_or_replace_annotation(obj, annotation):
+    '''Takes a nexson object `obj` and an `annotation` dictionary which is 
+    expected to have a string as the value of annotation['author']['name']
+    This function will remove all annotations from obj that:
+        1. have the same author/name, and
+        2. have no messages that are flagged as messages to be preserved (values for 'preserve' that evaluate to true)
+    '''
+    script_name = annotation['author']['name']
+    n = obj['nexml']
+    former_meta = n.setdefault('meta', [])
+    if not isinstance(former_meta, list):
+        former_meta = [former_meta]
+        n['meta'] = former_meta
+    else:
+        indices_to_pop = []
+        for annotation_ind, el in enumerate(former_meta):
+            try:
+                if (el.get('$') == annotation_label) and (el.get('author',{}).get('name') == script_name):
+                    m_list = el.get('messages', [])
+                    to_retain = []
+                    for m in m_list:
+                        if m.get('preserve'):
+                            to_retain.append(m)
+                    if len(to_retain) == 0:
+                        indices_to_pop.append(annotation_ind)
+                    elif len(to_retain) < len(m_list):
+                        el['messages'] = to_retain
+                        el['dateModified'] = datetime.datetime.utcnow().isoformat()
+            except:
+                # different annotation structures could yield IndexErrors or other exceptions.
+                # these are not the annotations that you are looking for....
+                pass
+
+        if len(indices_to_pop) > 0:
+            # walk backwards so pops won't change the meaning of stored indices
+            for annotation_ind in indices_to_pop[-1::-1]:
+                former_meta.pop(annotation_ind)
+    former_meta.append(annotation)
+
+def prepare_annotation(validation_logger, 
+                       author_name='',
+                       invocation=tuple(),
+                       annotation_label='',
+                       author_version=VERSION,
+                       url='https://github.com/OpenTreeOfLife/api.opentreeoflife.org',
+                       description="validator of NexSON constraints as well as constraints that would allow a study to be imported into the Open Tree of Life's phylogenetic synthesis tools"
+                       ):
+    checks_performed = list(WarningCodes.numeric_codes_registered)
+    for code in validation_logger.codes_to_skip:
+        try:
+            checks_performed.remove(code)
+        except:
+            pass
+    checks_performed = [WarningCodes.facets[i] for i in checks_performed]
+    nuuid = 'meta-' + str(uuid.uuid1())
+    annotation = {
+        '@property': 'ot:annotation',
+        '$': annotation_label,
+        '@xsi:type': 'nex:ResourceMeta',
+        'author': {
+            'name': author_name, 
+            'url': url, 
+            'description': description,
+            'version': author_version,
+            'invocation': {
+                'commandLine': invocation,
+                'checksPerformed': checks_performed,
+                'pythonVersion' : platform.python_version(),
+                'pythonImplementation' : platform.python_implementation(),
+            }
+        },
+        'dateCreated': datetime.datetime.utcnow().isoformat(),
+        'id': nuuid,
+        'messages': [],
+        'isValid': (len(validation_logger.errors) == 0) and (len(validation_logger.warnings) == 0),
+    }
+    message_list = annotation['messages']
+    for m in validation_logger.errors:
+        d = m.as_dict()
+        d['severity'] = 'ERROR'
+        d['preserve'] = False
+        message_list.append(d)
+    for m in validation_logger.warnings:
+        d = m.as_dict()
+        d['severity'] = 'WARNING'
+        d['preserve'] = False
+        message_list.append(d)
+    return annotation
 
 class NexSONError(Exception):
     def __init__(self, v):
@@ -52,6 +275,7 @@ class WarningCodes():
               'UNRECOGNIZED_TAG',
               'CONFLICTING_PROPERTY_VALUES',
               'NO_TREES',
+              'DEPRECATED_PROPERTY',
               )
     numeric_codes_registered = []
 # monkey-patching WarningCodes...
@@ -192,14 +416,24 @@ class MissingOptionalKeyWarning(WarningMessage):
             return "@property={k}".format(k=self.address.property_name) # MTH hack to get tests to pass
 
 class DuplicatingSingletonKeyWarning(WarningMessage):
-    def __init__(self, key, address, severity=SeverityCodes.ERROR):
-        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=key, address=address, severity=severity)
-        self.key = key
+    def __init__(self, address, severity=SeverityCodes.ERROR):
+        WarningMessage.__init__(self, WarningCodes.DUPLICATING_SINGLETON_KEY, data=None, address=address, severity=severity)
+        self.key = address.property_name
     def write(self, outstream, prefix):
         outstream.write('{p}Multiple instances found for a key ("{k}") which was expected to be found once'.format(p=prefix, k=self.key))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
         return self.key
+class DeprecatedMetaPropertyWarning(WarningMessage):
+    def __init__(self, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.DEPRECATED_PROPERTY, data=None, address=address, severity=severity)
+        self.key = address.property_name
+    def write(self, outstream, prefix):
+        outstream.write('{p}Found a deprecated a property ("{k}")'.format(p=prefix, k=self.key))
+        self._write_message_suffix(outstream)
+    def convert_data_for_json(self):
+        return self.key
+
 
 class RepeatedIDWarning(WarningMessage):
     def __init__(self, identifier, address, severity=SeverityCodes.ERROR):
@@ -244,14 +478,14 @@ class MissingMandatoryKeyWarning(WarningMessage):
         return self.key
 
 class UnrecognizedTagWarning(WarningMessage):
-    def __init__(self, key, address, severity=SeverityCodes.WARNING):
-        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=key, address=address, severity=severity)
-        self.key = key
+    def __init__(self, tag, address, severity=SeverityCodes.WARNING):
+        WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_TAG, data=tag, address=address, severity=severity)
+        self.tag = tag
     def write(self, outstream, prefix):
-        outstream.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=self.key))
+        outstream.write(u'{p}Unrecognized value for a tag: "{s}"'.format(p=prefix, s=self.tag))
         self._write_message_suffix(outstream)
     def convert_data_for_json(self):
-        return self.key
+        return self.tag
 
 class NoRootNodeWarning(WarningMessage):
     def __init__(self, address, severity=SeverityCodes.ERROR):
@@ -292,10 +526,10 @@ class TipWithoutOTUWarning(WarningMessage):
         return None
 
 class PropertyValueNotUsefulWarning(WarningMessage):
-    def __init__(self, key, value, address, severity=SeverityCodes.WARNING):
-        d = {'key': key, 'value': value}
+    def __init__(self, value, address, severity=SeverityCodes.WARNING):
+        d = {'key': address.property_name, 'value': value}
         WarningMessage.__init__(self, WarningCodes.PROPERTY_VALUE_NOT_USEFUL, data=d, address=address, severity=severity)
-        self.key = key
+        self.key = address.property_name
         self.value = value
     def write(self, outstream, prefix):
         outstream.write('{p}Unhelpful or deprecated value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
@@ -305,9 +539,9 @@ class PropertyValueNotUsefulWarning(WarningMessage):
 
 class UnrecognizedPropertyValueWarning(WarningMessage):
     def __init__(self, key, value, address, severity=SeverityCodes.WARNING):
-        d = {'key': key, 'value': value}
+        d = {'key': address.property_name, 'value': value}
         WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_PROPERTY_VALUE, data=d, address=address, severity=severity)
-        self.key = key
+        self.key = address.property_name
         self.value = value
     def write(self, outstream, prefix):
         outstream.write('{p}Unrecognized value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
@@ -316,10 +550,10 @@ class UnrecognizedPropertyValueWarning(WarningMessage):
         return self.warning_data
 
 class InvalidPropertyValueWarning(WarningMessage):
-    def __init__(self, key, value, address, severity=SeverityCodes.ERROR):
-        d = {'key': key, 'value': value}
+    def __init__(self, value, address, severity=SeverityCodes.ERROR):
+        d = {'key': address.property_name, 'value': value}
         WarningMessage.__init__(self, WarningCodes.INVALID_PROPERTY_VALUE, data=d, address=address, severity=severity)
-        self.key = key
+        self.key = address.property_name
         self.value = value
     def write(self, outstream, prefix):
         outstream.write('{p}Invalid value "{v}" for property "{k}"'.format(p=prefix, k=self.key, v=self.value))
@@ -617,7 +851,7 @@ class NexsonDictWrapper(object):
                 self._logger.warning(MissingOptionalKeyWarning(key=None, address=self.address_of_meta_key(property_name)))
             v = default
         elif isinstance(v, MetaValueList):
-            self._logger.emit_error(DuplicatingSingletonKeyWarning(self.address_of_meta_key(property_name))) #mth
+            self._logger.emit_error(DuplicatingSingletonKeyWarning(self.address_of_meta_key(property_name)))
         return v
     def add_meta(self, key, value):
         md = {"$": value, 
@@ -656,7 +890,7 @@ class NexsonDictWrapper(object):
         v = self._meta2value.get(property_name)
         if v is None:
             if warn_if_missing:
-                self._logger.warning(MissingOptionalKeyWarning(key=None, address=self.address_of_meta_key(property_name))) #mth
+                self._logger.warning(MissingOptionalKeyWarning(key=None, address=self.address_of_meta_key(property_name)))
             v = []
         return v
     def consume_meta_and_check_keys(self, d, rich_logger):
@@ -742,8 +976,11 @@ class OTU(NexsonDictWrapper):
         self._ott_id = self.get_singelton_meta('ot:ottid', warn_if_missing=False)
         if self._ott_id is None:
             self._ott_id = self.get_singelton_meta('ot:ottolid', warn_if_missing=False)
-            if self._ott_id is not None and (rich_logger is None or (not rich_logger.retain_deprecated)):
-                self.replace_meta_property_name('ot:ottolid', 'ot:ottid')
+            if self._ott_id is not None:
+                if (rich_logger is None or (not rich_logger.retain_deprecated)):
+                    self.replace_meta_property_name('ot:ottolid', 'ot:ottid')
+                else:
+                    rich_logger.warning(DeprecatedMetaPropertyWarning(address=self.address))
         if self._ott_id is None:
             self.get_singelton_meta('ot:ottid') # trigger a warning
         self._original_label = self.get_singelton_meta('ot:originalLabel')
@@ -1018,15 +1255,15 @@ class Tree(NexsonDictWrapper):
                                              'ot:bootstrapValues',
                                              'ot:posteriorSupport']:
                 if self._branch_len_mode in ['ot:other', 'ot:undefined']:
-                    rich_logger.warning(PropertyValueNotUsefulWarning(self._branch_len_mode, address=self.address_of_meta_key(k))) #mth
+                    rich_logger.warning(PropertyValueNotUsefulWarning(self._branch_len_mode, address=self.address_of_meta_key(k)))
                 else:
-                    rich_logger.emit_error(UnrecognizedPropertyValueWarning(self._branch_len_mode, address=self.address_of_meta_key(k))) # mth
+                    rich_logger.emit_error(UnrecognizedPropertyValueWarning(self._branch_len_mode, address=self.address_of_meta_key(k)))
         self._tag_list = self.get_list_meta('ot:tag', warn_if_missing=False)
         if isinstance(self._tag_list, str) or isinstance(self._tag_list, unicode):
             self._tag_list = [self._tag_list]
         unexpected_tags = [i for i in self._tag_list if i.lower() not in self.EXPECTED_TAGS]
         for tag in unexpected_tags:
-            rich_logger.warning(UnrecognizedTagWarning(tag, address=self.address_of_meta_key('ot:tag'))) #mth
+            rich_logger.warning(UnrecognizedTagWarning(tag, address=self.address_of_meta_key('ot:tag')))
         self._tagged_for_deletion = False
         self._tagged_for_inclusion = False # is there a tag meaning "use this tree?"
         tl = [i.lower() for i in self._tag_list]
@@ -1111,11 +1348,11 @@ class Tree(NexsonDictWrapper):
                         multi_labelled_ott_id.add(nd._otu._ott_id)
                     nl.append(nd)
                 if not is_flagged_as_leaf:
-                    rich_logger.warning(MissingOptionalKeyWarning(key=None, address=nd.address_of_meta_key('ot:isLeaf'))) #mth
+                    rich_logger.warning(MissingOptionalKeyWarning(key=None, address=nd.address_of_meta_key('ot:isLeaf')))
                     if not rich_logger.retain_deprecated:
                         nd.add_meta('ot:isLeaf', True)
             elif is_flagged_as_leaf:
-                rich_logger.emit_error(InvalidPropertyValueWarning(True, address=nd.address_of_meta_key('ot:isLeaf'))) #mth
+                rich_logger.emit_error(InvalidPropertyValueWarning(True, address=nd.address_of_meta_key('ot:isLeaf')))
                 nd.del_meta('ot:isLeaf') # Non const. Fixing.
         for ott_id in multi_labelled_ott_id:
             tip_list = ott_id2node.get(ott_id)
