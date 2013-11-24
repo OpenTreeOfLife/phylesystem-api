@@ -53,4 +53,9 @@ class GitData(object):
 
     def push(self):
         # TODO: set up GIT_SSH to use proper deployment key for repo
-        git.push()
+
+        current_branch = self.current_branch()
+        # be explicit about what we are pushing, since the default behavior
+        # is different in different versions of Git and/or by configuration
+        git.push("origin", current_branch)
+
