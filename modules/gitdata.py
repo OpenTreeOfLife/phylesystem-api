@@ -1,6 +1,6 @@
 from sh import git
 import sh
-import os
+import os, sys
 
 class GitData(object):
     def __init__(self, repo):
@@ -37,6 +37,26 @@ class GitData(object):
         except sh.ErrorReturnCode:
             return False
         return True
+
+    @preserve_cwd
+    def remove_study(self,study_id, branch, author="OpenTree API <api@opentreeoflife.org>"):
+        os.chdir(self.repo)
+
+        study_dir      = "study/%s" % study_id
+        study_filename = "%s/%s.json" % (study_dir, study_id)
+
+        if self.branch_exists(branch):
+            git.checkout(branch)
+        else:
+            git.checkout("-b",branch)
+
+        git.rm("-rf", study_dir)
+
+        git.commit(author=author, message="Delete Study #%s via OpenTree API" % study_id)
+
+        new_sha = git("rev-parse","HEAD")
+
+        return new_sha.strip()
 
     @preserve_cwd
     def write_study(self,study_id, content, branch, author="OpenTree API <api@opentreeoflife.org>"):
