@@ -179,8 +179,7 @@ def v1():
                 return unadulterated_content_commit
             if block_until_annotation_commit:
                 # add the annotation and commit the resulting blob...
-                # This currently causes a TypeError: 'NexSON' object is not subscriptable
-                add_or_replace_annotation(rich_nexson, annotation)
+                add_or_replace_annotation(rich_nexson._raw, annotation)
                 nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
                 return do_commit(nexson)
             else:
