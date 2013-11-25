@@ -28,8 +28,6 @@ class TestGitData(unittest.TestCase):
 
         git.branch("-D",self.testing_branch_name)
 
-        os.chdir(self.orig_cwd)
-
     def test_current_branch(self):
         git.checkout(self.testing_branch_name)
         branch_name = self.gd.current_branch()
