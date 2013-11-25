@@ -5,11 +5,18 @@ import time
 from gitdata import GitData
 import simplejson as json
 from sh import git
+from ConfigParser import SafeConfigParser
 
 class TestGitData(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        self.repo = "/Users/jleto/git/opentree/treenexus"
+        conf = SafeConfigParser({})
+        if os.path.isfile("../private/localconfig"):
+            conf.read("../private/localconfig")
+        else:
+            conf.read("../private/config")
+
+        self.repo = conf.get("apis","repo_path")
         self.gd   = GitData(repo=self.repo)
         self.orig_cwd = os.getcwd()
 
@@ -57,6 +64,26 @@ class TestGitData(unittest.TestCase):
         new_sha  = self.gd.write_study(study_id,content,branch,author)
         self.assertTrue( new_sha != "", "new_sha is non-empty")
         self.assertEqual(len(new_sha), 40, "SHA is 40 chars")
+        self.assertEqual( content, self.gd.fetch_study(9999), "correct content found via fetch_study")
+
+    def test_remove(self):
+        def cleanup_remove():
+            git.checkout("master")
+            git.branch("-D","johndoe_study_777")
+
+        self.addCleanup(cleanup_remove)
+
+        author   = "John Doe <john@doe.com>"
+        content  = '{"foo2":"bar3"}'
+        study_id = 777
+        branch   = "johndoe_study_%s" % study_id
+
+        new_sha  = self.gd.remove_study(study_id, branch, author)
+        self.assertTrue( new_sha != "", "new_sha is non-empty")
+        self.assertEqual(len(new_sha), 40, "SHA is 40 chars")
+
+        deleted_study_dir = "%s/study/%s" % (self.repo, study_id)
+        self.assertFalse( os.path.exists(deleted_study_dir), "%s should no longer exist" % deleted_study_dir )
 
 
     def test_branch_exists(self):
