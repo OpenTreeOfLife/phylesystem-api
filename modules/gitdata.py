@@ -6,7 +6,18 @@ class GitData(object):
     def __init__(self, repo):
         self.repo = repo
 
+    def preserve_cwd(function):
+        def decorator(*args, **kwargs):
+            cwd = os.getcwd()
+            try:
+                return function(*args, **kwargs)
+            finally:
+                os.chdir(cwd)
+        return decorator
+
+    @preserve_cwd
     def current_branch(self):
+        os.chdir(self.repo)
         branch_name = git("symbolic-ref", "--short", "HEAD")
         return branch_name.strip()
 
@@ -18,6 +29,7 @@ class GitData(object):
             return ''
         return file.read()
 
+    @preserve_cwd
     def branch_exists(self, branch):
         """Returns true or false depending on if a branch exists"""
         try:
@@ -26,7 +38,10 @@ class GitData(object):
             return False
         return True
 
+    @preserve_cwd
     def write_study(self,study_id, content, branch, author="OpenTree API <api@opentreeoflife.org>"):
+        os.chdir(self.repo)
+
         study_dir      = "study/%s" % study_id
         study_filename = "%s/%s.json" % (study_dir, study_id)
 
@@ -51,7 +66,9 @@ class GitData(object):
 
         return new_sha.strip()
 
+    @preserve_cwd
     def push(self):
+        os.chdir(self.repo)
         # TODO: set up GIT_SSH to use proper deployment key for repo
 
         current_branch = self.current_branch()

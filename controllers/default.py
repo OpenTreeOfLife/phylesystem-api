@@ -8,6 +8,7 @@ import github_client
 from githubwriter import GithubWriter
 from pprint import pprint
 from gitdata import GitData
+from ConfigParser import SafeConfigParser
 
 # NexSON validation
 from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
@@ -21,6 +22,15 @@ def v1():
     response.headers['Access-Control-Allow-Origin'] = "*"
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
+
+    app_name = "api"
+    conf = SafeConfigParser({})
+    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+    else:
+        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+
+    repo_path = conf.get("apis","repo_path")
 
     def __validate(nexson):
         '''Returns three objects:
@@ -59,8 +69,7 @@ def v1():
 
         # return the correct nexson of study_id, using the specified view
         try:
-            # TODO: store the full path to our data repo in our config file
-            gd = GitData(repo="/Users/jleto/git/opentree/treenexus")
+            gd = GitData(repo=repo_path)
             study_nexson = gd.fetch_study(resource_id)
             return dict(FULL_RESPONSE=study_nexson)
         except Exception, e:
@@ -68,6 +77,8 @@ def v1():
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "OTOL API methods relating to creating (and importing) resources"
+        gd = GitData(repo=repo_path)
+
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
@@ -98,6 +109,7 @@ def v1():
         # IF treemachine throws an error, return error info as '500 Internal Server Error'
 
     def PUT(resource, resource_id=None, **kwargs):
+        gd = GitData(repo=repo_path)
         "OTOL API methods relating to updating existing resources"
         #TODO, need to make this spawn a thread to do the second commit rather than block
         block_until_annotation_commit = True
@@ -108,10 +120,13 @@ def v1():
 
         if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
-        author_name  = kwargs.get('author_name','')
-        author_email = kwargs.get('author_email','')
         # this is the GitHub API auth-token for a logged-in curator
         auth_token   = kwargs.get('auth_token','')
+        gh           = Github(auth_token)
+
+        # use the Github Oauth token to get a name/email if not specified
+        author_name  = kwargs.get('author_name',gh.get_user().name)
+        author_email = kwargs.get('author_email',gh.get_user().email)
 
         if not auth_token:
             raise HTTP(400,"You must authenticate before updating via the OpenTree API")
@@ -119,7 +134,7 @@ def v1():
         try:
             nexson = kwargs.get('nexson', {})
             if not isinstance(nexson, dict):
-                nexson = json.loads(nd)
+                nexson = json.loads(nexson)
         except:
             raise HTTP(400, 'NexSON must be valid JSON')
 
@@ -132,23 +147,24 @@ def v1():
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
-        nexson_sha1        = hashlib.sha1( github_client.fetch_study(resource_id, auth_token) ).hexdigest()
+        nexson_sha1        = hashlib.sha1( gd.fetch_study(resource_id) ).hexdigest()
 
         # the POSTed data is the same as what we currently have, do nothing and return successfully
         if posted_nexson_sha1 == nexson_sha1:
             return { "error": 0, "description": "success, nothing to update" };
         else:
-            # validate the NexSON. If we find errors, prevent the update
-            # if only warnings are found, make an additional commit containing the
-            # warning annotation data
-
-            gd = GitData(repo="/Users/jleto/git/opentree/treenexus")
+            gd = GitData(repo=repo_path)
 
             branch_friendly_name = "".join([c for c in author_name if c.isalpha()])
             branch_name          = "%s_study_%s" % (branch_friendly_name, resource_id)
 
             def do_commit(file_content):
-                new_sha = gd.write_study(resource_id,content,branch_name,author)
+                author  = "%s <%s>" % (author_name, author_email)
+
+                new_sha = gd.write_study(resource_id,file_content,branch_name,author)
+
+                # actually push the changes to Github
+                gd.push()
 
                 # What other useful information should be returned on a successful write?
                 return {
@@ -157,13 +173,13 @@ def v1():
                     "description": "Updated study #%s" % resource_id,
                     "sha":  new_sha
                 }
-                gd.push()
 
             unadulterated_content_commit = do_commit(nexson)
             if unadulterated_content_commit['error'] != 0:
                 return unadulterated_content_commit
             if block_until_annotation_commit:
                 # add the annotation and commit the resulting blob...
+                # This currently causes a TypeError: 'NexSON' object is not subscriptable
                 add_or_replace_annotation(rich_nexson, annotation)
                 nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
                 return do_commit(nexson)
