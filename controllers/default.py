@@ -155,7 +155,7 @@ def v1():
         else:
             gd = GitData(repo=repo_path)
 
-            branch_friendly_name = "".join([c for c in author_name if c.isalpha()])
+            branch_friendly_name = "".join([c for c in author_name if c.isalpha()]).lower()
             branch_name          = "%s_study_%s" % (branch_friendly_name, resource_id)
 
             def do_commit(file_content):
@@ -192,6 +192,30 @@ def v1():
             response.view = 'generic.jsonp'
 
         if not resource=='study': raise HTTP(400, 'resource != study')
+
+        gd = GitData(repo=repo_path)
+
+        author_name  = kwargs.get('author_name','A U Thor')
+        author_email = kwargs.get('author_email','author@localhost')
+        author       = "%s <%s>" % (author_name, author_email)
+
+        branch_friendly_name = "".join([c for c in author_name if c.isalpha()]).lower()
+        branch_name          = "%s_study_%s" % (branch_friendly_name, resource_id)
+
+        try:
+            new_sha = gd.remove_study(resource_id, branch_name, author)
+        except:
+            return {
+                "error": 1,
+                "description": "Could not remove study #%s" % resource_id
+            }
+
+        return {
+            "error": 0,
+            "branch_name": branch,
+            "description": "Deleted study #%s" % resource_id,
+            "sha":  new_sha
+        }
 
     def OPTIONS(args, **kwargs):
         "A simple method for approving CORS preflight request"
