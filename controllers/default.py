@@ -170,12 +170,15 @@ def v1():
                 }
             unadulterated_content_commit = do_commit(nexson)
             if unadulterated_content_commit['error'] != 0:
-                return unadulterated_content_commit
+                raise HTTP(400, json.dumps(unadulterated_content_commit))
             if block_until_annotation_commit:
                 # add the annotation and commit the resulting blob...
-                add_or_replace_annotation(rich_nexson, annotation)
+                add_or_replace_annotation(rich_nexson._raw, annotation)
                 nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
-                return do_commit(nexson)
+                annotated_commit = do_commit(nexson)
+                if annotated_commit['error'] != 0:
+                    raise HTTP(400, json.dumps(annotated_commit))
+                return annotated_commit
             else:
                 return unadulterated_content_commit
 
