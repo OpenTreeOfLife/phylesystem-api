@@ -124,9 +124,17 @@ def v1():
         auth_token   = kwargs.get('auth_token','')
         gh           = Github(auth_token)
 
+        author_name  = kwargs.get('author_name','')
+        author_email = kwargs.get('author_email','')
+
         # use the Github Oauth token to get a name/email if not specified
-        author_name  = kwargs.get('author_name',gh.get_user().name)
-        author_email = kwargs.get('author_email',gh.get_user().email)
+        # we don't provide these as default values above because they would
+        # generate API calls regardless of author_name/author_email being specifed
+
+        if not author_name:
+            author_name = gh.get_user().name
+        if not author_email:
+            author_email = gh.get_user().email
 
         if not auth_token:
             raise HTTP(400,"You must authenticate before updating via the OpenTree API")
@@ -155,8 +163,7 @@ def v1():
         else:
             gd = GitData(repo=repo_path)
 
-            branch_friendly_name = "".join([c for c in author_name if c.isalpha()]).lower()
-            branch_name          = "%s_study_%s" % (branch_friendly_name, resource_id)
+            branch_name          = "%s_study_%s" % (gh.get_user().login, resource_id)
 
             def do_commit(file_content):
                 author  = "%s <%s>" % (author_name, author_email)
@@ -197,13 +204,23 @@ def v1():
         if not resource=='study': raise HTTP(400, 'resource != study')
 
         gd = GitData(repo=repo_path)
+        gh           = Github(auth_token)
 
-        author_name  = kwargs.get('author_name','A U Thor')
-        author_email = kwargs.get('author_email','author@localhost')
+        author_name  = kwargs.get('author_name','')
+        author_email = kwargs.get('author_email','')
+
+        # use the Github Oauth token to get a name/email if not specified
+        # we don't provide these as default values above because they would
+        # generate API calls regardless of author_name/author_email being specifed
+
+        if not author_name:
+            author_name = gh.get_user().name
+        if not author_email:
+            author_email = gh.get_user().email
+
         author       = "%s <%s>" % (author_name, author_email)
 
-        branch_friendly_name = "".join([c for c in author_name if c.isalpha()]).lower()
-        branch_name          = "%s_study_%s" % (branch_friendly_name, resource_id)
+        branch_name          = "%s_study_%s" % (gh.get_user().login, resource_id)
 
         try:
             new_sha = gd.remove_study(resource_id, branch_name, author)
