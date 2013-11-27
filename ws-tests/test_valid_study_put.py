@@ -1,13 +1,25 @@
 #!/usr/bin/env python
 from opentreetesting import test_http_json_method, config
+import datetime
 import codecs
 import json
-import sys, os
+import sys
+import os
 
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/1003'
 inpf = codecs.open('../nexson-validator/tests/single/input/1003.json', 'rU', encoding='utf-8')
 n = json.load(inpf)
+# refresh a timestamp so that the test generates a commit
+m = n['nexml']['meta']
+short_list = [i for i in m if i.get('@property') == 'bogus_timestamp']
+if short_list:
+    el = short_list[0]
+else:
+    el = {'@property': 'bogus_timestamp', '@xsi:type': 'nex:LiteralMeta'}
+    m.append(el)
+el['$'] = datetime.datetime.utcnow().isoformat()
+
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
 }
