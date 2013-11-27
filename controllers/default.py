@@ -203,6 +203,8 @@ def v1():
 
         if not resource=='study': raise HTTP(400, 'resource != study')
 
+        auth_token   = kwargs.get('auth_token','')
+
         gd = GitData(repo=repo_path)
         gh           = Github(auth_token)
 
@@ -224,15 +226,17 @@ def v1():
 
         try:
             new_sha = gd.remove_study(resource_id, branch_name, author)
+            # actually push the changes to Github
+            gd.push()
         except:
-            return {
+            raise HTTP(400, json.dumps({
                 "error": 1,
                 "description": "Could not remove study #%s" % resource_id
-            }
+            }))
 
         return {
             "error": 0,
-            "branch_name": branch,
+            "branch_name": branch_name,
             "description": "Deleted study #%s" % resource_id,
             "sha":  new_sha
         }
