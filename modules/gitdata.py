@@ -62,6 +62,14 @@ class GitData(object):
     def write_study(self,study_id, content, branch, author="OpenTree API <api@opentreeoflife.org>"):
         os.chdir(self.repo)
 
+        # If there are uncommitted changes to our repo, stash them so this commit can proceed
+        git.stash()
+
+        if self.branch_exists(branch):
+            git.checkout(branch)
+        else:
+            git.checkout("-b",branch)
+
         study_dir      = "study/%s" % study_id
         study_filename = "%s/%s.json" % (study_dir, study_id)
 
@@ -72,11 +80,6 @@ class GitData(object):
         file = open(study_filename, 'w')
         file.write(content)
         file.close()
-
-        if self.branch_exists(branch):
-            git.checkout(branch)
-        else:
-            git.checkout("-b",branch)
 
         git.add(study_filename)
 
