@@ -77,7 +77,6 @@ def v1():
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "OTOL API methods relating to creating (and importing) resources"
-        gd = GitData(repo=repo_path)
 
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
@@ -99,6 +98,12 @@ def v1():
         dryad_DOI = kwargs.get('dryad_DOI', '')
         import_option = kwargs.get('import_option', '')
 
+        gd = GitData(repo=repo_path)
+
+        # studies created by the OpenTree API start with o,
+        # so they don't conflict with new study id's from other sources
+        new_study_id = "o%d" % (gd.newest_study_id() + 1)
+
         return kwargs
         # TODO: 
         # assign a new ID for this study, create its folder in repo(?)
@@ -109,7 +114,6 @@ def v1():
         # IF treemachine throws an error, return error info as '500 Internal Server Error'
 
     def PUT(resource, resource_id=None, **kwargs):
-        gd = GitData(repo=repo_path)
         "OTOL API methods relating to updating existing resources"
         #TODO, need to make this spawn a thread to do the second commit rather than block
         block_until_annotation_commit = True
@@ -117,8 +121,6 @@ def v1():
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
         if not resource=='study': raise HTTP(400, 'resource != study')
-
-        if resource_id < 0 : raise HTTP(400, 'invalid resource_id: must be a postive integer')
 
         # this is the GitHub API auth-token for a logged-in curator
         auth_token   = kwargs.get('auth_token','')
@@ -152,6 +154,9 @@ def v1():
 
         # sort the keys of the POSTed NexSON and indent 0 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=0)
+
+        gd = GitData(repo=repo_path)
+
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
@@ -161,7 +166,6 @@ def v1():
         if posted_nexson_sha1 == nexson_sha1:
             return { "error": 0, "description": "success, nothing to update" };
         else:
-            gd = GitData(repo=repo_path)
 
             branch_name          = "%s_study_%s" % (gh.get_user().login, resource_id)
 
