@@ -94,6 +94,9 @@ class TestGitData(unittest.TestCase):
 
         exists = self.gd.branch_exists(branch_name)
         self.assertTrue( exists, "%s branch exists" % branch_name)
+    def test_newest_study_id(self):
+        newest_id = self.gd.newest_study_id()
+        self.assertTrue( newest_id >= 2700 )
 
 def suite():
     loader = unittest.TestLoader()
