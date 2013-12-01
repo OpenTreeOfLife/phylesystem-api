@@ -21,6 +21,19 @@ class GitData(object):
         branch_name = git("symbolic-ref", "--short", "HEAD")
         return branch_name.strip()
 
+    def newest_study_id(self):
+        os.chdir(self.repo)
+        dirs = []
+        for f in os.listdir("study/"):
+            if os.path.isdir("study/%s" % f):
+                # ignore alphabetic prefix, o = created by opentree API
+                if f[0].isalpha():
+                    dirs.append(int(f[1:]))
+                else:
+                    dirs.append(int(f))
+        dirs.sort()
+        return dirs[-1]
+
     def fetch_study(self, study_id):
         study_filename = "%s/study/%s/%s.json" % (self.repo, study_id, study_id)
         try:
