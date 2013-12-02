@@ -90,7 +90,8 @@ def v1():
             DELETE(resource, resource_id, kwargs)
         # elif _method == 'PATCH': ...
 
-        if not resource=='study': raise HTTP(400, 'resource != study')
+        if not resource=='study': raise HTTP(400, json.dumps({"error":1,
+            "description": "Only the creation of new studies is currently supported"}))
 
         # we're creating a new study (possibly with import instructions in the payload)
         cc0_agreement = kwargs.get('cc0_agreement', '')
@@ -99,30 +100,50 @@ def v1():
         dryad_DOI = kwargs.get('dryad_DOI', '')
         import_option = kwargs.get('import_option', '')
 
+        #TODO, need to make this spawn a thread to do the second commit rather than block
+        block_until_annotation_commit = True
+
+        (gh, author_name, author_email) = authenticate(**kwargs)
+        nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
+
         gd = GitData(repo=repo_path)
 
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
-        new_study_id = "o%d" % (gd.newest_study_id() + 1)
+        new_resource_id = "o%d" % (gd.newest_study_id() + 1)
 
-        return kwargs
-        # TODO: 
-        # assign a new ID for this study, create its folder in repo(?)
-        # forward ID and info to treemachine, expect to get study JSON back
-        # IF treemachine returns JSON, save as {ID}.json and return URL as '201 Created'
-        # or perhaps '303 See other' w/ redirect?
-        # (should we do this on a WIP branch? save empty folder in 'master'?)
-        # IF treemachine throws an error, return error info as '500 Internal Server Error'
+        unadulterated_content_commit = do_commit(gd, gh, nexson, author_name, author_email, new_resource_id)
+        if unadulterated_content_commit['error'] != 0:
+            raise HTTP(400, json.dumps(unadulterated_content_commit))
+        if block_until_annotation_commit:
+            # add the annotation and commit the resulting blob...
+            add_or_replace_annotation(rich_nexson._raw, annotation)
+            nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
+            annotated_commit = do_commit(gd, gh, nexson, author_name, author_email, new_resource_id)
+            if annotated_commit['error'] != 0:
+                raise HTTP(400, json.dumps(annotated_commit))
+            return annotated_commit
+        else:
+            return unadulterated_content_commit
 
-    def PUT(resource, resource_id=None, **kwargs):
-        "OTOL API methods relating to updating existing resources"
-        #TODO, need to make this spawn a thread to do the second commit rather than block
-        block_until_annotation_commit = True
-        # support JSONP request from another domain
-        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
-            response.view = 'generic.jsonp'
-        if not resource=='study': raise HTTP(400, 'resource != study')
+    def validate_and_normalize_nexson(**kwargs):
+        try:
+            nexson = kwargs.get('nexson', {})
+            if not isinstance(nexson, dict):
+                nexson = json.loads(nexson)
+        except:
+            raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
 
+        annotation, validation_log, rich_nexson = __validate(nexson)
+        if validation_log.errors:
+            raise HTTP(400, json.dumps(annotation))
+
+        # sort the keys of the POSTed NexSON and indent 0 spaces
+        nexson = json.dumps(nexson, sort_keys=True, indent=0)
+
+        return nexson, annotation, validation_log, rich_nexson
+
+    def authenticate(**kwargs):
         # this is the GitHub API auth-token for a logged-in curator
         auth_token   = kwargs.get('auth_token','')
 
@@ -145,19 +166,20 @@ def v1():
         if not author_email:
             author_email = gh.get_user().email
 
-        try:
-            nexson = kwargs.get('nexson', {})
-            if not isinstance(nexson, dict):
-                nexson = json.loads(nexson)
-        except:
-            raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
+        return gh, author_name, author_email
 
-        annotation, validation_log, rich_nexson = __validate(nexson)
-        if validation_log.errors:
-            raise HTTP(400, json.dumps(annotation))
+    def PUT(resource, resource_id, **kwargs):
+        "OTOL API methods relating to updating existing resources"
+        #TODO, need to make this spawn a thread to do the second commit rather than block
+        block_until_annotation_commit = True
+        # support JSONP request from another domain
+        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
+            response.view = 'generic.jsonp'
+        if not resource=='study': raise HTTP(400, 'resource != study')
 
-        # sort the keys of the POSTed NexSON and indent 0 spaces
-        nexson = json.dumps(nexson, sort_keys=True, indent=0)
+        gh, author_name, author_email = authenticate(**kwargs)
+
+        nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
 
         gd = GitData(repo=repo_path)
 
@@ -171,37 +193,37 @@ def v1():
             return { "error": 0, "description": "success, nothing to update" };
         else:
 
-            branch_name          = "%s_study_%s" % (gh.get_user().login, resource_id)
-
-            def do_commit(file_content):
-                author  = "%s <%s>" % (author_name, author_email)
-
-                new_sha = gd.write_study(resource_id,file_content,branch_name,author)
-
-                # actually push the changes to Github
-                gd.push()
-
-                # What other useful information should be returned on a successful write?
-                return {
-                    "error": 0,
-                    "branch_name": branch_name,
-                    "description": "Updated study #%s" % resource_id,
-                    "sha":  new_sha
-                }
-
-            unadulterated_content_commit = do_commit(nexson)
+            unadulterated_content_commit = do_commit(gd, gh, nexson, author_name, author_email, resource_id)
             if unadulterated_content_commit['error'] != 0:
                 raise HTTP(400, json.dumps(unadulterated_content_commit))
             if block_until_annotation_commit:
                 # add the annotation and commit the resulting blob...
                 add_or_replace_annotation(rich_nexson._raw, annotation)
                 nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
-                annotated_commit = do_commit(nexson)
+                annotated_commit = do_commit(gd, gh, nexson, author_name, author_email, resource_id)
                 if annotated_commit['error'] != 0:
                     raise HTTP(400, json.dumps(annotated_commit))
                 return annotated_commit
             else:
                 return unadulterated_content_commit
+
+    def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
+        author  = "%s <%s>" % (author_name, author_email)
+
+        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
+
+        new_sha = gd.write_study(resource_id,file_content,branch_name,author)
+
+        # actually push the changes to Github
+        gd.push()
+
+        # What other useful information should be returned on a successful write?
+        return {
+            "error": 0,
+            "branch_name": branch_name,
+            "description": "Updated study #%s" % resource_id,
+            "sha":  new_sha
+        }
 
     def DELETE(resource, resource_id=None, **kwargs):
         "OTOL API methods relating to deleting existing resources"
@@ -234,12 +256,19 @@ def v1():
 
         try:
             new_sha = gd.remove_study(resource_id, branch_name, author)
+        except:
+            raise HTTP(400, json.dumps({
+                "error": 1,
+                "description": "Could not remove study #%s" % resource_id
+            }))
+
+        try:
             # actually push the changes to Github
             gd.push()
         except:
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not remove study #%s" % resource_id
+                "description": "Could not push deletion of study #%s" % resource_id
             }))
 
         return {

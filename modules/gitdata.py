@@ -60,6 +60,10 @@ class GitData(object):
 
         if self.branch_exists(branch):
             git.checkout(branch)
+            if not os.path.isdir(study_dir):
+                # branch already exists locally with study removed
+                # so just return the commit SHA
+                return git("rev-parse","HEAD").strip()
         else:
             git.checkout("-b",branch)
 
