@@ -50,10 +50,11 @@ def v1():
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OpenTree API methods relating to reading"
-        valid_resources = ('study', 'search')
+        valid_resources = ('study')
 
-        if not resource in valid_resources:
-            raise HTTP(400, 'Resource requested not in list of valid resources: %s' % valid_resources)
+        if resource not in valid_resources:
+            raise HTTP(400, json.dumps({"error": 1,
+                "description": 'Resource requested not in list of valid resources: %s' % valid_resources }))
 
         # support JSONP request from another domain
         if jsoncallback or callback:
@@ -124,6 +125,12 @@ def v1():
 
         # this is the GitHub API auth-token for a logged-in curator
         auth_token   = kwargs.get('auth_token','')
+
+        if not auth_token:
+            raise HTTP(400,json.dumps({
+                "error": 1,
+                "description":"You must provide an auth_token to authenticate to the OpenTree API"
+            }))
         gh           = Github(auth_token)
 
         author_name  = kwargs.get('author_name','')
@@ -138,15 +145,12 @@ def v1():
         if not author_email:
             author_email = gh.get_user().email
 
-        if not auth_token:
-            raise HTTP(400,"You must authenticate before updating via the OpenTree API")
-
         try:
             nexson = kwargs.get('nexson', {})
             if not isinstance(nexson, dict):
                 nexson = json.loads(nexson)
         except:
-            raise HTTP(400, 'NexSON must be valid JSON')
+            raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
 
         annotation, validation_log, rich_nexson = __validate(nexson)
         if validation_log.errors:
