@@ -1,4 +1,4 @@
-import os
+import os, sys
 import time
 import json
 import hashlib
@@ -257,9 +257,10 @@ def v1():
         try:
             new_sha = gd.remove_study(resource_id, branch_name, author)
         except:
+            e = sys.exc_info()[0]
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not remove study #%s" % resource_id
+                "description": "Could not remove study #%s due to %s Exception" % (resource_id, e)
             }))
 
         try:
