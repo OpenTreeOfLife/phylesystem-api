@@ -1,10 +1,15 @@
 from sh import git
 import sh
 import os, sys
+import locket
+from locket import LockError
 
 class GitData(object):
     def __init__(self, repo):
-        self.repo = repo
+        self.repo          = repo
+        self.lock_file     = "%s/.git/API_WRITE_LOCK" % self.repo
+        self.lock_timeout  = 30
+        self.lock          = locket.lock_file(self.lock_file, timeout=self.lock_timeout)
 
     def preserve_cwd(function):
         def decorator(*args, **kwargs):
@@ -14,6 +19,12 @@ class GitData(object):
             finally:
                 os.chdir(cwd)
         return decorator
+
+    def acquire_lock(self):
+        self.lock.acquire()
+
+    def release_lock(self):
+        self.lock.release()
 
     @preserve_cwd
     def current_branch(self):
