@@ -2,7 +2,13 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/12'
+
+if len(sys.argv) > 1:
+    study_id = sys.argv[1]
+else:
+    study_id = 12
+
+SUBMIT_URI = DOMAIN + '/v1/study/%s' % study_id
 data = {
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
 }

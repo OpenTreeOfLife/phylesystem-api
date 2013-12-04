@@ -227,15 +227,24 @@ def v1():
             new_sha = gd.write_study(resource_id,file_content,branch_name,author)
         except:
             e = sys.exc_info()[0]
+
+            gd.release_lock()
+
             raise HTTP(400, json.dumps({
                 "error": 1,
                 "description": "Could not write to study #%s due to %s Exception" % (resource_id, e)
             }))
+
+        try:
+            # actually push the changes to Github
+            gd.push()
+        except:
+            raise HTTP(400, json.dumps({
+                "error": 1,
+                "description": "Could not push deletion of study #%s" % resource_id
+            }))
         finally:
             gd.release_lock()
-
-        # actually push the changes to Github
-        gd.push()
 
         # What other useful information should be returned on a successful write?
         return {
@@ -272,11 +281,21 @@ def v1():
 
         author       = "%s <%s>" % (author_name, author_email)
 
-        branch_name          = "%s_study_%s" % (gh.get_user().login, resource_id)
+        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
+
+        try:
+            gd.acquire_lock()
+        except LockError, e:
+            raise HTTP(400, json.dumps({
+                "error": 1,
+                "description": "Could not acquire lock to delete the study #%s" % resource_id
+            }))
 
         try:
             new_sha = gd.remove_study(resource_id, branch_name, author)
         except:
+            gd.release_lock()
+
             e = sys.exc_info()[0]
             raise HTTP(400, json.dumps({
                 "error": 1,
@@ -291,6 +310,8 @@ def v1():
                 "error": 1,
                 "description": "Could not push deletion of study #%s" % resource_id
             }))
+        finally:
+            gd.release_lock()
 
         return {
             "error": 0,

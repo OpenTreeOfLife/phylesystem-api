@@ -100,6 +100,7 @@ def test_http_json_method(url,
                                 allow_redirects=True)
     debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
     if resp.status_code != expected_status:
+        debug('Full response: {r}\n'.format(r=resp.text))
         resp.raise_for_status()
     if expected_response is not None:
         try:
