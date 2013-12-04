@@ -7,7 +7,7 @@ from github import Github
 import github_client
 from githubwriter import GithubWriter
 from pprint import pprint
-from gitdata import GitData, get_repo_path
+from gitdata import GitData
 
 # NexSON validation
 from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
@@ -21,8 +21,6 @@ def v1():
     response.headers['Access-Control-Allow-Origin'] = "*"
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
-
-    repo_path = get_repo_path()
 
     def __validate(nexson):
         '''Returns three objects:
@@ -62,7 +60,7 @@ def v1():
 
         # return the correct nexson of study_id, using the specified view
         try:
-            gd = GitData(repo=repo_path)
+            gd = GitData()
             study_nexson = gd.fetch_study(resource_id)
             return dict(FULL_RESPONSE=study_nexson)
         except Exception, e:
@@ -98,7 +96,7 @@ def v1():
         (gh, author_name, author_email) = authenticate(**kwargs)
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
 
-        gd = GitData(repo=repo_path)
+        gd = GitData()
 
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
@@ -173,7 +171,7 @@ def v1():
 
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
 
-        gd = GitData(repo=repo_path)
+        gd = GitData()
 
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
@@ -244,7 +242,7 @@ def v1():
 
         auth_token   = kwargs.get('auth_token','')
 
-        gd = GitData(repo=repo_path)
+        gd = GitData()
         gh           = Github(auth_token)
 
         author_name  = kwargs.get('author_name','')
