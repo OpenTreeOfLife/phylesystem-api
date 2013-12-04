@@ -3,6 +3,18 @@ import sh
 import os, sys
 import locket
 from locket import LockError
+from ConfigParser import SafeConfigParser
+
+def get_repo_path():
+    app_name = "api"
+    conf = SafeConfigParser({})
+    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+    else:
+        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+
+    repo_path = conf.get("apis","repo_path")
+    return repo_path
 
 class GitData(object):
     def __init__(self, repo):

@@ -7,8 +7,7 @@ from github import Github
 import github_client
 from githubwriter import GithubWriter
 from pprint import pprint
-from gitdata import GitData
-from ConfigParser import SafeConfigParser
+from gitdata import GitData, get_repo_path
 
 # NexSON validation
 from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
@@ -23,14 +22,7 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
-    app_name = "api"
-    conf = SafeConfigParser({})
-    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
-        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
-    else:
-        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-    repo_path = conf.get("apis","repo_path")
+    repo_path = get_repo_path()
 
     def __validate(nexson):
         '''Returns three objects:
