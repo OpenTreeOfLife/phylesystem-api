@@ -9,16 +9,21 @@ def get_repo_path():
     app_name = "api"
     conf = SafeConfigParser({})
     if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
-        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+        filename = "%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)
+        conf.readfp(open(filename))
     else:
-        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+        filename = "%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,)
+        conf.readfp(open(filename))
 
     repo_path = conf.get("apis","repo_path")
     return repo_path
 
 class GitData(object):
-    def __init__(self, repo):
-        self.repo          = repo
+    def __init__(self, repo=None):
+        if repo:
+            self.repo = repo
+        else:
+            self.repo      = get_repo_path()
         self.lock_file     = "%s/.git/API_WRITE_LOCK" % self.repo
         self.lock_timeout  = 30
         self.lock          = locket.lock_file(self.lock_file, timeout=self.lock_timeout)
