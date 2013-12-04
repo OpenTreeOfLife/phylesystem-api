@@ -34,6 +34,8 @@ before_script:
 script:
     - cd nexson-validator && python setup.py develop && ./test.sh
     - cd ..
+    - cd modules && python test_gitdata.py
+
 # Disable these tests for now. They are being worked on in the web2py_travis branch
 #    - OTOL_API_PORT=8000 nosetests tests/
 
