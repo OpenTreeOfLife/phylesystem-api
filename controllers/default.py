@@ -8,6 +8,7 @@ import github_client
 from githubwriter import GithubWriter
 from pprint import pprint
 from gitdata import GitData
+from ConfigParser import SafeConfigParser
 
 # NexSON validation
 from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
@@ -21,6 +22,18 @@ def v1():
     response.headers['Access-Control-Allow-Origin'] = "*"
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
+
+    app_name = "api"
+    conf = SafeConfigParser({})
+    localconfig_filename = "%s/applications/%s/private/localconfig" % (request.env.web2py_path, app_name)
+
+    if os.path.isfile(localconfig_filename):
+        conf.readfp(open(localconfig_filename))
+    else:
+        filename = "%s/applications/%s/private/config" % (request.env.web2py_path, app_name)
+        conf.readfp(open(filename))
+
+    repo_path = conf.get("apis","repo_path")
 
     def __validate(nexson):
         '''Returns three objects:
@@ -60,7 +73,7 @@ def v1():
 
         # return the correct nexson of study_id, using the specified view
         try:
-            gd = GitData()
+            gd = GitData(repo=repo_path)
             study_nexson = gd.fetch_study(resource_id)
             return dict(FULL_RESPONSE=study_nexson)
         except Exception, e:
@@ -96,7 +109,7 @@ def v1():
         (gh, author_name, author_email) = authenticate(**kwargs)
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
 
-        gd = GitData()
+        gd = GitData(repo=repo_path)
 
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
@@ -171,7 +184,7 @@ def v1():
 
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
 
-        gd = GitData()
+        gd = GitData(repo=repo_path)
 
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
@@ -242,7 +255,7 @@ def v1():
 
         auth_token   = kwargs.get('auth_token','')
 
-        gd = GitData()
+        gd = GitData(repo=repo_path)
         gh           = Github(auth_token)
 
         author_name  = kwargs.get('author_name','')
