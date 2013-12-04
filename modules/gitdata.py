@@ -77,6 +77,8 @@ class GitData(object):
                 # so just return the commit SHA
                 return git("rev-parse","HEAD").strip()
         else:
+            # Create this new branch off of master, NOT the currently-checked out branch!
+            git.checkout("master")
             git.checkout("-b",branch)
 
         git.rm("-rf", study_dir)
@@ -97,6 +99,8 @@ class GitData(object):
         if self.branch_exists(branch):
             git.checkout(branch)
         else:
+            # Create this new branch off of master, NOT the currently-checked out branch!
+            git.checkout("master")
             git.checkout("-b",branch)
 
         study_dir      = "study/%s" % study_id

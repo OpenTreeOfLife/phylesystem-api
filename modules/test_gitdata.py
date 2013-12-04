@@ -53,6 +53,7 @@ class TestGitData(unittest.TestCase):
     def test_write(self):
         def cleanup_write():
             git.checkout("master")
+            git.branch("-D","johndoe_study_9998")
             git.branch("-D","johndoe_study_9999")
 
         self.addCleanup(cleanup_write)
@@ -65,6 +66,18 @@ class TestGitData(unittest.TestCase):
         self.assertTrue( new_sha != "", "new_sha is non-empty")
         self.assertEqual(len(new_sha), 40, "SHA is 40 chars")
         self.assertEqual( content, self.gd.fetch_study(9999), "correct content found via fetch_study")
+
+        author   = "John Doe <john@doe.com>"
+        content  = '{"foo2":"bar2"}'
+        study_id = 9998
+        branch   = "johndoe_study_%s" % study_id
+        new_sha  = self.gd.write_study(study_id,content,branch,author)
+
+        merge_base_sha1 = git("merge-base","johndoe_study_9999","johndoe_study_9998").strip()
+
+        master_sha1     = git("rev-parse","master").strip()
+
+        self.assertEqual(master_sha1, merge_base_sha1, "Verify that writing new study branches from master and not the current branch")
 
     def test_remove(self):
         def cleanup_remove():
