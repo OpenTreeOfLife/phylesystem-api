@@ -212,7 +212,24 @@ def v1():
 
         branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
 
-        new_sha = gd.write_study(resource_id,file_content,branch_name,author)
+        try:
+            gd.acquire_lock()
+        except LockError, e:
+            raise HTTP(400, json.dumps({
+                "error": 1,
+                "description": "Could not acquire lock to write to study #%s" % resource_id
+            }))
+
+        try:
+            new_sha = gd.write_study(resource_id,file_content,branch_name,author)
+        except:
+            e = sys.exc_info()[0]
+            raise HTTP(400, json.dumps({
+                "error": 1,
+                "description": "Could not write to study #%s due to %s Exception" % (resource_id, e)
+            }))
+        finally:
+            gd.release_lock()
 
         # actually push the changes to Github
         gd.push()
