@@ -3,12 +3,13 @@ import time
 import json
 import hashlib
 import github
-from github import Github
+from github import Github, BadCredentialsException
 import github_client
 from githubwriter import GithubWriter
 from pprint import pprint
 from gitdata import GitData
 from ConfigParser import SafeConfigParser
+from locket import LockError
 
 # NexSON validation
 from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
@@ -156,6 +157,15 @@ def v1():
                 "description":"You must provide an auth_token to authenticate to the OpenTree API"
             }))
         gh           = Github(auth_token)
+        gh_user      = gh.get_user()
+
+        try:
+            gh_user.login
+        except BadCredentialsException:
+            raise HTTP(400,json.dumps({
+                "error": 1,
+                "description":"You have provided an invalid or expired authentication token"
+            }))
 
         author_name  = kwargs.get('author_name','')
         author_email = kwargs.get('author_email','')
@@ -165,9 +175,9 @@ def v1():
         # generate API calls regardless of author_name/author_email being specifed
 
         if not author_name:
-            author_name = gh.get_user().name
+            author_name = gh_user.name
         if not author_email:
-            author_email = gh.get_user().email
+            author_email = gh_user.email
 
         return gh, author_name, author_email
 
@@ -262,26 +272,13 @@ def v1():
 
         if not resource=='study': raise HTTP(400, 'resource != study')
 
-        auth_token   = kwargs.get('auth_token','')
-
-        gd = GitData(repo=repo_path)
-        gh           = Github(auth_token)
-
-        author_name  = kwargs.get('author_name','')
-        author_email = kwargs.get('author_email','')
-
-        # use the Github Oauth token to get a name/email if not specified
-        # we don't provide these as default values above because they would
-        # generate API calls regardless of author_name/author_email being specifed
-
-        if not author_name:
-            author_name = gh.get_user().name
-        if not author_email:
-            author_email = gh.get_user().email
+        (gh, author_name, author_email) = authenticate(**kwargs)
 
         author       = "%s <%s>" % (author_name, author_email)
 
         branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
+
+        gd = GitData(repo=repo_path)
 
         try:
             gd.acquire_lock()
