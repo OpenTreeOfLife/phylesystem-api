@@ -108,8 +108,21 @@ class TestGitData(unittest.TestCase):
         exists = self.gd.branch_exists(branch_name)
         self.assertTrue( exists, "%s branch exists" % branch_name)
     def test_newest_study_id(self):
+        def cleanup_newest():
+            git.checkout("master")
+            git.branch("-D","leto_study_o9999")
+
+        self.addCleanup(cleanup_newest)
+
+        git.checkout("master")
         newest_id = self.gd.newest_study_id()
-        self.assertTrue( newest_id >= 2700 )
+
+        self.assertGreaterEqual( newest_id, 2700)
+
+        git.checkout("-b", "leto_study_o9999")
+
+        newest_id = self.gd.newest_study_id()
+        self.assertGreaterEqual( newest_id, 9999 )
 
 def suite():
     loader = unittest.TestLoader()
