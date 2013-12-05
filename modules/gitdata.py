@@ -1,5 +1,6 @@
 from sh import git
 import sh
+import re
 import os, sys
 import locket
 from locket import LockError
@@ -35,7 +36,10 @@ class GitData(object):
 
     def newest_study_id(self):
         os.chdir(self.repo)
+
+        git.checkout("master")
         dirs = []
+        # first we look for studies already in our master branch
         for f in os.listdir("study/"):
             if os.path.isdir("study/%s" % f):
                 # ignore alphabetic prefix, o = created by opentree API
@@ -43,6 +47,16 @@ class GitData(object):
                     dirs.append(int(f[1:]))
                 else:
                     dirs.append(int(f))
+
+        # next we must look at local branch names for new studies
+        # without --no-color we get terminal color codes in the branch output
+        branches = git.branch("--no-color")
+        branches = [ b.strip() for b in branches ]
+        for b in branches:
+            mo = re.match(".+_o(\d+)",b)
+            if mo:
+                dirs.append(int(mo.group(1)))
+
         dirs.sort()
         return dirs[-1]
 
