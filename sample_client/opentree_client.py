@@ -23,19 +23,16 @@ headers = {
 }
 
 def example_get(study_id=9):
+    "Read a study via GET"
     url  = "%s/api/default/%s%s" % (apihost, "v1/study/", study_id)
     print "Requesting GET %s" % url
     resp = requests.get(url, headers=headers, allow_redirects=True)
     print "Got status code: %s" % resp.status_code
-
-    try:
-        json_response = resp.json()
-        print json_response
-    except:
-        text = resp.text
-        print text
+    show_response(resp)
 
 def example_put(study_id=9):
+    "Update a study via PUT"
+
     url  = "%s/api/default/%s%s" % (apihost, "v1/study/", study_id)
     print "Requesting PUT %s" % url
 
@@ -47,7 +44,25 @@ def example_put(study_id=9):
     }
 
     resp = requests.put(url, data=json.dumps(data), headers=headers, allow_redirects=True)
+    show_response(resp)
 
+def example_post():
+    "Create a study via POST"
+    url  = "%s/api/default/%s" % (apihost, "v1/study/")
+    print "Requesting POST %s" % url
+
+    study_file = codecs.open("study.json", "rU", encoding="utf-8")
+    nexson     = json.load(study_file)
+
+    data = { 'nexson' : nexson,
+            'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+    }
+
+    resp = requests.post(url, data=json.dumps(data), headers=headers, allow_redirects=True)
+    show_response(resp)
+
+
+def show_response(resp):
     print "Got status code: %s" % resp.status_code
 
     try:
@@ -62,3 +77,6 @@ example_get()
 
 # Modify a study
 example_put()
+
+# Create a new study
+example_post()
