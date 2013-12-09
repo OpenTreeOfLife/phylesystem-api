@@ -34,7 +34,8 @@ def v1():
         filename = "%s/applications/%s/private/config" % (request.env.web2py_path, app_name)
         conf.readfp(open(filename))
 
-    repo_path = conf.get("apis","repo_path")
+    repo_path   = conf.get("apis","repo_path")
+    repo_remote = conf.get("apis", "repo_remote")
 
     def __validate(nexson):
         '''Returns three objects:
@@ -247,7 +248,7 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push()
+            gd.push(repo_remote)
         except:
             raise HTTP(400, json.dumps({
                 "error": 1,
@@ -301,7 +302,7 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push()
+            gd.push(repo_remote)
         except:
             raise HTTP(400, json.dumps({
                 "error": 1,
