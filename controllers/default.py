@@ -25,7 +25,7 @@ def v1():
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
     app_name = "api"
-    conf = SafeConfigParser({})
+    conf = SafeConfigParser(allow_no_value=True)
     localconfig_filename = "%s/applications/%s/private/localconfig" % (request.env.web2py_path, app_name)
 
     if os.path.isfile(localconfig_filename):
@@ -36,6 +36,9 @@ def v1():
 
     repo_path   = conf.get("apis","repo_path")
     repo_remote = conf.get("apis", "repo_remote")
+    git_ssh     = conf.get("apis", "git_ssh")
+    pkey        = conf.get("apis", "pkey")
+    git_env     = {"GIT_SSH": git_ssh, "PKEY": pkey}
 
     def __validate(nexson):
         '''Returns three objects:
@@ -248,7 +251,7 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push(repo_remote)
+            gd.push(repo_remote, env=git_env)
         except:
             raise HTTP(400, json.dumps({
                 "error": 1,
@@ -302,7 +305,7 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push(repo_remote)
+            gd.push(repo_remote, git_env)
         except:
             raise HTTP(400, json.dumps({
                 "error": 1,

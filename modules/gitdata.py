@@ -137,12 +137,18 @@ class GitData(object):
         return new_sha.strip()
 
     @preserve_cwd
-    def push(self, remote):
+    def push(self, remote, env={}):
         os.chdir(self.repo)
-        # TODO: set up GIT_SSH to use proper deployment key for repo
 
         current_branch = self.current_branch()
-        # be explicit about what we are pushing, since the default behavior
+
+        # if there is no PKEY, we don't need to override env
+        # We are explicit about what we are pushing, since the default behavior
         # is different in different versions of Git and/or by configuration
-        git.push(remote, current_branch)
+        if env["PKEY"]:
+            new_env = os.environ.copy()
+            new_env.update(env)
+            git.push(remote, current_branch, _env=env)
+        else:
+            git.push(remote, current_branch)
 

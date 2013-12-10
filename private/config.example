@@ -15,5 +15,11 @@ repo_path   = REPO_PATH
 # the remote to push changes to
 repo_remote = REPO_REMOTE
 
+# these allow us to specify the SSH keys that git pushes
+# will use. Leave the config keys in this config file,
+# without any values assigned, to not use this feature
+git_ssh     = GIT_SSH
+pkey        = PKEY
+
 oti_host    = localhost
 oti_port    = 7474
