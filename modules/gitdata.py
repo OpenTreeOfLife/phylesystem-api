@@ -148,7 +148,7 @@ class GitData(object):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git.push(remote, current_branch, _env=env)
+            git.push(remote, current_branch, _env=new_env)
         else:
             git.push(remote, current_branch)
 

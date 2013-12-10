@@ -305,7 +305,7 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push(repo_remote, git_env)
+            gd.push(repo_remote, env=git_env)
         except:
             raise HTTP(400, json.dumps({
                 "error": 1,
