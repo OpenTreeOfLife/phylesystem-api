@@ -10,7 +10,7 @@ from ConfigParser import SafeConfigParser
 class TestGitData(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        conf = SafeConfigParser({})
+        conf = SafeConfigParser(allow_no_value=True)
         if os.path.isfile("../private/localconfig"):
             conf.read("../private/localconfig")
         else:
