@@ -13,6 +13,10 @@ github_client_secret = YOUR_CLIENT_SECRET_HERE
 repo_path   = REPO_PATH
 
 # the remote to push changes to
+# This will usually be "origin" on a local dev machine where treenexus.git
+# was cloned via SSH (git@github.com:...)
+# On deployed servers, which use anonymous git:// protocol, we add a new
+# remote "originssh" which can be pushed to
 repo_remote = REPO_REMOTE
 
 # these allow us to specify the SSH keys that git pushes
