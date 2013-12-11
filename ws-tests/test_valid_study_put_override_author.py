@@ -6,14 +6,8 @@ import json
 import sys
 import os
 
-# this makes it easier to test concurrent pushes to different branches
-if len(sys.argv) > 1:
-    study_id = sys.argv[1]
-else:
-    study_id = 1003
-
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/%s' % study_id
+SUBMIT_URI = DOMAIN + '/v1/study/1003'
 inpf = codecs.open('../nexson-validator/tests/single/input/1003.json', 'rU', encoding='utf-8')
 n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
@@ -28,6 +22,8 @@ el['$'] = datetime.datetime.utcnow().isoformat()
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'author_name': "Some Dude",
+         'author_email': "dude@dude.com",
 }
 if test_http_json_method(SUBMIT_URI,
                          'PUT',
