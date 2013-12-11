@@ -31,8 +31,8 @@ class GitData(object):
     @preserve_cwd
     def current_branch(self):
         os.chdir(self.repo)
-        branch_name = git("symbolic-ref", "--short", "HEAD")
-        return branch_name.strip()
+        branch_name = git("symbolic-ref", "HEAD")
+        return branch_name.replace('refs/heads/','').strip()
 
     def newest_study_id(self):
         os.chdir(self.repo)
