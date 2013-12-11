@@ -56,6 +56,12 @@ number.
 [Here](https://github.com/OpenTreeOfLife/treenexus/compare/leto_study_9?expand=1)
 is an example commit created by the OpenTree API.
 
+# Using the API from Python
+
+See
+[opentree_client.py](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/sample_client/opentree_client.py)
+for examples of using the API from Python.
+
 # Authors
 
 See the CREDITS file

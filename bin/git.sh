@@ -10,6 +10,7 @@ if [ -z "$PKEY" ]; then
     # if PKEY is not specified, run ssh using default keyfile
     ssh "$@"
 else
-    ssh -i "$PKEY" "$@"
+    # prevent "Are you sure you want to continue connecting?"
+    ssh -oStrictHostKeyChecking=no -i "$PKEY" "$@"
 fi
 
