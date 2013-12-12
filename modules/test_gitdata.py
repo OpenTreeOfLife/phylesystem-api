@@ -2,7 +2,7 @@ import unittest
 import os
 import sys
 import time
-from gitdata import GitData
+from gitdata import GitData, MergeException
 import simplejson as json
 from sh import git
 from ConfigParser import SafeConfigParser
@@ -32,8 +32,68 @@ class TestGitData(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-
         git.branch("-D",self.testing_branch_name)
+
+    def test_merge(self):
+        def cleanup_merge():
+            git.checkout("master")
+            # if something failed, the branch might still exist
+            if self.gd.branch_exists("to_merge_1"):
+                git.branch("-D", "to_merge_1")
+
+            git.branch("-D", "base_branch")
+
+        self.addCleanup(cleanup_merge)
+
+        git.checkout("-b", "to_merge_1")
+        git.checkout("-b", "base_branch")
+
+        file = open("foo.txt", "w")
+        file.write("ABC\n")
+        file.close()
+
+        git.add("foo.txt")
+
+        git.commit("-m","Test commit")
+
+        self.gd.merge("to_merge_1", "base_branch")
+
+        self.assertTrue(True, "Merge succeeded")
+
+    def test_merge_conflict(self):
+        def cleanup_merge_conflict():
+            git.checkout("master")
+            # if something failed, the branch might still exist
+            if self.gd.branch_exists("to_merge_1"):
+                git.branch("-D", "to_merge_1")
+
+            if self.gd.branch_exists("to_merge_2"):
+                git.branch("-D", "to_merge_2")
+
+        self.addCleanup(cleanup_merge_conflict)
+
+        git.checkout("master")
+        git.checkout("-b", "to_merge_1")
+
+        file = open("foo.txt", "w")
+        file.write("ABC\n")
+        file.close()
+
+        git.add("foo.txt")
+        git.commit("-m","Test commit")
+
+        git.checkout("master")
+
+        git.checkout("-b", "to_merge_2")
+
+        file = open("foo.txt", "w")
+        file.write("XYZ\n")
+        file.close()
+
+        git.add("foo.txt")
+        git.commit("-m","Test commit")
+
+        self.assertRaises(MergeException, lambda:  self.gd.merge("to_merge_1", "to_merge_2") )
 
     def test_current_branch(self):
         git.checkout(self.testing_branch_name)

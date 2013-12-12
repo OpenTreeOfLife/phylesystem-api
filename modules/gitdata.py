@@ -5,6 +5,9 @@ import os, sys
 import locket
 from locket import LockError
 
+class MergeException(Exception):
+    pass
+
 class GitData(object):
     def __init__(self, repo):
         self.repo = repo
@@ -135,6 +138,32 @@ class GitData(object):
         new_sha = git("rev-parse","HEAD")
 
         return new_sha.strip()
+
+    @preserve_cwd
+    def merge(self, branch, base_branch="master"):
+        "Merge the the given WIP branch to master (or base_branch, if specified)"
+        os.chdir(self.repo)
+
+        current_branch = self.current_branch()
+        if current_branch != base_branch:
+            git.checkout(base_branch)
+
+        # Always create a merge commit, even if we could fast forward, so we know
+        # when merges occured
+        try:
+            merge_output = git.merge("--no-ff", branch)
+        except sh.ErrorReturnCode:
+            # attempt to reset things so other operations can
+            # continue
+            output = git.status()
+            git.merge("--abort")
+
+            # re-raise the exception so other code can decide
+            # what to do with it
+            raise MergeException(output)
+
+        # the merge succeeded, so remove the local WIP branch
+        git.branch("-d", branch)
 
     @preserve_cwd
     def push(self, remote, env={}):
