@@ -56,7 +56,10 @@ class TestGitData(unittest.TestCase):
 
         git.commit("-m","Test commit")
 
-        self.gd.merge("to_merge_1", "base_branch")
+        new_sha = self.gd.merge("to_merge_1", "base_branch")
+
+        self.assertTrue( new_sha != "", "new_sha=%s is non-empty" % new_sha)
+        self.assertEqual(len(new_sha), 40, "SHA is 40 chars")
 
         self.assertTrue(True, "Merge succeeded")
 
@@ -177,7 +180,7 @@ class TestGitData(unittest.TestCase):
         git.checkout("master")
         newest_id = self.gd.newest_study_id()
 
-        self.assertGreaterEqual( newest_id, 2700)
+        self.assertGreaterEqual( newest_id, 2600)
 
         git.checkout("-b", "leto_study_o9999")
 
