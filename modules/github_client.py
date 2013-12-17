@@ -26,7 +26,7 @@ def get_registered_app_secrets():
     Github_client_secret = 'CLIENT_SECRET_NOT_FOUND'
     if in_web2py:
         app_name = current.request.application
-    conf = SafeConfigParser({})
+    conf = SafeConfigParser(allow_no_value=True)
     try:
         # NOTE: This assumes that request.application EXACTLY matches the filesystem path
         print(">> LOOKING FOR %s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
