@@ -4,8 +4,6 @@ import json
 import hashlib
 import github
 from github import Github, BadCredentialsException
-import github_client
-from githubwriter import GithubWriter
 from pprint import pprint
 from gitdata import GitData
 from ConfigParser import SafeConfigParser
@@ -135,6 +133,7 @@ def v1():
             return unadulterated_content_commit
 
     def validate_and_normalize_nexson(**kwargs):
+        """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
         try:
             nexson = kwargs.get('nexson', {})
             if not isinstance(nexson, dict):
@@ -152,6 +151,18 @@ def v1():
         return nexson, annotation, validation_log, rich_nexson
 
     def authenticate(**kwargs):
+        """Verify that we received a valid Github authentication token
+
+        This method takes a dict of keyword arguments and optionally
+        over-rides the author_name and author_email associated with the
+        given token, if they are present.
+
+        Returns a PyGithub object, author name and author email.
+
+        This method will return HTTP 400 if the auth token is not present
+        or if it is not valid, i.e. if PyGithub throws a BadCredentialsException.
+
+        """
         # this is the GitHub API auth-token for a logged-in curator
         auth_token   = kwargs.get('auth_token','')
 
@@ -225,6 +236,8 @@ def v1():
                 return unadulterated_content_commit
 
     def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
+        """Actually make a local Git commit and push it to our remote
+        """
         author  = "%s <%s>" % (author_name, author_email)
 
         branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
