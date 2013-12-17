@@ -60,7 +60,17 @@ def example_post():
 
     resp = requests.post(url, data=json.dumps(data), headers=headers, allow_redirects=True)
     show_response(resp)
+    data = resp.json()
+    return data["branch_name"]
 
+def example_merge(branch):
+    data = { 'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token') }
+
+    url  = "%s/api/merge/v1/%s/%s" % (apihost, branch, "master")
+
+    resp = requests.post(url, data=json.dumps(data), headers=headers, allow_redirects=True)
+
+    show_response(resp)
 
 def show_response(resp):
     print "Got status code: %s" % resp.status_code
@@ -79,4 +89,7 @@ example_get()
 example_put()
 
 # Create a new study
-example_post()
+branch = example_post()
+print "Branch name is %s" % branch
+
+example_merge(branch)
