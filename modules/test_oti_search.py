@@ -6,7 +6,7 @@ from ConfigParser import SafeConfigParser
 class TestOTISearch(unittest.TestCase):
     @classmethod
     def setUp(self):
-        conf = SafeConfigParser({})
+        conf = SafeConfigParser(allow_no_value=True)
         if os.path.isfile("../private/localconfig"):
             conf.read("../private/localconfig")
         else:

@@ -11,7 +11,7 @@ def v1():
     "The OpenTree API v1"
     response.view = 'generic.json'
     app_name = "api"
-    conf = SafeConfigParser({})
+    conf = SafeConfigParser(allow_no_value=True)
     if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
         conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
     else:
