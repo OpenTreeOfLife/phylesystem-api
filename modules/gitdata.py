@@ -5,6 +5,9 @@ import os, sys
 import locket
 from locket import LockError
 
+class MergeException(Exception):
+    pass
+
 class GitData(object):
     def __init__(self, repo):
         self.repo = repo
@@ -71,6 +74,7 @@ class GitData(object):
     @preserve_cwd
     def branch_exists(self, branch):
         """Returns true or false depending on if a branch exists"""
+        os.chdir(self.repo)
         try:
             git(("rev-parse",branch))
         except sh.ErrorReturnCode:
@@ -137,10 +141,42 @@ class GitData(object):
         return new_sha.strip()
 
     @preserve_cwd
-    def push(self, remote, env={}):
+    def merge(self, branch, base_branch="master"):
+        "Merge the the given WIP branch to master (or base_branch, if specified)"
         os.chdir(self.repo)
 
         current_branch = self.current_branch()
+        if current_branch != base_branch:
+            git.checkout(base_branch)
+
+        # Always create a merge commit, even if we could fast forward, so we know
+        # when merges occured
+        try:
+            merge_output = git.merge("--no-ff", branch)
+        except sh.ErrorReturnCode:
+            # attempt to reset things so other operations can
+            # continue
+            output = git.status()
+            git.merge("--abort")
+
+            # re-raise the exception so other code can decide
+            # what to do with it
+            raise MergeException(output)
+
+        # the merge succeeded, so remove the local WIP branch
+        git.branch("-d", branch)
+
+        new_sha      = git("rev-parse","HEAD")
+        return new_sha.strip()
+
+    @preserve_cwd
+    def push(self, remote, env={}, branch=None):
+        os.chdir(self.repo)
+
+        if branch:
+            branch_to_push = branch
+        else:
+            branch_to_push = self.current_branch()
 
         # if there is no PKEY, we don't need to override env
         # We are explicit about what we are pushing, since the default behavior
@@ -148,7 +184,7 @@ class GitData(object):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git.push(remote, current_branch, _env=new_env)
+            git.push(remote, branch_to_push, _env=new_env)
         else:
-            git.push(remote, current_branch)
+            git.push(remote, branch_to_push)
 

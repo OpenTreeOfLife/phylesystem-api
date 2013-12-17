@@ -4,9 +4,9 @@ import json
 import hashlib
 import github
 from github import Github, BadCredentialsException
+import api_utils
 from pprint import pprint
 from gitdata import GitData
-from ConfigParser import SafeConfigParser
 from locket import LockError
 
 # NexSON validation
@@ -22,20 +22,7 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
-    app_name = "api"
-    conf = SafeConfigParser(allow_no_value=True)
-    localconfig_filename = "%s/applications/%s/private/localconfig" % (request.env.web2py_path, app_name)
-
-    if os.path.isfile(localconfig_filename):
-        conf.readfp(open(localconfig_filename))
-    else:
-        filename = "%s/applications/%s/private/config" % (request.env.web2py_path, app_name)
-        conf.readfp(open(filename))
-
-    repo_path   = conf.get("apis","repo_path")
-    repo_remote = conf.get("apis", "repo_remote")
-    git_ssh     = conf.get("apis", "git_ssh")
-    pkey        = conf.get("apis", "pkey")
+    repo_path, repo_remote, git_ssh, pkey = api_utils.read_config(request)
     git_env     = {"GIT_SSH": git_ssh, "PKEY": pkey}
 
     def __validate(nexson):
@@ -109,7 +96,7 @@ def v1():
         #TODO, need to make this spawn a thread to do the second commit rather than block
         block_until_annotation_commit = True
 
-        (gh, author_name, author_email) = authenticate(**kwargs)
+        (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
 
         gd = GitData(repo=repo_path)
@@ -150,52 +137,6 @@ def v1():
 
         return nexson, annotation, validation_log, rich_nexson
 
-    def authenticate(**kwargs):
-        """Verify that we received a valid Github authentication token
-
-        This method takes a dict of keyword arguments and optionally
-        over-rides the author_name and author_email associated with the
-        given token, if they are present.
-
-        Returns a PyGithub object, author name and author email.
-
-        This method will return HTTP 400 if the auth token is not present
-        or if it is not valid, i.e. if PyGithub throws a BadCredentialsException.
-
-        """
-        # this is the GitHub API auth-token for a logged-in curator
-        auth_token   = kwargs.get('auth_token','')
-
-        if not auth_token:
-            raise HTTP(400,json.dumps({
-                "error": 1,
-                "description":"You must provide an auth_token to authenticate to the OpenTree API"
-            }))
-        gh           = Github(auth_token)
-        gh_user      = gh.get_user()
-
-        try:
-            gh_user.login
-        except BadCredentialsException:
-            raise HTTP(400,json.dumps({
-                "error": 1,
-                "description":"You have provided an invalid or expired authentication token"
-            }))
-
-        author_name  = kwargs.get('author_name','')
-        author_email = kwargs.get('author_email','')
-
-        # use the Github Oauth token to get a name/email if not specified
-        # we don't provide these as default values above because they would
-        # generate API calls regardless of author_name/author_email being specifed
-
-        if not author_name:
-            author_name = gh_user.name
-        if not author_email:
-            author_email = gh_user.email
-
-        return gh, author_name, author_email
-
     def PUT(resource, resource_id, **kwargs):
         "OTOL API methods relating to updating existing resources"
         #TODO, need to make this spawn a thread to do the second commit rather than block
@@ -205,7 +146,7 @@ def v1():
             response.view = 'generic.jsonp'
         if not resource=='study': raise HTTP(400, 'resource != study')
 
-        gh, author_name, author_email = authenticate(**kwargs)
+        gh, author_name, author_email = api_utils.authenticate(**kwargs)
 
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
 
@@ -265,10 +206,10 @@ def v1():
         try:
             # actually push the changes to Github
             gd.push(repo_remote, env=git_env)
-        except:
+        except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not push deletion of study #%s" % resource_id
+                "description": "Could not push deletion of study #%s. Details:\n %s" % (resource_id, e.message)
             }))
         finally:
             gd.release_lock()
@@ -289,7 +230,7 @@ def v1():
 
         if not resource=='study': raise HTTP(400, 'resource != study')
 
-        (gh, author_name, author_email) = authenticate(**kwargs)
+        (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
 
         author       = "%s <%s>" % (author_name, author_email)
 
