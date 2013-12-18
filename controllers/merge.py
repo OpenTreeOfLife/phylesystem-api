@@ -12,7 +12,37 @@ def v1():
     response.view = 'generic.json'
 
     def POST(branch,base_branch="master",jsoncallback=None,callback=None,_=None,**kwargs):
-        "OpenTree API methods relating to merging branching"
+        """OpenTree API methods relating to merging branches
+
+        This controller implements the merging of branches via the API.
+
+        For example, to merge the branch leto_study_12 to master via curl:
+
+        curl -X POST http://localhost:8000/api/merge/v1/leto_study_12/master?auth_token=$GITHUB_OAUTH_TOKEN
+
+        where the first branch is the branch to merge *in* and the second is
+        the branch to merge *into*. The second branch defaults to "master", so
+        this request is equivalent to the above:
+
+        curl -X POST http://localhost:8000/api/merge/v1/leto_study_12?auth_token=$GITHUB_OAUTH_TOKEN
+
+        If the request is successful, a JSON response similar to this will be returned:
+
+        {
+            "error": 0,
+            "branch_name": "master",
+            "description": "Merged branch leto_study_12",
+            "sha":  "dcab222749c9185797645378d0bda08d598f81e7"
+        }
+
+        If there is an error, an HTTP 400 error will be returned with a JSON response similar
+        to this:
+
+        {
+            "error": 1,
+            "description": "Could not push foo branch"
+        }
+        """
 
         # support JSONP request from another domain
         if jsoncallback or callback:
