@@ -90,11 +90,21 @@ def v1():
         try:
             # actually push the changes to Github
             gd.push(repo_remote, env=git_env,branch=base_branch)
-        except:
+        except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not push %s branch" % base_branch
+                "description": "Could not push %s branch! Details: \n%s" % (base_branch, e.message)
             }))
+
+        try:
+            # delete the WIP branch we just merged in on our remote
+            gd.delete_remote_branch(repo_remote, env=git_env, branch=branch)
+        except Exception, e:
+            raise HTTP(400, json.dumps({
+                "error": 1,
+                "description": "Could not delete remote branch %s! Details:\n%s" % (branch, e.message)
+            }))
+
         finally:
             gd.release_lock()
 
