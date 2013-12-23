@@ -3,6 +3,7 @@ import sh
 import re
 import os, sys
 import locket
+import functools
 from locket import LockError
 
 class MergeException(Exception):
@@ -16,7 +17,15 @@ class GitData(object):
         self.lock_timeout  = 30
         self.lock          = locket.lock_file(self.lock_file, timeout=self.lock_timeout)
 
+
     def preserve_cwd(function):
+        """
+        A decorator which remembers the current
+        working directory before a function call and
+        then resets the CWD after the function
+        returns.
+        """
+        @functools.wraps(function)
         def decorator(*args, **kwargs):
             cwd = os.getcwd()
             try:
@@ -170,7 +179,15 @@ class GitData(object):
         return new_sha.strip()
 
     @preserve_cwd
+    def delete_remote_branch(self, remote, branch, env={}):
+        "Delete a remote branch"
+        # deleting a branch is the same as
+        # git push remote :branch
+        self.push(remote, env, ":%s" % branch)
+
+    @preserve_cwd
     def push(self, remote, env={}, branch=None):
+        "Push a branch to a given remote"
         os.chdir(self.repo)
 
         if branch:
