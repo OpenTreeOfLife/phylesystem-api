@@ -273,3 +273,31 @@ class GitData(object):
         else:
             git.push(remote, branch_to_push)
 
+    @preserve_cwd
+    def pull(self, remote, env={}, branch=None):
+        """
+        Push a branch to a given remote
+
+        Given a remote, env and branch, push branch
+        to remote and add the environment variables
+        in the env dict to the environment of the
+        "git push" command.
+
+        If no branch is given, the current branch
+        will be updated.
+        """
+        os.chdir(self.repo)
+        if branch:
+            branch_to_pull = branch
+        else:
+            branch_to_pull = self.current_branch()
+
+        # if there is no PKEY, we don't need to override env
+        # We are explicit about what we are pushing, since the default behavior
+        # is different in different versions of Git and/or by configuration
+        if env["PKEY"]:
+            new_env = os.environ.copy()
+            new_env.update(env)
+            git.pull(remote, branch_to_pull, _env=new_env)
+        else:
+            git.pull(remote, branch_to_pull)
