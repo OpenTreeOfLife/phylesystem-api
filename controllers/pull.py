@@ -70,7 +70,13 @@ def v1():
         except Exception, e:
             gd.release_lock()
 
-            raise HTTP(400, json.dumps({
+            # Attempt to abort a merge, in case of conflicts
+            try:
+                git.merge("--abort")
+            except:
+                pass
+
+            raise HTTP(409, json.dumps({
                 "error": 1,
                 "description": "Could not pull! Details: %s" % (e.message)
             }))
