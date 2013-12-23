@@ -193,14 +193,12 @@ def v1():
 
         try:
             new_sha = gd.write_study(resource_id,file_content,branch_name,author)
-        except:
-            e = sys.exc_info()[0]
-
+        except Exception, e:
             gd.release_lock()
 
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not write to study #%s due to %s Exception" % (resource_id, e)
+                "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
             }))
 
         try:
