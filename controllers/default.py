@@ -192,6 +192,25 @@ def v1():
             }))
 
         try:
+            gd.pull(repo_remote, env=git_env, branch=branch_name)
+        except Exception, e:
+            # We can ignore this if the branch doesn't exist yet on the remote,
+            # otherwise raise a 400
+            if "Couldn't find remote ref" not in e.message:
+                gd.release_lock()
+
+                # Attempt to abort a merge, in case of conflicts
+                try:
+                    git.merge("--abort")
+                except:
+                    pass
+
+                raise HTTP(400, json.dumps({
+                    "error": 1,
+                    "description": "Could not pull latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
+                }))
+
+        try:
             new_sha = gd.write_study(resource_id,file_content,branch_name,author)
         except Exception, e:
             gd.release_lock()
@@ -203,7 +222,7 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push(repo_remote, env=git_env)
+            gd.push(repo_remote, env=git_env, branch=branch_name)
         except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
@@ -256,7 +275,7 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push(repo_remote, env=git_env)
+            gd.push(repo_remote, env=git_env, branch=branch_name)
         except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
