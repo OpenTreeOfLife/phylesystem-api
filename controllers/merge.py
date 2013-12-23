@@ -91,6 +91,8 @@ def v1():
             # actually push the changes to Github
             gd.push(repo_remote, env=git_env,branch=base_branch)
         except Exception, e:
+            gd.release_lock()
+
             raise HTTP(400, json.dumps({
                 "error": 1,
                 "description": "Could not push %s branch! Details: \n%s" % (base_branch, e.message)

@@ -246,22 +246,21 @@ def v1():
 
         try:
             new_sha = gd.remove_study(resource_id, branch_name, author)
-        except:
+        except Exception, e:
             gd.release_lock()
 
-            e = sys.exc_info()[0]
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not remove study #%s due to %s Exception" % (resource_id, e)
+                "description": "Could not remove study #%s! Details: %s" % (resource_id, e.message)
             }))
 
         try:
             # actually push the changes to Github
             gd.push(repo_remote, env=git_env)
-        except:
+        except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not push deletion of study #%s" % resource_id
+                "description": "Could not push deletion of study #%s! Details:\n%s" % (resource_id, e.message)
             }))
         finally:
             gd.release_lock()
