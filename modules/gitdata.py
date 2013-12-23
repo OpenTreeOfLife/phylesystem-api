@@ -276,12 +276,12 @@ class GitData(object):
     @preserve_cwd
     def pull(self, remote, env={}, branch=None):
         """
-        Push a branch to a given remote
+        Pull a branch from a given remote
 
-        Given a remote, env and branch, push branch
-        to remote and add the environment variables
+        Given a remote, env and branch, pull branch
+        from remote and add the environment variables
         in the env dict to the environment of the
-        "git push" command.
+        "git pull" command.
 
         If no branch is given, the current branch
         will be updated.
@@ -301,3 +301,6 @@ class GitData(object):
             git.pull(remote, branch_to_pull, _env=new_env)
         else:
             git.pull(remote, branch_to_pull)
+
+        new_sha      = git("rev-parse","HEAD")
+        return new_sha.strip()
