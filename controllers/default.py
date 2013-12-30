@@ -188,7 +188,7 @@ def v1():
         except LockError, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not acquire lock to write to study #%s" % resource_id
+                "description": "Could not acquire lock to write to study #%s\nDetails: %s" % (resource_id,e.message)
             }))
 
         try:
