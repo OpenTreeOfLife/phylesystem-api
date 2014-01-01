@@ -274,7 +274,7 @@ class GitData(object):
             git.push(remote, branch_to_push)
 
     @preserve_cwd
-    def pull(self, remote, env={}, branch=None):
+    def pull(self, remote, env={}, branch=None, author="OpenTree API <api@opentreeoflife.org>"):
         """
         Pull a branch from a given remote
 
@@ -298,9 +298,9 @@ class GitData(object):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git.pull(remote, branch_to_pull, _env=new_env)
+            git.pull(author=author, remote, branch_to_pull, _env=new_env)
         else:
-            git.pull(remote, branch_to_pull)
+            git.pull(author=author, remote, branch_to_pull)
 
         new_sha      = git("rev-parse","HEAD")
         return new_sha.strip()
