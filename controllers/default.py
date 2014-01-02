@@ -192,7 +192,7 @@ def v1():
             }))
 
         try:
-            gd.pull(repo_remote, env=git_env, branch=branch_name, author=author)
+            gd.pull(repo_remote, env=git_env, branch=branch_name)
         except Exception, e:
             # We can ignore this if the branch doesn't exist yet on the remote,
             # otherwise raise a 400
