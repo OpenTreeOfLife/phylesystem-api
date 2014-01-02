@@ -298,9 +298,9 @@ class GitData(object):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git.pull(remote, branch_to_pull, _env=new_env, author=author)
+            git.pull(author=author, remote, branch_to_pull, _env=new_env)
         else:
-            git.pull(remote, branch_to_pull, author=author)
+            git.pull(author=author, remote, branch_to_pull)
 
         new_sha      = git("rev-parse","HEAD")
         return new_sha.strip()
