@@ -72,6 +72,16 @@ def example_merge(branch):
 
     show_response(resp)
 
+def example_pull():
+    "Example that syncs the local master branch with our remote master branch"
+    data = { 'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token') }
+
+    url  = "%s/api/pull/v1/master" % ( apihost )
+
+    resp = requests.post(url, data=json.dumps(data), headers=headers, allow_redirects=True)
+
+    show_response(resp)
+
 def show_response(resp):
     print "Got status code: %s" % resp.status_code
 
@@ -81,6 +91,9 @@ def show_response(resp):
     except:
         text = resp.text
         print text
+
+# Update/sync a branch
+example_pull()
 
 # Read a study
 example_get()
