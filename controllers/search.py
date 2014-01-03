@@ -2,7 +2,6 @@ import os
 import time
 import json
 import requests
-from githubsearch import GithubSearch
 from oti_search import OTISearch
 from ConfigParser import SafeConfigParser
 
