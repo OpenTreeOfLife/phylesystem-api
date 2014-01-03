@@ -12,6 +12,13 @@ from locket import LockError
 # NexSON validation
 from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
 
+def index():
+    response.view = 'generic.json'
+    return json.dumps({
+        "description": "The Open Tree API",
+        "source_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/",
+    })
+
 @request.restful()
 def v1():
     "The OpenTree API v1"
