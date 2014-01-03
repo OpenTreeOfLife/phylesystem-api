@@ -18,35 +18,32 @@ create a symlink in ```$WEB2PY_ROOT/applications``` to the API repo directory:
    # this will make the app available under /api
    ln -sf /dir/with/api.opentreeoflife.org api
 
-# Using the API
+# Using the API from the command-line
 
-If you want to update study 10 with a file called 10-modified.json, the
-following command will accomplish that:
+See [docs/](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/docs/) for examples of how to use the API with ```curl```.
 
-    curl -v -X POST http://localhost:8080/api/default/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN \
-    --data-urlencode nexson@10-modified.json
+# Dealing with large studies
 
-Note that it assumes a Github Oauth token is stored in the environment variable
+NOTE: This is a proposal and not yet implemented. All studies
+are currently under 50MB and have a structure of:
 
-    $GITHUB_OAUTH_TOKEN
+    studies/N/N.json
 
-To get a Github OAuth token, you can use ```curl``` as well:
+On the backend, the API will ask treenexus for the directory
+containing study ```N```.  If the JSON representing that study
+is greater than 50MB, it will be broken into multiple files to
+be stored in Git, so they  will be merged together before a
+response is sent. This is all transparent to the user of the
+OToL API. Only people using the treenexus data files directly
+will need to handle this.
 
-    curl -v -u USERNAME -X POST https://api.github.com/authorizations \
-        --data '{"scopes":["public_repo"],"note":"description"}'
+These files will have the structure of:
 
-where USERNAME is your Github login/username. The above will return JSON
-containing a "token" key, which is your new OAuth token.
+    studies/N/N-0.json
+    studies/N/N-1.json
+    ....
+    studies/N/N-10.json
 
-The above will create a commit with the update JSON on a branch of the form
-
-    USERNAME_study_ID
-
-where USERNAME is the authenticated users Github login and ID is the study ID
-number.
-
-[Here](https://github.com/OpenTreeOfLife/treenexus/compare/leto_study_9?expand=1)
-is an example commit created by the OpenTree API.
 
 # Using the API from Python
 
