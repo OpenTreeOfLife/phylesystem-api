@@ -7,15 +7,7 @@ to the backend datastore [treenexus](https://github.com/OpenTreeOfLife/treenexus
 
 # Introduction
 
-This repo currently has a single Git submodule at ``` ./treenexus ```
-
-The first time you clone this repo, run this command to get the treenexus data:
-
-     git submodule update --init --recursive
-
-The ```--recursive``` option is currently optional.
-
-See the [Version Control Strategy](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/vcs_strategy.md) for more details about design decisions and how to use submodules.
+See the [Version Control Strategy](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/docs/vcs_strategy.md) for more details about design decisions and how to use submodules.
 
 # Deploying
 
