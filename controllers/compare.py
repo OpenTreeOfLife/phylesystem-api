@@ -1,7 +1,7 @@
 import os
 import time
 import json
-from api_utils import authenticate
+import api_utils
 
 @request.restful()
 def v1():
@@ -23,17 +23,21 @@ def v1():
             if auth_header:
                 auth_token = auth_header.split()[1]
 
-        return _compare("OpenTreeOfLife/treenexus",base,head, auth_token)
+        repo_path, repo_remote, git_ssh, pkey = api_utils.read_config(request)
+
+        return _compare(repo_path,base,head, auth_token)
 
     def _compare(repo_path, base, head, token):
         """Compare two commits (by SHA or branch name) and return a list of changed files
 
         Example URL: http://localhost:8080/api/compare/v1/c3608e5/master
 
-        which calls out to https://api.github.com/repos/OpenTreeOfLife/treenexus/compare/c3608e5...master
+        which calls out to https://api.github.com/repos/OpenTreeOfLife/REPO/compare/c3608e5...master
+
+        where REPO is the data repo which contains NEXSON files.
 
     """
-        (gh,gh_user,gh_username) = authenticate(auth_token=token)
+        (gh,gh_user,gh_username) = api_utils.authenticate(auth_token=token)
 
         repo = gh.get_repo(repo_path)
 
