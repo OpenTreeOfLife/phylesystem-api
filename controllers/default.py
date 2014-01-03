@@ -17,6 +17,7 @@ def index():
     return json.dumps({
         "description": "The Open Tree API",
         "source_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/",
+        "documentation_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/tree/master/docs"
     })
 
 @request.restful()
