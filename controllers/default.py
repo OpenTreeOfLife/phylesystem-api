@@ -78,7 +78,7 @@ def v1():
             return 'ERROR fetching study:\n%s' % e
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
-        "OTOL API methods relating to creating (and importing) resources"
+        "Open Tree API methods relating to creating (and importing) resources"
 
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
@@ -146,7 +146,7 @@ def v1():
         return nexson, annotation, validation_log, rich_nexson
 
     def PUT(resource, resource_id, **kwargs):
-        "OTOL API methods relating to updating existing resources"
+        "Open Tree API methods relating to updating existing resources"
         #TODO, need to make this spawn a thread to do the second commit rather than block
         block_until_annotation_commit = True
         # support JSONP request from another domain
@@ -248,7 +248,7 @@ def v1():
         }
 
     def DELETE(resource, resource_id=None, **kwargs):
-        "OTOL API methods relating to deleting existing resources"
+        "Open Tree API methods relating to deleting existing resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
