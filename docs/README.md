@@ -84,8 +84,18 @@ To create a new study from a file in the current directory called ```study.json`
 
 ### Syncing a WIP branch with Github
 
+This API method will sync the local Git repo on the server with it's remote (usually Github).
+
     curl -X POST http://dev.opentreeoflife.org/api/pull/v1/master?auth_token=$GITHUB_OAUTH_TOKEN
 
+On success, it will return JSON similar to this:
+
+    {
+        "branch_name": "master",
+        "sha": "9ed1ab2d118c911467c28cbdaa7cb3091243154d",
+        "description": "Updated branch master",
+        "error": 0
+    }
 
 
 ### Merge a study in a WIP branch
