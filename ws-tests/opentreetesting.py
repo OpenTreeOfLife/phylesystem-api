@@ -99,9 +99,12 @@ def test_http_json_method(url,
                                 headers=headers,
                                 allow_redirects=True)
     debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
+    debug('Got status code {c} (expecting {e})\n'.format(c=resp.status_code,e=expected_status))
     if resp.status_code != expected_status:
         debug('Full response: {r}\n'.format(r=resp.text))
         resp.raise_for_status()
+        # this is required for the case when we expect a 4xx/5xx but a successful return code is returned
+        return False
     if expected_response is not None:
         try:
             results = resp.json()

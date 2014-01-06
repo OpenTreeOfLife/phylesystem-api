@@ -70,12 +70,12 @@ def v1():
                 auth_token = auth_header.split()[1]
 
         # return the correct nexson of study_id, using the specified view
-        try:
-            gd = GitData(repo=repo_path)
-            study_nexson = gd.fetch_study(resource_id)
-            return dict(FULL_RESPONSE=study_nexson)
-        except Exception, e:
-            return 'ERROR fetching study:\n%s' % e
+        gd = GitData(repo=repo_path)
+        study_nexson = gd.fetch_study(resource_id)
+        if study_nexson == "":
+            raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
+
+        return dict(FULL_RESPONSE=study_nexson)
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
