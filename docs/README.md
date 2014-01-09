@@ -73,7 +73,7 @@ textual description of what happened and ```error``` is set to
 
 On failure, ```error``` will be set to 1 and ```description``` will provide details on why the request failed.
 
-[Here](https://github.com/OpenTreeOfLife/treenexus/compare/leto_study_9?expand=1)
+[Here](https://github.com/OpenTreeOfLife/phylesystem/compare/leto_study_9?expand=1)
 is an example commit created by the OpenTree API.
 
 ### Creating a new study

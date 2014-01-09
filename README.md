@@ -3,7 +3,7 @@
 [![Build Status](https://secure.travis-ci.org/OpenTreeOfLife/api.opentreeoflife.org.png)](http://travis-ci.org/OpenTreeOfLife/api.opentreeoflife.org)
 
 This repository holds the code that runs The Open Tree Of Life API, which talks
-to the backend datastore [treenexus](https://github.com/OpenTreeOfLife/treenexus).
+to the backend datastore [phylesystem](https://github.com/OpenTreeOfLife/phylesystem).
 
 # Introduction
 
@@ -29,12 +29,12 @@ are currently under 50MB and have a structure of:
 
     studies/N/N.json
 
-On the backend, the API will ask treenexus for the directory
+On the backend, the API will ask phylesystem for the directory
 containing study ```N```.  If the JSON representing that study
 is greater than 50MB, it will be broken into multiple files to
 be stored in Git, so they  will be merged together before a
 response is sent. This is all transparent to the user of the
-OToL API. Only people using the treenexus data files directly
+OToL API. Only people using the phylesystem data files directly
 will need to handle this.
 
 These files will have the structure of:

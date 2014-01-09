@@ -9,11 +9,11 @@ OpenTree changes.
 
 Currently the source data for OpenTree consists of a
 collection of JSON files (which are in the NexSON
-format) which live in the [treenexus](https://github.com/OpenTreeOfLife/treenexus) Github repo.
-There is also a [treenexus_test](https://github.com/OpenTreeOfLife/treenexus_test) repo to use
-in testing, since the treenexus repo is quite large.
+format) which live in the [phylesystem](https://github.com/OpenTreeOfLife/phylesystem) Github repo.
+There is also a [phylesystem_test](https://github.com/OpenTreeOfLife/phylesystem_test) repo to use
+in testing, since the phylesystem repo is quite large.
 
-NOTE: The name "treenexus" will be deprecated soon and changed to something
+NOTE: The name "phylesystem" will be deprecated soon and changed to something
 less confusing, since the repo does not contain files in the NEXUS format.
 
 # Code repository
