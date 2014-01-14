@@ -42,6 +42,8 @@ To get the entire NexSON of study N :
 
     curl http://dev.opentreeoflife.org/api/v1/study/N.json
 
+If the study does not exist, this API call will return a 404 error code.
+
 ### Updating a study
 
 If you want to update study 10 with a file called
@@ -73,6 +75,9 @@ textual description of what happened and ```error``` is set to
 
 On failure, ```error``` will be set to 1 and ```description``` will provide details on why the request failed.
 
+Any POST request attempting to update a study with invalid JSON
+will be denied and an HTTP error code 400 will be returned.
+
 [Here](https://github.com/OpenTreeOfLife/phylesystem/compare/leto_study_9?expand=1)
 is an example commit created by the OpenTree API.
 
@@ -97,6 +102,14 @@ On success, it will return JSON similar to this:
         "error": 0
     }
 
+If there is an error in syncing the local git repository with the remote, an HTTP 409 (conflict) error code will be returned with a JSON response of the form:
+
+    {
+        "error": 1,
+        "description": "Could not pull! Details: ..."
+    }
+
+where the description will usually contain the full error reported by Git.
 
 ### Merge a study in a WIP branch
 
@@ -112,21 +125,35 @@ The following two commands are equivalent.
 
     curl -X POST http://dev.opentreeoflife.org/api/merge/v1/leto_study_1003/master?auth_token=$GITHUB_OAUTH_TOKEN
 
+If the request is successful, a JSON response similar to this will be returned:
+
+        {
+            "error": 0,
+            "branch_name": "master",
+            "description": "Merged branch leto_study_12",
+            "sha":  "dcab222749c9185797645378d0bda08d598f81e7"
+        }
+
+        If there is an error, an HTTP 400 error will be returned with a JSON response similar
+        to this:
+
+        {
+            "error": 1,
+            "description": "Could not push foo branch"
+        }
+
 ### Using different author information
 
 By default, the API uses the name and email associated with the Github Oauth token to assign provenance to API calls. To over-ride that you can provide ```author_name``` and ```author_email``` arguments:
 
     curl -X PUT 'http://localhost:8000/api/default/v1/study/13.json?auth_token=$GITHUB_OAUTH_TOKEN&author_name=joe&author_email=joe@joe.com' --data-urlencode nexson@1003.json
 
-
+### API version
 
 All API calls are specific to the API version, which is a part
 of the URL. This allows for new versions of the API to come out
 which are not backward-compatible, while allowing old clients
 to continue working with older API versions.
-
-Any POST request attempting to update a study with invalid JSON
-will be denied and an HTTP error code 400 will be returned.
 
 
 ## Authors
