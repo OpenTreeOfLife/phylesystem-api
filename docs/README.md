@@ -12,6 +12,12 @@ _TODO: Consolidate these pages?_
 
 ## OToL API Version 1 Methods
 
+All API calls are specific to the API version, which is a part
+of the URL. This allows for new versions of the API to come out
+which are not backward-compatible, while allowing old clients
+to continue working with older API versions.
+
+
 NOTE: The dev.opentreeoflife.org hostname is a development URL and subject to change.
 
 ### Getting a Github Oauth token
@@ -36,6 +42,15 @@ To put it into an environment variable:
 
     export GITHUB_OAUTH_TOKEN=codecafe
 
+In the Open Tree curation webapp, we obtain this when a user logs into the
+site via Github. Github returns a persistent token that streamlines
+authentication in the future. (Basically, the user shouldn't need to login
+again unless they revoke access to the curation app on Github.)
+
+Here are other tips on managing auth tokens programmatically:
+
+http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app
+
 ### Fetch a study
 
 To get the entire NexSON of study N :
@@ -49,7 +64,7 @@ If the study does not exist, this API call will return a 404 error code.
 If you want to update study 10 with a file called
 10-modified.json, the following command will accomplish that:
 
-    curl -X PUT http://localhost:8080/api/default/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN \
+    curl -X PUT http://localhost:8080/api/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN \
     --data-urlencode nexson@10-modified.json
 
 The above will create a commit with the updated JSON on a branch of the form
@@ -85,7 +100,7 @@ is an example commit created by the OpenTree API.
 
 To create a new study from a file in the current directory called ```study.json```:
 
-    curl -X POST "http://localhost:8000/api/default/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
+    curl -X POST "http://dev.opentreeoflife.org/api/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
 
 ### Syncing a WIP branch with Github
 
@@ -146,15 +161,45 @@ If the request is successful, a JSON response similar to this will be returned:
 
 By default, the API uses the name and email associated with the Github Oauth token to assign provenance to API calls. To over-ride that you can provide ```author_name``` and ```author_email``` arguments:
 
-    curl -X PUT 'http://localhost:8000/api/default/v1/study/13.json?auth_token=$GITHUB_OAUTH_TOKEN&author_name=joe&author_email=joe@joe.com' --data-urlencode nexson@1003.json
+    curl -X PUT 'http://dev.opentreeoflife.org/api/v1/study/13.json?auth_token=$GITHUB_OAUTH_TOKEN&author_name=joe&author_email=joe@joe.com' --data-urlencode nexson@1003.json
 
-### API version
+### Not Yet Implemented Methods
 
-All API calls are specific to the API version, which is a part
-of the URL. This allows for new versions of the API to come out
-which are not backward-compatible, while allowing old clients
-to continue working with older API versions.
+The following methods have not been implemented yet.
 
+### Listing available studies
+
+# By convention, this might be the default view for a "collection" URL:
+
+    curl https://dev.opentreeoflife.org/api/v1/studies
+
+### Searching, filtering, sorting, paginating studies
+
+# Add searching, sorting, pagination, filters on the query string
+
+    curl https://dev.opentreeoflife.org/api/v1/studies?q=mammal&sort=status,-date&page=3&filter=state-draft
+
+### Listing your own studies (as a curator), sorted by status
+
+This is the default __dashboard__ view for a logged-in curator. Of course it's
+just a special case of the filtered list above.
+
+    # the curator's "dashboard" is just a preset filter
+    curl https://dev.opentreeoflife.org/api/v1/studies?q=jimallman&sort=-status,-date&page=1&filter=state-draft
+
+This and other "canned" views might have friendlier URLs:
+
+    curl https://dev.opentreeoflife.org/api/v1/studies/dashboard
+
+    curl https://dev.opentreeoflife.org/api/v1/studies/draft
+
+    curl https://dev.opentreeoflife.org/api/v1/studies/published
+
+    curl https://dev.opentreeoflife.org/api/v1/studies/latest
+
+### Fetching a work-in-progress (WIP) study
+
+    curl http://dev.opentreeoflife.org/api/v1/study/N.json?branch=user_study_N
 
 ## Authors
 
