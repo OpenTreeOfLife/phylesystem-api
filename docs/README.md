@@ -163,14 +163,12 @@ The following methods have not been implemented yet.
 
 ### Listing available studies
 
-# By convention, this might be the default view for a "collection" URL:
-
+    # By convention, this might be the default view for a "collection" URL:
     curl https://dev.opentreeoflife.org/api/v1/studies
 
 ### Searching, filtering, sorting, paginating studies
 
-# Add searching, sorting, pagination, filters on the query string
-
+    # Add searching, sorting, pagination, filters on the query string
     curl https://dev.opentreeoflife.org/api/v1/studies?q=mammal&sort=status,-date&page=3&filter=state-draft
 
 ### Listing your own studies (as a curator), sorted by status
@@ -194,6 +192,8 @@ This and other "canned" views might have friendlier URLs:
 ### Fetching a work-in-progress (WIP) study
 
     curl http://dev.opentreeoflife.org/api/v1/study/N.json?branch=user_study_N
+
+This will return the latest state of N.json on the ```user_study_N``` branch or a 404 if that branch does not exist.
 
 ## Authors
 
