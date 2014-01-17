@@ -4,12 +4,6 @@ This file documents the design of the Open Tree API, including requirements defi
 the [Open Tree of Life](http://opentreeoflife.org) community and software team
 and the reasons for various "details of implementation".
 
-_Note that methods are also being documented in a wiki page in the main 'opentree' project._
-https://github.com/OpenTreeOfLife/opentree/wiki/Open-Tree-of-Life-APIs
-
-_TODO: Consolidate these pages?_
-
-
 ## OToL API Version 1 Methods
 
 All API calls are specific to the API version, which is a part
