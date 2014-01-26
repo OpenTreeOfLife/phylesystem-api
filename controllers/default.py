@@ -130,7 +130,12 @@ def v1():
     def validate_and_normalize_nexson(**kwargs):
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
         try:
-            nexson = kwargs.get('nexson', {})
+            # check for kwarg 'nexson', or load the full request body
+            if hassatr(kwargs, 'nexson'):
+                nexson = kwargs.get('nexson', {})
+            else:
+                nexson = request.body.read()
+
             if not isinstance(nexson, dict):
                 nexson = json.loads(nexson)
         except:
