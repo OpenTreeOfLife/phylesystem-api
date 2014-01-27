@@ -131,7 +131,7 @@ def v1():
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
         try:
             # check for kwarg 'nexson', or load the full request body
-            if hassatr(kwargs, 'nexson'):
+            if hasattr(kwargs, 'nexson'):
                 nexson = kwargs.get('nexson', {})
             else:
                 nexson = request.body.read()
