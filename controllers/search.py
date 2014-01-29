@@ -16,7 +16,7 @@ def v1():
     else:
         conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
 
-    if conf.has_option("apis", "oti_base_url")
+    if conf.has_option("apis", "oti_base_url"):
         oti_base_url = conf.get("apis", "oti_base_url")
         api_base_url = "%s/db/data/ext/QueryServices/graphdb/" % (oti_base_url,)
     else:

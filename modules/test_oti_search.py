@@ -12,7 +12,7 @@ class TestOTISearch(unittest.TestCase):
         else:
             conf.read("../private/config")
 
-        if conf.has_option("apis", "oti_base_url")
+        if conf.has_option("apis", "oti_base_url"):
             self.oti_base_url = conf.get("apis", "oti_base_url")
             self.api_base_url = "%s/db/data/ext/QueryServices/graphdb/" % (self.oti_base_url,)
         else:
