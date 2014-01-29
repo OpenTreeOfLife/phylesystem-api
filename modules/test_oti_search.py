@@ -12,10 +12,15 @@ class TestOTISearch(unittest.TestCase):
         else:
             conf.read("../private/config")
 
-        self.host = conf.get("apis","oti_host")
-        self.port = conf.get("apis","oti_port")
+        if conf.has_option("apis", "oti_base_url")
+            self.oti_base_url = conf.get("apis", "oti_base_url")
+            self.api_base_url = "%s/db/data/ext/QueryServices/graphdb/" % (self.oti_base_url,)
+        else:
+            # fall back to older convention [TODO: remove this]
+            self.host = conf.get("apis","oti_host")
+            self.port = conf.get("apis","oti_port")
+            self.api_base_url = "http://%s:%s/db/data/ext/QueryServices/graphdb/" % (self.host, self.port)
 
-        self.api_base_url = "http://%s:%s/db/data/ext/QueryServices/graphdb/" % (self.host, self.port)
         self.oti = OTISearch(self.api_base_url)
 
     def test_tree(self):

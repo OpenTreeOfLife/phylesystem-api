@@ -16,10 +16,15 @@ def v1():
     else:
         conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
 
-    host = conf.get("apis","oti_host")
-    port = conf.get("apis","oti_port")
+    if conf.has_option("apis", "oti_base_url")
+        oti_base_url = conf.get("apis", "oti_base_url")
+        api_base_url = "%s/db/data/ext/QueryServices/graphdb/" % (oti_base_url,)
+    else:
+        # fall back to older convention [TODO: remove this]
+        host = conf.get("apis","oti_host")
+        port = conf.get("apis","oti_port")
+        api_base_url = "http://%s:%s/db/data/ext/QueryServices/graphdb/" % (host, port)
 
-    api_base_url = "http://%s:%s/db/data/ext/QueryServices/graphdb/" % (host, port)
     oti = OTISearch(api_base_url)
 
     def GET(kind, property_name, search_term,jsoncallback=None,callback=None,_=None,**kwargs):

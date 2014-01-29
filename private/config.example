@@ -25,5 +25,6 @@ repo_remote = REPO_REMOTE
 git_ssh     = GIT_SSH
 pkey        = PKEY
 
-oti_host    = localhost
-oti_port    = 7474
+oti_base_url = OTI_BASE_URL
+# Push scripts will substitute the OTI_BASE_URL server-config variables, shared
+# with other apps.
