@@ -18,7 +18,7 @@ def v1():
 
     if conf.has_option("apis", "oti_base_url"):
         oti_base_url = conf.get("apis", "oti_base_url")
-        api_base_url = "%s/db/data/ext/QueryServices/graphdb/" % (oti_base_url,)
+        api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
     else:
         # fall back to older convention [TODO: remove this]
         host = conf.get("apis","oti_host")
