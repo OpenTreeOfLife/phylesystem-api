@@ -538,7 +538,7 @@ class PropertyValueNotUsefulWarning(WarningMessage):
         return self.warning_data
 
 class UnrecognizedPropertyValueWarning(WarningMessage):
-    def __init__(self, key, value, address, severity=SeverityCodes.WARNING):
+    def __init__(self, value, address, severity=SeverityCodes.WARNING):
         d = {'key': address.property_name, 'value': value}
         WarningMessage.__init__(self, WarningCodes.UNRECOGNIZED_PROPERTY_VALUE, data=d, address=address, severity=severity)
         self.key = address.property_name
