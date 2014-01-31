@@ -310,6 +310,6 @@ def v1():
              response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
         if request.env.http_access_control_request_headers:
              response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
-        raise HTTP(200. **(response.headers))
+        raise HTTP(200, **(response.headers))
 
     return locals()
