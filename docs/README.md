@@ -283,6 +283,76 @@ best in a more general diff/patch solution, probably in RPC style rather
 than REST. Or as a choreographed series of RESTful operations on the
 individual elements, as shown above.
 
+### NexSON decomposition
+
+It can be beneficial to load entire studies in memory, esp. to manage
+integrity and relationships among study elements. Still, this can be
+difficult when managing large NexSON documents, due to limitations in
+working storage and network speed. Also, some operations can be applied
+cleanly to parts of the whole, e.g., reading and manipulating a single
+tree. 
+
+We have considered a simple, general model for "decomposing" NexSON into
+parts, while ensuring that they can be reassembled exactly as before. This
+might be as simple as removing an element (say, a tree) and replacing it with a
+token that identifies this element in context. For example, here's a study:
+    
+    http://dev.opentreeoflife.org/api/v1/study/ot/123
+
+    ...
+    "trees": {
+        "@id": "trees10", 
+        "@otus": "otus10", 
+        "tree": [
+            {
+                "@id": "tree1", 
+                "@label": "Untitled (#tree1)", 
+                "edge": [
+                ...
+            }, 
+            {
+                "@id": "tree3", 
+                "@label": "Untitled (#tree3)", 
+                "edge": [
+                ...
+            }, 
+    
+Upon request, we might extract its first tree (_tree1_) as a fragment:
+
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/1
+
+    {
+        "@id": "tree1", 
+        "@label": "Untitled (#tree1)", 
+        "edge": [
+        ...
+    } 
+
+We can either use the URL to replace this element in an update, or we can leave a placeholder:
+
+    http://dev.opentreeoflife.org/api/v1/study/ot/123
+
+    ...
+    "trees": {
+        "@id": "trees10", 
+        "@otus": "otus10", 
+        "tree": [
+            {
+                "@PLACEHOLDER": true, 
+                "@type": "object", 
+                "@href": "http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/1" 
+            }, 
+            {
+                "@id": "tree3", 
+                "@label": "Untitled (#tree3)", 
+                "edge": [
+                ...
+            }, 
+
+Placeholders like this should support loading a large NexSON document
+"piecemeal" from a local or remote source, replacing placeholders with full
+content as it arrives..
+
 
 ## Authors
 
