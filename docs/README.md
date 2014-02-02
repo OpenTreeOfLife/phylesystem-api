@@ -209,8 +209,8 @@ counter or using GUIDs, we're planning to use a prefix for tool or system
 that contributes Nexson studies to the repository.
 
 The prefixes currently planned include:
-    'ot' for the [Open Tree curation tool](https://dev.opentreeoflife.org/curator/study) 
-    'pg' for [phylografter](http://reelab.net/phylografter/)
+- __ot__ for the [Open Tree curation tool](https://dev.opentreeoflife.org/curator/study)
+- __pg__ for [phylografter](http://reelab.net/phylografter/)
 
 
 These "namespaces" will appear in different forms, depending on context: 
@@ -219,7 +219,8 @@ These "namespaces" will appear in different forms, depending on context:
 
     ```
     'nexml': { "@id": "ot:123", ... }
-
+    ```
+    ```
     <nexml id="pg:987" ... >
     ```
 
@@ -248,7 +249,7 @@ These "namespaces" will appear in different forms, depending on context:
 ### Creating, fetching, updating subresources (not yet implemented)
 
 We should be able to extend the RESTful style used for studies to manage
-"subresources" (trees, nodes, OTUs?) within a study.  Where possible, this
+"subresources" (__trees__, __nodes__, __OTUs__?) within a study.  Where possible, this
 would provide a uniform set of CRUD (create, retrieve, update,
 delete) operations using URLs like:
 
@@ -258,7 +259,7 @@ delete) operations using URLs like:
     http://dev.opentreeoflife.org/api/v1/study/ot/123/otu/456
 
 Apart from normal elements in NexSON, we might also consider using this
-convention for supporting files and annotations:
+convention for __supporting files__ and __annotations__:
 
     http://dev.opentreeoflife.org/api/v1/study/ot/123/file/3
     http://dev.opentreeoflife.org/api/v1/study/ot/123/file/alignment_data.xsl
@@ -267,9 +268,9 @@ convention for supporting files and annotations:
 Ideally, it would be good to also allow fetching (and more?) of sets of
 related objects:
 
-- contiguous ranges of objects
-- non-contiguous "sets" of objects
-- arbitrary sets of mixed types?
+- contiguous __ranges__ of objects
+- non-contiguous __sets__ of objects
+- arbitrary sets of __mixed types__?
 
 Here are some possible examples:
 
