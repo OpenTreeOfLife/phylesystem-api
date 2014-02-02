@@ -245,7 +245,7 @@ These "namespaces" will appear in different forms, depending on context:
     leto_study_pg_987
     ```
 
-See related discussion in #44
+See related discussion in OpenTreeOfLife/api.opentreeoflife.org#44
 
 ### Creating, fetching, updating subresources (not yet implemented)
 
@@ -284,7 +284,7 @@ best in a more general diff/patch solution, probably in RPC style rather
 than REST. Or as a choreographed series of RESTful operations on the
 individual elements, as shown above.
 
-See related discussion in #4, #32
+See related discussion in OpenTreeOfLife/api.opentreeoflife.org#4, OpenTreeOfLife/api.opentreeoflife.org#32
 
 ### NexSON fragments and decomposition
 
