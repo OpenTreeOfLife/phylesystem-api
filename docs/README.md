@@ -215,26 +215,26 @@ The prefixes currently planned include:
 
 These "namespaces" will appear in different forms, depending on context: 
 
-    - as CURIEs in NexSON or NeXML
+- as CURIEs in NexSON or NeXML
 
-        'nexml': { "@id": "ot:123", ... }
+    'nexml': { "@id": "ot:123", ... }
 
-        <nexml id="pg:987" ... >
+    <nexml id="pg:987" ... >
 
-    - as folders in the datastore (filesystem or git repo)
+- as folders in the datastore (filesystem or git repo)
 
-        ot/123.json
-        pg/987.json
+    ot/123.json
+    pg/987.json
 
-    - as subpaths in RESTful URLs
+- as subpaths in RESTful URLs
 
-        http://dev.opentreeoflife.org/api/v1/study/ot/123/tree
-        http://dev.opentreeoflife.org/api/v1/study/pg/987/tree
-        
-    - as elements of WIP branch names (in a branching repo)
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree
+    http://dev.opentreeoflife.org/api/v1/study/pg/987/tree
+    
+- as elements of WIP branch names (in a branching repo)
 
-        jimallman_study_ot_123
-        leto_study_pg_987
+    jimallman_study_ot_123
+    leto_study_pg_987
 
 
 ### Creating, fetching, updating subresources (not yet implemented)
@@ -259,9 +259,9 @@ convention for supporting files and annotations:
 Ideally, it would be good to also allow fetching (and more?) of sets of
 related objects:
 
-    - contiguous ranges of objects
-    - non-contiguous "sets" of objects
-    - arbitrary sets of mixed types?
+- contiguous ranges of objects
+- non-contiguous "sets" of objects
+- arbitrary sets of mixed types?
 
 Here are some possible examples:
 
