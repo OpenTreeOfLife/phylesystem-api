@@ -61,7 +61,13 @@ If you want to update study 10 with a file called
     curl -X PUT http://localhost:8080/api/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN \
     --data-urlencode nexson@10-modified.json
 
-The above will create a commit with the updated JSON on a branch of the form
+For large studies, it's faster to skip the URL-encoding and pass the NexSON data as binary:
+
+    curl -X PUT 'http://localhost:8080/api/v1/study/10?auth_token=26b5a59d2cbc921bdfe04ec0e9f6cc05c879a761' \
+    --data-binary @10-modified.json --compressed
+
+
+Either form of this command will create a commit with the updated JSON on a branch of the form
 
     USERNAME_study_ID
 
@@ -84,7 +90,7 @@ textual description of what happened and ```error``` is set to
 
 On failure, ```error``` will be set to 1 and ```description``` will provide details on why the request failed.
 
-Any POST request attempting to update a study with invalid JSON
+Any PUT request attempting to update a study with invalid JSON
 will be denied and an HTTP error code 400 will be returned.
 
 [Here](https://github.com/OpenTreeOfLife/phylesystem/compare/leto_study_9?expand=1)
@@ -157,7 +163,7 @@ By default, the API uses the name and email associated with the Github Oauth tok
 
     curl -X PUT 'http://dev.opentreeoflife.org/api/v1/study/13.json?auth_token=$GITHUB_OAUTH_TOKEN&author_name=joe&author_email=joe@joe.com' --data-urlencode nexson@1003.json
 
-### Not Yet Implemented Methods
+## Not Yet Implemented Methods
 
 The following methods have not been implemented yet.
 
@@ -194,6 +200,80 @@ This and other "canned" views might have friendlier URLs:
     curl http://dev.opentreeoflife.org/api/v1/study/N.json?branch=user_study_N
 
 This will return the latest state of N.json on the ```user_study_N``` branch or a 404 if that branch does not exist.
+
+### Incorporating "namespaced" study identifiers from different sources
+
+We need to avoid collisions between studies created in phylografter, the
+Open Tree web curation tool, and other tools. Rather than keeping a global
+counter or using GUIDs, we're planning to use a prefix for tool or system
+that contributes Nexson studies to the repository.
+
+The prefixes currently planned include:
+    'ot' for the [Open Tree curation tool](https://dev.opentreeoflife.org/curator/study) 
+    'pg' for [phylografter](http://reelab.net/phylografter/)
+
+
+These "namespaces" will appear in different forms, depending on context: 
+
+    - as CURIEs in NexSON or NeXML
+
+        'nexml': { "@id": "ot:123", ... }
+
+        <nexml id="pg:987" ... >
+
+    - as folders in the datastore (filesystem or git repo)
+
+        ot/123.json
+        pg/987.json
+
+    - as subpaths in RESTful URLs
+
+        http://dev.opentreeoflife.org/api/v1/study/ot/123/tree
+        http://dev.opentreeoflife.org/api/v1/study/pg/987/tree
+        
+    - as elements of WIP branch names (in a branching repo)
+
+        jimallman_study_ot_123
+        leto_study_pg_987
+
+
+### Creating, fetching, updating subresources (not yet implemented)
+
+We should be able to extend the RESTful style used for studies to manage
+"subresources" (trees, nodes, OTUs?) within a study.  Where possible, this
+would provide a uniform set of CRUD (create, retrieve, update,
+delete) operations using URLs like:
+
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/5
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/5/node/789
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/otu/456
+
+Apart from normal elements in NexSON, we might also consider using this
+convention for supporting files and annotations:
+
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/file/3
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/file/alignment_data.xsl
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/annotation/456
+
+Ideally, it would be good to also allow fetching (and more?) of sets of
+related objects:
+
+    - contiguous ranges of objects
+    - non-contiguous "sets" of objects
+    - arbitrary sets of mixed types?
+
+Here are some possible examples:
+
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/1...4
+    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/1,5,8
+
+The last case (arbitrary setes of mixed types) might include the cluster of
+elements needed for a complex annotation. This would probably be handled
+best in a more general diff/patch solution, probably in RPC style rather
+than REST. Or as a choreographed series of RESTful operations on the
+individual elements, as shown above.
+
 
 ## Authors
 
