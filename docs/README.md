@@ -245,6 +245,7 @@ These "namespaces" will appear in different forms, depending on context:
     leto_study_pg_987
     ```
 
+See related discussion in #44
 
 ### Creating, fetching, updating subresources (not yet implemented)
 
@@ -259,7 +260,7 @@ delete) operations using URLs like:
     http://dev.opentreeoflife.org/api/v1/study/ot/123/otu/456
 
 Apart from normal elements in NexSON, we might also consider using this
-convention for __supporting files__ and __annotations__:
+convention for __supporting files__ and __annotations__ :
 
     http://dev.opentreeoflife.org/api/v1/study/ot/123/file/3
     http://dev.opentreeoflife.org/api/v1/study/ot/123/file/alignment_data.xsl
@@ -282,6 +283,8 @@ elements needed for a complex annotation. This would probably be handled
 best in a more general diff/patch solution, probably in RPC style rather
 than REST. Or as a choreographed series of RESTful operations on the
 individual elements, as shown above.
+
+See related discussion in #4, #32
 
 ### NexSON fragments and decomposition
 
