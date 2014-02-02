@@ -283,7 +283,7 @@ best in a more general diff/patch solution, probably in RPC style rather
 than REST. Or as a choreographed series of RESTful operations on the
 individual elements, as shown above.
 
-### NexSON decomposition
+### NexSON fragments and decomposition
 
 It can be beneficial to load entire studies in memory, esp. to manage
 integrity and relationships among study elements. Still, this can be
@@ -293,7 +293,7 @@ cleanly to parts of the whole, e.g., reading and manipulating a single
 tree. 
 
 We have considered a simple, general model for "decomposing" NexSON into
-parts, while ensuring that they can be reassembled exactly as before. This
+fragments, while ensuring that these can be reassembled exactly as before. This
 might be as simple as removing an element (say, a tree) and replacing it with a
 token that identifies this element in context. For example, here's a study:
     
@@ -351,8 +351,30 @@ We can either use the URL to replace this element in an update, or we can leave 
 
 Placeholders like this should support loading a large NexSON document
 "piecemeal" from a local or remote source, replacing placeholders with full
-content as it arrives..
+content as it arrives. 
 
+Ideally these fragments could include ranges or sets
+of elements, as described above. This would address known performance
+challenges like large studies with "flat" collections (eg, tens of
+thousands of OTUs in an array).
+
+    http://dev.opentreeoflife.org/api/v1/study/pg/987
+
+    ...
+    "otus": {
+        "@id": "otus10", 
+        "otu": [
+            {
+                "@PLACEHOLDER": true, 
+                "@type": "range", 
+                "@href": "http://dev.opentreeoflife.org/api/v1/study/pg/987/otu/1...1000" 
+            }, 
+            {
+                "@PLACEHOLDER": true, 
+                "@type": "range", 
+                "@href": "http://dev.opentreeoflife.org/api/v1/study/pg/987/otu/1001...2000" 
+            }, 
+            ...
 
 ## Authors
 
