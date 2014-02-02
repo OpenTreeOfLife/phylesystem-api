@@ -217,24 +217,32 @@ These "namespaces" will appear in different forms, depending on context:
 
 - as CURIEs in NexSON or NeXML
 
+    ```
     'nexml': { "@id": "ot:123", ... }
 
     <nexml id="pg:987" ... >
+    ```
 
 - as folders in the datastore (filesystem or git repo)
 
+    ```
     ot/123.json
     pg/987.json
+    ```
 
 - as subpaths in RESTful URLs
 
+    ```
     http://dev.opentreeoflife.org/api/v1/study/ot/123/tree
     http://dev.opentreeoflife.org/api/v1/study/pg/987/tree
+    ```
     
 - as elements of WIP branch names (in a branching repo)
 
+    ```
     jimallman_study_ot_123
     leto_study_pg_987
+    ```
 
 
 ### Creating, fetching, updating subresources (not yet implemented)
