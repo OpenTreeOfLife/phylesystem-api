@@ -1,8 +1,10 @@
 from ConfigParser import SafeConfigParser
 from github import Github, BadCredentialsException
+from datetime import datetime
 import logging
 import os
 import json
+
 
 # this allows us to raise HTTP(...)
 from gluon import *
@@ -145,3 +147,25 @@ def get_logger(name="ot_api"):
         logger.addHandler(ch)
         logger.is_configured = True
     return logger
+
+def log_time_diff(log_obj, operation='', prev_time=None):
+    '''If prev_time is not None, logs (at debug level) to 
+    log_obj the difference between now and the naive datetime 
+    object prev_time.
+    `operation` is a string describing what events were timed.
+    The current time is returned to allow for several 
+    calls with the form
+       x = log_time_diff(_LOG, 'no op', x)
+       foo()
+       x = log_time_diff(_LOG, 'foo', x)
+       bar()
+       x = log_time_diff(_LOG, 'bar', x)
+       
+    '''
+    n = datetime.now()
+    if prev_time is not None:
+        td = n - prev_time
+        t = td.total_seconds()
+        log_obj.debug('Timed operation "{o}" took {t:f} seconds'.format(o=operation, t=t))
+    return n
+
