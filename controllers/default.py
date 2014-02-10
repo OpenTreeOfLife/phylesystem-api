@@ -50,6 +50,36 @@ def v1():
                                         annotation_label="Open Tree NexSON validation")
         return annotation, validation_log, nexson_obj
 
+    def __finish_write_verb(git_data, 
+                            git_hub_auth,
+                            nexson,
+                            author_name,
+                            author_email,
+                            resource_id,
+                            rich_nexson,
+                            annotation):
+        '''Called by PUT and POST handlers to avoid code repetition.'''
+        # global TIMING
+        #TODO, need to make this spawn a thread to do the second commit rather than block
+        block_until_annotation_commit = True
+        unadulterated_content_commit = do_commit(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
+        # TIMING = api_utils.log_time_diff(_LOG, 'unadulterated commit', TIMING)
+        if unadulterated_content_commit['error'] != 0:
+            _LOG.debug('unadulterated_content_commit failed')
+            raise HTTP(400, json.dumps(unadulterated_content_commit))
+        if block_until_annotation_commit:
+            # add the annotation and commit the resulting blob...
+            add_or_replace_annotation(rich_nexson._raw, annotation)
+            nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
+            annotated_commit = do_commit(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
+            # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
+            if annotated_commit['error'] != 0:
+                _LOG.debug('annotated_commit failed')
+                raise HTTP(400, json.dumps(annotated_commit))
+            return annotated_commit
+        else:
+            return unadulterated_content_commit
+
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OpenTree API methods relating to reading"
         valid_resources = ('study')
@@ -101,8 +131,6 @@ def v1():
         dryad_DOI = kwargs.get('dryad_DOI', '')
         import_option = kwargs.get('import_option', '')
 
-        #TODO, need to make this spawn a thread to do the second commit rather than block
-        block_until_annotation_commit = True
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
@@ -111,21 +139,14 @@ def v1():
         # so they don't conflict with new study id's from other sources
         new_resource_id = "o%d" % (gd.newest_study_id() + 1)
 
-        unadulterated_content_commit = do_commit(gd, gh, nexson, author_name, author_email, new_resource_id)
-        if unadulterated_content_commit['error'] != 0:
-            _LOG.debug('unadulterated_content_commit failed')
-            raise HTTP(400, json.dumps(unadulterated_content_commit))
-        if block_until_annotation_commit:
-            # add the annotation and commit the resulting blob...
-            add_or_replace_annotation(rich_nexson._raw, annotation)
-            nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
-            annotated_commit = do_commit(gd, gh, nexson, author_name, author_email, new_resource_id)
-            if annotated_commit['error'] != 0:
-                _LOG.debug('annotated_commit failed')
-                raise HTTP(400, json.dumps(annotated_commit))
-            return annotated_commit
-        else:
-            return unadulterated_content_commit
+        return __finish_write_verb(gd,
+                                   gh,
+                                   nexson,
+                                   author_name,
+                                   author_email,
+                                   new_resource_id,
+                                   rich_nexson,
+                                   annotation)
 
     def validate_and_normalize_nexson(**kwargs):
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
@@ -156,50 +177,45 @@ def v1():
 
     def PUT(resource, resource_id, **kwargs):
         "Open Tree API methods relating to updating existing resources"
-        #TODO, need to make this spawn a thread to do the second commit rather than block
-        block_until_annotation_commit = True
+        # global TIMING
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
         if not resource=='study':
             _LOG.debug('resource must be "study"')
             raise HTTP(400, 'resource != study')
-
+        # TIMING = api_utils.log_time_diff(_LOG)
         gh, author_name, author_email = api_utils.authenticate(**kwargs)
-
+        # TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
+        
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
-
+        # TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
         gd = GitData(repo=repo_path)
 
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
         nexson_sha1        = hashlib.sha1( gd.fetch_study(resource_id) ).hexdigest()
+        # TIMING = api_utils.log_time_diff(_LOG, 'GitData creation and sha', TIMING)
 
         # the POSTed data is the same as what we currently have, do nothing and return successfully
         if posted_nexson_sha1 == nexson_sha1:
             return { "error": 0, "description": "success, nothing to update" };
-        else:
-
-            unadulterated_content_commit = do_commit(gd, gh, nexson, author_name, author_email, resource_id)
-            if unadulterated_content_commit['error'] != 0:
-                _LOG.debug('unadulterated_content_commit failed in PUT')
-                raise HTTP(400, json.dumps(unadulterated_content_commit))
-            if block_until_annotation_commit:
-                # add the annotation and commit the resulting blob...
-                add_or_replace_annotation(rich_nexson._raw, annotation)
-                nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
-                annotated_commit = do_commit(gd, gh, nexson, author_name, author_email, resource_id)
-                if annotated_commit['error'] != 0:
-                    _LOG.debug('annotated_commit failed in PUT')
-                    raise HTTP(400, json.dumps(annotated_commit))
-                return annotated_commit
-            else:
-                return unadulterated_content_commit
+        blob = __finish_write_verb(gd,
+                                   gh,
+                                   nexson,
+                                   author_name,
+                                   author_email,
+                                   resource_id,
+                                   rich_nexson,
+                                   annotation)
+        # TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
+        return blob
 
     def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
         """Actually make a local Git commit and push it to our remote
         """
+        # global TIMING
         author  = "%s <%s>" % (author_name, author_email)
 
         branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
@@ -215,7 +231,9 @@ def v1():
             }))
 
         try:
+            # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
             gd.pull(repo_remote, env=git_env, branch=branch_name)
+            # TIMING = api_utils.log_time_diff(_LOG, 'git pull', TIMING)
         except Exception, e:
             # We can ignore this if the branch doesn't exist yet on the remote,
             # otherwise raise a 400
@@ -236,6 +254,7 @@ def v1():
 
         try:
             new_sha = gd.write_study(resource_id,file_content,branch_name,author)
+            # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
         except Exception, e:
             gd.release_lock()
 
@@ -247,6 +266,7 @@ def v1():
         try:
             # actually push the changes to Github
             gd.push(repo_remote, env=git_env, branch=branch_name)
+            # TIMING = api_utils.log_time_diff(_LOG, 'push', TIMING)
         except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
