@@ -38,7 +38,7 @@ def config(section=None, param=None):
 
 def summarize_json_response(resp):
     sys.stderr.write('Sent request to %s\n' %(resp.url))
-    resp.raise_for_status()
+    raise_for_status(resp)
     try:
         results = resp.json()
     except:
@@ -56,7 +56,7 @@ def summarize_json_response(resp):
 
 def summarize_gzipped_json_response(resp):
     sys.stderr.write('Sent request to %s\n' %(resp.url))
-    resp.raise_for_status()
+    raise_for_status(resp)
     try:
         uncompressed = gzip.GzipFile(mode='rb', fileobj=StringIO(resp.content)).read()
         results = uncompressed
@@ -102,7 +102,7 @@ def test_http_json_method(url,
     debug('Got status code {c} (expecting {e})\n'.format(c=resp.status_code,e=expected_status))
     if resp.status_code != expected_status:
         debug('Full response: {r}\n'.format(r=resp.text))
-        resp.raise_for_status()
+        raise_for_status(resp)
         # this is required for the case when we expect a 4xx/5xx but a successful return code is returned
         return False
     if expected_response is not None:
@@ -115,3 +115,17 @@ def test_http_json_method(url,
             debug('Non json resp is:' + resp.text)
             return False
     return True
+
+def raise_for_status(resp):
+    try:
+        resp.raise_for_status()
+    except Exception, e:
+        try:
+            j = resp.json()
+            m = '\n    '.join(['"{k}": {v}'.format(k=k, v=v) for k, v in r.items()])
+            sys.stderr.write('resp.json = {t}'.format(t=m))
+        except:
+            if resp.text:
+                sys.stderr.write('resp.text = {t}\n'.format(t=resp.text))
+        raise e
+

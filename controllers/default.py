@@ -12,6 +12,7 @@ from locket import LockError
 # NexSON validation
 from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
 
+_LOG = api_utils.get_logger('ot_api.default')
 def index():
     response.view = 'generic.json'
     return json.dumps({
@@ -79,7 +80,6 @@ def v1():
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
-
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
@@ -93,7 +93,7 @@ def v1():
 
         if not resource=='study': raise HTTP(400, json.dumps({"error":1,
             "description": "Only the creation of new studies is currently supported"}))
-
+        
         # we're creating a new study (possibly with import instructions in the payload)
         cc0_agreement = kwargs.get('cc0_agreement', '')
         import_option = kwargs.get('import_option', '')
@@ -106,15 +106,14 @@ def v1():
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
         nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
-
         gd = GitData(repo=repo_path)
-
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
         new_resource_id = "o%d" % (gd.newest_study_id() + 1)
 
         unadulterated_content_commit = do_commit(gd, gh, nexson, author_name, author_email, new_resource_id)
         if unadulterated_content_commit['error'] != 0:
+            _LOG.debug('unadulterated_content_commit failed')
             raise HTTP(400, json.dumps(unadulterated_content_commit))
         if block_until_annotation_commit:
             # add the annotation and commit the resulting blob...
@@ -122,6 +121,7 @@ def v1():
             nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
             annotated_commit = do_commit(gd, gh, nexson, author_name, author_email, new_resource_id)
             if annotated_commit['error'] != 0:
+                _LOG.debug('annotated_commit failed')
                 raise HTTP(400, json.dumps(annotated_commit))
             return annotated_commit
         else:
@@ -138,11 +138,15 @@ def v1():
 
             if not isinstance(nexson, dict):
                 nexson = json.loads(nexson)
+            if 'nexson' in nexson:
+                nexson = nexson['nexson']
         except:
+            _LOG.exception('Exception getting nexson content in validate_and_normalize_nexson')
             raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
 
         annotation, validation_log, rich_nexson = __validate(nexson)
         if validation_log.errors:
+            _LOG.debug('__validate failed'.format(k=nexson.keys(), a=json.dumps(annotation)))
             raise HTTP(400, json.dumps(annotation))
 
         # sort the keys of the POSTed NexSON and indent 0 spaces
@@ -157,7 +161,9 @@ def v1():
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
-        if not resource=='study': raise HTTP(400, 'resource != study')
+        if not resource=='study':
+            _LOG.debug('resource must be "study"')
+            raise HTTP(400, 'resource != study')
 
         gh, author_name, author_email = api_utils.authenticate(**kwargs)
 
@@ -177,6 +183,7 @@ def v1():
 
             unadulterated_content_commit = do_commit(gd, gh, nexson, author_name, author_email, resource_id)
             if unadulterated_content_commit['error'] != 0:
+                _LOG.debug('unadulterated_content_commit failed in PUT')
                 raise HTTP(400, json.dumps(unadulterated_content_commit))
             if block_until_annotation_commit:
                 # add the annotation and commit the resulting blob...
@@ -184,6 +191,7 @@ def v1():
                 nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
                 annotated_commit = do_commit(gd, gh, nexson, author_name, author_email, resource_id)
                 if annotated_commit['error'] != 0:
+                    _LOG.debug('annotated_commit failed in PUT')
                     raise HTTP(400, json.dumps(annotated_commit))
                 return annotated_commit
             else:
@@ -199,9 +207,11 @@ def v1():
         try:
             gd.acquire_lock()
         except LockError, e:
+            msg = "Could not acquire lock to write to study #%s\nDetails: %s" % (resource_id,e.message)
+            _LOG.debug(msg)
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not acquire lock to write to study #%s\nDetails: %s" % (resource_id,e.message)
+                "description": msg 
             }))
 
         try:
@@ -217,10 +227,11 @@ def v1():
                     git.merge("--abort")
                 except:
                     pass
-
+                msg = "Could not pull or merge latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
+                _LOG.debug(msg)
                 raise HTTP(400, json.dumps({
                     "error": 1,
-                    "description": "Could not pull latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
+                    "description": msg
                 }))
 
         try:
