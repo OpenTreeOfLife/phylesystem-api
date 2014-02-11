@@ -23,6 +23,16 @@ def index():
         "documentation_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/tree/master/docs"
     })
 
+_CONFIG_TUPLE = None
+def reponexsonformat():
+    global _CONFIG_TUPLE
+    response.view = 'generic.jsonp'
+    if _CONFIG_TUPLE is None:
+        _CONFIG_TUPLE = api_utils.read_config(request)
+    rn = _CONFIG_TUPLE[4]
+    return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
+            'nexml2json': rn}
+
 @request.restful()
 def v1():
     "The OpenTree API v1"
