@@ -1,8 +1,10 @@
 import os, sys
 import time
 import json
+import anyjson
 import hashlib
 import github
+from peyotl import can_convert_nexson_forms, convert_nexson_format
 from github import Github, BadCredentialsException
 import api_utils
 from pprint import pprint
@@ -31,7 +33,7 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
-    repo_path, repo_remote, git_ssh, pkey = api_utils.read_config(request)
+    repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
     git_env     = {"GIT_SSH": git_ssh, "PKEY": pkey}
 
     def __validate(nexson):
@@ -82,8 +84,12 @@ def v1():
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OpenTree API methods relating to reading"
-        valid_resources = ('study')
-
+        valid_resources = ('study', )
+        output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
+        if (output_nexml2json != repo_nexml2json) and not can_convert_nexson_forms(repo_nexml2json, output_nexml2json):
+            msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json, d=output_nexml2json)
+            _LOG.debug('GET failing: {m}'.format(m=msg))
+            raise HTTP(400, json.dumps({"error": 1, "description": msg}))
         if resource not in valid_resources:
             raise HTTP(400, json.dumps({"error": 1,
                 "description": 'Resource requested not in list of valid resources: %s' % valid_resources }))
@@ -105,8 +111,13 @@ def v1():
         study_nexson = gd.fetch_study(resource_id)
         if study_nexson == "":
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
-
-        return dict(FULL_RESPONSE=study_nexson)
+        if output_nexml2json != repo_nexml2json:
+            blob = anyjson.loads(study_nexson)
+            return convert_nexson_format(blob,
+                                         output_nexml2json,
+                                         current_format=repo_nexml2json)
+        else:
+            return dict(FULL_RESPONSE=study_nexson)
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"

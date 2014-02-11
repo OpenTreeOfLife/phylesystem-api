@@ -12,6 +12,14 @@ github_client_secret = YOUR_CLIENT_SECRET_HERE
 # the full path to where a local phylesystem.git can be found
 repo_path   = REPO_PATH
 
+# repo_nexml2json is the version of NexSON stored in the repository.
+# This is temporary as we migrate the NexSON rules.
+#   starting with 0.0 means the original BadgerFish convention.
+#   equal to 1.0.0 indicates our transitional HoneyBadgerFish, and
+#   equal to 1.2.0 refers the to-be-implemented form with IDs as object keys
+# TODO: this could be autodetected at launch time!
+repo_nexml2json = 0.0.0
+
 # the remote to push changes to
 # This will usually be "origin" on a local dev machine where phylesystem.git
 # was cloned via SSH (git@github.com:...)

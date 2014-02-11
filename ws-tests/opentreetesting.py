@@ -9,9 +9,15 @@ import os
 
 _CONFIG = None
 _CONFIG_FN = None
-_VERBOSE = 'VERBOSE_TESTING' in os.environ
+if 'VERBOSE_TESTING' in os.environ:
+    try:
+        _VERBOSITY_LEVEL = int(os.environ['VERBOSE_TESTING'])
+    except:
+        _VERBOSITY_LEVEL = 1
+else:
+    _VERBOSITY_LEVEL = 0
 def debug(s):
-    if _VERBOSE:
+    if _VERBOSITY_LEVEL > 0:
         sys.stderr.write('testing-harness: {s}\n'.format(s=s))
 
 def config(section=None, param=None):
@@ -75,13 +81,15 @@ def test_http_json_method(url,
                      data=None,
                      headers=None,
                      expected_status=200,
-                     expected_response=None):
+                     expected_response=None, 
+                     return_bool_data=False):
     '''Call `url` with the http method of `verb`. 
     If specified `data` is passed using json.dumps
     returns True if the response:
          has the expected status code, AND
          has the expected content (if expected_response is not None)
     '''
+    fail_return = (False, None) if return_bool_data else False
     if headers is None:
         headers = {
             'content-type' : 'application/json',
@@ -104,17 +112,22 @@ def test_http_json_method(url,
         debug('Full response: {r}\n'.format(r=resp.text))
         raise_for_status(resp)
         # this is required for the case when we expect a 4xx/5xx but a successful return code is returned
-        return False
+        return fail_return
     if expected_response is not None:
         try:
             results = resp.json()
             if results != expected_response:
                 debug('Did not get expect response content. Got:\n{s}'.format(s=resp.text))
-                return False
+                return fail_return
         except:
             debug('Non json resp is:' + resp.text)
-            return False
-    return True
+            return fail_return
+        if _VERBOSITY_LEVEL > 1:
+            debug(unicode(results))
+    elif _VERBOSITY_LEVEL > 1:
+        debug('Full response: {r}\n'.format(r=resp.text))
+
+    return (True, resp.json(), True) if return_bool_data else True
 
 def raise_for_status(resp):
     try:
