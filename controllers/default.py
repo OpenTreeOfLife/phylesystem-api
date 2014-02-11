@@ -123,9 +123,9 @@ def v1():
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
         if output_nexml2json != repo_nexml2json:
             blob = anyjson.loads(study_nexson)
-            return convert_nexson_format(blob,
-                                         output_nexml2json,
-                                         current_format=repo_nexml2json)
+            return __coerce_nexson_format(blob,
+                                          output_nexml2json,
+                                          current_format=repo_nexml2json)
         else:
             return dict(FULL_RESPONSE=study_nexson)
 
@@ -154,7 +154,7 @@ def v1():
 
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
-        nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
+        nexson, annotation, validation_log, rich_nexson = __validate_and_normalize_nexson(**kwargs)
         gd = GitData(repo=repo_path)
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
@@ -169,7 +169,17 @@ def v1():
                                    rich_nexson,
                                    annotation)
 
-    def validate_and_normalize_nexson(**kwargs):
+    def __coerce_nexson_format(nexson, dest_format, current_format=None):
+        '''Calls convert_nexson_format but does the appropriate logging and HTTP exceptions.
+        '''
+        try:
+            return convert_nexson_format(nexson, dest_format, current_format=current_format)
+        except:
+            msg = "Exception in coercing to the required NexSON version for validation"
+            _LOG.exception(msg)
+            raise HTTP(400, json.dumps({"error": 1, "description": msg}))
+
+    def __validate_and_normalize_nexson(**kwargs):
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
         try:
             # check for kwarg 'nexson', or load the full request body
@@ -183,14 +193,17 @@ def v1():
             if 'nexson' in nexson:
                 nexson = nexson['nexson']
         except:
-            _LOG.exception('Exception getting nexson content in validate_and_normalize_nexson')
+            _LOG.exception('Exception getting nexson content in __validate_and_normalize_nexson')
             raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
-
+        #TEMP
+        VALIDATION_NEXSON_FORMAT = "0.0.0" #currently the nexson validator requires badgerfish
+        nexson = __coerce_nexson_format(nexson, VALIDATION_NEXSON_FORMAT)
+        
         annotation, validation_log, rich_nexson = __validate(nexson)
         if validation_log.errors:
             _LOG.debug('__validate failed'.format(k=nexson.keys(), a=json.dumps(annotation)))
             raise HTTP(400, json.dumps(annotation))
-
+        nexson = __coerce_nexson_format(nexson, repo_nexml2json)
         # sort the keys of the POSTed NexSON and indent 0 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=0)
 
@@ -209,7 +222,7 @@ def v1():
         gh, author_name, author_email = api_utils.authenticate(**kwargs)
         # TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
         
-        nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
+        nexson, annotation, validation_log, rich_nexson = __validate_and_normalize_nexson(**kwargs)
         # TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
         gd = GitData(repo=repo_path)
 
