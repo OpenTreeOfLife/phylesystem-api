@@ -1572,12 +1572,17 @@ class NexSON(NexsonDictWrapper):
         if v is None:
             rich_logger.emit_error(MissingMandatoryKeyWarning('tree', address=self.address))
         else:
-            self.trees = TreeCollection(v, rich_logger, container=self)
-            possible_trees = [t for t in self.trees._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)]
+            if not isinstance(v, list):
+                v = [v]
+            self.trees = [TreeCollection(i, rich_logger, container=self) for i in v]
+            possible_trees = []
+            for tc in self.trees:
+                possible_trees.extend([t for t in tc._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)])
             if len(possible_trees) > 1:
-                rich_logger.warning(MultipleTreesWarning(self.trees._as_list, address=self.trees.address))
+                #TEMP: bug self.trees[0] may not be the offending element...
+                rich_logger.warning(MultipleTreesWarning(self.trees, address=self.trees[0].address))
             elif len(possible_trees) == 0:
-                rich_logger.warning(NoTreesWarning(address=self.trees.address))
+                rich_logger.warning(NoTreesWarning(address=self.trees[0].address))
 
 
 def indented_keys(out, o, indentation='', indent=2):
