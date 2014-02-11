@@ -1469,12 +1469,15 @@ class TreeCollection(NexsonDictWrapper):
         self._otu_collection = None
         v = o.get('@otus')
         if v is not None:
-            if container is None \
-               or container.otus is None \
-               or v != container.otus.nexson_id:
+            found = False
+            if (container is not None) and (container.otus is not None):
+                f = [i for i in container.otus if i.nexson_id == v]
+                if len(f) == 1:
+                    found = True
+                    self._otu_collection = f[0]
+            if not found:
                 rich_logger.emit_error(ReferencedIDNotFoundWarning('@otus', v, address=self.address))
-            else:
-                self._otu_collection = container.otus
+                
         v = o.get('tree', [])
         if not isinstance(v, list):
             rich_logger.emit_error(MissingExpectedListWarning(v, address=NexsonAddress(self, subelement='tree')))
@@ -1562,7 +1565,9 @@ class NexSON(NexsonDictWrapper):
         if v is None:
             rich_logger.emit_error(MissingMandatoryKeyWarning('otus', address=self.address))
         else:
-            self.otus = OTUCollection(v, rich_logger, container=self)
+            if not isinstance(v, list):
+                v = [v]
+            self.otus = [OTUCollection(i, rich_logger, container=self) for i in v]
         v = self._nexml.get('trees')
         if v is None:
             rich_logger.emit_error(MissingMandatoryKeyWarning('tree', address=self.address))
