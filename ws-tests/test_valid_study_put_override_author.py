@@ -7,8 +7,9 @@ import sys
 import os
 
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/1003'
-inpf = codecs.open('../nexson-validator/tests/single/input/1003.json', 'rU', encoding='utf-8')
+SUBMIT_URI = DOMAIN + '/v1/study/12'
+fn = 'data/{s}.json'.format(s=study_id)
+inpf = codecs.open(fn, 'rU', encoding='utf-8')
 n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
 m = n['nexml']['meta']
