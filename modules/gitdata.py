@@ -170,20 +170,20 @@ class GitData(object):
             git.checkout("master")
             git.checkout("-b",branch)
 
-        study_dir      = "study/%s" % study_id
+        study_dir      = "study/%s" % study_id #TODO what if more funky ids
         study_filename = "%s/%s.json" % (study_dir, study_id)
 
         # create a study directory if this is a new study
         if not os.path.isdir(study_dir):
             os.mkdir(study_dir)
 
-        file = open(study_filename, 'w')
-        file.write(content)
+        file = open(study_filename, 'w') #should be a move in here
+        file.write(content) #Should be outside of lock
         file.close()
 
         git.add(study_filename)
 
-        git.commit(author=author, message="Update Study #%s via OpenTree API" % study_id)
+        git.commit(author=author, message="Update Study #%s via OpenTree API" % study_id, _in='') #TODO use _in to avoid waiting for authorization?
 
         new_sha = git("rev-parse","HEAD")
 
