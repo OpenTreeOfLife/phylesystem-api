@@ -30,8 +30,11 @@ def read_config(request):
         pkey        = conf.get("apis", "pkey")
     except:
         pkey = None
-
-    return repo_path, repo_remote, git_ssh, pkey
+    try:
+        repo_nexml2json = conf.get("apis", "repo_nexml2json")
+    except:
+        repo_nexml2json = "0.0.0"
+    return repo_path, repo_remote, git_ssh, pkey, repo_nexml2json
 
 def authenticate(**kwargs):
     """Verify that we received a valid Github authentication token

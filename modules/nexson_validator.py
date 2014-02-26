@@ -1469,12 +1469,15 @@ class TreeCollection(NexsonDictWrapper):
         self._otu_collection = None
         v = o.get('@otus')
         if v is not None:
-            if container is None \
-               or container.otus is None \
-               or v != container.otus.nexson_id:
+            found = False
+            if (container is not None) and (container.otus is not None):
+                f = [i for i in container.otus if i.nexson_id == v]
+                if len(f) == 1:
+                    found = True
+                    self._otu_collection = f[0]
+            if not found:
                 rich_logger.emit_error(ReferencedIDNotFoundWarning('@otus', v, address=self.address))
-            else:
-                self._otu_collection = container.otus
+                
         v = o.get('tree', [])
         if not isinstance(v, list):
             rich_logger.emit_error(MissingExpectedListWarning(v, address=NexsonAddress(self, subelement='tree')))
@@ -1562,17 +1565,24 @@ class NexSON(NexsonDictWrapper):
         if v is None:
             rich_logger.emit_error(MissingMandatoryKeyWarning('otus', address=self.address))
         else:
-            self.otus = OTUCollection(v, rich_logger, container=self)
+            if not isinstance(v, list):
+                v = [v]
+            self.otus = [OTUCollection(i, rich_logger, container=self) for i in v]
         v = self._nexml.get('trees')
         if v is None:
             rich_logger.emit_error(MissingMandatoryKeyWarning('tree', address=self.address))
         else:
-            self.trees = TreeCollection(v, rich_logger, container=self)
-            possible_trees = [t for t in self.trees._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)]
+            if not isinstance(v, list):
+                v = [v]
+            self.trees = [TreeCollection(i, rich_logger, container=self) for i in v]
+            possible_trees = []
+            for tc in self.trees:
+                possible_trees.extend([t for t in tc._as_list if t._tagged_for_inclusion or (not t._tagged_for_deletion)])
             if len(possible_trees) > 1:
-                rich_logger.warning(MultipleTreesWarning(self.trees._as_list, address=self.trees.address))
+                #TEMP: bug self.trees[0] may not be the offending element...
+                rich_logger.warning(MultipleTreesWarning(self.trees, address=self.trees[0].address))
             elif len(possible_trees) == 0:
-                rich_logger.warning(NoTreesWarning(address=self.trees.address))
+                rich_logger.warning(NoTreesWarning(address=self.trees[0].address))
 
 
 def indented_keys(out, o, indentation='', indent=2):
