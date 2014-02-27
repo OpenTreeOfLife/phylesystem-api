@@ -12,7 +12,7 @@ from gitdata import GitData
 from locket import LockError
 
 # NexSON validation
-from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
+from peyotl.nexson_validation import NexsonWarningCodes, validate_nexson
 
 _LOG = api_utils.get_logger('ot_api.default')
 def index():
@@ -54,13 +54,12 @@ def v1():
                 alias parts of the nexson dict that is passed in as an argument.
         '''
         # stub function for hooking into NexSON validation
-        codes_to_skip = [WarningCodes.UNVALIDATED_ANNOTATION]
+        codes_to_skip = [NexsonWarningCodes.UNVALIDATED_ANNOTATION]
+        v_log, adaptor = validate_nexson(nexson, codes_to_skip, retain_deprecated=True)
         script_name = 'api.opentreeoflife.org/validate' # TODO
-        validation_log, nexson_obj = create_validation_nexson(nexson, codes_to_skip, retain_deprecated=True)
-        annotation = prepare_annotation(validation_log,
-                                        author_name=script_name,
-                                        annotation_label="Open Tree NexSON validation")
-        return annotation, validation_log, nexson_obj
+        annotation = v_log.prepare_annotation(author_name=script_name,
+                                              annotation_label="Open Tree NexSON validation")
+        return annotation, v_log, adaptor
 
     def __finish_write_verb(git_data, 
                             git_hub_auth,
@@ -68,12 +67,12 @@ def v1():
                             author_name,
                             author_email,
                             resource_id,
-                            rich_nexson,
+                            adaptor,
                             annotation):
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
-        block_until_annotation_commit = True
+        block_until_annotation_commit = False
         unadulterated_content_commit = do_commit(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
         # TIMING = api_utils.log_time_diff(_LOG, 'unadulterated commit', TIMING)
         if unadulterated_content_commit['error'] != 0:
@@ -81,8 +80,8 @@ def v1():
             raise HTTP(400, json.dumps(unadulterated_content_commit))
         if block_until_annotation_commit:
             # add the annotation and commit the resulting blob...
-            add_or_replace_annotation(rich_nexson._raw, annotation)
-            nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
+            adaptor.add_or_replace_annotation(annotation)
+            nexson = adaptor.get_nexson_str()
             annotated_commit = do_commit(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
             # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
             if annotated_commit['error'] != 0:
@@ -154,7 +153,7 @@ def v1():
 
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
-        nexson, annotation, validation_log, rich_nexson = __validate_and_normalize_nexson(**kwargs)
+        nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
         gd = GitData(repo=repo_path)
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
@@ -166,7 +165,7 @@ def v1():
                                    author_name,
                                    author_email,
                                    new_resource_id,
-                                   rich_nexson,
+                                   nexson_adaptor,
                                    annotation)
 
     def __coerce_nexson_format(nexson, dest_format, current_format=None):
@@ -199,7 +198,7 @@ def v1():
         VALIDATION_NEXSON_FORMAT = "0.0.0" #currently the nexson validator requires badgerfish
         nexson = __coerce_nexson_format(nexson, VALIDATION_NEXSON_FORMAT)
         
-        annotation, validation_log, rich_nexson = __validate(nexson)
+        annotation, validation_log, nexson_adaptor = __validate(nexson)
         if validation_log.errors:
             _LOG.debug('__validate failed'.format(k=nexson.keys(), a=json.dumps(annotation)))
             raise HTTP(400, json.dumps(annotation))
@@ -207,7 +206,7 @@ def v1():
         # sort the keys of the POSTed NexSON and indent 0 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=0)
 
-        return nexson, annotation, validation_log, rich_nexson
+        return nexson, annotation, validation_log, nexson_adaptor
 
     def PUT(resource, resource_id, **kwargs):
         "Open Tree API methods relating to updating existing resources"
@@ -222,7 +221,7 @@ def v1():
         gh, author_name, author_email = api_utils.authenticate(**kwargs)
         # TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
         
-        nexson, annotation, validation_log, rich_nexson = __validate_and_normalize_nexson(**kwargs)
+        nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
         # TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
         gd = GitData(repo=repo_path)
 
@@ -241,7 +240,7 @@ def v1():
                                    author_name,
                                    author_email,
                                    resource_id,
-                                   rich_nexson,
+                                   nexson_adaptor,
                                    annotation)
         # TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         return blob
