@@ -6,6 +6,8 @@ import locket
 import functools
 from locket import LockError
 from subprocess import call
+import api_utils
+_LOG = api_utils.get_logger(__name__)
 
 class MergeException(Exception):
     pass
@@ -35,10 +37,12 @@ class GitData(object):
 
     def acquire_lock(self):
         "Acquire a lock on the git repository"
+        _LOG.debug('Acquiring lock')
         self.lock.acquire()
 
     def release_lock(self):
         "Release a lock on the git repository"
+        _LOG.debug('Releasing lock')
         self.lock.release()
 
     @preserve_cwd
