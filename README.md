@@ -64,7 +64,7 @@ containing study ```N```.  If the JSON representing that study
 is greater than 50MB, it will be broken into multiple files to
 be stored in Git, so they  will be merged together before a
 response is sent. This is all transparent to the user of the
-OToL API. Only people using the phylesystem data files directly
+Open Tree API. Only people using the phylesystem data files directly
 will need to handle this.
 
 These files will have the structure of:
