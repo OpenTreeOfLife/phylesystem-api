@@ -5,12 +5,13 @@ import os, sys
 import locket
 import functools
 from locket import LockError
+from subprocess import call
 
 class MergeException(Exception):
     pass
 
 class GitData(object):
-    def __init__(self, repo):
+    def __init__(self, dir):
         """Create a GitData object to interact with a Git repository
 
         Example:
@@ -21,28 +22,16 @@ class GitData(object):
         lockfile in the .git directory.
 
         """
-        self.repo = repo
-
+        self.dir = dir
+        if os.path.isdir(self.dir+"/.git"):
+            self.repo=self.dir
+        for file in 
+        self.index={} #When/where should indexing happen?!
+                
         self.lock_file     = "%s/.git/API_WRITE_LOCK" % self.repo
         self.lock_timeout  = 30
         self.lock          = locket.lock_file(self.lock_file, timeout=self.lock_timeout)
 
-
-    def preserve_cwd(function):
-        """
-        A decorator which remembers the current
-        working directory before a function call and
-        then resets the CWD after the function
-        returns.
-        """
-        @functools.wraps(function)
-        def decorator(*args, **kwargs):
-            cwd = os.getcwd()
-            try:
-                return function(*args, **kwargs)
-            finally:
-                os.chdir(cwd)
-        return decorator
 
     def acquire_lock(self):
         "Acquire a lock on the git repository"
