@@ -5,15 +5,13 @@ import os, sys
 import locket
 import functools
 from locket import LockError
-from subprocess import call
 import api_utils
 _LOG = api_utils.get_logger(__name__)
-
 class MergeException(Exception):
     pass
 
 class GitData(object):
-    def __init__(self, dir):
+    def __init__(self, repo):
         """Create a GitData object to interact with a Git repository
 
         Example:
@@ -24,16 +22,28 @@ class GitData(object):
         lockfile in the .git directory.
 
         """
-        self.dir = dir
-        if os.path.isdir(self.dir+"/.git"):
-            self.repo=self.dir
-        for file in 
-        self.index={} #When/where should indexing happen?!
-                
+        self.repo = repo
+
         self.lock_file     = "%s/.git/API_WRITE_LOCK" % self.repo
         self.lock_timeout  = 30
         self.lock          = locket.lock_file(self.lock_file, timeout=self.lock_timeout)
 
+
+    def preserve_cwd(function):
+        """
+        A decorator which remembers the current
+        working directory before a function call and
+        then resets the CWD after the function
+        returns.
+        """
+        @functools.wraps(function)
+        def decorator(*args, **kwargs):
+            cwd = os.getcwd()
+            try:
+                return function(*args, **kwargs)
+            finally:
+                os.chdir(cwd)
+        return decorator
 
     def acquire_lock(self):
         "Acquire a lock on the git repository"
@@ -163,20 +173,20 @@ class GitData(object):
             git.checkout("master")
             git.checkout("-b",branch)
 
-        study_dir      = "study/%s" % study_id #TODO what if more funky ids
+        study_dir      = "study/%s" % study_id
         study_filename = "%s/%s.json" % (study_dir, study_id)
 
         # create a study directory if this is a new study
         if not os.path.isdir(study_dir):
             os.mkdir(study_dir)
 
-        file = open(study_filename, 'w') #should be a move in here
-        file.write(content) #Should be outside of lock
+        file = open(study_filename, 'w')
+        file.write(content)
         file.close()
 
         git.add(study_filename)
 
-        git.commit(author=author, message="Update Study #%s via OpenTree API" % study_id, _in='') #TODO use _in to avoid waiting for authorization?
+        git.commit(author=author, message="Update Study #%s via OpenTree API" % study_id)
 
         new_sha = git("rev-parse","HEAD")
 
