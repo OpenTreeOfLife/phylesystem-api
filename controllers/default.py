@@ -120,13 +120,14 @@ def v1():
         study_nexson, head_sha = gd.fetch_study(resource_id)
         if study_nexson == "":
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
+        
+        study_nexson = anyjson.loads(study_nexson)
         if output_nexml2json != repo_nexml2json:
-            blob = anyjson.loads(study_nexson)
-            return __coerce_nexson_format(blob,
+            study_nexson = __coerce_nexson_format(study_nexson,
                                           output_nexml2json,
                                           current_format=repo_nexml2json)
-        else:
-            return dict(FULL_RESPONSE=study_nexson)
+        return {'sha': head_sha,
+                'data': study_nexson}
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
