@@ -30,6 +30,7 @@ class GitData(object):
         
         if os.path.isdir("{}/.git".format(self.repo)):
            self.gitdir="--git-dir={}/.git".format(self.repo)
+           self.gitwd="--work-tree={}".format(self.repo)
         else: #EJM needs a test?
             print("Not a Git repo") 
            #EJM not sure where this will go in web2py
@@ -52,6 +53,7 @@ class GitData(object):
 
     def newest_study_id(self):
         "Return the numeric part of the newest study_id"
+        git(self.gitdir,"stash") #EJM not clear why, ask Mark
         git(self.gitdir,"checkout","master")
         dirs = []
         # first we look for studies already in our master branch
@@ -98,10 +100,7 @@ class GitData(object):
     def create_or_checkout_branch(self,branch):
         if self.branch_exists(branch):
             git(self.gitdir,"checkout",branch)
-            if not os.path.isdir(study_dir):
-                # branch already exists locally with study removed
-                # so just return the commit SHA
-                return git(self.gitdir,"rev-parse","HEAD").strip()
+            
         else:
             # Create this new branch off of master, NOT the currently-checked out branch!
             #EJM wait why?
@@ -122,8 +121,12 @@ class GitData(object):
         study_filename = "{}/{}.json".format(study_dir, study_id)
 
         self.create_or_checkout_branch(branch)
+        if not os.path.isdir(study_dir):
+                # branch already exists locally with study removed
+                # so just return the commit SHA
+                return git(self.gitdir,"rev-parse","HEAD").strip()
 
-        git(self.gitdir,"rm","-rf", study_dir)
+        git(self.gitdir, self.gitwd,"rm","-rf", study_dir)
 
         git(self.gitdir, "commit",author=author, message="Delete Study #%s via OpenTree API" % study_id)
 
@@ -160,7 +163,7 @@ class GitData(object):
         file.write(content)
         file.close()
 
-        git(self.gitdir, "add",study_filename)
+        git(self.gitdir, self.gitwd, "add",study_filename)
 
         git(self.gitdir, "commit",author=author, message="Update Study #%s via OpenTree API" % study_id)
 
