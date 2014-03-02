@@ -33,6 +33,18 @@ def reponexsonformat():
     return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
             'nexml2json': rn}
 
+def _acquire_lock_or_exit(git_data, fail_msg=''):
+    '''Adapts LockError to HTTP. If an exception is not thrown, the gd has the lock (and must release it!)
+    '''
+    try:
+        git_data.acquire_lock()
+    except LockError, e:
+        msg = '{o} Details: {d}'.format(o=fail_msg, d=e.message)
+        _LOG.debug(msg)
+        raise HTTP(400, json.dumps({
+            "error": 1,
+            "description": msg 
+        }))
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -117,7 +129,12 @@ def v1():
 
         # return the correct nexson of study_id, using the specified view
         gd = GitData(repo=repo_path)
-        study_nexson, head_sha = gd.fetch_study(resource_id)
+        _acquire_lock_or_exit(gd)
+        try:
+            gd.checkout_master()
+            study_nexson, head_sha = gd.fetch_study(resource_id)
+        finally:
+            gd.release_lock()
         if study_nexson == "":
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
         if output_nexml2json != repo_nexml2json:
@@ -254,15 +271,7 @@ def v1():
 
         branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
 
-        try:
-            gd.acquire_lock()
-        except LockError, e:
-            msg = "Could not acquire lock to write to study #%s\nDetails: %s" % (resource_id,e.message)
-            _LOG.debug(msg)
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": msg 
-            }))
+        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
 
         try:
             # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
@@ -333,13 +342,7 @@ def v1():
 
         gd = GitData(repo=repo_path)
 
-        try:
-            gd.acquire_lock()
-        except LockError, e:
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not acquire lock to delete the study #%s" % resource_id
-            }))
+        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to delete the study #%s" % resource_id)
 
         try:
             new_sha = gd.remove_study(resource_id, branch_name, author)
