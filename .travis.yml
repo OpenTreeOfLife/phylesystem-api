@@ -45,8 +45,6 @@ after_script:
 notifications:
   irc:
     channels: "chat.freenode.net#opentreeoflife"
-  recipients:
-    - duke@leto.net
   email:
     on_success: change
     on_failure: always
