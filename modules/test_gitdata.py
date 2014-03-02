@@ -105,7 +105,7 @@ class TestGitData(unittest.TestCase):
 
     def test_fetch(self):
         study_id = 438
-        study_nexson = self.gd.fetch_study(study_id)
+        study_nexson, head_sha = self.gd.fetch_study(study_id)
         valid = 1
         try:
             json.loads(study_nexson)
@@ -128,7 +128,8 @@ class TestGitData(unittest.TestCase):
         new_sha  = self.gd.write_study(study_id,content,branch,author)
         self.assertTrue( new_sha != "", "new_sha is non-empty")
         self.assertEqual(len(new_sha), 40, "SHA is 40 chars")
-        self.assertEqual( content, self.gd.fetch_study(9999), "correct content found via fetch_study")
+        fetched_content, head_sha = self.gd.fetch_study(9999)
+        self.assertEqual( content, fetched_content, "correct content found via fetch_study")
 
         author   = "John Doe <john@doe.com>"
         content  = '{"foo2":"bar2"}'

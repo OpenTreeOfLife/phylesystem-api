@@ -33,8 +33,6 @@ before_script:
     - git status -sbu
 
 script:
-    - cd nexson-validator && python setup.py develop && ./test.sh
-    - cd ..
     - cd modules && python test_gitdata.py
 
 after_script:
@@ -47,7 +45,6 @@ notifications:
   irc:
     channels: "chat.freenode.net#opentreeoflife"
   recipients:
-    - duke@leto.net
   email:
     on_success: change
     on_failure: always
