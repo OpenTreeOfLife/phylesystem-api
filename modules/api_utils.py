@@ -20,8 +20,8 @@ def read_config(request):
         filename = "%s/applications/%s/private/config" % (request.env.web2py_path, app_name)
         conf.readfp(open(filename))
 
-    repo_dir   = conf.get("apis","repo_dir")
-#    repo_remote = conf.get("apis", "repo_remote")
+    repo_path   = conf.get("apis","repo_path")
+    repo_remote = conf.get("apis", "repo_remote")
     try:
         git_ssh     = conf.get("apis", "git_ssh")
     except:
@@ -34,7 +34,7 @@ def read_config(request):
         repo_nexml2json = conf.get("apis", "repo_nexml2json")
     except:
         repo_nexml2json = "0.0.0"
-    return repo_dir, repo_remote, git_ssh, pkey, repo_nexml2json
+    return repo_path, repo_remote, git_ssh, pkey, repo_nexml2json
 
 def authenticate(**kwargs):
     """Verify that we received a valid Github authentication token
