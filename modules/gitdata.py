@@ -5,6 +5,8 @@ import os, sys
 import locket
 import functools
 from locket import LockError
+import codecs
+from peyotl.phylesystem import get_HEAD_SHA1
 import api_utils
 _LOG = api_utils.get_logger(__name__)
 class MergeException(Exception):
@@ -23,8 +25,8 @@ class GitData(object):
 
         """
         self.repo = repo
-
-        self.lock_file     = "%s/.git/API_WRITE_LOCK" % self.repo
+        self.git_dir = os.path.join(repo, '.git')
+        self.lock_file     = os.path.join(self.git_dir, "API_WRITE_LOCK")
         self.lock_timeout  = 30
         self.lock          = locket.lock_file(self.lock_file, timeout=self.lock_timeout)
 
@@ -90,16 +92,17 @@ class GitData(object):
         return dirs[-1]
 
     def fetch_study(self, study_id):
-        """Return the contents of the given study_id
+        """Return the contents of the given study_id, and the SHA1 of the HEAD.
 
         If the study_id does not exist, it returns the empty string.
         """
         study_filename = "%s/study/%s/%s.json" % (self.repo, study_id, study_id)
+        head_sha = get_HEAD_SHA1(self.git_dir)
         try:
-            file = open(study_filename, 'r')
+            f = codecs.open(study_filename, mode='rU', encoding='utf-8')
         except:
-            return ''
-        return file.read()
+            return '', head_sha
+        return f.read(), head_sha
 
     @preserve_cwd
     def branch_exists(self, branch):

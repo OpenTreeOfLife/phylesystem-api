@@ -117,7 +117,7 @@ def v1():
 
         # return the correct nexson of study_id, using the specified view
         gd = GitData(repo=repo_path)
-        study_nexson = gd.fetch_study(resource_id)
+        study_nexson, head_sha = gd.fetch_study(resource_id)
         if study_nexson == "":
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
         if output_nexml2json != repo_nexml2json:
@@ -228,7 +228,8 @@ def v1():
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
-        nexson_sha1        = hashlib.sha1( gd.fetch_study(resource_id) ).hexdigest()
+        nexson_fetched_content, head_sha = gd.fetch_study(resource_id)
+        nexson_sha1 = hashlib.sha1(nexson_fetched_content).hexdigest()
         # TIMING = api_utils.log_time_diff(_LOG, 'GitData creation and sha', TIMING)
 
         # the POSTed data is the same as what we currently have, do nothing and return successfully

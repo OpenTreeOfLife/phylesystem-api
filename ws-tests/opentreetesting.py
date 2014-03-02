@@ -76,6 +76,37 @@ def summarize_gzipped_json_response(resp):
         print 'Non gzipped response, but not a string is:', results
         return False
 
+def get_obj_from_http(url,
+                     verb='GET',
+                     data=None,
+                     headers=None):
+    '''Call `url` with the http method of `verb`. 
+    If specified `data` is passed using json.dumps
+    returns the json content of the web service or raise an HTTP error
+    '''
+    if headers is None:
+        headers = {
+            'content-type' : 'application/json',
+            'accept' : 'application/json',
+        }
+    if data:
+        resp = requests.request(verb,
+                                url,
+                                headers=headers,
+                                data=json.dumps(data),
+                                allow_redirects=True)
+    else:
+        resp = requests.request(verb,
+                                url,
+                                headers=headers,
+                                allow_redirects=True)
+    debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
+    debug('Got status code {c}\n'.format(c=resp.status_code))
+    if resp.status_code != 200:
+        debug('Full response: {r}\n'.format(r=resp.text))
+        raise_for_status(resp)
+    return resp.json()
+
 def test_http_json_method(url,
                      verb='GET',
                      data=None,
