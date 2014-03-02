@@ -64,6 +64,11 @@ class GitData(object):
         branch_name = git("symbolic-ref", "HEAD")
         return branch_name.replace('refs/heads/','').strip()
 
+    @preserve_cwd
+    def checkout_master(self):
+        os.chdir(self.repo)
+        git.checkout("master")
+
     def newest_study_id(self):
         "Return the numeric part of the newest study_id"
         os.chdir(self.repo)
