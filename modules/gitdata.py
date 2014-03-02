@@ -5,8 +5,8 @@ import os, sys
 import locket
 import functools
 from locket import LockError
-#import api_utils
-#_LOG = api_utils.get_logger(__name__)
+import api_utils
+_LOG = api_utils.get_logger(__name__)
 class MergeException(Exception):
     pass
 
@@ -52,7 +52,7 @@ class GitData(object):
 
     def newest_study_id(self):
         "Return the numeric part of the newest study_id"
-        git.checkout(self.gitdir,"master")
+        git(self.gitdir,"checkout","master")
         dirs = []
         # first we look for studies already in our master branch
         for f in os.listdir("study/"):
@@ -65,7 +65,7 @@ class GitData(object):
 
         # next we must look at local branch names for new studies
         # without --no-color we get terminal color codes in the branch output
-        branches = git.branch("--no-color")
+        branches = git(self.gitdir,"branch","--no-color")
         branches = [ b.strip() for b in branches ]
         for b in branches:
             mo = re.match(".+_o(\d+)",b)
@@ -148,7 +148,7 @@ class GitData(object):
         study_dir      = "{}/study/{}".format(self.repo,study_id) #TODO EJM change directory
         study_filename = "{}/{}.json".format(study_dir, study_id) 
         # If there are uncommitted changes to our repo, stash them so this commit can proceed
-        git("--git-dir={}/.git".format(self.repo),"stash") #EJM not clear why
+        git(self.gitdir,"stash") #EJM not clear why
 
         self.create_or_checkout_branch(branch)
         
