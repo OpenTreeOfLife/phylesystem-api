@@ -50,17 +50,16 @@ class GitData(object):
 
     def current_branch(self):
         "Return the current branch name"
-        branch_name = git(self.gitdir, "symbolic-ref", "HEAD")
+        branch_name = git(self.gitdir, self.gitwd, "symbolic-ref", "HEAD")
         return branch_name.replace('refs/heads/','').strip()
 
     def checkout_master(self):
-        os.chdir(self.repo)
-        git.checkout("master")
+        git(self.gitdir, self.gitwd, "checkout", "master")
 
     def newest_study_id(self):
         "Return the numeric part of the newest study_id"
-        git(self.gitdir,"stash") #EJM not clear why, ask Mark
-        git(self.gitdir,"checkout","master")
+        #git(self.gitdir, "stash") #EJM not clear why, ask Mark
+        git(self.gitdir, self.gitwd, "checkout","master")
         dirs = []
         # first we look for studies already in our master branch
         for f in os.listdir("study/"):
@@ -73,7 +72,7 @@ class GitData(object):
 
         # next we must look at local branch names for new studies
         # without --no-color we get terminal color codes in the branch output
-        branches = git(self.gitdir,"branch","--no-color")
+        branches = git(self.gitdir, self.gitwd,"branch","--no-color")
         branches = [ b.strip() for b in branches ]
         for b in branches:
             mo = re.match(".+_o(\d+)",b)
@@ -99,20 +98,20 @@ class GitData(object):
     def branch_exists(self, branch):
         """Returns true or false depending on if a branch exists"""
         try:
-            git(self.gitdir,"rev-parse",branch)
+            git(self.gitdir, self.gitwd, "rev-parse",branch)
         except sh.ErrorReturnCode:
             return False
         return True
- 
+
     def create_or_checkout_branch(self,branch):
         if self.branch_exists(branch):
-            git(self.gitdir,"checkout",branch)
+            git(self.gitdir, self.gitwd, "checkout",branch)
             
         else:
             # Create this new branch off of master, NOT the currently-checked out branch!
             #EJM wait why?
-            git(self.gitdir,"checkout","master")
-            git(self.gitdir,"checkout","-b",branch)
+            git(self.gitdir, self.gitwd, "checkout","master")
+            git(self.gitdir, self.gitwd, "checkout","-b",branch)
     
     def remove_study(self,study_id, branch, author="OpenTree API <api@opentreeoflife.org>"):
         """Remove a study
@@ -131,13 +130,13 @@ class GitData(object):
         if not os.path.isdir(study_dir):
                 # branch already exists locally with study removed
                 # so just return the commit SHA
-                return git(self.gitdir,"rev-parse","HEAD").strip()
+                return git(self.gitdir, self.gitwd, "rev-parse","HEAD").strip()
 
         git(self.gitdir, self.gitwd,"rm","-rf", study_dir)
 
-        git(self.gitdir, "commit",author=author, message="Delete Study #%s via OpenTree API" % study_id)
+        git(self.gitdir, self.gitwd, "commit",author=author, message="Delete Study #%s via OpenTree API" % study_id)
 
-        new_sha = git(self.gitdir,"rev-parse","HEAD")
+        new_sha = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
 
         return new_sha.strip()
 
@@ -158,7 +157,7 @@ class GitData(object):
         study_dir      = "{}/study/{}".format(self.repo,study_id) #TODO EJM change directory
         study_filename = "{}/{}.json".format(study_dir, study_id) 
         # If there are uncommitted changes to our repo, stash them so this commit can proceed
-        git(self.gitdir,"stash") #EJM not clear why
+        #git(self.gitdir, self.gitwd, "stash") #EJM not clear why
 
         self.create_or_checkout_branch(branch)
         
@@ -172,9 +171,9 @@ class GitData(object):
 
         git(self.gitdir, self.gitwd, "add",study_filename)
 
-        git(self.gitdir, "commit",author=author, message="Update Study #%s via OpenTree API" % study_id)
+        git(self.gitdir, self.gitwd,  "commit",author=author, message="Update Study #%s via OpenTree API" % study_id)
 
-        new_sha = git(self.gitdir, "rev-parse","HEAD")
+        new_sha = git(self.gitdir, self.gitwd,  "rev-parse","HEAD")
 
         return new_sha.strip()
 
@@ -192,26 +191,26 @@ class GitData(object):
 
         current_branch = self.current_branch()
         if current_branch != base_branch:
-            git(self.gitdir,"checkout",base_branch)
+            git(self.gitdir, self.gitwd, "checkout",base_branch)
 
         # Always create a merge commit, even if we could fast forward, so we know
         # when merges occured
         try:
-            merge_output = git(self.gitdir,"--no-ff","merge", branch)
+            merge_output = git(self.gitdir, self.gitwd, "--no-ff","merge", branch)
         except sh.ErrorReturnCode:
             # attempt to reset things so other operations can
             # continue
-            output = git(self.gitdir,"status")
-            git(self.gitdir,"merge""--abort")
+            output = git(self.gitdir, self.gitwd, "status")
+            git(self.gitdir, self.gitwd, "merge""--abort")
 
             # re-raise the exception so other code can decide
             # what to do with it
             raise MergeException(output)
 
         # the merge succeeded, so remove the local WIP branch
-        git(self.gitdir,"branch","-d", branch)
+        git(self.gitdir, self.gitwd, "branch","-d", branch)
 
-        new_sha      = git(self.gitdir,"rev-parse","HEAD")
+        new_sha      = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
         return new_sha.strip()
 
     def delete_remote_branch(self, remote, branch, env={}):
@@ -251,9 +250,9 @@ class GitData(object):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git(self.gitdir,"push",remote, branch_to_push, _env=new_env)
+            git(self.gitdir, self.gitwd, "push",remote, branch_to_push, _env=new_env)
         else:
-            git(self.gitdir,"push",remote, branch_to_push)
+            git(self.gitdir, self.gitwd, "push",remote, branch_to_push)
 
     def pull(self, remote, env={}, branch=None):
         """
@@ -278,9 +277,9 @@ class GitData(object):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git(self.gitdir,"pull",remote, branch_to_pull, _env=new_env)
+            git(self.gitdir, self.gitwd, "pull",remote, branch_to_pull, _env=new_env)
         else:
-            git(self.gitdir,"pull",remote, branch_to_pull)
+            git(self.gitdir, self.gitwd, "pull",remote, branch_to_pull)
 
-        new_sha      = git(self.gitdir,"rev-parse","HEAD")
+        new_sha      = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
         return new_sha.strip()

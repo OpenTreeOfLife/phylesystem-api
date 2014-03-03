@@ -14,6 +14,7 @@ from locket import LockError
 # NexSON validation
 from peyotl.nexson_validation import NexsonWarningCodes, validate_nexson
 
+_VALIDATING = False
 _LOG = api_utils.get_logger('ot_api.default')
 def index():
     response.view = 'generic.json'
@@ -90,7 +91,7 @@ def v1():
         if unadulterated_content_commit['error'] != 0:
             _LOG.debug('unadulterated_content_commit failed')
             raise HTTP(400, json.dumps(unadulterated_content_commit))
-        if block_until_annotation_commit:
+        if _VALIDATING and block_until_annotation_commit:
             # add the annotation and commit the resulting blob...
             adaptor.add_or_replace_annotation(annotation)
             nexson = adaptor.get_nexson_str()
@@ -216,7 +217,7 @@ def v1():
         nexson = __coerce_nexson_format(nexson, VALIDATION_NEXSON_FORMAT)
         
         annotation, validation_log, nexson_adaptor = __validate(nexson)
-        if validation_log.errors:
+        if _VALIDATING and validation_log.errors:
             _LOG.debug('__validate failed'.format(k=nexson.keys(), a=json.dumps(annotation)))
             raise HTTP(400, json.dumps(annotation))
         nexson = __coerce_nexson_format(nexson, repo_nexml2json)
