@@ -53,7 +53,6 @@ class GitData(object):
         branch_name = git(self.gitdir, "symbolic-ref", "HEAD")
         return branch_name.replace('refs/heads/','').strip()
 
-    @preserve_cwd
     def checkout_master(self):
         os.chdir(self.repo)
         git.checkout("master")
