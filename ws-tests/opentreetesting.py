@@ -140,6 +140,7 @@ def test_http_json_method(url,
     debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
     debug('Got status code {c} (expecting {e})\n'.format(c=resp.status_code,e=expected_status))
     if resp.status_code != expected_status:
+        debug('Did not get expect response status. Got:\n{s}'.format(s=resp.status_code))
         debug('Full response: {r}\n'.format(r=resp.text))
         raise_for_status(resp)
         # this is required for the case when we expect a 4xx/5xx but a successful return code is returned
