@@ -29,6 +29,8 @@ def create_new_path_for_study_id(study_id):
         pass
     finally:
         _study_index_lock.release()
+        
+
 try:
     get_paths_for_study_id('abdha')
 except:
