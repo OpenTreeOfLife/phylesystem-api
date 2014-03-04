@@ -24,8 +24,8 @@ el['$'] = datetime.datetime.utcnow().isoformat()
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
-         'author_name': "Some Dude",
-         'author_email': "dude@dude.com",
+         'author_name': "Some Author",
+         'author_email': "author@author.com",
 }
 if test_http_json_method(SUBMIT_URI,
                          'PUT',
