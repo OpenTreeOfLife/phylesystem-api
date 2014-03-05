@@ -133,7 +133,7 @@ def v1():
         _acquire_lock_or_exit(gd)
         try:
             gd.checkout_master()
-            study_nexson, head_sha = gd.fetch_study(resource_id)
+            study_nexson, head_sha = gd.return_study(resource_id)
         finally:
             gd.release_lock()
         if study_nexson == "":
@@ -246,7 +246,7 @@ def v1():
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
-        nexson_fetched_content, head_sha = gd.fetch_study(resource_id)
+        nexson_fetched_content, head_sha = gd.return_study(resource_id)
         nexson_sha1 = hashlib.sha1(nexson_fetched_content).hexdigest()
         # TIMING = api_utils.log_time_diff(_LOG, 'GitData creation and sha', TIMING)
 
@@ -275,8 +275,9 @@ def v1():
         _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
 
         try:
+            pass #EJM temp
             # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
-            gd.pull(repo_remote, env=git_env, branch=branch_name)
+            #gd.pull(repo_remote, env=git_env, branch=branch_name)
             # TIMING = api_utils.log_time_diff(_LOG, 'git pull', TIMING)
         except Exception, e:
             # We can ignore this if the branch doesn't exist yet on the remote,
@@ -309,7 +310,7 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push(repo_remote, env=git_env, branch=branch_name)
+            #gd.push(repo_remote, env=git_env, branch=branch_name)
             # TIMING = api_utils.log_time_diff(_LOG, 'push', TIMING)
         except Exception, e:
             raise HTTP(400, json.dumps({
