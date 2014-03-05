@@ -309,6 +309,7 @@ def v1():
             }))
 
         try:
+            pass #EJM temp
             # actually push the changes to Github
             #gd.push(repo_remote, env=git_env, branch=branch_name)
             # TIMING = api_utils.log_time_diff(_LOG, 'push', TIMING)
