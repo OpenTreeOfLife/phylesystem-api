@@ -49,9 +49,17 @@ http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-speci
 
 To get the entire NexSON of study N :
 
-    curl http://dev.opentreeoflife.org/api/v1/study/N.json
+    curl http://dev.opentreeoflife.org/api/v1/study/N.json?output_nexml2json=1.0.0
 
 If the study does not exist, this API call will return a 404 error code.
+The output_nexml2json arg specifies the version of the NeXML -> NexSON 
+mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
+for details. Currently the only supported values are:
+   0.0.0  badgerfish convention
+   1.0.0  the first version of the "honey badgerfish" convention
+
+The default for this parameter is 0.0.0, but this is subject to change.
+Consider the call with out the output_nexml2json argument to be brittle!
 
 ### Updating a study
 

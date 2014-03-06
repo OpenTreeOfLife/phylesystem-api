@@ -6,8 +6,10 @@ import json
 import sys
 import os
 
+# this makes it easier to test concurrent pushes to different branches
+study_id = 12
+
 DOMAIN = config('host', 'apihost')
-study_id="12"
 SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
 fn = 'data/{s}.json'.format(s=study_id)
 inpf = codecs.open(fn, 'rU', encoding='utf-8')
@@ -23,13 +25,11 @@ else:
 el['$'] = datetime.datetime.utcnow().isoformat()
 
 data = { 'nexson' : n,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
-         'author_name': "Some Dude",
-         'author_email': "dude@dude.com",
+         'auth_token': 'bogus'
 }
 if test_http_json_method(SUBMIT_URI,
                          'PUT',
                          data=data,
-                         expected_status=200):
+                         expected_status=400):
     sys.exit(0)
 sys.exit(1)

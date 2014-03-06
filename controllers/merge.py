@@ -50,7 +50,7 @@ def v1():
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
 
-        repo_path, repo_remote, git_ssh, pkey = api_utils.read_config(request)
+        repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
         git_env     = {"GIT_SSH": git_ssh, "PKEY": pkey}
 
         gd = GitData(repo=repo_path)

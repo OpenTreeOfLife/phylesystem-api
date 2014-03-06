@@ -1,8 +1,10 @@
 import os, sys
 import time
 import json
+import anyjson
 import hashlib
 import github
+from peyotl import can_convert_nexson_forms, convert_nexson_format
 from github import Github, BadCredentialsException
 import api_utils
 from pprint import pprint
@@ -10,8 +12,9 @@ from gitdata import GitData
 from locket import LockError
 
 # NexSON validation
-from nexson_validator import WarningCodes, create_validation_nexson, prepare_annotation, add_or_replace_annotation
+from peyotl.nexson_validation import NexsonWarningCodes, validate_nexson
 
+_VALIDATING = False
 _LOG = api_utils.get_logger('ot_api.default')
 def index():
     response.view = 'generic.json'
@@ -21,6 +24,28 @@ def index():
         "documentation_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/tree/master/docs"
     })
 
+_CONFIG_TUPLE = None
+def reponexsonformat():
+    global _CONFIG_TUPLE
+    response.view = 'generic.jsonp'
+    if _CONFIG_TUPLE is None:
+        _CONFIG_TUPLE = api_utils.read_config(request)
+    rn = _CONFIG_TUPLE[4]
+    return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
+            'nexml2json': rn}
+
+def _acquire_lock_or_exit(git_data, fail_msg=''):
+    '''Adapts LockError to HTTP. If an exception is not thrown, the gd has the lock (and must release it!)
+    '''
+    try:
+        git_data.acquire_lock()
+    except LockError, e:
+        msg = '{o} Details: {d}'.format(o=fail_msg, d=e.message)
+        _LOG.debug(msg)
+        raise HTTP(400, json.dumps({
+            "error": 1,
+            "description": msg 
+        }))
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -31,7 +56,7 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
-    repo_path, repo_remote, git_ssh, pkey = api_utils.read_config(request)
+    repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
     git_env     = {"GIT_SSH": git_ssh, "PKEY": pkey}
 
     def __validate(nexson):
@@ -42,13 +67,12 @@ def v1():
                 alias parts of the nexson dict that is passed in as an argument.
         '''
         # stub function for hooking into NexSON validation
-        codes_to_skip = [WarningCodes.UNVALIDATED_ANNOTATION]
+        codes_to_skip = [NexsonWarningCodes.UNVALIDATED_ANNOTATION]
+        v_log, adaptor = validate_nexson(nexson, codes_to_skip, retain_deprecated=True)
         script_name = 'api.opentreeoflife.org/validate' # TODO
-        validation_log, nexson_obj = create_validation_nexson(nexson, codes_to_skip, retain_deprecated=True)
-        annotation = prepare_annotation(validation_log,
-                                        author_name=script_name,
-                                        annotation_label="Open Tree NexSON validation")
-        return annotation, validation_log, nexson_obj
+        annotation = v_log.prepare_annotation(author_name=script_name,
+                                              annotation_label="Open Tree NexSON validation")
+        return annotation, v_log, adaptor
 
     def __finish_write_verb(git_data, 
                             git_hub_auth,
@@ -56,21 +80,21 @@ def v1():
                             author_name,
                             author_email,
                             resource_id,
-                            rich_nexson,
+                            adaptor,
                             annotation):
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
-        block_until_annotation_commit = True
+        block_until_annotation_commit = False
         unadulterated_content_commit = do_commit(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
         # TIMING = api_utils.log_time_diff(_LOG, 'unadulterated commit', TIMING)
         if unadulterated_content_commit['error'] != 0:
             _LOG.debug('unadulterated_content_commit failed')
             raise HTTP(400, json.dumps(unadulterated_content_commit))
-        if block_until_annotation_commit:
+        if _VALIDATING and block_until_annotation_commit:
             # add the annotation and commit the resulting blob...
-            add_or_replace_annotation(rich_nexson._raw, annotation)
-            nexson = json.dumps(rich_nexson._raw, sort_keys=True, indent=0)
+            adaptor.add_or_replace_annotation(annotation)
+            nexson = adaptor.get_nexson_str()
             annotated_commit = do_commit(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
             # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
             if annotated_commit['error'] != 0:
@@ -82,8 +106,12 @@ def v1():
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OpenTree API methods relating to reading"
-        valid_resources = ('study')
-
+        valid_resources = ('study', )
+        output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
+        if (output_nexml2json != repo_nexml2json) and not can_convert_nexson_forms(repo_nexml2json, output_nexml2json):
+            msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json, d=output_nexml2json)
+            _LOG.debug('GET failing: {m}'.format(m=msg))
+            raise HTTP(400, json.dumps({"error": 1, "description": msg}))
         if resource not in valid_resources:
             raise HTTP(400, json.dumps({"error": 1,
                 "description": 'Resource requested not in list of valid resources: %s' % valid_resources }))
@@ -102,11 +130,21 @@ def v1():
 
         # return the correct nexson of study_id, using the specified view
         gd = GitData(repo=repo_path)
-        study_nexson = gd.fetch_study(resource_id)
+        _acquire_lock_or_exit(gd)
+        try:
+            gd.checkout_master()
+            study_nexson, head_sha = gd.fetch_study(resource_id)
+        finally:
+            gd.release_lock()
         if study_nexson == "":
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
-
-        return dict(FULL_RESPONSE=study_nexson)
+        if output_nexml2json != repo_nexml2json:
+            blob = anyjson.loads(study_nexson)
+            return __coerce_nexson_format(blob,
+                                          output_nexml2json,
+                                          current_format=repo_nexml2json)
+        else:
+            return dict(FULL_RESPONSE=study_nexson)
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
@@ -133,7 +171,7 @@ def v1():
 
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
-        nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
+        nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
         gd = GitData(repo=repo_path)
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
@@ -145,10 +183,20 @@ def v1():
                                    author_name,
                                    author_email,
                                    new_resource_id,
-                                   rich_nexson,
+                                   nexson_adaptor,
                                    annotation)
 
-    def validate_and_normalize_nexson(**kwargs):
+    def __coerce_nexson_format(nexson, dest_format, current_format=None):
+        '''Calls convert_nexson_format but does the appropriate logging and HTTP exceptions.
+        '''
+        try:
+            return convert_nexson_format(nexson, dest_format, current_format=current_format)
+        except:
+            msg = "Exception in coercing to the required NexSON version for validation"
+            _LOG.exception(msg)
+            raise HTTP(400, json.dumps({"error": 1, "description": msg}))
+
+    def __validate_and_normalize_nexson(**kwargs):
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
         try:
             # check for kwarg 'nexson', or load the full request body
@@ -162,18 +210,21 @@ def v1():
             if 'nexson' in nexson:
                 nexson = nexson['nexson']
         except:
-            _LOG.exception('Exception getting nexson content in validate_and_normalize_nexson')
+            _LOG.exception('Exception getting nexson content in __validate_and_normalize_nexson')
             raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
-
-        annotation, validation_log, rich_nexson = __validate(nexson)
-        if validation_log.errors:
+        #TEMP
+        VALIDATION_NEXSON_FORMAT = "0.0.0" #currently the nexson validator requires badgerfish
+        nexson = __coerce_nexson_format(nexson, VALIDATION_NEXSON_FORMAT)
+        
+        annotation, validation_log, nexson_adaptor = __validate(nexson)
+        if _VALIDATING and validation_log.errors:
             _LOG.debug('__validate failed'.format(k=nexson.keys(), a=json.dumps(annotation)))
             raise HTTP(400, json.dumps(annotation))
-
+        nexson = __coerce_nexson_format(nexson, repo_nexml2json)
         # sort the keys of the POSTed NexSON and indent 0 spaces
         nexson = json.dumps(nexson, sort_keys=True, indent=0)
 
-        return nexson, annotation, validation_log, rich_nexson
+        return nexson, annotation, validation_log, nexson_adaptor
 
     def PUT(resource, resource_id, **kwargs):
         "Open Tree API methods relating to updating existing resources"
@@ -188,14 +239,15 @@ def v1():
         gh, author_name, author_email = api_utils.authenticate(**kwargs)
         # TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
         
-        nexson, annotation, validation_log, rich_nexson = validate_and_normalize_nexson(**kwargs)
+        nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
         # TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
         gd = GitData(repo=repo_path)
 
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
-        nexson_sha1        = hashlib.sha1( gd.fetch_study(resource_id) ).hexdigest()
+        nexson_fetched_content, head_sha = gd.fetch_study(resource_id)
+        nexson_sha1 = hashlib.sha1(nexson_fetched_content).hexdigest()
         # TIMING = api_utils.log_time_diff(_LOG, 'GitData creation and sha', TIMING)
 
         # the POSTed data is the same as what we currently have, do nothing and return successfully
@@ -207,7 +259,7 @@ def v1():
                                    author_name,
                                    author_email,
                                    resource_id,
-                                   rich_nexson,
+                                   nexson_adaptor,
                                    annotation)
         # TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         return blob
@@ -220,15 +272,7 @@ def v1():
 
         branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
 
-        try:
-            gd.acquire_lock()
-        except LockError, e:
-            msg = "Could not acquire lock to write to study #%s\nDetails: %s" % (resource_id,e.message)
-            _LOG.debug(msg)
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": msg 
-            }))
+        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
 
         try:
             # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
@@ -299,13 +343,7 @@ def v1():
 
         gd = GitData(repo=repo_path)
 
-        try:
-            gd.acquire_lock()
-        except LockError, e:
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not acquire lock to delete the study #%s" % resource_id
-            }))
+        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to delete the study #%s" % resource_id)
 
         try:
             new_sha = gd.remove_study(resource_id, branch_name, author)

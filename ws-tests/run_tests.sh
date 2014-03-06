@@ -4,7 +4,7 @@ num_p=0
 failed=''
 for fn in $(ls test_*.py)
 do
-    if python "$fn"
+    if python "$fn" > ".out_${fn}.txt"
     then
         num_p=$(expr 1 + $num_p)
         echo -n "."

@@ -5,7 +5,10 @@ import os, sys
 import locket
 import functools
 from locket import LockError
-
+import codecs
+from peyotl.phylesystem import get_HEAD_SHA1
+import api_utils
+_LOG = api_utils.get_logger(__name__)
 class MergeException(Exception):
     pass
 
@@ -22,48 +25,41 @@ class GitData(object):
 
         """
         self.repo = repo
-
-        self.lock_file     = "%s/.git/API_WRITE_LOCK" % self.repo
+        self.git_dir = os.path.join(repo, '.git')
+        self.lock_file     = os.path.join(self.git_dir, "API_WRITE_LOCK")
         self.lock_timeout  = 30
         self.lock          = locket.lock_file(self.lock_file, timeout=self.lock_timeout)
-
-
-    def preserve_cwd(function):
-        """
-        A decorator which remembers the current
-        working directory before a function call and
-        then resets the CWD after the function
-        returns.
-        """
-        @functools.wraps(function)
-        def decorator(*args, **kwargs):
-            cwd = os.getcwd()
-            try:
-                return function(*args, **kwargs)
-            finally:
-                os.chdir(cwd)
-        return decorator
+        
+        if os.path.isdir("{}/.git".format(self.repo)):
+           self.gitdir="--git-dir={}/.git".format(self.repo)
+           self.gitwd="--work-tree={}".format(self.repo)
+        else: #EJM needs a test?
+            print("Not a Git repo") 
+           #EJM not sure where this will go in web2py
+            
 
     def acquire_lock(self):
         "Acquire a lock on the git repository"
+        _LOG.debug('Acquiring lock')
         self.lock.acquire()
 
     def release_lock(self):
         "Release a lock on the git repository"
+        _LOG.debug('Releasing lock')
         self.lock.release()
 
-    @preserve_cwd
     def current_branch(self):
         "Return the current branch name"
-        os.chdir(self.repo)
-        branch_name = git("symbolic-ref", "HEAD")
+        branch_name = git(self.gitdir, self.gitwd, "symbolic-ref", "HEAD")
         return branch_name.replace('refs/heads/','').strip()
+
+    def checkout_master(self):
+        git(self.gitdir, self.gitwd, "checkout", "master")
 
     def newest_study_id(self):
         "Return the numeric part of the newest study_id"
-        os.chdir(self.repo)
-
-        git.checkout("master")
+        #git(self.gitdir, "stash") #EJM not clear why, ask Mark
+        git(self.gitdir, self.gitwd, "checkout","master")
         dirs = []
         # first we look for studies already in our master branch
         for f in os.listdir("study/"):
@@ -76,7 +72,7 @@ class GitData(object):
 
         # next we must look at local branch names for new studies
         # without --no-color we get terminal color codes in the branch output
-        branches = git.branch("--no-color")
+        branches = git(self.gitdir, self.gitwd,"branch","--no-color")
         branches = [ b.strip() for b in branches ]
         for b in branches:
             mo = re.match(".+_o(\d+)",b)
@@ -87,28 +83,36 @@ class GitData(object):
         return dirs[-1]
 
     def fetch_study(self, study_id):
-        """Return the contents of the given study_id
+        """Return the contents of the given study_id, and the SHA1 of the HEAD.
 
         If the study_id does not exist, it returns the empty string.
         """
         study_filename = "%s/study/%s/%s.json" % (self.repo, study_id, study_id)
+        head_sha = get_HEAD_SHA1(self.git_dir)
         try:
-            file = open(study_filename, 'r')
+            f = codecs.open(study_filename, mode='rU', encoding='utf-8')
         except:
-            return ''
-        return file.read()
+            return '', head_sha
+        return f.read(), head_sha
 
-    @preserve_cwd
     def branch_exists(self, branch):
         """Returns true or false depending on if a branch exists"""
-        os.chdir(self.repo)
         try:
-            git(("rev-parse",branch))
+            git(self.gitdir, self.gitwd, "rev-parse",branch)
         except sh.ErrorReturnCode:
             return False
         return True
 
-    @preserve_cwd
+    def create_or_checkout_branch(self,branch):
+        if self.branch_exists(branch):
+            git(self.gitdir, self.gitwd, "checkout",branch)
+            
+        else:
+            # Create this new branch off of master, NOT the currently-checked out branch!
+            #EJM wait why?
+            git(self.gitdir, self.gitwd, "checkout","master")
+            git(self.gitdir, self.gitwd, "checkout","-b",branch)
+    
     def remove_study(self,study_id, branch, author="OpenTree API <api@opentreeoflife.org>"):
         """Remove a study
 
@@ -119,31 +123,23 @@ class GitData(object):
         Returns the SHA of the commit on branch.
 
         """
-        os.chdir(self.repo)
+        study_dir      = "{}/study/{}".format(self.repo,study_id) #TODO change directory
+        study_filename = "{}/{}.json".format(study_dir, study_id)
 
-        study_dir      = "study/%s" % study_id
-        study_filename = "%s/%s.json" % (study_dir, study_id)
-
-        if self.branch_exists(branch):
-            git.checkout(branch)
-            if not os.path.isdir(study_dir):
+        self.create_or_checkout_branch(branch)
+        if not os.path.isdir(study_dir):
                 # branch already exists locally with study removed
                 # so just return the commit SHA
-                return git("rev-parse","HEAD").strip()
-        else:
-            # Create this new branch off of master, NOT the currently-checked out branch!
-            git.checkout("master")
-            git.checkout("-b",branch)
+                return git(self.gitdir, self.gitwd, "rev-parse","HEAD").strip()
 
-        git.rm("-rf", study_dir)
+        git(self.gitdir, self.gitwd,"rm","-rf", study_dir)
 
-        git.commit(author=author, message="Delete Study #%s via OpenTree API" % study_id)
+        git(self.gitdir, self.gitwd, "commit",author=author, message="Delete Study #%s via OpenTree API" % study_id)
 
-        new_sha = git("rev-parse","HEAD")
+        new_sha = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
 
         return new_sha.strip()
 
-    @preserve_cwd
     def write_study(self,study_id, content, branch, author="OpenTree API <api@opentreeoflife.org>"):
         """Write a study
 
@@ -158,22 +154,14 @@ class GitData(object):
         Returns the SHA of the new commit on branch.
 
         """
-        os.chdir(self.repo)
-
+        study_dir      = "{}/study/{}".format(self.repo,study_id) #TODO EJM change directory
+        study_filename = "{}/{}.json".format(study_dir, study_id) 
         # If there are uncommitted changes to our repo, stash them so this commit can proceed
-        git.stash()
+        #git(self.gitdir, self.gitwd, "stash") #EJM not clear why
 
-        if self.branch_exists(branch):
-            git.checkout(branch)
-        else:
-            # Create this new branch off of master, NOT the currently-checked out branch!
-            git.checkout("master")
-            git.checkout("-b",branch)
-
-        study_dir      = "study/%s" % study_id
-        study_filename = "%s/%s.json" % (study_dir, study_id)
-
-        # create a study directory if this is a new study
+        self.create_or_checkout_branch(branch)
+        
+        # create a study directory if this is a new study EJM- what if it isn't?
         if not os.path.isdir(study_dir):
             os.mkdir(study_dir)
 
@@ -181,15 +169,14 @@ class GitData(object):
         file.write(content)
         file.close()
 
-        git.add(study_filename)
+        git(self.gitdir, self.gitwd, "add",study_filename)
 
-        git.commit(author=author, message="Update Study #%s via OpenTree API" % study_id)
+        git(self.gitdir, self.gitwd,  "commit",author=author, message="Update Study #%s via OpenTree API" % study_id)
 
-        new_sha = git("rev-parse","HEAD")
+        new_sha = git(self.gitdir, self.gitwd,  "rev-parse","HEAD")
 
         return new_sha.strip()
 
-    @preserve_cwd
     def merge(self, branch, base_branch="master"):
         """
         Merge the the given WIP branch to master (or base_branch, if specified)
@@ -202,40 +189,36 @@ class GitData(object):
 
         """
 
-        os.chdir(self.repo)
-
         current_branch = self.current_branch()
         if current_branch != base_branch:
-            git.checkout(base_branch)
+            git(self.gitdir, self.gitwd, "checkout",base_branch)
 
         # Always create a merge commit, even if we could fast forward, so we know
         # when merges occured
         try:
-            merge_output = git.merge("--no-ff", branch)
+            merge_output = git(self.gitdir, self.gitwd, "--no-ff","merge", branch)
         except sh.ErrorReturnCode:
             # attempt to reset things so other operations can
             # continue
-            output = git.status()
-            git.merge("--abort")
+            output = git(self.gitdir, self.gitwd, "status")
+            git(self.gitdir, self.gitwd, "merge""--abort")
 
             # re-raise the exception so other code can decide
             # what to do with it
             raise MergeException(output)
 
         # the merge succeeded, so remove the local WIP branch
-        git.branch("-d", branch)
+        git(self.gitdir, self.gitwd, "branch","-d", branch)
 
-        new_sha      = git("rev-parse","HEAD")
+        new_sha      = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
         return new_sha.strip()
 
-    @preserve_cwd
     def delete_remote_branch(self, remote, branch, env={}):
         "Delete a remote branch"
         # deleting a branch is the same as
         # git push remote :branch
         self.push(remote, env, ":%s" % branch)
 
-    @preserve_cwd
     def push(self, remote, env={}, branch=None):
         """
         Push a branch to a given remote
@@ -256,8 +239,6 @@ class GitData(object):
         over-ridden.
 
         """
-        os.chdir(self.repo)
-
         if branch:
             branch_to_push = branch
         else:
@@ -269,11 +250,10 @@ class GitData(object):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git.push(remote, branch_to_push, _env=new_env)
+            git(self.gitdir, self.gitwd, "push",remote, branch_to_push, _env=new_env)
         else:
-            git.push(remote, branch_to_push)
+            git(self.gitdir, self.gitwd, "push",remote, branch_to_push)
 
-    @preserve_cwd
     def pull(self, remote, env={}, branch=None):
         """
         Pull a branch from a given remote
@@ -286,7 +266,6 @@ class GitData(object):
         If no branch is given, the current branch
         will be updated.
         """
-        os.chdir(self.repo)
         if branch:
             branch_to_pull = branch
         else:
@@ -298,9 +277,9 @@ class GitData(object):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git.pull(remote, branch_to_pull, _env=new_env)
+            git(self.gitdir, self.gitwd, "pull",remote, branch_to_pull, _env=new_env)
         else:
-            git.pull(remote, branch_to_pull)
+            git(self.gitdir, self.gitwd, "pull",remote, branch_to_pull)
 
-        new_sha      = git("rev-parse","HEAD")
+        new_sha      = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
         return new_sha.strip()

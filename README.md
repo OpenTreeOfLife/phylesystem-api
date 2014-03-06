@@ -9,6 +9,36 @@ to the backend datastore [phylesystem](https://github.com/OpenTreeOfLife/phylesy
 
 See the [Version Control Strategy](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/docs/vcs_strategy.md) for more details about design decisions and how to use submodules.
 
+# Installation
+
+There are a dependencies installable from pypi using pip, and the open
+tree of life client-side python library is also used on the server side
+for handling some aspects of NexSON.
+
+    $ pip install -r requirements.txt
+    $ cd ..
+
+The first time you run, you'll need to:
+
+    $ git clone https://github.com/OpenTreeOfLife/peyotl.git
+    $ cd peyotl
+    $ pip install -r requirements.txt
+    $ python setup.py develop
+
+subsequently changing to the <code>peyotl</code> directory and running
+
+    $ git pull origin master
+
+should be sufficient to get the latest changes.
+
+# Configuration
+
+    $ cp private/config.exampl private/config
+
+then open private/config in a text editor and tweak it. 
+
+**NEW in the translatingnexson branch**: a new config variable 'repo_nexml2json' was added.
+
 # Deploying
 
 This git repository is meant to be a "web2py application", so you need to
