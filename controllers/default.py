@@ -274,29 +274,8 @@ def v1():
 
         _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
 
-        try:
-            pass #EJM temp
-            # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
-            #gd.pull(repo_remote, env=git_env, branch=branch_name)
-            # TIMING = api_utils.log_time_diff(_LOG, 'git pull', TIMING)
-        except Exception, e:
-            # We can ignore this if the branch doesn't exist yet on the remote,
-            # otherwise raise a 400
-            if "Couldn't find remote ref" not in e.message:
-                gd.release_lock()
-
-                # Attempt to abort a merge, in case of conflicts
-                try:
-                    git.merge("--abort")
-                except:
-                    pass
-                msg = "Could not pull or merge latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
-                _LOG.debug(msg)
-                raise HTTP(400, json.dumps({
-                    "error": 1,
-                    "description": msg
-                }))
-
+        _pull_gh(gd,repo_remote,branch_name,resource_id)
+        
         try:
             new_sha = gd.write_study(resource_id,file_content,branch_name,author)
             # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
@@ -308,18 +287,8 @@ def v1():
                 "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
             }))
 
-        try:
-            pass #EJM temp
-            # actually push the changes to Github
-            #gd.push(repo_remote, env=git_env, branch=branch_name)
-            # TIMING = api_utils.log_time_diff(_LOG, 'push', TIMING)
-        except Exception, e:
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not push change to study #%s. Details:\n %s" % (resource_id, e.message)
-            }))
-        finally:
-            gd.release_lock()
+        _push_gh(gd,repo_remote,branch_name,resource_id)
+        gd.release_lock()
 
         # What other useful information should be returned on a successful write?
         return {
@@ -347,16 +316,52 @@ def v1():
 
         _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to delete the study #%s" % resource_id)
 
+        _pull_gh(gd,repo_remote,branch_name,resource_id)
+        
         try:
+            pass
             new_sha = gd.remove_study(resource_id, branch_name, author)
         except Exception, e:
-            gd.release_lock()
-
+        
             raise HTTP(400, json.dumps({
                 "error": 1,
                 "description": "Could not remove study #%s! Details: %s" % (resource_id, e.message)
             }))
 
+        _push_gh(gd,repo_remote,branch_name,resource_id)
+
+        gd.release_lock()
+        return {
+            "error": 0,
+            "branch_name": branch_name,
+            "description": "Deleted study #%s" % resource_id,
+#            "sha":  new_sha
+        }
+        
+ 
+    def _pull_gh(gd,repo_remote,branch_name,resource_id):#
+        try:
+            # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
+            gd.pull(repo_remote, env=git_env, branch=branch_name)
+            # TIMING = api_utils.log_time_diff(_LOG, 'git pull', TIMING)
+        except Exception, e:
+            # We can ignore this if the branch doesn't exist yet on the remote,
+            # otherwise raise a 400
+            if "Couldn't find remote ref" not in e.message:
+                # Attempt to abort a merge, in case of conflicts
+                try:
+                    git(gd.gitdir,"merge","--abort")
+                except:
+                    pass
+                msg = "Could not pull or merge latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
+                _LOG.debug(msg)
+                raise HTTP(400, json.dumps({
+                    "error": 1,
+                    "description": msg
+                }))
+
+    
+    def _push_gh(gd,repo_remote,branch_name,resource_id):#
         try:
             # actually push the changes to Github
             gd.push(repo_remote, env=git_env, branch=branch_name)
@@ -365,16 +370,11 @@ def v1():
                 "error": 1,
                 "description": "Could not push deletion of study #%s! Details:\n%s" % (resource_id, e.message)
             }))
-        finally:
-            gd.release_lock()
 
-        return {
-            "error": 0,
-            "branch_name": branch_name,
-            "description": "Deleted study #%s" % resource_id,
-            "sha":  new_sha
-        }
+        
 
+            
+            
     def OPTIONS(*args, **kwargs):
         "A simple method for approving CORS preflight request"
         if request.env.http_access_control_request_method:

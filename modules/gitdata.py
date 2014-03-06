@@ -69,9 +69,11 @@ class GitData(GitAction):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git(self.gitdir, self.gitwd, "pull",remote, branch_to_pull, _env=new_env)
+            git(self.gitdir, self.gitwd, "pull", remote, "{}:{}".format(branch_to_pull,branch_to_pull), _env=new_env)
         else:
-            git(self.gitdir, self.gitwd, "pull",remote, branch_to_pull)
+            git(self.gitdir, self.gitwd, "pull", remote, "{}:{}".format(branch_to_pull,branch_to_pull))
 
         new_sha      = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
         return new_sha.strip()
+
+
