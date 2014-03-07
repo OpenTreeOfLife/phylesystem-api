@@ -4,6 +4,7 @@ import json
 import anyjson
 import hashlib
 import github
+from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
 from github import Github, BadCredentialsException
 import api_utils
@@ -265,18 +266,20 @@ def v1():
         return blob
 
  
-    def _pull_gh(gd,repo_remote,branch_name,resource_id):#
+    def _pull_gh(gd, repo_remote, branch_name, resource_id):#
         try:
             # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
-            gd.pull(repo_remote, env=git_env, branch=branch_name)
+            git(gd.gitdir, "fetch", repo_remote, _env=git_env)
+            git(gd.gitdir, gd.gitwd, "merge", repo_remote + '/' + branch_name, _env=git_env)
             # TIMING = api_utils.log_time_diff(_LOG, 'git pull', TIMING)
         except Exception, e:
             # We can ignore this if the branch doesn't exist yet on the remote,
             # otherwise raise a 400
+            raise
             if "Couldn't find remote ref" not in e.message:
                 # Attempt to abort a merge, in case of conflicts
                 try:
-                    git(gd.gitdir,"merge","--abort")
+                    git(gd.gitdir,"merge", "--abort")
                 except:
                     pass
                 msg = "Could not pull or merge latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
@@ -307,22 +310,22 @@ def v1():
         branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
 
         _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
-
-        _pull_gh(gd,repo_remote,branch_name,resource_id)
-        
         try:
-            new_sha = gd.write_study(resource_id,file_content,branch_name,author)
-            # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
-        except Exception, e:
+            gd.checkout_master()
+            _pull_gh(gd, repo_remote, "master", resource_id)
+            
+            try:
+                new_sha = gd.write_study(resource_id, file_content, branch_name,author)
+                # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
+            except Exception, e:
+                raise HTTP(400, json.dumps({
+                    "error": 1,
+                    "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
+                }))
+            gd.merge(branch_name)
+            _push_gh(gd, repo_remote, "master", resource_id)
+        finally:
             gd.release_lock()
-
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
-            }))
-
-        _push_gh(gd,repo_remote,branch_name,resource_id)
-        gd.release_lock()
 
         # What other useful information should be returned on a successful write?
         return {
