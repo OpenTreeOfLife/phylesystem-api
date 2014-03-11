@@ -170,8 +170,6 @@ def v1():
         dryad_DOI = kwargs.get('dryad_DOI', '')
         import_option = kwargs.get('import_option', '')
 
-        import pdb; pdb.set_trace()
-
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
 
         # start with an empty NexSON template (add to kwargs)
@@ -209,7 +207,7 @@ def v1():
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
         try:
             # check for kwarg 'nexson', or load the full request body
-            if hasattr(kwargs, 'nexson'):
+            if 'nexson' in kwargs:
                 nexson = kwargs.get('nexson', {})
             else:
                 nexson = request.body.read()
