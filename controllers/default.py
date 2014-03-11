@@ -170,8 +170,16 @@ def v1():
         dryad_DOI = kwargs.get('dryad_DOI', '')
         import_option = kwargs.get('import_option', '')
 
+        import pdb; pdb.set_trace()
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
+
+        # start with an empty NexSON template (add to kwargs)
+        app_name = "api"
+        template_filename = "%s/applications/%s/static/NEXSON_TEMPLATE.json" % (request.env.web2py_path, app_name)
+        new_study_nexson = json.load( open(template_filename) )
+        kwargs['nexson'] = new_study_nexson
+
         nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
         gd = GitData(repo=repo_path)
         # studies created by the OpenTree API start with o,
