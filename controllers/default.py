@@ -4,6 +4,7 @@ import json
 import anyjson
 import hashlib
 import github
+from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
 from github import Github, BadCredentialsException
 import api_utils
@@ -14,6 +15,7 @@ from locket import LockError
 # NexSON validation
 from peyotl.nexson_validation import NexsonWarningCodes, validate_nexson
 
+_VALIDATING = False
 _LOG = api_utils.get_logger('ot_api.default')
 def index():
     response.view = 'generic.json'
@@ -90,7 +92,7 @@ def v1():
         if unadulterated_content_commit['error'] != 0:
             _LOG.debug('unadulterated_content_commit failed')
             raise HTTP(400, json.dumps(unadulterated_content_commit))
-        if block_until_annotation_commit:
+        if _VALIDATING and block_until_annotation_commit:
             # add the annotation and commit the resulting blob...
             adaptor.add_or_replace_annotation(annotation)
             nexson = adaptor.get_nexson_str()
@@ -132,7 +134,7 @@ def v1():
         _acquire_lock_or_exit(gd)
         try:
             gd.checkout_master()
-            study_nexson, head_sha = gd.fetch_study(resource_id)
+            study_nexson, head_sha = gd.return_study(resource_id)
         finally:
             gd.release_lock()
         if study_nexson == "":
@@ -169,8 +171,14 @@ def v1():
         dryad_DOI = kwargs.get('dryad_DOI', '')
         import_option = kwargs.get('import_option', '')
 
-
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
+
+        # start with an empty NexSON template (add to kwargs)
+        app_name = "api"
+        template_filename = "%s/applications/%s/static/NEXSON_TEMPLATE.json" % (request.env.web2py_path, app_name)
+        new_study_nexson = json.load( open(template_filename) )
+        kwargs['nexson'] = new_study_nexson
+
         nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
         gd = GitData(repo=repo_path)
         # studies created by the OpenTree API start with o,
@@ -200,7 +208,7 @@ def v1():
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
         try:
             # check for kwarg 'nexson', or load the full request body
-            if hasattr(kwargs, 'nexson'):
+            if 'nexson' in kwargs:
                 nexson = kwargs.get('nexson', {})
             else:
                 nexson = request.body.read()
@@ -217,7 +225,7 @@ def v1():
         nexson = __coerce_nexson_format(nexson, VALIDATION_NEXSON_FORMAT)
         
         annotation, validation_log, nexson_adaptor = __validate(nexson)
-        if validation_log.errors:
+        if _VALIDATING and validation_log.errors:
             _LOG.debug('__validate failed'.format(k=nexson.keys(), a=json.dumps(annotation)))
             raise HTTP(400, json.dumps(annotation))
         nexson = __coerce_nexson_format(nexson, repo_nexml2json)
@@ -246,7 +254,7 @@ def v1():
         # We compare sha1's instead of the actual data to reduce memory use
         # when comparing large studies
         posted_nexson_sha1 = hashlib.sha1(nexson).hexdigest()
-        nexson_fetched_content, head_sha = gd.fetch_study(resource_id)
+        nexson_fetched_content, head_sha = gd.return_study(resource_id)
         nexson_sha1 = hashlib.sha1(nexson_fetched_content).hexdigest()
         # TIMING = api_utils.log_time_diff(_LOG, 'GitData creation and sha', TIMING)
 
@@ -264,29 +272,21 @@ def v1():
         # TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         return blob
 
-    def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
-        """Actually make a local Git commit and push it to our remote
-        """
-        # global TIMING
-        author  = "%s <%s>" % (author_name, author_email)
-
-        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
-
-        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
-
+ 
+    def _pull_gh(gd, repo_remote, branch_name, resource_id):#
         try:
             # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
-            gd.pull(repo_remote, env=git_env, branch=branch_name)
+            git(gd.gitdir, "fetch", repo_remote, _env=git_env)
+            git(gd.gitdir, gd.gitwd, "merge", repo_remote + '/' + branch_name, _env=git_env)
             # TIMING = api_utils.log_time_diff(_LOG, 'git pull', TIMING)
         except Exception, e:
             # We can ignore this if the branch doesn't exist yet on the remote,
             # otherwise raise a 400
+            raise
             if "Couldn't find remote ref" not in e.message:
-                gd.release_lock()
-
                 # Attempt to abort a merge, in case of conflicts
                 try:
-                    git.merge("--abort")
+                    git(gd.gitdir,"merge", "--abort")
                 except:
                     pass
                 msg = "Could not pull or merge latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
@@ -296,32 +296,48 @@ def v1():
                     "description": msg
                 }))
 
-        try:
-            new_sha = gd.write_study(resource_id,file_content,branch_name,author)
-            # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
-        except Exception, e:
-            gd.release_lock()
-
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
-            }))
-
+    
+    def _push_gh(gd,repo_remote,branch_name,resource_id):#
         try:
             # actually push the changes to Github
             gd.push(repo_remote, env=git_env, branch=branch_name)
-            # TIMING = api_utils.log_time_diff(_LOG, 'push', TIMING)
         except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not push change to study #%s. Details:\n %s" % (resource_id, e.message)
+                "description": "Could not push deletion of study #%s! Details:\n%s" % (resource_id, e.message)
             }))
+
+
+    def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
+        """Actually make a local Git commit and push it to our remote
+        """
+        # global TIMING
+        author  = "%s <%s>" % (author_name, author_email)
+
+        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
+
+        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
+        try:
+            gd.checkout_master()
+            _pull_gh(gd, repo_remote, "master", resource_id)
+            
+            try:
+                new_sha = gd.write_study(resource_id, file_content, branch_name,author)
+                # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
+            except Exception, e:
+                raise HTTP(400, json.dumps({
+                    "error": 1,
+                    "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
+                }))
+            gd.merge(branch_name)
+            _push_gh(gd, repo_remote, "master", resource_id)
         finally:
             gd.release_lock()
 
         # What other useful information should be returned on a successful write?
         return {
             "error": 0,
+            "resource_id": resource_id,
             "branch_name": branch_name,
             "description": "Updated study #%s" % resource_id,
             "sha":  new_sha
@@ -345,27 +361,21 @@ def v1():
 
         _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to delete the study #%s" % resource_id)
 
+        _pull_gh(gd,repo_remote,branch_name,resource_id)
+        
         try:
+            pass
             new_sha = gd.remove_study(resource_id, branch_name, author)
         except Exception, e:
-            gd.release_lock()
-
+        
             raise HTTP(400, json.dumps({
                 "error": 1,
                 "description": "Could not remove study #%s! Details: %s" % (resource_id, e.message)
             }))
 
-        try:
-            # actually push the changes to Github
-            gd.push(repo_remote, env=git_env, branch=branch_name)
-        except Exception, e:
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not push deletion of study #%s! Details:\n%s" % (resource_id, e.message)
-            }))
-        finally:
-            gd.release_lock()
+        _push_gh(gd,repo_remote,branch_name,resource_id)
 
+        gd.release_lock()
         return {
             "error": 0,
             "branch_name": branch_name,
@@ -373,6 +383,7 @@ def v1():
             "sha":  new_sha
         }
 
+            
     def OPTIONS(*args, **kwargs):
         "A simple method for approving CORS preflight request"
         if request.env.http_access_control_request_method:
