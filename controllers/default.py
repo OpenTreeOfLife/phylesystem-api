@@ -170,8 +170,14 @@ def v1():
         dryad_DOI = kwargs.get('dryad_DOI', '')
         import_option = kwargs.get('import_option', '')
 
-
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
+
+        # start with an empty NexSON template (add to kwargs)
+        app_name = "api"
+        template_filename = "%s/applications/%s/static/NEXSON_TEMPLATE.json" % (request.env.web2py_path, app_name)
+        new_study_nexson = json.load( open(template_filename) )
+        kwargs['nexson'] = new_study_nexson
+
         nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
         gd = GitData(repo=repo_path)
         # studies created by the OpenTree API start with o,
@@ -201,7 +207,7 @@ def v1():
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
         try:
             # check for kwarg 'nexson', or load the full request body
-            if hasattr(kwargs, 'nexson'):
+            if 'nexson' in kwargs:
                 nexson = kwargs.get('nexson', {})
             else:
                 nexson = request.body.read()
@@ -330,6 +336,7 @@ def v1():
         # What other useful information should be returned on a successful write?
         return {
             "error": 0,
+            "resource_id": resource_id,
             "branch_name": branch_name,
             "description": "Updated study #%s" % resource_id,
             "sha":  new_sha
