@@ -336,6 +336,7 @@ def v1():
         # What other useful information should be returned on a successful write?
         return {
             "error": 0,
+            "resource_id": resource_id,
             "branch_name": branch_name,
             "description": "Updated study #%s" % resource_id,
             "sha":  new_sha
