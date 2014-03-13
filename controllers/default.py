@@ -171,6 +171,7 @@ def v1():
         import_option = kwargs.get('import_option', '')
         treebase_id = kwargs.get('treebase_id', '')
         publication_doi = kwargs.get('publication_DOI', '')
+        publication_ref = kwargs.get('publication_reference', '')
         ##dryad_DOI = kwargs.get('dryad_DOI', '')
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
@@ -181,66 +182,79 @@ def v1():
         new_study_nexson = json.load( open(template_filename) )
         # add known values for its metatags
         study_metatags = new_study_nexson['nexml']['meta']
-        meta_author = kwargs.get('author_name', '')
-        meta_publication_reference = ''
-        meta_publication_url = ''
-        meta_year = ''
+        meta_author = kwargs.get('author_name', '').decode('utf-8')
+        meta_publication_reference = u''
+        meta_publication_url = u''
+        meta_year = u''
 
-        if import_option == 'IMPORT_FROM_PUBLICATION_DOI' and publication_doi:
-            # if curator has provided a DOI, use it to pre-populate study metadata
+        importing_from_crossref_API = (import_option == 'IMPORT_FROM_PUBLICATION_DOI' and publication_doi) or \
+                                      (import_option == 'IMPORT_FROM_PUBLICATION_REFERENCE' and publication_ref)
 
-            # Cleanup submitted DOI to work with CrossRef API.
-            #   WORKS: http://dx.doi.org/10.999...
-            #   WORKS: doi:10.999...
-            #   FAILS: doi: 10.999...
-            #   FAILS: DOI:10.999...
-            # Let's keep it simple and make it a bare DOI.
-            # All DOIs use the directory indicator '10.', see
-            #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
-            # Remove all whitespace from the submitted DOI...
-            publication_doi = "".join(publication_doi.split())
-            # ... then strip everything up to the first '10.'
-            doi_parts = publication_doi.split('10.')
-            doi_parts[0] = ''
-            publication_doi = '10.'.join(doi_parts)
+        if importing_from_crossref_API:
+            if import_option == 'IMPORT_FROM_PUBLICATION_DOI':
+                # if curator has provided a DOI, use it to pre-populate study metadata
+
+                # Cleanup submitted DOI to work with CrossRef API.
+                #   WORKS: http://dx.doi.org/10.999...
+                #   WORKS: doi:10.999...
+                #   FAILS: doi: 10.999...
+                #   FAILS: DOI:10.999...
+                # Let's keep it simple and make it a bare DOI.
+                # All DOIs use the directory indicator '10.', see
+                #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
+                # Remove all whitespace from the submitted DOI...
+                publication_doi = "".join(publication_doi.split())
+                # ... then strip everything up to the first '10.'
+                doi_parts = publication_doi.split('10.')
+                doi_parts[0] = ''
+                search_term = '10.'.join(doi_parts)
+            else:  # assumes IMPORT_FROM_PUBLICATION_REFERENCE
+                search_term = publication_ref
 
             doi_lookup_response = fetch(
                 'http://search.crossref.org/dois?%s' % 
-                urlencode({'q': publication_doi})
+                urlencode({'q': search_term})
             )
+
+            doi_lookup_response = unicode(doi_lookup_response, 'utf-8')   # make sure it's Unicode!
+
             try:
                 matching_records = anyjson.loads(doi_lookup_response)
+
+                # if we got a match, grab the first (probably only) record
+                if len(matching_records) > 0:
+                    match = matching_records[0];
+
+                    # Convert HTML reference string to plain text
+                    raw_publication_reference = match.get('fullCitation', '')
+                    ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
+                    # root of this tree is the complete mini-DOM
+                    ref_root = ref_element_tree.elements()[0]
+                    # reduce this root to plain text (strip any tags)
+
+                    meta_publication_reference = ref_root.flatten().decode('utf-8')
+                    meta_publication_url = match.get('doi', u'')  # already in URL form
+                    meta_year = match.get('year', u'')
+
             except:
-                meta_publication_reference = 'No matching publication found for this DOI!'
-
-            # if we got a match, grab the first (probably only) record
-            if len(matching_records) > 0:
-                match = matching_records[0];
-
-                # Convert HTML reference string to plain text
-                raw_publication_reference = match.get('fullCitation', '')
-                ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
-                # root of this tree is the complete mini-DOM
-                ref_root = ref_element_tree.elements()[0]
-                # reduce this root to plain text (strip any tags)
-                meta_publication_reference = ref_root.flatten()
-
-                meta_publication_url = match.get('doi', '')  # already in URL form
-                meta_year = match.get('year', '')
+                if import_option == 'IMPORT_FROM_PUBLICATION_DOI':
+                    meta_publication_reference = u'No matching publication found for this DOI!'
+                else:  # assumes IMPORT_FROM_PUBLICATION_REFERENCE
+                    meta_publication_reference = u'No matching publication found for this reference string'
 
         # apply any values we have for metadata
         for tag in study_metatags:
             if tag['@property'] == u'ot:studyId':
                 tag['$'] = u'REPLACE_WITH_NEW_ID'
             if tag['@property'] == u'ot:studyPublicationReference':
-                tag['$'] = unicode(meta_publication_reference)
+                tag['$'] = meta_publication_reference
             if tag['@property'] == u'ot:studyPublication':
                 # N.B. here we set @href instead
-                tag['@href'] = unicode(meta_publication_url)
+                tag['@href'] = meta_publication_url
             if tag['@property'] == u'ot:studyYear':
-                tag['$'] = unicode(meta_year)
+                tag['$'] = meta_year
             if tag['@property'] == u'ot:curatorName':
-                tag['$'] = unicode(meta_author)
+                tag['$'] = meta_author
 
         # add nexson to kwargs for standard validation
         kwargs['nexson'] = new_study_nexson
