@@ -367,8 +367,8 @@ def v1():
         except Exception, e:
             # We can ignore this if the branch doesn't exist yet on the remote,
             # otherwise raise a 400
-            raise
-            if "Couldn't find remote ref" not in e.message:
+#            raise #@EJM what was this doing?
+            if "not something we can merge" not in e.message:
                 # Attempt to abort a merge, in case of conflicts
                 try:
                     git(gd.gitdir,"merge", "--abort")
