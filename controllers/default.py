@@ -174,6 +174,10 @@ def v1():
         publication_ref = kwargs.get('publication_reference', '')
         ##dryad_DOI = kwargs.get('dryad_DOI', '')
 
+        # check for required license agreement!
+        if cc0_agreement != 'true': raise HTTP(400, json.dumps({"error":1,
+            "description": "CC-0 license must be accepted to add studies using this API."}))
+
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
 
         # start with an empty NexSON template 
