@@ -11,6 +11,9 @@ import api_utils
 from pprint import pprint
 from gitdata import GitData
 from locket import LockError
+from gluon.tools import fetch
+from urllib import urlencode
+from gluon.html import web2pyHTMLParser
 
 # NexSON validation
 from peyotl.nexson_validation import NexsonWarningCodes, validate_nexson
@@ -168,22 +171,105 @@ def v1():
         cc0_agreement = kwargs.get('cc0_agreement', '')
         import_option = kwargs.get('import_option', '')
         treebase_id = kwargs.get('treebase_id', '')
-        dryad_DOI = kwargs.get('dryad_DOI', '')
-        import_option = kwargs.get('import_option', '')
+        publication_doi = kwargs.get('publication_DOI', '')
+        publication_ref = kwargs.get('publication_reference', '')
+        ##dryad_DOI = kwargs.get('dryad_DOI', '')
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
 
-        # start with an empty NexSON template (add to kwargs)
+        # start with an empty NexSON template 
         app_name = "api"
         template_filename = "%s/applications/%s/static/NEXSON_TEMPLATE.json" % (request.env.web2py_path, app_name)
         new_study_nexson = json.load( open(template_filename) )
-        kwargs['nexson'] = new_study_nexson
+        # add known values for its metatags
+        study_metatags = new_study_nexson['nexml']['meta']
+        meta_author = kwargs.get('author_name', '').decode('utf-8')
+        meta_publication_reference = u''
+        meta_publication_url = u''
+        meta_year = u''
 
+        importing_from_crossref_API = (import_option == 'IMPORT_FROM_PUBLICATION_DOI' and publication_doi) or \
+                                      (import_option == 'IMPORT_FROM_PUBLICATION_REFERENCE' and publication_ref)
+
+        if importing_from_crossref_API:
+            if import_option == 'IMPORT_FROM_PUBLICATION_DOI':
+                # if curator has provided a DOI, use it to pre-populate study metadata
+
+                # Cleanup submitted DOI to work with CrossRef API.
+                #   WORKS: http://dx.doi.org/10.999...
+                #   WORKS: doi:10.999...
+                #   FAILS: doi: 10.999...
+                #   FAILS: DOI:10.999...
+                # Let's keep it simple and make it a bare DOI.
+                # All DOIs use the directory indicator '10.', see
+                #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
+                # Remove all whitespace from the submitted DOI...
+                publication_doi = "".join(publication_doi.split())
+                # ... then strip everything up to the first '10.'
+                doi_parts = publication_doi.split('10.')
+                doi_parts[0] = ''
+                search_term = '10.'.join(doi_parts)
+            else:  # assumes IMPORT_FROM_PUBLICATION_REFERENCE
+                search_term = publication_ref
+
+            doi_lookup_response = fetch(
+                'http://search.crossref.org/dois?%s' % 
+                urlencode({'q': search_term})
+            )
+
+            doi_lookup_response = unicode(doi_lookup_response, 'utf-8')   # make sure it's Unicode!
+
+            try:
+                matching_records = anyjson.loads(doi_lookup_response)
+
+                # if we got a match, grab the first (probably only) record
+                if len(matching_records) > 0:
+                    match = matching_records[0];
+
+                    # Convert HTML reference string to plain text
+                    raw_publication_reference = match.get('fullCitation', '')
+                    ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
+                    # root of this tree is the complete mini-DOM
+                    ref_root = ref_element_tree.elements()[0]
+                    # reduce this root to plain text (strip any tags)
+
+                    meta_publication_reference = ref_root.flatten().decode('utf-8')
+                    meta_publication_url = match.get('doi', u'')  # already in URL form
+                    meta_year = match.get('year', u'')
+
+            except:
+                if import_option == 'IMPORT_FROM_PUBLICATION_DOI':
+                    meta_publication_reference = u'No matching publication found for this DOI!'
+                else:  # assumes IMPORT_FROM_PUBLICATION_REFERENCE
+                    meta_publication_reference = u'No matching publication found for this reference string'
+
+        # apply any values we have for metadata
+        for tag in study_metatags:
+            if tag['@property'] == u'ot:studyId':
+                tag['$'] = u'REPLACE_WITH_NEW_ID'
+            if tag['@property'] == u'ot:studyPublicationReference':
+                tag['$'] = meta_publication_reference
+            if tag['@property'] == u'ot:studyPublication':
+                # N.B. here we set @href instead
+                tag['@href'] = meta_publication_url
+            if tag['@property'] == u'ot:studyYear':
+                tag['$'] = meta_year
+            if tag['@property'] == u'ot:curatorName':
+                tag['$'] = meta_author
+
+        # add nexson to kwargs for standard validation
+        kwargs['nexson'] = new_study_nexson
         nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
+        # Now we have a validated nexson string, unpacked from __validate_etc
+        # TODO: Should we add the annotation generated above?!
+
         gd = GitData(repo=repo_path)
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
         new_resource_id = "o%d" % (gd.newest_study_id() + 1)
+
+        # do a quick substitution using the new ID
+        nexson = nexson.replace('REPLACE_WITH_NEW_ID', new_resource_id)
 
         return __finish_write_verb(gd,
                                    gh,
@@ -282,8 +368,8 @@ def v1():
         except Exception, e:
             # We can ignore this if the branch doesn't exist yet on the remote,
             # otherwise raise a 400
-            raise
-            if "Couldn't find remote ref" not in e.message:
+#            raise #@EJM what was this doing?
+            if "not something we can merge" not in e.message:
                 # Attempt to abort a merge, in case of conflicts
                 try:
                     git(gd.gitdir,"merge", "--abort")
