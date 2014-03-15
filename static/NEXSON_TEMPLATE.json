@@ -11,20 +11,8 @@
 "ot": "http://purl.org/opentree-terms#", 
 "xsd": "http://www.w3.org/2001/XMLSchema#", 
 "xsi": "http://www.w3.org/2001/XMLSchema-instance",
-"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+"xhtml": "http://www.w3.org/1999/xhtml/vocab#"
 }, 
-"rdf:RDF": 
-{
-"@xmlns": {
-"cc": "http://creativecommons.org/ns#",
-"xhv": "http://www.w3.org/1999/xhtml/vocab#",
-"dcterms": "http://purl.org/dc/terms/"
-}, 
-"@rdf:about": "http://opentreeoflife.org/curator/study/view/REPLACE_WITH_NEW_ID", 
-"cc:license": { "@rdf:resource": "http://creativecommons.org/publicdomain/zero/1.0/" }, 
-"xhv:license": { "@rdf:resource": "http://creativecommons.org/licenses/by-nc-sa/3.0/" }, 
-"dcterms:license": { "@rdf:resource": "http://creativecommons.org/licenses/by-nc-sa/3.0/" } 
-},
 "meta": [
 {
 "$": "", 
@@ -65,6 +53,11 @@
 "$": "", 
 "@property": "ot:focalCladeOTTTaxonName", 
 "@xsi:type": "nex:LiteralMeta"
+},
+{
+"@rel": "xhtml:license",
+"@href": "http://creativecommons.org/publicdomain/zero/1.0/",
+"@xsi:type": "nex:ResourceMeta"
 }
 ], 
 "otus": {
