@@ -248,6 +248,8 @@ def v1():
 
         # apply any values we have for metadata
         for tag in study_metatags:
+            if not '@property' in tag:
+                continue
             if tag['@property'] == u'ot:studyId':
                 tag['$'] = u'REPLACE_WITH_NEW_ID'
             if tag['@property'] == u'ot:studyPublicationReference':
