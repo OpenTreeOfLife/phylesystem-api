@@ -52,6 +52,12 @@ To get the entire NexSON of study N :
     curl http://dev.opentreeoflife.org/api/v1/study/N.json?output_nexml2json=1.0.0
 
 If the study does not exist, this API call will return a 404 error code.
+
+The returned JSON is an object with a "sha" that represents 
+the commit SHA for the data. This should be the parent of 
+any edits made. The NexSON object is returned as the "data"
+property of the object.
+
 The output_nexml2json arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
 for details. Currently the only supported values are:
@@ -59,7 +65,7 @@ for details. Currently the only supported values are:
    1.0.0  the first version of the "honey badgerfish" convention
 
 The default for this parameter is 0.0.0, but this is subject to change.
-Consider the call with out the output_nexml2json argument to be brittle!
+Consider the call without the output_nexml2json argument to be brittle!
 
 ### Updating a study
 
