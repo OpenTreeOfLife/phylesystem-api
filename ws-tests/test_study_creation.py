@@ -24,6 +24,7 @@ data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'cc0_agreement' : 'true',
 }
+
 if test_http_json_method(SUBMIT_URI,
                          'POST',
                          data=data,
