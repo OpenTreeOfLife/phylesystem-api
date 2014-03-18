@@ -7,6 +7,10 @@ import github
 import traceback
 from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
+from peyotl.phylesystem.git_workflows import acquire_lock_raise, \
+                                             GitWorkflowError, \
+                                             commit_and_try_merge2master, \
+                                             delete_and_push
 from peyotl.nexson_syntax import get_empty_nexson
 from github import Github, BadCredentialsException
 import api_utils
@@ -22,6 +26,15 @@ from peyotl.nexson_validation import NexsonWarningCodes, validate_nexson
 
 _VALIDATING = True
 _LOG = api_utils.get_logger('ot_api.default')
+
+def _raise_HTTP_from_msg(msg):
+    raise HTTP(400, json.dumps({"error": 1, "description": msg}))
+
+def _acquire_lock_raise_http(gd):
+    try:
+        acquire_lock_raise(gd)
+    except GitWorkflowError, err:
+        _raise_HTTP_from_msg(err.msg)
 
 def index():
     response.view = 'generic.json'
@@ -41,18 +54,6 @@ def reponexsonformat():
     return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
             'nexml2json': rn}
 
-def _acquire_lock_or_exit(git_data, fail_msg=''):
-    '''Adapts LockError to HTTP. If an exception is not thrown, the gd has the lock (and must release it!)
-    '''
-    try:
-        git_data.acquire_lock()
-    except LockError, e:
-        msg = '{o} Details: {d}'.format(o=fail_msg, d=e.message)
-        _LOG.debug(msg)
-        raise HTTP(400, json.dumps({
-            "error": 1,
-            "description": msg 
-        }))
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -64,7 +65,6 @@ def v1():
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
     repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
-    git_env     = {"GIT_SSH": git_ssh, "PKEY": pkey}
 
     def __validate(nexson):
         '''Returns three objects:
@@ -79,7 +79,6 @@ def v1():
         script_name = 'api.opentreeoflife.org/validate' # TODO
         annotation = v_log.prepare_annotation(author_name=script_name)
         return annotation, v_log, adaptor
-
 
     def __validate_output_nexml2json(kwargs):
         output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
@@ -101,7 +100,7 @@ def v1():
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
         block_until_annotation_commit = True
-        unadulterated_content_commit = do_commit(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
+        unadulterated_content_commit = commit_and_try_merge2master(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
         # TIMING = api_utils.log_time_diff(_LOG, 'unadulterated commit', TIMING)
         if unadulterated_content_commit['error'] != 0:
             _LOG.debug('unadulterated_content_commit failed')
@@ -111,7 +110,7 @@ def v1():
             adaptor.add_or_replace_annotation(nexson,
                                               annotation['annotationEvent'],
                                               annotation['agent'])
-            annotated_commit = do_commit(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
+            annotated_commit = commit_and_try_merge2master(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
             # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
             if annotated_commit['error'] != 0:
                 _LOG.debug('annotated_commit failed')
@@ -141,8 +140,8 @@ def v1():
                 auth_token = auth_header.split()[1]
 
         # return the correct nexson of study_id, using the specified view
-        gd = GitData(repo=repo_path)
-        _acquire_lock_or_exit(gd)
+        gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
+        _acquire_lock_raise_http(gd)
         try:
             gd.checkout_master()
             study_nexson, head_sha = gd.return_study(resource_id)
@@ -158,7 +157,6 @@ def v1():
                                           current_format=repo_nexml2json)
         return {'sha': head_sha,
                 'data': study_nexson}
-
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
@@ -191,7 +189,7 @@ def v1():
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
 
-        gd = GitData(repo=repo_path)
+        gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
         new_resource_id = "o%d" % (gd.newest_study_id() + 1)
@@ -269,9 +267,10 @@ def v1():
                                          nexson_adaptor,
                                          annotation)
             return commit_return
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
         except:
             raise HTTP(400, traceback.format_exc())
-
 
     def __coerce_nexson_format(nexson, dest_format, current_format=None):
         '''Calls convert_nexson_format but does the appropriate logging and HTTP exceptions.
@@ -328,8 +327,9 @@ def v1():
         nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(allow_invalid=False,
                                                                                              **kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
-        gd = GitData(repo=repo_path)
-        blob = __finish_write_verb(gd,
+        gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
+        try:
+            blob = __finish_write_verb(gd,
                                    gh,
                                    nexson,
                                    author_name,
@@ -337,79 +337,10 @@ def v1():
                                    resource_id,
                                    nexson_adaptor,
                                    annotation)
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         return blob
-
- 
-    def _pull_gh(gd, repo_remote, branch_name, resource_id):#
-        try:
-            # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
-            git(gd.gitdir, "fetch", repo_remote, _env=git_env)
-            git(gd.gitdir, gd.gitwd, "merge", repo_remote + '/' + branch_name, _env=git_env)
-            # TIMING = api_utils.log_time_diff(_LOG, 'git pull', TIMING)
-        except Exception, e:
-            # We can ignore this if the branch doesn't exist yet on the remote,
-            # otherwise raise a 400
-#            raise #@EJM what was this doing?
-            if "not something we can merge" not in e.message:
-                # Attempt to abort a merge, in case of conflicts
-                try:
-                    git(gd.gitdir,"merge", "--abort")
-                except:
-                    pass
-                msg = "Could not pull or merge latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
-                _LOG.debug(msg)
-                raise HTTP(400, json.dumps({
-                    "error": 1,
-                    "description": msg
-                }))
-
-    
-    def _push_gh(gd,repo_remote,branch_name,resource_id):#
-        try:
-            # actually push the changes to Github
-            gd.push(repo_remote, env=git_env, branch=branch_name)
-        except Exception, e:
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not push deletion of study #%s! Details:\n%s" % (resource_id, e.message)
-            }))
-
-
-    def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
-        """Actually make a local Git commit and push it to our remote
-        """
-        # global TIMING
-        author  = "%s <%s>" % (author_name, author_email)
-
-        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
-
-        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
-        try:
-            gd.checkout_master()
-            _pull_gh(gd, repo_remote, "master", resource_id)
-            
-            try:
-                new_sha = gd.write_study(resource_id, file_content, branch_name,author)
-                # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
-            except Exception, e:
-                raise HTTP(400, json.dumps({
-                    "error": 1,
-                    "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
-                }))
-            gd.merge(branch_name)
-            _push_gh(gd, repo_remote, "master", resource_id)
-        finally:
-            gd.release_lock()
-
-        # What other useful information should be returned on a successful write?
-        return {
-            "error": 0,
-            "resource_id": resource_id,
-            "branch_name": branch_name,
-            "description": "Updated study #%s" % resource_id,
-            "sha":  new_sha
-        }
 
     def DELETE(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to deleting existing resources"
@@ -420,38 +351,9 @@ def v1():
         if not resource=='study': raise HTTP(400, 'resource != study')
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
+        gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
+        delete_and_push(gd, gh, author_name, author_email, resource_id)
 
-        author       = "%s <%s>" % (author_name, author_email)
-
-        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
-
-        gd = GitData(repo=repo_path)
-
-        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to delete the study #%s" % resource_id)
-
-        _pull_gh(gd,repo_remote,branch_name,resource_id)
-        
-        try:
-            pass
-            new_sha = gd.remove_study(resource_id, branch_name, author)
-        except Exception, e:
-        
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not remove study #%s! Details: %s" % (resource_id, e.message)
-            }))
-
-        _push_gh(gd,repo_remote,branch_name,resource_id)
-
-        gd.release_lock()
-        return {
-            "error": 0,
-            "branch_name": branch_name,
-            "description": "Deleted study #%s" % resource_id,
-            "sha":  new_sha
-        }
-
-            
     def OPTIONS(*args, **kwargs):
         "A simple method for approving CORS preflight request"
         if request.env.http_access_control_request_method:
