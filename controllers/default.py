@@ -8,21 +8,18 @@ import traceback
 from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
 from peyotl.phylesystem.git_workflows import acquire_lock_raise, \
-                                             GitWorkflowError, \
                                              commit_and_try_merge2master, \
-                                             delete_and_push
+                                             delete_and_push, \
+                                             GitWorkflowError, \
+                                             validate_and_convert_nexson
 from peyotl.nexson_syntax import get_empty_nexson
 from github import Github, BadCredentialsException
 import api_utils
 from pprint import pprint
 from gitdata import GitData
-from locket import LockError
 from gluon.tools import fetch
 from urllib import urlencode
 from gluon.html import web2pyHTMLParser
-
-# NexSON validation
-from peyotl.nexson_validation import NexsonWarningCodes, validate_nexson
 
 _VALIDATING = True
 _LOG = api_utils.get_logger('ot_api.default')
@@ -65,20 +62,6 @@ def v1():
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
     repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
-
-    def __validate(nexson):
-        '''Returns three objects:
-            an annotation dict (NexSON formmatted), 
-            the validation_log object created when NexSON validation was performed, and
-            the object of class NexSON which was created from nexson. This object will
-                alias parts of the nexson dict that is passed in as an argument.
-        '''
-        # stub function for hooking into NexSON validation
-        codes_to_skip = [NexsonWarningCodes.UNVALIDATED_ANNOTATION]
-        v_log, adaptor = validate_nexson(nexson, codes_to_skip, retain_deprecated=True)
-        script_name = 'api.opentreeoflife.org/validate' # TODO
-        annotation = v_log.prepare_annotation(author_name=script_name)
-        return annotation, v_log, adaptor
 
     def __validate_output_nexml2json(kwargs):
         output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
@@ -256,8 +239,8 @@ def v1():
         nexml['^ot:curatorName'] = kwargs.get('author_name', '').decode('utf-8')
         kwargs['nexson'] = new_study_nexson
         try:
-            nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(allow_invalid=True,
-                                                                                             **kwargs)
+            bundle = validate_and_convert_nexson(new_study_nexson, repo_nexml2json, allow_invalid=True)
+            nexson, annotation, validation_log, nexson_adaptor = bundle
             commit_return = __finish_write_verb(gd,
                                          gh,
                                          nexson,
@@ -283,8 +266,8 @@ def v1():
             _LOG.exception(msg)
             raise HTTP(400, msg)
 
-    def __validate_and_normalize_nexson(allow_invalid, **kwargs):
-        """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
+    def __extract_nexson_from_http_call(request, **kwargs):
+        """Returns the nexson blob from `kwargs` or the request.body"""
         try:
             # check for kwarg 'nexson', or load the full request body
             if 'nexson' in kwargs:
@@ -297,19 +280,9 @@ def v1():
             if 'nexson' in nexson:
                 nexson = nexson['nexson']
         except:
-            _LOG.exception('Exception getting nexson content in __validate_and_normalize_nexson')
+            _LOG.exception('Exception getting nexson content in __extract_nexson_from_http_call')
             raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
-        
-        try:
-            annotation, validation_log, nexson_adaptor = __validate(nexson)
-        except:
-            _LOG.debug('exception in __validate: ' + traceback.format_exc())
-            raise
-        if _VALIDATING and (not allow_invalid) and validation_log.has_error():
-            _LOG.debug('__validate failed'.format(k=nexson.keys(), a=json.dumps(annotation)))
-            raise HTTP(400, json.dumps(annotation))
-        nexson = __coerce_nexson_format(nexson, repo_nexml2json)
-        return nexson, annotation, validation_log, nexson_adaptor
+        return nexson
 
     def PUT(resource, resource_id, **kwargs):
         "Open Tree API methods relating to updating existing resources"
@@ -324,8 +297,13 @@ def v1():
         gh, author_name, author_email = api_utils.authenticate(**kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
         
-        nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(allow_invalid=False,
-                                                                                             **kwargs)
+        try:
+            nexson = __extract_nexson_from_http_call(request, **kwargs)
+            bundle = validate_and_convert_nexson(nexson, repo_nexml2json, allow_invalid=False)
+            nexson, annotation, validation_log, nexson_adaptor = bundle
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+
         #TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
         try:
