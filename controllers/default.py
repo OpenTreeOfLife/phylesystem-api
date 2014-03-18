@@ -260,7 +260,7 @@ def v1():
         try:
             nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(allow_invalid=True,
                                                                                              **kwargs)
-            nexson = __finish_write_verb(gd,
+            commit_return = __finish_write_verb(gd,
                                          gh,
                                          nexson,
                                          author_name,
@@ -268,12 +268,7 @@ def v1():
                                          new_resource_id,
                                          nexson_adaptor,
                                          annotation)
-            # add nexson to kwargs for standard validation
-            if output_nexml2json != repo_nexml2json:
-                nexson = __coerce_nexson_format(nexson,
-                                                output_nexml2json,
-                                                current_format=repo_nexml2json)
-            return nexson
+            return commit_return
         except:
             raise HTTP(400, traceback.format_exc())
 
@@ -284,9 +279,10 @@ def v1():
         try:
             return convert_nexson_format(nexson, dest_format, current_format=current_format)
         except:
-            msg = "Exception in coercing to the required NexSON version for validation"
+            msg = "Exception in coercing to the required NexSON version for validation. "
+            msg += traceback.format_exc()
             _LOG.exception(msg)
-            raise HTTP(400, json.dumps({"error": 1, "description": msg}))
+            raise HTTP(400, msg)
 
     def __validate_and_normalize_nexson(allow_invalid, **kwargs):
         """A wrapper around __validate() which also sorts JSON keys and checks for invalid JSON"""
