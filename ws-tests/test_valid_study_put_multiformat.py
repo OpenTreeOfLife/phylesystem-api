@@ -24,7 +24,7 @@ else:
     el = {'@property': 'bogus_timestamp', '@xsi:type': 'nex:LiteralMeta'}
     m.append(el)
 el['$'] = datetime.datetime.utcnow().isoformat()
-n = convert_nexson_format(n, '1.0.0')
+n = convert_nexson_format(n, '1.2')
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),

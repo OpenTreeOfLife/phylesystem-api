@@ -8,7 +8,7 @@ import os
 
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/'
-inpf = codecs.open('data/1003.json', 'rU', encoding='utf-8')
+inpf = codecs.open('data/9.json', 'rU', encoding='utf-8')
 n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
 m = n['nexml']['meta']

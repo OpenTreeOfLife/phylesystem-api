@@ -7,7 +7,7 @@ import sys
 import os
 
 # this makes it easier to test concurrent pushes to different branches
-study_id = '12'
+study_id = '9'
 
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
