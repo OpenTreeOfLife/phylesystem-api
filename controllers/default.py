@@ -14,6 +14,8 @@ from locket import LockError
 from gluon.tools import fetch
 from urllib import urlencode
 from gluon.html import web2pyHTMLParser
+from peyotl.nexson_syntax import get_ot_study_info_from_nexml, BADGER_FISH_NEXSON_VERSION
+from StringIO import StringIO
 
 # NexSON validation
 from peyotl.nexson_validation import NexsonWarningCodes, validate_nexson
@@ -190,6 +192,16 @@ def v1():
 
         # any of these methods should returna parsed NexSON dict (vs. string)
         if importing_from_treebase_id:
+            # make sure the treebase ID is an integer
+            treebase_id = "".join(treebase_id.split())  # remove all whitespace
+            treebase_id = treebase_id.lstrip('S').lstrip('s')  # allow for possible leading 'S'?
+            try:
+                treebase_id = int(treebase_id)
+            except ValueError:
+                raise HTTP(400, json.dumps({
+                    "error": 1,
+                    "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s" % (treebase_id, e.message)
+                }))
             new_study_nexson = _import_nexson_from_treebase(treebase_id)
         elif importing_from_nexml_fetch:
             new_study_nexson = _import_nexson_from_nexml(fetch_url=nexml_fetch_url)
@@ -203,7 +215,11 @@ def v1():
         # TODO: ensure that we have standard structures? esp. study metadata fields!
 
         # apply standard metatags for a new study, regardless of NexSON source
-        study_metatags = new_study_nexson['nexml']['meta']
+        if new_study_nexson.has_key('nex:nexml'):  # from TreeBASE
+            study_metatags = new_study_nexson['nex:nexml']['meta']
+        else:  # from our template
+            study_metatags = new_study_nexson['nexml']['meta']
+            
         for tag in study_metatags:
             if tag['@property'] == u'ot:studyId':
                 tag['$'] = u'REPLACE_WITH_NEW_ID'
@@ -425,15 +441,40 @@ def v1():
 
         return nexson
 
-    def _import_nexson_from_nexml(nexml, fetch_url):
-        # TODO: use existing API tools to convert NeXML to NexSON, then
-        # possibly groom it to fit our standards
-        pass
+    def _import_nexson_from_nexml(nexml=None, fetch_url=None):
+        # Use Open Tree API tools to convert NeXML to NexSON, then groom it to
+        # fit our standards.
+        if fetch_url:
+            nexml = fetch(fetch_url)
+            nexml = unicode(nexml, 'utf-8')   # make sure it's Unicode!
+
+        # convert from NeXML to basic (BadgerFish) NexSON
+        fakefile = StringIO(nexml)  # the method we're calling expects a file  :-/
+        nexson = get_ot_study_info_from_nexml(fakefile,
+                                              nexson_syntax_version=BADGER_FISH_NEXSON_VERSION)
+        # TODO? get_ot_study_info_from_treebase_nexml() instead, if TreeBASE is source?
+        return nexson
 
     def _import_nexson_from_treebase(treebase_id):
-        # TODO: use TreeBASE API to fetch NeXML, then pass it as a string
+        # Use TreeBASE API to fetch NeXML, then pass it as a string
         # to _import_nexson_from_nexml()
-        pass
+
+        # EXAMPLE: Here's Phylografter's fetch URL for study 15515 as 'nexml' (versus 'nexus'):
+        #   http://purl.org/phylo/treebase/phylows/study/TB2:S15515?format=nexml
+        # ... which redirects to:
+        #   http://treebase.org/treebase-web/phylows/study/TB2:S15515?format=nexml
+        # ... which redirects to:
+        #   http://treebase.org/treebase-web/search/downloadAStudy.html?id=15515&format=nexml
+        #
+        # Since gluon's fetch follows redirects, let's respect the PhyloWS API on treebase.org
+        treebase_lookup_response = fetch(
+            'http://treebase.org/treebase-web/phylows/study/TB2:S%d?format=nexml' % 
+            treebase_id
+        )
+        treebase_lookup_response = unicode(treebase_lookup_response, 'utf-8')   # make sure it's Unicode!
+
+        # convert this NeXML response to nexson
+        return _import_nexson_from_nexml(nexml=treebase_lookup_response)
 
     def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
         """Actually make a local Git commit and push it to our remote
