@@ -76,12 +76,17 @@ def v1():
                             resource_id,
                             auth_info,
                             adaptor,
-                            annotation):
+                            annotation,
+                            parent_sha):
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
         block_until_annotation_commit = True
-        unadulterated_content_commit = commit_and_try_merge2master(git_data, nexson, resource_id, auth_info)
+        unadulterated_content_commit = commit_and_try_merge2master(git_data,
+                                                                   nexson,
+                                                                   resource_id,
+                                                                   auth_info,
+                                                                   parent_sha)
         # TIMING = api_utils.log_time_diff(_LOG, 'unadulterated commit', TIMING)
         if unadulterated_content_commit['error'] != 0:
             _LOG.debug('unadulterated_content_commit failed')
@@ -91,7 +96,7 @@ def v1():
             adaptor.add_or_replace_annotation(nexson,
                                               annotation['annotationEvent'],
                                               annotation['agent'])
-            annotated_commit = commit_and_try_merge2master(git_data, nexson, resource_id, auth_info)
+            annotated_commit = commit_and_try_merge2master(git_data, nexson, resource_id, auth_info, parent_sha)
             # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
             if annotated_commit['error'] != 0:
                 _LOG.debug('annotated_commit failed')
@@ -137,6 +142,7 @@ def v1():
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
         output_nexml2json = __validate_output_nexml2json(kwargs)
+
         
         # check for HTTP method override (passed on query string)
         if _method == 'PUT':
@@ -234,7 +240,8 @@ def v1():
                                          new_resource_id,
                                          auth_info,
                                          nexson_adaptor,
-                                         annotation)
+                                         annotation,
+                                         parent_sha=None)
             return commit_return
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
@@ -278,6 +285,9 @@ def v1():
         if not resource=='study':
             _LOG.debug('resource must be "study"')
             raise HTTP(400, 'resource != study')
+        parent_sha = kwargs.get('sha')
+        if parent_sha is None:
+            raise HTTP(400, 'Expecting a "sha" argument with the SHA of the parent')
         #TIMING = api_utils.log_time_diff(_LOG)
         auth_info = api_utils.authenticate(**kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
@@ -297,7 +307,8 @@ def v1():
                                    resource_id,
                                    auth_info,
                                    nexson_adaptor,
-                                   annotation)
+                                   annotation,
+                                   parent_sha)
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
