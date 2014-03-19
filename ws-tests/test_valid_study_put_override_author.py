@@ -7,6 +7,8 @@ import sys
 import os
 
 DOMAIN = config('host', 'apihost')
+starting_commit_SHA = config('host', 'parentsha')
+
 study_id="12"
 SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
 fn = 'data/{s}.json'.format(s=study_id)
@@ -26,6 +28,7 @@ data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'author_name': "Some Author",
          'author_email': "author@author.com",
+         'starting_commit_SHA': starting_commit_SHA,
 }
 if test_http_json_method(SUBMIT_URI,
                          'PUT',

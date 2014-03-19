@@ -11,6 +11,8 @@ import os
 study_id = 12
 
 DOMAIN = config('host', 'apihost')
+starting_commit_SHA = config('host', 'parentsha')
+
 SUBMIT_URI = DOMAIN + '/v1/study/%s' % study_id
 fn = 'data/{s}.json'.format(s=study_id)
 inpf = codecs.open(fn, 'rU', encoding='utf-8')
@@ -28,6 +30,7 @@ n = convert_nexson_format(n, '1.2')
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'starting_commit_SHA': starting_commit_SHA,
 }
 if test_http_json_method(SUBMIT_URI,
                          'PUT',

@@ -9,7 +9,7 @@ from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
 from peyotl.phylesystem.git_workflows import acquire_lock_raise, \
                                              commit_and_try_merge2master, \
-                                             delete_and_push, \
+                                             delete_study, \
                                              GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.nexson_syntax import get_empty_nexson
@@ -77,7 +77,8 @@ def v1():
                             auth_info,
                             adaptor,
                             annotation,
-                            parent_sha):
+                            parent_sha,
+                            master_file_blob_included=None):
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
@@ -86,7 +87,8 @@ def v1():
                                                                    nexson,
                                                                    resource_id,
                                                                    auth_info,
-                                                                   parent_sha)
+                                                                   parent_sha,
+                                                                   master_file_blob_included)
         # TIMING = api_utils.log_time_diff(_LOG, 'unadulterated commit', TIMING)
         if unadulterated_content_commit['error'] != 0:
             _LOG.debug('unadulterated_content_commit failed')
@@ -96,7 +98,12 @@ def v1():
             adaptor.add_or_replace_annotation(nexson,
                                               annotation['annotationEvent'],
                                               annotation['agent'])
-            annotated_commit = commit_and_try_merge2master(git_data, nexson, resource_id, auth_info, parent_sha)
+            annotated_commit = commit_and_try_merge2master(git_data,
+                                                           nexson,
+                                                           resource_id,
+                                                           auth_info,
+                                                           parent_sha,
+                                                           master_file_blob_included)
             # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
             if annotated_commit['error'] != 0:
                 _LOG.debug('annotated_commit failed')
@@ -121,7 +128,6 @@ def v1():
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
         _acquire_lock_raise_http(gd)
         try:
-            gd.checkout_master()
             study_nexson, head_sha = gd.return_study(resource_id)
         finally:
             gd.release_lock()
@@ -285,9 +291,10 @@ def v1():
         if not resource=='study':
             _LOG.debug('resource must be "study"')
             raise HTTP(400, 'resource != study')
-        parent_sha = kwargs.get('sha')
+        parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
-            raise HTTP(400, 'Expecting a "sha" argument with the SHA of the parent')
+            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        master_file_blob_included = kwargs.get('included_SHA')
         #TIMING = api_utils.log_time_diff(_LOG)
         auth_info = api_utils.authenticate(**kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
@@ -308,7 +315,8 @@ def v1():
                                    auth_info,
                                    nexson_adaptor,
                                    annotation,
-                                   parent_sha)
+                                   parent_sha,
+                                   master_file_blob_included)
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
@@ -321,9 +329,12 @@ def v1():
             response.view = 'generic.jsonp'
         if not resource=='study':
             raise HTTP(400, 'resource != study')
+        parent_sha = kwargs.get('starting_commit_SHA')
+        if parent_sha is None:
+            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
         auth_info = api_utils.authenticate(**kwargs)
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
-        delete_and_push(gd, resource_id, auth_info)
+        return delete_study(gd, resource_id, auth_info, parent_sha)
 
     def OPTIONS(*args, **kwargs):
         "A simple method for approving CORS preflight request"
