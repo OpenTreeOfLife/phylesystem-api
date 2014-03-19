@@ -10,7 +10,8 @@
 "nex": "http://www.nexml.org/2009", 
 "ot": "http://purl.org/opentree-terms#", 
 "xsd": "http://www.w3.org/2001/XMLSchema#", 
-"xsi": "http://www.w3.org/2001/XMLSchema-instance"
+"xsi": "http://www.w3.org/2001/XMLSchema-instance",
+"xhtml": "http://www.w3.org/1999/xhtml/vocab#"
 }, 
 "meta": [
 {
@@ -52,6 +53,11 @@
 "$": "", 
 "@property": "ot:focalCladeOTTTaxonName", 
 "@xsi:type": "nex:LiteralMeta"
+},
+{
+"@rel": "xhtml:license",
+"@href": "http://creativecommons.org/publicdomain/zero/1.0/",
+"@xsi:type": "nex:ResourceMeta"
 }
 ], 
 "otus": {

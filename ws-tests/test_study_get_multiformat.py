@@ -23,8 +23,8 @@ pl = test_http_json_method(SUBMIT_URI,
                             return_bool_data=True)
 if not pb[0]:
     sys.exit(1)
-badger = pb[1]
-legacy = pl[1]
+badger = pb[1]['data']
+legacy = pl[1]['data']
 assert(badger != legacy)
 lfromb = convert_nexson_format(badger, '1.0.0', current_format='0.0.0')
 if lfromb != legacy:

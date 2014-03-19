@@ -144,13 +144,14 @@ def v1():
             gd.release_lock()
         if study_nexson == "":
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
+        
+        study_nexson = anyjson.loads(study_nexson)
         if output_nexml2json != repo_nexml2json:
-            blob = anyjson.loads(study_nexson)
-            return __coerce_nexson_format(blob,
+            study_nexson = __coerce_nexson_format(study_nexson,
                                           output_nexml2json,
                                           current_format=repo_nexml2json)
-        else:
-            return dict(FULL_RESPONSE=study_nexson)
+        return {'sha': head_sha,
+                'data': study_nexson}
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
@@ -177,6 +178,10 @@ def v1():
         publication_doi = kwargs.get('publication_DOI', '')
         publication_ref = kwargs.get('publication_reference', '')
         ##dryad_DOI = kwargs.get('dryad_DOI', '')
+
+        # check for required license agreement!
+        if cc0_agreement != 'true': raise HTTP(400, json.dumps({"error":1,
+            "description": "CC-0 license must be accepted to add studies using this API."}))
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
 
@@ -221,6 +226,8 @@ def v1():
             study_metatags = new_study_nexson['nexml']['meta']
             
         for tag in study_metatags:
+            if not '@property' in tag:
+                continue
             if tag['@property'] == u'ot:studyId':
                 tag['$'] = u'REPLACE_WITH_NEW_ID'
             if tag['@property'] == u'ot:curatorName':
