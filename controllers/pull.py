@@ -5,6 +5,8 @@ import gitdata
 import api_utils
 from gitdata import GitData
 from locket import LockError
+from peyotl.phylesystem.git_workflows import GitWorkflowError, \
+                                             merge_from_master
 
 @request.restful()
 def v1():
@@ -14,18 +16,10 @@ def v1():
     """
     response.view = 'generic.json'
 
-    def POST(branch="master",jsoncallback=None,callback=None,_=None,**kwargs):
+    def POST(resource_id, starting_commit_SHA, jsoncallback=None,callback=None,_=None,**kwargs):
         """OpenTree API methods relating to updating branches
 
-        This controller implements the updating of a branch (pulling it from our remote) via the API.
-
-        For example, to update the branch leto_study_12 via curl:
-
-        curl -X POST http://localhost:8000/api/pull/v1/leto_study_12?auth_token=$GITHUB_OAUTH_TOKEN
-
-        The default branch is master, so to pull in changes from our remote master:
-
-        curl -X POST http://localhost:8000/api/pull/v1?auth_token=$GITHUB_OAUTH_TOKEN
+        curl -X POST http://localhost:8000/api/pull/v1?starting_commit_SHA=152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
 
         If the request is successful, a JSON response similar to this will be returned:
 
@@ -48,46 +42,15 @@ def v1():
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
-
         auth_info = api_utils.authenticate(**kwargs)
-
-        repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
-        git_env     = {"GIT_SSH": git_ssh, "PKEY": pkey}
-
+        repo_path = api_utils.read_config(request)[0]
         gd = GitData(repo=repo_path)
-
         try:
-            gd.acquire_lock()
-        except LockError, e:
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not acquire lock to pull branch %s" % branch
-            }))
-
-        try:
-            # do the pull
-            new_sha = gd.pull(repo_remote, env=git_env, branch=branch)
+            return merge_from_master(gd, resource_id, auth_info, starting_commit_SHA)
+        except GitWorkflowError, err:
+            raise HTTP(400, json.dumps({"error": 1, "description": err.msg}))
         except Exception, e:
-            gd.release_lock()
-
-            # Attempt to abort a merge, in case of conflicts
-            try:
-                git.merge("--abort")
-            except:
-                pass
-
             raise HTTP(409, json.dumps({
                 "error": 1,
                 "description": "Could not pull! Details: %s" % (e.message)
             }))
-        finally:
-            gd.release_lock()
-
-        return {
-            "error": 0,
-            "branch_name": branch,
-            "description": "Updated branch %s" % branch,
-            "sha":  new_sha
-        }
-
-    return locals()

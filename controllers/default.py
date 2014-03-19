@@ -149,7 +149,6 @@ def v1():
             response.view = 'generic.jsonp'
         output_nexml2json = __validate_output_nexml2json(kwargs)
 
-        
         # check for HTTP method override (passed on query string)
         if _method == 'PUT':
             PUT(resource, resource_id, kwargs)
@@ -157,8 +156,9 @@ def v1():
             DELETE(resource, resource_id, kwargs)
         # elif _method == 'PATCH': ...
 
-        if not resource=='study': raise HTTP(400, json.dumps({"error":1,
-            "description": "Only the creation of new studies is currently supported"}))
+        if not resource=='study':
+            raise HTTP(400, json.dumps({"error":1,
+                                        "description": "Only the creation of new studies is currently supported"}))
         
         # we're creating a new study (possibly with import instructions in the payload)
         cc0_agreement = kwargs.get('cc0_agreement', '')
