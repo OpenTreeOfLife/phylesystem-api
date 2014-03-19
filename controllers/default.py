@@ -170,93 +170,47 @@ def v1():
         cc0_agreement = kwargs.get('cc0_agreement', '')
         import_option = kwargs.get('import_option', '')
         treebase_id = kwargs.get('treebase_id', '')
+        nexml_fetch_url = kwargs.get('nexml_fetch_url', '')
+        nexml_pasted_string = kwargs.get('nexml_pasted_string', '')
         publication_doi = kwargs.get('publication_DOI', '')
         publication_ref = kwargs.get('publication_reference', '')
         ##dryad_DOI = kwargs.get('dryad_DOI', '')
 
         (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
 
-        # start with an empty NexSON template 
-        app_name = "api"
-        template_filename = "%s/applications/%s/static/NEXSON_TEMPLATE.json" % (request.env.web2py_path, app_name)
-        new_study_nexson = json.load( open(template_filename) )
-        # add known values for its metatags
-        study_metatags = new_study_nexson['nexml']['meta']
-        meta_author = kwargs.get('author_name', '').decode('utf-8')
-        meta_publication_reference = u''
-        meta_publication_url = u''
-        meta_year = u''
+        # create initial study NexSON using the chosen import option
+        importing_from_treebase_id = (import_option == 'IMPORT_FROM_TREEBASE' and treebase_id)
+        importing_from_nexml_fetch = (import_option == 'IMPORT_FROM_NEXML' and nexml_fetch_url)
+        importing_from_nexml_string = (import_option == 'IMPORT_FROM_NEXML' and nexml_pasted_string)
+        #importing_from_nexml_upload = (import_option == 'IMPORT_FROM_NEXML' and publication_doi)
+        #importing_from_nexml = (importing_from_treebase_id or importing_from_nexml_fetch or importing_from_nexml_string)  # or importing_from_nexml_upload
 
         importing_from_crossref_API = (import_option == 'IMPORT_FROM_PUBLICATION_DOI' and publication_doi) or \
                                       (import_option == 'IMPORT_FROM_PUBLICATION_REFERENCE' and publication_ref)
 
-        if importing_from_crossref_API:
-            if import_option == 'IMPORT_FROM_PUBLICATION_DOI':
-                # if curator has provided a DOI, use it to pre-populate study metadata
+        # any of these methods should returna parsed NexSON dict (vs. string)
+        if importing_from_treebase_id:
+            new_study_nexson = _import_nexson_from_treebase(treebase_id)
+        elif importing_from_nexml_fetch:
+            new_study_nexson = _import_nexson_from_nexml(fetch_url=nexml_fetch_url)
+        elif importing_from_nexml_string:
+            new_study_nexson = _import_nexson_from_nexml(nexml=nexml_pasted_string)
+        elif importing_from_crossref_API:
+            new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref)
+        else:   # assumes IMPORT_FROM_MANUAL_ENTRY, or insufficient args above
+            new_study_nexson = _new_nexson()
 
-                # Cleanup submitted DOI to work with CrossRef API.
-                #   WORKS: http://dx.doi.org/10.999...
-                #   WORKS: doi:10.999...
-                #   FAILS: doi: 10.999...
-                #   FAILS: DOI:10.999...
-                # Let's keep it simple and make it a bare DOI.
-                # All DOIs use the directory indicator '10.', see
-                #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
-                # Remove all whitespace from the submitted DOI...
-                publication_doi = "".join(publication_doi.split())
-                # ... then strip everything up to the first '10.'
-                doi_parts = publication_doi.split('10.')
-                doi_parts[0] = ''
-                search_term = '10.'.join(doi_parts)
-            else:  # assumes IMPORT_FROM_PUBLICATION_REFERENCE
-                search_term = publication_ref
+        # TODO: ensure that we have standard structures? esp. study metadata fields!
 
-            doi_lookup_response = fetch(
-                'http://search.crossref.org/dois?%s' % 
-                urlencode({'q': search_term})
-            )
-
-            doi_lookup_response = unicode(doi_lookup_response, 'utf-8')   # make sure it's Unicode!
-
-            try:
-                matching_records = anyjson.loads(doi_lookup_response)
-
-                # if we got a match, grab the first (probably only) record
-                if len(matching_records) > 0:
-                    match = matching_records[0];
-
-                    # Convert HTML reference string to plain text
-                    raw_publication_reference = match.get('fullCitation', '')
-                    ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
-                    # root of this tree is the complete mini-DOM
-                    ref_root = ref_element_tree.elements()[0]
-                    # reduce this root to plain text (strip any tags)
-
-                    meta_publication_reference = ref_root.flatten().decode('utf-8')
-                    meta_publication_url = match.get('doi', u'')  # already in URL form
-                    meta_year = match.get('year', u'')
-
-            except:
-                if import_option == 'IMPORT_FROM_PUBLICATION_DOI':
-                    meta_publication_reference = u'No matching publication found for this DOI!'
-                else:  # assumes IMPORT_FROM_PUBLICATION_REFERENCE
-                    meta_publication_reference = u'No matching publication found for this reference string'
-
-        # apply any values we have for metadata
+        # apply standard metatags for a new study, regardless of NexSON source
+        study_metatags = new_study_nexson['nexml']['meta']
         for tag in study_metatags:
             if tag['@property'] == u'ot:studyId':
                 tag['$'] = u'REPLACE_WITH_NEW_ID'
-            if tag['@property'] == u'ot:studyPublicationReference':
-                tag['$'] = meta_publication_reference
-            if tag['@property'] == u'ot:studyPublication':
-                # N.B. here we set @href instead
-                tag['@href'] = meta_publication_url
-            if tag['@property'] == u'ot:studyYear':
-                tag['$'] = meta_year
             if tag['@property'] == u'ot:curatorName':
-                tag['$'] = meta_author
+                tag['$'] = kwargs.get('author_name', '').decode('utf-8')
 
-        # add nexson to kwargs for standard validation
+        # add nexson to kwargs for full validation
         kwargs['nexson'] = new_study_nexson
         nexson, annotation, validation_log, nexson_adaptor = __validate_and_normalize_nexson(**kwargs)
         # Now we have a validated nexson string, unpacked from __validate_etc
@@ -392,6 +346,94 @@ def v1():
                 "description": "Could not push deletion of study #%s! Details:\n%s" % (resource_id, e.message)
             }))
 
+    def _new_nexson():
+        # return an empty NexSON doc using a template file
+        app_name = "api"
+        template_filename = "%s/applications/%s/static/NEXSON_TEMPLATE.json" % (request.env.web2py_path, app_name)
+        nexson = json.load( open(template_filename) )
+        return nexson
+
+    def _new_nexson_with_crossref_metadata(doi, ref_string):
+        if doi:
+            # use the supplied DOI to fetch study metadata
+
+            # Cleanup submitted DOI to work with CrossRef API.
+            #   WORKS: http://dx.doi.org/10.999...
+            #   WORKS: doi:10.999...
+            #   FAILS: doi: 10.999...
+            #   FAILS: DOI:10.999...
+            # Let's keep it simple and make it a bare DOI.
+            # All DOIs use the directory indicator '10.', see
+            #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
+
+            # Remove all whitespace from the submitted DOI...
+            publication_doi = "".join(doi.split())
+            # ... then strip everything up to the first '10.'
+            doi_parts = publication_doi.split('10.')
+            doi_parts[0] = ''
+            search_term = '10.'.join(doi_parts)
+
+        elif ref_string:
+            # use the supplied reference text to fetch study metadata
+            search_term = ref_string
+
+        # look for matching studies via CrossRef.org API
+        doi_lookup_response = fetch(
+            'http://search.crossref.org/dois?%s' % 
+            urlencode({'q': search_term})
+        )
+        doi_lookup_response = unicode(doi_lookup_response, 'utf-8')   # make sure it's Unicode!
+        matching_records = anyjson.loads(doi_lookup_response)
+
+        # if we got a match, grab the first (probably only) record
+        if len(matching_records) > 0:
+            match = matching_records[0];
+
+            # Convert HTML reference string to plain text
+            raw_publication_reference = match.get('fullCitation', '')
+            ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
+            # root of this tree is the complete mini-DOM
+            ref_root = ref_element_tree.elements()[0]
+            # reduce this root to plain text (strip any tags)
+
+            meta_publication_reference = ref_root.flatten().decode('utf-8')
+            meta_publication_url = match.get('doi', u'')  # already in URL form
+            meta_year = match.get('year', u'')
+            
+        else:
+            # Add a bogus reference string to signal the lack of results
+            if doi:
+                meta_publication_reference = u'No matching publication found for this DOI!'
+            else:
+                meta_publication_reference = u'No matching publication found for this reference string'
+            meta_publication_url = u''
+            meta_year = u''
+
+        # add any found values to a fresh NexSON template
+        nexson = _new_nexson()
+        study_metatags = nexson['nexml']['meta']
+        for tag in study_metatags:
+            if not '@property' in tag:
+                continue
+            if tag['@property'] == u'ot:studyPublicationReference':
+                tag['$'] = meta_publication_reference
+            if tag['@property'] == u'ot:studyPublication':
+                # N.B. here we set @href instead
+                tag['@href'] = meta_publication_url
+            if tag['@property'] == u'ot:studyYear':
+                tag['$'] = meta_year
+
+        return nexson
+
+    def _import_nexson_from_nexml(nexml, fetch_url):
+        # TODO: use existing API tools to convert NeXML to NexSON, then
+        # possibly groom it to fit our standards
+        pass
+
+    def _import_nexson_from_treebase(treebase_id):
+        # TODO: use TreeBASE API to fetch NeXML, then pass it as a string
+        # to _import_nexson_from_nexml()
+        pass
 
     def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
         """Actually make a local Git commit and push it to our remote
