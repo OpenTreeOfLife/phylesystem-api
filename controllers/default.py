@@ -77,7 +77,7 @@ def v1():
         v_log, adaptor = validate_nexson(nexson, codes_to_skip, retain_deprecated=True)
         script_name = 'api.opentreeoflife.org/validate' # TODO
         annotation = v_log.prepare_annotation(author_name=script_name,
-                                              annotation_label="Open Tree NexSON validation")
+                                              description="Open Tree NexSON validation")
         return annotation, v_log, adaptor
 
     def __finish_write_verb(git_data, 
