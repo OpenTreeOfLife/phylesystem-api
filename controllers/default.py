@@ -248,7 +248,6 @@ def v1():
             return convert_nexson_format(nexson, dest_format, current_format=current_format)
         except:
             msg = "Exception in coercing to the required NexSON version for validation. "
-            msg += traceback.format_exc()
             _LOG.exception(msg)
             raise HTTP(400, msg)
 
