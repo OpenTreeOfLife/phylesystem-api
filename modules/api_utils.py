@@ -59,28 +59,27 @@ def authenticate(**kwargs):
         }))
     gh           = Github(auth_token)
     gh_user      = gh.get_user()
-
+    auth_info = {}
     try:
-        gh_user.login
+        auth_info['login'] = gh_user.login
     except BadCredentialsException:
         raise HTTP(400,json.dumps({
             "error": 1,
             "description":"You have provided an invalid or expired authentication token"
         }))
 
-    author_name  = kwargs.get('author_name','')
-    author_email = kwargs.get('author_email','')
+    auth_info['name'] = kwargs.get('author_name')
+    auth_info['email'] = kwargs.get('author_email')
 
     # use the Github Oauth token to get a name/email if not specified
     # we don't provide these as default values above because they would
     # generate API calls regardless of author_name/author_email being specifed
 
-    if not author_name:
-        author_name = gh_user.name
-    if not author_email:
-        author_email = gh_user.email
-
-    return gh, author_name, author_email
+    if auth_info['name'] is None:
+        auth_info['name'] = gh_user.name
+    if auth_info['email'] is None:
+        auth_info['email']= gh_user.email
+    return auth_info
 
 
 _LOGGING_LEVEL_ENVAR="OT_API_LOGGING_LEVEL"

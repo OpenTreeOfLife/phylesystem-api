@@ -72,18 +72,16 @@ def v1():
         return output_nexml2json
 
     def __finish_write_verb(git_data, 
-                            git_hub_auth,
                             nexson,
-                            author_name,
-                            author_email,
                             resource_id,
+                            auth_info,
                             adaptor,
                             annotation):
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
         block_until_annotation_commit = True
-        unadulterated_content_commit = commit_and_try_merge2master(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
+        unadulterated_content_commit = commit_and_try_merge2master(git_data, nexson, resource_id, auth_info)
         # TIMING = api_utils.log_time_diff(_LOG, 'unadulterated commit', TIMING)
         if unadulterated_content_commit['error'] != 0:
             _LOG.debug('unadulterated_content_commit failed')
@@ -93,7 +91,7 @@ def v1():
             adaptor.add_or_replace_annotation(nexson,
                                               annotation['annotationEvent'],
                                               annotation['agent'])
-            annotated_commit = commit_and_try_merge2master(git_data, git_hub_auth, nexson, author_name, author_email, resource_id)
+            annotated_commit = commit_and_try_merge2master(git_data, nexson, resource_id, auth_info)
             # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
             if annotated_commit['error'] != 0:
                 _LOG.debug('annotated_commit failed')
@@ -113,14 +111,6 @@ def v1():
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
-
-        # fetch using the GitHub API auth-token for a logged-in curator
-        auth_token = kwargs.get('auth_token', 'ANONYMOUS')
-        if auth_token == 'ANONYMOUS':
-            # non-web callers might be using an HTTP header ("Authorization: token abc123def456")
-            auth_header = request.env.get('http_authorization', None) or request.wsgi.environ.get('HTTP_AUTHORIZATION', None)
-            if auth_header:
-                auth_token = auth_header.split()[1]
 
         # return the correct nexson of study_id, using the specified view
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
@@ -170,7 +160,7 @@ def v1():
         if cc0_agreement != 'true': raise HTTP(400, json.dumps({"error":1,
             "description": "CC-0 license must be accepted to add studies using this API."}))
 
-        (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
+        auth_info = api_utils.authenticate(**kwargs)
 
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
         # studies created by the OpenTree API start with o,
@@ -182,8 +172,6 @@ def v1():
         new_study_nexson = get_empty_nexson("1.2.1")
         nexml = new_study_nexson['nexml']
         nexml['^ot:studyId'] = new_resource_id
-        new_study_nexson = {'nexml': nexml}
-
         # add known values for its metatags
         meta_publication_reference = None
         importing_from_crossref_API = (import_option == 'IMPORT_FROM_PUBLICATION_DOI' and publication_doi) or \
@@ -236,17 +224,15 @@ def v1():
                     meta_publication_reference = u'No matching publication found for this reference string'
         if meta_publication_reference:
             nexml['^ot:studyPublicationReference'] = meta_publication_reference
-        nexml['^ot:curatorName'] = kwargs.get('author_name', '').decode('utf-8')
+        nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
         kwargs['nexson'] = new_study_nexson
         try:
             bundle = validate_and_convert_nexson(new_study_nexson, repo_nexml2json, allow_invalid=True)
             nexson, annotation, validation_log, nexson_adaptor = bundle
             commit_return = __finish_write_verb(gd,
-                                         gh,
                                          nexson,
-                                         author_name,
-                                         author_email,
                                          new_resource_id,
+                                         auth_info,
                                          nexson_adaptor,
                                          annotation)
             return commit_return
@@ -294,7 +280,7 @@ def v1():
             _LOG.debug('resource must be "study"')
             raise HTTP(400, 'resource != study')
         #TIMING = api_utils.log_time_diff(_LOG)
-        gh, author_name, author_email = api_utils.authenticate(**kwargs)
+        auth_info = api_utils.authenticate(**kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
         
         try:
@@ -308,11 +294,9 @@ def v1():
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
         try:
             blob = __finish_write_verb(gd,
-                                   gh,
                                    nexson,
-                                   author_name,
-                                   author_email,
                                    resource_id,
+                                   auth_info,
                                    nexson_adaptor,
                                    annotation)
         except GitWorkflowError, err:
@@ -325,12 +309,11 @@ def v1():
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
-
-        if not resource=='study': raise HTTP(400, 'resource != study')
-
-        (gh, author_name, author_email) = api_utils.authenticate(**kwargs)
+        if not resource=='study':
+            raise HTTP(400, 'resource != study')
+        auth_info = api_utils.authenticate(**kwargs)
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
-        delete_and_push(gd, gh, author_name, author_email, resource_id)
+        delete_and_push(gd, resource_id, auth_info)
 
     def OPTIONS(*args, **kwargs):
         "A simple method for approving CORS preflight request"
