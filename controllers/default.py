@@ -294,7 +294,7 @@ def v1():
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
-        master_file_blob_included = kwargs.get('included_SHA')
+        master_file_blob_included = kwargs.get('merged_SHA')
         #TIMING = api_utils.log_time_diff(_LOG)
         auth_info = api_utils.authenticate(**kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)

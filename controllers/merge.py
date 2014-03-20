@@ -1,41 +1,45 @@
 import os
 import time
 import json
-import gitdata
 import api_utils
 from gitdata import GitData
-from locket import LockError
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              merge_from_master
 
 @request.restful()
 def v1():
-    """The OpenTree API v1: Pull Controller
+    """The OpenTree API v1: Merge Controller
 
-    This controller can be used to update local branches from our remote, to keep the local and remote repo in sync.
+    This controller can be used to merge changes from master into
+    a WIP. After this succeeds, subsequent GETs and POSTs to the study
+    should be able to merge to master.
     """
     response.view = 'generic.json'
 
-    def POST(resource_id, starting_commit_SHA, jsoncallback=None,callback=None,_=None,**kwargs):
+    def PUT(resource_id, starting_commit_SHA, jsoncallback=None,callback=None,_=None,**kwargs):
         """OpenTree API methods relating to updating branches
 
-        curl -X POST http://localhost:8000/api/pull/v1?starting_commit_SHA=152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
+        curl -X POST http://localhost:8000/api/merge/v1?resource_id=9&starting_commit_SHA=152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
 
         If the request is successful, a JSON response similar to this will be returned:
 
         {
             "error": 0,
-            "branch_name": "master",
+            "branch_name": "my_user_9_2",
             "description": "Updated branch",
-            "sha":  "dcab222749c9185797645378d0bda08d598f81e7"
+            "sha": "dcab222749c9185797645378d0bda08d598f81e7",
+            "merged_SHA": "16463623459987070600ab2757540c06ddepa608",
         }
+
+        'merged_SHA' must be included in the next PUT for this study (unless you are
+            happy with your work languishing on a WIP branch instead of master).
 
         If there is an error, an HTTP 400 error will be returned with a JSON response similar
         to this:
 
         {
             "error": 1,
-            "description": "Could not pull from remote origin! Details: ..."
+            "description": "Could not merge master into WIP! Details: ..."
         }
         """
 
@@ -54,3 +58,4 @@ def v1():
                 "error": 1,
                 "description": "Could not pull! Details: %s" % (e.message)
             }))
+    return locals()
