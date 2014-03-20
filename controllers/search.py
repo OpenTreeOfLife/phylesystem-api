@@ -70,6 +70,8 @@ def nudgeIndexOnUpdates():
     # EXAMPLE of a working curl call to nudge index:
     # curl -X "POST" -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
 
+    # curl http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json"] }' -H "Content-type: application/json"
+
     repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = read_config(request)
     # EXAMPLE VALUES: (
     #   '/Users/jima/projects/nescent/opentree/phylesystem', 
@@ -106,19 +108,30 @@ def nudgeIndexOnUpdates():
         removed_study_ids = list(set(removed_study_ids))
 
     except:
-        raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
+        # TODO: raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
+        added_study_ids = ['9']
+        modified_study_ids = ['9','10']
+        removed_study_ids = ['10']
 
     nexson_url_template = REPO_URL.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
 
-    # for now, let's just roll all these together and try using indexNexsons for everyone
-    study_ids = added_study_ids + modified_study_ids + removed_study_ids
+    # for now, let's just add/update new and modified studies using indexNexsons
+    study_ids = added_study_ids + modified_study_ids
+    # NOTE that passing deleted_study_ids (any non-existent file paths) will fail on oti, with a FileNotFoundException!
     study_ids = list(set(study_ids))  # remove any duplicates
 
     nudge_url = "%s/ext/IndexServices/graphdb/indexNexsons" % (OTI_BASE_URL,)
+    pprint("nudge_url:")
+    pprint(nudge_url)
+
+    nexson_urls = [ (nexson_url_template % (study_id, study_id)) for study_id in study_ids ]
+    pprint("nexson_urls:")
+    pprint(nexson_urls)
+
     nudge_index_response = fetch(
         nudge_url,
         data={
-            "urls": [ (nexson_url_template % (study_id, study_id)) for study_id in study_ids ]
+            "urls": nexson_urls
         },
         headers={
             "Content-type": "application/json"
