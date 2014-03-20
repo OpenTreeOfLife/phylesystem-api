@@ -54,3 +54,13 @@ other than specifying a port, even if URL encoded.
             raise HTTP(400,json.dumps({"error":1, "description":"not a valid property name"}))
 
     return locals()
+
+def nudgeIndexOnUpdates():
+    from pprint import pprint
+    pprint(request)
+    pprint(request.args)
+    pprint(request.vars)
+    pprint(request.body.read())
+    return 'done'
+    pass
+
