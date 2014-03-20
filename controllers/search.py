@@ -108,7 +108,7 @@ def nudgeIndexOnUpdates():
     except:
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
 
-    nexson_url_template = REPO_URL.replace("github.com", "raw.github.com") + "/master/study/%s/$s.json"
+    nexson_url_template = REPO_URL.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
 
     # for now, let's just roll all these together and try using indexNexsons for everyone
     study_ids = added_study_ids + modified_study_ids + removed_study_ids
