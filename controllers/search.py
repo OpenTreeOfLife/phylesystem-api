@@ -16,7 +16,7 @@ else:
 oti_base_url = conf.get("apis", "oti_base_url")
 api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
 
-oti_study_repo_url = conf.get("apis", "oti_study_repo_url")
+opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
 
 @request.restful()
 def v1():
@@ -67,15 +67,12 @@ def nudgeIndexOnUpdates():
 
     # curl http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json"] }' -H "Content-type: application/json"
 
-    # Pull needed values from config file:
-    #   repo's URL or name (munge this to grab raw NexSON)
-    #   OTI_base_URL -- MAKE SURE we're pushing to the right OTI service(s)!
-    # Both of these should probably "flow through" private/config directly from the server-config file. Typical values might be:
-    # oti_study_repo_url = "https://github.com/OpenTreeOfLife/phylesystem"
-    # oti_base_url='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'
+    # Pull needed values from config file (typical values shown)
+    #   opentree_docstore_url = "https://github.com/OpenTreeOfLife/phylesystem"        # munge this to grab raw NexSON)
+    #   oti_base_url='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'    # confirm we're pushing to the right OTI service(s)!
 
     try:
-        if payload['repository']['url'] != oti_study_repo_url:
+        if payload['repository']['url'] != opentree_docstore_url:
             raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
 
         # how we nudge the index depends on which studies are new, changed, or deleted
@@ -100,7 +97,7 @@ def nudgeIndexOnUpdates():
         ## modified_study_ids = ["10"]
         ## removed_study_ids = [ ]
 
-    nexson_url_template = oti_study_repo_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
+    nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
 
     # for now, let's just add/update new and modified studies using indexNexsons
     study_ids = added_study_ids + modified_study_ids
