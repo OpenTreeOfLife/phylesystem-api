@@ -12,7 +12,10 @@ from peyotl.phylesystem.git_workflows import acquire_lock_raise, \
                                              delete_study, \
                                              GitWorkflowError, \
                                              validate_and_convert_nexson
-from peyotl.nexson_syntax import get_empty_nexson
+from peyotl.nexson_syntax import get_empty_nexson, \
+                                 get_ot_study_info_from_nexml, \
+                                 BY_ID_HONEY_BADGERFISH
+from peyotl.external import import_nexson_from_treebase
 from github import Github, BadCredentialsException
 import api_utils
 from pprint import pprint
@@ -20,6 +23,7 @@ from gitdata import GitData
 from gluon.tools import fetch
 from urllib import urlencode
 from gluon.html import web2pyHTMLParser
+from StringIO import StringIO
 
 _VALIDATING = True
 _LOG = api_utils.get_logger('ot_api.default')
@@ -164,78 +168,69 @@ def v1():
         cc0_agreement = kwargs.get('cc0_agreement', '')
         import_option = kwargs.get('import_option', '')
         treebase_id = kwargs.get('treebase_id', '')
+        nexml_fetch_url = kwargs.get('nexml_fetch_url', '')
+        nexml_pasted_string = kwargs.get('nexml_pasted_string', '')
         publication_doi = kwargs.get('publication_DOI', '')
         publication_ref = kwargs.get('publication_reference', '')
         ##dryad_DOI = kwargs.get('dryad_DOI', '')
 
         # check for required license agreement!
-        if cc0_agreement != 'true': raise HTTP(400, json.dumps({"error":1,
-            "description": "CC-0 license must be accepted to add studies using this API."}))
+        if cc0_agreement != 'true':
+            d = {"error":1,
+                 "description": "CC-0 license must be accepted to add studies using this API."}
+            raise HTTP(400, json.dumps(d))
 
         auth_info = api_utils.authenticate(**kwargs)
+
+        app_name = "api"
+        # add known values for its metatags
+        meta_publication_reference = None
+
+        # create initial study NexSON using the chosen import option
+        importing_from_treebase_id = (import_option == 'IMPORT_FROM_TREEBASE' and treebase_id)
+        importing_from_nexml_fetch = (import_option == 'IMPORT_FROM_NEXML' and nexml_fetch_url)
+        importing_from_nexml_string = (import_option == 'IMPORT_FROM_NEXML' and nexml_pasted_string)
+        #importing_from_nexml_upload = (import_option == 'IMPORT_FROM_NEXML' and publication_doi)
+        #importing_from_nexml = (importing_from_treebase_id or importing_from_nexml_fetch or importing_from_nexml_string)  # or importing_from_nexml_upload
+
+        importing_from_crossref_API = (import_option == 'IMPORT_FROM_PUBLICATION_DOI' and publication_doi) or \
+                                      (import_option == 'IMPORT_FROM_PUBLICATION_REFERENCE' and publication_ref)
+
+        # any of these methods should returna parsed NexSON dict (vs. string)
+        if importing_from_treebase_id:
+            # make sure the treebase ID is an integer
+            treebase_id = "".join(treebase_id.split())  # remove all whitespace
+            treebase_id = treebase_id.lstrip('S').lstrip('s')  # allow for possible leading 'S'?
+            try:
+                treebase_id = int(treebase_id)
+            except ValueError:
+                raise HTTP(400, json.dumps({
+                    "error": 1,
+                    "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s" % (treebase_id, e.message)
+                }))
+            new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+        elif importing_from_nexml_fetch:
+            if not (nexml_fetch_url.startswith('http://') or nexml_fetch_url.startswith('https://')):
+                raise HTTP(400, json.dumps({
+                    "error": 1,
+                    "description": 'Expecting: "nexml_fetch_url" to startwith http:// or https://',
+                }))
+            new_study_nexson = get_ot_study_info_from_nexml(fetch_url=nexml_fetch_url,
+                                                            nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+        elif importing_from_nexml_string:
+            new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
+                                                            nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+        elif importing_from_crossref_API:
+            new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref)
+        else:   # assumes IMPORT_FROM_MANUAL_ENTRY, or insufficient args above
+            new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
 
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
         # studies created by the OpenTree API start with o,
         # so they don't conflict with new study id's from other sources
         new_resource_id = "o%d" % (gd.newest_study_id() + 1)
-
-        # start with an empty NexSON template 
-        app_name = "api"
-        new_study_nexson = get_empty_nexson("1.2.1")
         nexml = new_study_nexson['nexml']
         nexml['^ot:studyId'] = new_resource_id
-        # add known values for its metatags
-        meta_publication_reference = None
-        importing_from_crossref_API = (import_option == 'IMPORT_FROM_PUBLICATION_DOI' and publication_doi) or \
-                                      (import_option == 'IMPORT_FROM_PUBLICATION_REFERENCE' and publication_ref)
-
-        if importing_from_crossref_API:
-            if import_option == 'IMPORT_FROM_PUBLICATION_DOI':
-                # if curator has provided a DOI, use it to pre-populate study metadata
-                # Cleanup submitted DOI to work with CrossRef API.
-                #   WORKS: http://dx.doi.org/10.999...
-                #   WORKS: doi:10.999...
-                #   FAILS: doi: 10.999...
-                #   FAILS: DOI:10.999...
-                # Let's keep it simple and make it a bare DOI.
-                # All DOIs use the directory indicator '10.', see
-                #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
-                # Remove all whitespace from the submitted DOI...
-                publication_doi = "".join(publication_doi.split())
-                # ... then strip everything up to the first '10.'
-                doi_parts = publication_doi.split('10.')
-                doi_parts[0] = ''
-                search_term = '10.'.join(doi_parts)
-            else:  # assumes IMPORT_FROM_PUBLICATION_REFERENCE
-                search_term = publication_ref
-            u = 'http://search.crossref.org/dois?' + urlencode({'q': search_term})
-            doi_lookup_response = fetch(u)
-            doi_lookup_response = unicode(doi_lookup_response, 'utf-8')   # make sure it's Unicode!
-            try:
-                matching_records = anyjson.loads(doi_lookup_response)
-                # if we got a match, grab the first (probably only) record
-                if len(matching_records) > 0:
-                    match = matching_records[0];
-                    # Convert HTML reference string to plain text
-                    raw_publication_reference = match.get('fullCitation', '')
-                    ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
-                    # root of this tree is the complete mini-DOM
-                    ref_root = ref_element_tree.elements()[0]
-                    # reduce this root to plain text (strip any tags)
-                    meta_publication_reference = ref_root.flatten().decode('utf-8')
-                    meta_publication_url = match.get('doi')  # already in URL form
-                    if meta_publication_url:
-                        nexml['^ot:studyPublication'] = {'@href': meta_publication_url}
-                    meta_year = match.get('year')
-                    if meta_year:
-                        nexml['^ot:studyYear'] = meta_year
-            except:
-                if import_option == 'IMPORT_FROM_PUBLICATION_DOI':
-                    meta_publication_reference = u'No matching publication found for this DOI!'
-                else:  # assumes IMPORT_FROM_PUBLICATION_REFERENCE
-                    meta_publication_reference = u'No matching publication found for this reference string'
-        if meta_publication_reference:
-            nexml['^ot:studyPublicationReference'] = meta_publication_reference
         nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
         kwargs['nexson'] = new_study_nexson
         try:
@@ -321,6 +316,107 @@ def v1():
             _raise_HTTP_from_msg(err.msg)
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         return blob
+
+    def _new_nexson_with_crossref_metadata(doi, ref_string):
+        if doi:
+            # use the supplied DOI to fetch study metadata
+
+            # Cleanup submitted DOI to work with CrossRef API.
+            #   WORKS: http://dx.doi.org/10.999...
+            #   WORKS: doi:10.999...
+            #   FAILS: doi: 10.999...
+            #   FAILS: DOI:10.999...
+            # Let's keep it simple and make it a bare DOI.
+            # All DOIs use the directory indicator '10.', see
+            #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
+
+            # Remove all whitespace from the submitted DOI...
+            publication_doi = "".join(doi.split())
+            # ... then strip everything up to the first '10.'
+            doi_parts = publication_doi.split('10.')
+            doi_parts[0] = ''
+            search_term = '10.'.join(doi_parts)
+
+        elif ref_string:
+            # use the supplied reference text to fetch study metadata
+            search_term = ref_string
+
+        # look for matching studies via CrossRef.org API
+        doi_lookup_response = fetch(
+            'http://search.crossref.org/dois?%s' % 
+            urlencode({'q': search_term})
+        )
+        doi_lookup_response = unicode(doi_lookup_response, 'utf-8')   # make sure it's Unicode!
+        matching_records = anyjson.loads(doi_lookup_response)
+
+        # if we got a match, grab the first (probably only) record
+        if len(matching_records) > 0:
+            match = matching_records[0];
+
+            # Convert HTML reference string to plain text
+            raw_publication_reference = match.get('fullCitation', '')
+            ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
+            # root of this tree is the complete mini-DOM
+            ref_root = ref_element_tree.elements()[0]
+            # reduce this root to plain text (strip any tags)
+
+            meta_publication_reference = ref_root.flatten().decode('utf-8')
+            meta_publication_url = match.get('doi', u'')  # already in URL form
+            meta_year = match.get('year', u'')
+            
+        else:
+            # Add a bogus reference string to signal the lack of results
+            if doi:
+                meta_publication_reference = u'No matching publication found for this DOI!'
+            else:
+                meta_publication_reference = u'No matching publication found for this reference string'
+            meta_publication_url = u''
+            meta_year = u''
+
+        # add any found values to a fresh NexSON template
+        nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
+        nexml_el = nexson['nexml']
+        nexml_el[u'^ot:studyPublicationReference'] = meta_publication_reference
+        if meta_publication_url:
+            nexml_el[u'^ot:studyPublication'] = {'@href': meta_publication_url}
+        if meta_year:
+            nexml_el[u'^ot:studyYear'] = meta_year
+        return nexson
+
+    def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
+        """Actually make a local Git commit and push it to our remote
+        """
+        # global TIMING
+        author  = "%s <%s>" % (author_name, author_email)
+
+        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
+
+        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
+        try:
+            gd.checkout_master()
+            _pull_gh(gd, repo_remote, "master", resource_id)
+            
+            try:
+                new_sha = gd.write_study(resource_id, file_content, branch_name,author)
+                # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
+            except Exception, e:
+                raise HTTP(400, json.dumps({
+                    "error": 1,
+                    "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
+                }))
+            gd.merge(branch_name)
+            _push_gh(gd, repo_remote, "master", resource_id)
+        finally:
+            gd.release_lock()
+
+        # What other useful information should be returned on a successful write?
+        return {
+            "error": 0,
+            "resource_id": resource_id,
+            "branch_name": branch_name,
+            "description": "Updated study #%s" % resource_id,
+            "sha":  new_sha
+        }
 
     def DELETE(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to deleting existing resources"
