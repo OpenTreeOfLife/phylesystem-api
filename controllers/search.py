@@ -4,28 +4,24 @@ import json
 import requests
 from oti_search import OTISearch
 from ConfigParser import SafeConfigParser
-from gluon.tools import fetch
-from api_utils import read_config
+import urllib2
+
+app_name = "api"
+conf = SafeConfigParser(allow_no_value=True)
+if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+    conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+else:
+    conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+
+oti_base_url = conf.get("apis", "oti_base_url")
+api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
+
+opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
 
 @request.restful()
 def v1():
     "The OpenTree API v1"
     response.view = 'generic.json'
-    app_name = "api"
-    conf = SafeConfigParser(allow_no_value=True)
-    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
-        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
-    else:
-        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-    if conf.has_option("apis", "oti_base_url"):
-        oti_base_url = conf.get("apis", "oti_base_url")
-        api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
-    else:
-        # fall back to older convention [TODO: remove this]
-        host = conf.get("apis","oti_host")
-        port = conf.get("apis","oti_port")
-        api_base_url = "http://%s:%s/db/data/ext/QueryServices/graphdb/" % (host, port)
 
     oti = OTISearch(api_base_url)
 
@@ -65,31 +61,18 @@ def nudgeIndexOnUpdates():
     # pprint(request.args)
     # pprint(request.body.read())
     payload = request.vars
-    pprint(payload)
 
     # EXAMPLE of a working curl call to nudge index:
     # curl -X "POST" -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
 
     # curl http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json"] }' -H "Content-type: application/json"
 
-    repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = read_config(request)
-    # EXAMPLE VALUES: (
-    #   '/Users/jima/projects/nescent/opentree/phylesystem', 
-    #   'originssh',
-    #   '/Users/jima/projects/nescent/opentree/api.opentreeoflife.org/bin/git.sh',
-    #   '/Users/jima/.ssh/opentree/opentreeapi-gh.pem',
-    #   '0.0.0'
-    # )
-    #
-    # Hm, turns out none of this is useful! Here's what we need to know:
-    #   repo's URL or name (munge this to grab raw NexSON)
-    #   OTI_base_URL -- MAKE SURE we're pushing to the right OTI service(s)!
-    # Both of these should probably "flow through" private/config from the server-config file.
-    REPO_URL = "https://github.com/OpenTreeOfLife/phylesystem"  # TODO: fetch from private/config
-    OTI_BASE_URL='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'  # TODO: fetch from private/config
+    # Pull needed values from config file (typical values shown)
+    #   opentree_docstore_url = "https://github.com/OpenTreeOfLife/phylesystem"        # munge this to grab raw NexSON)
+    #   oti_base_url='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'    # confirm we're pushing to the right OTI service(s)!
 
     try:
-        if payload['repository']['url'] != REPO_URL:
+        if payload['repository']['url'] != opentree_docstore_url:
             raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
 
         # how we nudge the index depends on which studies are new, changed, or deleted
@@ -108,40 +91,37 @@ def nudgeIndexOnUpdates():
         removed_study_ids = list(set(removed_study_ids))
 
     except:
-        # TODO: raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
-        added_study_ids = ['9']
-        modified_study_ids = ['9','10']
-        removed_study_ids = ['10']
+        raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
+        ## # test data
+        ## added_study_ids = [ ]
+        ## modified_study_ids = ["10"]
+        ## removed_study_ids = [ ]
 
-    nexson_url_template = REPO_URL.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
+    nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
 
     # for now, let's just add/update new and modified studies using indexNexsons
     study_ids = added_study_ids + modified_study_ids
-    # NOTE that passing deleted_study_ids (any non-existent file paths) will fail on oti, with a FileNotFoundException!
+    # NOTE that passing deleted_study_ids (any non-existent file paths) will
+    # fail on oti, with a FileNotFoundException!
     study_ids = list(set(study_ids))  # remove any duplicates
 
-    nudge_url = "%s/ext/IndexServices/graphdb/indexNexsons" % (OTI_BASE_URL,)
-    pprint("nudge_url:")
-    pprint(nudge_url)
-
+    nudge_url = "%s/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
     nexson_urls = [ (nexson_url_template % (study_id, study_id)) for study_id in study_ids ]
-    pprint("nexson_urls:")
-    pprint(nexson_urls)
 
-    nudge_index_response = fetch(
-        nudge_url,
-        data={
+    # N.B. that gluon.tools.fetch() can't be used here, since it won't send
+    # "raw" JSON data as treemachine expects
+    req = urllib2.Request(
+        url=nudge_url, 
+        data=json.dumps({
             "urls": nexson_urls
-        },
-        headers={
-            "Content-type": "application/json"
-        }
-    )
-    pprint(nudge_index_response)
-    # TODO: check returned IDs against our original study_ids list... what if something fails?
-    
-    ##### TODO: Call removed studies here, once we have a solid method for nudging for removal!
+        }), 
+        headers={"Content-Type": "application/json"}
+    ) 
+    nudge_response = urllib2.urlopen(req).read()
+    updated_study_ids = json.loads( nudge_response )
 
+    # TODO: Call removed studies here, once we have a solid method for nudging for removal!
+    # TODO: check returned IDs against our original lists... what if something failed?
 
 def _harvest_study_ids_from_paths( path_list, target_array ):
     for path in path_list:
