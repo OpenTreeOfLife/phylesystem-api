@@ -54,23 +54,23 @@ other than specifying a port, even if URL encoded.
     return locals()
 
 def nudgeIndexOnUpdates():
-    # just diagnostic stuff for now
-    from pprint import pprint
-    # nothing interesting in these...
-    # pprint(request)
-    # pprint(request.args)
-    # pprint(request.body.read())
+    """"Support method to update oti index in response to GitHub webhooks
+
+This examines the JSON payload of a GitHub webhook to see which studies have
+been added, modified, or removed. Then it calls oti's index service to
+(re)index the NexSON for those studies, or to delete a study's information if
+it was deleted from the docstore.
+
+N.B. This depends on a GitHub webhook on the chosen docstore.
+"""
     payload = request.vars
 
     # EXAMPLE of a working curl call to nudge index:
-    # curl -X "POST" -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
-
-    # curl http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json"] }' -H "Content-type: application/json"
+    # curl -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
 
     # Pull needed values from config file (typical values shown)
     #   opentree_docstore_url = "https://github.com/OpenTreeOfLife/phylesystem"        # munge this to grab raw NexSON)
     #   oti_base_url='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'    # confirm we're pushing to the right OTI service(s)!
-
     try:
         if payload['repository']['url'] != opentree_docstore_url:
             raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
@@ -92,10 +92,6 @@ def nudgeIndexOnUpdates():
 
     except:
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
-        ## # test data
-        ## added_study_ids = [ ]
-        ## modified_study_ids = ["10"]
-        ## removed_study_ids = [ ]
 
     nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
 
