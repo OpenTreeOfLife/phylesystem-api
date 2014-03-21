@@ -86,35 +86,20 @@ def v1():
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
-        block_until_annotation_commit = True
-        unadulterated_content_commit = commit_and_try_merge2master(git_data,
-                                                                   nexson,
-                                                                   resource_id,
-                                                                   auth_info,
-                                                                   parent_sha,
-                                                                   master_file_blob_included)
-        # TIMING = api_utils.log_time_diff(_LOG, 'unadulterated commit', TIMING)
-        if unadulterated_content_commit['error'] != 0:
-            _LOG.debug('unadulterated_content_commit failed')
-            raise HTTP(400, json.dumps(unadulterated_content_commit))
-        if _VALIDATING and block_until_annotation_commit:
-            # add the annotation and commit the resulting blob...
-            adaptor.add_or_replace_annotation(nexson,
-                                              annotation['annotationEvent'],
-                                              annotation['agent'])
-            annotated_commit = commit_and_try_merge2master(git_data,
-                                                           nexson,
-                                                           resource_id,
-                                                           auth_info,
-                                                           parent_sha,
-                                                           master_file_blob_included)
-            # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
-            if annotated_commit['error'] != 0:
-                _LOG.debug('annotated_commit failed')
-                raise HTTP(400, json.dumps(annotated_commit))
-            return annotated_commit
-        else:
-            return unadulterated_content_commit
+        adaptor.add_or_replace_annotation(nexson,
+                                          annotation['annotationEvent'],
+                                          annotation['agent'])
+        annotated_commit = commit_and_try_merge2master(git_data,
+                                                       nexson,
+                                                       resource_id,
+                                                       auth_info,
+                                                       parent_sha,
+                                                       master_file_blob_included)
+        # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
+        if annotated_commit['error'] != 0:
+            _LOG.debug('annotated_commit failed')
+            raise HTTP(400, json.dumps(annotated_commit))
+        return annotated_commit
 
     def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
         "OpenTree API methods relating to reading"
