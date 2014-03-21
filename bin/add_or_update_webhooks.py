@@ -19,7 +19,10 @@ else:
  
 # For now, let's just instruct the user how to do this manually. Point to
 # fetch current hooks on this docstore repo
-print """Please ensure the required webhook is in place on GitHub. You can
+print """
+***************************************************************
+
+Please ensure the required webhook is in place on GitHub. You can
 manage webhooks for this repo at:
     
     %s/settings/hooks
@@ -29,9 +32,10 @@ Find (or add) a webhook with these properties:
     Payload version: application/vnd.github.v3+json
     Events: push
     Active: true
+
+***************************************************************
     """ %  (opentree_docstore_url, opentree_api_base_url)
 
-ignore_me = raw_input("Press RETURN to continue")
 sys.exit(0)
      
 # TODO: To do this automatically via the GitHub API, we'll need an OAuth token
