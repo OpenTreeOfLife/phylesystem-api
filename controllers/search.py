@@ -116,7 +116,18 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     nudge_response = urllib2.urlopen(req).read()
     updated_study_ids = json.loads( nudge_response )
 
-    # TODO: Call removed studies here, once we have a solid method for nudging for removal!
+    # Un-index the studies that were removed from docstore
+    remove_url = "%s/ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
+    req = urllib2.Request(
+        url=remove_url, 
+        data=json.dumps({
+            "ids": removed_study_ids
+        }), 
+        headers={"Content-Type": "application/json"}
+    ) 
+    remove_response = urllib2.urlopen(req).read()
+    unindexed_study_ids = json.loads( remove_response )
+
     # TODO: check returned IDs against our original lists... what if something failed?
 
 def _harvest_study_ids_from_paths( path_list, target_array ):
