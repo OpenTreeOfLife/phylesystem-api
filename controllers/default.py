@@ -117,7 +117,9 @@ def v1():
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
         _acquire_lock_raise_http(gd)
         try:
-            study_nexson, head_sha = gd.return_study(resource_id)
+            r = gd.return_study(resource_id)
+            #_LOG.debug('return_study responded with "{}"'.format(str(r)))
+            study_nexson, head_sha, wip_map = r
         finally:
             gd.release_lock()
         if study_nexson == "":
@@ -129,15 +131,16 @@ def v1():
                                           output_nexml2json,
                                           current_format=repo_nexml2json)
         return {'sha': head_sha,
-                'data': study_nexson}
+                'data': study_nexson,
+                'branch2sha': wip_map
+                }
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
-        output_nexml2json = __validate_output_nexml2json(kwargs)
-
+        
         # check for HTTP method override (passed on query string)
         if _method == 'PUT':
             PUT(resource, resource_id, kwargs)
