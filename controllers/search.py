@@ -4,26 +4,24 @@ import json
 import requests
 from oti_search import OTISearch
 from ConfigParser import SafeConfigParser
+import urllib2
+
+app_name = "api"
+conf = SafeConfigParser(allow_no_value=True)
+if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+    conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+else:
+    conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+
+oti_base_url = conf.get("apis", "oti_base_url")
+api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
+
+opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
 
 @request.restful()
 def v1():
     "The OpenTree API v1"
     response.view = 'generic.json'
-    app_name = "api"
-    conf = SafeConfigParser(allow_no_value=True)
-    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
-        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
-    else:
-        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-    if conf.has_option("apis", "oti_base_url"):
-        oti_base_url = conf.get("apis", "oti_base_url")
-        api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
-    else:
-        # fall back to older convention [TODO: remove this]
-        host = conf.get("apis","oti_host")
-        port = conf.get("apis","oti_port")
-        api_base_url = "http://%s:%s/db/data/ext/QueryServices/graphdb/" % (host, port)
 
     oti = OTISearch(api_base_url)
 
@@ -56,11 +54,76 @@ other than specifying a port, even if URL encoded.
     return locals()
 
 def nudgeIndexOnUpdates():
-    from pprint import pprint
-    pprint(request)
-    pprint(request.args)
-    pprint(request.vars)
-    pprint(request.body.read())
-    return 'done'
-    pass
+    """"Support method to update oti index in response to GitHub webhooks
+
+This examines the JSON payload of a GitHub webhook to see which studies have
+been added, modified, or removed. Then it calls oti's index service to
+(re)index the NexSON for those studies, or to delete a study's information if
+it was deleted from the docstore.
+
+N.B. This depends on a GitHub webhook on the chosen docstore.
+"""
+    payload = request.vars
+
+    # EXAMPLE of a working curl call to nudge index:
+    # curl -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
+
+    # Pull needed values from config file (typical values shown)
+    #   opentree_docstore_url = "https://github.com/OpenTreeOfLife/phylesystem"        # munge this to grab raw NexSON)
+    #   oti_base_url='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'    # confirm we're pushing to the right OTI service(s)!
+    try:
+        if payload['repository']['url'] != opentree_docstore_url:
+            raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
+
+        # how we nudge the index depends on which studies are new, changed, or deleted
+        added_study_ids = [ ]
+        modified_study_ids = [ ]
+        removed_study_ids = [ ]
+        # TODO: Should any of these lists override another? maybe use commit timestamps to "trump" based on later operations?
+        for commit in payload['commits']:
+            _harvest_study_ids_from_paths( commit['added'], added_study_ids )
+            _harvest_study_ids_from_paths( commit['modified'], modified_study_ids )
+            _harvest_study_ids_from_paths( commit['removed'], removed_study_ids )
+
+        # "flatten" each list to remove duplicates
+        added_study_ids = list(set(added_study_ids))
+        modified_study_ids = list(set(modified_study_ids))
+        removed_study_ids = list(set(removed_study_ids))
+
+    except:
+        raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
+
+    nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
+
+    # for now, let's just add/update new and modified studies using indexNexsons
+    study_ids = added_study_ids + modified_study_ids
+    # NOTE that passing deleted_study_ids (any non-existent file paths) will
+    # fail on oti, with a FileNotFoundException!
+    study_ids = list(set(study_ids))  # remove any duplicates
+
+    nudge_url = "%s/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
+    nexson_urls = [ (nexson_url_template % (study_id, study_id)) for study_id in study_ids ]
+
+    # N.B. that gluon.tools.fetch() can't be used here, since it won't send
+    # "raw" JSON data as treemachine expects
+    req = urllib2.Request(
+        url=nudge_url, 
+        data=json.dumps({
+            "urls": nexson_urls
+        }), 
+        headers={"Content-Type": "application/json"}
+    ) 
+    nudge_response = urllib2.urlopen(req).read()
+    updated_study_ids = json.loads( nudge_response )
+
+    # TODO: Call removed studies here, once we have a solid method for nudging for removal!
+    # TODO: check returned IDs against our original lists... what if something failed?
+
+def _harvest_study_ids_from_paths( path_list, target_array ):
+    for path in path_list:
+        path_parts = path.split('/')
+        if path_parts[0] == "study":
+            study_id = path_parts[1]
+            target_array.append(study_id)
+
 
