@@ -361,6 +361,7 @@ def v1():
                                    resource_id,
                                    nexson_adaptor,
                                    annotation)
+        #_LOG.debug('PUT blob to be returned = ' + str(blob))
         # TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         return blob
 
@@ -417,11 +418,13 @@ def v1():
                 new_sha = gd.write_study(resource_id, file_content, branch_name,author)
                 # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
             except Exception, e:
+                import traceback
+                z = traceback.format_exc()
                 raise HTTP(400, json.dumps({
                     "error": 1,
-                    "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
+                    "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, z)
                 }))
-            gd.merge(branch_name)
+            new_sha = gd.merge(branch_name)
             _push_gh(gd, repo_remote, "master", resource_id)
         finally:
             gd.release_lock()
