@@ -86,9 +86,9 @@ def v1():
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
-        adaptor.add_or_replace_annotation(nexson,
-                                          annotation['annotationEvent'],
-                                          annotation['agent'])
+#        adaptor.add_or_replace_annotation(nexson,
+#                                          annotation['annotationEvent'],
+#                                          annotation['agent'])
         annotated_commit = commit_and_try_merge2master(git_data,
                                                        nexson,
                                                        resource_id,
