@@ -83,26 +83,36 @@ For large studies, it's faster to skip the URL-encoding and pass the NexSON data
 
 Either form of this command will create a commit with the updated JSON on a branch of the form
 
-    USERNAME_study_ID
-
+    USERNAME_study_ID_i
+    
 where USERNAME is the authenticated users Github login and ID
-is the study ID number.
+is the study ID number, and i is an iterator for if the user has more than one branch open for that study.
 
 On success, it will return a JSON response similar to this:
 
-    {
-     "branch_name": "leto_study_13",
-     "sha": "e13343535837229ced29d44bdafad2465e1d13d8",
-     "description": "Updated study #13",
-     "error": 0
-     }
+{
+        "error": "0",
+        "resource_id": "12",
+        "branch_name": "usr_study_12_0",
+        "description": "Updated study 12",
+        "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
+        "merge_needed": "No",
+    }
 
-```branch_name``` is the WIP branch that was created, ```sha```
-is the latest commit on that branch, ```description``` is a
-textual description of what happened and ```error``` is set to
+
+```error``` is set to
 0.
 
 On failure, ```error``` will be set to 1 and ```description``` will provide details on why the request failed.
+```resource id ``` is the id of the study that was edited
+```branch_name``` is the WIP branch that was created
+```sha``` is the latest commit on that branch
+```description``` is a textual description of what happened and 
+```merge_needed``` descibes whether the WIP branch was successfully merged into master.
+If it was, the branch no longer exists and Merge_Needed = No.
+If the file with that resource id has moved forward on the master branch from the parent of the edited file
+merge into master will not happen automatically, even if it can proceed without conflict.
+In this case the client needs to merge master
 
 Any PUT request attempting to update a study with invalid JSON
 will be denied and an HTTP error code 400 will be returned.
