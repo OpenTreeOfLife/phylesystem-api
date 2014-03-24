@@ -61,8 +61,8 @@ def v1():
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
     repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
-    code 
-        here
+#    code 
+#        here
 
     def __validate_output_nexml2json(kwargs):
         output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
@@ -114,18 +114,17 @@ def v1():
 
         # return the correct nexson of study_id, using the specified view
         phylesystem = api_utils.get_phylesystem()
-        gd = phylesystem.create_git_action(resource_id)
-        _acquire_lock_raise_http(gd)
         try:
-            r = gd.return_study(resource_id, return_WIP_map=True)
-            #_LOG.debug('return_study responded with "{}"'.format(str(r)))
-            study_nexson, head_sha, wip_map = r
-        finally:
-            gd.release_lock()
-        if study_nexson == "":
-            raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
-        
-        study_nexson = anyjson.loads(study_nexson)
+           r = phylesystem.return_study(resource_id, return_WIP_map=False)
+           study_nexson, head_sha, wip_map = r
+        except:
+            _LOG.exception('GET failed')
+            raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
+        #Apply the annotations
+        #create phylesystem action to get blob sha for a file given HEAD and study_ID
+        phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
+        phylesystem.add_validation_annotation(study_nexson)
+
         if output_nexml2json != repo_nexml2json:
             study_nexson = __coerce_nexson_format(study_nexson,
                                           output_nexml2json,
