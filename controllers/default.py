@@ -454,7 +454,7 @@ def v1():
 
         author       = "%s <%s>" % (author_name, author_email)
 
-        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
+        branch_name  = 'master' #"%s_study_%s" % (gh.get_user().login, resource_id)
 
         gd = GitData(repo=repo_path)
 
