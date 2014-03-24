@@ -60,9 +60,6 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
-    repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
-#    code 
-#        here
 
     def __validate_output_nexml2json(kwargs):
         output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
