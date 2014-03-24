@@ -60,6 +60,12 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
+#    repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
+#    code 
+#        here
+    phylesystem = api_utils.get_phylesystem(request)
+
+    repo_nexml2json = phylesystem.repo_nexml2json
 
     def __validate_output_nexml2json(kwargs):
         output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
@@ -110,22 +116,22 @@ def v1():
             response.view = 'generic.jsonp'
 
         # return the correct nexson of study_id, using the specified view
-        phylesystem = api_utils.get_phylesystem()
+        phylesystem = api_utils.get_phylesystem(request)
         try:
-           r = phylesystem.return_study(resource_id, return_WIP_map=False)
+           r = phylesystem.return_study(resource_id, return_WIP_map=True)
            study_nexson, head_sha, wip_map = r
+           blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
+           phylesystem.add_validation_annotation(study_nexson, blob_sha)
+
+           if output_nexml2json != repo_nexml2json:
+                study_nexson = __coerce_nexson_format(study_nexson,
+                                          output_nexml2json,
+                                          current_format=repo_nexml2json)
         except:
             _LOG.exception('GET failed')
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
         #Apply the annotations
         #create phylesystem action to get blob sha for a file given HEAD and study_ID
-        phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
-        phylesystem.add_validation_annotation(study_nexson)
-
-        if output_nexml2json != repo_nexml2json:
-            study_nexson = __coerce_nexson_format(study_nexson,
-                                          output_nexml2json,
-                                          current_format=repo_nexml2json)
         return {'sha': head_sha,
                 'data': study_nexson,
                 'branch2sha': wip_map
@@ -209,7 +215,7 @@ def v1():
         else:   # assumes IMPORT_FROM_MANUAL_ENTRY, or insufficient args above
             new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
 
-        phylesystem = api_utils.get_phylesystem()
+        phylesystem = api_utils.get_phylesystem(request)
         gd, new_resource_id = phylesystem.create_git_action_for_new_study()
         
         nexml = new_study_nexson['nexml']
@@ -285,7 +291,7 @@ def v1():
             _raise_HTTP_from_msg(err.msg)
 
         #TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
-        phylesystem = api_utils.get_phylesystem()
+        phylesystem = api_utils.get_phylesystem(request)
         gd = phylesystem.create_git_action(resource_id)
         try:
             blob = __finish_write_verb(gd,
@@ -413,7 +419,7 @@ def v1():
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
         auth_info = api_utils.authenticate(**kwargs)
-        phylesystem = api_utils.get_phylesystem()
+        phylesystem = api_utils.get_phylesystem(request)
         gd = phylesystem.create_git_action(resource_id)
         return delete_study(gd, resource_id, auth_info, parent_sha)
 
