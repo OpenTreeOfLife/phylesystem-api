@@ -117,7 +117,7 @@ def v1():
         gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
         _acquire_lock_raise_http(gd)
         try:
-            r = gd.return_study(resource_id)
+            r = gd.return_study(resource_id, return_WIP_map=True)
             #_LOG.debug('return_study responded with "{}"'.format(str(r)))
             study_nexson, head_sha, wip_map = r
         finally:
