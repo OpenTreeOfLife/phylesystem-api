@@ -1,6 +1,5 @@
 from ConfigParser import SafeConfigParser
 from peyotl.phylesystem import Phylesystem
-from gitdata import GitData
 from github import Github, BadCredentialsException
 from datetime import datetime
 import logging
@@ -13,6 +12,7 @@ from gluon import *
 _PHYLESYSTEM = None
 def get_phylesystem(request):
     global _PHYLESYSTEM
+    from gitdata import GitData
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
     repo_parent, repo_remote, git_ssh, pkey = read_config(request)
