@@ -2,7 +2,6 @@ import os
 import time
 import json
 import api_utils
-from gitdata import GitData
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              merge_from_master
 
@@ -47,8 +46,8 @@ def v1():
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
         auth_info = api_utils.authenticate(**kwargs)
-        repo_path = api_utils.read_config(request)[0]
-        gd = GitData(repo=repo_path)
+        phylesystem = api_utils.get_phylesystem()
+        gd = phylesystem.create_git_action()
         try:
             return merge_from_master(gd, resource_id, auth_info, starting_commit_SHA)
         except GitWorkflowError, err:

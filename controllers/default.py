@@ -19,7 +19,6 @@ from peyotl.external import import_nexson_from_treebase
 from github import Github, BadCredentialsException
 import api_utils
 from pprint import pprint
-from gitdata import GitData
 from gluon.tools import fetch
 from urllib import urlencode
 from gluon.html import web2pyHTMLParser
@@ -45,15 +44,11 @@ def index():
         "documentation_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/tree/master/docs"
     })
 
-_CONFIG_TUPLE = None
 def reponexsonformat():
-    global _CONFIG_TUPLE
     response.view = 'generic.jsonp'
-    if _CONFIG_TUPLE is None:
-        _CONFIG_TUPLE = api_utils.read_config(request)
-    rn = _CONFIG_TUPLE[4]
+    phylesystem = api_utils.get_phylesystem(request)
     return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
-            'nexml2json': rn}
+            'nexml2json': phylesystem.repo_nexml2json}
 
 @request.restful()
 def v1():
@@ -66,6 +61,8 @@ def v1():
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
     repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
+    code 
+        here
 
     def __validate_output_nexml2json(kwargs):
         output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
@@ -88,7 +85,8 @@ def v1():
         #TODO, need to make this spawn a thread to do the second commit rather than block
         adaptor.add_or_replace_annotation(nexson,
                                           annotation['annotationEvent'],
-                                          annotation['agent'])
+                                          annotation['agent'],
+                                          add_agent_only=True)
         annotated_commit = commit_and_try_merge2master(git_data,
                                                        nexson,
                                                        resource_id,
@@ -99,9 +97,10 @@ def v1():
         if annotated_commit['error'] != 0:
             _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
+
         return annotated_commit
 
-    def GET(resource,resource_id,jsoncallback=None,callback=None,_=None,**kwargs):
+    def GET(resource, resource_id, jsoncallback=None, callback=None, _=None, **kwargs):
         "OpenTree API methods relating to reading"
         valid_resources = ('study', )
         output_nexml2json = __validate_output_nexml2json(kwargs)
@@ -114,7 +113,8 @@ def v1():
             response.view = 'generic.jsonp'
 
         # return the correct nexson of study_id, using the specified view
-        gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
+        phylesystem = api_utils.get_phylesystem()
+        gd = phylesystem.create_git_action(resource_id)
         _acquire_lock_raise_http(gd)
         try:
             r = gd.return_study(resource_id, return_WIP_map=True)
@@ -213,10 +213,9 @@ def v1():
         else:   # assumes IMPORT_FROM_MANUAL_ENTRY, or insufficient args above
             new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
 
-        gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
-        # studies created by the OpenTree API start with o,
-        # so they don't conflict with new study id's from other sources
-        new_resource_id = "o%d" % (gd.newest_study_id() + 1)
+        phylesystem = api_utils.get_phylesystem()
+        gd, new_resource_id = phylesystem.create_git_action_for_new_study()
+        
         nexml = new_study_nexson['nexml']
         nexml['^ot:studyId'] = new_resource_id
         nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
@@ -290,7 +289,8 @@ def v1():
             _raise_HTTP_from_msg(err.msg)
 
         #TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
-        gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
+        phylesystem = api_utils.get_phylesystem()
+        gd = phylesystem.create_git_action(resource_id)
         try:
             blob = __finish_write_verb(gd,
                                    nexson,
@@ -417,7 +417,8 @@ def v1():
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
         auth_info = api_utils.authenticate(**kwargs)
-        gd = GitData(repo=repo_path, remote=repo_remote, git_ssh=git_ssh, pkey=pkey)
+        phylesystem = api_utils.get_phylesystem()
+        gd = phylesystem.create_git_action(resource_id)
         return delete_study(gd, resource_id, auth_info, parent_sha)
 
     def OPTIONS(*args, **kwargs):

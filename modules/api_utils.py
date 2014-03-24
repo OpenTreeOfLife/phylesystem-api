@@ -1,4 +1,6 @@
 from ConfigParser import SafeConfigParser
+from peyotl.phylesystem import Phylesystem
+from gitdata import GitData
 from github import Github, BadCredentialsException
 from datetime import datetime
 import logging
@@ -8,6 +10,17 @@ import json
 
 # this allows us to raise HTTP(...)
 from gluon import *
+_PHYLESYSTEM = None
+def get_phylesystem(request):
+    global _PHYLESYSTEM
+    if _PHYLESYSTEM is not None:
+        return _PHYLESYSTEM
+    repo_parent, repo_remote, git_ssh, pkey = read_config(request)
+    _PHYLESYSTEM = Phylesystem(repos_par=repo_parent,
+                               git_ssh=git_ssh,
+                               pkey=pkey,
+                               git_action_class=GitData)
+    return _PHYLESYSTEM
 
 def read_config(request):
     app_name = "api"
@@ -20,7 +33,7 @@ def read_config(request):
         filename = "%s/applications/%s/private/config" % (request.env.web2py_path, app_name)
         conf.readfp(open(filename))
 
-    repo_path   = conf.get("apis","repo_path")
+    repo_parent   = conf.get("apis","repo_parent")
     repo_remote = conf.get("apis", "repo_remote")
     try:
         git_ssh     = conf.get("apis", "git_ssh")
@@ -30,11 +43,7 @@ def read_config(request):
         pkey        = conf.get("apis", "pkey")
     except:
         pkey = None
-    try:
-        repo_nexml2json = conf.get("apis", "repo_nexml2json")
-    except:
-        repo_nexml2json = "0.0.0"
-    return repo_path, repo_remote, git_ssh, pkey, repo_nexml2json
+    return repo_parent, repo_remote, git_ssh, pkey
 
 def authenticate(**kwargs):
     """Verify that we received a valid Github authentication token
