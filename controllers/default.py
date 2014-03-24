@@ -397,7 +397,7 @@ def v1():
         except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not push deletion of study #%s! Details:\n%s" % (resource_id, e.message)
+                "description": "Could not push deletion of study #%s! Details:\n%s\nenv=%s" % (resource_id, e.message, str(git_env))
             }))
 
 
