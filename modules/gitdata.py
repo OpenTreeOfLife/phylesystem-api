@@ -21,8 +21,8 @@ class GitData(GitAction):
         "git push" command.
 
         If no branch is given, the current branch
-        will be used.
-
+        will be used
+.
         The ability to specify env is so that PKEY
         and GIT_SSH can be specified so Git can use
         different SSH credentials than the current
@@ -42,9 +42,9 @@ class GitData(GitAction):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git(self.gitdir, self.gitwd, "push",remote, branch_to_push, _env=new_env)
+            git(self.gitdir, self.gitwd, "push", remote, branch_to_push, _env=new_env)
         else:
-            git(self.gitdir, self.gitwd, "push",remote, branch_to_push)
+            git(self.gitdir, self.gitwd, "push", remote, branch_to_push)
 
     def pull(self, remote, env={}, branch=None):
         """

@@ -390,14 +390,14 @@ def v1():
                 }))
 
     
-    def _push_gh(gd,repo_remote,branch_name,resource_id):#
+    def _push_gh(gd, repo_remote, branch_name, resource_id):#
         try:
             # actually push the changes to Github
             gd.push(repo_remote, env=git_env, branch=branch_name)
         except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,
-                "description": "Could not push deletion of study #%s! Details:\n%s" % (resource_id, e.message)
+                "description": "Could not push deletion of study #%s! Details:\n%s\nenv=%s" % (resource_id, e.message, str(git_env))
             }))
 
 
@@ -460,7 +460,7 @@ def v1():
         
         try:
             pass
-            new_sha = gd.remove_study(resource_id, branch_name, author)
+            new_sha, branch_name = gd.remove_study(resource_id, branch_name, author)
         except Exception, e:
         
             raise HTTP(400, json.dumps({
