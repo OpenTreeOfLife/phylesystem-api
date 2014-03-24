@@ -369,8 +369,10 @@ def v1():
     def _pull_gh(gd, repo_remote, branch_name, resource_id):#
         try:
             # TIMING = api_utils.log_time_diff(_LOG, 'lock acquisition', TIMING)
-            git(gd.gitdir, "fetch", repo_remote, _env=git_env)
-            git(gd.gitdir, gd.gitwd, "merge", repo_remote + '/' + branch_name, _env=git_env)
+            _d = dict(os.environ)
+            _d.update(git_env)
+            git(gd.gitdir, "fetch", repo_remote, _env=_d)
+            git(gd.gitdir, gd.gitwd, "merge", repo_remote + '/' + branch_name, _env=_d)
             # TIMING = api_utils.log_time_diff(_LOG, 'git pull', TIMING)
         except Exception, e:
             # We can ignore this if the branch doesn't exist yet on the remote,
@@ -379,10 +381,10 @@ def v1():
             if "not something we can merge" not in e.message:
                 # Attempt to abort a merge, in case of conflicts
                 try:
-                    git(gd.gitdir,"merge", "--abort")
+                    git(gd.gitdir,  gd.gitwd, "merge", "--abort")
                 except:
                     pass
-                msg = "Could not pull or merge latest %s branch from %s ! Details: \n%s" % (branch_name, repo_remote, e.message)
+                msg = "Could not pull or merge latest %s branch from %s ! Details: \n%s\ngit_env=%s" % (branch_name, repo_remote, e.message, git_env)
                 _LOG.debug(msg)
                 raise HTTP(400, json.dumps({
                     "error": 1,
@@ -393,7 +395,9 @@ def v1():
     def _push_gh(gd, repo_remote, branch_name, resource_id):#
         try:
             # actually push the changes to Github
-            gd.push(repo_remote, env=git_env, branch=branch_name)
+            _d = dict(os.environ)
+            _d.update(git_env)
+            gd.push(repo_remote, env=_d, branch=branch_name)
         except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,

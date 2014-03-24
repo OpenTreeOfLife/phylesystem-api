@@ -89,7 +89,9 @@ def v1():
 
         try:
             # actually push the changes to Github
-            gd.push(repo_remote, env=git_env,branch=base_branch)
+            _d = dict(os.environ)
+            _d.update(git_env)
+            gd.push(repo_remote, env=_d,branch=base_branch)
         except Exception, e:
             gd.release_lock()
 
@@ -100,7 +102,7 @@ def v1():
 
         try:
             # delete the WIP branch we just merged in on our remote
-            gd.delete_remote_branch(repo_remote, env=git_env, branch=branch)
+            gd.delete_remote_branch(repo_remote, env=_d, branch=branch)
         except Exception, e:
             raise HTTP(400, json.dumps({
                 "error": 1,

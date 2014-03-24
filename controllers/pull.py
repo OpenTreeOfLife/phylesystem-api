@@ -66,7 +66,9 @@ def v1():
 
         try:
             # do the pull
-            new_sha = gd.pull(repo_remote, env=git_env, branch=branch)
+            _d = dict(os.environ)
+            _d.update(git_env)
+            new_sha = gd.pull(repo_remote, env=_d, branch=branch)
         except Exception, e:
             gd.release_lock()
 
