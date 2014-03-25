@@ -133,32 +133,33 @@ r5_sha=r5[1]['sha']
 
 # sixth commit is the merge
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/merge/v1/{s}'.format(s=study_id)
+starting_commit_SHA = r5_sha
+SUBMIT_URI = DOMAIN + '/merge/v1/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
 
 data = {
-        'starting_commit_SHA' : r5_sha,
         'auth_token' :  os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
        
 }
 
-print('curl -X PUT http://localhost:8000/api/merge/v1/9/{}?auth_token=$GITHUB_OAUTH_TOKEN'.format(r5_sha))
-
-#This part is not working...
-'''
 r6 = test_http_json_method(SUBMIT_URI,
                          'PUT',
                          data=data,
-                         expected_status=400,
+                         expected_status=200,
                          return_bool_data=True)
 
-print(r6[1].keys())
+
+
+assert(r6[0]==True)
+assert(r6[1]['resource_id']==study_id)
 
 merged_sha = r6[1]['merged_sha']
 
         
         
 # add a 7th commit onto commit 6. This should NOT merge to master because we don't give it the secret arg.
-starting_commit_SHA = ?
+DOMAIN = config('host', 'apihost')
+SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+starting_commit_SHA = r6[1]['sha']
 zc += 1
 zcurr_obj['nexml']["^zcount"] = zc
 
@@ -179,13 +180,16 @@ assert(r7[1]['merge_needed']==True)
 
         
 # add a 7th commit onto commit 6. This should merge to master because we don't give it the secret arg.
+DOMAIN = config('host', 'apihost')
+SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+starting_commit_SHA = r7[1]['sha']
 zc += 1
 zcurr_obj['nexml']["^zcount"] = zc
 
 data = { 'nexson' : zcurr_obj,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,
-         'merged_sha' : merged_sha
+         'merged_SHA' : merged_sha
 }
 r7a = test_http_json_method(SUBMIT_URI,
                          'PUT',
@@ -196,15 +200,15 @@ r7a = test_http_json_method(SUBMIT_URI,
 assert(r7a[0]==True)
 assert(r7a[1]['resource_id']==study_id)
 assert(r7a[1]['merge_needed']==False)
-        
+
 
 # after the merge we should be back down to 1 branch for this study
 data = {'output_nexml2json':'1.2'}
 
 rg3 = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
-assert(rg1[0]==True)
-assert(len(rg1[1]['branch2sha'])==1)
+assert(rg3[0]==True)
+print(rg3[1]['branch2sha'])
+assert(len(rg3[1]['branch2sha'])==1)
 #print(r2[1].keys())
 
 
-'''
