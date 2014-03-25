@@ -86,16 +86,10 @@ def v1():
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
-<<<<<<< HEAD
-#        adaptor.add_or_replace_annotation(nexson,
-#                                          annotation['annotationEvent'],
-#                                          annotation['agent'])
-=======
         adaptor.add_or_replace_annotation(nexson,
                                           annotation['annotationEvent'],
                                           annotation['agent'],
                                           add_agent_only=True)
->>>>>>> caching-validation
         annotated_commit = commit_and_try_merge2master(git_data,
                                                        nexson,
                                                        resource_id,
@@ -124,19 +118,6 @@ def v1():
         # return the correct nexson of study_id, using the specified view
         phylesystem = api_utils.get_phylesystem(request)
         try:
-<<<<<<< HEAD
-            r = gd.return_study(resource_id, return_WIP_map=True)
-            #_LOG.debug('return_study responded with "{}"'.format(str(r)))
-            study_nexson, head_sha, wip_map = r
-        finally:
-            gd.release_lock()
-        if study_nexson == "":
-            raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s was not found' % resource_id}))
-        
-        study_nexson = anyjson.loads(study_nexson)
-        if output_nexml2json != repo_nexml2json:
-            study_nexson = __coerce_nexson_format(study_nexson,
-=======
            r = phylesystem.return_study(resource_id, return_WIP_map=True)
            study_nexson, head_sha, wip_map = r
            blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
@@ -144,7 +125,6 @@ def v1():
 
            if output_nexml2json != repo_nexml2json:
                 study_nexson = __coerce_nexson_format(study_nexson,
->>>>>>> caching-validation
                                           output_nexml2json,
                                           current_format=repo_nexml2json)
         except:
