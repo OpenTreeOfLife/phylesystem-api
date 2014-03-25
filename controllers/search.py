@@ -5,6 +5,8 @@ import requests
 from oti_search import OTISearch
 from ConfigParser import SafeConfigParser
 import urllib2
+import sys
+import traceback
 
 app_name = "api"
 conf = SafeConfigParser(allow_no_value=True)
@@ -64,6 +66,7 @@ it was deleted from the docstore.
 N.B. This depends on a GitHub webhook on the chosen docstore.
 """
     payload = request.vars
+    msg = ''
 
     # EXAMPLE of a working curl call to nudge index:
     # curl -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
@@ -114,8 +117,17 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
             }), 
             headers={"Content-Type": "application/json"}
         ) 
-        nudge_response = urllib2.urlopen(req).read()
-        updated_study_ids = json.loads( nudge_response )
+        try:
+            nudge_response = urllib2.urlopen(req).read()
+            updated_study_ids = json.loads( nudge_response )
+        except Exception, e:
+            # TODO: log oti exceptions into my response
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            msg += """indexNexsons failed!'
+nudge_url: %s
+nexson_urls: %s
+%s""" % (nudge_url, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+
         # TODO: check returned IDs against our original lists... what if something failed?
 
     if len(removed_study_ids) > 0:
@@ -128,15 +140,25 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
             }), 
             headers={"Content-Type": "application/json"}
         ) 
-        remove_response = urllib2.urlopen(req).read()
-        unindexed_study_ids = json.loads( remove_response )
+        try:
+            remove_response = urllib2.urlopen(req).read()
+            unindexed_study_ids = json.loads( remove_response )
+        except Exception, e:
+            # TODO: log oti exceptions into my response
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            msg += """unindexNexsons failed!'
+remove_url: %s
+removed_study_ids: %s
+%s""" % (remove_url, removed_study_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+
         # TODO: check returned IDs against our original list... what if something failed?
 
     github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
     return """This URL should be called by a webhook set in the docstore repo:
 <br /><br />
-<a href="%s">%s</a>
-""" % (github_webhook_url, github_webhook_url,)
+<a href="%s">%s</a><br />
+<pre>%s</pre>
+""" % (github_webhook_url, github_webhook_url, msg,)
 
 def _harvest_study_ids_from_paths( path_list, target_array ):
     for path in path_list:
