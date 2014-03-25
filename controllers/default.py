@@ -114,11 +114,12 @@ def v1():
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
-
+        parent_sha = kwargs.get('starting_commit_SHA', 'master')
+        _LOG.debug('parent_sha = {}'.format(parent_sha))
         # return the correct nexson of study_id, using the specified view
         phylesystem = api_utils.get_phylesystem(request)
         try:
-           r = phylesystem.return_study(resource_id, return_WIP_map=True)
+           r = phylesystem.return_study(resource_id, branch=parent_sha, return_WIP_map=True)
            study_nexson, head_sha, wip_map = r
            blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
            phylesystem.add_validation_annotation(study_nexson, blob_sha)
