@@ -57,41 +57,5 @@ def v1():
                 "error": 1,
                 "description": "Could not pull! Details: %s" % (e.message)
             }))
-<<<<<<< HEAD
-    return locals()
-=======
-
-        try:
-            # actually push the changes to Github
-            _d = dict(os.environ)
-            _d.update(git_env)
-            gd.push(repo_remote, env=_d,branch=base_branch)
-        except Exception, e:
-            gd.release_lock()
-
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not push %s branch! Details: \n%s" % (base_branch, e.message)
-            }))
-
-        try:
-            # delete the WIP branch we just merged in on our remote
-            gd.delete_remote_branch(repo_remote, env=_d, branch=branch)
-        except Exception, e:
-            raise HTTP(400, json.dumps({
-                "error": 1,
-                "description": "Could not delete remote branch %s! Details:\n%s" % (branch, e.message)
-            }))
-
-        finally:
-            gd.release_lock()
-
-        return {
-            "error": 0,
-            "branch_name": base_branch,
-            "description": "Merged branch %s" % branch,
-            "sha":  new_sha
-        }
 
     return locals()
->>>>>>> origin/master
