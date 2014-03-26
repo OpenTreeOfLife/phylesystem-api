@@ -47,7 +47,7 @@ def v1():
             response.view = 'generic.jsonp'
         auth_info = api_utils.authenticate(**kwargs)
         phylesystem = api_utils.get_phylesystem(request)
-        gd = phylesystem.create_git_action(resource_id)
+        gd = phylesystem.create_git_action()
         try:
             return merge_from_master(gd, resource_id, auth_info, starting_commit_SHA)
         except GitWorkflowError, err:

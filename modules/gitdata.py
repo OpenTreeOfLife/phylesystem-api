@@ -5,6 +5,8 @@ import api_utils
 _LOG = api_utils.get_logger(__name__)
 
 class GitData(GitAction):
+    def __init__(self, repo, **kwargs):
+        GitAction.__init__(self, repo, **kwargs)
     def delete_remote_branch(self, remote, branch, env={}):
         "Delete a remote branch"
         # deleting a branch is the same as
@@ -42,9 +44,9 @@ class GitData(GitAction):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git(self.gitdir, self.gitwd, "push",remote, branch_to_push, _env=new_env)
+            git(self.gitdir, self.gitwd, "push", remote, branch_to_push, _env=new_env)
         else:
-            git(self.gitdir, self.gitwd, "push",remote, branch_to_push)
+            git(self.gitdir, self.gitwd, "push", remote, branch_to_push)
 
     def pull(self, remote, env={}, branch=None):
         """

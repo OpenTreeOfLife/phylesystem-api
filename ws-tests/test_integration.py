@@ -9,20 +9,21 @@ import os
 
 
 
-study_id = '9'
+study_id = '99'
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
-
+print('first get')
 #A full integration test, with GET, PUT, POST, MERGE and a merge conflict, 
 #test get and save sha
 data = {'output_nexml2json':'1.2'}
 r = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
-
+print('first get done')
 assert(r[0]==True)
 
 start_sha = r[1]["sha"]
 blob=r[1]["data"]
 assert(start_sha)
+
 
 acurr_obj = blob
 zcurr_obj = copy.deepcopy(blob)
@@ -49,6 +50,22 @@ assert(r2[1]['resource_id']==study_id)
 assert(r2[1]['merge_needed']==False)
 r2_sha=r2[1]['sha']
 
+#Now get the outcome of the Merge, so that a curator could look at it.
+DOMAIN = config('host', 'apihost')
+SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+
+data = {
+        'output_nexml2json':'1.2',
+#        'starting_commit_SHA': None
+        'starting_commit_SHA': r2[1]['sha'],
+}
+
+rg3 = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
+
+assert(rg3[0]==True)
+assert(rg3[1]['sha']==r6[1]['sha'])
+assert(len(rg3[1]['branch2sha'])==1)
+   
 #test merge failure when new branch is behind master
 # update Zcount so that file differs from previous commit
 zc = zcurr_obj['nexml'].get("^zcount", 0)
@@ -78,7 +95,6 @@ data = {'output_nexml2json':'1.2'}
 rg1 = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
 assert(rg1[0]==True)
 assert(len(rg1[1]['branch2sha'])>=2)
-#assert(rg1[1]['data']==acurr_obj) #@EJM isn't this what the data should be?
 
 # but not for other studies...
 alt_study_id='10'
@@ -153,8 +169,7 @@ assert(r6[0]==True)
 assert(r6[1]['resource_id']==study_id)
 
 merged_sha = r6[1]['merged_sha']
-
-        
+ 
         
 # add a 7th commit onto commit 6. This should NOT merge to master because we don't give it the secret arg.
 DOMAIN = config('host', 'apihost')
@@ -205,10 +220,8 @@ assert(r7a[1]['merge_needed']==False)
 # after the merge we should be back down to 1 branch for this study
 data = {'output_nexml2json':'1.2'}
 
-rg3 = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
-assert(rg3[0]==True)
-print(rg3[1]['branch2sha'])
-assert(len(rg3[1]['branch2sha'])==1)
-#print(r2[1].keys())
+rg4 = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
+assert(rg4[0]==True)
+assert(len(rg4[1]['branch2sha'])==1)
 
 
