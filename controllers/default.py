@@ -100,7 +100,6 @@ def v1():
         if annotated_commit['error'] != 0:
             _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
-
         return annotated_commit
 
     def GET(resource, resource_id, jsoncallback=None, callback=None, _=None, **kwargs):
@@ -373,41 +372,6 @@ def v1():
         if meta_year:
             nexml_el[u'^ot:studyYear'] = meta_year
         return nexson
-
-    def do_commit(gd, gh, file_content, author_name, author_email, resource_id):
-        """Actually make a local Git commit and push it to our remote
-        """
-        # global TIMING
-        author  = "%s <%s>" % (author_name, author_email)
-
-        branch_name  = "%s_study_%s" % (gh.get_user().login, resource_id)
-
-        _acquire_lock_or_exit(gd, fail_msg="Could not acquire lock to write to study #{s}".format(s=resource_id))
-        try:
-            gd.checkout_master()
-            _pull_gh(gd, repo_remote, "master", resource_id)
-            
-            try:
-                new_sha = gd.write_study(resource_id, file_content, branch_name,author)
-                # TIMING = api_utils.log_time_diff(_LOG, 'writing study', TIMING)
-            except Exception, e:
-                raise HTTP(400, json.dumps({
-                    "error": 1,
-                    "description": "Could not write to study #%s ! Details: \n%s" % (resource_id, e.message)
-                }))
-            gd.merge(branch_name)
-            _push_gh(gd, repo_remote, "master", resource_id)
-        finally:
-            gd.release_lock()
-
-        # What other useful information should be returned on a successful write?
-        return {
-            "error": 0,
-            "resource_id": resource_id,
-            "branch_name": branch_name,
-            "description": "Updated study #%s" % resource_id,
-            "sha":  new_sha
-        }
 
     def DELETE(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to deleting existing resources"

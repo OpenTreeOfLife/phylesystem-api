@@ -23,8 +23,8 @@ class GitData(GitAction):
         "git push" command.
 
         If no branch is given, the current branch
-        will be used.
-
+        will be used
+.
         The ability to specify env is so that PKEY
         and GIT_SSH can be specified so Git can use
         different SSH credentials than the current
