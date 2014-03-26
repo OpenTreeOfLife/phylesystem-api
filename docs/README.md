@@ -85,16 +85,21 @@ If the study does not exist, this API call will return a 404 error code.
 If you want to update study 10 with a file called
 10-modified.json, the following command will accomplish that:
 
-    curl -X PUT http://localhost:8080/api/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN \
+    curl -X PUT http://localhost:8080/api/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN\
+    &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
     --data-urlencode nexson@10-modified.json
+
+starting_commit_SHA is required.
 
 For large studies, it's faster to skip the URL-encoding and pass the NexSON data as binary:
 
     curl -X PUT 'http://localhost:8080/api/v1/study/10?auth_token=26b5a59d2cbc921bdfe04ec0e9f6cc05c879a761' \
+    &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
     --data-binary @10-modified.json --compressed
 
+
 Also takes the optional argument "merged_SHA" which will allow the branch to merge to 
-master even if master has changed from the parent. (@EJM fix more)
+master even if the study file on master has changed from the parent.
 
 Either form of this command will create a commit with the updated JSON on a branch of the form
 
@@ -102,11 +107,11 @@ Either form of this command will create a commit with the updated JSON on a bran
     
 where USERNAME is the authenticated users Github login and ID
 is the study ID number, and i is an iterator for if the user has more than one branch open for that study.
-If branch can be merged to master
+If branch can be merged to master, it will be and the branch will be deleted.
 
 On success, it will return a JSON response similar to this:
 
-{
+    {
         "error": "0",
         "resource_id": "12",
         "branch_name": "usr_study_12_0",
@@ -135,8 +140,8 @@ controller to merge master into that branch.
 Any PUT request attempting to update a study with invalid JSON
 will be denied and an HTTP error code 400 will be returned.
 
-@EJM new commit?
-[Here](https://github.com/OpenTreeOfLife/phylesystem/compare/leto_study_9?expand=1) 
+
+[Here](https://github.com/OpenTreeOfLife/hbf_phylesystem_test/commit/e991b02743f9e726b4b6acf6c810022668c066e2) 
 is an example commit created by the OpenTree API.
 
 ### Merge a study in a WIP branch
@@ -178,8 +183,20 @@ To create a new study from a file in the current directory called ```study.json`
 
     curl -X POST "http://dev.opentreeoflife.org/api/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
 
-### Syncing a WIP branch with Github
+This will generate the output
+    {
+        "error": "0",
+        "resource_id": "12",
+        "branch_name": "usr_study_12_0",
+        "description": "Updated study 12",
+        "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
+        "merge_needed": "No",
+    }
 
+
+For a new study merge_needed should always be "No"
+
+### Syncing a WIP branch with Github
 NOT UP TO DATE
 This API method will sync the local Git repo on the server with it's remote (usually Github).
 
