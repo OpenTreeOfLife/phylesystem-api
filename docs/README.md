@@ -62,7 +62,7 @@ The default for this parameter is 0.0.0, but this is subject to change.
 Consider the call without the output_nexml2json argument to be brittle!
 
 
-Get also takes the optional argument "starting_commit_SHA", 
+Also takes the optional argument "starting_commit_SHA", 
 which will return the version of the study from that commit sha.
 If no "starting_commit_sha" is given, GET will return study from master.
 
@@ -90,7 +90,7 @@ If you want to update study 10 with a file called
     &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
     --data-urlencode nexson@10-modified.json
 
-starting_commit_SHA is required.
+starting_commit_SHA is required, and should be the commit SHA of the parent of the edited study.
 
 For large studies, it's faster to skip the URL-encoding and pass the NexSON data as binary:
 
@@ -131,23 +131,26 @@ On failure, ```error``` will be set to 1 and ```description``` will provide deta
 ```sha``` is the latest commit on that branch
 ```description``` is a textual description of what happened and 
 ```merge_needed``` descibes whether the WIP branch was successfully merged into master.
-If it was, the branch no longer exists and Merge_Needed = No.
+If it was, the branch no longer exists and Merge_Needed = No. 
 
 If the file with that resource id has moved forward on the master branch from the parent 
 of the edited file merge into master will not happen automatically, 
 even if it can proceed without conflict. In this case the client needs to use the MERGE 
-controller to merge master into that branch.
+controller to merge master into that branch, then PUT that branch including the 'merged_sha'
+returned by the merge. Even if a merged_sha is included, 
+merge_needed may still be Yes, if the master has moved forward since the merge was vetted.
+Then a second merge and PUT with the new merged_sha is required.
 
 Any PUT request attempting to update a study with invalid JSON
 will be denied and an HTTP error code 400 will be returned.
-
 
 [Here](https://github.com/OpenTreeOfLife/hbf_phylesystem_test/commit/e991b02743f9e726b4b6acf6c810022668c066e2) 
 is an example commit created by the OpenTree API.
 
 ### Merge a study in a WIP branch
 
-Merges to master are done automatically on PUTs. The MERGE controller merges master 
+Merges to master are done automatically on PUTs when the version of the study on master has 
+not moved forward from the version in the parent commit. The MERGE controller merges master 
 into outstanding work in progress branches. The merged output should be vetted by a curator
 as this controller will only be used if the master branch has moved forward since edits were 
 made. This can generate semantic conflicts even if not git merge conflicts arise.
@@ -195,7 +198,7 @@ This will generate the output
     }
 
 
-For a new study merge_needed should always be "No"
+For a new study merge_needed should always be "No".
 
 ### Syncing a WIP branch with Github
 NOT UP TO DATE
