@@ -57,7 +57,7 @@ def v1():
             m = traceback.format_exc()
             raise HTTP(409, json.dumps({
                 "error": 1,
-                "description": "Could not pull! Details: %s" % (m)
+                "description": "Could not merge! Details: %s" % (m)
             }))
 
     return locals()
