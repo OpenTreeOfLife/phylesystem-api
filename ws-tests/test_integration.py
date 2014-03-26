@@ -12,12 +12,10 @@ import os
 study_id = '99'
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
-print('first get')
 #A full integration test, with GET, PUT, POST, MERGE and a merge conflict, 
 #test get and save sha
 data = {'output_nexml2json':'1.2'}
 r = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
-print('first get done')
 assert(r[0]==True)
 
 start_sha = r[1]["sha"]
@@ -63,7 +61,7 @@ data = {
 rg3 = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
 
 assert(rg3[0]==True)
-assert(rg3[1]['sha']==r6[1]['sha'])
+assert(rg3[1]['sha']==r2[1]['sha'])
 assert(len(rg3[1]['branch2sha'])==1)
    
 #test merge failure when new branch is behind master

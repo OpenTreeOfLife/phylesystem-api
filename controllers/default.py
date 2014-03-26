@@ -90,12 +90,12 @@ def v1():
                                           annotation['annotationEvent'],
                                           annotation['agent'],
                                           add_agent_only=True)
-        annotated_commit = commit_and_try_merge2master(git_data,
-                                                       nexson,
-                                                       resource_id,
-                                                       auth_info,
-                                                       parent_sha,
-                                                       master_file_blob_included)
+        annotated_commit = commit_and_try_merge2master(git_action=git_data,
+                                                       file_content=nexson,
+                                                       study_id=resource_id,
+                                                       auth_info=auth_info,
+                                                       parent_sha=parent_sha,
+                                                       merged_sha=master_file_blob_included)
         # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
         if annotated_commit['error'] != 0:
             _LOG.debug('annotated_commit failed')
@@ -113,16 +113,15 @@ def v1():
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
-        parent_sha = kwargs.get('starting_commit_SHA', 'master')
+        parent_sha = kwargs.get('starting_commit_SHA')
         _LOG.debug('parent_sha = {}'.format(parent_sha))
         # return the correct nexson of study_id, using the specified view
         phylesystem = api_utils.get_phylesystem(request)
         try:
-           r = phylesystem.return_study(resource_id, branch=parent_sha, return_WIP_map=True)
+           r = phylesystem.return_study(resource_id, commit_sha=parent_sha, return_WIP_map=True)
            study_nexson, head_sha, wip_map = r
            blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
            phylesystem.add_validation_annotation(study_nexson, blob_sha)
-
            if output_nexml2json != repo_nexml2json:
                 study_nexson = __coerce_nexson_format(study_nexson,
                                           output_nexml2json,
@@ -223,15 +222,18 @@ def v1():
         nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
         kwargs['nexson'] = new_study_nexson
         try:
-            bundle = validate_and_convert_nexson(new_study_nexson, repo_nexml2json, allow_invalid=True)
+            bundle = validate_and_convert_nexson(new_study_nexson,
+                                                 repo_nexml2json,
+                                                 allow_invalid=True)
             nexson, annotation, validation_log, nexson_adaptor = bundle
             commit_return = __finish_write_verb(gd,
-                                         nexson,
-                                         new_resource_id,
-                                         auth_info,
-                                         nexson_adaptor,
-                                         annotation,
-                                         parent_sha=None)
+                                                nexson=nexson,
+                                                resource_id=new_resource_id,
+                                                auth_info=auth_info,
+                                                adaptor=nexson_adaptor,
+                                                annotation=annotation,
+                                                parent_sha=None, 
+                                                master_file_blob_included=None)
             return commit_return
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
@@ -285,7 +287,9 @@ def v1():
         
         try:
             nexson = __extract_nexson_from_http_call(request, **kwargs)
-            bundle = validate_and_convert_nexson(nexson, repo_nexml2json, allow_invalid=False)
+            bundle = validate_and_convert_nexson(nexson,
+                                                 repo_nexml2json,
+                                                 allow_invalid=True) #@TEMP. Should reject...
             nexson, annotation, validation_log, nexson_adaptor = bundle
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
@@ -295,13 +299,13 @@ def v1():
         gd = phylesystem.create_git_action(resource_id)
         try:
             blob = __finish_write_verb(gd,
-                                   nexson,
-                                   resource_id,
-                                   auth_info,
-                                   nexson_adaptor,
-                                   annotation,
-                                   parent_sha,
-                                   master_file_blob_included)
+                                       nexson=nexson,
+                                       resource_id=resource_id,
+                                       auth_info=auth_info,
+                                       adaptor=nexson_adaptor,
+                                       annotation=annotation,
+                                       parent_sha=parent_sha, 
+                                       master_file_blob_included=master_file_blob_included)
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
