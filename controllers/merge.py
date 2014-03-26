@@ -52,10 +52,12 @@ def v1():
             return merge_from_master(gd, resource_id, auth_info, starting_commit_SHA)
         except GitWorkflowError, err:
             raise HTTP(400, json.dumps({"error": 1, "description": err.msg}))
-        except Exception, e:
+        except:
+            import traceback
+            m = traceback.format_exc()
             raise HTTP(409, json.dumps({
                 "error": 1,
-                "description": "Could not pull! Details: %s" % (e.message)
+                "description": "Could not pull! Details: %s" % (m)
             }))
 
     return locals()
