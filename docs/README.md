@@ -68,7 +68,7 @@ If no "starting_commit_sha" is given, GET will return study from master.
 
 On success, it will return a JSON response similar to this:
 
-{
+    {
         "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
         "data": Study NexSON object,
         "branch2sha": WIP map
@@ -76,6 +76,7 @@ On success, it will return a JSON response similar to this:
 
 The sha is the parent sha of that GET and will need to be returned with 
 edited study on a PUT.
+
 WIP_map - a list of sha's of WIP branches for that study.
 
 If the study does not exist, this API call will return a 404 error code.
