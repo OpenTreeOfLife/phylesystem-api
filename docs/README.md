@@ -51,12 +51,6 @@ To get the entire NexSON of study N :
 
     curl http://dev.opentreeoflife.org/api/v1/study/N.json?output_nexml2json=1.0.0
 
-If the study does not exist, this API call will return a 404 error code.
-
-The returned JSON is an object with a "sha" that represents 
-the commit SHA for the data. This should be the parent of 
-any edits made. The NexSON object is returned as the "data"
-property of the object.
 
 The output_nexml2json arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
@@ -67,19 +61,46 @@ for details. Currently the only supported values are:
 The default for this parameter is 0.0.0, but this is subject to change.
 Consider the call without the output_nexml2json argument to be brittle!
 
+
+Also takes the optional argument "starting_commit_SHA", 
+which will return the version of the study from that commit sha.
+If no "starting_commit_sha" is given, GET will return study from master.
+
+On success, it will return a JSON response similar to this:
+
+    {
+        "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
+        "data": Study NexSON object,
+        "branch2sha": WIP map
+    }
+
+The sha is the parent sha of that GET and will need to be returned with 
+edited study on a PUT.
+
+WIP_map - a list of sha's of WIP branches for that study.
+
+If the study does not exist, this API call will return a 404 error code.
+
 ### Updating a study
 
 If you want to update study 10 with a file called
 10-modified.json, the following command will accomplish that:
 
-    curl -X PUT http://localhost:8080/api/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN \
+    curl -X PUT http://localhost:8080/api/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN\
+    &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
     --data-urlencode nexson@10-modified.json
+
+starting_commit_SHA is required, and should be the commit SHA of the parent of the edited study.
 
 For large studies, it's faster to skip the URL-encoding and pass the NexSON data as binary:
 
     curl -X PUT 'http://localhost:8080/api/v1/study/10?auth_token=26b5a59d2cbc921bdfe04ec0e9f6cc05c879a761' \
+    &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
     --data-binary @10-modified.json --compressed
 
+
+Also takes the optional argument "merged_SHA" which will allow the branch to merge to 
+master even if the study file on master has changed from the parent.
 
 Either form of this command will create a commit with the updated JSON on a branch of the form
 
@@ -87,10 +108,11 @@ Either form of this command will create a commit with the updated JSON on a bran
     
 where USERNAME is the authenticated users Github login and ID
 is the study ID number, and i is an iterator for if the user has more than one branch open for that study.
+If branch can be merged to master, it will be and the branch will be deleted.
 
 On success, it will return a JSON response similar to this:
 
-{
+    {
         "error": "0",
         "resource_id": "12",
         "branch_name": "usr_study_12_0",
@@ -109,16 +131,55 @@ On failure, ```error``` will be set to 1 and ```description``` will provide deta
 ```sha``` is the latest commit on that branch
 ```description``` is a textual description of what happened and 
 ```merge_needed``` descibes whether the WIP branch was successfully merged into master.
-If it was, the branch no longer exists and Merge_Needed = No.
-If the file with that resource id has moved forward on the master branch from the parent of the edited file
-merge into master will not happen automatically, even if it can proceed without conflict.
-In this case the client needs to merge master
+If it was, the branch no longer exists and Merge_Needed = No. 
+
+If the file with that resource id has moved forward on the master branch from the parent 
+of the edited file merge into master will not happen automatically, 
+even if it can proceed without conflict. In this case the client needs to use the MERGE 
+controller to merge master into that branch, then PUT that branch including the 'merged_sha'
+returned by the merge. Even if a merged_sha is included, 
+merge_needed may still be Yes, if the master has moved forward since the merge was vetted.
+Then a second merge and PUT with the new merged_sha is required.
 
 Any PUT request attempting to update a study with invalid JSON
 will be denied and an HTTP error code 400 will be returned.
 
-[Here](https://github.com/OpenTreeOfLife/phylesystem/compare/leto_study_9?expand=1)
+[Here](https://github.com/OpenTreeOfLife/hbf_phylesystem_test/commit/e991b02743f9e726b4b6acf6c810022668c066e2) 
 is an example commit created by the OpenTree API.
+
+### Merge a study in a WIP branch
+
+Merges to master are done automatically on PUTs when the version of the study on master has 
+not moved forward from the version in the parent commit. The MERGE controller merges master 
+into outstanding work in progress branches. The merged output should be vetted by a curator
+as this controller will only be used if the master branch has moved forward since edits were 
+made. This can generate semantic conflicts even if not git merge conflicts arise.
+
+To merge a study from master into a branch with a given "starting_commit_sha"
+
+    curl -X POST http://localhost:8000/api/merge/v1?resource_id=9&starting_commit_SHA=152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
+
+
+If the request is successful, a JSON response similar to this will be returned:
+
+        {
+            "error": 0,
+            "branch_name": "my_user_9_2",
+            "description": "Updated branch",
+            "sha": "dcab222749c9185797645378d0bda08d598f81e7",
+            "merged_SHA": "16463623459987070600ab2757540c06ddepa608",
+        }
+
+'merged_SHA' must be included in the next PUT for this study (unless you are 
+happy with your work languishing on a WIP branch instead of master).
+
+If there is an error, an HTTP 400 error will be returned with a JSON response similar 
+to this:
+
+        {
+            "error": 1,
+            "description": "Could not merge master into WIP! Details: ..."
+        }
 
 ### Creating a new study
 
@@ -126,8 +187,21 @@ To create a new study from a file in the current directory called ```study.json`
 
     curl -X POST "http://dev.opentreeoflife.org/api/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
 
-### Syncing a WIP branch with Github
+This will generate the output
+    {
+        "error": "0",
+        "resource_id": "12",
+        "branch_name": "usr_study_12_0",
+        "description": "Updated study 12",
+        "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
+        "merge_needed": "No",
+    }
 
+
+For a new study merge_needed should always be "No".
+
+### Syncing a WIP branch with Github
+NOT UP TO DATE
 This API method will sync the local Git repo on the server with it's remote (usually Github).
 
     curl -X POST http://dev.opentreeoflife.org/api/pull/v1/master?auth_token=$GITHUB_OAUTH_TOKEN
@@ -150,36 +224,6 @@ If there is an error in syncing the local git repository with the remote, an HTT
 
 where the description will usually contain the full error reported by Git.
 
-### Merge a study in a WIP branch
-
-To merge branch X into branch Y:
-
-    curl -X POST http://dev.opentreeoflife.org/api/merge/v1/X/Y?auth_token=$GITHUB_OAUTH_TOKEN
-
-The default value for Y is the "master" branch, which is what most merges will want to do.
-
-The following two commands are equivalent.
-
-    curl -X POST http://dev.opentreeoflife.org/api/merge/v1/leto_study_1003?auth_token=$GITHUB_OAUTH_TOKEN
-
-    curl -X POST http://dev.opentreeoflife.org/api/merge/v1/leto_study_1003/master?auth_token=$GITHUB_OAUTH_TOKEN
-
-If the request is successful, a JSON response similar to this will be returned:
-
-        {
-            "error": 0,
-            "branch_name": "master",
-            "description": "Merged branch leto_study_12",
-            "sha":  "dcab222749c9185797645378d0bda08d598f81e7"
-        }
-
-        If there is an error, an HTTP 400 error will be returned with a JSON response similar
-        to this:
-
-        {
-            "error": 1,
-            "description": "Could not push foo branch"
-        }
 
 ### Using different author information
 
@@ -219,11 +263,6 @@ This and other "canned" views might have friendlier URLs:
 
     curl https://dev.opentreeoflife.org/api/v1/studies/latest
 
-### Fetching a work-in-progress (WIP) study
-
-    curl http://dev.opentreeoflife.org/api/v1/study/N.json?branch=user_study_N
-
-This will return the latest state of N.json on the ```user_study_N``` branch or a 404 if that branch does not exist.
 
 ### Incorporating "namespaced" study identifiers from different sources
 
