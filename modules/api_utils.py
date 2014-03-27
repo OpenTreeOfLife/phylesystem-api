@@ -16,10 +16,19 @@ def get_phylesystem(request):
         return _PHYLESYSTEM
     from gitdata import GitData
     repo_parent, repo_remote, git_ssh, pkey = read_config(request)
+    push_mirror = os.path.join(repo_parent, 'mirror')
+    pmi = {
+        'parent_dir': push_mirror,
+        'remote_map': {
+            'GitHubRemote': 'git@github.com:OpenTreeOfLife',
+            },
+        }
+    mirror_info = {'push':pmi}
     _PHYLESYSTEM = Phylesystem(repos_par=repo_parent,
                                git_ssh=git_ssh,
                                pkey=pkey,
-                               git_action_class=GitData)
+                               git_action_class=GitData,
+                               mirror_info=mirror_info)
     return _PHYLESYSTEM
 
 def read_config(request):
