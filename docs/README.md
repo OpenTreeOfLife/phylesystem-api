@@ -200,18 +200,18 @@ This will generate the output
 
 For a new study merge_needed should always be "No".
 
-### Syncing a WIP branch with Github
-NOT UP TO DATE
-This API method will sync the local Git repo on the server with it's remote (usually Github).
+### Pushing the master branch to Github
+IN FLUX!
 
-    curl -X POST http://dev.opentreeoflife.org/api/pull/v1/master?auth_token=$GITHUB_OAUTH_TOKEN
+This API method will push the master branch of the local Git repo
+to the master on GitHub
+
+    curl -X POST http://dev.opentreeoflife.org/api/push/v1/9
 
 On success, it will return JSON similar to this:
 
     {
-        "branch_name": "master",
-        "sha": "9ed1ab2d118c911467c28cbdaa7cb3091243154d",
-        "description": "Updated branch master",
+        "description": "Push succeeded",
         "error": 0
     }
 
@@ -219,10 +219,10 @@ If there is an error in syncing the local git repository with the remote, an HTT
 
     {
         "error": 1,
-        "description": "Could not pull! Details: ..."
+        "description": "Could not push! Details: ..."
     }
 
-where the description will usually contain the full error reported by Git.
+where the description will contain a stacktrace.
 
 
 ### Using different author information
