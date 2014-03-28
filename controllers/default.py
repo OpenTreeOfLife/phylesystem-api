@@ -88,8 +88,7 @@ def v1():
         #TODO, need to make this spawn a thread to do the second commit rather than block
         adaptor.add_or_replace_annotation(nexson,
                                           annotation['annotationEvent'],
-                                          annotation['agent'],
-                                          add_agent_only=True)
+                                          annotation['agent'])
         annotated_commit = commit_and_try_merge2master(git_action=git_data,
                                                        file_content=nexson,
                                                        study_id=resource_id,
