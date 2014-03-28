@@ -75,7 +75,8 @@ def v1():
             raise HTTP(400, json.dumps({"error": 1, "description": msg}))
         return output_nexml2json
 
-    def __finish_write_verb(git_data, 
+    def __finish_write_verb(phylesystem,
+                            git_data, 
                             nexson,
                             resource_id,
                             auth_info,
@@ -86,15 +87,15 @@ def v1():
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
         #TODO, need to make this spawn a thread to do the second commit rather than block
-        adaptor.add_or_replace_annotation(nexson,
-                                          annotation['annotationEvent'],
-                                          annotation['agent'])
-        annotated_commit = commit_and_try_merge2master(git_action=git_data,
-                                                       file_content=nexson,
-                                                       study_id=resource_id,
-                                                       auth_info=auth_info,
-                                                       parent_sha=parent_sha,
-                                                       merged_sha=master_file_blob_included)
+        a = phylesystem.annotate_and_write(git_data, 
+                                           nexson,
+                                           resource_id,
+                                           auth_info,
+                                           adaptor,
+                                           annotation,
+                                           parent_sha,
+                                           master_file_blob_included)
+        annotated_commit = a
         # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
         if annotated_commit['error'] != 0:
             _LOG.debug('annotated_commit failed')
@@ -225,7 +226,8 @@ def v1():
                                                  repo_nexml2json,
                                                  allow_invalid=True)
             nexson, annotation, validation_log, nexson_adaptor = bundle
-            commit_return = __finish_write_verb(gd,
+            commit_return = __finish_write_verb(phylesystem,
+                                                gd,
                                                 nexson=nexson,
                                                 resource_id=new_resource_id,
                                                 auth_info=auth_info,
@@ -297,7 +299,8 @@ def v1():
         phylesystem = api_utils.get_phylesystem(request)
         gd = phylesystem.create_git_action(resource_id)
         try:
-            blob = __finish_write_verb(gd,
+            blob = __finish_write_verb(phylesystem,
+                                       gd,
                                        nexson=nexson,
                                        resource_id=resource_id,
                                        auth_info=auth_info,
