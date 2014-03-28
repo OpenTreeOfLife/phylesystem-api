@@ -66,9 +66,9 @@ assert(len(rg3[1]['branch2sha'])==1)
    
 #test merge failure when new branch is behind master
 # update Zcount so that file differs from previous commit
-zc = zcurr_obj['nexml'].get("^zcount", 0)
+zc = zcurr_obj.get("^zcount", 0)
 zc += 1
-zcurr_obj['nexml']["^zcount"] = zc
+zcurr_obj["^zcount"] = zc
 data = { 'nexson' : zcurr_obj,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,
@@ -126,9 +126,9 @@ assert(r4[1]['merge_needed']==False)
 
 # add a fifth commit onto commit 3. This should still NOT merge to master
 starting_commit_SHA = r3_sha
-zc = zcurr_obj['nexml'].get("^zcount", 0)
+zc = zcurr_obj.get("^zcount", 0)
 zc += 1
-zcurr_obj['nexml']["^zcount"] = zc
+zcurr_obj["^zcount"] = zc
 data = { 'nexson' : zcurr_obj,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,
@@ -174,7 +174,7 @@ DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
 starting_commit_SHA = r6[1]['sha']
 zc += 1
-zcurr_obj['nexml']["^zcount"] = zc
+zcurr_obj["^zcount"] = zc
 
 data = { 'nexson' : zcurr_obj,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
@@ -197,7 +197,7 @@ DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
 starting_commit_SHA = r7[1]['sha']
 zc += 1
-zcurr_obj['nexml']["^zcount"] = zc
+zcurr_obj["^zcount"] = zc
 
 data = { 'nexson' : zcurr_obj,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
