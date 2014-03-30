@@ -241,6 +241,7 @@ To create a new study from a file in the current directory called ```study.json`
     curl -X POST "http://dev.opentreeoflife.org/api/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
 
 This will generate the output
+
     {
         "error": "0",
         "resource_id": "12",
