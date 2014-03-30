@@ -45,6 +45,37 @@ Here are other tips on managing auth tokens programmatically:
 
 http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app
 
+### WIP branches
+
+We use "WIP" to stand for "Work in progress" branch. The naming convention
+for these branches are:
+
+    <curator github login>_study_<study #>_<WIP counter>
+
+So if `mtholder` has 2 WIPs for study 9, they will show up as:
+
+    mtholder_study_9_0
+    mtholder_study_9_1
+
+As discussed below, WIPs are created on a PUT. They are merged back to master and deleted
+if the master's version of the study has not advanced in the interim between
+GET and PUT. Thus, the WIPs are often very ephemeral and not 
+noticeable by the user.
+
+If the master has advanced, the WIP will be retained so that future PUT
+operations by the curator will be guaranteed to be conflict-free 
+updates somewhere in the repo. A call to `merge` will be needed to
+merge the updated content from the master into the WIP. After the
+merge (and subsequent PUTs) succeed, then the WIP should be 
+able to merge to the master branch (resulting in the deletion of the WIP).
+
+Clients of the API need never refer to the WIP names. All communication about
+versions happens via SHA values.
+However, they are returned in the `branch2sha` map from GET so that the 
+curation client can remind the curator of any WIPs that they have started but 
+not merged.
+
+
 ### Fetch a study
 
 To get the entire NexSON of study N :
@@ -74,23 +105,32 @@ On success, it will return a JSON response similar to this:
         "branch2sha": WIP map
     }
 
-The `sha` is the parent sha of that GET and will need to be returned with 
-edited study on a PUT.
+*   `sha` is the parent sha of that GET and will need to be returned with 
+edited study on a PUT. It can also be used as the `starting_commit_SHA`
+in future GET calls to return the same data.
+*   `data` will be the NexSON object using the syntactic convention
+that was specified in `output_nexml2json` argument, and with the 
+validator AnnotationEvent included.
+*   `branch2sha` is an object summarizing the WIP branches for this study.
+The keys will be the names of the branch; the value will be the commit `sha`
+values that can be used in a GET call to get that version of the study. The
+content of the key before the`_study_.*` regex pattern will be the name
+of the curator whose PUT created the branch). An example `branch2sha` map is:
 
-WIP_map - a list of sha's of WIP branches for that study.
+    {
+        "mtholder_study_9_0": "f8d6ddacc2cef7a54847a4067ccb45915a4b4ebc",
+        "master": "0841f890259686d74c7c1749a87026e1c4193ca0"
+    }
 
-If the study does not exist, this API call will return a 404 error code.
 
 ### Updating a study
 
 If you want to update study 10 with a file called
-10-modified.json, the following command will accomplish that:
+`10-modified.json`, the following command will accomplish that:
 
     curl -X PUT http://localhost:8080/api/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN\
     &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
     --data-urlencode nexson@10-modified.json
-
-starting_commit_SHA is required, and should be the commit SHA of the parent of the edited study.
 
 For large studies, it's faster to skip the URL-encoding and pass the NexSON data as binary:
 
@@ -98,9 +138,18 @@ For large studies, it's faster to skip the URL-encoding and pass the NexSON data
     &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
     --data-binary @10-modified.json --compressed
 
+#### PUT arguments
 
-Also takes the optional argument "merged_SHA" which will allow the branch to merge to 
-master even if the study file on master has changed from the parent.
+*   `starting_commit_SHA` is required, and should be the commit SHA of the parent of the edited study.
+*   `merged_SHA` is optional. If the master branch's version of this study has advanced
+    a PUT will not be merged to master. The curation app will need to call 
+    the merge URL (see below). That controller will return a `merged_SHA` value. 
+    Calling PUT with this `merged_SHA` key-value pair as an argument, is a signal 
+    that the curator has examined the changes that have been made to the master branch 
+    and that he/she confirms that the edits are not incompatible. The presence of the `merged_SHA`
+    argument will allow the branch to merge to master despite the fact that the master has advanced
+    since `starting_commit_SHA`. Note that, if the master has advanced again since the 
+    client calls the merge controller, the client will need to merge
 
 Either form of this command will create a commit with the updated JSON on a branch of the form
 
@@ -110,6 +159,8 @@ where USERNAME is the authenticated users Github login and ID
 is the study ID number, and i is an iterator for if the user has more than one branch open for that study.
 If branch can be merged to master, it will be and the branch will be deleted.
 
+#### PUT response
+
 On success, it will return a JSON response similar to this:
 
     {
@@ -118,28 +169,30 @@ On success, it will return a JSON response similar to this:
         "branch_name": "usr_study_12_0",
         "description": "Updated study 12",
         "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
-        "merge_needed": "No",
+        "merge_needed": true,
     }
 
 
-```error``` is set to
-0.
+*   `error` is set to 0 on success. On failure, `error` will be set to 1.
+*   `description` a textual description of what occurred. This will hold the details of the error (if `error` is 1)
+*   `resource id` is the id of the study that was edited
+*   `branch_name` is the WIP branch that was created. This is not useful (because the `sha`
+is all that really matters), and may be deprecated
+*   `sha` is the handle for the commit that was created by the PUT (if `error` was 0). This must be used as `starting_commit_SHA` in the next PUT (assuming that the curator wants a linear edit history)
+*   `merge_needed` descibes whether the merge controller has to be called before the commit will
+be included in the master branch. If false, then the WIP will have been deleted (so that the `branch_name` returned is stale)
 
-On failure, ```error``` will be set to 1 and ```description``` will provide details on why the request failed.
-```resource id ``` is the id of the study that was edited
-```branch_name``` is the WIP branch that was created
-```sha``` is the latest commit on that branch
-```description``` is a textual description of what happened and 
-```merge_needed``` descibes whether the WIP branch was successfully merged into master.
-If it was, the branch no longer exists and Merge_Needed = No. 
-
-If the file with that resource id has moved forward on the master branch from the parent 
-of the edited file merge into master will not happen automatically, 
-even if it can proceed without conflict. In this case the client needs to use the MERGE 
+If the study has moved forward on the master branch since `starting_commit_SHA`, the
+content of this PUT will be successfully stored on a WIP, but the merge into master
+will not happen automatically.
+This merge will not happen even if there is no conflict. 
+The client needs to use the MERGE 
 controller to merge master into that branch, then PUT that branch including the 'merged_sha'
-returned by the merge. Even if a merged_sha is included, 
-merge_needed may still be Yes, if the master has moved forward since the merge was vetted.
-Then a second merge and PUT with the new merged_sha is required.
+returned by the merge. 
+Even if a `merged_sha` is included in the PUT,
+`merge_needed` may still be `true`.
+This happens if the master has moved forward since the merge was vetted.
+Then a second merge and PUT with the new `merged_sha` is required.
 
 Any PUT request attempting to update a study with invalid JSON
 will be denied and an HTTP error code 400 will be returned.
@@ -150,12 +203,12 @@ is an example commit created by the OpenTree API.
 ### Merge a study in a WIP branch
 
 Merges to master are done automatically on PUTs when the version of the study on master has 
-not moved forward from the version in the parent commit. The MERGE controller merges master 
-into outstanding work in progress branches. The merged output should be vetted by a curator
-as this controller will only be used if the master branch has moved forward since edits were 
-made. This can generate semantic conflicts even if not git merge conflicts arise.
+not moved forward from the version in the parent commit.
+The MERGE controller merges master into outstanding WIP branch.
+The merged output should be vetted by a curator, because the
+merge can generate semantic conflicts even if not git (textual) conflicts arise.
 
-To merge a study from master into a branch with a given "starting_commit_sha"
+To merge a study from master into a branch with a given `starting_commit_sha`
 
     curl -X POST http://localhost:8000/api/merge/v1?resource_id=9&starting_commit_SHA=152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
 
@@ -170,7 +223,7 @@ If the request is successful, a JSON response similar to this will be returned:
             "merged_SHA": "16463623459987070600ab2757540c06ddepa608",
         }
 
-'merged_SHA' must be included in the next PUT for this study (unless you are 
+`merged_SHA` must be included in the next PUT for this study (unless you are 
 happy with your work languishing on a WIP branch instead of master).
 
 If there is an error, an HTTP 400 error will be returned with a JSON response similar 
@@ -194,11 +247,11 @@ This will generate the output
         "branch_name": "usr_study_12_0",
         "description": "Updated study 12",
         "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
-        "merge_needed": "No",
+        "merge_needed": false
     }
 
-
-For a new study merge_needed should always be "No".
+See the PUT response for an explanation of the output.
+For a new study merge_needed should always be `false`
 
 ### Pushing the master branch to Github
 IN FLUX!
