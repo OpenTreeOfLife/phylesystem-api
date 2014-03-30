@@ -498,6 +498,6 @@ thousands of OTUs in an array).
 
 ## Authors
 
-Jonathan "Duke" Leto
+Jonathan "Duke" Leto wrote the previous version of this API
 
-Jim Allman
+Jim Allman, Emily Jane McTavish, and Mark Holder wrote the current version.
