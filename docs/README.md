@@ -52,29 +52,27 @@ To get the entire NexSON of study N :
     curl http://dev.opentreeoflife.org/api/v1/study/N.json?output_nexml2json=1.0.0
 
 
-The output_nexml2json arg specifies the version of the NeXML -> NexSON 
+*   The `output_nexml2json` arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
 for details. Currently the only supported values are:
-   0.0.0  badgerfish convention
-   1.0.0  the first version of the "honey badgerfish" convention
-
+  *  0.0.0  badgerfish convention
+  *  1.0.0  the first version of the "honey badgerfish" convention
+  *  1.2.1  the "by ID" version of the "honey badgerfish" convention
 The default for this parameter is 0.0.0, but this is subject to change.
 Consider the call without the output_nexml2json argument to be brittle!
-
-
-Also takes the optional argument "starting_commit_SHA", 
-which will return the version of the study from that commit sha.
-If no "starting_commit_sha" is given, GET will return study from master.
+*   `starting_commit_SHA` This is optional 
+which will return the version of the study from a specific commit sha.
+If no `starting_commit_SHA` is given, GET will return study from master.
 
 On success, it will return a JSON response similar to this:
 
     {
         "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
-        "data": Study NexSON object,
+        "data": <Study NexSON object>,
         "branch2sha": WIP map
     }
 
-The sha is the parent sha of that GET and will need to be returned with 
+The `sha` is the parent sha of that GET and will need to be returned with 
 edited study on a PUT.
 
 WIP_map - a list of sha's of WIP branches for that study.
