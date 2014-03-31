@@ -7,10 +7,7 @@ import github
 import traceback
 from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
-from peyotl.phylesystem.git_workflows import acquire_lock_raise, \
-                                             commit_and_try_merge2master, \
-                                             delete_study, \
-                                             GitWorkflowError, \
+from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  get_ot_study_info_from_nexml, \
@@ -29,12 +26,6 @@ _LOG = api_utils.get_logger('ot_api.default')
 
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
-
-def _acquire_lock_raise_http(gd):
-    try:
-        acquire_lock_raise(gd)
-    except GitWorkflowError, err:
-        _raise_HTTP_from_msg(err.msg)
 
 def index():
     response.view = 'generic.json'
@@ -214,32 +205,22 @@ def v1():
         else:   # assumes IMPORT_FROM_MANUAL_ENTRY, or insufficient args above
             new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
 
-        phylesystem = api_utils.get_phylesystem(request)
-        gd, new_resource_id = phylesystem.create_git_action_for_new_study()
-        
         nexml = new_study_nexson['nexml']
-        nexml['^ot:studyId'] = new_resource_id
         nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
-        kwargs['nexson'] = new_study_nexson
+        phylesystem = api_utils.get_phylesystem(request)
         try:
-            bundle = validate_and_convert_nexson(new_study_nexson,
-                                                 repo_nexml2json,
-                                                 allow_invalid=True)
-            nexson, annotation, validation_log, nexson_adaptor = bundle
-            commit_return = __finish_write_verb(phylesystem,
-                                                gd,
-                                                nexson=nexson,
-                                                resource_id=new_resource_id,
-                                                auth_info=auth_info,
-                                                adaptor=nexson_adaptor,
-                                                annotation=annotation,
-                                                parent_sha=None, 
-                                                master_file_blob_included=None)
-            return commit_return
+            r = phylesystem.ingest_new_study(new_study_nexson,
+                                             repo_nexml2json,
+                                             auth_info)
+            new_resource_id, commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
         except:
             raise HTTP(400, traceback.format_exc())
+        if commit_return['error'] != 0:
+            _LOG.debug('ingest_new_study failed with error code')
+            raise HTTP(400, json.dumps(commit_return))
+        return commit_return
 
     def __coerce_nexson_format(nexson, dest_format, current_format=None):
         '''Calls convert_nexson_format but does the appropriate logging and HTTP exceptions.
@@ -391,8 +372,13 @@ def v1():
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
         auth_info = api_utils.authenticate(**kwargs)
         phylesystem = api_utils.get_phylesystem(request)
-        gd = phylesystem.create_git_action(resource_id)
-        return delete_study(gd, resource_id, auth_info, parent_sha)
+        try:
+            return phylesystem.delete_study(resource_id, auth_info, parent_sha)
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            _LOG.exception('Exception getting nexson content in phylesystem.delete_study')
+            raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in study deletion'}))
 
     def OPTIONS(*args, **kwargs):
         "A simple method for approving CORS preflight request"
