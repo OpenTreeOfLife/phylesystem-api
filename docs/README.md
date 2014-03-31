@@ -14,6 +14,19 @@ to continue working with older API versions.
 
 NOTE: The dev.opentreeoflife.org hostname is a development URL and subject to change.
 
+#### index
+
+    curl http://dev.opentreeoflife.org/api/
+
+Returns a JSON structure with some simple documentation of the service that is running.
+
+#### study_list
+
+    curl http://dev.opentreeoflife.org/api/study_list
+
+Returns a JSON array of all of the study IDs.
+
+
 ### Getting a Github Oauth token
 
 Any API methods that allow writing (or changing the state of

@@ -35,6 +35,12 @@ def index():
         "documentation_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/tree/master/docs"
     })
 
+def study_list():
+    response.view = 'generic.json'
+    phylesystem = api_utils.get_phylesystem(request)
+    studies = phylesystem.get_study_ids()
+    return json.dumps(studies)
+
 def reponexsonformat():
     response.view = 'generic.jsonp'
     phylesystem = api_utils.get_phylesystem(request)
