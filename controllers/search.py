@@ -132,8 +132,9 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
             exc_type, exc_value, exc_traceback = sys.exc_info()
             msg += """indexNexsons failed!'
 nudge_url: %s
+nexson_url_template: %s
 nexson_urls: %s
-%s""" % (nudge_url, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+%s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
 
         # TODO: check returned IDs against our original lists... what if something failed?
 
