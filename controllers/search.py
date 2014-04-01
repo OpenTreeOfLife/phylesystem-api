@@ -103,7 +103,8 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
                               args=["study", "%s"], 
                               vars={'output_nexml2json': '0.0.0'}, 
                               scheme=True, 
-                              host=True)
+                              host=True,
+                              url_encode=False)
 
     # for now, let's just add/update new and modified studies using indexNexsons
     add_or_update_ids = added_study_ids + modified_study_ids
