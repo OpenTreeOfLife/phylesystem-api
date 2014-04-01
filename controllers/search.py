@@ -97,8 +97,9 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
 
     #nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
-    nexson_url_template = URL(controller="default", 
-                              action="v1", 
+    nexson_url_template = URL(r=request,
+                              c="default", 
+                              f="v1", 
                               args=["study", "%s"], 
                               vars={'output_nexml2json': '0.0.0'}, 
                               scheme=True, 
