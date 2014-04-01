@@ -12,7 +12,9 @@ r = test_http_json_method(SUBMIT_URI,
                           return_bool_data=True)
 d = r[1]['data']
 c = d['nexml'].get('^ot:testCount', 0)
-c += 1
+if isinstance(c, list):
+    c = c[0]
+c = c + 1
 d['nexml']['^ot:testCount'] = c
 
 starting_commit_SHA = r[1]['sha']
