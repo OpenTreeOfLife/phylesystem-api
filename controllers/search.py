@@ -75,9 +75,6 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     #   opentree_docstore_url = "https://github.com/OpenTreeOfLife/phylesystem"        # munge this to grab raw NexSON)
     #   oti_base_url='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'    # confirm we're pushing to the right OTI service(s)!
     try:
-        if payload['repository']['url'] != opentree_docstore_url:
-            raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
-
         # how we nudge the index depends on which studies are new, changed, or deleted
         added_study_ids = [ ]
         modified_study_ids = [ ]
@@ -95,6 +92,9 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
 
     except:
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
+
+    if payload['repository']['url'] != opentree_docstore_url:
+        raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
 
     #nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
     nexson_url_template = URL(r=request,
@@ -173,7 +173,6 @@ def _harvest_study_ids_from_paths( path_list, target_array ):
     for path in path_list:
         path_parts = path.split('/')
         if path_parts[0] == "study":
-            study_id = path_parts[1]
+            # skip any intermediate directories in docstore repo
+            study_id = path_parts[ len(path_parts) - 2 ]
             target_array.append(study_id)
-
-
