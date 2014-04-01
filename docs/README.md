@@ -273,7 +273,7 @@ IN FLUX!
 This API method will push the master branch of the local Git repo
 to the master on GitHub
 
-    curl -X POST http://dev.opentreeoflife.org/api/push/v1/9
+    curl -X PUT http://dev.opentreeoflife.org/api/push/v1/9
 
 On success, it will return JSON similar to this:
 
