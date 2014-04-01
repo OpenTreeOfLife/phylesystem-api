@@ -96,7 +96,15 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     except:
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
 
-    nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
+    #nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
+    nexson_url_template = URL(r=request,
+                              c="default", 
+                              f="v1", 
+                              args=["study", "%s"], 
+                              vars={'output_nexml2json': '0.0.0'}, 
+                              scheme=True, 
+                              host=True,
+                              url_encode=False)
 
     # for now, let's just add/update new and modified studies using indexNexsons
     add_or_update_ids = added_study_ids + modified_study_ids
@@ -106,7 +114,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
 
     if len(add_or_update_ids) > 0:
         nudge_url = "%s/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
-        nexson_urls = [ (nexson_url_template % (study_id, study_id)) for study_id in add_or_update_ids ]
+        nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
 
         # N.B. that gluon.tools.fetch() can't be used here, since it won't send
         # "raw" JSON data as treemachine expects
@@ -125,8 +133,9 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
             exc_type, exc_value, exc_traceback = sys.exc_info()
             msg += """indexNexsons failed!'
 nudge_url: %s
+nexson_url_template: %s
 nexson_urls: %s
-%s""" % (nudge_url, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+%s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
 
         # TODO: check returned IDs against our original lists... what if something failed?
 
