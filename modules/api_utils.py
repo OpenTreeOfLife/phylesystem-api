@@ -29,6 +29,7 @@ def get_phylesystem(request):
                                pkey=pkey,
                                git_action_class=GitData,
                                mirror_info=mirror_info)
+    _LOG.debug('repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     return _PHYLESYSTEM
 
 def read_config(request):
@@ -167,7 +168,7 @@ def get_logger(name="ot_api"):
         logger.addHandler(ch)
         logger.is_configured = True
     return logger
-
+_LOG = get_logger(__name__)
 def log_time_diff(log_obj, operation='', prev_time=None):
     '''If prev_time is not None, logs (at debug level) to 
     log_obj the difference between now and the naive datetime 
