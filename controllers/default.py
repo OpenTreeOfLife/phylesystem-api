@@ -57,11 +57,8 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
-#    repo_path, repo_remote, git_ssh, pkey, repo_nexml2json = api_utils.read_config(request)
-#    code 
-#        here
-    phylesystem = api_utils.get_phylesystem(request)
 
+    phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
 
     def __validate_output_nexml2json(kwargs):
