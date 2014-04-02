@@ -20,12 +20,27 @@ from gluon.tools import fetch
 from urllib import urlencode
 from gluon.html import web2pyHTMLParser
 from StringIO import StringIO
+import copy
+try:
+    from open_tree_tasks import call_http_json
+except:
+    call_http_json = None
 
 _VALIDATING = True
 _LOG = api_utils.get_logger('ot_api.default')
 
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
+
+def __deferred_push_to_gh_call(request, resource_id, **kwargs):
+    if call_http_json is not None:
+        url = compose_push_to_github_url(request, resource_id)
+        auth_token = copy.copy(kwargs.get('auth_token'))
+        data = {}
+        if auth_token is not None:
+            data['auth_token'] = auth_token
+        call_http_json(url=url, verb='PUT', data=data)
+        
 
 def index():
     response.view = 'generic.json'
@@ -237,6 +252,7 @@ def v1():
         if commit_return['error'] != 0:
             _LOG.debug('ingest_new_study failed with error code')
             raise HTTP(400, json.dumps(commit_return))
+        __deferred_push_to_gh_call(request, new_resource_id, **kwargs)
         return commit_return
 
     def __coerce_nexson_format(nexson, dest_format, current_format=None):
@@ -309,6 +325,9 @@ def v1():
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
+        mn = blob.get('merge_needed')
+        if (mn is not None) and (not mn):
+            __deferred_push_to_gh_call(request, resource_id, **kwargs)
         return blob
 
     def _new_nexson_with_crossref_metadata(doi, ref_string):
@@ -390,7 +409,10 @@ def v1():
         auth_info = api_utils.authenticate(**kwargs)
         phylesystem = api_utils.get_phylesystem(request)
         try:
-            return phylesystem.delete_study(resource_id, auth_info, parent_sha)
+            x = phylesystem.delete_study(resource_id, auth_info, parent_sha)
+            if x.get('error') == 0:
+                __deferred_push_to_gh_call(request, None, **kwargs)
+            return x
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
         except:
