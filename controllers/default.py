@@ -21,25 +21,31 @@ from urllib import urlencode
 from gluon.html import web2pyHTMLParser
 from StringIO import StringIO
 import copy
+_LOG = api_utils.get_logger('ot_api.default')
 try:
     from open_tree_tasks import call_http_json
+    _LOG.debug('call_http_json imported')
 except:
     call_http_json = None
+    _LOG.debug('call_http_json was not imported from open_tree_tasks')
+
+
 
 _VALIDATING = True
-_LOG = api_utils.get_logger('ot_api.default')
 
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
 
 def __deferred_push_to_gh_call(request, resource_id, **kwargs):
+    _LOG.debug('in __deferred_push_to_gh_call')
     if call_http_json is not None:
-        url = compose_push_to_github_url(request, resource_id)
+        url = api_utils.compose_push_to_github_url(request, resource_id)
         auth_token = copy.copy(kwargs.get('auth_token'))
         data = {}
         if auth_token is not None:
             data['auth_token'] = auth_token
-        call_http_json(url=url, verb='PUT', data=data)
+        _LOG.debug('__deferred_push_to_gh_call({u}, {d})'.format(u=url, d=str(data)))
+        call_http_json.delay(url=url, verb='PUT', data=data)
         
 
 def index():
