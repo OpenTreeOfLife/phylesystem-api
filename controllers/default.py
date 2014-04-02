@@ -41,6 +41,20 @@ def study_list():
     studies = phylesystem.get_study_ids()
     return json.dumps(studies)
 
+def external_url():
+    response.view = 'generic.json'
+    try:
+        study_id = request.args[0]
+    except:
+        raise HTTP(400, '{"error": 1, "description": "Expecting study_id as the argument"}')
+    phylesystem = api_utils.get_phylesystem(request)
+    try:
+        u = phylesystem.get_public_url(study_id)
+        return json.dumps({'url': u, 'study_id': study_id})
+    except:
+        _LOG.exception('study {} not found in external_url'.format(study_id))
+        raise HTTP(404, '{"error": 1, "description": "study not found"}')
+
 def reponexsonformat():
     response.view = 'generic.jsonp'
     phylesystem = api_utils.get_phylesystem(request)
