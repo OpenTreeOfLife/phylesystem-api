@@ -41,7 +41,7 @@ setup(
     url='https://github.com/OpenTreeOfLife',
     license='BSD',
     author='Mark T. Holder and Celery documentation',
-    py_modules=['celeryconfig', 'open_tree_tasks.py'],
+    py_modules=['celeryconfig', 'open_tree_tasks'],
     classifiers=[
         'Development Status :: 1 - Planning',
         'Intended Audience :: Science/Research',

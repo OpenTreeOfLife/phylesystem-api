@@ -3,10 +3,10 @@ from celery import Celery
 import requests
 import traceback
 import json
-app = Celery()
-app.config_from_object('celeryconfig')
+celery = Celery()
+celery.config_from_object('celeryconfig')
 
-@app.task
+@celery.task
 def call_http_json(url,
               verb='GET',
               data=None,
