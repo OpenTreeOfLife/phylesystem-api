@@ -26,6 +26,17 @@ Returns a JSON structure with some simple documentation of the service that is r
 
 Returns a JSON array of all of the study IDs.
 
+#### study_list
+
+    curl http://dev.opentreeoflife.org/api/external_url/9
+
+Returns a JSON object with the canonical study ID and a url for the version of the 
+study in the repo on the master branch:
+
+    {
+        "url": "https://raw.githubusercontent.com/OpenTreeOfLife/phylesystem-0/master/study/pg_09/pg_09/pg_09.json", 
+        "study_id": "9"
+    }
 
 ### Getting a Github Oauth token
 
