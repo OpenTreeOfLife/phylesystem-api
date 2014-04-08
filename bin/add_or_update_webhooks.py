@@ -33,7 +33,7 @@ else:
 
 # Alternately, we could prompt the user for their GitHub username and password...
 
-if !(prompt_for_manual_webhooks):
+if not(prompt_for_manual_webhooks):
     docstore_repo_name = opentree_docstore_url.rstrip('/').split('/').pop()
 
     r = requests.get('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name,
