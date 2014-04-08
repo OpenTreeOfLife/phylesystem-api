@@ -37,7 +37,11 @@ docstore_repo_name = opentree_docstore_url.rstrip('/').split('/').pop()
 r = requests.get('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name,
                  headers={"Authorization": ("token %s" % auth_token)})
 hooks_info = json.loads(r.text)
-
+print('---------')
+print(r.text)
+print('---------')
+print(hooks_info)
+print('---------')
 # look for an existing hook that will do the job...
 found_matching_webhook = False
 for hook in hooks_info:
