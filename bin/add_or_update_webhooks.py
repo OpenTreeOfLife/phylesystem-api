@@ -41,10 +41,11 @@ hooks_info = json.loads(r.text)
 # look for an existing hook that will do the job...
 found_matching_webhook = False
 for hook in hooks_info:
-    if (hook['name'] == "web" and 
-        hook['active'] == True and
-        "push" in hook['events'] and
-        hook['config']['url'] == "%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url):
+    if (hook.get('name') == "web" and 
+        hook.get('active') == True and
+        hook.get('events') and ("push" in hook['events']) and
+        hook.get('config') and (hook['config']['url'] == "%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url)
+    ):
         found_matching_webhook = True
         
 if found_matching_webhook:
