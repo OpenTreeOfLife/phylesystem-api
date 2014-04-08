@@ -8,13 +8,19 @@ this_script = sys.argv[0]
 if len(sys.argv) > 1:
 	opentree_docstore_url = sys.argv[1]
 else:
-    print "Please specify the Open Tree doc-store URL as first argument: '%s <repo-URL> <public-API-URL>'" % (this_script,)
+    print "Please specify the Open Tree doc-store URL as first argument: '%s <repo-URL> <public-API-URL> <GitHub-OAuth-token-file>'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 2:
 	opentree_api_base_url = sys.argv[2].rstrip("/").rstrip("/api/v1")
 else:
-    print "Please specify the Open Tree API public URL as second argument: '%s <repo-URL> <public-API-URL>'" % (this_script,)
+    print "Please specify the Open Tree API public URL as second argument: '%s <repo-URL> <public-API-URL> <GitHub-OAuth-token-file>'" % (this_script,)
+    sys.exit(1)  # signal to the caller that something went wrong
+ 
+if len(sys.argv) > 3:
+	oauth_token_file = sys.argv[3]
+else:
+    print "Please specify an OAuth token file (for the 'opentreeapi' user on GitHub) as third argument: '%s <repo-URL> <public-API-URL>'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
  
 # For now, let's just instruct the user how to do this manually. Point to
@@ -36,15 +42,26 @@ Find (or add) a webhook with these properties:
 ***************************************************************
     """ %  (opentree_docstore_url, opentree_api_base_url)
 
-sys.exit(0)
+#sys.exit(0)
      
-# TODO: To do this automatically via the GitHub API, we'll need an OAuth token
-# with scope 'public_repo' to add/edit webhooks on GitHub. This would probably
-# use the 'opentreeapi' bot user on GitHub, probably with its userid:password
-# read from (yet another) sensitive file.
+# To do this automatically via the GitHub API, we need an OAuth token for bot
+# user 'opentreeapi' on GitHub, with scope 'public_repo' and permission to
+# manage hooks. This is stored in yet another sensitive file.
+auth_token = open(oauth_token_file).readline().strip()
+print "auth_token:"
+print auth_token
+print "opentree_docstore_url:"
+print opentree_docstore_url
+docstore_repo_name = opentree_docstore_url.rstrip('/').split('/').pop()
+print "docstore_repo_name:"
+print docstore_repo_name
+
+
 # OR, we can simply prompt the user for their GitHub username and password.
-#
-## r = requests.get('https://api.github.com/repos/OpenTreeOfLife/phylesystem/hooks')
+
+r = requests.get('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name)
+print r.url
+print r.text
 #
 # Parse with json and look for a hook with these properties:
 #   hook['name'] == "web" 
