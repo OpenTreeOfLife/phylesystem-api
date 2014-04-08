@@ -49,8 +49,10 @@ pprint( hooks_info )
 # look for an existing hook that will do the job...
 found_matching_webhook = False
 for hook in hooks_info:
+    print("test config.url:")
+    print("%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url)
     if (hook['name'] == "web" and 
-        hook['active'] == "true" and
+        hook['active'] == True and
         "push" in hook['events'] and
         hook['config']['url'] == "%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url):
         found_matching_webhook = True
