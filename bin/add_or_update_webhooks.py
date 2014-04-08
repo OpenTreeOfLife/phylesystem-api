@@ -8,25 +8,27 @@ this_script = sys.argv[0]
 if len(sys.argv) > 1:
 	opentree_docstore_url = sys.argv[1]
 else:
-    print "Please specify the Open Tree doc-store URL as first argument: '%s <repo-URL> <public-API-URL> <GitHub-OAuth-token-file>'" % (this_script,)
+    print "Please specify the Open Tree doc-store URL as first argument: '%s <repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 2:
 	opentree_api_base_url = sys.argv[2].rstrip("/").rstrip("/api/v1")
 else:
-    print "Please specify the Open Tree API public URL as second argument: '%s <repo-URL> <public-API-URL> <GitHub-OAuth-token-file>'" % (this_script,)
+    print "Please specify the Open Tree API public URL as second argument: '%s <repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
  
 if len(sys.argv) > 3:
 	oauth_token_file = sys.argv[3]
 else:
-    print "Please specify an OAuth token file (for the 'opentreeapi' user on GitHub) as third argument: '%s <repo-URL> <public-API-URL>'" % (this_script,)
-    sys.exit(1)  # signal to the caller that something went wrong
+    oauth_token_file = None
  
 # To do this automatically via the GitHub API, we need an OAuth token for bot
 # user 'opentreeapi' on GitHub, with scope 'public_repo' and permission to
 # manage hooks. This is stored in yet another sensitive file.
-auth_token = open(oauth_token_file).readline().strip()
+if oauth_token_file:
+    auth_token = open(oauth_token_file).readline().strip()
+else:
+    auth_token = '00000000000000000000000000'  # doomed to fail
 
 # Alternately, we could prompt the user for their GitHub username and password...
 
