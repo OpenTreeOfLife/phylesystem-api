@@ -23,49 +23,81 @@ else:
     print "Please specify an OAuth token file (for the 'opentreeapi' user on GitHub) as third argument: '%s <repo-URL> <public-API-URL>'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
  
-# For now, let's just instruct the user how to do this manually. Point to
-# fetch current hooks on this docstore repo
-print """
-***************************************************************
-
-Please ensure the required webhook is in place on GitHub. You can
-manage webhooks for this repo at:
-    
-    %s/settings/hooks
-    
-Find (or add) a webhook with these properties:
-    Payload URL: %s/api/search/nudgeIndexOnUpdates
-    Payload version: application/vnd.github.v3+json
-    Events: push
-    Active: true
-
-***************************************************************
-    """ %  (opentree_docstore_url, opentree_api_base_url)
-
-#sys.exit(0)
-     
 # To do this automatically via the GitHub API, we need an OAuth token for bot
 # user 'opentreeapi' on GitHub, with scope 'public_repo' and permission to
 # manage hooks. This is stored in yet another sensitive file.
 auth_token = open(oauth_token_file).readline().strip()
+
+# Alternately, we could prompt the user for their GitHub username and password...
+
+docstore_repo_name = opentree_docstore_url.rstrip('/').split('/').pop()
 print "auth_token:"
 print auth_token
 print "opentree_docstore_url:"
 print opentree_docstore_url
-docstore_repo_name = opentree_docstore_url.rstrip('/').split('/').pop()
 print "docstore_repo_name:"
 print docstore_repo_name
 
-
-# OR, we can simply prompt the user for their GitHub username and password.
-
-r = requests.get('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name)
+r = requests.get('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name,
+                 headers={"Authorization": ("token %s" % auth_token)})
 print r.url
 print r.text
-#
-# Parse with json and look for a hook with these properties:
-#   hook['name'] == "web" 
-#   hook['active'] == "true" 
-#   "push" in hook['events']
-#   hook['config']['url'] == "{THIS_API_SERVER}/api/search/nudgeIndexOnUpdates"
-# If found, maybe update it with PATCH. If not found, add it now.
+hooks_info = json.loads(r.text)
+from pprint import pprint
+pprint( hooks_info )
+
+# look for an existing hook that will do the job...
+found_matching_webhook = False
+for hook in hooks_info:
+    if (hook['name'] == "web" and 
+        hook['active'] == "true" and
+        "push" in hook['events'] and
+        hook['config']['url'] == "%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url):
+        found_matching_webhook = True
+        
+if found_matching_webhook:
+    print "Found a matching webhook in the docstore repo!"
+    sys.exit(0)
+else:
+    print "Adding a webhook to the docstore repo..."
+    hook_settings = {
+        "name": "web",
+        "active": True,
+        "events": [
+            "push"
+        ],
+        "config": {
+            "url": ("%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url),
+            "content_type": "json"
+        }
+    }
+
+    r = requests.post('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name,
+                      headers={"Authorization": ("token %s" % auth_token), 
+                               "Content-type": "aplication/json"}, 
+                      data=json.dumps(hook_settings))
+    print r.url
+    print r.text
+    if r.status_code == 201:  # 201=Created
+        print "Hook added successfully!"
+    else:
+        print "Failed to add webhook!"
+        # fall back to our prompt for manual action
+        print """
+        ***************************************************************
+
+        Please ensure the required webhook is in place on GitHub. You can
+        manage webhooks for this repo at:
+            
+            %s/settings/hooks
+            
+        Find (or add) a webhook with these properties:
+            Payload URL: %s/api/search/nudgeIndexOnUpdates
+            Payload version: application/vnd.github.v3+json
+            Events: push
+            Active: true
+
+        ***************************************************************
+            """ %  (opentree_docstore_url, opentree_api_base_url)
+
+sys.exit(0)
