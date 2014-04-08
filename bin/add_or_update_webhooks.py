@@ -31,26 +31,14 @@ auth_token = open(oauth_token_file).readline().strip()
 # Alternately, we could prompt the user for their GitHub username and password...
 
 docstore_repo_name = opentree_docstore_url.rstrip('/').split('/').pop()
-print "auth_token:"
-print auth_token
-print "opentree_docstore_url:"
-print opentree_docstore_url
-print "docstore_repo_name:"
-print docstore_repo_name
 
 r = requests.get('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name,
                  headers={"Authorization": ("token %s" % auth_token)})
-print r.url
-print r.text
 hooks_info = json.loads(r.text)
-from pprint import pprint
-pprint( hooks_info )
 
 # look for an existing hook that will do the job...
 found_matching_webhook = False
 for hook in hooks_info:
-    print("test config.url:")
-    print("%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url)
     if (hook['name'] == "web" and 
         hook['active'] == True and
         "push" in hook['events'] and
@@ -78,12 +66,12 @@ else:
                       headers={"Authorization": ("token %s" % auth_token), 
                                "Content-type": "aplication/json"}, 
                       data=json.dumps(hook_settings))
-    print r.url
-    print r.text
     if r.status_code == 201:  # 201=Created
         print "Hook added successfully!"
     else:
-        print "Failed to add webhook!"
+        print "Failed to add webhook! API sent this response:"
+        print r.url
+        print r.text
         # fall back to our prompt for manual action
         print """
         ***************************************************************
