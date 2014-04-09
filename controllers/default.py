@@ -183,7 +183,7 @@ def v1():
                                         "description": "Only the creation of new studies is currently supported"}))
         
         # we're creating a new study (possibly with import instructions in the payload)
-        cc0_agreement = kwargs.get('cc0_agreement', '')
+        cc0_agreement = kwargs.get('cc0_agreement', '') == 'true'
         import_option = kwargs.get('import_option', '')
         treebase_id = kwargs.get('treebase_id', '')
         nexml_fetch_url = kwargs.get('nexml_fetch_url', '')
@@ -191,12 +191,6 @@ def v1():
         publication_doi = kwargs.get('publication_DOI', '')
         publication_ref = kwargs.get('publication_reference', '')
         ##dryad_DOI = kwargs.get('dryad_DOI', '')
-
-        # check for required license agreement!
-        if cc0_agreement != 'true':
-            d = {"error":1,
-                 "description": "CC-0 license must be accepted to add studies using this API."}
-            raise HTTP(400, json.dumps(d))
 
         auth_info = api_utils.authenticate(**kwargs)
 
@@ -239,9 +233,9 @@ def v1():
             new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
                                                             nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
         elif importing_from_crossref_API:
-            new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref)
+            new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref, include_cc0=cc0_agreement)
         else:   # assumes IMPORT_FROM_MANUAL_ENTRY, or insufficient args above
-            new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
+            new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
 
         nexml = new_study_nexson['nexml']
         nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
@@ -336,7 +330,7 @@ def v1():
             __deferred_push_to_gh_call(request, resource_id, **kwargs)
         return blob
 
-    def _new_nexson_with_crossref_metadata(doi, ref_string):
+    def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
         if doi:
             # use the supplied DOI to fetch study metadata
 
@@ -393,7 +387,7 @@ def v1():
             meta_year = u''
 
         # add any found values to a fresh NexSON template
-        nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
+        nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=include_cc0)
         nexml_el = nexson['nexml']
         nexml_el[u'^ot:studyPublicationReference'] = meta_publication_reference
         if meta_publication_url:
