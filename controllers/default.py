@@ -156,7 +156,7 @@ def v1():
                 study_nexson = __coerce_nexson_format(study_nexson,
                                           output_nexml2json,
                                           current_format=repo_nexml2json)
-        except Error, err:
+        except Exception, err:
             _raise_HTTP_from_msg(err.msg)
             _LOG.exception('GET failed')
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
