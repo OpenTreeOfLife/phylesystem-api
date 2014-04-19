@@ -151,6 +151,7 @@ def v1():
            study_nexson, head_sha, wip_map = r
            blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
            phylesystem.add_validation_annotation(study_nexson, blob_sha)
+           version_history = phylesystem.get_version_history_for_study_id(resource_id)
            if output_nexml2json != repo_nexml2json:
                 study_nexson = __coerce_nexson_format(study_nexson,
                                           output_nexml2json,
@@ -162,6 +163,7 @@ def v1():
         #create phylesystem action to get blob sha for a file given HEAD and study_ID
         return {'sha': head_sha,
                 'data': study_nexson,
+                'versionHistory': version_history,
                 'branch2sha': wip_map
                 }
 
