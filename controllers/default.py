@@ -112,6 +112,7 @@ def v1():
                             adaptor,
                             annotation,
                             parent_sha,
+                            commit_msg='',
                             master_file_blob_included=None):
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
@@ -123,6 +124,7 @@ def v1():
                                            adaptor,
                                            annotation,
                                            parent_sha,
+                                           commit_msg,
                                            master_file_blob_included)
         annotated_commit = a
         # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
@@ -299,6 +301,7 @@ def v1():
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        commit_msg = kwargs.get('commit_msg')
         master_file_blob_included = kwargs.get('merged_SHA')
         #TIMING = api_utils.log_time_diff(_LOG)
         auth_info = api_utils.authenticate(**kwargs)
@@ -325,6 +328,7 @@ def v1():
                                        adaptor=nexson_adaptor,
                                        annotation=annotation,
                                        parent_sha=parent_sha, 
+                                       commit_msg=commit_msg,
                                        master_file_blob_included=master_file_blob_included)
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
