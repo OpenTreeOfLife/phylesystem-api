@@ -26,7 +26,7 @@ Returns a JSON structure with some simple documentation of the service that is r
 
 Returns a JSON array of all of the study IDs.
 
-#### study_list
+#### external_url
 
     curl http://dev.opentreeoflife.org/api/external_url/9
 
