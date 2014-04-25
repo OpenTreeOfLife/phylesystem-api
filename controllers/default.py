@@ -20,12 +20,33 @@ from gluon.tools import fetch
 from urllib import urlencode
 from gluon.html import web2pyHTMLParser
 from StringIO import StringIO
+import copy
+_LOG = api_utils.get_logger('ot_api.default')
+try:
+    from open_tree_tasks import call_http_json
+    _LOG.debug('call_http_json imported')
+except:
+    call_http_json = None
+    _LOG.debug('call_http_json was not imported from open_tree_tasks')
+
+
 
 _VALIDATING = True
-_LOG = api_utils.get_logger('ot_api.default')
 
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
+
+def __deferred_push_to_gh_call(request, resource_id, **kwargs):
+    _LOG.debug('in __deferred_push_to_gh_call')
+    if call_http_json is not None:
+        url = api_utils.compose_push_to_github_url(request, resource_id)
+        auth_token = copy.copy(kwargs.get('auth_token'))
+        data = {}
+        if auth_token is not None:
+            data['auth_token'] = auth_token
+        _LOG.debug('__deferred_push_to_gh_call({u}, {d})'.format(u=url, d=str(data)))
+        call_http_json.delay(url=url, verb='PUT', data=data)
+        
 
 def index():
     response.view = 'generic.json'
@@ -91,6 +112,7 @@ def v1():
                             adaptor,
                             annotation,
                             parent_sha,
+                            commit_msg='',
                             master_file_blob_included=None):
         '''Called by PUT and POST handlers to avoid code repetition.'''
         # global TIMING
@@ -102,6 +124,7 @@ def v1():
                                            adaptor,
                                            annotation,
                                            parent_sha,
+                                           commit_msg,
                                            master_file_blob_included)
         annotated_commit = a
         # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
@@ -130,17 +153,21 @@ def v1():
            study_nexson, head_sha, wip_map = r
            blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
            phylesystem.add_validation_annotation(study_nexson, blob_sha)
+           version_history = phylesystem.get_version_history_for_study_id(resource_id)
            if output_nexml2json != repo_nexml2json:
                 study_nexson = __coerce_nexson_format(study_nexson,
                                           output_nexml2json,
                                           current_format=repo_nexml2json)
         except:
+            e = sys.exc_info()[0]
+            _raise_HTTP_from_msg(e)
             _LOG.exception('GET failed')
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
         #Apply the annotations
         #create phylesystem action to get blob sha for a file given HEAD and study_ID
         return {'sha': head_sha,
                 'data': study_nexson,
+                'versionHistory': version_history,
                 'branch2sha': wip_map
                 }
 
@@ -162,7 +189,7 @@ def v1():
                                         "description": "Only the creation of new studies is currently supported"}))
         
         # we're creating a new study (possibly with import instructions in the payload)
-        cc0_agreement = kwargs.get('cc0_agreement', '')
+        cc0_agreement = kwargs.get('cc0_agreement', '') == 'true'
         import_option = kwargs.get('import_option', '')
         treebase_id = kwargs.get('treebase_id', '')
         nexml_fetch_url = kwargs.get('nexml_fetch_url', '')
@@ -170,12 +197,6 @@ def v1():
         publication_doi = kwargs.get('publication_DOI', '')
         publication_ref = kwargs.get('publication_reference', '')
         ##dryad_DOI = kwargs.get('dryad_DOI', '')
-
-        # check for required license agreement!
-        if cc0_agreement != 'true':
-            d = {"error":1,
-                 "description": "CC-0 license must be accepted to add studies using this API."}
-            raise HTTP(400, json.dumps(d))
 
         auth_info = api_utils.authenticate(**kwargs)
 
@@ -218,9 +239,9 @@ def v1():
             new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
                                                             nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
         elif importing_from_crossref_API:
-            new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref)
+            new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref, include_cc0=cc0_agreement)
         else:   # assumes IMPORT_FROM_MANUAL_ENTRY, or insufficient args above
-            new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
+            new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
 
         nexml = new_study_nexson['nexml']
         nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
@@ -237,6 +258,7 @@ def v1():
         if commit_return['error'] != 0:
             _LOG.debug('ingest_new_study failed with error code')
             raise HTTP(400, json.dumps(commit_return))
+        __deferred_push_to_gh_call(request, new_resource_id, **kwargs)
         return commit_return
 
     def __coerce_nexson_format(nexson, dest_format, current_format=None):
@@ -279,6 +301,7 @@ def v1():
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        commit_msg = kwargs.get('commit_msg')
         master_file_blob_included = kwargs.get('merged_SHA')
         #TIMING = api_utils.log_time_diff(_LOG)
         auth_info = api_utils.authenticate(**kwargs)
@@ -305,13 +328,17 @@ def v1():
                                        adaptor=nexson_adaptor,
                                        annotation=annotation,
                                        parent_sha=parent_sha, 
+                                       commit_msg=commit_msg,
                                        master_file_blob_included=master_file_blob_included)
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
+        mn = blob.get('merge_needed')
+        if (mn is not None) and (not mn):
+            __deferred_push_to_gh_call(request, resource_id, **kwargs)
         return blob
 
-    def _new_nexson_with_crossref_metadata(doi, ref_string):
+    def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
         if doi:
             # use the supplied DOI to fetch study metadata
 
@@ -368,7 +395,7 @@ def v1():
             meta_year = u''
 
         # add any found values to a fresh NexSON template
-        nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH)
+        nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=include_cc0)
         nexml_el = nexson['nexml']
         nexml_el[u'^ot:studyPublicationReference'] = meta_publication_reference
         if meta_publication_url:
@@ -390,7 +417,10 @@ def v1():
         auth_info = api_utils.authenticate(**kwargs)
         phylesystem = api_utils.get_phylesystem(request)
         try:
-            return phylesystem.delete_study(resource_id, auth_info, parent_sha)
+            x = phylesystem.delete_study(resource_id, auth_info, parent_sha)
+            if x.get('error') == 0:
+                __deferred_push_to_gh_call(request, None, **kwargs)
+            return x
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
         except:

@@ -6,6 +6,15 @@ import logging
 import os
 import json
 
+def compose_push_to_github_url(request, resource_id):
+    if resource_id is None:
+        return '{p}://{d}/{a}/push/v1'.format(p=request.env.wsgi_url_scheme,
+                                              d=request.env.http_host,
+                                              a=request.application)
+    return '{p}://{d}/{a}/push/v1/{r}'.format(p=request.env.wsgi_url_scheme,
+                                           d=request.env.http_host,
+                                           a=request.application,
+                                           r=resource_id)
 
 # this allows us to raise HTTP(...)
 from gluon import *
@@ -15,12 +24,12 @@ def get_phylesystem(request):
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
     from gitdata import GitData
-    repo_parent, repo_remote, git_ssh, pkey = read_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote = read_config(request)
     push_mirror = os.path.join(repo_parent, 'mirror')
     pmi = {
         'parent_dir': push_mirror,
         'remote_map': {
-            'GitHubRemote': 'git@github.com:OpenTreeOfLife',
+            'GitHubRemote': git_hub_remote,
             },
         }
     mirror_info = {'push':pmi}
@@ -53,7 +62,11 @@ def read_config(request):
         pkey        = conf.get("apis", "pkey")
     except:
         pkey = None
-    return repo_parent, repo_remote, git_ssh, pkey
+    try:
+        git_hub_remote = conf.get("apis", "git_hub_remote")
+    except:
+        git_hub_remote = 'git@github.com:OpenTreeOfLife'
+    return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote
 
 def authenticate(**kwargs):
     """Verify that we received a valid Github authentication token
