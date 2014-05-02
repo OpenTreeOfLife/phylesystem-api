@@ -150,6 +150,10 @@ def v1():
         phylesystem = api_utils.get_phylesystem(request)
         try:
            r = phylesystem.return_study(resource_id, commit_sha=parent_sha, return_WIP_map=True)
+        except:
+            _LOG.exception('GET failed')
+            raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
+        try:
            study_nexson, head_sha, wip_map = r
            blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
            phylesystem.add_validation_annotation(study_nexson, blob_sha)
@@ -159,10 +163,9 @@ def v1():
                                           output_nexml2json,
                                           current_format=repo_nexml2json)
         except:
+            _LOG.exception('GET failed')
             e = sys.exc_info()[0]
             _raise_HTTP_from_msg(e)
-            _LOG.exception('GET failed')
-            raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
         #Apply the annotations
         #create phylesystem action to get blob sha for a file given HEAD and study_ID
         return {'sha': head_sha,
