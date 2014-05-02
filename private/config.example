@@ -27,3 +27,8 @@ opentree_docstore_url = OPENTREE_DOCSTORE_URL
 # prefix for the GitHubRemote used in the push mirror
 #   default is git@github.com:OpenTreeOfLife
 # git_hub_remote = git@github.com:OpenTreeOfLife
+
+[logging]
+level = OPEN_TREE_API_LOGGING_LEVEL
+formatter = OPEN_TREE_API_LOGGING_FORMATTER
+filepath = OPEN_TREE_API_LOGGING_FILEPATH

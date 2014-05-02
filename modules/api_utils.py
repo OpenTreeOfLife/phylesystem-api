@@ -81,14 +81,20 @@ def read_logging_config(request):
         conf.readfp(open(filename))
     try:
         level = conf.get("logging", "level")
+        if not level.strip():
+            level = 'WARNING'
     except:
         level = 'WARNING'
     try:
         logging_format_name = conf.get("logging", "formatter")
+        if not logging_format_name.strip():
+            logging_format_name = 'NONE'
     except:
         logging_format_name = 'NONE'
     try:
         logging_filepath = conf.get("logging", "filepath")
+        if not logging_filepath.strip():
+            logging_filepath = None
     except:
         logging_filepath = None
     return level, logging_format_name, logging_filepath
