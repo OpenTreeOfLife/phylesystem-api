@@ -182,6 +182,10 @@ def get_logger(name="ot_api"):
                 os.makedirs(log_dir)
             ch = logging.FileHandler(log_fp)
         else:
+            fo = open('/tmp/api-no-log-file-path', 'a')
+            for k, v in os.environ.items():
+                fo.write('{} = "{}"'.format(k, v))
+            fo.close()
             ch = logging.StreamHandler()
         ch.setLevel(level)
         ch.setFormatter(logging_formatter)
