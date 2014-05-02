@@ -136,6 +136,7 @@ def v1():
     def GET(resource, resource_id, jsoncallback=None, callback=None, _=None, **kwargs):
         "OpenTree API methods relating to reading"
         valid_resources = ('study', )
+        _LOG.debug('GET default/v1/study/{}'.format(str(resource_id)))
         output_nexml2json = __validate_output_nexml2json(kwargs)
         if resource not in valid_resources:
             raise HTTP(400, json.dumps({"error": 1,
