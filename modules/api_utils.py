@@ -175,7 +175,14 @@ def get_logger(name="ot_api"):
         if logging_formatter is not None:
             logging_formatter.datefmt='%H:%M:%S'
         logger.setLevel(level)
-        ch = logging.StreamHandler()
+        if 'OT_API_LOG_FILE_PATH' in os.environ:
+            log_fp = os.environ['OT_API_LOG_FILE_PATH']
+            log_dir = os.path.split(log_fp)[0]
+            if log_dir and not os.path.exists(log_dir):
+                os.makedirs(log_dir)
+            ch = logging.FileHandler(log_fp)
+        else:
+            ch = logging.StreamHandler()
         ch.setLevel(level)
         ch.setFormatter(logging_formatter)
         logger.addHandler(ch)

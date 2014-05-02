@@ -37,6 +37,13 @@ should be sufficient to get the latest changes.
 
 then open private/config in a text editor and tweak it. 
 
+### Logging configuration
+
+The behavior of the log is determined by environmental variables:
+   OT_API_LOG_FILE_PATH filepath of log file (StreamHandler if omitted)
+   OT_API_LOGGING_LEVEL  (NotSet, debug, info, warning, error, or critical)
+   OT_API_LOGGING_FORMAT  "rich", "simple" or "None" (None is default)
+
 **NEW in the translatingnexson branch**: a new config variable 'repo_nexml2json' was added.
 
 # Deploying
