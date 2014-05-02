@@ -204,9 +204,7 @@ def get_logger(request, name="ot_api"):
 #         except:
 #             logger_set = False
     logger = logging.getLogger(name)
-    if not hasattr(logger, 'is_configured'):
-        logger.is_configured = False
-    if not logger.is_configured:
+    if len(logger.handlers) == 0:
         if request is None:
             level = _get_logging_level(os.environ.get(_LOGGING_LEVEL_ENVAR))
             logging_formatter = _get_logging_formatter(os.environ.get(_LOGGING_FORMAT_ENVAR))
@@ -227,7 +225,6 @@ def get_logger(request, name="ot_api"):
         ch.setLevel(level)
         ch.setFormatter(logging_formatter)
         logger.addHandler(ch)
-        logger.is_configured = True
     return logger
 
 def log_time_diff(log_obj, operation='', prev_time=None):
