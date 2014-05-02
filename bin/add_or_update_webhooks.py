@@ -42,13 +42,15 @@ if not(prompt_for_manual_webhooks):
     # look for an existing hook that will do the job...
     found_matching_webhook = False
     for hook in hooks_info:
-        if (hook.get('name') == "web" and 
-            hook.get('active') == True and
-            hook.get('events') and ("push" in hook['events']) and
-            hook.get('config') and (hook['config']['url'] == "%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url)
-        ):
-            found_matching_webhook = True
-            
+        try:
+            if (hook.get('name') == "web" and 
+                hook.get('active') == True and
+                hook.get('events') and ("push" in hook['events']) and
+                hook.get('config') and (hook['config']['url'] == "%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url)
+            ):
+                found_matching_webhook = True
+        except:
+            pass
     if found_matching_webhook:
         print "Found a matching webhook in the docstore repo!"
         sys.exit(0)
