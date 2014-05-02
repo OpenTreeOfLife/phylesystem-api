@@ -2,7 +2,6 @@ from peyotl.phylesystem.git_actions import GitAction
 from sh import git
 import os
 import api_utils
-_LOG = api_utils.get_logger(__name__)
 
 class GitData(GitAction):
     def __init__(self, repo, **kwargs):

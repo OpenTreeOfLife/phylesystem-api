@@ -38,6 +38,7 @@ def get_phylesystem(request):
                                pkey=pkey,
                                git_action_class=GitData,
                                mirror_info=mirror_info)
+    _LOG = get_logger(request, 'ot_api')
     _LOG.debug('repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     return _PHYLESYSTEM
 
@@ -67,6 +68,30 @@ def read_config(request):
     except:
         git_hub_remote = 'git@github.com:OpenTreeOfLife'
     return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote
+
+def read_logging_config(request):
+    app_name = "api"
+    conf = SafeConfigParser(allow_no_value=True)
+    localconfig_filename = "%s/applications/%s/private/localconfig" % (request.env.web2py_path, app_name)
+
+    if os.path.isfile(localconfig_filename):
+        conf.readfp(open(localconfig_filename))
+    else:
+        filename = "%s/applications/%s/private/config" % (request.env.web2py_path, app_name)
+        conf.readfp(open(filename))
+    try:
+        level = conf.get("logging", "level")
+    except:
+        level = 'WARNING'
+    try:
+        logging_format_name = conf.get("logging", "formatter")
+    except:
+        logging_format_name = 'NONE'
+    try:
+        logging_filepath = conf.get("logging", "filepath")
+    except:
+        logging_filepath = None
+    return level, logging_format_name, logging_filepath
 
 def authenticate(**kwargs):
     """Verify that we received a valid Github authentication token
@@ -116,28 +141,49 @@ def authenticate(**kwargs):
 
 _LOGGING_LEVEL_ENVAR="OT_API_LOGGING_LEVEL"
 _LOGGING_FORMAT_ENVAR="OT_API_LOGGING_FORMAT"
+_LOGGING_FILE_PATH_ENVAR = 'OT_API_LOG_FILE_PATH'
 
-def _get_logging_level():
-    if _LOGGING_LEVEL_ENVAR in os.environ:
-        if os.environ[_LOGGING_LEVEL_ENVAR].upper() == "NOTSET":
-            level = logging.NOTSET
-        elif os.environ[_LOGGING_LEVEL_ENVAR].upper() == "DEBUG":
-            level = logging.DEBUG
-        elif os.environ[_LOGGING_LEVEL_ENVAR].upper() == "INFO":
-            level = logging.INFO
-        elif os.environ[_LOGGING_LEVEL_ENVAR].upper() == "WARNING":
-            level = logging.WARNING
-        elif os.environ[_LOGGING_LEVEL_ENVAR].upper() == "ERROR":
-            level = logging.ERROR
-        elif os.environ[_LOGGING_LEVEL_ENVAR].upper() == "CRITICAL":
-            level = logging.CRITICAL
-        else:
-            level = logging.NOTSET
+def _get_logging_level(s=None):
+    if s is None:
+        return logging.NOTSET
+    supper = s.upper()
+    if supper == "NOTSET":
+        level = logging.NOTSET
+    elif supper == "DEBUG":
+        level = logging.DEBUG
+    elif supper == "INFO":
+        level = logging.INFO
+    elif supper == "WARNING":
+        level = logging.WARNING
+    elif supper == "ERROR":
+        level = logging.ERROR
+    elif supper == "CRITICAL":
+        level = logging.CRITICAL
     else:
         level = logging.NOTSET
     return level
 
-def get_logger(name="ot_api"):
+def _get_logging_formatter(s=None):
+    if s is None:
+        s == 'NONE'
+    else:
+        s = s.upper()
+    rich_formatter = logging.Formatter("[%(asctime)s] %(filename)s (%(lineno)d): %(levelname) 8s: %(message)s")
+    simple_formatter = logging.Formatter("%(levelname) 8s: %(message)s")
+    raw_formatter = logging.Formatter("%(message)s")
+    default_formatter = None
+    logging_formatter = default_formatter
+    if s == "RICH":
+        logging_formatter = rich_formatter
+    elif s == "SIMPLE":
+        logging_formatter = simple_formatter
+    else:
+        logging_formatter = None
+    if logging_formatter is not None:
+        logging_formatter.datefmt='%H:%M:%S'
+    return logging_formatter
+
+def get_logger(request, name="ot_api"):
     """
     Returns a logger with name set as given, and configured
     to the level given by the environment variable _LOGGING_LEVEL_ENVAR.
@@ -155,44 +201,29 @@ def get_logger(name="ot_api"):
     if not hasattr(logger, 'is_configured'):
         logger.is_configured = False
     if not logger.is_configured:
-        level = _get_logging_level()
-        rich_formatter = logging.Formatter("[%(asctime)s] %(filename)s (%(lineno)d): %(levelname) 8s: %(message)s")
-        simple_formatter = logging.Formatter("%(levelname) 8s: %(message)s")
-        raw_formatter = logging.Formatter("%(message)s")
-        default_formatter = None
-        logging_formatter = default_formatter
-        if _LOGGING_FORMAT_ENVAR in os.environ:
-            if os.environ[_LOGGING_FORMAT_ENVAR].upper() == "RICH":
-                logging_formatter = rich_formatter
-            elif os.environ[_LOGGING_FORMAT_ENVAR].upper() == "SIMPLE":
-                logging_formatter = simple_formatter
-            elif os.environ[_LOGGING_FORMAT_ENVAR].upper() == "NONE":
-                logging_formatter = None
-            else:
-                logging_formatter = default_formatter
+        if request is None:
+            level = _get_logging_level(os.environ.get(_LOGGING_LEVEL_ENVAR))
+            logging_formatter = _get_logging_formatter(os.environ.get(_LOGGING_FORMAT_ENVAR))
+            logging_filepath = os.environ.get(_LOGGING_FILE_PATH_ENVAR)
         else:
-            logging_formatter = default_formatter
-        if logging_formatter is not None:
-            logging_formatter.datefmt='%H:%M:%S'
+            level_str, logging_format_name, logging_filepath = read_logging_config(request)
+            logging_formatter = _get_logging_formatter(logging_format_name)
+            level = _get_logging_level(level_str)
+
         logger.setLevel(level)
-        if 'OT_API_LOG_FILE_PATH' in os.environ:
-            log_fp = os.environ['OT_API_LOG_FILE_PATH']
-            log_dir = os.path.split(log_fp)[0]
+        if logging_filepath is not None:
+            log_dir = os.path.split(logging_filepath)[0]
             if log_dir and not os.path.exists(log_dir):
                 os.makedirs(log_dir)
-            ch = logging.FileHandler(log_fp)
+            ch = logging.FileHandler(logging_filepath)
         else:
-            fo = open('/tmp/api-no-log-file-path', 'a')
-            for k, v in os.environ.items():
-                fo.write('{} = "{}"'.format(k, v))
-            fo.close()
             ch = logging.StreamHandler()
         ch.setLevel(level)
         ch.setFormatter(logging_formatter)
         logger.addHandler(ch)
         logger.is_configured = True
     return logger
-_LOG = get_logger(__name__)
+
 def log_time_diff(log_obj, operation='', prev_time=None):
     '''If prev_time is not None, logs (at debug level) to 
     log_obj the difference between now and the naive datetime 

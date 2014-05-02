@@ -21,13 +21,13 @@ from urllib import urlencode
 from gluon.html import web2pyHTMLParser
 from StringIO import StringIO
 import copy
-_LOG = api_utils.get_logger('ot_api.default')
+_GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
     from open_tree_tasks import call_http_json
-    _LOG.debug('call_http_json imported')
+    _GLOG.debug('call_http_json imported')
 except:
     call_http_json = None
-    _LOG.debug('call_http_json was not imported from open_tree_tasks')
+    _GLOG.debug('call_http_json was not imported from open_tree_tasks')
 
 
 
@@ -37,6 +37,7 @@ def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
 
 def __deferred_push_to_gh_call(request, resource_id, **kwargs):
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     _LOG.debug('in __deferred_push_to_gh_call')
     if call_http_json is not None:
         url = api_utils.compose_push_to_github_url(request, resource_id)
@@ -73,6 +74,7 @@ def external_url():
         u = phylesystem.get_public_url(study_id)
         return json.dumps({'url': u, 'study_id': study_id})
     except:
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         _LOG.exception('study {} not found in external_url'.format(study_id))
         raise HTTP(404, '{"error": 1, "description": "study not found"}')
 
@@ -100,6 +102,7 @@ def v1():
         output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
         if (output_nexml2json != repo_nexml2json) and not can_convert_nexson_forms(repo_nexml2json, output_nexml2json):
             msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json, d=output_nexml2json)
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.debug('GET failing: {m}'.format(m=msg))
             raise HTTP(400, json.dumps({"error": 1, "description": msg}))
         return output_nexml2json
@@ -129,12 +132,14 @@ def v1():
         annotated_commit = a
         # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
         if annotated_commit['error'] != 0:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
         return annotated_commit
 
     def GET(resource, resource_id, jsoncallback=None, callback=None, _=None, **kwargs):
         "OpenTree API methods relating to reading"
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         valid_resources = ('study', )
         _LOG.debug('GET default/v1/study/{}'.format(str(resource_id)))
         output_nexml2json = __validate_output_nexml2json(kwargs)
@@ -177,6 +182,8 @@ def v1():
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.POST')
+        
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
@@ -272,6 +279,7 @@ def v1():
             return convert_nexson_format(nexson, dest_format, current_format=current_format)
         except:
             msg = "Exception in coercing to the required NexSON version for validation. "
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.exception(msg)
             raise HTTP(400, msg)
 
@@ -289,6 +297,7 @@ def v1():
             if 'nexson' in nexson:
                 nexson = nexson['nexson']
         except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.exception('Exception getting nexson content in __extract_nexson_from_http_call')
             raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
         return nexson
@@ -296,6 +305,8 @@ def v1():
     def PUT(resource, resource_id, **kwargs):
         "Open Tree API methods relating to updating existing resources"
         #global TIMING
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
+        
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
@@ -411,6 +422,7 @@ def v1():
     def DELETE(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to deleting existing resources"
         # support JSONP request from another domain
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.DELETE')
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
         if not resource=='study':
