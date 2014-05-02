@@ -50,7 +50,8 @@ if not(prompt_for_manual_webhooks):
             ):
                 found_matching_webhook = True
         except:
-            pass
+            print 'hook =', hook
+            raise
     if found_matching_webhook:
         print "Found a matching webhook in the docstore repo!"
         sys.exit(0)
