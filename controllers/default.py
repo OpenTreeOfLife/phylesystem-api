@@ -320,7 +320,7 @@ def v1():
         master_file_blob_included = kwargs.get('merged_SHA')
         _LOG.debug('PUT to study {} for starting_commit_SHA = {} and merged_SHA = {}'.format(resource_id,
                                                                                              parent_sha,
-                                                                                             str(merged_SHA)))
+                                                                                             str(master_file_blob_included)))
         #TIMING = api_utils.log_time_diff(_LOG)
         auth_info = api_utils.authenticate(**kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
