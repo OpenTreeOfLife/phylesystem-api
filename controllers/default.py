@@ -318,6 +318,9 @@ def v1():
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
         commit_msg = kwargs.get('commit_msg')
         master_file_blob_included = kwargs.get('merged_SHA')
+        _LOG.debug('PUT to study {} for starting_commit_SHA = {} and merged_SHA = {}'.format(resource_id,
+                                                                                             parent_sha,
+                                                                                             str(merged_SHA)))
         #TIMING = api_utils.log_time_diff(_LOG)
         auth_info = api_utils.authenticate(**kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
