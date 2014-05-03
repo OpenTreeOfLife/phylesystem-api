@@ -329,9 +329,10 @@ def v1():
             nexson = __extract_nexson_from_http_call(request, **kwargs)
             bundle = validate_and_convert_nexson(nexson,
                                                  repo_nexml2json,
-                                                 allow_invalid=True) #@TEMP. Should reject...
+                                                 allow_invalid=False)
             nexson, annotation, validation_log, nexson_adaptor = bundle
         except GitWorkflowError, err:
+            _LOG.exception('PUT failed in validation')
             _raise_HTTP_from_msg(err.msg)
 
         #TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
@@ -349,6 +350,7 @@ def v1():
                                        commit_msg=commit_msg,
                                        master_file_blob_included=master_file_blob_included)
         except GitWorkflowError, err:
+            _LOG.exception('PUT failed in __finish_write_verb')
             _raise_HTTP_from_msg(err.msg)
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         mn = blob.get('merge_needed')
