@@ -250,7 +250,7 @@ def v1():
                     "error": 1,
                     "description": 'Expecting: "nexml_fetch_url" to startwith http:// or https://',
                 }))
-            new_study_nexson = get_ot_study_info_from_nexml(fetch_url=nexml_fetch_url,
+            new_study_nexson = get_ot_study_info_from_nexml(src=nexml_fetch_url,
                                                             nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
         elif importing_from_nexml_string:
             new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
