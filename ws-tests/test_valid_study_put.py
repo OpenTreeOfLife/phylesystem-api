@@ -21,8 +21,8 @@ n = resp['data']
 # refresh a timestamp so that the test generates a commit
 m = n['nexml']['^bogus_timestamp'] = datetime.datetime.utcnow().isoformat()
 
-from peyotl import write_as_json
-write_as_json(n, '9-0.0.0.json')
+#from peyotl import write_as_json
+#write_as_json(n, '9-0.0.0.json')
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,
