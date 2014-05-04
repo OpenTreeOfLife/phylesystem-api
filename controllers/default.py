@@ -200,13 +200,22 @@ def v1():
                                         "description": "Only the creation of new studies is currently supported"}))
         
         # we're creating a new study (possibly with import instructions in the payload)
-        cc0_agreement = kwargs.get('cc0_agreement', '') == 'true'
-        import_option = kwargs.get('import_option', '')
+        import_from_location = kwargs.get('import_from_location', '')
         treebase_id = kwargs.get('treebase_id', '')
         nexml_fetch_url = kwargs.get('nexml_fetch_url', '')
         nexml_pasted_string = kwargs.get('nexml_pasted_string', '')
         publication_doi = kwargs.get('publication_DOI', '')
         publication_ref = kwargs.get('publication_reference', '')
+        # apply the CC0 waiver *only* if the data location is 'UPLOAD'
+        # (i.e., this study is not currently in an online repository)
+        if import_from_location == 'IMPORT_FROM_UPLOAD':
+            cc0_agreement = kwargs.get('cc0_agreement', '') == 'true'
+        else:
+            cc0_agreement = False
+        # look for the chosen import method, e.g,
+        # 'import-method-PUBLICATION_DOI' or 'import-method-MANUAL_ENTRY'
+        import_method = kwargs.get('import_method', '')
+
         ##dryad_DOI = kwargs.get('dryad_DOI', '')
 
         auth_info = api_utils.authenticate(**kwargs)
@@ -215,15 +224,12 @@ def v1():
         # add known values for its metatags
         meta_publication_reference = None
 
-        # create initial study NexSON using the chosen import option
-        importing_from_treebase_id = (import_option == 'IMPORT_FROM_TREEBASE' and treebase_id)
-        importing_from_nexml_fetch = (import_option == 'IMPORT_FROM_NEXML' and nexml_fetch_url)
-        importing_from_nexml_string = (import_option == 'IMPORT_FROM_NEXML' and nexml_pasted_string)
-        #importing_from_nexml_upload = (import_option == 'IMPORT_FROM_NEXML' and publication_doi)
-        #importing_from_nexml = (importing_from_treebase_id or importing_from_nexml_fetch or importing_from_nexml_string)  # or importing_from_nexml_upload
-
-        importing_from_crossref_API = (import_option == 'IMPORT_FROM_PUBLICATION_DOI' and publication_doi) or \
-                                      (import_option == 'IMPORT_FROM_PUBLICATION_REFERENCE' and publication_ref)
+        # create initial study NexSON using the chosen import method
+        importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
+        importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
+        importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)
+        importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi) or \
+                                      (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
 
         # any of these methods should returna parsed NexSON dict (vs. string)
         if importing_from_treebase_id:
@@ -251,7 +257,7 @@ def v1():
                                                             nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
         elif importing_from_crossref_API:
             new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref, include_cc0=cc0_agreement)
-        else:   # assumes IMPORT_FROM_MANUAL_ENTRY, or insufficient args above
+        else:   # assumes 'import-method-MANUAL_ENTRY', or insufficient args above
             new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
 
         nexml = new_study_nexson['nexml']
