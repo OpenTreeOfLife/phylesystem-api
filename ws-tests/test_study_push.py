@@ -2,7 +2,7 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-study = '9'
+study = '10'
 SUBMIT_URI = DOMAIN + '/v1/study/' + study
 data = {'output_nexml2json':'1.2'}
 r = test_http_json_method(SUBMIT_URI,
