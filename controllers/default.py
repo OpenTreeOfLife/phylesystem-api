@@ -261,6 +261,11 @@ def v1():
             new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
 
         nexml = new_study_nexson['nexml']
+
+        # If submitter requested the CC0 waiver, make sure it's here
+        if cc0_agreement:
+            nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+
         nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
         phylesystem = api_utils.get_phylesystem(request)
         try:
