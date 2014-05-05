@@ -26,6 +26,16 @@ Returns a JSON structure with some simple documentation of the service that is r
 
 Returns a JSON array of all of the study IDs.
 
+#### phylesystem_config
+
+    curl http://dev.opentreeoflife.org/api/study_list
+
+Returns a JSON object with information about how the phylesystem doc store is 
+configured. Including information about what sets of ID aliases map to the same
+study. The returned struct is identical to what you get if you were to call
+phylesystem.get_configuration_dict() on a local instance (using peyotl).
+
+
 #### external_url
 
     curl http://dev.opentreeoflife.org/api/external_url/9

@@ -63,6 +63,13 @@ def study_list():
     studies = phylesystem.get_study_ids()
     return json.dumps(studies)
 
+def phylesystem_config():
+    response.view = 'generic.json'
+    phylesystem = api_utils.get_phylesystem(request)
+    cd = phylesystem.get_configuration_dict()
+    return json.dumps(cd)
+
+
 def external_url():
     response.view = 'generic.json'
     try:
