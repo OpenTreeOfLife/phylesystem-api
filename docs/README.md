@@ -288,6 +288,25 @@ This will generate the output
 See the PUT response for an explanation of the output.
 For a new study merge_needed should always be `false`
 
+POSTS fall into 2 general categories:
+  1. With a study ID. These take the same arguments as a PUT, and are only to be used
+        if a study is being added to the doc store, and it is known that it already
+        has a valid, namespaced ID in another curation tool (such as phylografter).
+        See the PUT documentation for the arguments.
+  2. Studies without an ID:
+     * import_from_location can be "IMPORT_FROM_UPLOAD" or some other string
+     * cc0_agreement is checked if import_from_location="IMPORT_FROM_UPLOAD",
+            if cc0_agreement is the 'true', then CC0 deposition will be noted
+            in the metadata.
+     * publication_reference', '')
+     * import_method can be:
+        * import-method-TREEBASE_ID should be used with treebase_id argument
+        * import-method-NEXML should be used with nexml_fetch_url OR
+                with nexml_pasted_string argument
+        * import-method-PUBLICATION_DOI should be used with publication_DOI argument
+        * import-method-PUBLICATION_REFERENCE' should be used with
+                publication_reference argument
+
 ### Pushing the master branch to Github
 IN FLUX!
 

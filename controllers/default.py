@@ -194,91 +194,96 @@ def v1():
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
-        
         # check for HTTP method override (passed on query string)
         if _method == 'PUT':
             PUT(resource, resource_id, kwargs)
         elif _method == 'DELETE':
             DELETE(resource, resource_id, kwargs)
-        # elif _method == 'PATCH': ...
-
         if not resource=='study':
             raise HTTP(400, json.dumps({"error":1,
                                         "description": "Only the creation of new studies is currently supported"}))
-        
-        # we're creating a new study (possibly with import instructions in the payload)
-        import_from_location = kwargs.get('import_from_location', '')
-        treebase_id = kwargs.get('treebase_id', '')
-        nexml_fetch_url = kwargs.get('nexml_fetch_url', '')
-        nexml_pasted_string = kwargs.get('nexml_pasted_string', '')
-        publication_doi = kwargs.get('publication_DOI', '')
-        publication_ref = kwargs.get('publication_reference', '')
-        # apply the CC0 waiver *only* if the data location is 'UPLOAD'
-        # (i.e., this study is not currently in an online repository)
-        if import_from_location == 'IMPORT_FROM_UPLOAD':
-            cc0_agreement = kwargs.get('cc0_agreement', '') == 'true'
-        else:
-            cc0_agreement = False
-        # look for the chosen import method, e.g,
-        # 'import-method-PUBLICATION_DOI' or 'import-method-MANUAL_ENTRY'
-        import_method = kwargs.get('import_method', '')
-
-        ##dryad_DOI = kwargs.get('dryad_DOI', '')
-
         auth_info = api_utils.authenticate(**kwargs)
+        # Studies that were created in phylografter, can be added by
+        #   POSTing the content with resource_id 
+        new_study_id = resource_id
+        if new_study_id is not None:
+            bundle = __extract_and_validate_nexson(request,
+                                                   repo_nexml2json,
+                                                   kwargs)
+            new_study_nexson = bundle[0]
+        else:
+            # we're creating a new study (possibly with import instructions in the payload)
+            import_from_location = kwargs.get('import_from_location', '')
+            treebase_id = kwargs.get('treebase_id', '')
+            nexml_fetch_url = kwargs.get('nexml_fetch_url', '')
+            nexml_pasted_string = kwargs.get('nexml_pasted_string', '')
+            publication_doi = kwargs.get('publication_DOI', '')
+            publication_ref = kwargs.get('publication_reference', '')
+            # apply the CC0 waiver *only* if the data location is 'UPLOAD'
+            # (i.e., this study is not currently in an online repository)
+            if import_from_location == 'IMPORT_FROM_UPLOAD':
+                cc0_agreement = kwargs.get('cc0_agreement', '') == 'true'
+            else:
+                cc0_agreement = False
+            # look for the chosen import method, e.g,
+            # 'import-method-PUBLICATION_DOI' or 'import-method-MANUAL_ENTRY'
+            import_method = kwargs.get('import_method', '')
 
-        app_name = "api"
-        # add known values for its metatags
-        meta_publication_reference = None
+            ##dryad_DOI = kwargs.get('dryad_DOI', '')
 
-        # create initial study NexSON using the chosen import method
-        importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
-        importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
-        importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)
-        importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi) or \
-                                      (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
+            app_name = "api"
+            # add known values for its metatags
+            meta_publication_reference = None
 
-        # any of these methods should returna parsed NexSON dict (vs. string)
-        if importing_from_treebase_id:
-            # make sure the treebase ID is an integer
-            treebase_id = "".join(treebase_id.split())  # remove all whitespace
-            treebase_id = treebase_id.lstrip('S').lstrip('s')  # allow for possible leading 'S'?
-            try:
-                treebase_id = int(treebase_id)
-            except ValueError:
-                raise HTTP(400, json.dumps({
-                    "error": 1,
-                    "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s" % (treebase_id, e.message)
-                }))
-            new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
-        elif importing_from_nexml_fetch:
-            if not (nexml_fetch_url.startswith('http://') or nexml_fetch_url.startswith('https://')):
-                raise HTTP(400, json.dumps({
-                    "error": 1,
-                    "description": 'Expecting: "nexml_fetch_url" to startwith http:// or https://',
-                }))
-            new_study_nexson = get_ot_study_info_from_nexml(src=nexml_fetch_url,
-                                                            nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
-        elif importing_from_nexml_string:
-            new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
-                                                            nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
-        elif importing_from_crossref_API:
-            new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref, include_cc0=cc0_agreement)
-        else:   # assumes 'import-method-MANUAL_ENTRY', or insufficient args above
-            new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
+            # create initial study NexSON using the chosen import method
+            importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
+            importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
+            importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)
+            importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi) or \
+                                          (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
 
-        nexml = new_study_nexson['nexml']
+            # any of these methods should returna parsed NexSON dict (vs. string)
+            if importing_from_treebase_id:
+                # make sure the treebase ID is an integer
+                treebase_id = "".join(treebase_id.split())  # remove all whitespace
+                treebase_id = treebase_id.lstrip('S').lstrip('s')  # allow for possible leading 'S'?
+                try:
+                    treebase_id = int(treebase_id)
+                except ValueError:
+                    raise HTTP(400, json.dumps({
+                        "error": 1,
+                        "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s" % (treebase_id, e.message)
+                    }))
+                new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+            elif importing_from_nexml_fetch:
+                if not (nexml_fetch_url.startswith('http://') or nexml_fetch_url.startswith('https://')):
+                    raise HTTP(400, json.dumps({
+                        "error": 1,
+                        "description": 'Expecting: "nexml_fetch_url" to startwith http:// or https://',
+                    }))
+                new_study_nexson = get_ot_study_info_from_nexml(src=nexml_fetch_url,
+                                                                nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+            elif importing_from_nexml_string:
+                new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
+                                                                nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+            elif importing_from_crossref_API:
+                new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref, include_cc0=cc0_agreement)
+            else:   # assumes 'import-method-MANUAL_ENTRY', or insufficient args above
+                new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
 
-        # If submitter requested the CC0 waiver, make sure it's here
-        if cc0_agreement:
-            nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+            nexml = new_study_nexson['nexml']
 
-        nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
+            # If submitter requested the CC0 waiver, make sure it's here
+            if cc0_agreement:
+                nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+
+            nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
         phylesystem = api_utils.get_phylesystem(request)
         try:
             r = phylesystem.ingest_new_study(new_study_nexson,
                                              repo_nexml2json,
-                                             auth_info)
+                                             auth_info,
+                                             new_study_id)
             new_resource_id, commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
@@ -320,6 +325,19 @@ def v1():
             raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
         return nexson
 
+    def __extract_and_validate_nexson(request, repo_nexml2json, kwargs):
+        try:
+            nexson = __extract_nexson_from_http_call(request, **kwargs)
+            bundle = validate_and_convert_nexson(nexson,
+                                                 repo_nexml2json,
+                                                 allow_invalid=False)
+            nexson, annotation, validation_log, nexson_adaptor = bundle
+        except GitWorkflowError, err:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.exception('PUT failed in validation')
+            _raise_HTTP_from_msg(err.msg)
+        return nexson, annotation, nexson_adaptor
+
     def PUT(resource, resource_id, **kwargs):
         "Open Tree API methods relating to updating existing resources"
         #global TIMING
@@ -343,15 +361,10 @@ def v1():
         auth_info = api_utils.authenticate(**kwargs)
         #TIMING = api_utils.log_time_diff(_LOG, 'github authentication', TIMING)
         
-        try:
-            nexson = __extract_nexson_from_http_call(request, **kwargs)
-            bundle = validate_and_convert_nexson(nexson,
-                                                 repo_nexml2json,
-                                                 allow_invalid=False)
-            nexson, annotation, validation_log, nexson_adaptor = bundle
-        except GitWorkflowError, err:
-            _LOG.exception('PUT failed in validation')
-            _raise_HTTP_from_msg(err.msg)
+        bundle = __extract_and_validate_nexson(request,
+                                               repo_nexml2json,
+                                               kwargs)
+        nexson, annotation, nexson_adaptor = bundle
 
         #TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
         phylesystem = api_utils.get_phylesystem(request)
