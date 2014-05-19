@@ -88,9 +88,30 @@ Synthetic tree commenting:
 
 ---
 # treemachine
-* written by the Smith lab
 * reads OTT as a tree and trees from NexSON
 * reads a list of study ranking to be used when resolving conflicts.
 * creates a "graph of life" of all of the input trees in a neo4j database
 * implements [a novel supertree algorithm](http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1003223) for selecting which branches should go in the "synthetic tree of life"
+* treemachine "plugin" used to provide web services to explore the tree.
+
+---
+# synthetic tree browser
+* JavaScript front end (runs in the user's web-browser) for the synthetic tree
+* uses taxomachine and treemachine services
+* enables
+    * navigation of the tree
+    * commenting
+    * searching for taxa in the tree
+
+---
+<div id="container">
+ <img alt="2013 Architecture" src="images/architecture-user-2013.svg" width="800" height="600" />
+</div>
+
+---
+<div id="container">
+ <img alt="2013 Architecture" src="images/architecture-2013.svg" width="800" height="600" />
+</div>
+
+
 
