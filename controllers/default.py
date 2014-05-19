@@ -69,6 +69,13 @@ def phylesystem_config():
     cd = phylesystem.get_configuration_dict()
     return json.dumps(cd)
 
+def unmerged_branches():
+    response.view = 'generic.json'
+    phylesystem = api_utils.get_phylesystem(request)
+    bl = phylesystem.get_branch_list()
+    bl.sort()
+    return json.dumps(bl)
+
 
 def external_url():
     response.view = 'generic.json'
