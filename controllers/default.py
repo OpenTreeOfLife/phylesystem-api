@@ -226,10 +226,11 @@ def v1():
             nexml_pasted_string = kwargs.get('nexml_pasted_string', '')
             publication_doi = kwargs.get('publication_DOI', '')
             publication_ref = kwargs.get('publication_reference', '')
-            # apply the CC0 waiver *only* if the data location is 'UPLOAD'
-            # (i.e., this study is not currently in an online repository)
+            # is the submitter explicity applying the CC0 waiver to a new study
+            # (i.e., this study is not currently in an online repository)?
             if import_from_location == 'IMPORT_FROM_UPLOAD':
-                cc0_agreement = kwargs.get('cc0_agreement', '') == 'true'
+                cc0_agreement = (kwargs.get('chosen_license', '') == 'apply-new-CC0-waiver' and 
+                                 kwargs.get('cc0_agreement', '') == 'true')
             else:
                 cc0_agreement = False
             # look for the chosen import method, e.g,
@@ -242,12 +243,19 @@ def v1():
             # add known values for its metatags
             meta_publication_reference = None
 
-            # create initial study NexSON using the chosen import method
+            # Create initial study NexSON using the chosen import method.
+            #
+            # N.B. We're currently using a streamlined creation path with just
+            # two methods (TreeBASE ID and publication DOI). But let's keep the
+            # logic for others, just in case we revert based on user feedback.
             importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
             importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
             importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)
             importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi) or \
                                           (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
+
+            # Are they using an existing license or waiver (CC0, CC-BY, something else?)
+            using_existing_license = (kwargs.get('chosen_license', '') == 'study-data-has-existing-license')
 
             # any of these methods should returna parsed NexSON dict (vs. string)
             if importing_from_treebase_id:
@@ -256,23 +264,23 @@ def v1():
                 treebase_id = treebase_id.lstrip('S').lstrip('s')  # allow for possible leading 'S'?
                 try:
                     treebase_id = int(treebase_id)
-                except ValueError:
+                except ValueError, e:
                     raise HTTP(400, json.dumps({
                         "error": 1,
                         "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s" % (treebase_id, e.message)
                     }))
                 new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
-            elif importing_from_nexml_fetch:
-                if not (nexml_fetch_url.startswith('http://') or nexml_fetch_url.startswith('https://')):
-                    raise HTTP(400, json.dumps({
-                        "error": 1,
-                        "description": 'Expecting: "nexml_fetch_url" to startwith http:// or https://',
-                    }))
-                new_study_nexson = get_ot_study_info_from_nexml(src=nexml_fetch_url,
-                                                                nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
-            elif importing_from_nexml_string:
-                new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
-                                                                nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+            # elif importing_from_nexml_fetch:
+            #     if not (nexml_fetch_url.startswith('http://') or nexml_fetch_url.startswith('https://')):
+            #         raise HTTP(400, json.dumps({
+            #             "error": 1,
+            #             "description": 'Expecting: "nexml_fetch_url" to startwith http:// or https://',
+            #         }))
+            #     new_study_nexson = get_ot_study_info_from_nexml(src=nexml_fetch_url,
+            #                                                     nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+            # elif importing_from_nexml_string:
+            #     new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
+            #                                                    nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
             elif importing_from_crossref_API:
                 new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref, include_cc0=cc0_agreement)
             else:   # assumes 'import-method-MANUAL_ENTRY', or insufficient args above
@@ -280,11 +288,25 @@ def v1():
 
             nexml = new_study_nexson['nexml']
 
-            # If submitter requested the CC0 waiver, make sure it's here
-            if cc0_agreement:
+            # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
+            if importing_from_treebase_id or cc0_agreement:
                 nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+            elif using_existing_license:
+                existing_license = kwargs.get('alternate_license', '')
+                if existing_license == 'CC-0':
+                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+                    pass
+                elif existing_license == 'CC-BY':
+                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/licenses/by/4.0/'}
+                    pass
+                else:  # assume it's something else
+                    alt_license_name = kwargs.get('alt_license_name', '')
+                    alt_license_url = kwargs.get('alt_license_URL', '')
+                    # OK to add a name here? mainly to capture submitter's intent
+                    nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
 
             nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
+
         phylesystem = api_utils.get_phylesystem(request)
         try:
             r = phylesystem.ingest_new_study(new_study_nexson,
