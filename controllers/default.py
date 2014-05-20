@@ -359,7 +359,7 @@ def v1():
             nexson = __extract_nexson_from_http_call(request, **kwargs)
             bundle = validate_and_convert_nexson(nexson,
                                                  repo_nexml2json,
-                                                 allow_invalid=False)
+                                                 allow_invalid=True)
             nexson, annotation, validation_log, nexson_adaptor = bundle
         except GitWorkflowError, err:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
