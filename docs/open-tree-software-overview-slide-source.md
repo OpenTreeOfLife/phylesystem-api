@@ -113,5 +113,57 @@ Synthetic tree commenting:
  <img alt="2013 Architecture" src="images/architecture-2013.svg" width="800" height="600" />
 </div>
 
+---
+<div id="container">
+ <img alt="2014 Architecture" src="images/architecture-2014.svg" width="800" height="600" />
+</div>
 
+---
+<div id="container">
+ <img alt="2014 Architecture" src="images/architecture-user-2014.svg" width="800" height="600" />
+</div>
+
+---
+# new curation "backend"
+* Entire corpus of studies in a <code>git</code> repo
+* python code to add a layer of web-services to access the repo
+* "satellite" services (e.g. our study indexing tool <code>oti</code>) via:
+    * sync'-ing using <code>git</code>
+    * web-hooks on GitHub
+* Planned support for letting the community submit edits via git "pull requesets"
+
+---
+# new curation user interface
+* JavaScript using <code>taxomachine</code>, <code>phylesystem API</code>, <code>oti</code>
+* more flexible OTU mapping
+* easier tree operations (rerooting, ingroup specification)
+* built to display multiple perspectives on the study
+* still undergoing initial tests
+
+---
+# Summary of architecture
+* modular
+* headed toward 3 primary data-backed services:
+    * taxonomy (<code>taxomachine</code> serving OTT)
+    * input trees (<code>phylesystem API</code>)
+    * graph of Life(<code>treemachine</code>)
+* 2 primary user-facing web applications that integrate multiple Open Tree services
+    * synthetic tree browsing app
+    * new curation app
+
+---
+# APIs
+* current architecture -> all substantive calls are already done through APIs
+* we need to document APIs much better
+* authentication via GitHub (we don't control a user database)
+* hackathon planned for Sept. 2014
+
+---
+# "open" aspects
+* Free and Open code licenses (of course)
+* very little "behind the scenes" code
+    * git repo as study database
+    * taxonomy always available as archive
+    * every part of deployment (except private keys) publicly visible
+    * open mailing lists, trello board, google docs, issue trackers and IRC
 
