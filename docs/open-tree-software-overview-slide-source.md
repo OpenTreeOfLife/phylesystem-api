@@ -140,6 +140,24 @@ Synthetic tree commenting:
 * still undergoing initial tests
 
 ---
+<div id="container">
+ <img alt="2013 Architecture" src="images/curator-studylist.png"/>
+</div>
+---
+<div id="container">
+ <img alt="2013 Architecture" src="images/curator-metadata.png"/>
+</div>
+
+---
+<div id="container">
+ <img alt="2013 Architecture" src="images/curator-tree.png"/>
+</div>
+---
+<div id="container">
+ <img alt="2013 Architecture" src="images/curator-otu.png"/>
+</div>
+
+---
 # Summary of architecture
 * headed toward 3 primary data-backed services:
     * taxonomy (<code>taxomachine</code> serving OTT)
@@ -159,7 +177,7 @@ Synthetic tree commenting:
 ---
 # "open" aspects
 * Free and Open code licenses (of course)
-* very little "behind the scenes" code
+* very little "behind the scenes":
     * git repo as study database
     * taxonomy always available as archive
     * every part of deployment (except private keys) publicly visible
