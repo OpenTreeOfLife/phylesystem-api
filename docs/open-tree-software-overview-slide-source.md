@@ -54,15 +54,14 @@ Synthetic tree commenting:
 # "smasher"
 * Command-line tool written/run by Jonathan Rees
 * Rule-based combination of:
-    * taxonomies from NCBI, GBIF, IRMNG, Index Fungorum
-    * tips from SILVA
-    * arbitrary taxonomic edits by curators
+    * taxonomic info. from NCBI, GBIF, IRMNG, Index Fungorum, SILVA
+    * taxonomic edits by curators
 * Produces a versioned Open Tree Taxonomy (OTT)
 
 ---
 # taxomachine
 * Takes OTT as input
-* Provides string-to-OTT ID services and other taxonomic APIs
+* Provides name-to-OTT-ID services and other taxonomic APIs
 * neo4j backend
 * written by Cody Hinchliff and others in Smith lab.
 
@@ -84,7 +83,7 @@ Synthetic tree commenting:
 * <code>git</code> (version control system) repository of phylografter exports
 * a script can pull down the newly-updated studies from phylografter.
 * used as the input for treemachine
-* gives us a very loose dependence between phylografter and treemachine
+* decouples phylografter and treemachine
 
 ---
 # treemachine
@@ -125,12 +124,12 @@ Synthetic tree commenting:
 
 ---
 # new curation "backend"
-* Entire corpus of studies in a <code>git</code> repo
-* python code to add a layer of web-services to access the repo
+* Entire corpus of studies in a <code>git</code> repository
+* a python app. provides web-services for data access
 * "satellite" services (e.g. our study indexing tool <code>oti</code>) via:
     * sync'-ing using <code>git</code>
     * web-hooks on GitHub
-* Planned support for letting the community submit edits via git "pull requesets"
+* Planned support for letting the community submit edits via git "pull requests"
 
 ---
 # new curation user interface
@@ -142,7 +141,6 @@ Synthetic tree commenting:
 
 ---
 # Summary of architecture
-* modular
 * headed toward 3 primary data-backed services:
     * taxonomy (<code>taxomachine</code> serving OTT)
     * input trees (<code>phylesystem API</code>)
