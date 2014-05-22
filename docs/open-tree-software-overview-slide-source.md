@@ -61,7 +61,7 @@ Synthetic tree commenting:
 ---
 # taxomachine
 * Takes OTT as input
-* Provides name-to-OTT-ID services and other taxonomic APIs
+* Provides name-to-OTT-ID service and other taxonomic APIs
 * neo4j backend
 * written by Cody Hinchliff and others in Smith lab.
 
@@ -90,8 +90,8 @@ Synthetic tree commenting:
 * reads OTT as a tree and trees from NexSON
 * reads a list of study ranking to be used when resolving conflicts.
 * creates a "graph of life" of all of the input trees in a neo4j database
-* implements [a novel supertree algorithm](http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1003223) for selecting which branches should go in the "synthetic tree of life"
-* treemachine "plugin" used to provide web services to explore the tree.
+* implements [a novel supertree algorithm](http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1003223) for selecting which branches in the "synthetic tree of life"
+* treemachine plugin provides web services to explore the tree.
 
 ---
 # synthetic tree browser
@@ -102,10 +102,6 @@ Synthetic tree commenting:
     * commenting
     * searching for taxa in the tree
 
----
-<div id="container">
- <img alt="2013 Architecture" src="images/architecture-user-2013.svg" width="800" height="600" />
-</div>
 
 ---
 <div id="container">
@@ -123,7 +119,7 @@ Synthetic tree commenting:
 </div>
 
 ---
-# new curation "backend"
+# "phylesystem"
 * Entire corpus of studies in a <code>git</code> repository
 * a python app. provides web-services for data access
 * "satellite" services (e.g. our study indexing tool <code>oti</code>) via:
@@ -136,7 +132,7 @@ Synthetic tree commenting:
 * JavaScript using <code>taxomachine</code>, <code>phylesystem API</code>, <code>oti</code>
 * more flexible OTU mapping
 * easier tree operations (rerooting, ingroup specification)
-* built to display multiple perspectives on the study
+* displays multiple perspectives on the study
 * still undergoing initial tests
 
 ---
@@ -154,18 +150,18 @@ Synthetic tree commenting:
 </div>
 ---
 <div id="container">
- <img alt="2013 Architecture" src="images/curator-otu.png"/>
+ <img alt="2013 Architecture" src="images/curator-otu.png" width="914" height="1108"/>
 </div>
 
 ---
 # Summary of architecture
-* headed toward 3 primary data-backed services:
+* 3 primary data-backed services:
     * taxonomy (<code>taxomachine</code> serving OTT)
-    * input trees (<code>phylesystem API</code>)
-    * graph of Life(<code>treemachine</code>)
-* 2 primary user-facing web applications that integrate multiple Open Tree services
-    * synthetic tree browsing app
-    * new curation app
+    * input trees (<code>phylografter</code>, <code>phylesystem API</code>)
+    * graph of Life (<code>treemachine</code>)
+* 2 primary user-facing web applications:
+    * synthetic tree browsing
+    * new curation
 
 ---
 # APIs
