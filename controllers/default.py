@@ -206,7 +206,7 @@ def v1():
             PUT(resource, resource_id, kwargs)
         elif _method == 'DELETE':
             DELETE(resource, resource_id, kwargs)
-        if not resource=='study':
+        if not resource == 'study':
             raise HTTP(400, json.dumps({"error":1,
                                         "description": "Only the creation of new studies is currently supported"}))
         auth_info = api_utils.authenticate(**kwargs)

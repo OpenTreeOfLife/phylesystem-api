@@ -28,7 +28,7 @@ Returns a JSON array of all of the study IDs.
 
 #### phylesystem_config
 
-    curl http://dev.opentreeoflife.org/api/study_list
+    curl http://dev.opentreeoflife.org/api/phylesystem_config
 
 Returns a JSON object with information about how the phylesystem doc store is 
 configured. Including information about what sets of ID aliases map to the same
