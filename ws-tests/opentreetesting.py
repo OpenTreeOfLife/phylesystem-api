@@ -113,7 +113,8 @@ def test_http_json_method(url,
                      headers=None,
                      expected_status=200,
                      expected_response=None, 
-                     return_bool_data=False):
+                     return_bool_data=False,
+                     is_json=True):
     '''Call `url` with the http method of `verb`. 
     If specified `data` is passed using json.dumps
     returns True if the response:
@@ -146,6 +147,8 @@ def test_http_json_method(url,
         # this is required for the case when we expect a 4xx/5xx but a successful return code is returned
         return fail_return
     if expected_response is not None:
+        if not is_json:
+             return (True, resp.text, True) if return_bool_data else True
         try:
             results = resp.json()
             if results != expected_response:
@@ -158,7 +161,8 @@ def test_http_json_method(url,
             debug(unicode(results))
     elif _VERBOSITY_LEVEL > 1:
         debug('Full response: {r}\n'.format(r=resp.text))
-
+    if not is_json:
+             return (True, resp.text, True) if return_bool_data else True
     return (True, resp.json(), True) if return_bool_data else True
 
 def raise_for_status(resp):
