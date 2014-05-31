@@ -167,7 +167,7 @@ def v1():
             _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
         return annotated_commit
-    def GET(resource, resource_id, subresouce_id=None, jsoncallback=None, callback=None, _=None, **kwargs):
+    def GET(resource, resource_id, subresource_id=None, jsoncallback=None, callback=None, _=None, **kwargs):
         "OpenTree API methods relating to reading"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         valid_resources = ('study', 'tree')
@@ -178,7 +178,7 @@ def v1():
             returning_full_study = True
         elif resource == 'tree':
             returning_tree = True
-            if subresouce_id is None:
+            if subresource_id is None:
                 raise HTTP(400, json.dumps({"error": 1,
                                             "description": 'tree resource requires a study_id and tree_id'}))
         else:
@@ -222,7 +222,7 @@ def v1():
             result['branch2sha'] = wip_map
         else:
             if returning_tree:
-                tree_repr = extract_tree(study_nexson, subresouce_id, output_nexml2json)
+                tree_repr = extract_tree(study_nexson, subresource_id, output_nexml2json)
                 #response.view = 'default/newick.txt'
                 return tree_repr
         return result
