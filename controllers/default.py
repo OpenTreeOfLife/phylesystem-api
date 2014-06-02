@@ -167,26 +167,32 @@ def v1():
             _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
         return annotated_commit
-    def GET(resource, resource_id, subresource_id=None, jsoncallback=None, callback=None, _=None, **kwargs):
+    def GET(resource, resource_id, subresource=None, subresource_id=None, jsoncallback=None, callback=None, _=None, **kwargs):
         "OpenTree API methods relating to reading"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
-        valid_resources = ('study', 'tree')
+        valid_resources = ('study', )
+        valid_subresources = ('tree',)
         _LOG.debug('GET default/v1/{}/{}'.format(str(resource), str(resource_id)))
         returning_full_study = False
         returning_tree = False
-        if resource == 'study':
+        if not resource.lower() == 'study':
+            raise HTTP(400, json.dumps({"error": 1,
+                                        "description": 'resource requested not in list of valid resources: %s' % valid_resources }))
+        if subresource is None:
             returning_full_study = True
-        elif resource == 'tree':
+            return_type = 'study'
+        elif subresource == 'tree':
+            return_type = 'tree'
             returning_tree = True
             if subresource_id is None:
                 raise HTTP(400, json.dumps({"error": 1,
                                             "description": 'tree resource requires a study_id and tree_id'}))
         else:
             raise HTTP(400, json.dumps({"error": 1,
-                                        "description": 'resource requested not in list of valid resources: %s' % valid_resources }))
+                                        "description": 'resource requested not in list of valid resources: %s' % valid_subresources }))
 
         if returning_full_study or returning_tree:
-            output_nexml2json = __validate_output_nexml2json(kwargs, resource)
+            output_nexml2json = __validate_output_nexml2json(kwargs, return_type)
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'

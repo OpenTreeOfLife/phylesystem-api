@@ -2,7 +2,7 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/tree/10/tree3'
+SUBMIT_URI = DOMAIN + '/v1/study/10/tree/tree3'
 data = {'format':'nexus', 'tip_label': 'ot:ottTaxonName'}
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
