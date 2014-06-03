@@ -127,9 +127,12 @@ def v1():
                                                               d=schema.description)
         except ValueError, x:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.debug('GET failing: {m}'.format(m=msg))
             msg = str(x)
+            _LOG.exception('GET failing: {m}'.format(m=msg))
+            
         if msg:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.debug('output sniffing err msg = ' + msg)
             raise HTTP(400, json.dumps({"error": 1, "description": msg}))
         return schema
         
@@ -173,32 +176,25 @@ def v1():
         if not resource.lower() == 'study':
             raise HTTP(400, json.dumps({"error": 1,
                                         "description": 'resource requested not in list of valid resources: %s' % valid_resources }))
-        type_ext = None
+        if request.extension != 'html':
+            type_ext = '.' + request.extension
+        else:
+            type_ext = None
+
         if subresource is None:
             returning_full_study = True
             return_type = 'study'
-            if '.' in resource_id:
-                srid = resource_id.split('.')
-                type_ext = srid[-1]
-                content_id = '.'.join(srid[:-1])
-            else:
-                content_id = resource_id
+            content_id = resource_id
         elif subresource == 'tree':
             if subresource_id is None:
                 raise HTTP(400, json.dumps({"error": 1,
                                             "description": 'tree resource requires a study_id and tree_id'}))
             return_type = 'tree'
             returning_tree = True
-            if '.' in resource_id:
-                srid = subresource_id.split('.')[-1]
-                type_ext = srid[-1]
-                content_id = '.'.join(srid[:-1])
-            else:
-                content_id = subresource_id
+            content_id = subresource_id
         else:
             raise HTTP(400, json.dumps({"error": 1,
                                         "description": 'resource requested not in list of valid resources: %s' % valid_subresources }))
-
         out_schema = __validate_output_nexml2json(kwargs,
                                                   return_type,
                                                   type_ext,
