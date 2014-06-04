@@ -10,7 +10,6 @@ from peyotl import can_convert_nexson_forms, convert_nexson_format
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.nexson_syntax import get_empty_nexson, \
-                                 get_ot_study_info_from_nexml, \
                                  extract_tree, \
                                  PhyloSchema, \
                                  BY_ID_HONEY_BADGERFISH
@@ -334,10 +333,10 @@ def v1():
             #             "error": 1,
             #             "description": 'Expecting: "nexml_fetch_url" to startwith http:// or https://',
             #         }))
-            #     new_study_nexson = get_ot_study_info_from_nexml(src=nexml_fetch_url,
+            #     new_study_nexson = get_ot_study_info_from_treebase_nexml(src=nexml_fetch_url,
             #                                                     nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
             # elif importing_from_nexml_string:
-            #     new_study_nexson = get_ot_study_info_from_nexml(nexml_content=nexml_pasted_string,
+            #     new_study_nexson = get_ot_study_info_from_treebase_nexml(nexml_content=nexml_pasted_string,
             #                                                    nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
             elif importing_from_crossref_API:
                 new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref, include_cc0=cc0_agreement)
