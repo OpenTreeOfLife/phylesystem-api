@@ -183,7 +183,7 @@ def v1():
         if subresource is None:
             returning_full_study = True
             return_type = 'study'
-            content_id = resource_id
+            content_id = None
         elif subresource == 'tree':
             if subresource_id is None:
                 raise HTTP(400, json.dumps({"error": 1,
@@ -220,7 +220,6 @@ def v1():
             _LOG.exception('GET failed')
             e = sys.exc_info()[0]
             _raise_HTTP_from_msg(e)
-
         if out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:
@@ -247,8 +246,6 @@ def v1():
                 result['versionHistory'] = version_history
             return result
         else:
-            _LOG.debug('result_data = ' + result_data)
-        
             return result_data
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
