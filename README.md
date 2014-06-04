@@ -37,14 +37,30 @@ should be sufficient to get the latest changes.
 
 then open private/config in a text editor and tweak it. 
 
+  * `repo_parent` should be a file path which holds 1 or more phyleystem-# repositories
+with the data.
+
+  * `git_ssh` and `pkey`
+
+
 ### Logging configuration
 
-The behavior of the log is determined by environmental variables:
-   OT_API_LOG_FILE_PATH filepath of log file (StreamHandler if omitted)
-   OT_API_LOGGING_LEVEL  (NotSet, debug, info, warning, error, or critical)
-   OT_API_LOGGING_FORMAT  "rich", "simple" or "None" (None is default)
+The behavior of the log for functions run from with a request is determined by the config
+file. Specifically, the 
 
-**NEW in the translatingnexson branch**: a new config variable 'repo_nexml2json' was added.
+    [logging]
+    level = debug
+    filepath = /tmp/my-api.log
+    formatter = rich
+
+section of that file.
+
+If you are developer of the phylesystem-api, and you want to see logging for functions
+that are not called in the context of a request, you can use the environmental variables:
+
+  * `OT_API_LOG_FILE_PATH` filepath of log file (StreamHandler if omitted)
+  * `OT_API_LOGGING_LEVEL` (NotSet, debug, info, warning, error, or critical)
+  * `OT_API_LOGGING_FORMAT` "rich", "simple" or "None" (None is default)
 
 # Deploying
 
@@ -58,29 +74,6 @@ create a symlink in ```$WEB2PY_ROOT/applications``` to the API repo directory:
 # Using the API from the command-line
 
 See [docs/](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/docs/) for examples of how to use the API with ```curl```.
-
-# Dealing with large studies
-
-NOTE: This is a proposal and not yet implemented. All studies
-are currently under 50MB and have a structure of:
-
-    studies/N/N.json
-
-On the backend, the API will ask phylesystem for the directory
-containing study ```N```.  If the JSON representing that study
-is greater than 50MB, it will be broken into multiple files to
-be stored in Git, so they  will be merged together before a
-response is sent. This is all transparent to the user of the
-Open Tree API. Only people using the phylesystem data files directly
-will need to handle this.
-
-These files will have the structure of:
-
-    studies/N/N-0.json
-    studies/N/N-1.json
-    ....
-    studies/N/N-10.json
-
 
 # Using the API from Python
 
