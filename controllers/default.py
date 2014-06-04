@@ -10,7 +10,6 @@ from peyotl import can_convert_nexson_forms, convert_nexson_format
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.nexson_syntax import get_empty_nexson, \
-                                 get_ot_study_info_from_treebase_nexml, \
                                  BY_ID_HONEY_BADGERFISH
 from peyotl.external import import_nexson_from_treebase
 from github import Github, BadCredentialsException
