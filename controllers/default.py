@@ -184,7 +184,7 @@ def v1():
         if not resource.lower() == 'study':
             raise HTTP(400, json.dumps({"error": 1,
                                         "description": 'resource requested not in list of valid resources: %s' % valid_resources }))
-        if request.extension != 'html':
+        if request.extension not in('html', 'json'):
             type_ext = '.' + request.extension
         else:
             type_ext = None
