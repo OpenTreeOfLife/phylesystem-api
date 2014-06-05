@@ -1,34 +1,36 @@
-# Open Tree API Documentation
+# Open Tree Phylesystem API Documentation
 
-This file documents the design of the Open Tree API, including requirements defined by
+This file documents the design of the Open Tree Phylesystem API, including requirements defined by
 the [Open Tree of Life](http://opentreeoflife.org) community and software team
 and the reasons for various "details of implementation".
 
-## Open Tree API Version 1 Methods
+See elsewhere for documentation on the APIs for other Open Tree components such as treemachine and taxomachine.
+
+## Open Tree Phylesystem API Version 1 Methods
 
 All API calls are specific to the API version, which is a part
-of the URL. This allows for new versions of the API to come out
+of the URL. This allows for new versions of the Phylesystem API to come out
 which are not backward-compatible, while allowing old clients
 to continue working with older API versions.
 
 
-NOTE: The dev.opentreeoflife.org hostname is a development URL and subject to change.
+NOTE: Interface details are still under development and host names and paths are subject to change.
 
 #### index
 
-    curl http://dev.opentreeoflife.org/api/
+    curl http://api.opentreeoflife.org/api/
 
 Returns a JSON structure with some simple documentation of the service that is running.
 
 #### study_list
 
-    curl http://dev.opentreeoflife.org/api/study_list
+    curl http://api.opentreeoflife.org/api/study_list
 
-Returns a JSON array of all of the study IDs.
+Returns a JSON array of all of the study IDs.  [TBD: that ought to have a /v1/ in the URL.]
 
 #### phylesystem_config
 
-    curl http://dev.opentreeoflife.org/api/phylesystem_config
+    curl http://api.opentreeoflife.org/api/phylesystem_config
 
 Returns a JSON object with information about how the phylesystem doc store is 
 configured. Including information about what sets of ID aliases map to the same
@@ -103,7 +105,7 @@ merge the updated content from the master into the WIP. After the
 merge (and subsequent PUTs) succeed, then the WIP should be 
 able to merge to the master branch (resulting in the deletion of the WIP).
 
-Clients of the API need never refer to the WIP names. All communication about
+Clients of the Phylesystem API need never refer to the WIP names. All communication about
 versions happens via SHA values.
 However, they are returned in the `branch2sha` map from GET so that the 
 curation client can remind the curator of any WIPs that they have started but 
@@ -114,8 +116,8 @@ not merged.
 
 To get the entire NexSON of study N :
 
-    curl http://dev.opentreeoflife.org/api/v1/study/N.json
-
+    curl http://api.opentreeoflife.org/api/v1/study/STUDYID.json
+    
 #### GET arguments
 *   The `output_nexml2json` arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
@@ -272,7 +274,7 @@ to this:
 
 To create a new study from a file in the current directory called ```study.json```:
 
-    curl -X POST "http://dev.opentreeoflife.org/api/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
+    curl -X POST "http://ot10.opentreeoflife.org/api/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
 
 This will generate the output
 
@@ -313,7 +315,9 @@ IN FLUX!
 This API method will push the master branch of the local Git repo
 to the master on GitHub
 
-    curl -X PUT http://dev.opentreeoflife.org/api/push/v1/9
+    curl -X PUT http://ot10.opentreeoflife.org/api/push/v1/9
+    
+[shouldn't this be /api/v1/push/ ?]
 
 On success, it will return JSON similar to this:
 
@@ -334,9 +338,9 @@ where the description will contain a stacktrace.
 
 ### Using different author information
 
-By default, the API uses the name and email associated with the Github Oauth token to assign provenance to API calls. To over-ride that you can provide ```author_name``` and ```author_email``` arguments:
+By default, the Phylesystem API uses the name and email associated with the Github Oauth token to assign provenance to API calls. To over-ride that you can provide ```author_name``` and ```author_email``` arguments:
 
-    curl -X PUT 'http://dev.opentreeoflife.org/api/v1/study/13.json?auth_token=$GITHUB_OAUTH_TOKEN&author_name=joe&author_email=joe@joe.com' --data-urlencode nexson@1003.json
+    curl -X PUT 'http://ot10.opentreeoflife.org/api/v1/study/13.json?auth_token=$GITHUB_OAUTH_TOKEN&author_name=joe&author_email=joe@joe.com' --data-urlencode nexson@1003.json
 
 ## Not Yet Implemented Methods
 
@@ -345,12 +349,12 @@ The following methods have not been implemented yet.
 ### Listing available studies
 
     # By convention, this might be the default view for a "collection" URL:
-    curl https://dev.opentreeoflife.org/api/v1/studies
+    curl https://api.opentreeoflife.org/api/v1/studies
 
 ### Searching, filtering, sorting, paginating studies
 
     # Add searching, sorting, pagination, filters on the query string
-    curl https://dev.opentreeoflife.org/api/v1/studies?q=mammal&sort=status,-date&page=3&filter=state-draft
+    curl https://api.opentreeoflife.org/api/v1/studies?q=mammal&sort=status,-date&page=3&filter=state-draft
 
 ### Listing your own studies (as a curator), sorted by status
 
@@ -358,17 +362,17 @@ This is the default __dashboard__ view for a logged-in curator. Of course it's
 just a special case of the filtered list above.
 
     # the curator's "dashboard" is just a preset filter
-    curl https://dev.opentreeoflife.org/api/v1/studies?q=jimallman&sort=-status,-date&page=1&filter=state-draft
+    curl https://api.opentreeoflife.org/api/v1/studies?q=jimallman&sort=-status,-date&page=1&filter=state-draft
 
 This and other "canned" views might have friendlier URLs:
 
-    curl https://dev.opentreeoflife.org/api/v1/studies/dashboard
+    curl https://api.opentreeoflife.org/api/v1/studies/dashboard
 
-    curl https://dev.opentreeoflife.org/api/v1/studies/draft
+    curl https://api.opentreeoflife.org/api/v1/studies/draft
 
-    curl https://dev.opentreeoflife.org/api/v1/studies/published
+    curl https://api.opentreeoflife.org/api/v1/studies/published
 
-    curl https://dev.opentreeoflife.org/api/v1/studies/latest
+    curl https://api.opentreeoflife.org/api/v1/studies/latest
 
 
 ### Incorporating "namespaced" study identifiers from different sources
