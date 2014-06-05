@@ -129,6 +129,8 @@ Consider the call without the output_nexml2json argument to be brittle!
 which will return the version of the study from a specific commit sha.
 If no `starting_commit_SHA` is given, GET will return study from master.
 
+
+
 #### GET response
 
 On success, it will return a JSON response similar to this:

@@ -164,14 +164,23 @@ def v1():
             _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
         return annotated_commit
-    def GET(resource, resource_id, subresource=None, subresource_id=None, jsoncallback=None, callback=None, _=None, **kwargs):
+    def GET(resource,
+            resource_id,
+            subresource=None,
+            subresource_id=None,
+            jsoncallback=None,
+            callback=None,
+            _=None,
+            **kwargs):
         "OpenTree API methods relating to reading"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         valid_resources = ('study', )
-        valid_subresources = ('tree',)
+        valid_subresources = ('tree', 'meta', 'otus', 'otu', 'otumap')
         _LOG.debug('GET default/v1/{}/{}'.format(str(resource), str(resource_id)))
         returning_full_study = False
         returning_tree = False
+        content_id = None
+        version_history = None
         if not resource.lower() == 'study':
             raise HTTP(400, json.dumps({"error": 1,
                                         "description": 'resource requested not in list of valid resources: %s' % valid_resources }))
@@ -179,21 +188,28 @@ def v1():
             type_ext = '.' + request.extension
         else:
             type_ext = None
-
         if subresource is None:
             returning_full_study = True
             return_type = 'study'
-            content_id = None
         elif subresource == 'tree':
-            if subresource_id is None:
-                raise HTTP(400, json.dumps({"error": 1,
-                                            "description": 'tree resource requires a study_id and tree_id'}))
             return_type = 'tree'
             returning_tree = True
             content_id = subresource_id
+        elif subresource == 'subtree':
+            subtree_id = kwargs.get('subtree_id')
+            if subtree_id is None:
+                raise HTTP(400, json.dumps({"error": 1,
+                                            "description": 'subtree resource requires a study_id and tree_id in the URL and a subtree_id parameter'}))
+            return_type = 'subtree'
+            returning_tree = True
+            content_id = (subresource_id, subtree_id)
+        elif subresource in ['meta', 'otus', 'otu', 'otumap']:
+            if subresource != 'meta':
+                content_id = subresource_id
+            return_type = subresource
         else:
             raise HTTP(400, json.dumps({"error": 1,
-                                        "description": 'resource requested not in list of valid resources: %s' % valid_subresources }))
+                                        "description": 'subresource requested not in list of valid resources: %s' % ' '.join(valid_subresources)}))
         out_schema = __validate_output_nexml2json(kwargs,
                                                   return_type,
                                                   type_ext,
@@ -234,11 +250,11 @@ def v1():
                 msg = "Exception in coercing to the required NexSON version for validation. "
                 _LOG.exception(msg)
                 raise HTTP(400, msg)
-        if result_data is None:
-            if returning_tree:
-                raise HTTP(404, 'Tree "{t}" not found in study "{s}"'.format(t=subresource_id,
-                                                                             s=resource_id))
-        if out_schema.is_json():
+        if not result_data:
+            raise HTTP(404, 'subresource "{r}/{t}" not found in study "{s}"'.format(r=subresource,
+                                                                                    t=subresource_id,
+                                                                                    s=resource_id))
+        if returning_full_study and out_schema.is_json():
             result = {'sha': head_sha,
                      'data': result_data,
                      'branch2sha': wip_map}
