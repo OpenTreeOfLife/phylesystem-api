@@ -52,8 +52,8 @@ def index():
     response.view = 'generic.json'
     return json.dumps({
         "description": "The Open Tree API",
-        "source_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/",
-        "documentation_url": "https://github.com/OpenTreeOfLife/api.opentreeoflife.org/tree/master/docs"
+        "source_url": "https://github.com/OpenTreeOfLife/phylesystem-api/",
+        "documentation_url": "https://github.com/OpenTreeOfLife/phylesystem-api/tree/master/docs"
     })
 
 def study_list():
