@@ -222,7 +222,7 @@ def v1():
         # return the correct nexson of study_id, using the specified view
         phylesystem = api_utils.get_phylesystem(request)
         try:
-           r = phylesystem.return_study(resource_id, commit_sha=parent_sha, return_WIP_map=True)
+            r = phylesystem.return_study(resource_id, commit_sha=parent_sha, return_WIP_map=True)
         except:
             _LOG.exception('GET failed')
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
