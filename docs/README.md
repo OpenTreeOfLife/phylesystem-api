@@ -131,14 +131,18 @@ Consider the call without the output_nexml2json argument to be brittle!
 which will return the version of the study from a specific commit sha.
 If no `starting_commit_SHA` is given, GET will return study from master.
 
+
+
 #### GET response
 
-On success, it will return a JSON response similar to this:
+On success, a request for the full study in NexSON will return
+ a JSON response similar to this:
 
     {
         "sha":  "e13343535837229ced29d44bdafad2465e1d13d8",
         "data": <Study NexSON object>,
         "branch2sha": WIP map
+        "versionHistory": [history objects]
     }
 
 *   `sha` is the parent sha of that GET and will need to be returned with 
@@ -157,6 +161,69 @@ of the curator whose PUT created the branch). An example `branch2sha` map is:
         "mtholder_study_9_0": "f8d6ddacc2cef7a54847a4067ccb45915a4b4ebc",
         "master": "0841f890259686d74c7c1749a87026e1c4193ca0"
     }
+
+*   `versionHistory` is a list of the history of edits to the study since
+import or since transfer from phylografter (the edit history within phylografter
+is not stored, although a curatorName field is maintained by phylografter). Each object will
+contain the following information:
+
+    {
+    "author_email": <email of person who edited (if this is public in their GitHub profile)>, 
+    "author_name": <name of person who edited (if this is public in their GitHub profile)>, 
+    "message_subject": <summary line of the edit commit>,
+    "date_ISO_8601": "2014-05-29 12:02:40 -0500",
+    "date": "Thu, 29 May 2014 12:02:40 -0500", 
+    "id": <commit sha>, 
+    "relative_date": "7 days ago"
+    }
+
+##### Output conversion of GET
+If the URL ends with a file extension, then the file type will be inferred for file conversion:
+  * .nex -> NEXUS
+  * .tre -> Newick
+  * .nexml -> NeXML
+  * .nexson, .json, or no extension -> NexSON
+
+NexSON supports fine-grained access to parts of the study (see below).
+NeXML can only be returned for the study. Newick and NEXUS formats can only return
+the full study, trees or subtrees.
+
+
+##### fine-grained access via GET
+You can request just parts of the study using a syntax of alternating resource IDs and names:
+
+  * `*/v1/study/pg_10/meta` returns a shell of information about the study but has null entries
+    in place of the trees and otus. This is useful because the response is typically much
+    smaller than the full study
+  * `*/v1/study/pg_10/tree` returns an object with property names corresponding to the 
+    IDs of the trees in the study and values being the tree objects.
+  * `.../v1/study/pg_10/tree/ABC` is similar to the tree resource mentioned above, but only 
+    the tree with ID of "ABC" will be included. A 404 will result if no such tree is found in the study.
+  * `*/v1/study/pg_10/subtree/ABC?subtree_id=XYZ` is similar to the tree resource
+    mentioned above, but only a subtree of the tree with ID of "ABC" will be included. The subtree
+    will be the part of the tree that is rooted at the node with ID "XYZ". A 404 will result if no such 
+    subtree is found in the study.
+  * `*/v1/study/pg_10/subtree/ABC?subtree_id=ingroup` ingroup is a wildcard that can be used
+    to designate the ingroup node of any tree (may give a 404 for a tree, if the ingroup node
+    has not been specified by a curator).
+  * `*/v1/study/pg_10/otus` the `study["nexml"]["otusById"]` object 
+  * `*/v1/study/pg_10/otus/ABC` is similar to otus, but only the otus group with ID "ABC" 
+    will be included.
+  * `*/v1/study/pg_10/otu` returns the union of the `study["nexml"]["otusById"][*]["otuById"]` objects 
+  * `*/v1/study/pg_10/otu/ABC` is similar to otu, but only the otu with ID "ABC"  will be included.
+  * `*/v1/study/pg_10/otumap` will return an object that maps the original label for each OTU to 
+    either an object or list of objects (if there were two tips that originally had the same label). The
+    objects in the values field will have properties from the mapping: either "^ot:ottId" and/or 
+    "^ot:ottTaxonName" fields, or they will be empty (if the OTU has not been mapped to OTT)
+
+By default all of the fine-grained access methods return NexSON 1.2.1 
+Currently they do not support back translation to older versions of NexSON.
+The tree related fine-grained access methods (`*/tree/*` and `*/subtree/*`) will also support NEXUS
+or newick via calls like: `*/v1/study/pg_10/tree/ABC.nex`
+
+When returning slices of data in NexSON using the fine-grained access URLs, the content returned will
+simply be the requested data. The "sha", "branch2sha", and "versionHistory" properties will not be
+included. Nor will the requested data be packaged in a "data" field.
 
 
 ### Updating a study

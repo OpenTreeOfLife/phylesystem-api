@@ -10,6 +10,8 @@ from peyotl import can_convert_nexson_forms, convert_nexson_format
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.nexson_syntax import get_empty_nexson, \
+                                 extract_tree, \
+                                 PhyloSchema, \
                                  BY_ID_HONEY_BADGERFISH
 from peyotl.external import import_nexson_from_treebase
 from github import Github, BadCredentialsException
@@ -27,8 +29,6 @@ try:
 except:
     call_http_json = None
     _GLOG.debug('call_http_json was not imported from open_tree_tasks')
-
-
 
 _VALIDATING = True
 
@@ -111,15 +111,30 @@ def v1():
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
 
-    def __validate_output_nexml2json(kwargs):
-        output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
-        if (output_nexml2json != repo_nexml2json) and not can_convert_nexson_forms(repo_nexml2json, output_nexml2json):
-            msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json, d=output_nexml2json)
+    def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
+        msg = None
+        if 'output_nexml2json' not in kwargs:
+            kwargs['output_nexml2json'] = '0.0.0'
+        try:
+            schema = PhyloSchema(schema=kwargs.get('format'),
+                                 type_ext=type_ext,
+                                 content=resource,
+                                 content_id=content_id,
+                                 **kwargs)
+            if not schema.can_convert_from(resource):
+                msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json,
+                                                              d=schema.description)
+        except ValueError, x:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.debug('GET failing: {m}'.format(m=msg))
+            msg = str(x)
+            _LOG.exception('GET failing: {m}'.format(m=msg))
+            
+        if msg:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.debug('output sniffing err msg = ' + msg)
             raise HTTP(400, json.dumps({"error": 1, "description": msg}))
-        return output_nexml2json
-
+        return schema
+        
     def __finish_write_verb(phylesystem,
                             git_data, 
                             nexson,
@@ -149,17 +164,56 @@ def v1():
             _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
         return annotated_commit
-
-    def GET(resource, resource_id, jsoncallback=None, callback=None, _=None, **kwargs):
+    def GET(resource,
+            resource_id,
+            subresource=None,
+            subresource_id=None,
+            jsoncallback=None,
+            callback=None,
+            _=None,
+            **kwargs):
         "OpenTree API methods relating to reading"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         valid_resources = ('study', )
-        _LOG.debug('GET default/v1/study/{}'.format(str(resource_id)))
-        output_nexml2json = __validate_output_nexml2json(kwargs)
-        if resource not in valid_resources:
+        valid_subresources = ('tree', 'meta', 'otus', 'otu', 'otumap')
+        _LOG.debug('GET default/v1/{}/{}'.format(str(resource), str(resource_id)))
+        returning_full_study = False
+        returning_tree = False
+        content_id = None
+        version_history = None
+        if not resource.lower() == 'study':
             raise HTTP(400, json.dumps({"error": 1,
-                "description": 'Resource requested not in list of valid resources: %s' % valid_resources }))
-
+                                        "description": 'resource requested not in list of valid resources: %s' % valid_resources }))
+        if request.extension not in('html', 'json'):
+            type_ext = '.' + request.extension
+        else:
+            type_ext = None
+        if subresource is None:
+            returning_full_study = True
+            return_type = 'study'
+        elif subresource == 'tree':
+            return_type = 'tree'
+            returning_tree = True
+            content_id = subresource_id
+        elif subresource == 'subtree':
+            subtree_id = kwargs.get('subtree_id')
+            if subtree_id is None:
+                raise HTTP(400, json.dumps({"error": 1,
+                                            "description": 'subtree resource requires a study_id and tree_id in the URL and a subtree_id parameter'}))
+            return_type = 'subtree'
+            returning_tree = True
+            content_id = (subresource_id, subtree_id)
+        elif subresource in ['meta', 'otus', 'otu', 'otumap']:
+            if subresource != 'meta':
+                content_id = subresource_id
+            return_type = subresource
+        else:
+            raise HTTP(400, json.dumps({"error": 1,
+                                        "description": 'subresource requested not in list of valid resources: %s' % ' '.join(valid_subresources)}))
+        out_schema = __validate_output_nexml2json(kwargs,
+                                                  return_type,
+                                                  type_ext,
+                                                  content_id=content_id)
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
@@ -168,30 +222,47 @@ def v1():
         # return the correct nexson of study_id, using the specified view
         phylesystem = api_utils.get_phylesystem(request)
         try:
-           r = phylesystem.return_study(resource_id, commit_sha=parent_sha, return_WIP_map=True)
+            r = phylesystem.return_study(resource_id, commit_sha=parent_sha, return_WIP_map=True)
         except:
             _LOG.exception('GET failed')
             raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
         try:
-           study_nexson, head_sha, wip_map = r
-           blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
-           phylesystem.add_validation_annotation(study_nexson, blob_sha)
-           version_history = phylesystem.get_version_history_for_study_id(resource_id)
-           if output_nexml2json != repo_nexml2json:
-                study_nexson = __coerce_nexson_format(study_nexson,
-                                          output_nexml2json,
-                                          current_format=repo_nexml2json)
+            study_nexson, head_sha, wip_map = r
+            if returning_full_study:
+                blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
+                phylesystem.add_validation_annotation(study_nexson, blob_sha)
+                version_history = phylesystem.get_version_history_for_study_id(resource_id)
         except:
             _LOG.exception('GET failed')
             e = sys.exc_info()[0]
             _raise_HTTP_from_msg(e)
-        #Apply the annotations
-        #create phylesystem action to get blob sha for a file given HEAD and study_ID
-        return {'sha': head_sha,
-                'data': study_nexson,
-                'versionHistory': version_history,
-                'branch2sha': wip_map
-                }
+        if out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
+            result_data = study_nexson
+        else:
+            try:
+                serialize = not out_schema.is_json()
+                src_schema = PhyloSchema('nexson', version=repo_nexml2json)
+                result_data = out_schema.convert(study_nexson,
+                                                 content=return_type,
+                                                 serialize=serialize,
+                                                 src_schema=src_schema)
+            except:
+                msg = "Exception in coercing to the required NexSON version for validation. "
+                _LOG.exception(msg)
+                raise HTTP(400, msg)
+        if not result_data:
+            raise HTTP(404, 'subresource "{r}/{t}" not found in study "{s}"'.format(r=subresource,
+                                                                                    t=subresource_id,
+                                                                                    s=resource_id))
+        if returning_full_study and out_schema.is_json():
+            result = {'sha': head_sha,
+                     'data': result_data,
+                     'branch2sha': wip_map}
+            if version_history:
+                result['versionHistory'] = version_history
+            return result
+        else:
+            return result_data
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
