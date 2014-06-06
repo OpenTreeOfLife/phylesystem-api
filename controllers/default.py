@@ -120,6 +120,7 @@ def v1():
                                  type_ext=type_ext,
                                  content=resource,
                                  content_id=content_id,
+                                 repo_nexml2json=repo_nexml2json,
                                  **kwargs)
             if not schema.can_convert_from(resource):
                 msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json,
