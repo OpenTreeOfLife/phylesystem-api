@@ -244,7 +244,6 @@ def v1():
                 serialize = not out_schema.is_json()
                 src_schema = PhyloSchema('nexson', version=repo_nexml2json)
                 result_data = out_schema.convert(study_nexson,
-                                                 content=return_type,
                                                  serialize=serialize,
                                                  src_schema=src_schema)
             except:
