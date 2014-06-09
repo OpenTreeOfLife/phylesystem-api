@@ -18,13 +18,13 @@ def v1():
 
         curl -X POST http://localhost:8000/api/push/v1?resource_id=9
         """
-
+        git_hub_branch = read_config(request)[5]
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
         phylesystem = api_utils.get_phylesystem(request)
         try:
-            phylesystem.push_study_to_remote('GitHubRemote', resource_id)
+            phylesystem.push_study_to_remote('GitHubRemote', resource_id, git_hub_branch)
         except:
             m = traceback.format_exc()
             raise HTTP(409, json.dumps({

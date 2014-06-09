@@ -24,7 +24,7 @@ def get_phylesystem(request):
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
     from gitdata import GitData
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote = read_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, git_hub_branch = read_config(request)
     push_mirror = os.path.join(repo_parent, 'mirror')
     pmi = {
         'parent_dir': push_mirror,
@@ -67,7 +67,11 @@ def read_config(request):
         git_hub_remote = conf.get("apis", "git_hub_remote")
     except:
         git_hub_remote = 'git@github.com:OpenTreeOfLife'
-    return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote
+    try:
+        git_hub_branch = conf.get("apis", "git_hub_branch")
+    except:
+        git_hub_branch = 'master'
+    return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, git_hub_branch
 
 def read_logging_config(request):
     app_name = "api"
