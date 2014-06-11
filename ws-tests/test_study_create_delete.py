@@ -29,12 +29,13 @@ resp = r[1]
 starting_commit_SHA = resp['sha']
 c_id = resp['resource_id']
 DOMAIN = config('host', 'apihost')
-starting_commit_SHA = config('host', 'parentsha')
 SUBMIT_URI = DOMAIN + '/v1/study/%s' % c_id
 data = {
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,
 }
-if test_http_json_method(SUBMIT_URI, 'DELETE', data=data, expected_status=200):
-    sys.exit(0)
-sys.exit(1)
+r = test_http_json_method(SUBMIT_URI, 'DELETE', data=data, expected_status=200, return_bool_data=True)
+if not r[0]:
+    sys.exit(1)
+resp = r[1]
+assert resp['merge_needed'] == False
