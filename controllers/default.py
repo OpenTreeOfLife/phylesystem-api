@@ -97,6 +97,15 @@ def reponexsonformat():
     return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
             'nexml2json': phylesystem.repo_nexml2json}
 
+_route_tag2func = {'index':index,
+                   'study_list': study_list,
+                   'phylesystem_config': phylesystem_config,
+                   'unmerged_branches': unmerged_branches,
+                   'external_url': external_url,
+                   'repo_nexson_format': reponexsonformat,
+                   'reponexsonformat': reponexsonformat,
+                  }
+
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -165,8 +174,9 @@ def v1():
             _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
         return annotated_commit
+
     def GET(resource,
-            resource_id,
+            resource_id=None,
             subresource=None,
             subresource_id=None,
             jsoncallback=None,
@@ -174,17 +184,22 @@ def v1():
             _=None,
             **kwargs):
         "OpenTree API methods relating to reading"
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
+        delegate = _route_tag2func.get(resource)
+        if delegate:
+            return delegate()
         valid_resources = ('study', )
+        if not resource.lower() == 'study':
+            raise HTTP(400, json.dumps({"error": 1,
+                                        "description": 'resource requested not in list of valid resources: %s' % valid_resources }))
+        if resource_id is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": 'study ID expected after "study/"'}))
         valid_subresources = ('tree', 'meta', 'otus', 'otu', 'otumap')
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         _LOG.debug('GET default/v1/{}/{}'.format(str(resource), str(resource_id)))
         returning_full_study = False
         returning_tree = False
         content_id = None
         version_history = None
-        if not resource.lower() == 'study':
-            raise HTTP(400, json.dumps({"error": 1,
-                                        "description": 'resource requested not in list of valid resources: %s' % valid_resources }))
         if request.extension not in('html', 'json'):
             type_ext = '.' + request.extension
         else:
@@ -215,6 +230,17 @@ def v1():
                                                   return_type,
                                                   type_ext,
                                                   content_id=content_id)
+=======
+        if resource not in valid_resources:
+            raise HTTP(400, json.dumps({"error": 1,
+                "description": 'Resource requested not in list of valid resources: %s' % valid_resources }))
+        if resource_id is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": 'study ID expected after "study/"'}))
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
+        _LOG.debug('GET default/v1/study/{}'.format(str(resource_id)))
+        output_nexml2json = __validate_output_nexml2json(kwargs)
+
+>>>>>>> origin/fixing-v1
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
@@ -309,7 +335,7 @@ def v1():
 
             ##dryad_DOI = kwargs.get('dryad_DOI', '')
 
-            app_name = "api"
+            app_name = request.application
             # add known values for its metatags
             meta_publication_reference = None
 

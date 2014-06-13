@@ -43,7 +43,7 @@ def get_phylesystem(request):
     return _PHYLESYSTEM
 
 def read_config(request):
-    app_name = "api"
+    app_name = request.application
     conf = SafeConfigParser(allow_no_value=True)
     localconfig_filename = "%s/applications/%s/private/localconfig" % (request.env.web2py_path, app_name)
 
@@ -70,7 +70,7 @@ def read_config(request):
     return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote
 
 def read_logging_config(request):
-    app_name = "api"
+    app_name = request.application
     conf = SafeConfigParser(allow_no_value=True)
     localconfig_filename = "%s/applications/%s/private/localconfig" % (request.env.web2py_path, app_name)
 
