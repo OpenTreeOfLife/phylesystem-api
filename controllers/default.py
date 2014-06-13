@@ -122,6 +122,8 @@ def v1():
 
     def __validate_output_nexml2json(kwargs):
         output_nexml2json = kwargs.get('output_nexml2json', '0.0.0')
+        if output_nexml2json == 'native':
+            output_nexml2json = repo_nexml2json
         if (output_nexml2json != repo_nexml2json) and not can_convert_nexson_forms(repo_nexml2json, output_nexml2json):
             msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json, d=output_nexml2json)
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
