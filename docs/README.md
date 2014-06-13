@@ -13,8 +13,10 @@ of the URL. This allows for new versions of the Phylesystem API to come out
 which are not backward-compatible, while allowing old clients
 to continue working with older API versions.
 
+**NOTE**: substituting `http://devapi` for `http://api` will let you acess the more "bleeding edge" 
+deployments of the code.
 
-NOTE: Interface details are still under development and host names and paths are subject to change.
+**NOTE**: Interface details are still under development and host names and paths are subject to change.
 
 #### index
 
