@@ -230,17 +230,6 @@ def v1():
                                                   return_type,
                                                   type_ext,
                                                   content_id=content_id)
-=======
-        if resource not in valid_resources:
-            raise HTTP(400, json.dumps({"error": 1,
-                "description": 'Resource requested not in list of valid resources: %s' % valid_resources }))
-        if resource_id is None:
-            raise HTTP(400, json.dumps({"error": 1, "description": 'study ID expected after "study/"'}))
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
-        _LOG.debug('GET default/v1/study/{}'.format(str(resource_id)))
-        output_nexml2json = __validate_output_nexml2json(kwargs)
-
->>>>>>> origin/fixing-v1
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
