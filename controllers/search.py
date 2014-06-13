@@ -8,17 +8,6 @@ import urllib2
 import sys
 import traceback
 
-app_name = "api"
-conf = SafeConfigParser(allow_no_value=True)
-if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
-    conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
-else:
-    conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-oti_base_url = conf.get("apis", "oti_base_url")
-api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
-
-opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
 
 @request.restful()
 def v1():
@@ -39,6 +28,17 @@ because web2py does not recognize URLs that contain a colon
 other than specifying a port, even if URL encoded.
 
 """
+        app_name = request.application
+        conf = SafeConfigParser(allow_no_value=True)
+        if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+            conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+        else:
+            conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+
+        oti_base_url = conf.get("apis", "oti_base_url")
+        api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
+
+        opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
 
         # support JSONP request from another domain
         if jsoncallback or callback:
@@ -65,6 +65,17 @@ it was deleted from the docstore.
 
 N.B. This depends on a GitHub webhook on the chosen docstore.
 """
+    app_name = request.application
+    conf = SafeConfigParser(allow_no_value=True)
+    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+    else:
+        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+
+    oti_base_url = conf.get("apis", "oti_base_url")
+    api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
+
+    opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
     payload = request.vars
     msg = ''
 
