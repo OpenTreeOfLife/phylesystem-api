@@ -39,6 +39,7 @@ _VALIDATING = True
 # http://stackoverflow.com/questions/1071191/detect-urls-in-a-string-and-wrap-with-a-href-tag
 link_regex = re.compile(  r'''
                      (?x)( # verbose identify URLs within text
+                    (^|\s) # don't touch URLs that are already wrapped!
               (http|https) # make sure we find a resource type
                        :// # ...needs to be followed by colon-slash-slash
             (\w+[:.]?){2,} # at least two domain groups, e.g. (gnosis.)(cx)
@@ -47,7 +48,7 @@ link_regex = re.compile(  r'''
                     [\w/]) # resource name ends in alphanumeric or slash
      (?=([\s\.,>)'"\]]|$)) # assert: followed by white or clause ending OR end of line
                          ) # end of match group
-                           ''')
+                           ''', re.UNICODE)
 # this do-nothing version makes a sensible hyperlink
 link_replace = r'\1'
 # NOTE the funky constructor required to use this below
