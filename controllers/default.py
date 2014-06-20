@@ -59,6 +59,11 @@ def _markdown_to_html( markdown_src='', open_links_in_new_window=False ):
                       html)
     return html
 
+def render_markdown():
+    # Convert POSTed Markdown to HTML (e.g., for previews in web UI)
+    markdown_src = request.body.read()
+    return _markdown_to_html( markdown_src, open_links_in_new_window=True )
+
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
 
