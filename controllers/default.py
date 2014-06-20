@@ -20,6 +20,8 @@ from pprint import pprint
 from gluon.tools import fetch
 from urllib import urlencode
 from gluon.html import web2pyHTMLParser
+import re
+from gluon.contrib.markdown.markdown2 import markdown
 from StringIO import StringIO
 import copy
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
@@ -31,6 +33,31 @@ except:
     _GLOG.debug('call_http_json was not imported from open_tree_tasks')
 
 _VALIDATING = True
+
+# Cook up some reasonably strong regular expressions to detect bare
+# URLs in Markdown and wrap them in hyperlinks. Adapted from 
+# http://stackoverflow.com/questions/1071191/detect-urls-in-a-string-and-wrap-with-a-href-tag
+link_regex = re.compile(  r'''
+                     (?x)( # verbose identify URLs within text
+              (http|https) # make sure we find a resource type
+                       :// # ...needs to be followed by colon-slash-slash
+            (\w+[:.]?){2,} # at least two domain groups, e.g. (gnosis.)(cx)
+                      (/?| # could be just the domain name (maybe w/ slash)
+                [^ \n\r"]+ # or stuff then space, newline, tab, quote
+                    [\w/]) # resource name ends in alphanumeric or slash
+     (?=([\s\.,>)'"\]]|$)) # assert: followed by white or clause ending OR end of line
+                         ) # end of match group
+                           ''')
+# this do-nothing version makes a sensible hyperlink
+link_replace = r'\1'
+# NOTE the funky constructor required to use this below
+def _markdown_to_html( markdown_src='', open_links_in_new_window=False ):
+    html = XML(markdown(markdown_src, extras={'link-patterns':None}, link_patterns=[(link_regex, link_replace)]).encode('utf-8'), sanitize=False).flatten()
+    if open_links_in_new_window:
+        html = re.sub(r' href=',
+                      r' target="_blank" href=',
+                      html)
+    return html
 
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
@@ -200,6 +227,7 @@ def v1():
         returning_tree = False
         content_id = None
         version_history = None
+        comment_html = None
         if request.extension not in('html', 'json'):
             type_ext = '.' + request.extension
         else:
@@ -248,6 +276,10 @@ def v1():
                 blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
                 phylesystem.add_validation_annotation(study_nexson, blob_sha)
                 version_history = phylesystem.get_version_history_for_study_id(resource_id)
+                try:
+                    comment_html = _markdown_to_html( study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
+                except: 
+                    comment_html = ''
         except:
             _LOG.exception('GET failed')
             e = sys.exc_info()[0]
@@ -272,7 +304,8 @@ def v1():
         if returning_full_study and out_schema.is_json():
             result = {'sha': head_sha,
                      'data': result_data,
-                     'branch2sha': wip_map}
+                     'branch2sha': wip_map,
+                     'commentHTML': comment_html}
             if version_history:
                 result['versionHistory'] = version_history
             return result
