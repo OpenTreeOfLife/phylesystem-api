@@ -130,6 +130,9 @@ def reponexsonformat():
     return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
             'nexml2json': phylesystem.repo_nexml2json}
 
+# Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
+# This allows us to normalize all API method URLs under v1/, even for
+# non-RESTful methods.
 _route_tag2func = {'index':index,
                    'study_list': study_list,
                    'phylesystem_config': phylesystem_config,
@@ -137,6 +140,7 @@ _route_tag2func = {'index':index,
                    'external_url': external_url,
                    'repo_nexson_format': reponexsonformat,
                    'reponexsonformat': reponexsonformat,
+                   'render_markdown': render_markdown,
                   }
 
 @request.restful()
@@ -320,6 +324,9 @@ def v1():
 
     def POST(resource, resource_id=None, _method='POST', **kwargs):
         "Open Tree API methods relating to creating (and importing) resources"
+        delegate = _route_tag2func.get(resource)
+        if delegate:
+            return delegate()
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.POST')
         
         # support JSONP request from another domain
