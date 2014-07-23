@@ -21,7 +21,7 @@ deployments of the code.
 
 #### index
 
-	curl http://api.opentreeoflife.org/phylensystem/v1/index
+	curl http://api.opentreeoflife.org/phylesystem/v1/index
 	
 Returns a JSON structure with some simple documentation of the service that is running.
 
@@ -43,9 +43,7 @@ phylesystem.get_configuration_dict() on a local instance (using peyotl).
 
 #### external_url
 
-[ Does not seem to be working as of 22-Jul-2014 ]
-
-    curl http://api.opentreeoflife.org/api/external_url/9
+    curl http://api.opentreeoflife.org/phylesystem/external_url/9
 
 Returns a JSON object with the canonical study ID and a url for the version of the 
 study in the repo on the master branch:
