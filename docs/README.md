@@ -18,21 +18,22 @@ deployments of the code.
 
 **NOTE**: Interface details are still under development and host names and paths are subject to change.
 
+
 #### index
 
-    curl http://api.opentreeoflife.org/api/
-
+	curl http://api.opentreeoflife.org/phylesystem/v1/index
+	
 Returns a JSON structure with some simple documentation of the service that is running.
 
 #### study_list
 
-    curl http://api.opentreeoflife.org/api/study_list
+    curl http://api.opentreeoflife.org/phylesystem/v1/study_list
 
-Returns a JSON array of all of the study IDs.  [TBD: that ought to have a /v1/ in the URL.]
+Returns a JSON array of all of the study IDs. 
 
 #### phylesystem_config
 
-    curl http://api.opentreeoflife.org/api/phylesystem_config
+    curl http://api.opentreeoflife.org/phylesystem/v1/phylesystem_config
 
 Returns a JSON object with information about how the phylesystem doc store is 
 configured. Including information about what sets of ID aliases map to the same
@@ -42,7 +43,7 @@ phylesystem.get_configuration_dict() on a local instance (using peyotl).
 
 #### external_url
 
-    curl http://dev.opentreeoflife.org/api/external_url/9
+    curl http://api.opentreeoflife.org/phylesystem/external_url/9
 
 Returns a JSON object with the canonical study ID and a url for the version of the 
 study in the repo on the master branch:
@@ -118,8 +119,10 @@ not merged.
 
 To get the entire NexSON of study N :
 
-    curl http://api.opentreeoflife.org/api/v1/study/STUDYID.json
+    curl http://api.opentreeoflife.org/phylesystem/v1/study/STUDYID.json
     
+where STUDYID is of the form namespace_XX, for example pg_199 or ot_29.
+
 #### GET arguments
 *   The `output_nexml2json` arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
@@ -230,22 +233,27 @@ included. Nor will the requested data be packaged in a "data" field.
 
 ### Updating a study
 
-If you want to update study 10 with a file called
-`10-modified.json`, the following command will accomplish that:
+If you want to update a study, for example study = ot_10, with a file called
+`10-modified.json`, use the following PUT command:
 
-    curl -X PUT http://localhost:8080/api/v1/study/10.json?auth_token=$GITHUB_OAUTH_TOKEN\
-    &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
-    --data-urlencode nexson@10-modified.json
+    curl -X PUT http://api.opentreeoflife.org/phylesystem/v1/study/ot_10.json?auth_token=$GITHUB_OAUTH_TOKEN\
+    &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 --data-urlencode nexson@10-modified.json
 
-For large studies, it's faster to skip the URL-encoding and pass the NexSON data as binary:
+(Note the escaped '&'). For large studies, it's faster to skip the URL-encoding and pass the NexSON data as binary:
 
-    curl -X PUT 'http://localhost:8080/api/v1/study/10?auth_token=26b5a59d2cbc921bdfe04ec0e9f6cc05c879a761' \
-    &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 \
-    --data-binary @10-modified.json --compressed
+    curl -X PUT 'http://api.opentreeoflife.org/phylesystem/v1/study/ot_10?auth_token=26b5a59d2cbc921bdfe04ec0e9f6cc05c879a761'\
+    &starting_commit_SHA=e13343535837229ced29d44bdafad2465e1d13d8 --data-binary @10-modified.json --compressed
 
 #### PUT arguments
 
+**Required arguments**
+
+*   `auth_token` is required, and is your [GitHub authorization token](https://github.com/OpenTreeOfLife/phylesystem-api/tree/master/docs#getting-a-github-oauth-token) 
 *   `starting_commit_SHA` is required, and should be the commit SHA of the parent of the edited study.
+
+**Optional arguments**
+
+*  `commit_msg` is optional, but it is good practice to include it
 *   `merged_SHA` is optional. If the master branch's version of this study has advanced
     a PUT will not be merged to master. The curation app will need to call 
     the merge URL (see below). That controller will return a `merged_SHA` value. 
@@ -255,6 +263,7 @@ For large studies, it's faster to skip the URL-encoding and pass the NexSON data
     argument will allow the branch to merge to master despite the fact that the master has advanced
     since `starting_commit_SHA`. Note that, if the master has advanced again since the 
     client calls the merge controller, the client will need to merge
+
 
 Either form of this command will create a commit with the updated JSON on a branch of the form
 
@@ -302,8 +311,7 @@ Then a second merge and PUT with the new `merged_sha` is required.
 Any PUT request attempting to update a study with invalid JSON
 will be denied and an HTTP error code 400 will be returned.
 
-[Here](https://github.com/OpenTreeOfLife/hbf_phylesystem_test/commit/e991b02743f9e726b4b6acf6c810022668c066e2) 
-is an example commit created by the OpenTree API.
+[Here](https://github.com/OpenTreeOfLife/phylesystem-1/commit/c3312d2cbb7fc608a62c0f7de177305fdd8a2d1a) is an example commit created by the OpenTree API.
 
 ### Merge a study in a WIP branch
 
@@ -315,7 +323,7 @@ merge can generate semantic conflicts even if not git (textual) conflicts arise.
 
 To merge a study from master into a branch with a given `starting_commit_sha`
 
-    curl -X POST http://localhost:8000/api/merge/v1?resource_id=9&starting_commit_SHA=152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
+    curl -X POST http://api.opentreeoflife.org/phylesystem/v1/merge/?resource_id=9&starting_commit_SHA=152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
 
 
 If the request is successful, a JSON response similar to this will be returned:
@@ -343,7 +351,7 @@ to this:
 
 To create a new study from a file in the current directory called ```study.json```:
 
-    curl -X POST "http://ot10.opentreeoflife.org/api/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
+    curl -X POST "http://api.opentreeoflife.org/phylesystem/v1/study/?auth_token=$GITHUB_OAUTH_TOKEN" --data-urlencode nexson@study.json
 
 This will generate the output
 
@@ -384,9 +392,7 @@ IN FLUX!
 This API method will push the master branch of the local Git repo
 to the master on GitHub
 
-    curl -X PUT http://ot10.opentreeoflife.org/api/push/v1/9
-    
-[shouldn't this be /api/v1/push/ ?]
+    curl -X PUT http://api.opentreeoflife.org/phylesystem/v1/push/9
 
 On success, it will return JSON similar to this:
 
@@ -409,21 +415,16 @@ where the description will contain a stacktrace.
 
 By default, the Phylesystem API uses the name and email associated with the Github Oauth token to assign provenance to API calls. To over-ride that you can provide ```author_name``` and ```author_email``` arguments:
 
-    curl -X PUT 'http://ot10.opentreeoflife.org/api/v1/study/13.json?auth_token=$GITHUB_OAUTH_TOKEN&author_name=joe&author_email=joe@joe.com' --data-urlencode nexson@1003.json
+    curl -X PUT 'http://api.opentreeoflife.org/phylesystem/v1/study/13.json?auth_token=$GITHUB_OAUTH_TOKEN&author_name=joe&author_email=joe@joe.com' --data-urlencode nexson@1003.json
 
 ## Not Yet Implemented Methods
 
 The following methods have not been implemented yet.
 
-### Listing available studies
-
-    # By convention, this might be the default view for a "collection" URL:
-    curl https://api.opentreeoflife.org/api/v1/studies
-
 ### Searching, filtering, sorting, paginating studies
 
     # Add searching, sorting, pagination, filters on the query string
-    curl https://api.opentreeoflife.org/api/v1/studies?q=mammal&sort=status,-date&page=3&filter=state-draft
+    curl https://api.opentreeoflife.org/phylesystem/v1/studies?q=mammal&sort=status,-date&page=3&filter=state-draft
 
 ### Listing your own studies (as a curator), sorted by status
 
@@ -431,17 +432,17 @@ This is the default __dashboard__ view for a logged-in curator. Of course it's
 just a special case of the filtered list above.
 
     # the curator's "dashboard" is just a preset filter
-    curl https://api.opentreeoflife.org/api/v1/studies?q=jimallman&sort=-status,-date&page=1&filter=state-draft
+    curl https://api.opentreeoflife.org/phylesystem/v1/studies?q=jimallman&sort=-status,-date&page=1&filter=state-draft
 
 This and other "canned" views might have friendlier URLs:
 
-    curl https://api.opentreeoflife.org/api/v1/studies/dashboard
+    curl https://api.opentreeoflife.org/phylesystem/v1/studies/dashboard
 
-    curl https://api.opentreeoflife.org/api/v1/studies/draft
+    curl https://api.opentreeoflife.org/phylesystem/v1/studies/draft
 
-    curl https://api.opentreeoflife.org/api/v1/studies/published
+    curl https://api.opentreeoflife.org/phylesystem/v1/studies/published
 
-    curl https://api.opentreeoflife.org/api/v1/studies/latest
+    curl https://api.opentreeoflife.org/phylesystem/v1/studies/latest
 
 
 ### Incorporating "namespaced" study identifiers from different sources
@@ -452,7 +453,7 @@ counter or using GUIDs, we're planning to use a prefix for tool or system
 that contributes Nexson studies to the repository.
 
 The prefixes currently planned include:
-- __ot__ for the [Open Tree curation tool](https://dev.opentreeoflife.org/curator/study)
+- __ot__ for the [Open Tree curation tool](https://tree.opentreeoflife.org/curator/study)
 - __pg__ for [phylografter](http://reelab.net/phylografter/)
 
 
@@ -477,8 +478,8 @@ These "namespaces" will appear in different forms, depending on context:
 - as subpaths in RESTful URLs
 
     ```
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree
-    http://dev.opentreeoflife.org/api/v1/study/pg/987/tree
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/tree
+    http://api/phylesystem/v1/study/pg/987/tree
     ```
     
 - as elements of WIP branch names (in a branching repo)
@@ -497,17 +498,17 @@ We should be able to extend the RESTful style used for studies to manage
 would provide a uniform set of CRUD (create, retrieve, update,
 delete) operations using URLs like:
 
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/5
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/5/node/789
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/otu/456
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/tree
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/tree/5
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/tree/5/node/789
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/otu/456
 
 Apart from normal elements in NexSON, we might also consider using this
 convention for __supporting files__ and __annotations__ :
 
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/file/3
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/file/alignment_data.xsl
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/annotation/456
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/file/3
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/file/alignment_data.xsl
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/annotation/456
 
 Ideally, it would be good to also allow fetching (and more?) of sets of
 related objects:
@@ -518,8 +519,8 @@ related objects:
 
 Here are some possible examples:
 
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/1...4
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/1,5,8
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/tree/1...4
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/tree/1,5,8
 
 The last case (arbitrary setes of mixed types) might include the cluster of
 elements needed for a complex annotation. This would probably be handled
@@ -543,7 +544,7 @@ fragments, while ensuring that these can be reassembled exactly as before. This
 might be as simple as removing an element (say, a tree) and replacing it with a
 token that identifies this element in context. For example, here's a study:
     
-    http://dev.opentreeoflife.org/api/v1/study/ot/123
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123
 
     ...
     "trees": {
@@ -565,7 +566,7 @@ token that identifies this element in context. For example, here's a study:
     
 Upon request, we might extract its first tree (_tree1_) as a fragment:
 
-    http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/1
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/tree/1
 
     {
         "@id": "tree1", 
@@ -576,7 +577,7 @@ Upon request, we might extract its first tree (_tree1_) as a fragment:
 
 We can either use the URL to replace this element in an update, or we can leave a placeholder:
 
-    http://dev.opentreeoflife.org/api/v1/study/ot/123
+    http://api.opentreeoflife.org/phylesystem/v1/study/ot/123
 
     ...
     "trees": {
@@ -586,7 +587,7 @@ We can either use the URL to replace this element in an update, or we can leave 
             {
                 "@PLACEHOLDER": true, 
                 "@type": "object", 
-                "@href": "http://dev.opentreeoflife.org/api/v1/study/ot/123/tree/1" 
+                "@href": "http://api.opentreeoflife.org/phylesystem/v1/study/ot/123/tree/1" 
             }, 
             {
                 "@id": "tree3", 
@@ -604,7 +605,7 @@ of elements, as described above. This would address known performance
 challenges like large studies with "flat" collections (eg, tens of
 thousands of OTUs in an array).
 
-    http://dev.opentreeoflife.org/api/v1/study/pg/987
+    http://api.opentreeoflife.org/phylesystem/v1/study/pg/987
 
     ...
     "otus": {
@@ -613,12 +614,12 @@ thousands of OTUs in an array).
             {
                 "@PLACEHOLDER": true, 
                 "@type": "range", 
-                "@href": "http://dev.opentreeoflife.org/api/v1/study/pg/987/otu/1...1000" 
+                "@href": "http://api.opentreeoflife.org/phylesystem/v1/study/pg/987/otu/1...1000" 
             }, 
             {
                 "@PLACEHOLDER": true, 
                 "@type": "range", 
-                "@href": "http://dev.opentreeoflife.org/api/v1/study/pg/987/otu/1001...2000" 
+                "@href": "http://api.opentreeoflife.org/phylesystem/v1/study/pg/987/otu/1001...2000" 
             }, 
             ...
 
