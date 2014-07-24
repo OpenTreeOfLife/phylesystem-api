@@ -141,6 +141,7 @@ _route_tag2func = {'index':index,
                    'repo_nexson_format': reponexsonformat,
                    'reponexsonformat': reponexsonformat,
                    'render_markdown': render_markdown,
+                   #TODO: 'push': j
                   }
 
 @request.restful()
@@ -498,10 +499,15 @@ def v1():
             _raise_HTTP_from_msg(err.msg)
         return nexson, annotation, nexson_adaptor
 
-    def PUT(resource, resource_id, **kwargs):
+    def PUT(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to updating existing resources"
         #global TIMING
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
+
+        delegate = _route_tag2func.get(resource)
+        if delegate:
+            _LOG.debug('PUT call to {} bouncing to delegate'.format(resource))
+            return delegate()
         
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
@@ -509,6 +515,9 @@ def v1():
         if not resource=='study':
             _LOG.debug('resource must be "study"')
             raise HTTP(400, 'resource != study')
+        if resource_id is None:
+            _LOG.debug('resource id not provided')
+            raise HTTP(400, json.dumps({"error": 1, "description": 'study ID expected after "study/"'}))
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
@@ -528,7 +537,11 @@ def v1():
 
         #TIMING = api_utils.log_time_diff(_LOG, 'validation and normalization', TIMING)
         phylesystem = api_utils.get_phylesystem(request)
-        gd = phylesystem.create_git_action(resource_id)
+        try:
+            gd = phylesystem.create_git_action(resource_id)
+        except KeyError, err:
+            _LOG.debug('PUT failed in create_git_action (probably a bad study ID)')
+            _raise_HTTP_from_msg("invalid study ID, please check the URL")
         try:
             blob = __finish_write_verb(phylesystem,
                                        gd,
@@ -623,6 +636,9 @@ def v1():
             response.view = 'generic.jsonp'
         if not resource=='study':
             raise HTTP(400, 'resource != study')
+        if resource_id is None:
+            _LOG.debug('resource id not provided')
+            raise HTTP(400, json.dumps({"error": 1, "description": 'study ID expected after "study/"'}))
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
