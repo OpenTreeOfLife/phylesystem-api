@@ -12,7 +12,7 @@ else:
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 2:
-	opentree_api_base_url = sys.argv[2].rstrip("/").rstrip("/api/v1")
+	opentree_api_base_url = sys.argv[2].rstrip("/")
 else:
     print "Please specify the Open Tree API public URL as second argument: '%s <repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
@@ -46,7 +46,7 @@ if not(prompt_for_manual_webhooks):
             if (hook.get('name') == "web" and 
                 hook.get('active') == True and
                 hook.get('events') and ("push" in hook['events']) and
-                hook.get('config') and (hook['config']['url'] == "%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url)
+                hook.get('config') and (hook['config']['url'] == "%s/../search/nudgeIndexOnUpdates" % opentree_api_base_url)
             ):
                 found_matching_webhook = True
         except:
@@ -64,7 +64,7 @@ if not(prompt_for_manual_webhooks):
                 "push"
             ],
             "config": {
-                "url": ("%s/api/search/nudgeIndexOnUpdates" % opentree_api_base_url),
+                "url": ("%s/../search/nudgeIndexOnUpdates" % opentree_api_base_url),
                 "content_type": "json"
             }
         }
