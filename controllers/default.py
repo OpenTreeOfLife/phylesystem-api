@@ -428,8 +428,19 @@ def v1():
                 if existing_license == 'CC-0':
                     nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
                     pass
+                elif existing_license == 'CC-BY-2.0':
+                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/licenses/by/2.0/'}
+                    pass
+                elif existing_license == 'CC-BY-2.5':
+                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/licenses/by/2.5/'}
+                    pass
+                elif existing_license == 'CC-BY-3.0':
+                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/licenses/by/3.0/'}
+                    pass
+                # NOTE that we don't offer CC-BY 4.0, which is problematic for data
                 elif existing_license == 'CC-BY':
-                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/licenses/by/4.0/'}
+                    # default to version 3, if not specified. 
+                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/licenses/by/3.0/'}
                     pass
                 else:  # assume it's something else
                     alt_license_name = kwargs.get('alt_license_name', '')
