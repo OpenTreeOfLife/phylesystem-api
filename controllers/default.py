@@ -23,6 +23,7 @@ from gluon.html import web2pyHTMLParser
 import re
 from gluon.contrib.markdown.markdown2 import markdown
 from StringIO import StringIO
+from ConfigParser import SafeConfigParser
 import copy
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
@@ -143,6 +144,42 @@ _route_tag2func = {'index':index,
                    'render_markdown': render_markdown,
                    #TODO: 'push': j
                   }
+
+def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
+    # Use the oti (docstore index) service to see if there are other studies in
+    # the collection with the same DOI; return the IDs of any duplicate studies
+    # found, or an empty list if there are no dupes.
+    if not study_DOI:
+        # if no DOI exists, there are no known duplicates
+        return [ ]
+    app_name = request.application
+    conf = SafeConfigParser(allow_no_value=True)
+    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+    else:
+        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+    oti_base_url = conf.get("apis", "oti_base_url")
+    try:
+        dupe_lookup_response = fetch(
+            '%s/singlePropertySearchForStudies' % oti_base_url,
+            data={
+                "property": "ot:studyPublication",
+                "value": study_DOI,
+                "exact": False
+            }
+        )
+    except:
+        raise HTTP(400, traceback.format_exc())
+    dupe_lookup_response = unicode(dupe_lookup_response, 'utf-8') # make sure it's Unicode!
+    response_json = anyjson.loads(dupe_lookup_response)
+    duplicate_study_ids = [x['ot:studyId'] for x in response_json['matched_studies']]
+    # Remove this study's ID; any others that remain are duplicates
+    try:
+        duplicate_study_ids.remove(study_ID)
+    except ValueError:
+        # ignore error, if oti is lagging and doesn't have this study yet
+        pass
+    return duplicate_study_ids
 
 @request.restful()
 def v1():
@@ -312,11 +349,20 @@ def v1():
             raise HTTP(404, 'subresource "{r}/{t}" not found in study "{s}"'.format(r=subresource,
                                                                                     t=subresource_id,
                                                                                     s=resource_id))
+
         if returning_full_study and out_schema.is_json():
+            try:
+                study_DOI = study_nexson['nexml']['^ot:studyPublication']['@href']
+            except KeyError:
+                study_DOI = None
+            duplicate_study_ids = _fetch_duplicate_study_ids(study_DOI, resource_id)
+
             result = {'sha': head_sha,
                      'data': result_data,
                      'branch2sha': wip_map,
-                     'commentHTML': comment_html}
+                     'commentHTML': comment_html,
+                     'duplicateStudyIDs': duplicate_study_ids}
+
             if version_history:
                 result['versionHistory'] = version_history
             return result
@@ -507,7 +553,7 @@ def v1():
         except GitWorkflowError, err:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.exception('PUT failed in validation')
-            _raise_HTTP_from_msg(err.msg)
+            _raise_HTTP_from_msg(err.msg or 'No message found')
         return nexson, annotation, nexson_adaptor
 
     def PUT(resource, resource_id=None, **kwargs):
