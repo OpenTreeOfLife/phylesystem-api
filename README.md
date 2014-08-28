@@ -77,9 +77,8 @@ See [docs/](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master
 
 # Using the API from Python
 
-See
-[opentree_client.py](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/sample_client/opentree_client.py)
-for examples of using the API from Python.
+See [peyotl](https://github.com/OpenTreeOfLife/peyotl) has wrappers for accessing phylesystem web services.
+See the [peyotl wiki](https://github.com/OpenTreeOfLife/peyotl/wiki) for details.
 
 # Authors
 
