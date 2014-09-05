@@ -159,9 +159,13 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
     else:
         conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
     oti_base_url = conf.get("apis", "oti_base_url")
+    fetch_url = '%s/singlePropertySearchForStudies' % oti_base_url
+    if fetch_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        fetch_url = "http:%s" % fetch_url
     try:
         dupe_lookup_response = fetch(
-            '%s/singlePropertySearchForStudies' % oti_base_url,
+            fetch_url,
             data={
                 "property": "ot:studyPublication",
                 "value": study_DOI,
