@@ -1,10 +1,24 @@
-from ConfigParser import SafeConfigParser
-from peyotl.phylesystem import Phylesystem
 from github import Github, BadCredentialsException
+from peyotl.nexson_syntax import write_as_json
+from peyotl.phylesystem import Phylesystem
+from ConfigParser import SafeConfigParser
 from datetime import datetime
+import tempfile
 import logging
-import os
 import json
+import os
+
+def atomic_write_json_if_not_found(obj, dest):
+    if os.path.exists(dest):
+        return False
+    handle, tmpfn = tempfile.mkstemp(suffix='.json', text=True)
+    #mkstemp opens the file, but write_as_json will open the string...
+    handle.close()
+    write_as_json(obj, tmpfn, indent=2, sort_keys=True)
+    if os.path.exists(dest):
+        return False
+    os.rename(tmpfn, dest)
+    return True
 
 def compose_push_to_github_url(request, resource_id):
     if resource_id is None:
@@ -41,6 +55,13 @@ def get_phylesystem(request):
     _LOG = get_logger(request, 'ot_api')
     _LOG.debug('repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     return _PHYLESYSTEM
+
+
+def get_failed_push_filepath(request):
+    app_name = request.application
+    leader = request.env.web2py_path
+    return '%s/applications/%s/private/PUSH_FAILURE.json' % (leader, app_name)
+
 
 def read_config(request):
     app_name = request.application
