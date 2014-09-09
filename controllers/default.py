@@ -389,7 +389,9 @@ def v1():
                      'data': result_data,
                      'branch2sha': wip_map,
                      'commentHTML': comment_html,
-                     'duplicateStudyIDs': duplicate_study_ids}
+                     }
+            if duplicate_study_ids is not None:
+                result['duplicateStudyIDs'] = duplicate_study_ids
 
             if version_history:
                 result['versionHistory'] = version_history

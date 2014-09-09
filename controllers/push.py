@@ -41,7 +41,7 @@ def v1():
                        'study': resource_id,
                        'commit': master_sha,
                        'stacktrace': m}
-                api_utils.atomic_write_json_if_not_found(obj, fail_file)
+                api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
                 _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
             raise HTTP(409, json.dumps({
                 "error": 1,

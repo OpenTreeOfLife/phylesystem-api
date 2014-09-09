@@ -8,12 +8,19 @@ import logging
 import json
 import os
 
-def atomic_write_json_if_not_found(obj, dest):
+def get_private_dir(request):
+    app_name = request.application
+    leader = request.env.web2py_path
+    return '%s/applications/%s/private' % (leader, app_name)
+
+def atomic_write_json_if_not_found(obj, dest, request):
     if os.path.exists(dest):
         return False
-    handle, tmpfn = tempfile.mkstemp(suffix='.json', text=True)
-    #mkstemp opens the file, but write_as_json will open the string...
-    handle.close()
+    dir = get_private_dir(request)
+    handle, tmpfn = tempfile.mkstemp(suffix='.json', dir=dir, text=True)
+    # mkstemp opens the file and returns a file descriptor, 
+    #   but we are using write_as_json to open with the right encoding
+    os.close(handle)
     write_as_json(obj, tmpfn, indent=2, sort_keys=True)
     if os.path.exists(dest):
         return False
@@ -58,20 +65,17 @@ def get_phylesystem(request):
 
 
 def get_failed_push_filepath(request):
-    app_name = request.application
-    leader = request.env.web2py_path
-    return '%s/applications/%s/private/PUSH_FAILURE.json' % (leader, app_name)
-
+    return os.path.join(get_private_dir(request), 'PUSH_FAILURE.json')
 
 def read_config(request):
     app_name = request.application
     conf = SafeConfigParser(allow_no_value=True)
-    localconfig_filename = "%s/applications/%s/private/localconfig" % (request.env.web2py_path, app_name)
+    localconfig_filename = os.path.join(get_private_dir(request), "localconfig")
 
     if os.path.isfile(localconfig_filename):
         conf.readfp(open(localconfig_filename))
     else:
-        filename = "%s/applications/%s/private/config" % (request.env.web2py_path, app_name)
+        filename = os.path.join(get_private_dir(request), "config")
         conf.readfp(open(filename))
 
     repo_parent   = conf.get("apis","repo_parent")
@@ -93,12 +97,12 @@ def read_config(request):
 def read_logging_config(request):
     app_name = request.application
     conf = SafeConfigParser(allow_no_value=True)
-    localconfig_filename = "%s/applications/%s/private/localconfig" % (request.env.web2py_path, app_name)
+    localconfig_filename = os.path.join(get_private_dir(request), "localconfig")
 
     if os.path.isfile(localconfig_filename):
         conf.readfp(open(localconfig_filename))
     else:
-        filename = "%s/applications/%s/private/config" % (request.env.web2py_path, app_name)
+        filename = os.path.join(get_private_dir(request), "config")
         conf.readfp(open(filename))
     try:
         level = conf.get("logging", "level")
