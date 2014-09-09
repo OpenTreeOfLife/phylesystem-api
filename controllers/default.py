@@ -379,7 +379,11 @@ def v1():
                 study_DOI = study_nexson['nexml']['^ot:studyPublication']['@href']
             except KeyError:
                 study_DOI = None
-            duplicate_study_ids = _fetch_duplicate_study_ids(study_DOI, resource_id)
+            try:
+                duplicate_study_ids = _fetch_duplicate_study_ids(study_DOI, resource_id)
+            except:
+                _LOG.exception('call to OTI check for duplicate DOIs failed')
+                duplicate_study_ids = None
 
             result = {'sha': head_sha,
                      'data': result_data,
