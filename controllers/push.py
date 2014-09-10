@@ -1,8 +1,10 @@
-import os
-import time
-import json
 import api_utils
 import traceback
+import datetime
+import codecs
+import json
+import os
+
 @request.restful()
 def v1():
     """The OpenTree API v1: Merge Controller
@@ -13,12 +15,13 @@ def v1():
     """
     response.view = 'generic.json'
 
-    def PUT(resource_id=None, jsoncallback=None,callback=None,_=None,**kwargs):
+    def PUT(resource_id=None, jsoncallback=None, callback=None, _=None, **kwargs):
         """OpenTree API methods relating to updating branches
 
         curl -X POST http://localhost:8000/api/push/v1?resource_id=9
         """
-
+        _LOG = api_utils.get_logger(request, 'ot_api.push.v1.PUT')
+        fail_file = api_utils.get_failed_push_filepath(request)
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
@@ -27,10 +30,32 @@ def v1():
             phylesystem.push_study_to_remote('GitHubRemote', resource_id)
         except:
             m = traceback.format_exc()
+            _LOG.warn('Push of study {s} failed. Details: {m}'.format(s=resource_id, m=m))
+            if os.path.exists(fail_file):
+                _LOG.warn('push failure file "{f}" already exists. This event not logged there'.format(f=fail_file))
+            else:
+                timestamp = datetime.datetime.utcnow().isoformat()
+                ga = phylesystem.create_git_action(resource_id)
+                master_sha = ga.get_master_sha()
+                obj = {'date': timestamp,
+                       'study': resource_id,
+                       'commit': master_sha,
+                       'stacktrace': m}
+                api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
+                _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
             raise HTTP(409, json.dumps({
                 "error": 1,
                 "description": "Could not push! Details: {m}".format(m=m)
             }))
+        if os.path.exists(fail_file):
+            # log any old fail_file, and remove it because the pushes are working
+            with codecs.open(fail_file, 'rU', encoding='utf-8') as inpf:
+                prev_fail = json.load(inpf)
+            os.unlink(fail_file)
+            fail_log_file = codecs.open(fail_file + '.log', mode='a', encoding='utf-8')
+            json.dump(prev_fail, fail_log_file, indent=2, encoding='utf-8')
+            fail_log_file.close()
+
         return {'error': 0,
                 'description': 'Push succeeded'}
     return locals()

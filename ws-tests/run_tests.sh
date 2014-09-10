@@ -4,7 +4,7 @@ num_p=0
 failed=''
 for fn in $(ls test_*.py)
 do
-    if test $fn = test_study_push.py; 
+    if test $fn = skipped_test_name_here.py ; 
     then
         echo test $fn skipped
     else

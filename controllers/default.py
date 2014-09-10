@@ -1,9 +1,6 @@
 import os, sys
-import time
 import json
 import anyjson
-import hashlib
-import github
 import traceback
 from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
@@ -12,17 +9,16 @@ from peyotl.phylesystem.git_workflows import GitWorkflowError, \
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_tree, \
                                  PhyloSchema, \
+                                 read_as_json, \
                                  BY_ID_HONEY_BADGERFISH
 from peyotl.external import import_nexson_from_treebase
 from github import Github, BadCredentialsException
 import api_utils
-from pprint import pprint
 from gluon.tools import fetch
 from urllib import urlencode
 from gluon.html import web2pyHTMLParser
 import re
 from gluon.contrib.markdown.markdown2 import markdown
-from StringIO import StringIO
 from ConfigParser import SafeConfigParser
 import copy
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
@@ -36,9 +32,9 @@ except:
 _VALIDATING = True
 
 # Cook up some reasonably strong regular expressions to detect bare
-# URLs in Markdown and wrap them in hyperlinks. Adapted from 
+# URLs in Markdown and wrap them in hyperlinks. Adapted from
 # http://stackoverflow.com/questions/1071191/detect-urls-in-a-string-and-wrap-with-a-href-tag
-link_regex = re.compile(  r'''
+link_regex = re.compile(r'''
                      (?x)( # verbose identify URLs within text
                  (?<![>"]) # don't touch URLs that are already wrapped!
               (http|https) # make sure we find a resource type
@@ -53,7 +49,7 @@ link_regex = re.compile(  r'''
 # this do-nothing version makes a sensible hyperlink
 link_replace = r'\1'
 # NOTE the funky constructor required to use this below
-def _markdown_to_html( markdown_src='', open_links_in_new_window=False ):
+def _markdown_to_html(markdown_src='', open_links_in_new_window=False):
     html = XML(markdown(markdown_src, extras={'link-patterns':None}, link_patterns=[(link_regex, link_replace)]).encode('utf-8'), sanitize=False).flatten()
     if open_links_in_new_window:
         html = re.sub(r' href=',
@@ -131,6 +127,33 @@ def reponexsonformat():
     return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
             'nexml2json': phylesystem.repo_nexml2json}
 
+def push_failure():
+    """Return the contents of the push fail file if it exists.
+
+    adds a boolean `pushes_succeeding` flag (True if there is no fail file)
+    If this flag is False, there should also be:
+        `data` utc timestamp of the push event that first failed
+        `study` the study that triggered the first failing push event
+        `commit` the master commit SHA of the working dir at the time of the first failure
+        `stacktrace`: the stacktrace of the push_study_to_remote operation that failed.
+    If `pushes_succeeded` is False, but there is only a message field, then another
+        thread may have rectified the push problems while this operation was trying
+        to report the errors. In this case, you should call this function again.
+        Report a bug if it has not reverted to `pushes_succeeding=True.
+    """
+
+    response.view = 'generic.json'
+    fail_file = api_utils.get_failed_push_filepath(request)
+    if os.path.exists(fail_file):
+        try:
+            blob = read_as_json(fail_file)
+        except:
+            blob = {'message': 'could not read push fail file'}
+        blob['pushes_succeeding'] = False
+    else:
+        blob = {'pushes_succeeding': True}
+    return json.dumps(blob)
+
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
 # This allows us to normalize all API method URLs under v1/, even for
 # non-RESTful methods.
@@ -139,6 +162,7 @@ _route_tag2func = {'index':index,
                    'phylesystem_config': phylesystem_config,
                    'unmerged_branches': unmerged_branches,
                    'external_url': external_url,
+                   'push_failure': push_failure,
                    'repo_nexson_format': reponexsonformat,
                    'reponexsonformat': reponexsonformat,
                    'render_markdown': render_markdown,
@@ -326,7 +350,7 @@ def v1():
                 version_history = phylesystem.get_version_history_for_study_id(resource_id)
                 try:
                     comment_html = _markdown_to_html( study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
-                except: 
+                except:
                     comment_html = ''
         except:
             _LOG.exception('GET failed')
@@ -355,13 +379,19 @@ def v1():
                 study_DOI = study_nexson['nexml']['^ot:studyPublication']['@href']
             except KeyError:
                 study_DOI = None
-            duplicate_study_ids = _fetch_duplicate_study_ids(study_DOI, resource_id)
+            try:
+                duplicate_study_ids = _fetch_duplicate_study_ids(study_DOI, resource_id)
+            except:
+                _LOG.exception('call to OTI check for duplicate DOIs failed')
+                duplicate_study_ids = None
 
             result = {'sha': head_sha,
                      'data': result_data,
                      'branch2sha': wip_map,
                      'commentHTML': comment_html,
-                     'duplicateStudyIDs': duplicate_study_ids}
+                     }
+            if duplicate_study_ids is not None:
+                result['duplicateStudyIDs'] = duplicate_study_ids
 
             if version_history:
                 result['versionHistory'] = version_history
@@ -375,9 +405,8 @@ def v1():
         if delegate:
             return delegate()
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.POST')
-        
         # support JSONP request from another domain
-        if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
+        if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
             response.view = 'generic.jsonp'
         # check for HTTP method override (passed on query string)
         if _method == 'PUT':
@@ -389,7 +418,7 @@ def v1():
                                         "description": "Only the creation of new studies is currently supported"}))
         auth_info = api_utils.authenticate(**kwargs)
         # Studies that were created in phylografter, can be added by
-        #   POSTing the content with resource_id 
+        #   POSTing the content with resource_id
         new_study_id = resource_id
         if new_study_id is not None:
             bundle = __extract_and_validate_nexson(request,
@@ -407,7 +436,7 @@ def v1():
             # is the submitter explicity applying the CC0 waiver to a new study
             # (i.e., this study is not currently in an online repository)?
             if import_from_location == 'IMPORT_FROM_UPLOAD':
-                cc0_agreement = (kwargs.get('chosen_license', '') == 'apply-new-CC0-waiver' and 
+                cc0_agreement = (kwargs.get('chosen_license', '') == 'apply-new-CC0-waiver' and
                                  kwargs.get('cc0_agreement', '') == 'true')
             else:
                 cc0_agreement = False
