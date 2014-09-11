@@ -745,5 +745,3 @@ def v1():
         raise HTTP(200, **(response.headers))
 
     return locals()
-
-

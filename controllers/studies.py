@@ -38,14 +38,48 @@ def find_studies():
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
     field = request.vars.get('property')
+    try:
+        if field is None:
+            resp = oti.find_all_studies(verbose=verbose)
+        else:
+            value = request.vars.get('value')
+            if value is None:
+                _raise400('If "property" is sent, a "value" argument must be used.')
+            exact = _bool_arg(request.vars.get('exact', False))
+            if (exact is not True) and (exact is not False):
+                _raise400('"exact" setting must be a boolean')
+            try:
+                resp = oti.find_studies({field: value}, verbose=verbose, exact=exact)
+            except ValueError, x:
+                _raise400(x.message)
+    except HTTP:
+        raise
+    except Exception, x:
+        raise HTTP(500, json.dumps({"error": 1, 
+                                    "description": "Unexpected error calling oti: {}".format(x.message)}))
+    return json.dumps(resp)
+
+def find_trees():
+    oti = _init(request, response)
+    verbose = _bool_arg(request.vars.get('verbose', False))
+    if (verbose is not True) and (verbose is not False):
+        _raise400('"verbose" setting must be a boolean')
+    field = request.vars.get('property')
     if field is None:
-        resp = oti.find_all_studies(verbose=verbose)
-    else:
-        value = request.vars.get('value')
-        if value is None:
-            _raise400('If "property" is sent, a "value" argument must be used.')
-        exact = _bool_arg(request.vars.get('exact', False))
-        if (exact is not True) and (exact is not False):
-            _raise400('"exact" setting must be a boolean')
-        resp = oti.find_studies({field: value}, verbose=verbose, exact=exact)
+        _raise400('A "property" argument must be used.')
+    value = request.vars.get('value')
+    if value is None:
+        _raise400('A "value" argument must be used.')
+    exact = _bool_arg(request.vars.get('exact', False))
+    if (exact is not True) and (exact is not False):
+        _raise400('"exact" setting must be a boolean')
+    try:
+        resp = oti.find_trees({field: value}, verbose=verbose, exact=exact)
+    except HTTP:
+        raise
+    except ValueError, x:
+        _raise400(x.message)
+    except Exception, x:
+        raise HTTP(500, json.dumps({"error": 1, 
+                                    "description": "Unexpected error calling oti: {}".format(x.message)}))
     return json.dumps(resp)
