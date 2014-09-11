@@ -122,10 +122,10 @@ def external_url():
         raise HTTP(404, '{"error": 1, "description": "study not found"}')
 
 def reponexsonformat():
-    response.view = 'generic.jsonp'
+    response.view = 'generic.json'
     phylesystem = api_utils.get_phylesystem(request)
-    return {'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
-            'nexml2json': phylesystem.repo_nexml2json}
+    return json.dumps({'description': "The nexml2json property reports the version of the NexSON that is used in the document store. Using other forms of NexSON with the API is allowed, but may be slower.",
+                       'nexml2json': phylesystem.repo_nexml2json})
 
 def push_failure():
     """Return the contents of the push fail file if it exists.
@@ -176,17 +176,8 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
     if not study_DOI:
         # if no DOI exists, there are no known duplicates
         return [ ]
-    app_name = request.application
-    conf = SafeConfigParser(allow_no_value=True)
-    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
-        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
-    else:
-        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-    oti_base_url = conf.get("apis", "oti_base_url")
+    oti_base_url = api_utils.get_oti_base_url(request)
     fetch_url = '%s/singlePropertySearchForStudies' % oti_base_url
-    if fetch_url.startswith('//'):
-        # Prepend scheme to a scheme-relative URL
-        fetch_url = "http:%s" % fetch_url
     try:
         dupe_lookup_response = fetch(
             fetch_url,
@@ -353,7 +344,7 @@ def v1():
                 phylesystem.add_validation_annotation(study_nexson, blob_sha)
                 version_history = phylesystem.get_version_history_for_study_id(resource_id)
                 try:
-                    comment_html = _markdown_to_html( study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
+                    comment_html = _markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
                 except:
                     comment_html = ''
         except:
@@ -754,3 +745,5 @@ def v1():
         raise HTTP(200, **(response.headers))
 
     return locals()
+
+
