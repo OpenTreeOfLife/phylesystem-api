@@ -6,6 +6,27 @@ and the reasons for various "details of implementation".
 
 See elsewhere for documentation on the APIs for other Open Tree components such as treemachine and taxomachine.
 
+## Open Tree Phylesystem API Version 2 Methods
+The implementation of the REST interface for study objects did not change in the transition from Open
+Tree of Life v1 API to v2 API.
+The only aspect that changed was the start of the URL from:
+
+    http://api.opentreeoflife.org/phylesystem/v1/study/...
+    http://devapi.opentreeoflife.org/phylesystem/v1/study/...
+
+(for the production and dev servers respectively) to:
+
+    http://api.opentreeoflife.org/v2/study/...
+    http://devapi.opentreeoflife.org/v2/study/...
+
+(note that this version of the API has not been deployed on the production server
+as of 11 Sept. 2014).  Methods that are discussed below, but are do not follow
+these URL patterns are not considered part of the publicly documented API.
+They are still accessible, but typically will have the v1 as part of their URL.
+
+Because the phylesystem v1 APIs are the same as v2 APIs, the v1 will not be
+deprecated as soon in this repo as it will be in other repositories.
+
 ## Open Tree Phylesystem API Version 1 Methods
 
 All API calls are specific to the API version, which is a part
@@ -127,11 +148,19 @@ where STUDYID is of the form namespace_XX, for example pg_199 or ot_29.
 *   The `output_nexml2json` arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
 for details. Currently the only supported values are:
-  *  0.0.0  badgerfish convention
-  *  1.0.0  the first version of the "honey badgerfish" convention
-  *  1.2.1  the "by ID" version of the "honey badgerfish" convention
+  *  `0.0.0`  badgerfish convention
+  *  `1.0.0`  the first version of the "honey badgerfish" convention
+  *  `1.2.1`  the "by ID" version of the "honey badgerfish" convention
+  *  `native` this means that whatever version of NexSON is stored in the 
+phylesystem doc store shoule be returned without translation. This should
+provide the fastest access (but, of course, requires the client to be able
+to handle whatever format is returned).
+
 The default for this parameter is 0.0.0, but this is subject to change.
 Consider the call without the output_nexml2json argument to be brittle!
+The data are stored in the phylesystem repo as version `1.2.1` 
+(so that is what you get if you use the `native` value for this argument).
+
 *   `starting_commit_SHA` This is optional 
 which will return the version of the study from a specific commit sha.
 If no `starting_commit_SHA` is given, GET will return study from master.
@@ -181,6 +210,12 @@ contain the following information:
     "id": <commit sha>, 
     "relative_date": "7 days ago"
     }
+
+*  a `duplicateStudyIDs` property may be present (this property will be absent if the server timesout while trying 
+to contact its indexing service). If it is present, this will be a list of other study IDs that 
+refer to the same DOI. If there are entries in this field, you may not be working with the most 
+recent version of the study. We are in the process of trying to remove duplicates, but in the interim 
+some caution is required.
 
 ##### Output conversion of GET
 If the URL ends with a file extension, then the file type will be inferred for file conversion:
