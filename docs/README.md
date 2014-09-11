@@ -144,6 +144,11 @@ To get the entire NexSON of study N :
     
 where STUDYID is of the form namespace_XX, for example pg_199 or ot_29.
 
+Or equivalently, (after v2 of the API has been it is deployed to the
+development server):
+
+    curl http://devapi.opentreeoflife.org/v2/study/STUDYID.json
+
 #### GET arguments
 *   The `output_nexml2json` arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
