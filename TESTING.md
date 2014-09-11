@@ -29,7 +29,13 @@ IMPORTANT: The tests create bogus studies. So do not use the real (OpenTreeOfLif
         for their commits. The value needs to be a SHA in the repo that is checkout
         as your repo_parent. 
 
-4. run the web-service tests by:
+4. create an environmental var with your GitHub OAUTH token. See https://github.com/OpenTreeOfLife/phylesystem-api/blob/master/docs/README.md#getting-a-github-oauth-token
+for instructions on how to get the token. The name of the var should be GITHUB_OAUTH_TOKEN
+
+    $ export GITHUB_OAUTH_TOKEN=0123456789012345678901234567890123456789
+    
+
+5. run the web-service tests by:
 
 
    $ cd ws-tests
