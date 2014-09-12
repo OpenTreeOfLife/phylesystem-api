@@ -123,6 +123,10 @@ To get the entire NexSON of study N :
     
 where STUDYID is of the form namespace_XX, for example pg_199 or ot_29.
 
+Or equivalently, (after v2 has been it is deployed to the dev server):
+
+    curl http://devapi.opentreeoflife.org/v2/study/STUDYID.json
+
 #### GET arguments
 *   The `output_nexml2json` arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
@@ -220,6 +224,8 @@ You can request just parts of the study using a syntax of alternating resource I
     either an object or list of objects (if there were two tips that originally had the same label). The
     objects in the values field will have properties from the mapping: either "^ot:ottId" and/or 
     "^ot:ottTaxonName" fields, or they will be empty (if the OTU has not been mapped to OTT)
+  * `*/v1/study/pg_10/file` returns a list of object describing the supplementary files associated with a study, including (in the "id" property) the fileID (see the next bullet point)
+  * `*/v1/study/pg_10/file/xyz` returns the contents of the file with fileID `xyz` if that file is associated with study `pg_10`. Typically, you would call the `v1/study/STUDY_ID/file` method first, then choose the file you want and fetch it with this call.
 
 By default all of the fine-grained access methods return NexSON 1.2.1 
 Currently they do not support back translation to older versions of NexSON.
