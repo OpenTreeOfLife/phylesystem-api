@@ -1,3 +1,4 @@
+import requests
 import os, sys
 import json
 import anyjson
@@ -391,7 +392,9 @@ def v1():
                 #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
                 if u.startswith('/curator'):
                     u = 'http://tree.opentreeoflife.org' + u
-                return json.dumps(u)
+                response.headers['Content-Type'] = 'text/plain'
+                fetched = requests.get(u)
+                return fetched.text
         elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:

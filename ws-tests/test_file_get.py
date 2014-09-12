@@ -24,7 +24,8 @@ r = test_http_json_method(NEW_URL,
                           'GET',
                           expected_status=200,
                           return_bool_data=True,
-                          is_json=True)
+                          headers={'content-type':'text/plain', 'accept':'text/plain'},
+                          is_json=False)
 if r[0]:
     print r[1]
 else:
