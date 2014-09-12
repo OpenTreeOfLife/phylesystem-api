@@ -13,8 +13,9 @@ r = test_http_json_method(SUBMIT_URI,
                           return_bool_data=True,
                           is_json=True)
 if r[0]:
-    fid = r[1][0]['@id']
+    fid = r[1][0]['id']
     print fid
+    print r[1][0]
 else:
     sys.exit(1)
 NEW_URL = SUBMIT_URI + '/bogusid'

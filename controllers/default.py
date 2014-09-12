@@ -368,7 +368,9 @@ def v1():
                     files = m.get('data', {}).get('files', {}).get('file', [])
                     for f in files:
                         if '@url' in f:
-                            r.append(m)
+                            r.append({'id': m['@id'],
+                                      'filename': f.get('@filename', ''),
+                                      'url_fragment': f['@url']})
                             break
                 return json.dumps(r)
             else:
@@ -394,6 +396,7 @@ def v1():
                     u = 'http://tree.opentreeoflife.org' + u
                 response.headers['Content-Type'] = 'text/plain'
                 fetched = requests.get(u)
+                fetched.raise_for_status()
                 return fetched.text
         elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
