@@ -1,4 +1,9 @@
 #!/bin/sh
+if ! python -c 'import peyotl' 2>/dev/null;
+then
+    echo 'peyotl must be installed to run tests'
+    exit 1
+fi
 num_t=0
 num_p=0
 failed=''
