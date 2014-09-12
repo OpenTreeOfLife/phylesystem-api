@@ -67,17 +67,19 @@ def get_phylesystem(request):
 def get_failed_push_filepath(request):
     return os.path.join(get_private_dir(request), 'PUSH_FAILURE.json')
 
-def read_config(request):
+def get_conf_object(request):
     app_name = request.application
     conf = SafeConfigParser(allow_no_value=True)
     localconfig_filename = os.path.join(get_private_dir(request), "localconfig")
-
     if os.path.isfile(localconfig_filename):
         conf.readfp(open(localconfig_filename))
     else:
         filename = os.path.join(get_private_dir(request), "config")
         conf.readfp(open(filename))
+    return conf
 
+def read_config(request):
+    conf = get_conf_object(request)
     repo_parent   = conf.get("apis","repo_parent")
     repo_remote = conf.get("apis", "repo_remote")
     try:
@@ -95,15 +97,7 @@ def read_config(request):
     return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote
 
 def read_logging_config(request):
-    app_name = request.application
-    conf = SafeConfigParser(allow_no_value=True)
-    localconfig_filename = os.path.join(get_private_dir(request), "localconfig")
-
-    if os.path.isfile(localconfig_filename):
-        conf.readfp(open(localconfig_filename))
-    else:
-        filename = os.path.join(get_private_dir(request), "config")
-        conf.readfp(open(filename))
+    conf = get_conf_object(request)
     try:
         level = conf.get("logging", "level")
         if not level.strip():
@@ -264,7 +258,6 @@ def log_time_diff(log_obj, operation='', prev_time=None):
        x = log_time_diff(_LOG, 'foo', x)
        bar()
        x = log_time_diff(_LOG, 'bar', x)
-       
     '''
     n = datetime.now()
     if prev_time is not None:
@@ -273,3 +266,16 @@ def log_time_diff(log_obj, operation='', prev_time=None):
         log_obj.debug('Timed operation "{o}" took {t:f} seconds'.format(o=operation, t=t))
     return n
 
+def get_oti_base_url(request):
+    conf = get_conf_object(request)
+    oti_base_url = conf.get("apis", "oti_base_url")
+    if oti_base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        oti_base_url = "http:" + oti_base_url
+    return oti_base_url
+
+def get_oti_domain(request):
+    oti_base = get_oti_base_url(request)
+    s = oti_base.split('/')
+    assert len(s) > 2
+    return '/'.join(s[:3])
