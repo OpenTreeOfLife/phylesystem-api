@@ -50,12 +50,13 @@ if not(prompt_for_manual_webhooks):
             ):
                 found_matching_webhook = True
         except:
-            print 'hook =', hook
-            raise
+            print 'Unexpected webhook response: ', r.text
+            # Rather than failing outright, let's keep going with the manual prompt below
+            prompt_for_manual_webhooks = True
     if found_matching_webhook:
         print "Found a matching webhook in the docstore repo!"
         sys.exit(0)
-    else:
+    elif prompt_for_manual_webhooks == False:
         print "Adding a webhook to the docstore repo..."
         hook_settings = {
             "name": "web",
