@@ -50,7 +50,7 @@ if not(prompt_for_manual_webhooks):
             ):
                 found_matching_webhook = True
         except:
-            print 'hook =', hook
+            print 'Unexpected webhook response: ', r.text
             raise
     if found_matching_webhook:
         print "Found a matching webhook in the docstore repo!"
