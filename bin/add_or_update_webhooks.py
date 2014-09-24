@@ -56,7 +56,7 @@ if not(prompt_for_manual_webhooks):
     if found_matching_webhook:
         print "Found a matching webhook in the docstore repo!"
         sys.exit(0)
-    else if prompt_for_manual_webhooks == False:
+    elif prompt_for_manual_webhooks == False:
         print "Adding a webhook to the docstore repo..."
         hook_settings = {
             "name": "web",
