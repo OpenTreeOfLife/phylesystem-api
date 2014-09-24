@@ -54,11 +54,19 @@ def get_phylesystem(request):
             },
         }
     mirror_info = {'push':pmi}
+    conf = get_conf_object(request)
+    a = {}
+    try:
+        new_study_prefix = conf.get('apis', 'new_study_prefix')
+        a['new_study_prefix'] = new_study_prefix
+    except:
+        pass
     _PHYLESYSTEM = Phylesystem(repos_par=repo_parent,
                                git_ssh=git_ssh,
                                pkey=pkey,
                                git_action_class=GitData,
-                               mirror_info=mirror_info)
+                               mirror_info=mirror_info,
+                               **a)
     _LOG = get_logger(request, 'ot_api')
     _LOG.debug('repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     return _PHYLESYSTEM
