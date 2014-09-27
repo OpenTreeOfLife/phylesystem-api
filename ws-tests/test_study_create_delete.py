@@ -28,6 +28,8 @@ if not r[0]:
 resp = r[1]
 starting_commit_SHA = resp['sha']
 c_id = resp['resource_id']
+print c_id
+
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/%s' % c_id
 data = {
