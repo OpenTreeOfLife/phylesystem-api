@@ -18,18 +18,24 @@ To test locally you need to:
 
 IMPORTANT: The tests create bogus studies. So do not use the real (OpenTreeOfLife/phylesystem-1) repo as your shard!!!
 
-2. launch an instance of web2py with the phylesystem-api linked in the applications folder.
+2. If you are testing locally, launch an instance of web2py with the phylesystem-api linked in the applications folder. If you are testing remotely, you'll need to have peyotl installed to run the tests.
 
-2. `cp ws-tests/local.test.conf ws-tests/test.conf`
+3. `cp ws-tests/local.test.conf ws-tests/test.conf`
 
-3. tweak test.conf by:
+4. tweak test.conf by:
    1. correcting the `apihost` setting to point to the URL where you are running the 
         phylesystem-api.
    2. correcting the `parentsha` setting. Some of the tests use this sha as the parent
         for their commits. The value needs to be a SHA in the repo that is checkout
         as your repo_parent. 
 
-4. run the web-service tests by:
+5. create an environmental var with your GitHub OAUTH token. See https://github.com/OpenTreeOfLife/phylesystem-api/blob/master/docs/README.md#getting-a-github-oauth-token
+for instructions on how to get the token. The name of the var should be GITHUB_OAUTH_TOKEN
+
+    $ export GITHUB_OAUTH_TOKEN=0123456789012345678901234567890123456789
+    
+
+6. run the web-service tests by:
 
 
    $ cd ws-tests
