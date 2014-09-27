@@ -138,7 +138,7 @@ def test_http_json_method(url,
                                 url,
                                 headers=headers,
                                 allow_redirects=True)
-    debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
+        debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
     debug('Got status code {c} (expecting {e})\n'.format(c=resp.status_code,e=expected_status))
     if resp.status_code != expected_status:
         debug('Did not get expect response status. Got:\n{s}'.format(s=resp.status_code))

@@ -1,3 +1,4 @@
+import requests
 import os, sys
 import json
 import anyjson
@@ -7,6 +8,7 @@ from peyotl import can_convert_nexson_forms, convert_nexson_format
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.nexson_syntax import get_empty_nexson, \
+                                 extract_supporting_file_messages, \
                                  extract_tree, \
                                  PhyloSchema, \
                                  read_as_json, \
@@ -232,13 +234,11 @@ def v1():
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             msg = str(x)
             _LOG.exception('GET failing: {m}'.format(m=msg))
-            
         if msg:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.debug('output sniffing err msg = ' + msg)
             raise HTTP(400, json.dumps({"error": 1, "description": msg}))
         return schema
-        
     def __finish_write_verb(phylesystem,
                             git_data, 
                             nexson,
@@ -314,7 +314,7 @@ def v1():
             return_type = 'subtree'
             returning_tree = True
             content_id = (subresource_id, subtree_id)
-        elif subresource in ['meta', 'otus', 'otu', 'otumap']:
+        elif subresource in ['file', 'meta', 'otus', 'otu', 'otumap']:
             if subresource != 'meta':
                 content_id = subresource_id
             return_type = subresource
@@ -351,7 +351,45 @@ def v1():
             _LOG.exception('GET failed')
             e = sys.exc_info()[0]
             _raise_HTTP_from_msg(e)
-        if out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
+        if subresource == 'file':
+            m_list = extract_supporting_file_messages(study_nexson)
+            if subresource_id is None:
+                r = []
+                for m in m_list:
+                    files = m.get('data', {}).get('files', {}).get('file', [])
+                    for f in files:
+                        if '@url' in f:
+                            r.append({'id': m['@id'],
+                                      'filename': f.get('@filename', ''),
+                                      'url_fragment': f['@url']})
+                            break
+                return json.dumps(r)
+            else:
+                matching = None
+                for m in m_list:
+                    if m['@id'] == subresource_id:
+                        matching = m
+                        break
+                if matching is None:
+                    raise HTTP(404, 'No file with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
+                u = None
+                files = m.get('data', {}).get('files', {}).get('file', [])
+                for f in files:
+                    if '@url' in f:
+                        u = f['@url']
+                        break
+                if u is None:
+                    raise HTTP(404, 'No @url found in the message with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
+                #TEMPORARY HACK TODO
+                u = u.replace('uploadid=', 'uploadId=')
+                #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
+                if u.startswith('/curator'):
+                    u = 'http://tree.opentreeoflife.org' + u
+                response.headers['Content-Type'] = 'text/plain'
+                fetched = requests.get(u)
+                fetched.raise_for_status()
+                return fetched.text
+        elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:
             try:
