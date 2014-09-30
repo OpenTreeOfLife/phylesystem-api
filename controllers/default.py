@@ -529,7 +529,7 @@ def v1():
                 new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
                 if publication_doi:
                     # submitter entered an invalid DOI (or other URL); add it now
-                    nexson['nexml'][u'^ot:studyPublication'] = {'@href': publication_doi}
+                    new_study_nexson['nexml'][u'^ot:studyPublication'] = {'@href': publication_doi}
 
             nexml = new_study_nexson['nexml']
 
