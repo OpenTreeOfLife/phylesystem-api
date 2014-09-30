@@ -679,6 +679,8 @@ def v1():
         mn = blob.get('merge_needed')
         if (mn is not None) and (not mn):
             __deferred_push_to_gh_call(request, resource_id, **kwargs)
+        # Add updated commit history to the blob
+        blob['versionHistory'] = phylesystem.get_version_history_for_study_id(resource_id)
         return blob
 
     def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
