@@ -465,6 +465,8 @@ def v1():
             nexml_fetch_url = kwargs.get('nexml_fetch_url', '')
             nexml_pasted_string = kwargs.get('nexml_pasted_string', '')
             publication_doi = kwargs.get('publication_DOI', '')
+            # if a URL or something other than a valid DOI was entered, don't submit it to crossref API
+            publication_doi_for_crossref = __make_valid_DOI(publication_doi) or None
             publication_ref = kwargs.get('publication_reference', '')
             # is the submitter explicity applying the CC0 waiver to a new study
             # (i.e., this study is not currently in an online repository)?
@@ -491,7 +493,7 @@ def v1():
             importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
             importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
             importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)
-            importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi) or \
+            importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi_for_crossref) or \
                                           (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
 
             # Are they using an existing license or waiver (CC0, CC-BY, something else?)
@@ -522,9 +524,12 @@ def v1():
             #     new_study_nexson = get_ot_study_info_from_treebase_nexml(nexml_content=nexml_pasted_string,
             #                                                    nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
             elif importing_from_crossref_API:
-                new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi, ref_string=publication_ref, include_cc0=cc0_agreement)
+                new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi_for_crossref, ref_string=publication_ref, include_cc0=cc0_agreement)
             else:   # assumes 'import-method-MANUAL_ENTRY', or insufficient args above
                 new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
+                if publication_doi:
+                    # submitter entered an invalid DOI (or other URL); add it now
+                    new_study_nexson['nexml'][u'^ot:studyPublication'] = {'@href': publication_doi}
 
             nexml = new_study_nexson['nexml']
 
@@ -618,6 +623,32 @@ def v1():
             _raise_HTTP_from_msg(err.msg or 'No message found')
         return nexson, annotation, nexson_adaptor
 
+    def __make_valid_DOI(candidate):
+        # Try to convert the candidate string to a proper, minimal DOI. Return the DOI,
+        # or None if conversion is not possible.
+        #   WORKS: http://dx.doi.org/10.999...
+        #   WORKS: 10.999...
+        #   FAILS: 11.999...
+        #   WORKS: doi:10.999...
+        #   WORKS: DOI:10.999...
+        #   FAILS: http://example.com/
+        #   WORKS: http://example.com/10.blah
+        #   FAILS: something-else
+        doi_prefix = '10.'
+        # All existing DOIs use the directory indicator '10.', see
+        #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
+
+        # Remove all whitespace from the candidate string
+        candidate = "".join(candidate.split())
+        if doi_prefix in candidate:
+            # Strip everything up to the first '10.'
+            doi_parts = candidate.split(doi_prefix)
+            doi_parts[0] = ''
+            # Remove any preamble and return the minimal DOI
+            return doi_prefix.join(doi_parts)
+        else:
+            return None
+
     def PUT(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to updating existing resources"
         #global TIMING
@@ -686,23 +717,7 @@ def v1():
     def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
         if doi:
             # use the supplied DOI to fetch study metadata
-
-            # Cleanup submitted DOI to work with CrossRef API.
-            #   WORKS: http://dx.doi.org/10.999...
-            #   WORKS: doi:10.999...
-            #   FAILS: doi: 10.999...
-            #   FAILS: DOI:10.999...
-            # Let's keep it simple and make it a bare DOI.
-            # All DOIs use the directory indicator '10.', see
-            #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
-
-            # Remove all whitespace from the submitted DOI...
-            publication_doi = "".join(doi.split())
-            # ... then strip everything up to the first '10.'
-            doi_parts = publication_doi.split('10.')
-            doi_parts[0] = ''
-            search_term = '10.'.join(doi_parts)
-
+            search_term = doi
         elif ref_string:
             # use the supplied reference text to fetch study metadata
             search_term = ref_string
