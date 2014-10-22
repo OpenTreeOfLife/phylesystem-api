@@ -220,6 +220,12 @@ def v1():
         msg = None
         if 'output_nexml2json' not in kwargs:
             kwargs['output_nexml2json'] = '0.0.0'
+        biv = kwargs.get('xbracket_ingroup')
+        if biv and (isinstance(biv, str) or isinstance(biv, unicode)):
+            if biv.lower() in ['f', 'false', '0']:
+                kwargs['bracket_ingroup'] = False
+            else:
+                kwargs['bracket_ingroup'] = True
         try:
             schema = PhyloSchema(schema=kwargs.get('format'),
                                  type_ext=type_ext,
