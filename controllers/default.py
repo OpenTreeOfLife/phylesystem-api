@@ -645,6 +645,8 @@ def v1():
         #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
 
         # Remove all whitespace from the candidate string
+        if not candidate:
+            return None
         candidate = "".join(candidate.split())
         if doi_prefix in candidate:
             # Strip everything up to the first '10.'
