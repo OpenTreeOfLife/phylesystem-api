@@ -220,6 +220,12 @@ def v1():
         msg = None
         if 'output_nexml2json' not in kwargs:
             kwargs['output_nexml2json'] = '0.0.0'
+        biv = kwargs.get('bracket_ingroup')
+        if biv and (isinstance(biv, str) or isinstance(biv, unicode)):
+            if biv.lower() in ['f', 'false', '0']:
+                kwargs['bracket_ingroup'] = False
+            else:
+                kwargs['bracket_ingroup'] = True
         try:
             schema = PhyloSchema(schema=kwargs.get('format'),
                                  type_ext=type_ext,
@@ -639,6 +645,8 @@ def v1():
         #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
 
         # Remove all whitespace from the candidate string
+        if not candidate:
+            return None
         candidate = "".join(candidate.split())
         if doi_prefix in candidate:
             # Strip everything up to the first '10.'
