@@ -35,7 +35,13 @@ def v1():
                 _LOG.warn('push failure file "{f}" already exists. This event not logged there'.format(f=fail_file))
             else:
                 timestamp = datetime.datetime.utcnow().isoformat()
-                ga = phylesystem.create_git_action(resource_id)
+                try:
+                    ga = phylesystem.create_git_action(resource_id)
+                except:
+                    m = 'Could not create an adaptor for git actions on study ID "{}". ' \
+                        'If you are confident that this is a valid study ID, please report this as a bug.'
+                    m = m.format(resource_id)
+                    raise HTTP(400, json.dumps({'error': 1, 'description': m}))
                 master_sha = ga.get_master_sha()
                 obj = {'date': timestamp,
                        'study': resource_id,
