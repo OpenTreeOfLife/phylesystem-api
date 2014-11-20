@@ -460,6 +460,15 @@ def v1():
         #   POSTing the content with resource_id
         new_study_id = resource_id
         if new_study_id is not None:
+            try:
+                int(new_study_id)
+            except:
+                new_study_id = 'pg_' + new_study_id
+            else:
+                try:
+                    new_study_id.startswith('pg_')
+                except:
+                    raise HTTP(400, 'Use of the resource_id to specify a study ID is limited to phylografter studies')
             bundle = __extract_and_validate_nexson(request,
                                                    repo_nexml2json,
                                                    kwargs)
