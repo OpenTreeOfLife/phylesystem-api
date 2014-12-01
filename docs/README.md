@@ -206,11 +206,14 @@ You can request just parts of the study using a syntax of alternating resource I
     smaller than the full study
   * `*/v1/study/pg_10/tree` returns an object with property names corresponding to the 
     IDs of the trees in the study and values being the tree objects.
-  * `.../v1/study/pg_10/tree/ABC` is similar to the tree resource mentioned above, but only 
+  * `*/v1/study/pg_10/tree/ABC` is similar to the tree resource mentioned above, but only 
     the tree with ID of "ABC" will be included. A 404 will result if no such tree is found in the study.
     If a `bracket_info=true` argument is added to the call, then the ingroup will be the 
     newick segment between `[pre-ingroup-marker]` and `[post-ingroup-marker]` comments in the 
     newick
+  * `*/v1/study/pg_10/tree/ABC?starting_commit_SHA=a2c48df995` is similar to the tree resource mentioned above, 
+    except that rather than retrieving the most recent version of the tree, get the version indexed 
+    by git commit SHA "a2c48df995".
   * `*/v1/study/pg_10/subtree/ABC?subtree_id=XYZ` is similar to the tree resource
     mentioned above, but only a subtree of the tree with ID of "ABC" will be included. The subtree
     will be the part of the tree that is rooted at the node with ID "XYZ". A 404 will result if no such 
