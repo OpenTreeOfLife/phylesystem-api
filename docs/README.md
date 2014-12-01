@@ -212,7 +212,7 @@ You can request just parts of the study using a syntax of alternating resource I
     newick segment between `[pre-ingroup-marker]` and `[post-ingroup-marker]` comments in the 
     newick
   * `*/v1/study/pg_10/tree/ABC?starting_commit_SHA=a2c48df995` is similar to the tree resource mentioned above, 
-    except that rather than retrieving the most recent version of the tree, get the version indexed 
+    except that rather than retrieving the most recent version of the tree "ABC", get the version indexed 
     by git commit SHA "a2c48df995".
   * `*/v1/study/pg_10/subtree/ABC?subtree_id=XYZ` is similar to the tree resource
     mentioned above, but only a subtree of the tree with ID of "ABC" will be included. The subtree
