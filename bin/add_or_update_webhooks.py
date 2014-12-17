@@ -93,7 +93,7 @@ if prompt_for_manual_webhooks:
         %s/settings/hooks
         
     Find (or add) a webhook with these properties:
-        Payload URL: %s/api/search/nudgeIndexOnUpdates
+        Payload URL: %s/../search/nudgeIndexOnUpdates
         Payload version: application/vnd.github.v3+json
         Events: push
         Active: true
