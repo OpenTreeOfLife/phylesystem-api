@@ -176,11 +176,15 @@ removed_study_ids: %s
         # TODO: check returned IDs against our original list... what if something failed?
 
     github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
-    return """This URL should be called by a webhook set in the docstore repo:
+    full_msg = """This URL should be called by a webhook set in the docstore repo:
 <br /><br />
 <a href="%s">%s</a><br />
 <pre>%s</pre>
 """ % (github_webhook_url, github_webhook_url, msg,)
+    if msg == '':
+        return full_msg
+    else:
+        raise HTTP(500, full_msg)
 
 def _harvest_study_ids_from_paths( path_list, target_array ):
     for path in path_list:
