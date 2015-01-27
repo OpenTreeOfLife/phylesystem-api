@@ -35,3 +35,7 @@ level = OPEN_TREE_API_LOGGING_LEVEL
 formatter = OPEN_TREE_API_LOGGING_FORMATTER
 filepath = OPEN_TREE_API_LOGGING_FILEPATH
 
+[filesize]
+#overrides for peyotl config values in case no peyotl config exists
+peyotl_max_file_size = 20000000
+validation_max_num_trees = 65
