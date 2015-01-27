@@ -390,7 +390,7 @@ def v1():
                 u = u.replace('uploadid=', 'uploadId=')
                 #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
                 if u.startswith('/curator'):
-                    u = 'http://tree.opentreeoflife.org' + u
+                    u = 'https://tree.opentreeoflife.org' + u
                 response.headers['Content-Type'] = 'text/plain'
                 fetched = requests.get(u)
                 fetched.raise_for_status()
