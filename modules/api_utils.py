@@ -1,6 +1,8 @@
 from github import Github, BadCredentialsException
 from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
+from peyotl.utility import read_config, get_config
+#from peyotl.utility import get_logger, read_config, _replace_default_config
 from ConfigParser import SafeConfigParser
 from datetime import datetime
 import tempfile
@@ -40,6 +42,10 @@ def compose_push_to_github_url(request, resource_id):
 # this allows us to raise HTTP(...)
 from gluon import *
 _PHYLESYSTEM = None
+config, cfg_filename = read_config()
+if 'phylesystem' not in config.sections():
+        config.add_section('phylesystem')
+config.set('phylesystem', 'max_file_size', '10') #overrides peyotl config with max phylesytem-api filesize
 def get_phylesystem(request):
     global _PHYLESYSTEM
     if _PHYLESYSTEM is not None:
