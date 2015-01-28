@@ -216,7 +216,7 @@ def v1():
     phylesystem = api_utils.get_phylesystem(request)
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_config(request)
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    _LOG.debug('max num trees set to {}'.format(max_num_trees))
+    _LOG.debug('Max filestize set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
     repo_nexml2json = phylesystem.repo_nexml2json
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
@@ -627,18 +627,18 @@ def v1():
             raise HTTP(400, json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
         return nexson
 
-    def __extract_and_validate_nexson(request, repo_nexml2json, max_num_trees_per_study=max_num_trees):
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-        _LOG.debug('made it into extract, mnt set to {}'.format(max_num_trees))
+    def __extract_and_validate_nexson(request, repo_nexml2json, kwargs):
         try:
             nexson = __extract_nexson_from_http_call(request, **kwargs)
+        #    from peyotl.manip import count_num_trees
+        #    numtrees=count_num_trees(nexson,repo_nexml2json)
+        #    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        #    _LOG.debug('number of trees in nexson is {}, max number of trees is {}'.format(numtrees,max_num_trees))
             bundle = validate_and_convert_nexson(nexson,
                                                  repo_nexml2json,
                                                  allow_invalid=False,
                                                  max_num_trees_per_study=max_num_trees)
             nexson, annotation, validation_log, nexson_adaptor = bundle
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.debug('annotation exists and is {}'.format(annotation['annotationEvent']['@passedChecks']))
         except GitWorkflowError, err:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.exception('PUT failed in validation')

@@ -113,10 +113,14 @@ def read_config(request):
         max_filesize = conf.get("filesize", "peyotl_max_file_size")
     except:
         max_filesize = '20000000'
-    try:
+    try: 
         max_num_trees = conf.get("filesize", "validation_max_num_trees")
     except:
-        max_num_trees = '65'   
+        max_num_trees = 65
+    try:
+        max_num_trees = int(max_num_trees)
+    except ValueError:
+            raise HTTP(400, json.dumps({"error": 1, "description": 'max number of trees per study in config is not an integer'}))
     return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees
 
 def read_logging_config(request):
