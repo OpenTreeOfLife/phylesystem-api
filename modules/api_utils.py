@@ -3,7 +3,6 @@ from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
 from peyotl.utility import read_config as read_peyotl_config
 from peyotl.utility import get_config as get_peyotl_config
-#from peyotl.utility import get_logger, read_config, _replace_default_config
 from ConfigParser import SafeConfigParser
 from datetime import datetime
 import tempfile
@@ -113,7 +112,7 @@ def read_config(request):
         max_filesize = conf.get("filesize", "peyotl_max_file_size")
     except:
         max_filesize = '20000000'
-    try: 
+    try:
         max_num_trees = conf.get("filesize", "validation_max_num_trees")
     except:
         max_num_trees = 65
