@@ -214,8 +214,10 @@ def v1():
 
 
     phylesystem = api_utils.get_phylesystem(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_config(request)
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    _LOG.debug('Max filestize set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
     repo_nexml2json = phylesystem.repo_nexml2json
-
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
         if 'output_nexml2json' not in kwargs:
@@ -390,7 +392,7 @@ def v1():
                 u = u.replace('uploadid=', 'uploadId=')
                 #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
                 if u.startswith('/curator'):
-                    u = 'http://tree.opentreeoflife.org' + u
+                    u = 'https://tree.opentreeoflife.org' + u
                 response.headers['Content-Type'] = 'text/plain'
                 fetched = requests.get(u)
                 fetched.raise_for_status()
@@ -628,9 +630,14 @@ def v1():
     def __extract_and_validate_nexson(request, repo_nexml2json, kwargs):
         try:
             nexson = __extract_nexson_from_http_call(request, **kwargs)
+        #    from peyotl.manip import count_num_trees
+        #    numtrees=count_num_trees(nexson,repo_nexml2json)
+        #    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        #    _LOG.debug('number of trees in nexson is {}, max number of trees is {}'.format(numtrees,max_num_trees))
             bundle = validate_and_convert_nexson(nexson,
                                                  repo_nexml2json,
-                                                 allow_invalid=False)
+                                                 allow_invalid=False,
+                                                 max_num_trees_per_study=max_num_trees)
             nexson, annotation, validation_log, nexson_adaptor = bundle
         except GitWorkflowError, err:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')

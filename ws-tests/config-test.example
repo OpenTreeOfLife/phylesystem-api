@@ -1,5 +1,6 @@
 # Rename this file to "config" to make it active
-
+# this is an example config for tests in the config-test directory
+#tests should pass if this config is renamed to conifg and placed in the phylesystem-api/private dir
 [apis]
 
 # the full path to where a local phylesystem.git can be found
@@ -37,5 +38,5 @@ filepath = OPEN_TREE_API_LOGGING_FILEPATH
 
 [filesize]
 #overrides for peyotl config values in case no peyotl config exists
-peyotl_max_file_size = 20000000
-validation_max_num_trees = 65
+peyotl_max_file_size = 10
+validation_max_num_trees = 0
