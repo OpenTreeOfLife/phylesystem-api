@@ -43,8 +43,6 @@ def compose_push_to_github_url(request, resource_id):
 # this allows us to raise HTTP(...)
 from gluon import *
 _PHYLESYSTEM = None
-
-
 def get_phylesystem(request):
     global _PHYLESYSTEM
     if _PHYLESYSTEM is not None:
