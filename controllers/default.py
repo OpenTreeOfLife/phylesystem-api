@@ -138,6 +138,15 @@ def cached():
     fetch_url = '%s://%s/%s' % (request.env.wsgi_url_scheme, request.env.http_host, root_relative_url)
     ##pprint('PROXYING TO SIMPLE URL: ')
     ##pprint(fetch_url)
+
+    # permissive CORS handling of requests from another domain (e.g. tree.opentreeoflife.org)
+    if request.env.request_method == 'OPTIONS':
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, **(response.headers))
+
     # N.B. This try/except block means we'll cache errors. For now, the fix is to clear the entire cache.
     try:
         # fetch the latest IDs as JSON from remote site
