@@ -123,6 +123,56 @@ def external_url():
         _LOG.exception('study {} not found in external_url'.format(study_id))
         raise HTTP(404, '{"error": 1, "description": "study not found"}')
 
+## cache(time_expire=None, cache_model=cache.ram)
+## cache(key='cached-%(args)s-%(vars)s', time_expire=None, cache_model=cache.ram)
+## cache(key=request.env.url, time_expire=None, cache_model=cache.ram)
+## WORKS:  @cache(key='FOOFOO', time_expire=None, cache_model=cache.ram)
+## WORKS:  @cache(key=request.env.path_info, time_expire=None, cache_model=cache.ram)
+## FAILS:  @cache(key=request.env.path_info, time_expire=None, cache_model=cache.ram)
+## WORKS (using autokey value)  @cache(key=':%(name)s:%(args)s:%(vars)s', time_expire=None, cache_model=cache.ram)
+## FAILS: @cache(key=(request.url + '/'.join(request.args), time_expire=None, cache_model=cache.ram)
+
+# Create a unique key like the incoming URL, but move POSTed vars to its "query string"
+@cache(key=request.url +'?'+ '&'.join( ['='.join([x,request.vars[x]]) for x in request.vars] ), 
+       time_expire=None, 
+       cache_model=cache.ram)
+def cached():
+    """If no value was found (above) in the cache, proxy the request to its original destination"""
+    ##import pdb; pdb.set_trace()
+    from pprint import pprint
+    # let's restrict this to the api server, to avoid shenanigans
+    root_relative_url = request.env.request_uri.split('/cached/')[-1]
+    pprint('ROOT-RELATIVE URL: ')
+    pprint(root_relative_url)
+    fetch_url = '%s://%s/%s' % (request.env.wsgi_url_scheme, request.env.http_host, root_relative_url)
+    pprint('PROXYING TO SIMPLE URL: ')
+    pprint(fetch_url)
+    try:
+        # fetch the latest IDs as JSON from remote site
+        import simplejson
+
+        if fetch_url.startswith('//'):
+            # Prepend scheme to a scheme-relative URL
+            fetch_url = "http:%s" % fetch_url
+
+        fetch_args = request.vars # {'startingTaxonOTTId': ""}
+
+        # TODO: For more flexibility, we should examine and mimic the original request (HTTP verb, headers, etc)
+
+        # this needs to be a POST (pass fetch_args or ''); if GET, it just describes the API
+        # N.B. that gluon.tools.fetch() can't be used here, since it won't send "raw" JSON data as treemachine expects
+        req = urllib2.Request(url=fetch_url, data=simplejson.dumps(fetch_args), headers={"Content-Type": "application/json"}) 
+        the_response = urllib2.urlopen(req).read()
+        pprint('RESPONSE:')
+        pprint(the_response)
+        return the_response
+
+    except Exception, e:
+        # throw 403 or 500 or just leave it
+        return ('ERROR', e.message)
+
+
+
 def reponexsonformat():
     response.view = 'generic.json'
     phylesystem = api_utils.get_phylesystem(request)
