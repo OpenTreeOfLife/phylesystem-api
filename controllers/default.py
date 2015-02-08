@@ -130,7 +130,7 @@ def external_url():
        cache_model=cache.ram)
 def cached():
     """If no value was found (above) in the cache, proxy the request to its original destination"""
-    ##from pprint import pprint
+    from pprint import pprint
     # let's restrict this to the api server, to avoid shenanigans
     root_relative_url = request.env.request_uri.split('/cached/')[-1]
     pprint('ROOT-RELATIVE URL: ')
