@@ -130,14 +130,14 @@ def external_url():
        cache_model=cache.ram)
 def cached():
     """If no value was found (above) in the cache, proxy the request to its original destination"""
-    from pprint import pprint
+    ##from pprint import pprint
     # let's restrict this to the api server, to avoid shenanigans
     root_relative_url = request.env.request_uri.split('/cached/')[-1]
-    pprint('ROOT-RELATIVE URL: ')
-    pprint(root_relative_url)
+    ##pprint('ROOT-RELATIVE URL: ')
+    ##pprint(root_relative_url)
     fetch_url = '%s://%s/%s' % (request.env.wsgi_url_scheme, request.env.http_host, root_relative_url)
-    pprint('PROXYING TO SIMPLE URL: ')
-    pprint(fetch_url)
+    ##pprint('PROXYING TO SIMPLE URL: ')
+    ##pprint(fetch_url)
 
     # permissive CORS handling of requests from another domain (e.g. tree.opentreeoflife.org)
     if request.env.request_method == 'OPTIONS':
@@ -145,7 +145,7 @@ def cached():
              response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
         if request.env.http_access_control_request_headers:
              response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
-        pprint('RESPONDING TO OPTIONS')
+        ##pprint('RESPONDING TO OPTIONS')
         raise HTTP(200, **(response.headers))
 
     # N.B. This try/except block means we'll cache errors. For now, the fix is to clear the entire cache.
@@ -165,8 +165,8 @@ def cached():
         # N.B. that gluon.tools.fetch() can't be used here, since it won't send "raw" JSON data as treemachine expects
         req = urllib2.Request(url=fetch_url, data=simplejson.dumps(fetch_args), headers={"Content-Type": "application/json"}) 
         the_response = urllib2.urlopen(req).read()
-        pprint('RESPONSE:')
-        pprint(the_response)
+        ##pprint('RESPONSE:')
+        ##pprint(the_response)
         return the_response
 
     except Exception, e:
