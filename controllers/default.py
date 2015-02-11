@@ -126,7 +126,7 @@ def external_url():
 
 # Create a unique key with the URL and POSTed vars to its "query string"
 def build_general_cache_key(request):
-    __return 'cached:'+ request.url +'?'+ repr(request.vars)
+    return 'cached:'+ request.url +'?'+ repr(request.vars)
 
 @cache(key=build_general_cache_key(request), 
        time_expire=None, 
