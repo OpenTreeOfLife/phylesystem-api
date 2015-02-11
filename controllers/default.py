@@ -124,8 +124,11 @@ def external_url():
         _LOG.exception('study {} not found in external_url'.format(study_id))
         raise HTTP(404, '{"error": 1, "description": "study not found"}')
 
-# Create a unique key like the incoming URL, but move POSTed vars to its "query string"
-@cache(key=request.url +'?'+ '&'.join( ['='.join([x,request.vars[x]]) for x in request.vars] ), 
+# Create a unique key with the URL and POSTed vars to its "query string"
+def build_general_cache_key(request):
+    __return 'cached:'+ request.url +'?'+ repr(request.vars)
+
+@cache(key=build_general_cache_key(request), 
        time_expire=None, 
        cache_model=cache.ram)
 def cached():
