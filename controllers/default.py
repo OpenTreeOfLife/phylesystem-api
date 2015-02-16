@@ -124,9 +124,10 @@ def external_url():
         _LOG.exception('study {} not found in external_url'.format(study_id))
         raise HTTP(404, '{"error": 1, "description": "study not found"}')
 
-# Create a unique key with the URL and POSTed vars to its "query string"
+# Create a unique key with the URL and any vars (GET *or* POST) to its "query string"
+# ALSO include the request method (HTTP verb) to respond to OPTIONS requests
 def build_general_cache_key(request):
-    return 'cached:'+ request.url +'?'+ repr(request.vars)
+    return 'cached:['+ request.env.request_method.upper() +']:'+ request.url +'?'+ repr(request.vars)
 
 @cache(key=build_general_cache_key(request), 
        time_expire=None, 
