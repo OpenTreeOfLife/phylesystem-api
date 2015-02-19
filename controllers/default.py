@@ -858,10 +858,14 @@ def v1():
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        try:
+            commit_msg = kwargs.get('commit_msg')
+        except:
+            commit_msg = 'study deletion'
         auth_info = api_utils.authenticate(**kwargs)
         phylesystem = api_utils.get_phylesystem(request)
         try:
-            x = phylesystem.delete_study(resource_id, auth_info, parent_sha)
+            x = phylesystem.delete_study(resource_id, auth_info, parent_sha, commit_msg=commit_msg)
             if x.get('error') == 0:
                 __deferred_push_to_gh_call(request, None, **kwargs)
             return x
