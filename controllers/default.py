@@ -798,7 +798,7 @@ def v1():
         try:
             commit_msg = kwargs.get('commit_msg')
         except:
-            commit_msg = 'study deletion'
+            commit_msg = None
         auth_info = api_utils.authenticate(**kwargs)
         phylesystem = api_utils.get_phylesystem(request)
         try:
