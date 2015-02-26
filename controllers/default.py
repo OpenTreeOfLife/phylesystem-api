@@ -796,7 +796,10 @@ def v1():
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
         try:
-            commit_msg = kwargs.get('commit_msg')
+            commit_msg = kwargs.get('commit_msg','')
+            if commit_msg.strip() == '':
+                # git rejects empty commit messages
+                commit_msg = None
         except:
             commit_msg = None
         auth_info = api_utils.authenticate(**kwargs)
