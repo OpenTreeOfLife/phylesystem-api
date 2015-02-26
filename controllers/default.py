@@ -751,7 +751,13 @@ def v1():
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
-        commit_msg = kwargs.get('commit_msg')
+        try:
+            commit_msg = kwargs.get('commit_msg','')
+            if commit_msg.strip() == '':
+                # git rejects empty commit messages
+                commit_msg = None
+        except:
+            commit_msg = None
         master_file_blob_included = kwargs.get('merged_SHA')
         _LOG.debug('PUT to study {} for starting_commit_SHA = {} and merged_SHA = {}'.format(resource_id,
                                                                                              parent_sha,
@@ -859,9 +865,12 @@ def v1():
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
         try:
-            commit_msg = kwargs.get('commit_msg')
+            commit_msg = kwargs.get('commit_msg','')
+            if commit_msg.strip() == '':
+                # git rejects empty commit messages
+                commit_msg = None
         except:
-            commit_msg = 'study deletion'
+            commit_msg = None
         auth_info = api_utils.authenticate(**kwargs)
         phylesystem = api_utils.get_phylesystem(request)
         try:
