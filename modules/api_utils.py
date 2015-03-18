@@ -87,6 +87,7 @@ def get_conf_object(request):
     return conf
 
 def read_config(request):
+    """Load settings for managing the main Nexson docstore"""
     conf = get_conf_object(request)
     repo_parent   = conf.get("apis","repo_parent")
     repo_remote = conf.get("apis", "repo_remote")
@@ -103,6 +104,44 @@ def read_config(request):
     except:
         git_hub_remote = 'git@github.com:OpenTreeOfLife'
     return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote
+
+def read_collections_config(request):
+    """Load settings for a minor repo with shared tree collections"""
+    conf = get_conf_object(request)
+    collections_repo_parent   = conf.get("apis","collections_repo_parent")
+    collections_repo_remote = conf.get("apis", "collections_repo_remote")
+    try:
+        git_ssh     = conf.get("apis", "git_ssh")
+    except:
+        git_ssh = 'ssh'
+    try:
+        pkey        = conf.get("apis", "pkey")
+    except:
+        pkey = None
+    try:
+        git_hub_remote = conf.get("apis", "git_hub_remote")
+    except:
+        git_hub_remote = 'git@github.com:OpenTreeOfLife'
+    return collections_repo_parent, collections_repo_remote, git_ssh, pkey, git_hub_remote
+
+def read_following_config(request):
+    """Load settings for a minor repo with per-user 'following' information"""
+    conf = get_conf_object(request)
+    following_repo_parent   = conf.get("apis","following_repo_parent")
+    following_repo_remote = conf.get("apis", "following_repo_remote")
+    try:
+        git_ssh     = conf.get("apis", "git_ssh")
+    except:
+        git_ssh = 'ssh'
+    try:
+        pkey        = conf.get("apis", "pkey")
+    except:
+        pkey = None
+    try:
+        git_hub_remote = conf.get("apis", "git_hub_remote")
+    except:
+        git_hub_remote = 'git@github.com:OpenTreeOfLife'
+    return following_repo_parent, following_repo_remote, git_ssh, pkey, git_hub_remote
 
 def read_logging_config(request):
     conf = get_conf_object(request)
