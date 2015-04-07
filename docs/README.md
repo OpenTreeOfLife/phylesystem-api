@@ -196,6 +196,7 @@ If the URL ends with a file extension, then the file type will be inferred for f
 For NEXUS and Newick formats, by default tip labels will be those from the originally uploaded study.
 Alternate labels can be accessed using 'tip_label'. Values must be one of "ot:originallabel", or "ot:ottid", "ot:otttaxonname
 e.g. 
+
     curl http://api.opentreeoflife.org/v2/study/pg_1144.nex/?tip_label=ot:ottid
     curl http://api.opentreeoflife.org/v2/study/pg_1144.nex/?tip_label=ot:otttaxonname
 
