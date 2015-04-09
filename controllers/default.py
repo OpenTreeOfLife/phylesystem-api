@@ -200,7 +200,7 @@ def collection():
     # check for full or partial collection ID
     collection_id = None
     if len(request.args) > 2:
-        collection_id = request.args[1:3].join('/')
+        collection_id = ('/').join(request.args[1:3])
         # TODO: validate this using peyotl's test?
     else:
         # TODO: Make this id optional for some operations? (eg, creating a new collection)
