@@ -175,7 +175,6 @@ def collections():
 
     # extract and validate the intended API call
     from pprint import pformat
-    raise HTTP(500, pformat(request.args))
     assert request.args[0] == 'collections'
     assert len(request.args) > 1
     api_call = request.args[1]   # ignore anything later in the URL
