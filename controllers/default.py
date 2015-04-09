@@ -172,17 +172,15 @@ def collections():
              response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
         raise HTTP(200, T("OPTIONS!"), **(response.headers))
     # N.B. other request methods don't really matter for these functions!
-
     # extract and validate the intended API call
-    from pprint import pformat
-    assert request.args[0] == 'collections'
+    assert request.args[0].lower() == 'collections'
     assert len(request.args) > 1
     api_call = request.args[1]   # ignore anything later in the URL
     if api_call == 'find_collections':
-        # TODO
+        # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
         raise HTTP(200, T("Now we'd list all tree collections matching the criteria provided!"))
     elif api_call == 'properties':
-        # TODO
+        # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
         raise HTTP(200, T("Now we'd list all searchable properties in tree collections!"))
     raise HTTP(404, T('No such method as collections/{}'.format(api_call)))
 
@@ -198,10 +196,16 @@ def collection():
              response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
         raise HTTP(200, T("single-collection OPTIONS!"), **(response.headers))
 
+    assert request.args[0].lower() == 'collection'
     # check for full or partial collection ID
     collection_id = None
-    if len(request.args > 2):
-        collection_id = request.args[1:].join('/')
+    if len(request.args) > 2:
+        collection_id = request.args[1:3].join('/')
+        # TODO: validate this using peyotl's test?
+    else:
+        # TODO: Make this id optional for some operations? (eg, creating a new collection)
+        raise HTTP(400, json.dumps({"error": 1, "description": 'collection ID expected after "collection/"'}))
+
     raise HTTP(200, T('collection_id: [{}]'.format(collection_id)))
     
     if request.env.request_method == 'GET':
