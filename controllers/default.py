@@ -171,21 +171,21 @@ def collections():
         if request.env.http_access_control_request_headers:
              response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
         raise HTTP(200, T("OPTIONS!"), **(response.headers))
+    # N.B. other request methods don't really matter for these functions!
 
     # extract and validate the intended API call
     from pprint import pformat
     raise HTTP(500, pformat(request.args))
-
-    if request.env.request_method == 'GET':
-        raise HTTP(200, T('GET!'))
-
-    if request.env.request_method == 'PUT':
-        raise HTTP(200, T('PUT!'))
-
-    if request.env.request_method == 'POST':
-        raise HTTP(200, T('POST!'))
-
-    raise HTTP(500, T('WTF?! request_method = {}'.format(request.env.request_method)))
+    assert request.args[0] == 'collections'
+    assert len(request.args) > 1
+    api_call = request.args[1]   # ignore anything later in the URL
+    if api_call == 'find_collections':
+        # TODO
+        raise HTTP(200, T("Now we'd list all tree collections matching the criteria provided!"))
+    elif api_call == 'properties':
+        # TODO
+        raise HTTP(200, T("Now we'd list all searchable properties in tree collections!"))
+    raise HTTP(404, T('No such method as collections/{}'.format(api_call)))
 
 def collection():
     """Handle an incoming URL targeting /v2/collection/{ID}
@@ -199,6 +199,12 @@ def collection():
              response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
         raise HTTP(200, T("single-collection OPTIONS!"), **(response.headers))
 
+    # check for full or partial collection ID
+    collection_id = None
+    if len(request.args > 2):
+        collection_id = request.args[1:].join('/')
+    raise HTTP(200, T('collection_id: [{}]'.format(collection_id)))
+    
     if request.env.request_method == 'GET':
         raise HTTP(200, T('single-collection GET!'))
 
