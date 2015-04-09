@@ -1,6 +1,7 @@
 from github import Github, BadCredentialsException
 from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
+from peyotl.collections import TreeCollectionStore
 from ConfigParser import SafeConfigParser
 from datetime import datetime
 import tempfile
@@ -70,6 +71,49 @@ def get_phylesystem(request):
     _LOG = get_logger(request, 'ot_api')
     _LOG.debug('repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     return _PHYLESYSTEM
+
+_TREE_COLLECTION_STORE = None
+def get_tree_collection_store(request):
+    global _TREE_COLLECTION_STORE
+    if _TREE_COLLECTION_STORE is not None:
+        return _TREE_COLLECTION_STORE
+    _LOG = get_logger(request, 'ot_api')
+    _LOG.debug("getting _TREE_COLLECTION_STORE...")
+    from gitdata import GitData  #TODO?
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote = read_config(request)
+    _LOG.debug("  repo_parent={}".format(repo_parent))
+    _LOG.debug("  repo_remote={}".format(repo_remote))
+    _LOG.debug("  git_ssh={}".format(git_ssh))
+    _LOG.debug("  pkey={}".format(pkey))
+    _LOG.debug("  git_hub_remote={}".format(git_hub_remote))
+    push_mirror = os.path.join(repo_parent, 'mirror')
+    pmi = {
+        'parent_dir': push_mirror,
+        'remote_map': {
+            'GitHubRemote': git_hub_remote,
+            },
+        }
+    mirror_info = {'push':pmi}
+    conf = get_conf_object(request)
+    import pprint
+    _LOG.debug("  conf:")
+    _LOG.debug(pprint.pformat(conf))
+    a = {}
+    try:
+        # any keyword args to pass along from config?
+        #new_study_prefix = conf.get('apis', 'new_study_prefix')
+        #a['new_study_prefix'] = new_study_prefix
+        pass
+    except:
+        pass
+    _TREE_COLLECTION_STORE = TreeCollectionStore(repos_par=repo_parent,
+                                                 git_ssh=git_ssh,
+                                                 pkey=pkey,
+                                                 git_action_class=GitData, #TODO?
+                                                 mirror_info=mirror_info,
+                                                 **a)
+    _LOG.debug('assumed_doc_version = {}'.format(_TREE_COLLECTION_STORE.assumed_doc_version))
+    return _TREE_COLLECTION_STORE
 
 
 def get_failed_push_filepath(request):

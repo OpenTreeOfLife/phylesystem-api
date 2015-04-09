@@ -184,7 +184,7 @@ def collections():
         raise HTTP(200, T("Now we'd list all searchable properties in tree collections!"))
     raise HTTP(404, T('No such method as collections/{}'.format(api_call)))
 
-def collection():
+def collection(*args, **kwargs):
     """Handle an incoming URL targeting /v2/collection/{ID}
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
@@ -206,18 +206,57 @@ def collection():
         # TODO: Make this id optional for some operations? (eg, creating a new collection)
         raise HTTP(400, json.dumps({"error": 1, "description": 'collection ID expected after "collection/"'}))
 
-    raise HTTP(200, T('collection_id: [{}]'.format(collection_id)))
-    
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
+
     if request.env.request_method == 'GET':
-        raise HTTP(200, T('single-collection GET!'))
+        # fetch the current collection JSON
+        _LOG.debug('GET /v2/collection/{}'.format(str(collection_id)))
+        version_history = None
+        comment_html = None
+        # TODO: support JSONP request from another domain? or assume CORS?
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        _LOG.debug('parent_sha = {}'.format(parent_sha))
+        # return the correct nexson of study_id, using the specified view
+        collections = api_utils.get_tree_collection_store(request)  # TODO
+        try:
+            r = collections.return_doc(resource_id, commit_sha=parent_sha, return_WIP_map=True)
+        except:
+            _LOG.exception('GET failed')
+            raise HTTP(404, json.dumps({"error": 1, "description": 'Collection #%s GET failure' % resource_id}))
+        try:
+            collection_json, head_sha, wip_map = r
+            if returning_full_study:
+                blob_sha = collections.get_blob_sha_for_study_id(resource_id, head_sha)
+                version_history = collections.get_version_history_for_doc_id(resource_id)
+                try:
+                    # pre-render internal description? (assumes markdown!)
+                    comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True ) # TODO
+                except:
+                    comment_html = ''
+        except:
+            _LOG.exception('GET failed')
+            e = sys.exc_info()[0]
+            _raise_HTTP_from_msg(e)
+        if not collection_json:
+            raise HTTP(404, 'Collection #{s} has no JSON data!"'.format(s=resource_id))
+        result = {'sha': head_sha,
+                 'data': result_data,
+                 'branch2sha': wip_map,
+                 'commentHTML': comment_html,
+                 }
+        if version_history:
+            result['versionHistory'] = version_history
+        return result
 
     if request.env.request_method == 'PUT':
+        # TODO
         raise HTTP(200, T('single-collection PUT!'))
 
     if request.env.request_method == 'POST':
+        # TODO
         raise HTTP(200, T('single-collection POST!'))
 
-    raise HTTP(500, T('single-collection WTF?! request_method = {}'.format(request.env.request_method)))
+    raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
 
 
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
