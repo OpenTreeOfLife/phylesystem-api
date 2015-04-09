@@ -157,7 +157,8 @@ def push_failure():
     return json.dumps(blob)
 
 
-def handle_RESTful_all_collections():
+@request.restful()
+def collections():
     """Handle an incoming URL targeting /v2/collections/
     This includes:
         /v2/collections/find_collections
@@ -165,22 +166,30 @@ def handle_RESTful_all_collections():
         /v2/collections/properties
     TODO:
     """
-    if request.env.request_method == 'OPTIONS':
-        "A simple method for approving CORS preflight request"
-        if request.env.http_access_control_request_method:
-             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
-        if request.env.http_access_control_request_headers:
-             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
-        raise HTTP(200, T("OPTIONS!"), **(response.headers))
+    def GET():
+        raise HTTP(200, T('@restful GET (collections)!'))
+    def POST():
+        raise HTTP(200, T('@restful POST (collections)!'))
+    def PUT():
+        raise HTTP(200, T('@restful PUT (collections)!'))
+    def OPTIONS():
+        raise HTTP(200, T('@restful OPTIONS (collections)!'))
+    raise HTTP(500, T('@restful WTF (collections)?! request_method = {}'.format(request.env.request_method)))
 
-    if request.env.request_method == 'GET':
-        raise HTTP(200, T('GET!'))
-
-    if request.env.request_method == 'PUT':
-        raise HTTP(200, T('PUT!'))
-
-    if request.env.request_method == 'POST':
-        raise HTTP(200, T('POST!'))
+    ### Another approach to handling HTTP methods, if @restful calls can't be nested in this way:
+    ##if request.env.request_method == 'OPTIONS':
+    ##    "A simple method for approving CORS preflight request"
+    ##    if request.env.http_access_control_request_method:
+    ##         response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+    ##    if request.env.http_access_control_request_headers:
+    ##         response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+    ##    raise HTTP(200, T("OPTIONS!"), **(response.headers))
+    ##if request.env.request_method == 'GET':
+    ##    raise HTTP(200, T('GET!'))
+    ##if request.env.request_method == 'PUT':
+    ##    raise HTTP(200, T('PUT!'))
+    ##if request.env.request_method == 'POST':
+    ##    raise HTTP(200, T('POST!'))
 
     raise HTTP(500, T('WTF?! request_method = {}'.format(request.env.request_method)))
 
@@ -213,9 +222,10 @@ _route_tag2func = {'index':index,
                    'reponexsonformat': reponexsonformat,
                    'render_markdown': render_markdown,
                    # handle minor resource types based on identifying paths
-                   'collections': handle_RESTful_all_collections,
-                   'collection': handle_RESTful_single_collection,
-                   #TODO: 'following': handle_RESTful_following,
+                   # NOTE singular vs. plural forms
+                   'collections': collections,
+                   'collection': collection,
+                   #TODO: 'following': following,
                   }
 
 def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
