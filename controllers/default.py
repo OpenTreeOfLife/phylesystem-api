@@ -157,56 +157,54 @@ def push_failure():
     return json.dumps(blob)
 
 
-@request.restful()
 def collections():
     """Handle an incoming URL targeting /v2/collections/
     This includes:
         /v2/collections/find_collections
         /v2/collections/find_trees
         /v2/collections/properties
-    TODO:
     """
-    def GET():
-        raise HTTP(200, T('@restful GET (collections)!'))
-    def POST():
-        raise HTTP(200, T('@restful POST (collections)!'))
-    def PUT():
-        raise HTTP(200, T('@restful PUT (collections)!'))
-    def OPTIONS():
-        raise HTTP(200, T('@restful OPTIONS (collections)!'))
-    raise HTTP(500, T('@restful WTF (collections)?! request_method = {}'.format(request.env.request_method)))
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("OPTIONS!"), **(response.headers))
 
-    ### Another approach to handling HTTP methods, if @restful calls can't be nested in this way:
-    ##if request.env.request_method == 'OPTIONS':
-    ##    "A simple method for approving CORS preflight request"
-    ##    if request.env.http_access_control_request_method:
-    ##         response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
-    ##    if request.env.http_access_control_request_headers:
-    ##         response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
-    ##    raise HTTP(200, T("OPTIONS!"), **(response.headers))
-    ##if request.env.request_method == 'GET':
-    ##    raise HTTP(200, T('GET!'))
-    ##if request.env.request_method == 'PUT':
-    ##    raise HTTP(200, T('PUT!'))
-    ##if request.env.request_method == 'POST':
-    ##    raise HTTP(200, T('POST!'))
+    if request.env.request_method == 'GET':
+        raise HTTP(200, T('GET!'))
+
+    if request.env.request_method == 'PUT':
+        raise HTTP(200, T('PUT!'))
+
+    if request.env.request_method == 'POST':
+        raise HTTP(200, T('POST!'))
 
     raise HTTP(500, T('WTF?! request_method = {}'.format(request.env.request_method)))
 
-@request.restful()
 def collection():
     """Handle an incoming URL targeting /v2/collection/{ID}
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
-    def GET():
-        raise HTTP(200, T('@restful GET!'))
-    def POST():
-        raise HTTP(200, T('@restful POST!'))
-    def PUT():
-        raise HTTP(200, T('@restful PUT!'))
-    def OPTIONS():
-        raise HTTP(200, T('@restful OPTIONS!'))
-    raise HTTP(500, T('@restful WTF?! request_method = {}'.format(request.env.request_method)))
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("single-collection OPTIONS!"), **(response.headers))
+
+    if request.env.request_method == 'GET':
+        raise HTTP(200, T('single-collection GET!'))
+
+    if request.env.request_method == 'PUT':
+        raise HTTP(200, T('single-collection PUT!'))
+
+    if request.env.request_method == 'POST':
+        raise HTTP(200, T('single-collection POST!'))
+
+    raise HTTP(500, T('single-collection WTF?! request_method = {}'.format(request.env.request_method)))
 
 
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
