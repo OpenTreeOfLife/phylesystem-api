@@ -172,6 +172,10 @@ def collections():
              response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
         raise HTTP(200, T("OPTIONS!"), **(response.headers))
 
+    # extract and validate the intended API call
+    from pprint import pprint
+    raise HTTP(500, T(pprint(request.args)))
+
     if request.env.request_method == 'GET':
         raise HTTP(200, T('GET!'))
 
