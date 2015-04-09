@@ -168,7 +168,10 @@ _route_tag2func = {'index':index,
                    'repo_nexson_format': reponexsonformat,
                    'reponexsonformat': reponexsonformat,
                    'render_markdown': render_markdown,
-                   #TODO: 'push': j
+                   # handle minor resource types based on identifying paths
+                   'collections': handle_RESTful_all_collections,
+                   'collection': handle_RESTful_single_collection,
+                   #TODO: 'following': handle_RESTful_following,
                   }
 
 def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
@@ -830,3 +833,45 @@ def v1():
         raise HTTP(200, **(response.headers))
 
     return locals()
+
+def handle_RESTful_all_collections():
+    """Handle an incoming URL targeting /v2/collections/
+    This includes:
+        /v2/collections/find_collections
+        /v2/collections/find_trees
+        /v2/collections/properties
+    TODO:
+    """
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("OPTIONS!"), **(response.headers))
+
+    if request.env.request_method == 'GET':
+        raise HTTP(200, T('GET!'))
+
+    if request.env.request_method == 'PUT':
+        raise HTTP(200, T('PUT!'))
+
+    if request.env.request_method == 'POST':
+        raise HTTP(200, T('POST!'))
+
+    raise HTTP(500, T('WTF?! request_method = {}'.format(request.env.request_method)))
+
+@request.restful()
+def handle_RESTful_single_collection():
+    """Handle an incoming URL targeting /v2/collection/{ID}
+    Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
+    """
+    def GET():
+        raise HTTP(200, T('@restful GET!'))
+    def POST():
+        raise HTTP(200, T('@restful POST!'))
+    def PUT():
+        raise HTTP(200, T('@restful PUT!'))
+    def OPTIONS():
+        raise HTTP(200, T('@restful OPTIONS!'))
+    raise HTTP(500, T('@restful WTF?! request_method = {}'.format(request.env.request_method)))
