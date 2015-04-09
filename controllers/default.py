@@ -173,8 +173,8 @@ def collections():
         raise HTTP(200, T("OPTIONS!"), **(response.headers))
 
     # extract and validate the intended API call
-    from pprint import pprint
-    raise HTTP(500, T(pprint(request.args)))
+    from pprint import pformat
+    raise HTTP(500, pformat(request.args))
 
     if request.env.request_method == 'GET':
         raise HTTP(200, T('GET!'))
