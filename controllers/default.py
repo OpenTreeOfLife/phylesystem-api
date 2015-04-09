@@ -194,7 +194,7 @@ def collections():
     raise HTTP(500, T('WTF?! request_method = {}'.format(request.env.request_method)))
 
 @request.restful()
-def handle_RESTful_single_collection():
+def collection():
     """Handle an incoming URL targeting /v2/collection/{ID}
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
