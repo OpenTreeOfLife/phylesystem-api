@@ -335,6 +335,8 @@ def v1():
             else:
                 kwargs['bracket_ingroup'] = True
         try:
+            _LOG.debug(">>> repo_nexml2json={}".format(repo_nexml2json))
+            _LOG.debug(">>> assumed_doc_version={}".format(phylesystem.assumed_doc_version))
             schema = PhyloSchema(schema=kwargs.get('format'),
                                  type_ext=type_ext,
                                  content=resource,
