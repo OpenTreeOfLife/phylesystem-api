@@ -1,11 +1,11 @@
-from peyotl.phylesystem.git_actions import GitAction
+from peyotl.phylesystem.git_actions import PhylesystemGitAction
 from sh import git
 import os
 import api_utils
 
-class GitData(GitAction):
+class GitData(PhylesystemGitAction):
     def __init__(self, repo, **kwargs):
-        GitAction.__init__(self, repo, **kwargs)
+        PhylesystemGitAction.__init__(self, repo, **kwargs)
     def delete_remote_branch(self, remote, branch, env={}):
         "Delete a remote branch"
         # deleting a branch is the same as
