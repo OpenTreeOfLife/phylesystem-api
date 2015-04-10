@@ -510,15 +510,15 @@ def v1():
             result_data = study_nexson
         else:
             try:
-                _LOG('a, study_nexson={}'.format(study_nexson));
+                _LOG.debug('a, study_nexson={}'.format(study_nexson));
                 serialize = not out_schema.is_json()
-                _LOG('b, serialize: {}'.format(serialize));
+                _LOG.debug('b, serialize: {}'.format(serialize));
                 src_schema = PhyloSchema('nexson', version=repo_nexml2json)
-                _LOG('c, src_schema: {}'.format(src_schema));
+                _LOG.debug('c, src_schema: {}'.format(src_schema));
                 result_data = out_schema.convert(study_nexson,
                                                  serialize=serialize,
                                                  src_schema=src_schema)
-                _LOG('d, result_data: {}'.format(result_data));
+                _LOG.debug('d, result_data: {}'.format(result_data));
             except:
                 msg = "Exception in coercing to the required NexSON version for validation. "
                 _LOG.exception(msg)
