@@ -319,9 +319,10 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
-
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    _LOG.debug(">>> repo_nexml2json={}".format(repo_nexml2json))
 
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
@@ -506,11 +507,15 @@ def v1():
             result_data = study_nexson
         else:
             try:
+                _LOG('a, study_nexson={}'.format(study_nexson));
                 serialize = not out_schema.is_json()
+                _LOG('b, serialize: {}'.format(serialize));
                 src_schema = PhyloSchema('nexson', version=repo_nexml2json)
+                _LOG('c, src_schema: {}'.format(src_schema));
                 result_data = out_schema.convert(study_nexson,
                                                  serialize=serialize,
                                                  src_schema=src_schema)
+                _LOG('d, result_data: {}'.format(result_data));
             except:
                 msg = "Exception in coercing to the required NexSON version for validation. "
                 _LOG.exception(msg)
@@ -708,7 +713,7 @@ def v1():
         try:
             return convert_nexson_format(nexson, dest_format, current_format=current_format)
         except:
-            msg = "Exception in coercing to the required NexSON version for validation. "
+            msg = "Exception in coercing to the required NexSON version for validation!"
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.exception(msg)
             raise HTTP(400, msg)
