@@ -1,5 +1,6 @@
 # Rename this file to "config" to make it active
-
+# this is an example config for tests in the config-test directory
+#tests should pass if this config is renamed to conifg and placed in the phylesystem-api/private dir
 [apis]
 
 # the full path to where a local phylesystem.git can be found
@@ -8,22 +9,12 @@ repo_parent   = REPO_PAR
 # prefix for new study ids. should be of the form [a-z][a-z]_
 # new_study_prefix = zz_
 
-# local paths for minor repos
-collections_repo_path   = COLLECTIONS_REPO_PATH
-collections_repo_parent = COLLECTIONS_REPO_PAR
-following_repo_path     = FOLLOWING_REPO_PATH
-following_repo_parent   = FOLLOWING_REPO_PAR
-
 # the remote to push changes to
 # This will usually be "origin" on a local dev machine where phylesystem.git
 # was cloned via SSH (git@github.com:...)
 # On deployed servers, which use anonymous git:// protocol, we add a new
 # remote "originssh" which can be pushed to
 repo_remote = REPO_REMOTE
-
-# remotes for minor repos
-collections_repo_remote = COLLECTIONS_REPO_REMOTE
-following_repo_remote   = FOLLOWING_REPO_REMOTE
 
 # these allow us to specify the SSH keys that git pushes
 # will use. Leave the config keys in this config file,
@@ -36,10 +27,6 @@ opentree_docstore_url = OPENTREE_DOCSTORE_URL
 # Push scripts will substitute the OTI_BASE_URL server-config variables, shared
 # with other apps.
 
-# URLs for minor repos
-collections_repo_url = COLLECTIONS_REPO_URL
-following_repo_url   = FOLLOWING_REPO_URL
-
 # prefix for the GitHubRemote used in the push mirror
 #   default is git@github.com:OpenTreeOfLife
 # git_hub_remote = git@github.com:OpenTreeOfLife
@@ -51,5 +38,5 @@ filepath = OPEN_TREE_API_LOGGING_FILEPATH
 
 [filesize]
 #overrides for peyotl config values in case no peyotl config exists
-peyotl_max_file_size = 20000000
-validation_max_num_trees = 65
+peyotl_max_file_size = 10
+validation_max_num_trees = 0

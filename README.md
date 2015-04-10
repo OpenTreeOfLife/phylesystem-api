@@ -7,7 +7,12 @@ to the backend datastore [phylesystem](https://github.com/OpenTreeOfLife/phylesy
 
 # Introduction
 
-See the [Version Control Strategy](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/docs/vcs_strategy.md) for more details about design decisions and how to use submodules.
+This repo uses `peyotl` to interact with a copy of the phylesystem data on a server.
+The code here provides a web services API to that data store. 
+The best description of the phylesystem is in [our preprint](http://biorxiv.org/content/early/2015/01/16/013862).
+
+See [docs/](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/blob/master/docs/) for examples of how to use the API with ```curl```.
+
 
 # Installation
 

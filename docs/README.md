@@ -193,6 +193,14 @@ If the URL ends with a file extension, then the file type will be inferred for f
   * .nexml -> NeXML
   * .nexson, .json, or no extension -> NexSON
 
+For NEXUS and Newick formats, by default tip labels will be those from the originally uploaded study.
+Alternate labels can be accessed using `tip_label` argument. Values must be one of `ot:originallabel`, `ot:ottid`, or `ot:otttaxonname`.
+
+e.g. 
+
+    curl http://api.opentreeoflife.org/v2/study/pg_1144.nex/?tip_label=ot:ottid
+    curl http://api.opentreeoflife.org/v2/study/pg_1144.nex/?tip_label=ot:otttaxonname
+
 NexSON supports fine-grained access to parts of the study (see below).
 NeXML can only be returned for the study. Newick and NEXUS formats can only return
 the full study, trees or subtrees.

@@ -2,6 +2,8 @@ from github import Github, BadCredentialsException
 from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
 from peyotl.collections import TreeCollectionStore
+from peyotl.utility import read_config as read_peyotl_config
+from peyotl.utility import get_config as get_peyotl_config
 from ConfigParser import SafeConfigParser
 from datetime import datetime
 import tempfile
@@ -46,7 +48,11 @@ def get_phylesystem(request):
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
     from gitdata import GitData
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote = read_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = read_config(request)
+    peyotl_config, cfg_filename = read_peyotl_config()
+    if 'phylesystem' not in peyotl_config.sections():
+        peyotl_config.add_section('phylesystem')
+    peyotl_config.set('phylesystem', 'max_file_size', max_filesize) #overrides peyotl config with max phylesytem-api filesize
     push_mirror = os.path.join(repo_parent, 'mirror')
     pmi = {
         'parent_dir': push_mirror,
@@ -147,7 +153,19 @@ def read_config(request):
         git_hub_remote = conf.get("apis", "git_hub_remote")
     except:
         git_hub_remote = 'git@github.com:OpenTreeOfLife'
-    return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote
+    try:
+        max_filesize = conf.get("filesize", "peyotl_max_file_size")
+    except:
+        max_filesize = '20000000'
+    try:
+        max_num_trees = conf.get("filesize", "validation_max_num_trees")
+    except:
+        max_num_trees = 65
+    try:
+        max_num_trees = int(max_num_trees)
+    except ValueError:
+            raise HTTP(400, json.dumps({"error": 1, "description": 'max number of trees per study in config is not an integer'}))
+    return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees
 
 def read_collections_config(request):
     """Load settings for a minor repo with shared tree collections"""

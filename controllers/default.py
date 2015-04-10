@@ -1,4 +1,5 @@
 import requests
+import urllib2
 import os, sys
 import json
 import anyjson
@@ -122,6 +123,61 @@ def external_url():
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         _LOG.exception('study {} not found in external_url'.format(study_id))
         raise HTTP(404, '{"error": 1, "description": "study not found"}')
+
+# Create a unique key with the URL and any vars (GET *or* POST) to its "query string"
+# ALSO include the request method (HTTP verb) to respond to OPTIONS requests
+def build_general_cache_key(request):
+    return 'cached:['+ request.env.request_method.upper() +']:'+ request.url +'?'+ repr(request.vars)
+
+@cache(key=build_general_cache_key(request), 
+       time_expire=None, 
+       cache_model=cache.ram)
+def cached():
+    """If no value was found (above) in the cache, proxy the request to its original destination"""
+    ##from pprint import pprint
+    # let's restrict this to the api server, to avoid shenanigans
+    root_relative_url = request.env.request_uri.split('/cached/')[-1]
+    ##pprint('ROOT-RELATIVE URL: ')
+    ##pprint(root_relative_url)
+    fetch_url = '%s://%s/%s' % (request.env.wsgi_url_scheme, request.env.http_host, root_relative_url)
+    ##pprint('PROXYING TO SIMPLE URL: ')
+    ##pprint(fetch_url)
+
+    # permissive CORS handling of requests from another domain (e.g. tree.opentreeoflife.org)
+    if request.env.request_method == 'OPTIONS':
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        ##pprint('RESPONDING TO OPTIONS')
+        raise HTTP(200, **(response.headers))
+
+    # N.B. This try/except block means we'll cache errors. For now, the fix is to clear the entire cache.
+    try:
+        # fetch the latest IDs as JSON from remote site
+        import simplejson
+
+        if fetch_url.startswith('//'):
+            # Prepend scheme to a scheme-relative URL
+            fetch_url = "http:%s" % fetch_url
+
+        fetch_args = request.vars # {'startingTaxonOTTId': ""}
+
+        # TODO: For more flexibility, we should examine and mimic the original request (HTTP verb, headers, etc)
+
+        # this needs to be a POST (pass fetch_args or ''); if GET, it just describes the API
+        # N.B. that gluon.tools.fetch() can't be used here, since it won't send "raw" JSON data as treemachine expects
+        req = urllib2.Request(url=fetch_url, data=simplejson.dumps(fetch_args), headers={"Content-Type": "application/json"}) 
+        the_response = urllib2.urlopen(req).read()
+        ##pprint('RESPONSE:')
+        ##pprint(the_response)
+        return the_response
+
+    except Exception, e:
+        # throw 403 or 500 or just leave it
+        return ('ERROR', e.message)
+
+
 
 def reponexsonformat():
     response.view = 'generic.json'
@@ -320,10 +376,11 @@ def v1():
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
     phylesystem = api_utils.get_phylesystem(request)
-    repo_nexml2json = phylesystem.repo_nexml2json
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_config(request)
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    _LOG.debug('Max filestize set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
+    repo_nexml2json = phylesystem.repo_nexml2json
     _LOG.debug(">>> repo_nexml2json={}".format(repo_nexml2json))
-
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
         if 'output_nexml2json' not in kwargs:
@@ -501,7 +558,7 @@ def v1():
                 u = u.replace('uploadid=', 'uploadId=')
                 #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
                 if u.startswith('/curator'):
-                    u = 'http://tree.opentreeoflife.org' + u
+                    u = 'https://tree.opentreeoflife.org' + u
                 response.headers['Content-Type'] = 'text/plain'
                 fetched = requests.get(u)
                 fetched.raise_for_status()
@@ -743,9 +800,14 @@ def v1():
     def __extract_and_validate_nexson(request, repo_nexml2json, kwargs):
         try:
             nexson = __extract_nexson_from_http_call(request, **kwargs)
+        #    from peyotl.manip import count_num_trees
+        #    numtrees=count_num_trees(nexson,repo_nexml2json)
+        #    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        #    _LOG.debug('number of trees in nexson is {}, max number of trees is {}'.format(numtrees,max_num_trees))
             bundle = validate_and_convert_nexson(nexson,
                                                  repo_nexml2json,
-                                                 allow_invalid=False)
+                                                 allow_invalid=False,
+                                                 max_num_trees_per_study=max_num_trees)
             nexson, annotation, validation_log, nexson_adaptor = bundle
         except GitWorkflowError, err:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
