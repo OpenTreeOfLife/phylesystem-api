@@ -378,10 +378,9 @@ def v1():
 
     phylesystem = api_utils.get_phylesystem(request)
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_config(request)
-    _LOG.debug('>>> read_config(request): {}'.format(api_utils.read_config(request)))
     _LOG.debug('Max file size set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
     repo_nexml2json = phylesystem.repo_nexml2json
-    _LOG.debug(">>>A repo_nexml2json={}".format(repo_nexml2json))
+    _LOG.debug("phylesystem created with repo_nexml2json={}".format(repo_nexml2json))
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
         if 'output_nexml2json' not in kwargs:
@@ -393,9 +392,6 @@ def v1():
             else:
                 kwargs['bracket_ingroup'] = True
         try:
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.debug(">>>B repo_nexml2json={}".format(repo_nexml2json))
-            _LOG.debug(">>> assumed_doc_version={}".format(phylesystem.assumed_doc_version))
             schema = PhyloSchema(schema=kwargs.get('format'),
                                  type_ext=type_ext,
                                  content=resource,
