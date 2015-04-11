@@ -368,6 +368,7 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
 @request.restful()
 def v1():
     "The OpenTree API v1"
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     response.view = 'generic.json'
 
     # CORS support for cross-domain API requests (from anywhere)
@@ -377,10 +378,10 @@ def v1():
 
     phylesystem = api_utils.get_phylesystem(request)
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_config(request)
-    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    _LOG.debug('Max filestize set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
+    _LOG.debug('>>> read_config(request): {}'.format(api_utils.read_config(request)))
+    _LOG.debug('Max file size set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
     repo_nexml2json = phylesystem.repo_nexml2json
-    _LOG.debug(">>> repo_nexml2json={}".format(repo_nexml2json))
+    _LOG.debug(">>>A repo_nexml2json={}".format(repo_nexml2json))
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
         if 'output_nexml2json' not in kwargs:
@@ -393,7 +394,7 @@ def v1():
                 kwargs['bracket_ingroup'] = True
         try:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.debug(">>> repo_nexml2json={}".format(repo_nexml2json))
+            _LOG.debug(">>>B repo_nexml2json={}".format(repo_nexml2json))
             _LOG.debug(">>> assumed_doc_version={}".format(phylesystem.assumed_doc_version))
             schema = PhyloSchema(schema=kwargs.get('format'),
                                  type_ext=type_ext,
