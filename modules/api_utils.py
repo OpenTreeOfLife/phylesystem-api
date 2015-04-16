@@ -48,7 +48,7 @@ def get_phylesystem(request):
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
     from gitdata import GitData
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = read_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = read_phylesystem_config(request)
     peyotl_config, cfg_filename = read_peyotl_config()
     if 'phylesystem' not in peyotl_config.sections():
         peyotl_config.add_section('phylesystem')
@@ -86,7 +86,7 @@ def get_tree_collection_store(request):
     _LOG = get_logger(request, 'ot_api')
     _LOG.debug("getting _TREE_COLLECTION_STORE...")
     from gitdata import GitData  #TODO?
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote = read_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote = read_collections_config(request)
     _LOG.debug("  repo_parent={}".format(repo_parent))
     _LOG.debug("  repo_remote={}".format(repo_remote))
     _LOG.debug("  git_ssh={}".format(git_ssh))
@@ -136,7 +136,7 @@ def get_conf_object(request):
         conf.readfp(open(filename))
     return conf
 
-def read_config(request):
+def read_phylesystem_config(request):
     """Load settings for managing the main Nexson docstore"""
     conf = get_conf_object(request)
     repo_parent   = conf.get("apis","repo_parent")
@@ -184,7 +184,11 @@ def read_collections_config(request):
         git_hub_remote = conf.get("apis", "git_hub_remote")
     except:
         git_hub_remote = 'git@github.com:OpenTreeOfLife'
-    return collections_repo_parent, collections_repo_remote, git_ssh, pkey, git_hub_remote
+    try:
+        max_filesize = conf.get("filesize", "collections_max_file_size")
+    except:
+        max_filesize = '20000000'
+    return collections_repo_parent, collections_repo_remote, git_ssh, pkey, git_hub_remote, max_filesize
 
 def read_following_config(request):
     """Load settings for a minor repo with per-user 'following' information"""
