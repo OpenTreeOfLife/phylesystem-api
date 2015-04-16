@@ -238,7 +238,7 @@ def collections():
     elif api_call == 'properties':
         # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
         raise HTTP(200, T("Now we'd list all searchable properties in tree collections!"))
-    elif api_call = 'store_config':
+    elif api_call == 'store_config':
         response.view = 'generic.json'
         docstore = api_utils.get_tree_collection_store(request)
         cd = docstore.get_configuration_dict()
