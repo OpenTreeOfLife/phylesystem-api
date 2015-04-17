@@ -86,7 +86,7 @@ def get_tree_collection_store(request):
     _LOG = get_logger(request, 'ot_api')
     _LOG.debug("getting _TREE_COLLECTION_STORE...")
     from gitdata import GitData  #TODO?
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote = read_collections_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_collections_config(request)
     _LOG.debug("  repo_parent={}".format(repo_parent))
     _LOG.debug("  repo_remote={}".format(repo_remote))
     _LOG.debug("  git_ssh={}".format(git_ssh))
@@ -190,11 +190,11 @@ def read_collections_config(request):
         max_filesize = '20000000'
     return collections_repo_parent, collections_repo_remote, git_ssh, pkey, git_hub_remote, max_filesize
 
-def read_following_config(request):
-    """Load settings for a minor repo with per-user 'following' information"""
+def read_favorites_config(request):
+    """Load settings for a minor repo with per-user 'favorites' information"""
     conf = get_conf_object(request)
-    following_repo_parent   = conf.get("apis","following_repo_parent")
-    following_repo_remote = conf.get("apis", "following_repo_remote")
+    favorites_repo_parent   = conf.get("apis","favorites_repo_parent")
+    favorites_repo_remote = conf.get("apis", "favorites_repo_remote")
     try:
         git_ssh     = conf.get("apis", "git_ssh")
     except:
@@ -207,7 +207,7 @@ def read_following_config(request):
         git_hub_remote = conf.get("apis", "git_hub_remote")
     except:
         git_hub_remote = 'git@github.com:OpenTreeOfLife'
-    return following_repo_parent, following_repo_remote, git_ssh, pkey, git_hub_remote
+    return favorites_repo_parent, favorites_repo_remote, git_ssh, pkey, git_hub_remote
 
 def read_logging_config(request):
     conf = get_conf_object(request)
