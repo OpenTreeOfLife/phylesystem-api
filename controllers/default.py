@@ -263,8 +263,8 @@ def collection(*args, **kwargs):
     if len(request.args) > 2:
         collection_id = ('/').join(request.args[1:3])
         # TODO: validate this using peyotl's test?
-    else:
-        # TODO: Make this id optional for some operations? (eg, creating a new collection)
+    elif request.env.request_method != 'POST':
+        # N.B. this id is optional when creating a new collection
         raise HTTP(400, json.dumps({"error": 1, "description": 'collection ID expected after "collection/"'}))
 
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
