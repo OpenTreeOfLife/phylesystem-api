@@ -286,14 +286,13 @@ def collection(*args, **kwargs):
             raise HTTP(404, json.dumps({"error": 1, "description": 'Collection #%s GET failure' % collection_id}))
         try:
             collection_json, head_sha, wip_map = r
-            ## if returning_full_study:
-            ##     blob_sha = collections.get_blob_sha_for_study_id(collection_id, head_sha)
-            ##     version_history = collections.get_version_history_for_doc_id(collection_id)
-            ##     try:
-            ##         # pre-render internal description? (assumes markdown!)
-            ##         comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True ) # TODO
-            ##     except:
-            ##         comment_html = ''
+            ## if returning_full_study:  # TODO: offer bare vs. full output?
+            version_history = collections.get_version_history_for_doc_id(collection_id)
+            try:
+                                                                        #          # pre-render internal description? (assumes markdown!)
+                comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True ) # TODO
+            except:
+                comment_html = ''
         except:
             _LOG.exception('GET failed')
             e = sys.exc_info()[0]
@@ -301,7 +300,7 @@ def collection(*args, **kwargs):
         if not collection_json:
             raise HTTP(404, 'Collection #{s} has no JSON data!"'.format(s=resource_id))
         result = {'sha': head_sha,
-                 'data': result_data,
+                 'data': collection_json,
                  'branch2sha': wip_map,
                  'commentHTML': comment_html,
                  }
