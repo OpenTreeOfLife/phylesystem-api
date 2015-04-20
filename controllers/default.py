@@ -280,20 +280,20 @@ def collection(*args, **kwargs):
         # return the correct nexson of study_id, using the specified view
         collections = api_utils.get_tree_collection_store(request)  # TODO
         try:
-            r = collections.return_doc(resource_id, commit_sha=parent_sha, return_WIP_map=True)
+            r = collections.return_doc(collection_id, commit_sha=parent_sha, return_WIP_map=True)
         except:
             _LOG.exception('GET failed')
-            raise HTTP(404, json.dumps({"error": 1, "description": 'Collection #%s GET failure' % resource_id}))
+            raise HTTP(404, json.dumps({"error": 1, "description": 'Collection #%s GET failure' % collection_id}))
         try:
             collection_json, head_sha, wip_map = r
-            if returning_full_study:
-                blob_sha = collections.get_blob_sha_for_study_id(resource_id, head_sha)
-                version_history = collections.get_version_history_for_doc_id(resource_id)
-                try:
-                    # pre-render internal description? (assumes markdown!)
-                    comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True ) # TODO
-                except:
-                    comment_html = ''
+            ## if returning_full_study:
+            ##     blob_sha = collections.get_blob_sha_for_study_id(collection_id, head_sha)
+            ##     version_history = collections.get_version_history_for_doc_id(collection_id)
+            ##     try:
+            ##         # pre-render internal description? (assumes markdown!)
+            ##         comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True ) # TODO
+            ##     except:
+            ##         comment_html = ''
         except:
             _LOG.exception('GET failed')
             e = sys.exc_info()[0]
