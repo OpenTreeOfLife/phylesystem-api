@@ -246,7 +246,7 @@ def collections():
         return json.dumps(cd)
     elif api_call == 'push_failure':
         # this should find a type-specific PUSH_FAILURE file
-        request.vars['doc_type'] = 'collections'
+        request.vars['doc_type'] = 'collection'
         return push_failure()   
     raise HTTP(404, T('No such method as collections/{}'.format(api_call)))
 
