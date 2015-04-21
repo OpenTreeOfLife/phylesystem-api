@@ -291,11 +291,11 @@ def collection(*args, **kwargs):
             raise HTTP(404, json.dumps({"error": 1, "description": 'Collection #%s GET failure' % collection_id}))
         try:
             collection_json, head_sha, wip_map = r
-            ## if returning_full_study:  # TODO: offer bare vs. full output?
+            ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
             version_history = collections.get_version_history_for_doc_id(collection_id)
             try:
-                                                                        #          # pre-render internal description? (assumes markdown!)
-                comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True ) # TODO
+                # pre-render internal description (assumes markdown!)
+                comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True )
             except:
                 comment_html = ''
         except:
@@ -314,12 +314,21 @@ def collection(*args, **kwargs):
         return result
 
     if request.env.request_method == 'PUT':
-        # TODO
-        raise HTTP(200, T('single-collection PUT!'))
+        # TODO: update an existing collection with the data provided
+        raise HTTP(400, json.dumps({"error": 1,
+                                    "description": "single-collection PUT is not implemented yet" }))
 
     if request.env.request_method == 'POST':
-        # TODO
-        raise HTTP(200, T('single-collection POST!'))
+        # TODO: create a new collection with the data provided
+        raise HTTP(400, json.dumps({"error": 1,
+                                    "description": "single-collection POST is not implemented yet" }))
+        #raise HTTP(200, T('single-collection POST!'))
+
+    if request.env.request_method == 'DELETE':
+        # TODO: remove this collection from the docstore
+        raise HTTP(400, json.dumps({"error": 1,
+                                    "description": "single-collection DELETE is not implemented yet" }))
+        #raise HTTP(200, T('single-collection DELETE!'))
 
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
 
