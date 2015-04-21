@@ -244,7 +244,9 @@ def collections():
         cd = docstore.get_configuration_dict()
         return json.dumps(cd)
     elif api_call == 'push_failure':
-        return push_failure()   # this should find a type-specific PUSH_FAILURE file
+        # this should find a type-specific PUSH_FAILURE file
+        request.vars['type'] = 'collections'
+        return push_failure()   
     raise HTTP(404, T('No such method as collections/{}'.format(api_call)))
 
 def collection(*args, **kwargs):
