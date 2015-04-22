@@ -6,8 +6,12 @@ import anyjson
 import traceback
 from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
+from peyotl.utility.str_util import slugify
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
+from peyotl.collections import OWNER_ID_PATTERN, \
+                               COLLECTION_ID_PATTERN
+from peyotl.collection_validation import validate_collection
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
                                  extract_tree, \
@@ -264,22 +268,39 @@ def collection(*args, **kwargs):
 
     assert request.args[0].lower() == 'collection'
     # check for full or partial collection ID
+    owner_id = None
     collection_id = None
+    if len(request.args) > 1:
+        # for a new collection, we might have just the owner's id (GitHub username)
+        owner_id = request.args[1]
+        if not OWNER_ID_PATTERN.match(owner_id):
+            raise HTTP(400, json.dumps({"error": 1, "description": "invalid owner ID ({}) provided".format(owner_id)}))
     if len(request.args) > 2:
         collection_id = ('/').join(request.args[1:3])
-        # TODO: validate this using peyotl's test?
+        if not COLLECTION_ID_PATTERN.match(collection_id):
+            #raise HTTP(400, json.dumps({"error": 1, "description": 'invalid collection ID provided'}))
+            # ignore the submitted id and generate a new one
+            collection_id = None
     elif request.env.request_method != 'POST':
         # N.B. this id is optional when creating a new collection
         raise HTTP(400, json.dumps({"error": 1, "description": 'collection ID expected after "collection/"'}))
 
+    # write methods will expect collection JSON to be provided
+    cjson = kwargs.get('data', None)
+    if (cjson is None) and request.env.request_method in ('POST','PUT')::
+        raise HTTP(400, json.dumps({"error": 1, "description": "collection JSON expected for '{}' HTTP method".format(request.env.request_method) }))
+
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
+
+    if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
+        # support JSONP requests from another domain
+        response.view = 'generic.jsonp'
 
     if request.env.request_method == 'GET':
         # fetch the current collection JSON
         _LOG.debug('GET /v2/collection/{}'.format(str(collection_id)))
         version_history = None
         comment_html = None
-        # TODO: support JSONP request from another domain? or assume CORS?
         parent_sha = kwargs.get('starting_commit_SHA', None)
         _LOG.debug('parent_sha = {}'.format(parent_sha))
         # return the correct nexson of study_id, using the specified view
@@ -319,10 +340,37 @@ def collection(*args, **kwargs):
                                     "description": "single-collection PUT is not implemented yet" }))
 
     if request.env.request_method == 'POST':
-        # TODO: create a new collection with the data provided
-        raise HTTP(400, json.dumps({"error": 1,
-                                    "description": "single-collection POST is not implemented yet" }))
-        #raise HTTP(200, T('single-collection POST!'))
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        # Create a new collection with the data provided
+        auth_info = api_utils.authenticate(**kwargs)
+        # fetch and parse the JSON payload
+        collection_obj, collection_adapter = __extract_and_validate_collection(request,
+                                                                               kwargs)
+        # submit the json and proposed id (if any), and read the results
+        docstore = api_utils.get_tree_collection_store(request)
+        try:
+            r = add_new_collection(owner_id, 
+                                   collection_obj, 
+                                   collection_id)
+            new_collection_id, commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+        if commit_return['error'] != 0:
+            _LOG.debug('add_new_collection failed with error code')
+            raise HTTP(400, json.dumps(commit_return))
+        __deferred_push_to_gh_call(request, new_collection_id, **kwargs)
+        #TODO: adapt this for collection operations?
+        return commit_return
+
+        # N.B. the docstore will assign a unique slug + id
+        ##TODO: replace or clobber its inner URL? or update this on GET?
+        ##TODO: prepend the API's base URL
+        #docstore_base_url = 'http://example.org/v2/collection'
+        #proposed_collection_url = '{b}/{i}'.format(b=docstore_base_url, i=collection_id)
+        #_LOG.debug('>>> proposed collection URL: {}'.format(proposed_collection_url))
+        #collection_obj['url'] = proposed_collection_url
 
     if request.env.request_method == 'DELETE':
         # TODO: remove this collection from the docstore
@@ -331,6 +379,41 @@ def collection(*args, **kwargs):
         #raise HTTP(200, T('single-collection DELETE!'))
 
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
+
+    def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
+        """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
+        json_obj = None
+        try:
+            # check for kwarg data_field_name, or load the full request body
+            if data_field_name in kwargs:
+                json_obj = kwargs.get(data_field_name, {})
+            else:
+                json_obj = request.body.read()
+
+            if not isinstance(json, dict):
+                json_obj = json.loads(json_obj)
+            if data_field_name in json_obj:
+                json_obj = json_obj[data_field_name]
+        except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
+            raise HTTP(400, json.dumps({"error": 1, "description": 'collection must be valid JSON'}))
+        return json
+
+    def __extract_and_validate_collection(request, kwargs):
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        try:
+            collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+            errors, collection_adaptor = validate_collection(collection_obj)
+        except Exception, err:
+            _LOG.exception('PUT failed in validation')
+            _raise_HTTP_from_msg(err.msg or 'No message found')
+        if len(errors) > 0:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            msg = 'PUT of collection failed validation with {} errors'.format(len(errors))
+            _LOG.exception(msg)
+            _raise_HTTP_from_msg(msg)
+        return collection_obj, errors, collection_adaptor
 
 
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
