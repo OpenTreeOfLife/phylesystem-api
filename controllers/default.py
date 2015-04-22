@@ -254,6 +254,26 @@ def collections():
         return push_failure()   
     raise HTTP(404, T('No such method as collections/{}'.format(api_call)))
 
+def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
+    """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
+    json_obj = None
+    try:
+        # check for kwarg data_field_name, or load the full request body
+        if data_field_name in kwargs:
+            json_obj = kwargs.get(data_field_name, {})
+        else:
+            json_obj = request.body.read()
+
+        if not isinstance(json, dict):
+            json_obj = json.loads(json_obj)
+        if data_field_name in json_obj:
+            json_obj = json_obj[data_field_name]
+    except:
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
+        raise HTTP(400, json.dumps({"error": 1, "description": 'collection must be valid JSON'}))
+    return json
+
 def collection(*args, **kwargs):
     """Handle an incoming URL targeting /v2/collection/{ID}
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
@@ -265,6 +285,22 @@ def collection(*args, **kwargs):
         if request.env.http_access_control_request_headers:
              response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
         raise HTTP(200, T("single-collection OPTIONS!"), **(response.headers))
+
+    def __extract_and_validate_collection(request, kwargs):
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        try:
+            collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+            errors, collection_adaptor = validate_collection(collection_obj)
+        except Exception, err:
+            _LOG.exception('PUT failed in validation')
+            _raise_HTTP_from_msg(err.msg or 'No message found')
+        if len(errors) > 0:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            msg = 'PUT of collection failed validation with {} errors'.format(len(errors))
+            _LOG.exception(msg)
+            _raise_HTTP_from_msg(msg)
+        return collection_obj, errors, collection_adaptor
+
 
     assert request.args[0].lower() == 'collection'
     # check for full or partial collection ID
@@ -377,42 +413,6 @@ def collection(*args, **kwargs):
         #raise HTTP(200, T('single-collection DELETE!'))
 
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
-
-    def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
-        """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
-        json_obj = None
-        try:
-            # check for kwarg data_field_name, or load the full request body
-            if data_field_name in kwargs:
-                json_obj = kwargs.get(data_field_name, {})
-            else:
-                json_obj = request.body.read()
-
-            if not isinstance(json, dict):
-                json_obj = json.loads(json_obj)
-            if data_field_name in json_obj:
-                json_obj = json_obj[data_field_name]
-        except:
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
-            raise HTTP(400, json.dumps({"error": 1, "description": 'collection must be valid JSON'}))
-        return json
-
-    def __extract_and_validate_collection(request, kwargs):
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-        try:
-            collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
-            errors, collection_adaptor = validate_collection(collection_obj)
-        except Exception, err:
-            _LOG.exception('PUT failed in validation')
-            _raise_HTTP_from_msg(err.msg or 'No message found')
-        if len(errors) > 0:
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            msg = 'PUT of collection failed validation with {} errors'.format(len(errors))
-            _LOG.exception(msg)
-            _raise_HTTP_from_msg(msg)
-        return collection_obj, errors, collection_adaptor
-
 
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
 # This allows us to normalize all API method URLs under v1/, even for
