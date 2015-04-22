@@ -309,7 +309,7 @@ def collection(*args, **kwargs):
             r = collections.return_doc(collection_id, commit_sha=parent_sha, return_WIP_map=True)
         except:
             _LOG.exception('GET failed')
-            raise HTTP(404, json.dumps({"error": 1, "description": 'Collection #%s GET failure' % collection_id}))
+            raise HTTP(404, json.dumps({"error": 1, "description": "Collection '{}' GET failure".format(collection_id)}))
         try:
             collection_json, head_sha, wip_map = r
             ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
