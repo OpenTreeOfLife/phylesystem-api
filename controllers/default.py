@@ -285,10 +285,11 @@ def collection(*args, **kwargs):
         # N.B. this id is optional when creating a new collection
         raise HTTP(400, json.dumps({"error": 1, "description": 'collection ID expected after "collection/"'}))
 
-    # write methods will expect collection JSON to be provided
-    cjson = kwargs.get('data', None)
-    if (cjson is None) and request.env.request_method in ('POST','PUT'):
-        raise HTTP(400, json.dumps({"error": 1, "description": "collection JSON expected for '{}' HTTP method".format(request.env.request_method) }))
+    # fetch and parse the JSON payload, if any 
+    collection_obj, collection_adapter = __extract_and_validate_collection(request,
+                                                                           kwargs)
+    if (collection_obj is None) and request.env.request_method in ('POST','PUT'):
+        raise HTTP(400, json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.env.request_method) }))
 
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
 
@@ -343,9 +344,6 @@ def collection(*args, **kwargs):
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # Create a new collection with the data provided
         auth_info = api_utils.authenticate(**kwargs)
-        # fetch and parse the JSON payload
-        collection_obj, collection_adapter = __extract_and_validate_collection(request,
-                                                                               kwargs)
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
         try:
