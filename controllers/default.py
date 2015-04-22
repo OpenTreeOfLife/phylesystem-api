@@ -287,7 +287,7 @@ def collection(*args, **kwargs):
 
     # write methods will expect collection JSON to be provided
     cjson = kwargs.get('data', None)
-    if (cjson is None) and request.env.request_method in ('POST','PUT')::
+    if (cjson is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "collection JSON expected for '{}' HTTP method".format(request.env.request_method) }))
 
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
