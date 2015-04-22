@@ -293,7 +293,7 @@ def collection(*args, **kwargs):
             errors, collection_adaptor = validate_collection(collection_obj)
         except Exception, err:
             _LOG.exception('PUT failed in validation')
-            _raise_HTTP_from_msg(err.msg or 'No message found')
+            _raise_HTTP_from_msg(err.get('msg') or 'No message found')
         if len(errors) > 0:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             msg = 'PUT of collection failed validation with {} errors'.format(len(errors))
