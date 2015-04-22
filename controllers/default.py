@@ -272,7 +272,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
         raise HTTP(400, json.dumps({"error": 1, "description": 'collection must be valid JSON'}))
-    return json
+    return json_obj
 
 def collection(*args, **kwargs):
     """Handle an incoming URL targeting /v2/collection/{ID}
