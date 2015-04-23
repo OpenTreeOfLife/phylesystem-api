@@ -383,6 +383,8 @@ def collection(*args, **kwargs):
     if request.env.request_method == 'POST':
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # Create a new collection with the data provided
+        _LOG.debug('>>> POST COLLECTION kwargs: {}'.format(kwargs))
+        _LOG.debug('>>> POST COLLECTION **kwargs: {}'.format(**kwargs))
         auth_info = api_utils.authenticate(**kwargs)
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
@@ -716,6 +718,8 @@ def v1():
         if delegate:
             return delegate()
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.POST')
+        _LOG.debug('>>> POST NEXSON kwargs: {}'.format(kwargs))
+        _LOG.debug('>>> POST NEXSON **kwargs: {}'.format(**kwargs))
         # support JSONP request from another domain
         if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
             response.view = 'generic.jsonp'
