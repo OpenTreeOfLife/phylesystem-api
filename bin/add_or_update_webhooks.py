@@ -41,7 +41,8 @@ if not(prompt_for_manual_webhooks):
     try:
         hooks_info = json.loads(r.text)
     except:
-        print 'Unable to load webhook info (bad OAuth token?) [auth_token=%s]' % auth_token 
+        print '\nUnable to load webhook info (bad OAuth token?) [auth_token=%s]:' % auth_token 
+        print r.text
         prompt_for_manual_webhooks = True
 
 if not(prompt_for_manual_webhooks):
