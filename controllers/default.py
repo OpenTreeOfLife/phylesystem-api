@@ -384,7 +384,7 @@ def collection(*args, **kwargs):
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # Create a new collection with the data provided
         _LOG.debug('>>> POST COLLECTION kwargs: {}'.format(kwargs))
-        _LOG.debug('>>> POST COLLECTION **kwargs: {}'.format(**kwargs))
+        #_LOG.debug('>>> POST COLLECTION **kwargs: {}'.format(**kwargs))
         auth_info = api_utils.authenticate(**kwargs)
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
