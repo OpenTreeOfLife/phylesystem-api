@@ -293,6 +293,8 @@ def collection(*args, **kwargs):
             errors, collection_adaptor = validate_collection(collection_obj)
         except Exception, err:
             _LOG.exception('PUT failed in validation')
+            from pprint import pprint
+            pprint(err)
             try:
                 msg = err.get('msg', 'No message found')
             except:
