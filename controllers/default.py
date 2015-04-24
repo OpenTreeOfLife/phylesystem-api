@@ -393,6 +393,7 @@ def collection(*args, **kwargs):
         try:
             r = docstore.add_new_collection(owner_id, 
                                             collection_obj, 
+                                            auth_info,
                                             collection_id)
             new_collection_id, commit_return = r
         except GitWorkflowError, err:
