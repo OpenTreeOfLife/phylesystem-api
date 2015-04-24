@@ -391,9 +391,9 @@ def collection(*args, **kwargs):
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
         try:
-            r = add_new_collection(owner_id, 
-                                   collection_obj, 
-                                   collection_id)
+            r = docstore.add_new_collection(owner_id, 
+                                            collection_obj, 
+                                            collection_id)
             new_collection_id, commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
