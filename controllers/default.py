@@ -240,6 +240,11 @@ def collections():
     if api_call == 'find_collections':
         # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
         raise HTTP(200, T("Now we'd list all tree collections matching the criteria provided!"))
+    elif api_call == 'collection_list':
+        response.view = 'generic.json'
+        docstore = api_utils.get_tree_collection_store(request)
+        ids = docstore.get_collection_ids()
+        return json.dumps(ids)
     elif api_call == 'properties':
         # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
         raise HTTP(200, T("Now we'd list all searchable properties in tree collections!"))
