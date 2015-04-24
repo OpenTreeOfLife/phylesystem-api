@@ -264,7 +264,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
         else:
             json_obj = request.body.read()
 
-        if not isinstance(json, dict):
+        if not isinstance(json_obj, dict):
             json_obj = json.loads(json_obj)
         if data_field_name in json_obj:
             json_obj = json_obj[data_field_name]
