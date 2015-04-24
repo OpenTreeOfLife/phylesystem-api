@@ -556,7 +556,7 @@ def v1():
         "OpenTree API methods relating to reading"
         delegate = _route_tag2func.get(resource)
         if delegate:
-            return delegate()
+            return delegate(kwargs)
         valid_resources = ('study', )
         if not resource.lower() == 'study':
             raise HTTP(400, json.dumps({"error": 1,
@@ -716,7 +716,7 @@ def v1():
         "Open Tree API methods relating to creating (and importing) resources"
         delegate = _route_tag2func.get(resource)
         if delegate:
-            return delegate()
+            return delegate(kwargs)
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.POST')
         _LOG.debug('>>> POST NEXSON kwargs: {}'.format(kwargs))
         _LOG.debug('>>> POST NEXSON **kwargs: {}'.format(**kwargs))
@@ -949,14 +949,11 @@ def v1():
 
     def PUT(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to updating existing resources"
-        #global TIMING
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
-
         delegate = _route_tag2func.get(resource)
         if delegate:
-            _LOG.debug('PUT call to {} bouncing to delegate'.format(resource))
-            return delegate()
-        
+            return delegate(kwargs)
+        #global TIMING
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
@@ -1070,6 +1067,9 @@ def v1():
 
     def DELETE(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to deleting existing resources"
+        delegate = _route_tag2func.get(resource)
+        if delegate:
+            return delegate(kwargs)
         # support JSONP request from another domain
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.DELETE')
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
