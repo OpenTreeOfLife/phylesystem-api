@@ -303,7 +303,7 @@ def collection(*args, **kwargs):
             try:
                 msg = err.get('msg', 'No message found')
             except:
-                msg = repr(err)
+                msg = err
             _raise_HTTP_from_msg(msg)
         if len(errors) > 0:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
