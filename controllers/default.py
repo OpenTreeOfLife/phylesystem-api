@@ -297,13 +297,17 @@ def collection(*args, **kwargs):
         from pprint import pprint
         try:
             collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
-            errors, collection_adaptor = validate_collection(collection_obj)
+            import pdb; pdb.set_trace()
+            if collection_obj:
+                errors, collection_adaptor = validate_collection(collection_obj)
+            except:
+                return None, None, None
         except HTTP, err:
-            _LOG.exception('PUT failed in validation (raising HTTP response)')
+            _LOG.exception('JSON payload failed validation (raising HTTP response)')
             pprint(err)
             raise err
         except Exception, err:
-            _LOG.exception('PUT failed in validation (reporting err.msg)')
+            _LOG.exception('JSON payload failed validation (reporting err.msg)')
             pprint(err)
             try:
                 msg = err.get('msg', 'No message found')
@@ -312,11 +316,10 @@ def collection(*args, **kwargs):
             _raise_HTTP_from_msg(msg)
         if len(errors) > 0:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            msg = 'PUT of collection failed validation with {} errors'.format(len(errors))
+            msg = 'JSON payload failed validation with {} errors'.format(len(errors))
             _LOG.exception(msg)
             _raise_HTTP_from_msg(msg)
         return collection_obj, errors, collection_adaptor
-
 
     assert request.args[0].lower() == 'collection'
     # check for full or partial collection ID
