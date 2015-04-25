@@ -10,21 +10,29 @@ def v1():
     """The OpenTree API v1: Merge Controller
 
     This controller can be used to merge changes from master into
-    a WIP. After this succeeds, subsequent GETs and POSTs to the study
+    a WIP. After this succeeds, subsequent GETs and POSTs to the document
     should be able to merge to master.
     """
     response.view = 'generic.json'
 
-    def PUT(resource_id=None, jsoncallback=None, callback=None, _=None, **kwargs):
+    def PUT(resource_id=None, jsoncallback=None, callback=None, _=None, resource_type='study', **kwargs):
         """OpenTree API methods relating to updating branches
 
+        'resource_type' should be 'study' (default), 'collection', or 'favorites'
+
         curl -X POST http://localhost:8000/api/push/v1?resource_id=9
+        curl -X POST http://localhost:8000/api/push/v1?resource_id=TestUserB/my-favorite-trees&resource_type=collection
         """
         _LOG = api_utils.get_logger(request, 'ot_api.push.v1.PUT')
         fail_file = api_utils.get_failed_push_filepath(request)
+        _LOG.debug(">> fail_file for type '{t}': {f}".format(t=resource_type, f=fail_file))
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
+
+
+
+
         phylesystem = api_utils.get_phylesystem(request)
         try:
             phylesystem.push_study_to_remote('GitHubRemote', resource_id)
@@ -53,6 +61,9 @@ def v1():
                 "error": 1,
                 "description": "Could not push! Details: {m}".format(m=m)
             }))
+
+
+
         if os.path.exists(fail_file):
             # log any old fail_file, and remove it because the pushes are working
             with codecs.open(fail_file, 'rU', encoding='utf-8') as inpf:
