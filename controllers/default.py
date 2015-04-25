@@ -73,13 +73,13 @@ def render_markdown():
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
 
-def __deferred_push_to_gh_call(request, resource_id, **kwargs):
+def __deferred_push_to_gh_call(request, resource_id, doc_type='study', **kwargs):
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     _LOG.debug('in __deferred_push_to_gh_call')
     if call_http_json is not None:
         url = api_utils.compose_push_to_github_url(request, resource_id)
         auth_token = copy.copy(kwargs.get('auth_token'))
-        data = {}
+        data = {'doc_type': doc_type}
         if auth_token is not None:
             data['auth_token'] = auth_token
         _LOG.debug('__deferred_push_to_gh_call({u}, {d})'.format(u=url, d=str(data)))
@@ -416,7 +416,7 @@ def collection(*args, **kwargs):
         if commit_return['error'] != 0:
             _LOG.debug('add_new_collection failed with error code')
             raise HTTP(400, json.dumps(commit_return))
-        __deferred_push_to_gh_call(request, new_collection_id, **kwargs)
+        __deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **kwargs)
         #TODO: adapt this for collection operations?
         return commit_return
 
@@ -884,7 +884,7 @@ def v1():
         if commit_return['error'] != 0:
             _LOG.debug('ingest_new_study failed with error code')
             raise HTTP(400, json.dumps(commit_return))
-        __deferred_push_to_gh_call(request, new_resource_id, **kwargs)
+        __deferred_push_to_gh_call(request, new_resource_id, doc_type='study', **kwargs)
         return commit_return
 
     def __coerce_nexson_format(nexson, dest_format, current_format=None):
@@ -1026,7 +1026,7 @@ def v1():
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         mn = blob.get('merge_needed')
         if (mn is not None) and (not mn):
-            __deferred_push_to_gh_call(request, resource_id, **kwargs)
+            __deferred_push_to_gh_call(request, resource_id, doc_type='study', **kwargs)
         # Add updated commit history to the blob
         blob['versionHistory'] = phylesystem.get_version_history_for_study_id(resource_id)
         return blob
@@ -1110,7 +1110,7 @@ def v1():
         try:
             x = phylesystem.delete_study(resource_id, auth_info, parent_sha, commit_msg=commit_msg)
             if x.get('error') == 0:
-                __deferred_push_to_gh_call(request, None, **kwargs)
+                __deferred_push_to_gh_call(request, None, doc_type='study', **kwargs)
             return x
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)

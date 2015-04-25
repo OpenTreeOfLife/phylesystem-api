@@ -21,17 +21,16 @@ def v1():
         'doc_type' should be 'study' (default), 'collection', or 'favorites'
 
         curl -X POST http://localhost:8000/api/push/v1?resource_id=9
-        curl -X POST http://localhost:8000/api/push/v1?resource_id=TestUserB/my-favorite-trees&resource_type=collection
+        curl -X POST http://localhost:8000/api/push/v1?resource_id=TestUserB/my-favorite-trees&doc_type=collection
         """
         _LOG = api_utils.get_logger(request, 'ot_api.push.v1.PUT')
-        fail_file = api_utils.get_failed_push_filepath(request, doc_type=resource_type)
-        _LOG.debug(">> fail_file for type '{t}': {f}".format(t=resource_type, f=fail_file))
+        fail_file = api_utils.get_failed_push_filepath(request, doc_type=doc_type)
+        _LOG.debug(">> fail_file for type '{t}': {f}".format(t=doc_type, f=fail_file))
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
 
         if doc_type.lower() == 'study':
-
             phylesystem = api_utils.get_phylesystem(request)
             try:
                 phylesystem.push_study_to_remote('GitHubRemote', resource_id)
@@ -60,10 +59,40 @@ def v1():
                     "error": 1,
                     "description": "Could not push! Details: {m}".format(m=m)
                 }))
+
         elif doc_type.lower() == 'collection':
-            raise NotImplementedError('TODO: add push behavior for collections!') 
+            docstore = api_utils.get_tree_collection_store(request)
+            try:
+                docstore.push_doc_to_remote('GitHubRemote', resource_id)
+            except:
+                m = traceback.format_exc()
+                _LOG.warn('Push of collection {s} failed. Details: {m}'.format(s=resource_id, m=m))
+                if os.path.exists(fail_file):
+                    _LOG.warn('push failure file "{f}" already exists. This event not logged there'.format(f=fail_file))
+                else:
+                    timestamp = datetime.datetime.utcnow().isoformat()
+                    try:
+                        ga = docstore.create_git_action(resource_id)
+                    except:
+                        m = 'Could not create an adaptor for git actions on collection ID "{}". ' \
+                            'If you are confident that this is a valid collection ID, please report this as a bug.'
+                        m = m.format(resource_id)
+                        raise HTTP(400, json.dumps({'error': 1, 'description': m}))
+                    master_sha = ga.get_master_sha()
+                    obj = {'date': timestamp,
+                           'collection': resource_id,
+                           'commit': master_sha,
+                           'stacktrace': m}
+                    api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
+                    _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+                raise HTTP(409, json.dumps({
+                    "error": 1,
+                    "description": "Could not push! Details: {m}".format(m=m)
+                }))
+
         elif doc_type.lower() == 'favorites':
             raise NotImplementedError('TODO: add push behavior for favorites!') 
+
         else:
             raise ValueError("Can't push unknown doc_type '{}'".format(doc_type)) 
 
