@@ -26,6 +26,7 @@ from urllib import urlencode
 from gluon.html import web2pyHTMLParser
 import re
 from gluon.contrib.markdown.markdown2 import markdown
+from gluon.http import HTTP
 from ConfigParser import SafeConfigParser
 import copy
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
@@ -293,12 +294,16 @@ def collection(*args, **kwargs):
 
     def __extract_and_validate_collection(request, kwargs):
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        from pprint import pprint
         try:
             collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
             errors, collection_adaptor = validate_collection(collection_obj)
+        except HTML, err:
+            _LOG.exception('PUT failed in validation (raising HTTP response)')
+            pprint(err)
+            raise err
         except Exception, err:
-            _LOG.exception('PUT failed in validation')
-            from pprint import pprint
+            _LOG.exception('PUT failed in validation (reporting err.msg)')
             pprint(err)
             try:
                 msg = err.get('msg', 'No message found')
