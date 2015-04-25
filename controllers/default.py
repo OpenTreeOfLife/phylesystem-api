@@ -297,10 +297,9 @@ def collection(*args, **kwargs):
         from pprint import pprint
         try:
             collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
-            import pdb; pdb.set_trace()
             if collection_obj:
                 errors, collection_adaptor = validate_collection(collection_obj)
-            except:
+            else:
                 return None, None, None
         except HTTP, err:
             _LOG.exception('JSON payload failed validation (raising HTTP response)')
