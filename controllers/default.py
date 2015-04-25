@@ -298,7 +298,7 @@ def collection(*args, **kwargs):
         try:
             collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
             errors, collection_adaptor = validate_collection(collection_obj)
-        except HTML, err:
+        except HTTP, err:
             _LOG.exception('PUT failed in validation (raising HTTP response)')
             pprint(err)
             raise err
