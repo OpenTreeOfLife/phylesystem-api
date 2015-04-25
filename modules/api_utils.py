@@ -122,11 +122,11 @@ def get_tree_collection_store(request):
     return _TREE_COLLECTION_STORE
 
 
-def get_failed_push_filepath(request):
+def get_failed_push_filepath(request, doc_type=None):
     filenames_by_content_type = {'nexson': "PUSH_FAILURE_nexson.json",
                                  'collection': "PUSH_FAILURE_collection.json",
                                  'favorites': "PUSH_FAILURE_favorites.json"}
-    content_type = request.vars.get('doc_type', 'nexson')
+    content_type = doc_type or request.vars.get('doc_type', 'nexson')
     failure_filename = filenames_by_content_type[content_type]
     return os.path.join(get_private_dir(request), failure_filename)
 
