@@ -277,7 +277,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
     except:
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
-        raise HTTP(400, json.dumps({"error": 1, "description": 'collection must be valid JSON'}))
+        raise HTTP(400, json.dumps({"error": 1, "description": 'no collection JSON found in request'}))
     return json_obj
 
 def collection(*args, **kwargs):
@@ -297,10 +297,11 @@ def collection(*args, **kwargs):
         from pprint import pprint
         try:
             collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
-            if collection_obj:
-                errors, collection_adaptor = validate_collection(collection_obj)
-            else:
-                return None, None, None
+        except HTTP, err:
+            # payload not found
+            return None, None, None
+        try:
+            errors, collection_adaptor = validate_collection(collection_obj)
         except HTTP, err:
             _LOG.exception('JSON payload failed validation (raising HTTP response)')
             pprint(err)
