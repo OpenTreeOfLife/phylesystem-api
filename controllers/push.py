@@ -15,10 +15,10 @@ def v1():
     """
     response.view = 'generic.json'
 
-    def PUT(resource_id=None, jsoncallback=None, callback=None, _=None, doc_type='study', **kwargs):
+    def PUT(resource_id=None, jsoncallback=None, callback=None, _=None, doc_type='nexson', **kwargs):
         """OpenTree API methods relating to updating branches
 
-        'doc_type' should be 'study' (default), 'collection', or 'favorites'
+        'doc_type' should be 'nexson' (default), 'collection', or 'favorites'
 
         curl -X POST http://localhost:8000/api/push/v1?resource_id=9
         curl -X POST http://localhost:8000/api/push/v1?resource_id=TestUserB/my-favorite-trees&doc_type=collection
@@ -30,7 +30,7 @@ def v1():
         if jsoncallback or callback:
             response.view = 'generic.jsonp'
 
-        if doc_type.lower() == 'study':
+        if doc_type.lower() == 'nexson':
             phylesystem = api_utils.get_phylesystem(request)
             try:
                 phylesystem.push_study_to_remote('GitHubRemote', resource_id)
