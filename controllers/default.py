@@ -383,7 +383,7 @@ def collection(*args, **kwargs):
             raise HTTP(404, 'Collection #{s} has no JSON data!"'.format(s=resource_id))
         # add/restore the url field (using the visible fetch URL)
         base_url = api_utils.get_collections_api_base_url(request)
-        collection_json['url'] = '{b}collection/{i}'.format(b=base_url,
+        collection_json['url'] = '{b}/collection/{i}'.format(b=base_url,
                                                             i=collection_id)
         result = {'sha': head_sha,
                  'data': collection_json,
