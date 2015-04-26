@@ -382,9 +382,9 @@ def collection(*args, **kwargs):
         if not collection_json:
             raise HTTP(404, 'Collection #{s} has no JSON data!"'.format(s=resource_id))
         # add/restore the url field (using the visible fetch URL)
-        collection_json['url'] = '{s}://{h}{u}'.format(s=request.env.wsgi_url_scheme, 
-                                                       h=request.env.http_host, 
-                                                       u=request.env.web2py_original_uri)
+        base_url = api_utils.get_collections_api_base_url(request)
+        collection_json['url'] = '{b}collection/{i}'.format(b=base_url,
+                                                            i=collection_id)
         result = {'sha': head_sha,
                  'data': collection_json,
                  'branch2sha': wip_map,

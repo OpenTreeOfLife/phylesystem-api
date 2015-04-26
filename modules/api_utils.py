@@ -397,3 +397,19 @@ def get_oti_domain(request):
     s = oti_base.split('/')
     assert len(s) > 2
     return '/'.join(s[:3])
+
+def get_collections_api_base_url(request):
+    conf = get_conf_object(request)
+    base_url = conf.get("apis", "collections_api_base_url")
+    if base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        base_url = "http:" + base_url
+    return base_url
+
+def get_favorites_api_base_url(request):
+    conf = get_conf_object(request)
+    base_url = conf.get("apis", "favorites_api_base_url")
+    if base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        base_url = "http:" + base_url
+    return base_url
