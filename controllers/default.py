@@ -346,7 +346,7 @@ def collection(*args, **kwargs):
     if (collection_obj is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.env.request_method) }))
 
-    _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
+    _LOG = api_utils.get_logger(request, 'ot_api.default.collection')
 
     if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
         # support JSONP requests from another domain
@@ -381,6 +381,8 @@ def collection(*args, **kwargs):
             _raise_HTTP_from_msg(e)
         if not collection_json:
             raise HTTP(404, 'Collection #{s} has no JSON data!"'.format(s=resource_id))
+        # add/restore the url field (using the actual fetch URL)
+        collection_json['url'] = request.url
         result = {'sha': head_sha,
                  'data': collection_json,
                  'branch2sha': wip_map,
@@ -419,14 +421,6 @@ def collection(*args, **kwargs):
         __deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **kwargs)
         #TODO: adapt this for collection operations?
         return commit_return
-
-        # N.B. the docstore will assign a unique slug + id
-        ##TODO: replace or clobber its inner URL? or update this on GET?
-        ##TODO: prepend the API's base URL
-        #docstore_base_url = 'http://example.org/v2/collection'
-        #proposed_collection_url = '{b}/{i}'.format(b=docstore_base_url, i=collection_id)
-        #_LOG.debug('>>> proposed collection URL: {}'.format(proposed_collection_url))
-        #collection_obj['url'] = proposed_collection_url
 
     if request.env.request_method == 'DELETE':
         # TODO: remove this collection from the docstore
