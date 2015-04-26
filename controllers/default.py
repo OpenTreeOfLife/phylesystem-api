@@ -381,8 +381,10 @@ def collection(*args, **kwargs):
             _raise_HTTP_from_msg(e)
         if not collection_json:
             raise HTTP(404, 'Collection #{s} has no JSON data!"'.format(s=resource_id))
-        # add/restore the url field (using the actual fetch URL)
-        collection_json['url'] = request.url
+        # add/restore the url field (using the visible fetch URL)
+        collection_json['url'] = '{s}://{h}{u}'.format(s=request.env.wsgi_url_scheme, 
+                                                       h=request.env.http_host, 
+                                                       u=request.env.web2py_original_uri)
         result = {'sha': head_sha,
                  'data': collection_json,
                  'branch2sha': wip_map,
