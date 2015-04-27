@@ -484,7 +484,7 @@ def collection(*args, **kwargs):
         except:
             commit_msg = None
         try:
-            x = docstore.delete_collection(resource_id, 
+            x = docstore.delete_collection(collection_id, 
                                            auth_info, 
                                            parent_sha, 
                                            commit_msg=commit_msg)
