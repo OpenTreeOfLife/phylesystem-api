@@ -380,7 +380,7 @@ def collection(*args, **kwargs):
             e = sys.exc_info()[0]
             _raise_HTTP_from_msg(e)
         if not collection_json:
-            raise HTTP(404, 'Collection #{s} has no JSON data!"'.format(s=resource_id))
+            raise HTTP(404, 'Collection '{s}' has no JSON data!"'.format(s=collection_id))
         # add/restore the url field (using the visible fetch URL)
         base_url = api_utils.get_collections_api_base_url(request)
         collection_json['url'] = '{b}/collection/{i}'.format(b=base_url,
@@ -395,15 +395,62 @@ def collection(*args, **kwargs):
         return result
 
     if request.env.request_method == 'PUT':
-        # TODO: update an existing collection with the data provided
-        raise HTTP(400, json.dumps({"error": 1,
-                                    "description": "single-collection PUT is not implemented yet" }))
+        # update an existing collection with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.collections.PUT')
+        _LOG.debug('>>> PUT COLLECTION kwargs: {}'.format(kwargs))
+        # submit new json for this id, and read the results
+        auth_info = api_utils.authenticate(**kwargs)
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        merged_sha = None  #TODO: kwargs.get('???', None)
+        docstore = api_utils.get_tree_collection_store(request)
+        try:
+            collection_obj = {}  #TODO TODO TODO: remove this!
+            r = docstore.update_existing_collection(owner_id, 
+                                                    collection_id,
+                                                    collection_obj, 
+                                                    auth_info,
+                                                    parent_sha,
+                                                    merged_sha)
+            commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+
+        return commit_return
+#
+#        parent_sha = kwargs.get('starting_commit_SHA')
+#        if parent_sha is None:
+#            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+#        try:
+#            commit_msg = kwargs.get('commit_msg','')
+#            if commit_msg.strip() == '':
+#                # git rejects empty commit messages
+#                commit_msg = None
+#        except:
+#            commit_msg = None
+#        master_file_blob_included = kwargs.get('merged_SHA')
+#        msg = 'PUT to collection {} for starting_commit_SHA = {} and merged_SHA = {}'
+#        _LOG.debug(msg.format(collection_id,
+#                              parent_sha,
+#                              str(master_file_blob_included)))
+#
+
+#         try:
+#             gd = phylesystem.create_git_action(resource_id)
+#         except KeyError, err:
+#             _LOG.debug('PUT failed in create_git_action (probably a bad collection ID)')
+#             _raise_HTTP_from_msg("invalid collection ID, please check the URL")
+#         except GitWorkflowError, err:
+#             _LOG.debug('PUT failed in create_git_action: {}'.format(err.msg))
+#             _raise_HTTP_from_msg(err.msg)
+#         except:
+#             raise HTTP(400, traceback.format_exc())
 
     if request.env.request_method == 'POST':
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # Create a new collection with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
         _LOG.debug('>>> POST COLLECTION kwargs: {}'.format(kwargs))
-        #_LOG.debug('>>> POST COLLECTION **kwargs: {}'.format(**kwargs))
         auth_info = api_utils.authenticate(**kwargs)
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
