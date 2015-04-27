@@ -1009,8 +1009,8 @@ def v1():
         "Open Tree API methods relating to updating existing resources"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
         from pprint import pprint
-        _LOG.debug(">>>>>>> args: {}".format(pprint(args))
-        _LOG.debug(">>>>>>> kwargs: {}".format(pprint(kwargs))
+        _LOG.debug(">>>>>>> args: {}".format(pprint(args)))
+        _LOG.debug(">>>>>>> kwargs: {}".format(pprint(kwargs)))
         delegate = _route_tag2func.get(resource)
         if delegate:
             return delegate(**kwargs)
