@@ -493,9 +493,9 @@ def collection(*args, **kwargs):
             return x
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
-        except Exception, err:
+        except:
             _LOG.exception('Unknown error in collection deletion')
-            _raise_HTTP_from_msg(err.msg)
+            raise HTTP(400, traceback.format_exc())
             #raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in collection deletion'}))
 
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
