@@ -285,7 +285,7 @@ def collection(*args, **kwargs):
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
     _LOG = api_utils.get_logger(request, 'ot_api.collection')
-    _LOG.debug("insude collection!")
+    _LOG.debug(">>>>>>>>>>>>>>> insude collection!")
     if request.env.request_method == 'OPTIONS':
         "A simple method for approving CORS preflight request"
         if request.env.http_access_control_request_method:
@@ -1009,7 +1009,7 @@ def v1():
     def PUT(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to updating existing resources"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
-        _LOG.debug("inside PUT, checking delegates")
+        _LOG.debug(">>>>>>> insude PUT, checking delegates")
         delegate = _route_tag2func.get(resource)
         if delegate:
             return delegate(**kwargs)
