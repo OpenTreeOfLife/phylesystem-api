@@ -613,6 +613,8 @@ def v1():
             _=None,
             **kwargs):
         "OpenTree API methods relating to reading"
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
+        _LOG.debug(">>>>>>> insude GET, checking delegates")
         delegate = _route_tag2func.get(resource)
         if delegate:
             return delegate(**kwargs)
@@ -623,7 +625,6 @@ def v1():
         if resource_id is None:
             raise HTTP(400, json.dumps({"error": 1, "description": 'study ID expected after "study/"'}))
         valid_subresources = ('tree', 'meta', 'otus', 'otu', 'otumap')
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         _LOG.debug('GET default/v1/{}/{}'.format(str(resource), str(resource_id)))
         returning_full_study = False
         returning_tree = False
@@ -1006,7 +1007,7 @@ def v1():
         else:
             return None
 
-    def PUT(resource, resource_id=None, **kwargs):
+    def PUT(resource, resource_id=None, *args, **kwargs):
         "Open Tree API methods relating to updating existing resources"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
         _LOG.debug(">>>>>>> insude PUT, checking delegates")
