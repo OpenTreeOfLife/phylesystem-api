@@ -417,34 +417,34 @@ def collection(*args, **kwargs):
             raise HTTP(400, traceback.format_exc())
 
         return commit_return
-#
-#        parent_sha = kwargs.get('starting_commit_SHA')
-#        if parent_sha is None:
-#            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
-#        try:
-#            commit_msg = kwargs.get('commit_msg','')
-#            if commit_msg.strip() == '':
-#                # git rejects empty commit messages
-#                commit_msg = None
-#        except:
-#            commit_msg = None
-#        master_file_blob_included = kwargs.get('merged_SHA')
-#        msg = 'PUT to collection {} for starting_commit_SHA = {} and merged_SHA = {}'
-#        _LOG.debug(msg.format(collection_id,
-#                              parent_sha,
-#                              str(master_file_blob_included)))
-#
+        #
+        #        parent_sha = kwargs.get('starting_commit_SHA')
+        #        if parent_sha is None:
+        #            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        #        try:
+        #            commit_msg = kwargs.get('commit_msg','')
+        #            if commit_msg.strip() == '':
+        #                # git rejects empty commit messages
+        #                commit_msg = None
+        #        except:
+        #            commit_msg = None
+        #        master_file_blob_included = kwargs.get('merged_SHA')
+        #        msg = 'PUT to collection {} for starting_commit_SHA = {} and merged_SHA = {}'
+        #        _LOG.debug(msg.format(collection_id,
+        #                              parent_sha,
+        #                              str(master_file_blob_included)))
+        #
 
-#         try:
-#             gd = phylesystem.create_git_action(resource_id)
-#         except KeyError, err:
-#             _LOG.debug('PUT failed in create_git_action (probably a bad collection ID)')
-#             _raise_HTTP_from_msg("invalid collection ID, please check the URL")
-#         except GitWorkflowError, err:
-#             _LOG.debug('PUT failed in create_git_action: {}'.format(err.msg))
-#             _raise_HTTP_from_msg(err.msg)
-#         except:
-#             raise HTTP(400, traceback.format_exc())
+        #         try:
+        #             gd = phylesystem.create_git_action(resource_id)
+        #         except KeyError, err:
+        #             _LOG.debug('PUT failed in create_git_action (probably a bad collection ID)')
+        #             _raise_HTTP_from_msg("invalid collection ID, please check the URL")
+        #         except GitWorkflowError, err:
+        #             _LOG.debug('PUT failed in create_git_action: {}'.format(err.msg))
+        #             _raise_HTTP_from_msg(err.msg)
+        #         except:
+        #             raise HTTP(400, traceback.format_exc())
 
     if request.env.request_method == 'POST':
         # Create a new collection with the data provided
