@@ -397,8 +397,6 @@ def collection(*args, **kwargs):
     if request.env.request_method == 'PUT':
         # update an existing collection with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.PUT')
-        _LOG.debug('>>> PUT COLLECTION args: {}'.format(args))
-        _LOG.debug('>>> PUT COLLECTION kwargs: {}'.format(kwargs))
         # submit new json for this id, and read the results
         auth_info = api_utils.authenticate(**kwargs)
         parent_sha = kwargs.get('starting_commit_SHA', None)
@@ -450,7 +448,7 @@ def collection(*args, **kwargs):
     if request.env.request_method == 'POST':
         # Create a new collection with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
-        _LOG.debug('>>> POST COLLECTION kwargs: {}'.format(kwargs))
+        #_LOG.debug('>>> POST COLLECTION kwargs: {}'.format(kwargs))
         auth_info = api_utils.authenticate(**kwargs)
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
@@ -468,14 +466,36 @@ def collection(*args, **kwargs):
             _LOG.debug('add_new_collection failed with error code')
             raise HTTP(400, json.dumps(commit_return))
         __deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **kwargs)
-        #TODO: adapt this for collection operations?
         return commit_return
 
     if request.env.request_method == 'DELETE':
-        # TODO: remove this collection from the docstore
-        raise HTTP(400, json.dumps({"error": 1,
-                                    "description": "single-collection DELETE is not implemented yet" }))
-        #raise HTTP(200, T('single-collection DELETE!'))
+        # remove this collection from the docstore
+        _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
+        auth_info = api_utils.authenticate(**kwargs)
+        docstore = api_utils.get_tree_collection_store(request)
+        parent_sha = kwargs.get('starting_commit_SHA')
+        if parent_sha is None:
+            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        try:
+            commit_msg = kwargs.get('commit_msg','')
+            if commit_msg.strip() == '':
+                # git rejects empty commit messages
+                commit_msg = None
+        except:
+            commit_msg = None
+        try:
+            x = docstore.delete_collection(resource_id, 
+                                           auth_info, 
+                                           parent_sha, 
+                                           commit_msg=commit_msg)
+            if x.get('error') == 0:
+                __deferred_push_to_gh_call(request, None, doc_type='collection', **kwargs)
+            return x
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            _LOG.exception('Unknown error in collection deletion')
+            raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in collection deletion'}))
 
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
 
@@ -1124,7 +1144,7 @@ def v1():
             nexml_el[u'^ot:studyYear'] = meta_year
         return nexson
 
-    def DELETE(resource, resource_id=None, **kwargs):
+    def DELETE(resource, resource_id=None, *args, **kwargs):
         "Open Tree API methods relating to deleting existing resources"
         delegate = _route_tag2func.get(resource)
         if delegate:
