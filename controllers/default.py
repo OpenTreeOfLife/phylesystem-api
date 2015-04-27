@@ -284,6 +284,8 @@ def collection(*args, **kwargs):
     """Handle an incoming URL targeting /v2/collection/{ID}
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
+    _LOG = api_utils.get_logger(request, 'ot_api.collection')
+    _LOG.debug("insude collection!")
     if request.env.request_method == 'OPTIONS':
         "A simple method for approving CORS preflight request"
         if request.env.http_access_control_request_method:
@@ -293,7 +295,6 @@ def collection(*args, **kwargs):
         raise HTTP(200, T("single-collection OPTIONS!"), **(response.headers))
 
     def __extract_and_validate_collection(request, kwargs):
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         from pprint import pprint
         try:
             collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
@@ -1007,11 +1008,12 @@ def v1():
 
     def PUT(resource, resource_id=None, **kwargs):
         "Open Tree API methods relating to updating existing resources"
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
+        _LOG.debug("inside PUT, checking delegates")
         delegate = _route_tag2func.get(resource)
         if delegate:
             return delegate(**kwargs)
         #global TIMING
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
