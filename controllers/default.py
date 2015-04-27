@@ -1008,9 +1008,11 @@ def v1():
     def PUT(resource, resource_id=None, *args, **kwargs):
         "Open Tree API methods relating to updating existing resources"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
-        from pprint import pprint
-        _LOG.debug(">>>>>>> args: {}".format(pprint(args)))
-        _LOG.debug(">>>>>>> kwargs: {}".format(pprint(kwargs)))
+        import pprint
+        _LOG.debug(">>>>>>> args: {}".format(pprint.pformat(args)))
+        _LOG.debug(">>>>>>> END of args")
+        _LOG.debug(">>>>>>> kwargs: {}".format(pprint.pformat(kwargs)))
+        _LOG.debug(">>>>>>> END of kwargs")
         delegate = _route_tag2func.get(resource)
         if delegate:
             return delegate(**kwargs)
