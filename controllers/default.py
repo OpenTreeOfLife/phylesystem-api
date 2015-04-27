@@ -380,7 +380,7 @@ def collection(*args, **kwargs):
             e = sys.exc_info()[0]
             _raise_HTTP_from_msg(e)
         if not collection_json:
-            raise HTTP(404, 'Collection '{s}' has no JSON data!"'.format(s=collection_id))
+            raise HTTP(404, "Collection '{s}' has no JSON data!".format(s=collection_id))
         # add/restore the url field (using the visible fetch URL)
         base_url = api_utils.get_collections_api_base_url(request)
         collection_json['url'] = '{b}/collection/{i}'.format(b=base_url,
