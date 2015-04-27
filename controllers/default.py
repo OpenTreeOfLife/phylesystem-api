@@ -404,7 +404,6 @@ def collection(*args, **kwargs):
         merged_sha = None  #TODO: kwargs.get('???', None)
         docstore = api_utils.get_tree_collection_store(request)
         try:
-            collection_obj = {}  #TODO TODO TODO: remove this!
             r = docstore.update_existing_collection(owner_id, 
                                                     collection_id,
                                                     collection_obj, 
