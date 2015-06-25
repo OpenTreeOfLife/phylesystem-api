@@ -584,7 +584,13 @@ def v1():
                         "error": 1,
                         "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s" % (treebase_id, e.message)
                     }))
-                new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+                try:
+                    new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+                except Exception as e:
+                    raise HTTP(500, json.dumps({
+                        "error": 1,
+                        "description": "Unexpected error parsing the file obtained from TreeBASE. Please report this bug to the Open Tree of Life developers."
+                    }))
             # elif importing_from_nexml_fetch:
             #     if not (nexml_fetch_url.startswith('http://') or nexml_fetch_url.startswith('https://')):
             #         raise HTTP(400, json.dumps({
