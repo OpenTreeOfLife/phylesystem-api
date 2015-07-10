@@ -613,7 +613,7 @@ def v1():
             nexml = new_study_nexson['nexml']
 
             # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
-            if importing_from_treebase_id or cc0_agreement:
+            if cc0_agreement:
                 nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
             elif using_existing_license:
                 existing_license = kwargs.get('alternate_license', '')
