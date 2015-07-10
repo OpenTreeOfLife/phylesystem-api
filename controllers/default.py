@@ -541,13 +541,9 @@ def v1():
             # if a URL or something other than a valid DOI was entered, don't submit it to crossref API
             publication_doi_for_crossref = __make_valid_DOI(publication_doi) or None
             publication_ref = kwargs.get('publication_reference', '')
-            # is the submitter explicity applying the CC0 waiver to a new study
-            # (i.e., this study is not currently in an online repository)?
-            if import_from_location == 'IMPORT_FROM_UPLOAD':
-                cc0_agreement = (kwargs.get('chosen_license', '') == 'apply-new-CC0-waiver' and
-                                 kwargs.get('cc0_agreement', '') == 'true')
-            else:
-                cc0_agreement = False
+            # is the submitter explicity applying the CC0 waiver to a new study?
+            cc0_agreement = (kwargs.get('chosen_license', '') == 'apply-new-CC0-waiver' and
+                             kwargs.get('cc0_agreement', '') == 'true')
             # look for the chosen import method, e.g,
             # 'import-method-PUBLICATION_DOI' or 'import-method-MANUAL_ENTRY'
             import_method = kwargs.get('import_method', '')
