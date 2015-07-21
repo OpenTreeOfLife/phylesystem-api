@@ -236,11 +236,17 @@ def collections():
     # N.B. other request methods don't really matter for these functions!
     # extract and validate the intended API call
     assert request.args[0].lower() == 'collections'
-    assert len(request.args) > 1
+    if len(request.args) < 2:
+        raise HTTP(404, T('No method specified! Try collections/find_collections, find_trees, or properties'))
     api_call = request.args[1]   # ignore anything later in the URL
     if api_call == 'find_collections':
         # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
+        # For now, let's try using the GitHub APIs for these search functions
+
         raise HTTP(200, T("Now we'd list all tree collections matching the criteria provided!"))
+    if api_call == 'find_trees':
+        # TODO: proxy to oti? see above, and also controllers/studies.py > find_trees()
+        raise HTTP(200, T("Now we'd list all collections holding trees that match the criteria provided!"))
     elif api_call == 'collection_list':
         response.view = 'generic.json'
         docstore = api_utils.get_tree_collection_store(request)
@@ -281,7 +287,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
     return json_obj
 
 def collection(*args, **kwargs):
-    """Handle an incoming URL targeting /v2/collection/{ID}
+    """Handle an incoming URL targeting /v2/collection/{COLLECTION_ID}
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
     _LOG = api_utils.get_logger(request, 'ot_api.collection')
@@ -360,7 +366,7 @@ def collection(*args, **kwargs):
         parent_sha = kwargs.get('starting_commit_SHA', None)
         _LOG.debug('parent_sha = {}'.format(parent_sha))
         # return the correct nexson of study_id, using the specified view
-        collections = api_utils.get_tree_collection_store(request)  # TODO
+        collections = api_utils.get_tree_collection_store(request)
         try:
             r = collections.return_doc(collection_id, commit_sha=parent_sha, return_WIP_map=True)
         except:
@@ -385,10 +391,17 @@ def collection(*args, **kwargs):
         base_url = api_utils.get_collections_api_base_url(request)
         collection_json['url'] = '{b}/collection/{i}'.format(b=base_url,
                                                             i=collection_id)
+        try:
+            external_url = collections.get_public_url(collection_id)
+        except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.exception('collection {} not found in external_url'.format(collection))
+            external_url = 'NOT FOUND'
         result = {'sha': head_sha,
                  'data': collection_json,
                  'branch2sha': wip_map,
                  'commentHTML': comment_html,
+                 'external_url': external_url,
                  }
         if version_history:
             result['versionHistory'] = version_history
