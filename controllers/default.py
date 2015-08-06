@@ -241,9 +241,11 @@ def collections():
     api_call = request.args[1]   # ignore anything later in the URL
     if api_call == 'find_collections':
         # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
-        # For now, let's try using the GitHub APIs for these search functions
-
-        raise HTTP(200, T("Now we'd list all tree collections matching the criteria provided!"))
+        # For now, let's just return all collections (complete JSON)
+        response.view = 'generic.json'
+        docstore = api_utils.get_tree_collection_store(request)
+        docs = [d for d in docstore.iter_doc_objs()]
+        return json.dumps(docs)
     if api_call == 'find_trees':
         # TODO: proxy to oti? see above, and also controllers/studies.py > find_trees()
         raise HTTP(200, T("Now we'd list all collections holding trees that match the criteria provided!"))
