@@ -244,8 +244,13 @@ def collections(*args, **kwargs):
         # For now, let's just return all collections (complete JSON)
         response.view = 'generic.json'
         docstore = api_utils.get_tree_collection_store(request)
-        docs = [d for d in docstore.iter_doc_objs()]
-        return json.dumps(docs)
+        # Convert these to more closely resemble the output of find_all_studies
+        collection_list = []
+        for id, props in docstore.iter_doc_objs():
+            props.update({'id': id})
+            #TODO: reckon and add 'lastModified' property, based on commit history?
+            collection_list.append(props)
+        return json.dumps(collection_list)
     if api_call == 'find_trees':
         # TODO: proxy to oti? see above, and also controllers/studies.py > find_trees()
         raise HTTP(200, T("Now we'd list all collections holding trees that match the criteria provided!"))
