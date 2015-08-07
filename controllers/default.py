@@ -219,7 +219,7 @@ def push_failure():
     return json.dumps(blob)
 
 
-def collections():
+def collections(*args, **kwargs):
     """Handle an incoming URL targeting /v2/collections/
     This includes:
         /v2/collections/find_collections
