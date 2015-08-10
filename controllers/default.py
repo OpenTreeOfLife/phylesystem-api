@@ -247,8 +247,17 @@ def collections(*args, **kwargs):
         # Convert these to more closely resemble the output of find_all_studies
         collection_list = []
         for id, props in docstore.iter_doc_objs():
-            props.update({'id': id})
-            #TODO: reckon and add 'lastModified' property, based on commit history?
+            # reckon and add 'lastModified' property, based on commit history?
+            latest_commit = docstore.get_version_history_for_doc_id(id)[0]
+            props.update({
+                'id': id,
+                'lastModified': {
+                        'author_name': latest_commit.get('author_name'),
+                        'relative_date': latest_commit.get('relative_date'),
+                        'display_date': latest_commit.get('date'),
+                        'ISO_date': latest_commit.get('date_ISO_8601')
+                        }
+                })
             collection_list.append(props)
         return json.dumps(collection_list)
     if api_call == 'find_trees':
