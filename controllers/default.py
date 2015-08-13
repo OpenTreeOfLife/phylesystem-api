@@ -234,7 +234,7 @@ def _fetch_shard_name(study_id):
             return shard_name
     except:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.debug('_fetch_shard_name failed for study {}'.format(study_ID))
+            _LOG.debug('_fetch_shard_name failed for study {}'.format(study_id))
             return None
 
 def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
