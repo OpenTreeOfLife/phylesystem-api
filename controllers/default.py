@@ -227,15 +227,15 @@ _route_tag2func = {'index':index,
                    #TODO: 'push': j
                   }
 
-def _fetch_shard_name(study_ID):
+def _fetch_shard_name(study_id):
     phylesystem = api_utils.get_phylesystem(request)
-    for shard in phylesystem._shards:
-        if study_ID in shard.get_study_ids():
-            return shard.name
-    # this should have discovered a matching shard!
-    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    _LOG.debug('_fetch_shard_name failed for study {}'.format(study_ID))
-    return None 
+    try:
+            shard_name, path_frag = phylesystem.get_repo_and_path_fragment(study_id)
+            return shard_name
+    except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.debug('_fetch_shard_name failed for study {}'.format(study_ID))
+            return None
 
 def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
     # Use the oti (docstore index) service to see if there are other studies in
