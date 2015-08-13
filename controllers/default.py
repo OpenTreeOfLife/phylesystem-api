@@ -227,6 +227,16 @@ _route_tag2func = {'index':index,
                    #TODO: 'push': j
                   }
 
+def _fetch_shard_name(study_ID):
+    phylesystem = api_utils.get_phylesystem(request)
+    for shard in phylesystem._shards:
+        if study_ID in shard.get_study_ids():
+            return shard.name
+    # this should have discovered a matching shard!
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    _LOG.debug('_fetch_shard_name failed for study {}'.format(study_ID))
+    return None 
+
 def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
     # Use the oti (docstore index) service to see if there are other studies in
     # the collection with the same DOI; return the IDs of any duplicate studies
@@ -482,6 +492,12 @@ def v1():
                 _LOG.exception('call to OTI check for duplicate DOIs failed')
                 duplicate_study_ids = None
 
+            try:
+                shard_name = _fetch_shard_name(resource_id)
+            except:
+                _LOG.exception('check for shard name failed')
+                shard_name = None
+
             result = {'sha': head_sha,
                      'data': result_data,
                      'branch2sha': wip_map,
@@ -489,7 +505,8 @@ def v1():
                      }
             if duplicate_study_ids is not None:
                 result['duplicateStudyIDs'] = duplicate_study_ids
-
+            if shard_name:
+                result['shardName'] = shard_name
             if version_history:
                 result['versionHistory'] = version_history
             return result
