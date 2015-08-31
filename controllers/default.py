@@ -391,8 +391,15 @@ def collection(*args, **kwargs):
             _LOG.exception('{} failed'.format(request.env.request_method))
             raise HTTP(404, json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
 
-    _LOG = api_utils.get_logger(request, 'ot_api.default.collection')
-
+    # some request types imply git commits; gather any user-provided commit message
+    try:
+        commit_msg = kwargs.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+        
     if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
         # support JSONP requests from another domain
         response.view = 'generic.jsonp'
@@ -528,13 +535,6 @@ def collection(*args, **kwargs):
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
-        try:
-            commit_msg = kwargs.get('commit_msg','')
-            if commit_msg.strip() == '':
-                # git rejects empty commit messages
-                commit_msg = None
-        except:
-            commit_msg = None
         try:
             x = docstore.delete_collection(collection_id, 
                                            auth_info, 
