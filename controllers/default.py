@@ -368,6 +368,28 @@ def collection(*args, **kwargs):
     if (collection_obj is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.env.request_method) }))
 
+    auth_info = api_utils.authenticate(**kwargs)
+    if owner_id is None:
+        # set this explicitly to the logged-in userid (make sure the user is allowed!)
+        owner_id = auth_info.get('login', None)
+        if owner_id is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
+    if collection_id is None:
+        # try to extract a usable collection ID from the JSON payload (confirm owner_id against above)
+        url = collection_obj.get('url', None)
+        if url is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": "no collection URL provided in query string or JSON payload"}))
+        try:
+            collection_id = url.split('/collection/')[1]
+        except:
+            _LOG.exception('{} failed'.format(request.env.request_method))
+            raise HTTP(404, json.dumps({"error": 1, "description": "invalid URL, no collection id found: {}".format(url)}))
+        try:
+            assert collection_id.split('/')[0] == owner_id
+        except:
+            _LOG.exception('{} failed'.format(request.env.request_method))
+            raise HTTP(404, json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
+
     _LOG = api_utils.get_logger(request, 'ot_api.default.collection')
 
     if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
@@ -427,7 +449,6 @@ def collection(*args, **kwargs):
         # update an existing collection with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.PUT')
         # submit new json for this id, and read the results
-        auth_info = api_utils.authenticate(**kwargs)
         parent_sha = kwargs.get('starting_commit_SHA', None)
         merged_sha = None  #TODO: kwargs.get('???', None)
         docstore = api_utils.get_tree_collection_store(request)
@@ -478,7 +499,6 @@ def collection(*args, **kwargs):
         # Create a new collection with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
         #_LOG.debug('>>> POST COLLECTION kwargs: {}'.format(kwargs))
-        auth_info = api_utils.authenticate(**kwargs)
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
         try:
@@ -500,7 +520,6 @@ def collection(*args, **kwargs):
     if request.env.request_method == 'DELETE':
         # remove this collection from the docstore
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
-        auth_info = api_utils.authenticate(**kwargs)
         docstore = api_utils.get_tree_collection_store(request)
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
