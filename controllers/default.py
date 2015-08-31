@@ -368,9 +368,10 @@ def collection(*args, **kwargs):
     if (collection_obj is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.env.request_method) }))
 
-    auth_info = api_utils.authenticate(**kwargs)
+    auth_info = None
     if owner_id is None:
         # set this explicitly to the logged-in userid (make sure the user is allowed!)
+        auth_info = api_utils.authenticate(**kwargs)
         owner_id = auth_info.get('login', None)
         if owner_id is None:
             raise HTTP(400, json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
@@ -448,6 +449,7 @@ def collection(*args, **kwargs):
     if request.env.request_method == 'PUT':
         # update an existing collection with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.PUT')
+        auth_info = auth_info or api_utils.authenticate(**kwargs)
         # submit new json for this id, and read the results
         parent_sha = kwargs.get('starting_commit_SHA', None)
         merged_sha = None  #TODO: kwargs.get('???', None)
@@ -498,6 +500,7 @@ def collection(*args, **kwargs):
     if request.env.request_method == 'POST':
         # Create a new collection with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
+        auth_info = auth_info or api_utils.authenticate(**kwargs)
         #_LOG.debug('>>> POST COLLECTION kwargs: {}'.format(kwargs))
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
@@ -520,6 +523,7 @@ def collection(*args, **kwargs):
     if request.env.request_method == 'DELETE':
         # remove this collection from the docstore
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
+        auth_info = auth_info or api_utils.authenticate(**kwargs)
         docstore = api_utils.get_tree_collection_store(request)
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
