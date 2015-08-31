@@ -467,7 +467,8 @@ def collection(*args, **kwargs):
                                                     collection_obj, 
                                                     auth_info,
                                                     parent_sha,
-                                                    merged_sha)
+                                                    merged_sha, 
+                                                    commit_msg=commit_msg)
             commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
@@ -515,7 +516,8 @@ def collection(*args, **kwargs):
             r = docstore.add_new_collection(owner_id, 
                                             collection_obj, 
                                             auth_info,
-                                            collection_id)
+                                            collection_id, 
+                                            commit_msg=commit_msg)
             new_collection_id, commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
