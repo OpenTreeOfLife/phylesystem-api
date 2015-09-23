@@ -20,7 +20,7 @@ def debug(s):
     if _VERBOSITY_LEVEL > 0:
         sys.stderr.write('testing-harness: {s}\n'.format(s=s))
 
-def config(section=None, param=None):
+def config(section=None, param=None, default=None):
     '''
     Returns the config object if `section` and `param` are None, or the 
         value for the requested parameter.
@@ -39,8 +39,11 @@ def config(section=None, param=None):
         v = _CONFIG.get(section, param)
         return v
     except:
-        sys.stderr.write('Config file "%s" does not contain option "%s in section "%s"\n' % (_CONFIG_FN, param, section))
-        return None
+        if default != None:
+            return default
+        else:
+            sys.stderr.write('Config file "%s" does not contain option "%s" in section "%s"\n' % (_CONFIG_FN, param, section))
+            return None
 
 def summarize_json_response(resp):
     sys.stderr.write('Sent request to %s\n' %(resp.url))

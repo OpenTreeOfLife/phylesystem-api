@@ -17,6 +17,8 @@ if isinstance(c, list):
 c = c + 1
 d['nexml']['^ot:testCount'] = c
 
+if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+
 starting_commit_SHA = r[1]['sha']
 data = { 'nexson' : d,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),

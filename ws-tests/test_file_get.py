@@ -6,6 +6,7 @@ if '/api.opentree' in DOMAIN:
     study = 'ot_134'
 else:
     study = 'pg_90'
+# '/file' means get list of supplementary files
 SUBMIT_URI = '{d}/v1/study/{s}/file'.format(d=DOMAIN, s=study)
 r = test_http_json_method(SUBMIT_URI,
                           'GET',

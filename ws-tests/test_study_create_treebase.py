@@ -6,6 +6,8 @@ import json
 import sys
 import os
 
+if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/'
 # refresh a timestamp so that the test generates a commit

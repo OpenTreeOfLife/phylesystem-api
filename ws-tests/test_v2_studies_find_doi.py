@@ -6,7 +6,8 @@ CONTROLLER = DOMAIN + '/studies'
 SUBMIT_URI = CONTROLLER + '/find_studies'
 p = {'verbose': True,
      'property': 'ot:studyPublication',
-     'value': '10.3732/ajb.94.11.1860',}
+     'value': '10.1600/036364408785679851',}
+# DOI was formerly 10.3732/ajb.94.11.1860
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
                           data=p,

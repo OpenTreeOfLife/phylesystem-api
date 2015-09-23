@@ -24,6 +24,8 @@ else:
     m.append(el)
 el['$'] = datetime.datetime.utcnow().isoformat()
 
+if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'author_name': "Some Author",

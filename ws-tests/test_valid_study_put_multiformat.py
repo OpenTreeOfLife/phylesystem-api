@@ -28,6 +28,8 @@ else:
 el['$'] = datetime.datetime.utcnow().isoformat()
 n = convert_nexson_format(n, '1.2')
 
+if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,

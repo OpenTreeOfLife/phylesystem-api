@@ -37,6 +37,8 @@ data = { 'nexson' : acurr_obj,
          'starting_commit_SHA': starting_commit_SHA,
 }
 
+if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+
 r2 = test_http_json_method(SUBMIT_URI,
                          'PUT',
                          data=data,

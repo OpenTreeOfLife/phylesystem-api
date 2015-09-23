@@ -13,6 +13,8 @@ n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
 m = n['nexml']['^bogus_timestamp'] = datetime.datetime.utcnow().isoformat()
 
+if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'cc0_agreement' : 'true',

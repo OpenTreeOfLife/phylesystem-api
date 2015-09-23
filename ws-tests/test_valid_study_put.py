@@ -21,6 +21,8 @@ n = resp['data']
 # refresh a timestamp so that the test generates a commit
 m = n['nexml']['^bogus_timestamp'] = datetime.datetime.utcnow().isoformat()
 
+if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+
 #from peyotl import write_as_json
 #write_as_json(n, '9-0.0.0.json')
 data = { 'nexson' : n,
