@@ -33,6 +33,7 @@ def config(section=None, param=None, default=None):
         _CONFIG_FN = os.path.abspath('test.conf')
         _CONFIG = SafeConfigParser()
         _CONFIG.read(_CONFIG_FN)
+        parse_argv_as_options(_CONFIG)
     if section is None and param is None:
         return _CONFIG
     try:
@@ -44,6 +45,20 @@ def config(section=None, param=None, default=None):
         else:
             sys.stderr.write('Config file "%s" does not contain option "%s" in section "%s"\n' % (_CONFIG_FN, param, section))
             return None
+
+# Obtain command line option assignments given in the form section:parameter=option
+
+def parse_argv_as_options(_CONFIG):
+    for arg in sys.argv[1:]:
+        equatands = arg.split('=')
+        if len(equatands) == 2:
+            sec_param = equatands[0].split(':')
+            if len(sec_param) == 2:
+                _CONFIG.set(sec_param[0], sec_param[1], equatands[1])
+            else:
+                sys.stderr.write('Command line argument %s not in form section:parameter=value' % (arg))
+        else:
+            sys.stderr.write('Command line argument %s not in form section:parameter=value' % (arg))
 
 def summarize_json_response(resp):
     sys.stderr.write('Sent request to %s\n' %(resp.url))
