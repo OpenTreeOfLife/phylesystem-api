@@ -6,7 +6,7 @@ CONTROLLER = DOMAIN + '/studies'
 SUBMIT_URI = CONTROLLER + '/find_trees'
 p = {'verbose': True,
      'property': 'ot:ottId',
-     'value': '10'}
+     'value': '770315'}
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
                           data=p,
