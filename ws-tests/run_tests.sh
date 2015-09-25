@@ -13,12 +13,12 @@ do
     then
         echo test $fn skipped
     else
-        if python "$fn" > ".out_${fn}.txt"
+        if python "$fn" $* > ".out_${fn}.txt"
         then
             num_p=$(expr 1 + $num_p)
-            echo -n "."
+            /bin/echo -n "."
         else
-            echo -n "F"
+            /bin/echo -n "F"
             failed="$failed \n $fn"
         fi
         num_t=$(expr 1 + $num_t)
