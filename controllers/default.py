@@ -11,7 +11,7 @@ from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.collections import OWNER_ID_PATTERN, \
                                COLLECTION_ID_PATTERN
-from peyotl.collection_validation import validate_collection
+from peyotl.collections.validation import validate_collection
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
                                  extract_tree, \
