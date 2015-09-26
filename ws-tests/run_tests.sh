@@ -25,7 +25,8 @@ do
     fi
 done
 echo
-echo Passed $num_p out of $num_t tests
+echo "By default, an 's' is written for every test skipped." 
+echo "Passed or skipped $num_p out of $num_t tests."
 if test $num_t -ne $num_p
 then
     echo "Failures: $failed"

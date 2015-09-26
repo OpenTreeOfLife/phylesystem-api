@@ -196,3 +196,16 @@ def raise_for_status(resp):
                 sys.stderr.write('resp.text = {t}\n'.format(t=resp.text))
         raise e
 
+
+
+def api_is_readonly():
+    return config('host', 'allowwrite', 'true') == 'false'
+
+def exit_if_api_is_readonly(fn):
+    if not api_is_readonly():
+        return
+    if _VERBOSITY_LEVEL > 0:
+        debug('Running in read-only mode. Skipped {}'.format(fn))
+    else:
+        sys.stderr.write('s')
+    sys.exit(0)

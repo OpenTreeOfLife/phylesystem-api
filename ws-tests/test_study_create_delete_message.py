@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config
+from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 import datetime
 import codecs
 import json
@@ -13,7 +13,7 @@ n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
 m = n['nexml']['^bogus_timestamp'] = datetime.datetime.utcnow().isoformat()
 
-if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+exit_if_api_is_readonly(__file__)
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),

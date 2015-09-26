@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys, os
-from opentreetesting import test_http_json_method, config
+from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 DOMAIN = config('host', 'apihost')
 study = '10'
 SUBMIT_URI = DOMAIN + '/v1/study/' + study
@@ -17,7 +17,7 @@ if isinstance(c, list):
 c = c + 1
 d['nexml']['^ot:testCount'] = c
 
-if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+exit_if_api_is_readonly(__file__)
 
 starting_commit_SHA = r[1]['sha']
 data = { 'nexson' : d,

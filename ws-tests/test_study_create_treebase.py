@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config
+from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 import datetime
 import codecs
 import json
 import sys
 import os
 
-if config('host', 'allowwrite', 'true') == 'false': sys.exit(0)
+exit_if_api_is_readonly(__file__)
 
 DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/v1/study/'
