@@ -30,7 +30,7 @@ The first time you run, you'll need to:
     $ pip install -r requirements.txt
     $ python setup.py develop
 
-subsequently changing to the <code>peyotl</code> directory and running
+Subsequently changing to the <code>peyotl</code> directory and running
 
     $ git pull origin master
 
