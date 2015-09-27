@@ -338,7 +338,7 @@ def collection(*args, **kwargs):
             _raise_HTTP_from_msg(msg)
         if len(errors) > 0:
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            msg = 'JSON payload failed validation with {} errors'.format(len(errors))
+            msg = 'JSON payload failed validation with {nerrors} errors:\n{errors}'.format(nerrors=len(errors), errors='\n  '.join(errors))
             _LOG.exception(msg)
             _raise_HTTP_from_msg(msg)
         return collection_obj, errors, collection_adaptor
