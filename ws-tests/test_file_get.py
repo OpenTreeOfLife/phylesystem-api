@@ -7,7 +7,7 @@ if '/api.opentree' in DOMAIN:
 #elif '/devapi.opentree' in DOMAIN:
 #    study = 'tt_23'
 else:
-    study = 'pg_909124'
+    study = 'pg_90'
 # '/file' means get list of supplementary files
 SUBMIT_URI = '{d}/v1/study/{s}/file'.format(d=DOMAIN, s=study)
 r = test_http_json_method(SUBMIT_URI,
