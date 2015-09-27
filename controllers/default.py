@@ -256,7 +256,7 @@ def collections(*args, **kwargs):
                         'relative_date': latest_commit.get('relative_date'),
                         'display_date': latest_commit.get('date'),
                         'ISO_date': latest_commit.get('date_ISO_8601'),
-                        'sha': docstore.get_blob_sha_for_doc_id(id, 'HEAD')
+                        'sha': latest_commit.get('id')  # this is the commit hash
                         }
                 })
             collection_list.append(props)
