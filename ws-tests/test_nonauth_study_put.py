@@ -10,7 +10,7 @@ import os
 study_id = 12
 
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 fn = 'data/{s}.json'.format(s=study_id)
 inpf = codecs.open(fn, 'rU', encoding='utf-8')
 n = json.load(inpf)

@@ -2,7 +2,7 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-CONTROLLER = DOMAIN + '/studies'
+CONTROLLER = DOMAIN + '/phylesystem/studies'
 SUBMIT_URI = CONTROLLER + '/find_studies'
 p = {'verbose': True,
      'property': 'ot:studyPublication',
