@@ -109,13 +109,13 @@ def get_obj_from_http(url,
         }
     if data:
         resp = requests.request(verb,
-                                url,
+                                translate(url),
                                 headers=headers,
                                 data=json.dumps(data),
                                 allow_redirects=True)
     else:
         resp = requests.request(verb,
-                                url,
+                                translate(url),
                                 headers=headers,
                                 allow_redirects=True)
     debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
@@ -147,13 +147,13 @@ def test_http_json_method(url,
         }
     if data:
         resp = requests.request(verb,
-                                url,
+                                translate(url),
                                 headers=headers,
                                 data=json.dumps(data),
                                 allow_redirects=True)
     else:
         resp = requests.request(verb,
-                                url,
+                                translate(url),
                                 headers=headers,
                                 allow_redirects=True)
         debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
@@ -209,3 +209,26 @@ def exit_if_api_is_readonly(fn):
     else:
         sys.stderr.write('s')
     sys.exit(0)
+
+
+# Mimic the behavior of apache so that services can be tested without
+# having apache running.  See opentree/deploy/setup/opentree-shared.conf
+
+translations = [('/v2/study/', '/phylesystem/v1/study/'),
+                ('/cached/', '/phylesystem/default/cached/'),
+                # treemachine
+                ('/v2/tree_of_life/', '/db/data/ext/tree_of_life/graphdb/'),
+                ('/v2/graph/', '/db/data/ext/graph/graphdb/'),
+                # taxomachine
+                ('/v2/tnrs/', '/db/data/ext/tnrs_v2/graphdb/'),
+                ('/v2/taxonomy/', '/db/data/ext/taxonomy/graphdb/'),
+                # oti
+                ('/v2/studies/', '/db/data/ext/studies/graphdb/'),
+]
+
+def translate(s):
+    if config('host', 'translate', 'false') == 'true':
+        for (src, dst) in translations:
+            if s.startswith(src):
+                return dst + s[len(src):]
+    return s
