@@ -30,7 +30,7 @@ r2 = test_http_json_method(SUBMIT_URI,
                            expected_status=200,
                            return_bool_data=True)
 
-PUSH_URI = DOMAIN + '/push/v1/' + study
+PUSH_URI = DOMAIN + '/phylesystem/push/v1/' + study
 r3 = test_http_json_method(PUSH_URI,
                            'PUT',
                            expected_status=200,
