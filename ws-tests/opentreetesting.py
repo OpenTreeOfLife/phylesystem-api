@@ -54,6 +54,8 @@ def parse_argv_as_options(_CONFIG):
         if len(equatands) == 2:
             sec_param = equatands[0].split(':')
             if len(sec_param) == 2:
+                if not _CONFIG.has_section(sec_param[0]):
+                    _CONFIG.add_section(sec_param[0])
                 _CONFIG.set(sec_param[0], sec_param[1], equatands[1])
             else:
                 sys.stderr.write('Command line argument %s not in form section:parameter=value' % (arg))
