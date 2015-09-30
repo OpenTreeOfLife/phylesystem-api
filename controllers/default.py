@@ -77,9 +77,11 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     _LOG.debug('in __deferred_push_to_gh_call')
     if call_http_json is not None:
-        url = api_utils.compose_push_to_github_url(request, resource_id)
+        # Pass the resource_id in data, so that two-part collection IDs will be recognized
+        # (else the second part will trigger an unwanted JSONP response from the push)
+        url = api_utils.compose_push_to_github_url(request)
         auth_token = copy.copy(kwargs.get('auth_token'))
-        data = {'doc_type': doc_type}
+        data = {'doc_type': doc_type, 'resource_id': resource_id}
         if auth_token is not None:
             data['auth_token'] = auth_token
         _LOG.debug('__deferred_push_to_gh_call({u}, {d})'.format(u=url, d=str(data)))
