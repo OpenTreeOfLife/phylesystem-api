@@ -32,7 +32,7 @@ import copy
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
     from open_tree_tasks import call_http_json
-    _GLOG.debug('call_http_json imported')
+    #_GLOG.debug('call_http_json imported')
 except:
     call_http_json = None
     _GLOG.debug('call_http_json was not imported from open_tree_tasks')
@@ -75,7 +75,6 @@ def _raise_HTTP_from_msg(msg):
 
 def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    _LOG.debug('in __deferred_push_to_gh_call')
     if call_http_json is not None:
         # Pass the resource_id in data, so that two-part collection IDs will be recognized
         # (else the second part will trigger an unwanted JSONP response from the push)
@@ -516,7 +515,6 @@ def collection(*args, **kwargs):
         # Create a new collection with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
         auth_info = auth_info or api_utils.authenticate(**kwargs)
-        #_LOG.debug('>>> POST COLLECTION kwargs: {}'.format(kwargs))
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_tree_collection_store(request)
         try:
@@ -624,9 +622,9 @@ def v1():
 
     phylesystem = api_utils.get_phylesystem(request)
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_phylesystem_config(request)
-    _LOG.debug('Max file size set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
+    #_LOG.debug('Max file size set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
     repo_nexml2json = phylesystem.repo_nexml2json
-    _LOG.debug("phylesystem created with repo_nexml2json={}".format(repo_nexml2json))
+    #_LOG.debug("phylesystem created with repo_nexml2json={}".format(repo_nexml2json))
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
         if 'output_nexml2json' not in kwargs:
@@ -810,15 +808,11 @@ def v1():
             result_data = study_nexson
         else:
             try:
-                _LOG.debug('a, study_nexson={}'.format(study_nexson));
                 serialize = not out_schema.is_json()
-                _LOG.debug('b, serialize: {}'.format(serialize));
                 src_schema = PhyloSchema('nexson', version=repo_nexml2json)
-                _LOG.debug('c, src_schema: {}'.format(src_schema));
                 result_data = out_schema.convert(study_nexson,
                                                  serialize=serialize,
                                                  src_schema=src_schema)
-                _LOG.debug('d, result_data: {}'.format(result_data));
             except:
                 msg = "Exception in coercing to the required NexSON version for validation. "
                 _LOG.exception(msg)
@@ -859,8 +853,6 @@ def v1():
         if delegate:
             return delegate(**kwargs)
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.POST')
-        _LOG.debug('>>> POST NEXSON kwargs: {}'.format(kwargs))
-        #_LOG.debug('>>> POST NEXSON **kwargs: {}'.format(**kwargs))
         # support JSONP request from another domain
         if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
             response.view = 'generic.jsonp'
