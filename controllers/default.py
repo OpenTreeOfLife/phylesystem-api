@@ -79,7 +79,7 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
     if call_http_json is not None:
         # Pass the resource_id in data, so that two-part collection IDs will be recognized
         # (else the second part will trigger an unwanted JSONP response from the push)
-        url = api_utils.compose_push_to_github_url(request)
+        url = api_utils.compose_push_to_github_url(request, resource_id=None)
         auth_token = copy.copy(kwargs.get('auth_token'))
         data = {'doc_type': doc_type, 'resource_id': resource_id}
         if auth_token is not None:
