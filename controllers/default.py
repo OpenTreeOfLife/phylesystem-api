@@ -478,6 +478,10 @@ def collection(*args, **kwargs):
         except:
             raise HTTP(400, traceback.format_exc())
 
+        # check for 'merge needed'?
+        mn = commit_return.get('merge_needed')
+        if (mn is not None) and (not mn):
+            __deferred_push_to_gh_call(request, collection_id, doc_type='collection', **kwargs)
         return commit_return
         #
         #        parent_sha = kwargs.get('starting_commit_SHA')
