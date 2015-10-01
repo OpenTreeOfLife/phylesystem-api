@@ -4,8 +4,8 @@ from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
 if '/api.opentree' in DOMAIN:
     study = 'ot_134'
-elif '/devapi.opentree' in DOMAIN:
-    study = 'tt_23'
+#elif '/devapi.opentree' in DOMAIN:
+#    study = 'tt_23'
 else:
     study = 'pg_90'
 # '/file' means get list of supplementary files
