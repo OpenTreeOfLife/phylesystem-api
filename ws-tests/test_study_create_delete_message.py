@@ -7,7 +7,7 @@ import sys
 import os
 
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/'
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/'
 inpf = codecs.open('data/10.json', 'rU', encoding='utf-8')
 n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
@@ -33,7 +33,7 @@ c_id = resp['resource_id']
 print c_id
 
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/%s' % c_id
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/%s' % c_id
 data = {
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,

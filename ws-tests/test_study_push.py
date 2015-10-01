@@ -3,7 +3,7 @@ import sys, os
 from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 DOMAIN = config('host', 'apihost')
 study = '10'
-SUBMIT_URI = DOMAIN + '/v1/study/' + study
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/' + study
 data = {'output_nexml2json':'1.2'}
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
@@ -30,7 +30,7 @@ r2 = test_http_json_method(SUBMIT_URI,
                            expected_status=200,
                            return_bool_data=True)
 
-PUSH_URI = DOMAIN + '/push/v1/' + study
+PUSH_URI = DOMAIN + '/phylesystem/push/v1/' + study
 r3 = test_http_json_method(PUSH_URI,
                            'PUT',
                            expected_status=200,
