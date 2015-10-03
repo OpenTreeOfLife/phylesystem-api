@@ -18,6 +18,11 @@ Run all of the tests using:
         passing or failing the tests.
   * run_tests.sh runs all of the test_*.py files and summarizes the number
         of tests and failures.
+  * to suppress tests that have side effects (PUT/POST), set configuration
+    parameter allowwrite in the \[host\] section to false
+  * configuration settings may be made from the command line; these
+    override settings from test.conf.  They are passed as command line
+    arguments of the form section:param=value, e.g. host:allowwrite=false
 
 If VERBOSE_TESTING is in the env when you execute a test, you'll get more
 verbose output.

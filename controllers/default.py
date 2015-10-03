@@ -578,6 +578,16 @@ _route_tag2func = {'index':index,
                    #TODO: 'following': following,
                   }
 
+def _fetch_shard_name(study_id):
+    phylesystem = api_utils.get_phylesystem(request)
+    try:
+            shard_name, path_frag = phylesystem.get_repo_and_path_fragment(study_id)
+            return shard_name
+    except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.debug('_fetch_shard_name failed for study {}'.format(study_id))
+            return None
+
 def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
     # Use the oti (docstore index) service to see if there are other studies in
     # the collection with the same DOI; return the IDs of any duplicate studies
@@ -833,6 +843,12 @@ def v1():
                 _LOG.exception('call to OTI check for duplicate DOIs failed')
                 duplicate_study_ids = None
 
+            try:
+                shard_name = _fetch_shard_name(resource_id)
+            except:
+                _LOG.exception('check for shard name failed')
+                shard_name = None
+
             result = {'sha': head_sha,
                      'data': result_data,
                      'branch2sha': wip_map,
@@ -840,7 +856,8 @@ def v1():
                      }
             if duplicate_study_ids is not None:
                 result['duplicateStudyIDs'] = duplicate_study_ids
-
+            if shard_name:
+                result['shardName'] = shard_name
             if version_history:
                 result['versionHistory'] = version_history
             return result
@@ -892,13 +909,9 @@ def v1():
             # if a URL or something other than a valid DOI was entered, don't submit it to crossref API
             publication_doi_for_crossref = __make_valid_DOI(publication_doi) or None
             publication_ref = kwargs.get('publication_reference', '')
-            # is the submitter explicity applying the CC0 waiver to a new study
-            # (i.e., this study is not currently in an online repository)?
-            if import_from_location == 'IMPORT_FROM_UPLOAD':
-                cc0_agreement = (kwargs.get('chosen_license', '') == 'apply-new-CC0-waiver' and
-                                 kwargs.get('cc0_agreement', '') == 'true')
-            else:
-                cc0_agreement = False
+            # is the submitter explicity applying the CC0 waiver to a new study?
+            cc0_agreement = (kwargs.get('chosen_license', '') == 'apply-new-CC0-waiver' and
+                             kwargs.get('cc0_agreement', '') == 'true')
             # look for the chosen import method, e.g,
             # 'import-method-PUBLICATION_DOI' or 'import-method-MANUAL_ENTRY'
             import_method = kwargs.get('import_method', '')
@@ -935,7 +948,13 @@ def v1():
                         "error": 1,
                         "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s" % (treebase_id, e.message)
                     }))
-                new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+                try:
+                    new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+                except Exception as e:
+                    raise HTTP(500, json.dumps({
+                        "error": 1,
+                        "description": "Unexpected error parsing the file obtained from TreeBASE. Please report this bug to the Open Tree of Life developers."
+                    }))
             # elif importing_from_nexml_fetch:
             #     if not (nexml_fetch_url.startswith('http://') or nexml_fetch_url.startswith('https://')):
             #         raise HTTP(400, json.dumps({
@@ -958,7 +977,7 @@ def v1():
             nexml = new_study_nexson['nexml']
 
             # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
-            if importing_from_treebase_id or cc0_agreement:
+            if cc0_agreement:
                 nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
             elif using_existing_license:
                 existing_license = kwargs.get('alternate_license', '')

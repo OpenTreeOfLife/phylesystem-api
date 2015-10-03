@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config
+from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 import datetime
 import codecs
 import json
@@ -23,6 +23,8 @@ else:
     el = {'@property': 'bogus_timestamp', '@xsi:type': 'nex:LiteralMeta'}
     m.append(el)
 el['$'] = datetime.datetime.utcnow().isoformat()
+
+exit_if_api_is_readonly(__file__)
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),

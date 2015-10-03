@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config
+from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 import datetime
 import codecs
 import copy
@@ -36,6 +36,8 @@ data = { 'nexson' : acurr_obj,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,
 }
+
+exit_if_api_is_readonly(__file__)
 
 r2 = test_http_json_method(SUBMIT_URI,
                          'PUT',

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config
+from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 from peyotl import convert_nexson_format
 import datetime
 import codecs
@@ -27,6 +27,8 @@ else:
     m.append(el)
 el['$'] = datetime.datetime.utcnow().isoformat()
 n = convert_nexson_format(n, '1.2')
+
+exit_if_api_is_readonly(__file__)
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),

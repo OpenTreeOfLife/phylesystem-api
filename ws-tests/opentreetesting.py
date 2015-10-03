@@ -20,7 +20,7 @@ def debug(s):
     if _VERBOSITY_LEVEL > 0:
         sys.stderr.write('testing-harness: {s}\n'.format(s=s))
 
-def config(section=None, param=None):
+def config(section=None, param=None, default=None):
     '''
     Returns the config object if `section` and `param` are None, or the 
         value for the requested parameter.
@@ -33,14 +33,32 @@ def config(section=None, param=None):
         _CONFIG_FN = os.path.abspath('test.conf')
         _CONFIG = SafeConfigParser()
         _CONFIG.read(_CONFIG_FN)
+        parse_argv_as_options(_CONFIG)
     if section is None and param is None:
         return _CONFIG
     try:
         v = _CONFIG.get(section, param)
         return v
     except:
-        sys.stderr.write('Config file "%s" does not contain option "%s in section "%s"\n' % (_CONFIG_FN, param, section))
-        return None
+        if default != None:
+            return default
+        else:
+            sys.stderr.write('Config file "%s" does not contain option "%s" in section "%s"\n' % (_CONFIG_FN, param, section))
+            return None
+
+# Obtain command line option assignments given in the form section:parameter=option
+
+def parse_argv_as_options(_CONFIG):
+    for arg in sys.argv[1:]:
+        equatands = arg.split('=')
+        if len(equatands) == 2:
+            sec_param = equatands[0].split(':')
+            if len(sec_param) == 2:
+                _CONFIG.set(sec_param[0], sec_param[1], equatands[1])
+            else:
+                sys.stderr.write('Command line argument %s not in form section:parameter=value' % (arg))
+        else:
+            sys.stderr.write('Command line argument %s not in form section:parameter=value' % (arg))
 
 def summarize_json_response(resp):
     sys.stderr.write('Sent request to %s\n' %(resp.url))
@@ -178,3 +196,16 @@ def raise_for_status(resp):
                 sys.stderr.write('resp.text = {t}\n'.format(t=resp.text))
         raise e
 
+
+
+def api_is_readonly():
+    return config('host', 'allowwrite', 'true') == 'false'
+
+def exit_if_api_is_readonly(fn):
+    if not api_is_readonly():
+        return
+    if _VERBOSITY_LEVEL > 0:
+        debug('Running in read-only mode. Skipped {}'.format(fn))
+    else:
+        sys.stderr.write('s')
+    sys.exit(0)
