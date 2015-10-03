@@ -9,9 +9,9 @@ import os
 
 
 
-study_id = '99'
+study_id = 'pg_99'
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 #A full integration test, with GET, PUT, POST, MERGE and a merge conflict, 
 #test get and save sha
 data = {'output_nexml2json':'1.2'}
@@ -52,7 +52,7 @@ r2_sha=r2[1]['sha']
 
 #Now get the outcome of the Merge, so that a curator could look at it.
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 
 data = {
         'output_nexml2json':'1.2',
@@ -99,7 +99,7 @@ assert(len(rg1[1]['branch2sha'])>=2)
 # but not for other studies...
 alt_study_id='10'
 data = {'output_nexml2json':'1.2'}
-alt_SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=alt_study_id)
+alt_SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=alt_study_id)
 rg2 = test_http_json_method(alt_SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
 assert(rg2[0]==True)
 assert(len(rg2[1]['branch2sha'])==1)
@@ -150,7 +150,7 @@ r5_sha=r5[1]['sha']
 # sixth commit is the merge
 DOMAIN = config('host', 'apihost')
 starting_commit_SHA = r5_sha
-SUBMIT_URI = DOMAIN + '/merge/v1/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
+SUBMIT_URI = DOMAIN + '/phylesystem/merge/v1/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
 
 data = {
         'auth_token' :  os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
@@ -173,7 +173,7 @@ merged_sha = r6[1]['merged_sha']
         
 # add a 7th commit onto commit 6. This should NOT merge to master because we don't give it the secret arg.
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 starting_commit_SHA = r6[1]['sha']
 zc += 1
 zcurr_obj["^zcount"] = zc
@@ -196,7 +196,7 @@ assert(r7[1]['merge_needed']==True)
         
 # add a 7th commit onto commit 6. This should merge to master because we don't give it the secret arg.
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 starting_commit_SHA = r7[1]['sha']
 zc += 1
 zcurr_obj["^zcount"] = zc

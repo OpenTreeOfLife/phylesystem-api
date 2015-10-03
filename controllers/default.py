@@ -790,30 +790,34 @@ def v1():
                             break
                 return json.dumps(r)
             else:
-                matching = None
-                for m in m_list:
-                    if m['@id'] == subresource_id:
-                        matching = m
-                        break
-                if matching is None:
-                    raise HTTP(404, 'No file with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
-                u = None
-                files = m.get('data', {}).get('files', {}).get('file', [])
-                for f in files:
-                    if '@url' in f:
-                        u = f['@url']
-                        break
-                if u is None:
-                    raise HTTP(404, 'No @url found in the message with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
-                #TEMPORARY HACK TODO
-                u = u.replace('uploadid=', 'uploadId=')
-                #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
-                if u.startswith('/curator'):
-                    u = 'https://tree.opentreeoflife.org' + u
-                response.headers['Content-Type'] = 'text/plain'
-                fetched = requests.get(u)
-                fetched.raise_for_status()
-                return fetched.text
+                try:
+                    matching = None
+                    for m in m_list:
+                        if m['@id'] == subresource_id:
+                            matching = m
+                            break
+                    if matching is None:
+                        raise HTTP(404, 'No file with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
+                    u = None
+                    files = m.get('data', {}).get('files', {}).get('file', [])
+                    for f in files:
+                        if '@url' in f:
+                            u = f['@url']
+                            break
+                    if u is None:
+                        raise HTTP(404, 'No @url found in the message with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
+                    #TEMPORARY HACK TODO
+                    u = u.replace('uploadid=', 'uploadId=')
+                    #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
+                    if u.startswith('/curator'):
+                        u = 'https://tree.opentreeoflife.org' + u
+                    response.headers['Content-Type'] = 'text/plain'
+                    fetched = requests.get(u)
+                    fetched.raise_for_status()
+                    return fetched.text
+                except Exception as x:
+                    _LOG.exception('file_get failed')
+                    return HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
         elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:
