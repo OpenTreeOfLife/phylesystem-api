@@ -1,6 +1,7 @@
 from github import Github, BadCredentialsException
 from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
+from peyotl.collections import TreeCollectionStore
 from peyotl.utility import read_config as read_peyotl_config
 from peyotl.utility import get_config as get_peyotl_config
 from ConfigParser import SafeConfigParser
@@ -47,7 +48,7 @@ def get_phylesystem(request):
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
     from gitdata import GitData
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = read_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = read_phylesystem_config(request)
     peyotl_config, cfg_filename = read_peyotl_config()
     if 'phylesystem' not in peyotl_config.sections():
         peyotl_config.add_section('phylesystem')
@@ -74,12 +75,60 @@ def get_phylesystem(request):
                                mirror_info=mirror_info,
                                **a)
     _LOG = get_logger(request, 'ot_api')
-    _LOG.debug('repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
+    _LOG.debug('[[[[[[ repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     return _PHYLESYSTEM
 
+_TREE_COLLECTION_STORE = None
+def get_tree_collection_store(request):
+    global _TREE_COLLECTION_STORE
+    if _TREE_COLLECTION_STORE is not None:
+        return _TREE_COLLECTION_STORE
+    _LOG = get_logger(request, 'ot_api')
+    _LOG.debug("getting _TREE_COLLECTION_STORE...")
+    from gitdata import GitData  #TODO?
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_collections_config(request)
+    _LOG.debug("  repo_parent={}".format(repo_parent))
+    _LOG.debug("  repo_remote={}".format(repo_remote))
+    _LOG.debug("  git_ssh={}".format(git_ssh))
+    _LOG.debug("  pkey={}".format(pkey))
+    _LOG.debug("  git_hub_remote={}".format(git_hub_remote))
+    push_mirror = os.path.join(repo_parent, 'mirror')
+    pmi = {
+        'parent_dir': push_mirror,
+        'remote_map': {
+            'GitHubRemote': git_hub_remote,
+            },
+        }
+    mirror_info = {'push':pmi}
+    conf = get_conf_object(request)
+    import pprint
+    _LOG.debug("  conf:")
+    _LOG.debug(pprint.pformat(conf))
+    a = {}
+    try:
+        # any keyword args to pass along from config?
+        #new_study_prefix = conf.get('apis', 'new_study_prefix')
+        #a['new_study_prefix'] = new_study_prefix
+        pass
+    except:
+        pass
+    _TREE_COLLECTION_STORE = TreeCollectionStore(repos_par=repo_parent,
+                                                 git_ssh=git_ssh,
+                                                 pkey=pkey,
+                                                 git_action_class=GitData, #TODO?
+                                                 mirror_info=mirror_info,
+                                                 **a)
+    _LOG.debug('assumed_doc_version = {}'.format(_TREE_COLLECTION_STORE.assumed_doc_version))
+    return _TREE_COLLECTION_STORE
 
-def get_failed_push_filepath(request):
-    return os.path.join(get_private_dir(request), 'PUSH_FAILURE.json')
+
+def get_failed_push_filepath(request, doc_type=None):
+    filenames_by_content_type = {'nexson': "PUSH_FAILURE_nexson.json",
+                                 'collection': "PUSH_FAILURE_collection.json",
+                                 'favorites': "PUSH_FAILURE_favorites.json"}
+    content_type = doc_type or request.vars.get('doc_type', 'nexson')
+    failure_filename = filenames_by_content_type[content_type]
+    return os.path.join(get_private_dir(request), failure_filename)
 
 def get_conf_object(request):
     app_name = request.application
@@ -92,7 +141,8 @@ def get_conf_object(request):
         conf.readfp(open(filename))
     return conf
 
-def read_config(request):
+def read_phylesystem_config(request):
+    """Load settings for managing the main Nexson docstore"""
     conf = get_conf_object(request)
     repo_parent   = conf.get("apis","repo_parent")
     repo_remote = conf.get("apis", "repo_remote")
@@ -121,6 +171,48 @@ def read_config(request):
     except ValueError:
             raise HTTP(400, json.dumps({"error": 1, "description": 'max number of trees per study in config is not an integer'}))
     return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees
+
+def read_collections_config(request):
+    """Load settings for a minor repo with shared tree collections"""
+    conf = get_conf_object(request)
+    collections_repo_parent   = conf.get("apis","collections_repo_parent")
+    collections_repo_remote = conf.get("apis", "collections_repo_remote")
+    try:
+        git_ssh     = conf.get("apis", "git_ssh")
+    except:
+        git_ssh = 'ssh'
+    try:
+        pkey        = conf.get("apis", "pkey")
+    except:
+        pkey = None
+    try:
+        git_hub_remote = conf.get("apis", "git_hub_remote")
+    except:
+        git_hub_remote = 'git@github.com:OpenTreeOfLife'
+    try:
+        max_filesize = conf.get("filesize", "collections_max_file_size")
+    except:
+        max_filesize = '20000000'
+    return collections_repo_parent, collections_repo_remote, git_ssh, pkey, git_hub_remote, max_filesize
+
+def read_favorites_config(request):
+    """Load settings for a minor repo with per-user 'favorites' information"""
+    conf = get_conf_object(request)
+    favorites_repo_parent   = conf.get("apis","favorites_repo_parent")
+    favorites_repo_remote = conf.get("apis", "favorites_repo_remote")
+    try:
+        git_ssh     = conf.get("apis", "git_ssh")
+    except:
+        git_ssh = 'ssh'
+    try:
+        pkey        = conf.get("apis", "pkey")
+    except:
+        pkey = None
+    try:
+        git_hub_remote = conf.get("apis", "git_hub_remote")
+    except:
+        git_hub_remote = 'git@github.com:OpenTreeOfLife'
+    return favorites_repo_parent, favorites_repo_remote, git_ssh, pkey, git_hub_remote
 
 def read_logging_config(request):
     conf = get_conf_object(request)
@@ -305,3 +397,19 @@ def get_oti_domain(request):
     s = oti_base.split('/')
     assert len(s) > 2
     return '/'.join(s[:3])
+
+def get_collections_api_base_url(request):
+    conf = get_conf_object(request)
+    base_url = conf.get("apis", "collections_api_base_url")
+    if base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        base_url = "http:" + base_url
+    return base_url
+
+def get_favorites_api_base_url(request):
+    conf = get_conf_object(request)
+    base_url = conf.get("apis", "favorites_api_base_url")
+    if base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        base_url = "http:" + base_url
+    return base_url
