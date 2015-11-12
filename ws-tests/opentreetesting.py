@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+# This file has been copied to the ws-tests directory of some other
+# open tree repositories.  Please propagate improvements to these
+# other copies.
+
 from ConfigParser import SafeConfigParser
 from cStringIO import StringIO
 import requests
@@ -231,6 +236,6 @@ translations = [('/v2/study/', '/phylesystem/v1/study/'),
 def translate(s):
     if config('host', 'translate', 'false') == 'true':
         for (src, dst) in translations:
-            if s.startswith(src):
-                return dst + s[len(src):]
+            if src in s:
+                return s.replace(src, dst)
     return s
