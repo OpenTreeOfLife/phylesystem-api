@@ -21,7 +21,7 @@ pl = test_http_json_method(SUBMIT_URI,
                             data=data,
                             expected_status=200,
                             return_bool_data=True)
-if not pb[0]:
+if not pl[0]:
     sys.exit(1)
 badger = pb[1]['data']
 legacy = pl[1]['data']
