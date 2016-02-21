@@ -122,6 +122,7 @@ To get the entire NexSON of study N :
     curl https://api.opentreeoflife.org/phylesystem/v1/study/STUDYID.json
     
 where STUDYID is of the form namespace_XX, for example pg_199 or ot_29.
+You can find the STUDYID of a study of interest by opening it in curation and looking at the url.
 
 Or equivalently, (after v2 has been it is deployed to the dev server):
 
