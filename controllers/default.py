@@ -595,7 +595,7 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
         # if no DOI exists, there are no known duplicates
         return [ ]
     oti_base_url = api_utils.get_oti_base_url(request)
-    fetch_url = '%s/singlePropertySearchForStudies' % oti_base_url
+    fetch_url = '%s/v3/studies/find_studies' % oti_base_url
     try:
         dupe_lookup_response = fetch(
             fetch_url,
