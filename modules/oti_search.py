@@ -8,9 +8,9 @@ class OTISearch(object):
 
     def do_search(self, kind, key, value):
         kind_to_oti_url = {
-            "tree": "singlePropertySearchForTrees/",
-            "node": "singlePropertySearchForTreeNodes/",
-            "study": "singlePropertySearchForStudies/"
+            "tree":  "v3/studies/find_trees",
+            "node":  "v3/studies/find_nodes",  # CURRENTLY UNSUPPORTED in v3 APIs
+            "study": "v3/studies/find_studies"
         }
 
         headers = {

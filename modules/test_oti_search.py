@@ -33,6 +33,7 @@ class TestOTISearch(unittest.TestCase):
         self.assertIsInstance(results, type(list()))
 
     def test_node(self):
+        # CURRENTLY UNSUPPORTED in v3 APIs
         json = self.oti.do_search("node",
             key="ot:ottId",
             value="1000455",
