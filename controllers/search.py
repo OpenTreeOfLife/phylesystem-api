@@ -7,6 +7,7 @@ from ConfigParser import SafeConfigParser
 import urllib2
 import sys
 import traceback
+import api_utils
 
 
 @request.restful()
@@ -14,7 +15,8 @@ def v1():
     "The OpenTree API v1"
     response.view = 'generic.json'
 
-    oti = OTISearch(api_base_url)
+    oti_base_url = api_utils.get_oti_base_url(request)  # WAS conf.get("apis", "oti_base_url")
+    oti = OTISearch(oti_base_url)
 
     def GET(kind, property_name, search_term,jsoncallback=None,callback=None,_=None,**kwargs):
         """"OpenTree API methods relating to searching
@@ -34,9 +36,6 @@ other than specifying a port, even if URL encoded.
             conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
         else:
             conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-        oti_base_url = conf.get("apis", "oti_base_url")
-        api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
 
         opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
 
@@ -71,9 +70,6 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
     else:
         conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-    oti_base_url = conf.get("apis", "oti_base_url")
-    api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
 
     opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
     payload = request.vars
@@ -125,7 +121,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
 
     if len(add_or_update_ids) > 0:
         # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
-        nudge_url = "%s/../ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
+        nudge_url = "%s/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
         nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
 
         # N.B. that gluon.tools.fetch() can't be used here, since it won't send
@@ -154,7 +150,7 @@ nexson_urls: %s
     if len(removed_study_ids) > 0:
         # Un-index the studies that were removed from docstore
         # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
-        remove_url = "%s/../ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
+        remove_url = "%s/ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
         req = urllib2.Request(
             url=remove_url, 
             data=json.dumps({

@@ -389,7 +389,7 @@ def get_oti_base_url(request):
     oti_base_url = conf.get("apis", "oti_base_url")
     if oti_base_url.startswith('//'):
         # Prepend scheme to a scheme-relative URL
-        oti_base_url = "http:" + oti_base_url
+        oti_base_url = "https:" + oti_base_url
     return oti_base_url
 
 def get_oti_domain(request):
