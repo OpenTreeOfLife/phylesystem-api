@@ -36,7 +36,7 @@ other than specifying a port, even if URL encoded.
             conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
 
         oti_base_url = conf.get("apis", "oti_base_url")
-        api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
+        api_base_url = "%s/oti/ext/QueryServices/graphdb/" % (oti_base_url,)
 
         opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
 
@@ -73,7 +73,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
 
     oti_base_url = conf.get("apis", "oti_base_url")
-    api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
+    api_base_url = "%s/oti/ext/QueryServices/graphdb/" % (oti_base_url,)
 
     opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
     payload = request.vars
@@ -124,8 +124,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     add_or_update_ids = list(set(add_or_update_ids))  # remove any duplicates
 
     if len(add_or_update_ids) > 0:
-        # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
-        nudge_url = "%s/../ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
+        nudge_url = "%s/oti/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
         nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
 
         # N.B. that gluon.tools.fetch() can't be used here, since it won't send
@@ -153,8 +152,7 @@ nexson_urls: %s
 
     if len(removed_study_ids) > 0:
         # Un-index the studies that were removed from docstore
-        # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
-        remove_url = "%s/../ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
+        remove_url = "%s/oti/ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
         req = urllib2.Request(
             url=remove_url, 
             data=json.dumps({
