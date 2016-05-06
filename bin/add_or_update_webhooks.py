@@ -6,22 +6,23 @@ import json, requests, sys
 this_script = sys.argv[0]
 
 if len(sys.argv) > 1:
-	opentree_docstore_url = sys.argv[1]
+    opentree_docstore_url = sys.argv[1]
 else:
     print "Please specify the Open Tree doc-store URL as first argument: '%s <repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 2:
-	opentree_api_base_url = sys.argv[2].rstrip("/")
+    opentree_api_base_url = sys.argv[2].rstrip("/")
+    nudge_index_url = "%s/phylesystem/search/nudgeIndexOnUpdates" % opentree_api_base_url
 else:
     print "Please specify the Open Tree API public URL as second argument: '%s <repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
- 
+
 if len(sys.argv) > 3:
-	oauth_token_file = sys.argv[3]
+    oauth_token_file = sys.argv[3]
 else:
     oauth_token_file = None
- 
+
 # To do this automatically via the GitHub API, we need an OAuth token for bot
 # user 'opentreeapi' on GitHub, with scope 'public_repo' and permission to
 # manage hooks. This is stored in yet another sensitive file.
@@ -54,7 +55,7 @@ if not(prompt_for_manual_webhooks):
             if (hook.get('name') == "web" and 
                 hook.get('active') == True and
                 hook.get('events') and ("push" in hook['events']) and
-                hook.get('config') and (hook['config']['url'] == "%s/../search/nudgeIndexOnUpdates" % opentree_api_base_url)
+                hook.get('config') and (hook['config']['url'] == nudge_index_url)
             ):
                 found_matching_webhook = True
         except:
@@ -73,7 +74,7 @@ if not(prompt_for_manual_webhooks):
                 "push"
             ],
             "config": {
-                "url": ("%s/../search/nudgeIndexOnUpdates" % opentree_api_base_url),
+                "url": nudge_index_url,
                 "content_type": "json"
             }
         }
@@ -101,12 +102,12 @@ if prompt_for_manual_webhooks:
         %s/settings/hooks
         
     Find (or add) a webhook with these properties:
-        Payload URL: %s/../search/nudgeIndexOnUpdates
+        Payload URL: %s
         Payload version: application/vnd.github.v3+json
         Events: push
         Active: true
 
     ***************************************************************
-        """ %  (opentree_docstore_url, opentree_api_base_url)
+        """ %  (opentree_docstore_url, nudge_index_url)
 
 sys.exit(0)
