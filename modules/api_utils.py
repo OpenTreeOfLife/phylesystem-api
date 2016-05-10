@@ -10,6 +10,7 @@ import tempfile
 import logging
 import json
 import os
+from gluon import cache
 
 def get_private_dir(request):
     app_name = request.application
