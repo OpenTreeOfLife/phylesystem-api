@@ -417,8 +417,8 @@ def get_favorites_api_base_url(request):
 def clear_matching_cache_keys(key_pattern):
     # ASSUMES we're working with RAM cache
     # NOTE that we apparently need to "clear" (using a bogus regex) to get a fresh view of the cache
-    _LOG = get_logger(request, 'ot_api')
     from gluon import current
+    _LOG = get_logger(current.request, 'ot_api')
     current.cache.ram.clear(regex='^_BOGUS_CACHE_KEY_$')
     item_count_before = len(current.cache.ram.storage.keys())
     LOG.debug("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
