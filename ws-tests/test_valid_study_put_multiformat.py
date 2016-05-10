@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config
+from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 from peyotl import convert_nexson_format
 import datetime
 import codecs
@@ -13,7 +13,7 @@ study_id = 12
 DOMAIN = config('host', 'apihost')
 starting_commit_SHA = config('host', 'parentsha')
 
-SUBMIT_URI = DOMAIN + '/v1/study/%s' % study_id
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/%s' % study_id
 fn = 'data/{s}.json'.format(s=study_id)
 inpf = codecs.open(fn, 'rU', encoding='utf-8')
 n = json.load(inpf)
@@ -27,6 +27,8 @@ else:
     m.append(el)
 el['$'] = datetime.datetime.utcnow().isoformat()
 n = convert_nexson_format(n, '1.2')
+
+exit_if_api_is_readonly(__file__)
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),

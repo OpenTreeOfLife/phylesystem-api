@@ -4,7 +4,7 @@ from opentreetesting import test_http_json_method, config
 #This test should only pass if filesize is set very low in the config and/or max tree number is set to 0
 DOMAIN = config('host', 'apihost')
 study = '10'
-SUBMIT_URI = DOMAIN + '/v1/study/' + study
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/' + study
 data = {'output_nexml2json':'1.2'}
 r = test_http_json_method(SUBMIT_URI,
                           'GET',

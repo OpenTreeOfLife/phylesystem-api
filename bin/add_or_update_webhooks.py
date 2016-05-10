@@ -35,10 +35,18 @@ else:
 
 if not(prompt_for_manual_webhooks):
     docstore_repo_name = opentree_docstore_url.rstrip('/').split('/').pop()
-
-    r = requests.get('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name,
+    webhook_url = 'https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name
+    r = requests.get(webhook_url,
                      headers={"Authorization": ("token %s" % auth_token)})
-    hooks_info = json.loads(r.text)
+    try:
+        hooks_info = json.loads(r.text)
+    except:
+        print '\nUnable to load webhook info (bad OAuth token?) [auth_token=%s]:' % auth_token 
+        print 'Webhook URL: [%s]' % webhook_url
+        print 'Webhook response:\n%s\n' % r.text.encode('utf-8')
+        prompt_for_manual_webhooks = True
+
+if not(prompt_for_manual_webhooks):
     # look for an existing hook that will do the job...
     found_matching_webhook = False
     for hook in hooks_info:

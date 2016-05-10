@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config
+from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
 import datetime
 import codecs
 import json
@@ -10,7 +10,7 @@ DOMAIN = config('host', 'apihost')
 starting_commit_SHA = config('host', 'parentsha')
 
 study_id="12"
-SUBMIT_URI = DOMAIN + '/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 fn = 'data/{s}.json'.format(s=study_id)
 inpf = codecs.open(fn, 'rU', encoding='utf-8')
 n = json.load(inpf)
@@ -23,6 +23,8 @@ else:
     el = {'@property': 'bogus_timestamp', '@xsi:type': 'nex:LiteralMeta'}
     m.append(el)
 el['$'] = datetime.datetime.utcnow().isoformat()
+
+exit_if_api_is_readonly(__file__)
 
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),

@@ -6,8 +6,12 @@ import anyjson
 import traceback
 from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
+from peyotl.utility.str_util import slugify
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
+from peyotl.collections import OWNER_ID_PATTERN, \
+                               COLLECTION_ID_PATTERN
+from peyotl.collections.validation import validate_collection
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
                                  extract_tree, \
@@ -22,12 +26,13 @@ from urllib import urlencode
 from gluon.html import web2pyHTMLParser
 import re
 from gluon.contrib.markdown.markdown2 import markdown
+from gluon.http import HTTP
 from ConfigParser import SafeConfigParser
 import copy
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
     from open_tree_tasks import call_http_json
-    _GLOG.debug('call_http_json imported')
+    #_GLOG.debug('call_http_json imported')
 except:
     call_http_json = None
     _GLOG.debug('call_http_json was not imported from open_tree_tasks')
@@ -60,21 +65,21 @@ def _markdown_to_html(markdown_src='', open_links_in_new_window=False):
                       html)
     return html
 
-def render_markdown():
+def render_markdown(src):
     # Convert POSTed Markdown to HTML (e.g., for previews in web UI)
-    markdown_src = request.body.read()
-    return _markdown_to_html( markdown_src, open_links_in_new_window=True )
+    return _markdown_to_html( src, open_links_in_new_window=True )
 
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, json.dumps({"error": 1, "description": msg}))
 
-def __deferred_push_to_gh_call(request, resource_id, **kwargs):
+def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    _LOG.debug('in __deferred_push_to_gh_call')
     if call_http_json is not None:
-        url = api_utils.compose_push_to_github_url(request, resource_id)
+        # Pass the resource_id in data, so that two-part collection IDs will be recognized
+        # (else the second part will trigger an unwanted JSONP response from the push)
+        url = api_utils.compose_push_to_github_url(request, resource_id=None)
         auth_token = copy.copy(kwargs.get('auth_token'))
-        data = {}
+        data = {'doc_type': doc_type, 'resource_id': resource_id}
         if auth_token is not None:
             data['auth_token'] = auth_token
         _LOG.debug('__deferred_push_to_gh_call({u}, {d})'.format(u=url, d=str(data)))
@@ -210,7 +215,348 @@ def push_failure():
         blob['pushes_succeeding'] = False
     else:
         blob = {'pushes_succeeding': True}
+    blob['doc_type'] = request.vars.get('doc_type', 'nexson')
     return json.dumps(blob)
+
+
+def collections(*args, **kwargs):
+    """Handle an incoming URL targeting /v2/collections/
+    This includes:
+        /v2/collections/find_collections
+        /v2/collections/find_trees
+        /v2/collections/properties
+    """
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("OPTIONS!"), **(response.headers))
+    # N.B. other request methods don't really matter for these functions!
+    # extract and validate the intended API call
+    assert request.args[0].lower() == 'collections'
+    if len(request.args) < 2:
+        raise HTTP(404, T('No method specified! Try collections/find_collections, find_trees, or properties'))
+    api_call = request.args[1]   # ignore anything later in the URL
+    if api_call == 'find_collections':
+        # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
+        # For now, let's just return all collections (complete JSON)
+        response.view = 'generic.json'
+        docstore = api_utils.get_tree_collection_store(request)
+        # Convert these to more closely resemble the output of find_all_studies
+        collection_list = []
+        for id, props in docstore.iter_doc_objs():
+            # reckon and add 'lastModified' property, based on commit history?
+            latest_commit = docstore.get_version_history_for_doc_id(id)[0]
+            props.update({
+                'id': id,
+                'lastModified': {
+                        'author_name': latest_commit.get('author_name'),
+                        'relative_date': latest_commit.get('relative_date'),
+                        'display_date': latest_commit.get('date'),
+                        'ISO_date': latest_commit.get('date_ISO_8601'),
+                        'sha': latest_commit.get('id')  # this is the commit hash
+                        }
+                })
+            collection_list.append(props)
+        return json.dumps(collection_list)
+    if api_call == 'find_trees':
+        # TODO: proxy to oti? see above, and also controllers/studies.py > find_trees()
+        raise HTTP(200, T("Now we'd list all collections holding trees that match the criteria provided!"))
+    elif api_call == 'collection_list':
+        response.view = 'generic.json'
+        docstore = api_utils.get_tree_collection_store(request)
+        ids = docstore.get_collection_ids()
+        return json.dumps(ids)
+    elif api_call == 'properties':
+        # TODO: proxy to oti? or drop 'collections' here and re-route this (in apache config)?
+        raise HTTP(200, T("Now we'd list all searchable properties in tree collections!"))
+    elif api_call == 'store_config':
+        response.view = 'generic.json'
+        docstore = api_utils.get_tree_collection_store(request)
+        cd = docstore.get_configuration_dict()
+        return json.dumps(cd)
+    elif api_call == 'push_failure':
+        # this should find a type-specific PUSH_FAILURE file
+        request.vars['doc_type'] = 'collection'
+        return push_failure()   
+    raise HTTP(404, T('No such method as collections/{}'.format(api_call)))
+
+def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
+    """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
+    json_obj = None
+    try:
+        # check for kwarg data_field_name, or load the full request body
+        if data_field_name in kwargs:
+            json_obj = kwargs.get(data_field_name, {})
+        else:
+            json_obj = request.body.read()
+
+        if not isinstance(json_obj, dict):
+            json_obj = json.loads(json_obj)
+        if data_field_name in json_obj:
+            json_obj = json_obj[data_field_name]
+    except:
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
+        raise HTTP(400, json.dumps({"error": 1, "description": 'no collection JSON found in request'}))
+    return json_obj
+
+def collection(*args, **kwargs):
+    """Handle an incoming URL targeting /v2/collection/{COLLECTION_ID}
+    Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
+    """
+    _LOG = api_utils.get_logger(request, 'ot_api.collection')
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("single-collection OPTIONS!"), **(response.headers))
+
+    def __extract_and_validate_collection(request, kwargs):
+        from pprint import pprint
+        try:
+            collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+        except HTTP, err:
+            # payload not found
+            return None, None, None
+        try:
+            errors, collection_adaptor = validate_collection(collection_obj)
+        except HTTP, err:
+            _LOG.exception('JSON payload failed validation (raising HTTP response)')
+            pprint(err)
+            raise err
+        except Exception, err:
+            _LOG.exception('JSON payload failed validation (reporting err.msg)')
+            pprint(err)
+            try:
+                msg = err.get('msg', 'No message found')
+            except:
+                msg = str(err)
+            _raise_HTTP_from_msg(msg)
+        if len(errors) > 0:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            msg = 'JSON payload failed validation with {nerrors} errors:\n{errors}'.format(nerrors=len(errors), errors='\n  '.join(errors))
+            _LOG.exception(msg)
+            _raise_HTTP_from_msg(msg)
+        return collection_obj, errors, collection_adaptor
+
+    assert request.args[0].lower() == 'collection'
+    # check for full or partial collection ID
+    owner_id = None
+    collection_id = None
+    if len(request.args) > 1:
+        # for a new collection, we might have just the owner's id (GitHub username)
+        owner_id = request.args[1]
+        if not OWNER_ID_PATTERN.match(owner_id):
+            raise HTTP(400, json.dumps({"error": 1, "description": "invalid owner ID ({}) provided".format(owner_id)}))
+    if len(request.args) > 2:
+        collection_id = ('/').join(request.args[1:3])
+        if not COLLECTION_ID_PATTERN.match(collection_id):
+            #raise HTTP(400, json.dumps({"error": 1, "description": 'invalid collection ID provided'}))
+            # ignore the submitted id and generate a new one
+            collection_id = None
+    elif request.env.request_method != 'POST':
+        # N.B. this id is optional when creating a new collection
+        raise HTTP(400, json.dumps({"error": 1, "description": 'collection ID expected after "collection/"'}))
+
+    # fetch and parse the JSON payload, if any 
+    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request,
+                                                                                              kwargs)
+    if (collection_obj is None) and request.env.request_method in ('POST','PUT'):
+        raise HTTP(400, json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.env.request_method) }))
+
+    auth_info = None
+    if owner_id is None:
+        # set this explicitly to the logged-in userid (make sure the user is allowed!)
+        auth_info = api_utils.authenticate(**kwargs)
+        owner_id = auth_info.get('login', None)
+        if owner_id is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
+    if collection_id is None:
+        # try to extract a usable collection ID from the JSON payload (confirm owner_id against above)
+        url = collection_obj.get('url', None)
+        if url is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": "no collection URL provided in query string or JSON payload"}))
+        try:
+            collection_id = url.split('/collection/')[1]
+        except:
+            _LOG.exception('{} failed'.format(request.env.request_method))
+            raise HTTP(404, json.dumps({"error": 1, "description": "invalid URL, no collection id found: {}".format(url)}))
+        try:
+            assert collection_id.split('/')[0] == owner_id
+        except:
+            _LOG.exception('{} failed'.format(request.env.request_method))
+            raise HTTP(404, json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
+
+    # some request types imply git commits; gather any user-provided commit message
+    try:
+        commit_msg = kwargs.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+        
+    if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
+        # support JSONP requests from another domain
+        response.view = 'generic.jsonp'
+
+    if request.env.request_method == 'GET':
+        # fetch the current collection JSON
+        _LOG.debug('GET /v2/collection/{}'.format(str(collection_id)))
+        version_history = None
+        comment_html = None
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        _LOG.debug('parent_sha = {}'.format(parent_sha))
+        # return the correct nexson of study_id, using the specified view
+        collections = api_utils.get_tree_collection_store(request)
+        try:
+            r = collections.return_doc(collection_id, commit_sha=parent_sha, return_WIP_map=True)
+        except:
+            _LOG.exception('GET failed')
+            raise HTTP(404, json.dumps({"error": 1, "description": "Collection '{}' GET failure".format(collection_id)}))
+        try:
+            collection_json, head_sha, wip_map = r
+            ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
+            version_history = collections.get_version_history_for_doc_id(collection_id)
+            try:
+                # pre-render internal description (assumes markdown!)
+                comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True )
+            except:
+                comment_html = ''
+        except:
+            _LOG.exception('GET failed')
+            e = sys.exc_info()[0]
+            _raise_HTTP_from_msg(e)
+        if not collection_json:
+            raise HTTP(404, "Collection '{s}' has no JSON data!".format(s=collection_id))
+        # add/restore the url field (using the visible fetch URL)
+        base_url = api_utils.get_collections_api_base_url(request)
+        collection_json['url'] = '{b}/collection/{i}'.format(b=base_url,
+                                                            i=collection_id)
+        try:
+            external_url = collections.get_public_url(collection_id)
+        except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.exception('collection {} not found in external_url'.format(collection))
+            external_url = 'NOT FOUND'
+        result = {'sha': head_sha,
+                 'data': collection_json,
+                 'branch2sha': wip_map,
+                 'commentHTML': comment_html,
+                 'external_url': external_url,
+                 }
+        if version_history:
+            result['versionHistory'] = version_history
+        return result
+
+    if request.env.request_method == 'PUT':
+        # update an existing collection with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.collections.PUT')
+        auth_info = auth_info or api_utils.authenticate(**kwargs)
+        # submit new json for this id, and read the results
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        merged_sha = None  #TODO: kwargs.get('???', None)
+        docstore = api_utils.get_tree_collection_store(request)
+        try:
+            r = docstore.update_existing_collection(owner_id, 
+                                                    collection_id,
+                                                    collection_obj, 
+                                                    auth_info,
+                                                    parent_sha,
+                                                    merged_sha, 
+                                                    commit_msg=commit_msg)
+            commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+
+        # check for 'merge needed'?
+        mn = commit_return.get('merge_needed')
+        if (mn is not None) and (not mn):
+            __deferred_push_to_gh_call(request, collection_id, doc_type='collection', **kwargs)
+        return commit_return
+        #
+        #        parent_sha = kwargs.get('starting_commit_SHA')
+        #        if parent_sha is None:
+        #            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        #        try:
+        #            commit_msg = kwargs.get('commit_msg','')
+        #            if commit_msg.strip() == '':
+        #                # git rejects empty commit messages
+        #                commit_msg = None
+        #        except:
+        #            commit_msg = None
+        #        master_file_blob_included = kwargs.get('merged_SHA')
+        #        msg = 'PUT to collection {} for starting_commit_SHA = {} and merged_SHA = {}'
+        #        _LOG.debug(msg.format(collection_id,
+        #                              parent_sha,
+        #                              str(master_file_blob_included)))
+        #
+
+        #         try:
+        #             gd = phylesystem.create_git_action(resource_id)
+        #         except KeyError, err:
+        #             _LOG.debug('PUT failed in create_git_action (probably a bad collection ID)')
+        #             _raise_HTTP_from_msg("invalid collection ID, please check the URL")
+        #         except GitWorkflowError, err:
+        #             _LOG.debug('PUT failed in create_git_action: {}'.format(err.msg))
+        #             _raise_HTTP_from_msg(err.msg)
+        #         except:
+        #             raise HTTP(400, traceback.format_exc())
+
+    if request.env.request_method == 'POST':
+        # Create a new collection with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
+        auth_info = auth_info or api_utils.authenticate(**kwargs)
+        # submit the json and proposed id (if any), and read the results
+        docstore = api_utils.get_tree_collection_store(request)
+        try:
+            r = docstore.add_new_collection(owner_id, 
+                                            collection_obj, 
+                                            auth_info,
+                                            collection_id, 
+                                            commit_msg=commit_msg)
+            new_collection_id, commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+        if commit_return['error'] != 0:
+            _LOG.debug('add_new_collection failed with error code')
+            raise HTTP(400, json.dumps(commit_return))
+        __deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **kwargs)
+        return commit_return
+
+    if request.env.request_method == 'DELETE':
+        # remove this collection from the docstore
+        _LOG = api_utils.get_logger(request, 'ot_api.default.collections.POST')
+        auth_info = auth_info or api_utils.authenticate(**kwargs)
+        docstore = api_utils.get_tree_collection_store(request)
+        parent_sha = kwargs.get('starting_commit_SHA')
+        if parent_sha is None:
+            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        try:
+            x = docstore.delete_collection(collection_id, 
+                                           auth_info, 
+                                           parent_sha, 
+                                           commit_msg=commit_msg)
+            if x.get('error') == 0:
+                __deferred_push_to_gh_call(request, None, doc_type='collection', **kwargs)
+            return x
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            _LOG.exception('Unknown error in collection deletion')
+            raise HTTP(400, traceback.format_exc())
+            #raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in collection deletion'}))
+
+    raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
 
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
 # This allows us to normalize all API method URLs under v1/, even for
@@ -224,7 +570,11 @@ _route_tag2func = {'index':index,
                    'repo_nexson_format': reponexsonformat,
                    'reponexsonformat': reponexsonformat,
                    'render_markdown': render_markdown,
-                   #TODO: 'push': j
+                   # handle minor resource types based on identifying paths
+                   # NOTE singular vs. plural forms
+                   'collections': collections,
+                   'collection': collection,
+                   #TODO: 'following': following,
                   }
 
 def _fetch_shard_name(study_id):
@@ -271,6 +621,7 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
 @request.restful()
 def v1():
     "The OpenTree API v1"
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     response.view = 'generic.json'
 
     # CORS support for cross-domain API requests (from anywhere)
@@ -278,12 +629,11 @@ def v1():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
-
     phylesystem = api_utils.get_phylesystem(request)
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_config(request)
-    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    _LOG.debug('Max filestize set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_phylesystem_config(request)
+    #_LOG.debug('Max file size set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
     repo_nexml2json = phylesystem.repo_nexml2json
+    #_LOG.debug("phylesystem created with repo_nexml2json={}".format(repo_nexml2json))
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
         if 'output_nexml2json' not in kwargs:
@@ -352,9 +702,10 @@ def v1():
             _=None,
             **kwargs):
         "OpenTree API methods relating to reading"
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         delegate = _route_tag2func.get(resource)
         if delegate:
-            return delegate()
+            return delegate(**kwargs)
         valid_resources = ('study', )
         if not resource.lower() == 'study':
             raise HTTP(400, json.dumps({"error": 1,
@@ -362,7 +713,6 @@ def v1():
         if resource_id is None:
             raise HTTP(400, json.dumps({"error": 1, "description": 'study ID expected after "study/"'}))
         valid_subresources = ('tree', 'meta', 'otus', 'otu', 'otumap')
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         _LOG.debug('GET default/v1/{}/{}'.format(str(resource), str(resource_id)))
         returning_full_study = False
         returning_tree = False
@@ -439,30 +789,34 @@ def v1():
                             break
                 return json.dumps(r)
             else:
-                matching = None
-                for m in m_list:
-                    if m['@id'] == subresource_id:
-                        matching = m
-                        break
-                if matching is None:
-                    raise HTTP(404, 'No file with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
-                u = None
-                files = m.get('data', {}).get('files', {}).get('file', [])
-                for f in files:
-                    if '@url' in f:
-                        u = f['@url']
-                        break
-                if u is None:
-                    raise HTTP(404, 'No @url found in the message with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
-                #TEMPORARY HACK TODO
-                u = u.replace('uploadid=', 'uploadId=')
-                #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
-                if u.startswith('/curator'):
-                    u = 'https://tree.opentreeoflife.org' + u
-                response.headers['Content-Type'] = 'text/plain'
-                fetched = requests.get(u)
-                fetched.raise_for_status()
-                return fetched.text
+                try:
+                    matching = None
+                    for m in m_list:
+                        if m['@id'] == subresource_id:
+                            matching = m
+                            break
+                    if matching is None:
+                        raise HTTP(404, 'No file with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
+                    u = None
+                    files = m.get('data', {}).get('files', {}).get('file', [])
+                    for f in files:
+                        if '@url' in f:
+                            u = f['@url']
+                            break
+                    if u is None:
+                        raise HTTP(404, 'No @url found in the message with id="{f}" found in study="{s}"'.format(f=subresource_id, s=resource_id))
+                    #TEMPORARY HACK TODO
+                    u = u.replace('uploadid=', 'uploadId=')
+                    #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
+                    if u.startswith('/curator'):
+                        u = 'https://tree.opentreeoflife.org' + u
+                    response.headers['Content-Type'] = 'text/plain'
+                    fetched = requests.get(u)
+                    fetched.raise_for_status()
+                    return fetched.text
+                except Exception as x:
+                    _LOG.exception('file_get failed')
+                    return HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
         elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:
@@ -517,7 +871,7 @@ def v1():
         "Open Tree API methods relating to creating (and importing) resources"
         delegate = _route_tag2func.get(resource)
         if delegate:
-            return delegate()
+            return delegate(**kwargs)
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.POST')
         # support JSONP request from another domain
         if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
@@ -669,7 +1023,7 @@ def v1():
         if commit_return['error'] != 0:
             _LOG.debug('ingest_new_study failed with error code')
             raise HTTP(400, json.dumps(commit_return))
-        __deferred_push_to_gh_call(request, new_resource_id, **kwargs)
+        __deferred_push_to_gh_call(request, new_resource_id, doc_type='nexson', **kwargs)
         return commit_return
 
     def __coerce_nexson_format(nexson, dest_format, current_format=None):
@@ -678,7 +1032,7 @@ def v1():
         try:
             return convert_nexson_format(nexson, dest_format, current_format=current_format)
         except:
-            msg = "Exception in coercing to the required NexSON version for validation. "
+            msg = "Exception in coercing to the required NexSON version for validation!"
             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             _LOG.exception(msg)
             raise HTTP(400, msg)
@@ -748,16 +1102,13 @@ def v1():
         else:
             return None
 
-    def PUT(resource, resource_id=None, **kwargs):
+    def PUT(resource, resource_id=None, *args, **kwargs):
         "Open Tree API methods relating to updating existing resources"
-        #global TIMING
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.PUT')
-
         delegate = _route_tag2func.get(resource)
         if delegate:
-            _LOG.debug('PUT call to {} bouncing to delegate'.format(resource))
-            return delegate()
-        
+            return delegate(**kwargs)
+        #global TIMING
         # support JSONP request from another domain
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
             response.view = 'generic.jsonp'
@@ -814,7 +1165,7 @@ def v1():
         #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
         mn = blob.get('merge_needed')
         if (mn is not None) and (not mn):
-            __deferred_push_to_gh_call(request, resource_id, **kwargs)
+            __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs)
         # Add updated commit history to the blob
         blob['versionHistory'] = phylesystem.get_version_history_for_study_id(resource_id)
         return blob
@@ -869,8 +1220,11 @@ def v1():
             nexml_el[u'^ot:studyYear'] = meta_year
         return nexson
 
-    def DELETE(resource, resource_id=None, **kwargs):
+    def DELETE(resource, resource_id=None, *args, **kwargs):
         "Open Tree API methods relating to deleting existing resources"
+        delegate = _route_tag2func.get(resource)
+        if delegate:
+            return delegate(**kwargs)
         # support JSONP request from another domain
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.DELETE')
         if kwargs.get('jsoncallback',None) or kwargs.get('callback',None):
@@ -895,7 +1249,7 @@ def v1():
         try:
             x = phylesystem.delete_study(resource_id, auth_info, parent_sha, commit_msg=commit_msg)
             if x.get('error') == 0:
-                __deferred_push_to_gh_call(request, None, **kwargs)
+                __deferred_push_to_gh_call(request, None, doc_type='nexson', **kwargs)
             return x
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)

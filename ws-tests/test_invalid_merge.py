@@ -3,7 +3,7 @@ from opentreetesting import test_http_json_method, config
 import sys
 
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/merge/v1/master/master'
+SUBMIT_URI = DOMAIN + '/phylesystem/merge/v1/master/master'
 
 data = {
          'auth_token': 'bogus'

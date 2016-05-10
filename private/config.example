@@ -3,17 +3,27 @@
 [apis]
 
 # the full path to where a local phylesystem.git can be found
-repo_path   = REPO_PATH
-repo_parent   = REPO_PAR
+repo_path   = PHYLESYSTEM_REPO_PATH
+repo_parent   = PHYLESYSTEM_REPO_PAR
 # prefix for new study ids. should be of the form [a-z][a-z]_
 # new_study_prefix = zz_
+
+# local paths for minor repos
+collections_repo_path   = COLLECTIONS_REPO_PATH
+collections_repo_parent = COLLECTIONS_REPO_PAR
+following_repo_path     = FOLLOWING_REPO_PATH
+following_repo_parent   = FOLLOWING_REPO_PAR
 
 # the remote to push changes to
 # This will usually be "origin" on a local dev machine where phylesystem.git
 # was cloned via SSH (git@github.com:...)
 # On deployed servers, which use anonymous git:// protocol, we add a new
 # remote "originssh" which can be pushed to
-repo_remote = REPO_REMOTE
+repo_remote = PHYLESYSTEM_REPO_REMOTE
+
+# remotes for minor repos
+collections_repo_remote = COLLECTIONS_REPO_REMOTE
+following_repo_remote   = FOLLOWING_REPO_REMOTE
 
 # these allow us to specify the SSH keys that git pushes
 # will use. Leave the config keys in this config file,
@@ -22,9 +32,16 @@ git_ssh     = GIT_SSH
 pkey        = PKEY
 
 oti_base_url = OTI_BASE_URL
+collections_api_base_url = COLLECTIONS_API_BASE_URL
+favorites_api_base_url = FAVORITES_API_BASE_URL
+
 opentree_docstore_url = OPENTREE_DOCSTORE_URL
 # Push scripts will substitute the OTI_BASE_URL server-config variables, shared
 # with other apps.
+
+# URLs for minor repos
+collections_repo_url = COLLECTIONS_REPO_URL
+following_repo_url   = FOLLOWING_REPO_URL
 
 # prefix for the GitHubRemote used in the push mirror
 #   default is git@github.com:OpenTreeOfLife

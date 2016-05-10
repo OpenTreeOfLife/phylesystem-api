@@ -2,7 +2,7 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v1/study/10'
+SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/10'
 data = { 'nexson': {'bogus' : 5},
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token')
 
