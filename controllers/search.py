@@ -9,7 +9,6 @@ import sys
 import traceback
 from api_utils import clear_matching_cache_keys
 
-
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -180,9 +179,9 @@ removed_study_ids: %s
 
     # Clear any cached study lists (both verbose and non-verbose)
     from pprint import pprint
-    pprint("....... clearing cache keys now .......");
+    pprint("....... clearing cache keys now .......")
     clear_matching_cache_keys("/find_studies")
-    pprint("....... clearing cache keys DONE!");
+    pprint("....... clearing cache keys DONE!")
 
     github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
     full_msg = """This URL should be called by a webhook set in the docstore repo:
