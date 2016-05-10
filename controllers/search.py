@@ -176,9 +176,7 @@ removed_study_ids: %s
         # TODO: check returned IDs against our original list... what if something failed?
 
     # Clear any cached study lists (both verbose and non-verbose)
-    print("....... clearing cache keys now .......")
-    clear_matching_cache_keys("/find_studies")
-    print("....... clearing cache keys DONE!")
+    clear_matching_cache_keys(".*find_studies.*")
 
     github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
     full_msg = """This URL should be called by a webhook set in the docstore repo:
