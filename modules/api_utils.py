@@ -417,20 +417,20 @@ def get_favorites_api_base_url(request):
 def clear_matching_cache_keys(key_pattern):
     # ASSUMES we're working with RAM cache
     # NOTE that we apparently need to "clear" (using a bogus regex) to get a fresh view of the cache
+    _LOG = get_logger(request, 'ot_api')
     from gluon import current
-    from pprint import pprint
     current.cache.ram.clear(regex='^_BOGUS_CACHE_KEY_$')
     item_count_before = len(current.cache.ram.storage.keys())
-    pprint("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
+    LOG.debug("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
     for k in current.cache.ram.storage.keys():
-        pprint(k)
-    pprint("===")
-    pprint("> clearing cached items matching [%s]" % key_pattern)
+        LOG.debug(k)
+    LOG.debug("===")
+    LOG.debug("> clearing cached items matching [%s]" % key_pattern)
     current.cache.ram.clear(regex=key_pattern)
     item_count_after = len(current.cache.ram.storage.keys())
-    pprint("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
+    LOG.debug("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
     for k in current.cache.ram.storage.keys():
-        pprint(k)
-    pprint("===")
-    pprint("  %d items removed" % (item_count_before - item_count_after,))
+        LOG.debug(k)
+    LOG.debug("===")
+    LOG.debug("  %d items removed" % (item_count_before - item_count_after,))
 
