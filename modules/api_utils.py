@@ -305,3 +305,39 @@ def get_oti_domain(request):
     s = oti_base.split('/')
     assert len(s) > 2
     return '/'.join(s[:3])
+
+def get_collections_api_base_url(request):
+    conf = get_conf_object(request)
+    base_url = conf.get("apis", "collections_api_base_url")
+    if base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        base_url = "http:" + base_url
+    return base_url
+
+def get_favorites_api_base_url(request):
+    conf = get_conf_object(request)
+    base_url = conf.get("apis", "favorites_api_base_url")
+    if base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        base_url = "http:" + base_url
+    return base_url
+
+def clear_matching_cache_keys(key_pattern):
+    # ASSUMES we're working with RAM cache
+    # NOTE that we apparently need to "clear" (using a bogus regex) to get a fresh view of the cache
+    from pprint import pprint
+    cache.ram.clear(regex='^_BOGUS_CACHE_KEY_$')
+    item_count_before = len(cache.ram.storage.keys())
+    pprint("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
+    for k in cache.ram.storage.keys():
+        pprint(k)
+    pprint("===")
+    pprint("> clearing cached items matching [%s]" % key_pattern)
+    cache.ram.clear(regex=key_pattern)
+    item_count_after = len(cache.ram.storage.keys())
+    pprint("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
+    for k in cache.ram.storage.keys():
+        pprint(k)
+    pprint("===")
+    pprint("  %d items removed" % (item_count_before - item_count_after,))
+
