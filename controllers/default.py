@@ -436,7 +436,7 @@ def collection(*args, **kwargs):
             raise HTTP(404, "Collection '{s}' has no JSON data!".format(s=collection_id))
         # add/restore the url field (using the visible fetch URL)
         base_url = api_utils.get_collections_api_base_url(request)
-        collection_json['url'] = '{b}/collection/{i}'.format(b=base_url,
+        collection_json['url'] = '{b}/v2/collection/{i}'.format(b=base_url,
                                                             i=collection_id)
         try:
             external_url = collections.get_public_url(collection_id)
@@ -595,7 +595,7 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
         # if no DOI exists, there are no known duplicates
         return [ ]
     oti_base_url = api_utils.get_oti_base_url(request)
-    fetch_url = '%s/singlePropertySearchForStudies' % oti_base_url
+    fetch_url = '%s/oti/v1/singlePropertySearchForStudies' % oti_base_url
     try:
         dupe_lookup_response = fetch(
             fetch_url,
