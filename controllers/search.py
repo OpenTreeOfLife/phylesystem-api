@@ -7,7 +7,7 @@ from ConfigParser import SafeConfigParser
 import urllib2
 import sys
 import traceback
-
+from api_utils import clear_matching_cache_keys
 
 @request.restful()
 def v1():
@@ -62,6 +62,8 @@ This examines the JSON payload of a GitHub webhook to see which studies have
 been added, modified, or removed. Then it calls oti's index service to
 (re)index the NexSON for those studies, or to delete a study's information if
 it was deleted from the docstore.
+
+Finally, we clear the cached study list (response to find_studies with no args).
 
 N.B. This depends on a GitHub webhook on the chosen docstore.
 """
@@ -172,6 +174,9 @@ removed_study_ids: %s
 %s""" % (remove_url, removed_study_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
 
         # TODO: check returned IDs against our original list... what if something failed?
+
+    # Clear any cached study lists (both verbose and non-verbose)
+    clear_matching_cache_keys(".*find_studies.*")
 
     github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
     full_msg = """This URL should be called by a webhook set in the docstore repo:
