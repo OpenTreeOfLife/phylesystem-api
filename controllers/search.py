@@ -121,7 +121,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
 
     if len(add_or_update_ids) > 0:
         # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
-        nudge_url = "%s/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
+        nudge_url = "%s/oti/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
         nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
 
         # N.B. that gluon.tools.fetch() can't be used here, since it won't send
@@ -150,7 +150,7 @@ nexson_urls: %s
     if len(removed_study_ids) > 0:
         # Un-index the studies that were removed from docstore
         # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
-        remove_url = "%s/ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
+        remove_url = "%s/oti/ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
         req = urllib2.Request(
             url=remove_url, 
             data=json.dumps({
