@@ -389,7 +389,7 @@ def get_oti_base_url(request):
     oti_base_url = conf.get("apis", "oti_base_url")
     if oti_base_url.startswith('//'):
         # Prepend scheme to a scheme-relative URL
-        oti_base_url = "http:" + oti_base_url
+        oti_base_url = "https:" + oti_base_url
     return oti_base_url
 
 def get_oti_domain(request):
@@ -403,7 +403,7 @@ def get_collections_api_base_url(request):
     base_url = conf.get("apis", "collections_api_base_url")
     if base_url.startswith('//'):
         # Prepend scheme to a scheme-relative URL
-        base_url = "http:" + base_url
+        base_url = "https:" + base_url
     return base_url
 
 def get_favorites_api_base_url(request):

@@ -7,14 +7,15 @@ from ConfigParser import SafeConfigParser
 import urllib2
 import sys
 import traceback
-from api_utils import clear_matching_cache_keys
+import api_utils
 
 @request.restful()
 def v1():
     "The OpenTree API v1"
     response.view = 'generic.json'
 
-    oti = OTISearch(api_base_url)
+    oti_base_url = api_utils.get_oti_base_url(request)  # WAS conf.get("apis", "oti_base_url")
+    oti = OTISearch(oti_base_url)
 
     def GET(kind, property_name, search_term,jsoncallback=None,callback=None,_=None,**kwargs):
         """"OpenTree API methods relating to searching
@@ -34,9 +35,6 @@ other than specifying a port, even if URL encoded.
             conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
         else:
             conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-        oti_base_url = conf.get("apis", "oti_base_url")
-        api_base_url = "%s/oti/ext/QueryServices/graphdb/" % (oti_base_url,)
 
         opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
 
@@ -73,9 +71,6 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
     else:
         conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-    oti_base_url = conf.get("apis", "oti_base_url")
-    api_base_url = "%s/oti/ext/QueryServices/graphdb/" % (oti_base_url,)
 
     opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
     payload = request.vars
@@ -125,6 +120,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     # fail on oti, with a FileNotFoundException!
     add_or_update_ids = list(set(add_or_update_ids))  # remove any duplicates
 
+    oti_base_url = api_utils.get_oti_base_url(request)  # WAS conf.get("apis", "oti_base_url")
     if len(add_or_update_ids) > 0:
         nudge_url = "%s/oti/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
         nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
@@ -176,7 +172,7 @@ removed_study_ids: %s
         # TODO: check returned IDs against our original list... what if something failed?
 
     # Clear any cached study lists (both verbose and non-verbose)
-    clear_matching_cache_keys(".*find_studies.*")
+    api_utils.clear_matching_cache_keys(".*find_studies.*")
 
     github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
     full_msg = """This URL should be called by a webhook set in the docstore repo:
