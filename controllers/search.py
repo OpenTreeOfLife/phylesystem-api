@@ -119,6 +119,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     # fail on oti, with a FileNotFoundException!
     add_or_update_ids = list(set(add_or_update_ids))  # remove any duplicates
 
+    oti_base_url = api_utils.get_oti_base_url(request)  # WAS conf.get("apis", "oti_base_url")
     if len(add_or_update_ids) > 0:
         # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
         nudge_url = "%s/oti/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
