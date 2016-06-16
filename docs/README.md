@@ -202,12 +202,13 @@ e.g.
     curl https://api.opentreeoflife.org/v2/study/pg_1144.nex/?tip_label=ot:ottid
     curl https://api.opentreeoflife.org/v2/study/pg_1144.nex/?tip_label=ot:otttaxonname
 
-NexSON supports fine-grained access to parts of the study (see below).
-NeXML can only be returned for the study. Newick and NEXUS formats can only return
-the full study, trees or subtrees.
 
 
 ##### fine-grained access via GET
+NexSON supports fine-grained access to parts of the study (such as the metadata).
+NeXML can only be returned for the study. Newick and NEXUS formats can only return
+the full study, trees or subtrees.
+
 You can request just parts of the study using a syntax of alternating resource IDs and names:
 
   * `*/v1/study/pg_10/meta` returns a shell of information about the study but has null entries
@@ -226,10 +227,10 @@ You can request just parts of the study using a syntax of alternating resource I
   * `*/v1/study/pg_10/subtree/ABC?subtree_id=XYZ` is similar to the tree resource
     mentioned above, but only a subtree of the tree with ID of "ABC" will be included. The subtree
     will be the part of the tree that is rooted at the node with ID "XYZ". A 404 will result if no such 
-    subtree is found in the study.
+    subtree is found in the study. Requesting a subtree only works when the requested format is newick or NEXUS.
   * `*/v1/study/pg_10/subtree/ABC?subtree_id=ingroup` ingroup is a wildcard that can be used
     to designate the ingroup node of any tree (may give a 404 for a tree, if the ingroup node
-    has not been specified by a curator).
+    has not been specified by a curator).  Requesting a subtree only works when the requested format is newick or NEXUS.
   * `*/v1/study/pg_10/otus` the `study["nexml"]["otusById"]` object 
   * `*/v1/study/pg_10/otus/ABC` is similar to otus, but only the otus group with ID "ABC" 
     will be included.
