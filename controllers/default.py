@@ -12,6 +12,8 @@ from peyotl.phylesystem.git_workflows import GitWorkflowError, \
 from peyotl.collections import OWNER_ID_PATTERN, \
                                COLLECTION_ID_PATTERN
 from peyotl.collections.validation import validate_collection
+from peyotl.amendments import AMENDMENT_ID_PATTERN
+from peyotl.amendments.validation import validate_amendment
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
                                  extract_tree, \
@@ -558,6 +560,272 @@ def collection(*args, **kwargs):
 
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
 
+
+# TAXONOMIC AMENDMENTS
+
+def amendments(*args, **kwargs):
+    """Handle an incoming URL targeting /v3/amendments/
+    This includes:
+        /v3/amendments/list_all
+        /v3/amendments/store_config
+        /v3/amendments/push_failure
+    """
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("OPTIONS!"), **(response.headers))
+    # N.B. other request methods don't really matter for these functions!
+    # extract and validate the intended API call
+    assert request.args[0].lower() == 'amendments'
+    if len(request.args) < 2:
+        raise HTTP(404, T('No method specified! Try amendments/list_all, store_config, or push_failure'))
+    api_call = request.args[1]   # ignore anything later in the URL
+    if api_call == 'list_all':
+        # For now, let's just return all amendments (complete JSON)
+        response.view = 'generic.json'
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        # Convert these to more closely resemble the output of find_all_studies
+        amendment_list = []
+        for id, props in docstore.iter_doc_objs():
+            # reckon and add 'lastModified' property, based on commit history?
+            latest_commit = docstore.get_version_history_for_doc_id(id)[0]
+            props.update({
+                'id': id,
+                'lastModified': {
+                        'author_name': latest_commit.get('author_name'),
+                        'relative_date': latest_commit.get('relative_date'),
+                        'display_date': latest_commit.get('date'),
+                        'ISO_date': latest_commit.get('date_ISO_8601'),
+                        'sha': latest_commit.get('id')  # this is the commit hash
+                        }
+                })
+            amendment_list.append(props)
+        return json.dumps(amendment_list)
+    elif api_call == 'store_config':
+        response.view = 'generic.json'
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        cd = docstore.get_configuration_dict()
+        return json.dumps(cd)
+    elif api_call == 'push_failure':
+        # this should find a type-specific PUSH_FAILURE file
+        request.vars['doc_type'] = 'amendment'
+        return push_failure()
+    raise HTTP(404, T('No such method as amendments/{}'.format(api_call)))
+
+def amendment(*args, **kwargs):
+    """Handle an incoming URL targeting /v3/amendment/{AMENDMENT_ID}
+    Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
+    """
+    _LOG = api_utils.get_logger(request, 'ot_api.amendment')
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("single-amendment OPTIONS!"), **(response.headers))
+
+    def __extract_and_validate_amendment(request, kwargs):
+        from pprint import pprint
+        try:
+            amendment_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+        except HTTP, err:
+            # payload not found
+            return None, None, None
+        try:
+            errors, amendment_adaptor = validate_amendment(amendment_obj)
+        except HTTP, err:
+            _LOG.exception('JSON payload failed validation (raising HTTP response)')
+            pprint(err)
+            raise err
+        except Exception, err:
+            _LOG.exception('JSON payload failed validation (reporting err.msg)')
+            pprint(err)
+            try:
+                msg = err.get('msg', 'No message found')
+            except:
+                msg = str(err)
+            _raise_HTTP_from_msg(msg)
+        if len(errors) > 0:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            msg = 'JSON payload failed validation with {nerrors} errors:\n{errors}'.format(nerrors=len(errors), errors='\n  '.join(errors))
+            _LOG.exception(msg)
+            _raise_HTTP_from_msg(msg)
+        return amendment_obj, errors, amendment_adaptor
+
+    assert request.args[0].lower() == 'amendment'
+    # check for an existing amendment ID
+    amendment_id = None
+    if len(request.args) > 1:
+        amendment_id = request.args[1]
+        if not AMENDMENT_ID_PATTERN.match(amendment_id):
+            raise HTTP(400, json.dumps({"error": 1, "description": "invalid amendment ID ({}) provided".format(amendment_id)}))
+            # TODO: OR ignore the submitted id and generate a new one
+            #amendment_id = None
+
+    elif request.env.request_method != 'POST':
+        # N.B. this id is optional when creating a new amendment
+        raise HTTP(400, json.dumps({"error": 1, "description": 'amendment ID expected after "amendment/"'}))
+
+    # fetch and parse the JSON payload, if any
+    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request,
+                                                                                              kwargs)
+    if (amendment_obj is None) and request.env.request_method in ('POST','PUT'):
+        raise HTTP(400, json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.env.request_method) }))
+
+    auth_info = auth_info or api_utils.authenticate(**kwargs)
+    if amendment_id is None:
+        # try to extract a usable amendment ID from the JSON payload (based on JSON elements and ottids used)
+        url = amendment_obj.get('url', None)
+        if url is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": "no amendment URL provided in query string or JSON payload"}))
+        try:
+            amendment_id = url.split('/amendment/')[1]
+        except:
+            _LOG.exception('{} failed'.format(request.env.request_method))
+            raise HTTP(404, json.dumps({"error": 1, "description": "invalid URL, no amendment id found: {}".format(url)}))
+        try:
+            assert amendment_id.split('/')[0] == owner_id
+        except:
+            _LOG.exception('{} failed'.format(request.env.request_method))
+            raise HTTP(404, json.dumps({"error": 1, "description": "amendment URL in JSON doesn't match logged-in user: {}".format(url)}))
+
+    # some request types imply git commits; gather any user-provided commit message
+    try:
+        commit_msg = kwargs.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+
+    if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
+        # support JSONP requests from another domain
+        response.view = 'generic.jsonp'
+
+    if request.env.request_method == 'GET':
+        # fetch the current amendment JSON
+        _LOG.debug('GET /v2/amendment/{}'.format(str(amendment_id)))
+        version_history = None
+        comment_html = None
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        _LOG.debug('parent_sha = {}'.format(parent_sha))
+        # return the correct nexson of study_id, using the specified view
+        amendments = api_utils.get_taxonomic_amendment_store(request)
+        try:
+            r = amendments.return_doc(amendment_id, commit_sha=parent_sha, return_WIP_map=True)
+        except:
+            _LOG.exception('GET failed')
+            raise HTTP(404, json.dumps({"error": 1, "description": "Amendment '{}' GET failure".format(amendment_id)}))
+        try:
+            amendment_json, head_sha, wip_map = r
+            ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
+            version_history = amendments.get_version_history_for_doc_id(amendment_id)
+        except:
+            _LOG.exception('GET failed')
+            e = sys.exc_info()[0]
+            _raise_HTTP_from_msg(e)
+        if not amendment_json:
+            raise HTTP(404, "Amendment '{s}' has no JSON data!".format(s=amendment_id))
+
+        try:
+            external_url = amendments.get_public_url(amendment_id)
+        except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.exception('amendment {} not found in external_url'.format(amendment))
+            external_url = 'NOT FOUND'
+        result = {'sha': head_sha,
+                 'data': amendment_json,
+                 'branch2sha': wip_map,
+                 'external_url': external_url,
+                 }
+        if version_history:
+            result['versionHistory'] = version_history
+        return result
+
+    if request.env.request_method == 'PUT':
+        # update an existing amendment with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.PUT')
+        # submit new json for this id, and read the results
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        merged_sha = None  #TODO: kwargs.get('???', None)
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        try:
+            r = docstore.update_existing_amendment(amendment_id,
+                                                   amendment_obj,
+                                                   auth_info,
+                                                   parent_sha,
+                                                   merged_sha,
+                                                   commit_msg=commit_msg)
+            commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+
+        # check for 'merge needed'?
+        mn = commit_return.get('merge_needed')
+        if (mn is not None) and (not mn):
+            __deferred_push_to_gh_call(request, amendment_id, doc_type='amendment', **kwargs)
+        return commit_return
+
+    if request.env.request_method == 'POST':
+        # Create a new amendment with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
+        # submit the json and proposed id (if any), and read the results
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+
+        # TODO: Mint any needed ottids, update the document accordingly, and
+        # prepare a response with
+        #  - per-taxon mapping of tag to ottid
+        #  - resulting id (or URL) to the stored amendment
+        # To ensure synchronization of ottids and amendments, this should be an
+        # atomic operation!
+
+        try:
+            r = docstore.add_new_amendment(amendment_obj,
+                                           auth_info,
+                                           amendment_id,
+                                           commit_msg=commit_msg)
+            new_amendment_id, commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+        if commit_return['error'] != 0:
+            _LOG.debug('add_new_amendment failed with error code')
+            raise HTTP(400, json.dumps(commit_return))
+        __deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', **kwargs)
+        return commit_return
+
+    if request.env.request_method == 'DELETE':
+        # remove this amendment from the docstore
+        _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        parent_sha = kwargs.get('starting_commit_SHA')
+        if parent_sha is None:
+            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        try:
+            x = docstore.delete_amendment(amendment_id,
+                                          auth_info,
+                                          parent_sha,
+                                          commit_msg=commit_msg)
+            if x.get('error') == 0:
+                __deferred_push_to_gh_call(request, None, doc_type='amendment', **kwargs)
+            return x
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            _LOG.exception('Unknown error in amendment deletion')
+            raise HTTP(400, traceback.format_exc())
+            #raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in amendment deletion'}))
+
+    raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
+
+
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
 # This allows us to normalize all API method URLs under v1/, even for
 # non-RESTful methods.
@@ -574,6 +842,8 @@ _route_tag2func = {'index':index,
                    # NOTE singular vs. plural forms
                    'collections': collections,
                    'collection': collection,
+                   'amendments': amendments,
+                   'amendment': amendment,
                    #TODO: 'following': following,
                   }
 
