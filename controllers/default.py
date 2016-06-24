@@ -676,7 +676,7 @@ def amendment(*args, **kwargs):
     if (amendment_obj is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.env.request_method) }))
 
-    auth_info = auth_info or api_utils.authenticate(**kwargs)
+    auth_info = api_utils.authenticate(**kwargs)
     if amendment_id is None:
         # try to extract a usable amendment ID from the JSON payload (based on JSON elements and ottids used)
         url = amendment_obj.get('url', None)
