@@ -778,17 +778,12 @@ def amendment(*args, **kwargs):
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_taxonomic_amendment_store(request)
 
-        # TODO: Mint any needed ottids, update the document accordingly, and
-        # prepare a response with
-        #  - per-taxon mapping of tag to ottid
-        #  - resulting id (or URL) to the stored amendment
-        # To ensure synchronization of ottids and amendments, this should be an
-        # atomic operation!
-
+        # N.B. add_new_amendment below takes care of minting new ottids,
+        # assigning them to new taxa, and returning a per-taxon mapping to the
+        # caller. It will assign the new amendment id accordingly!
         try:
             r = docstore.add_new_amendment(amendment_obj,
                                            auth_info,
-                                           amendment_id,
                                            commit_msg=commit_msg)
             new_amendment_id, commit_return = r
         except GitWorkflowError, err:
