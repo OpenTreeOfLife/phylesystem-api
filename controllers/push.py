@@ -90,6 +90,36 @@ def v1():
                     "description": "Could not push! Details: {m}".format(m=m)
                 }))
 
+        elif doc_type.lower() == 'amendment':
+            docstore = api_utils.get_taxonomic_amendment_store(request)
+            try:
+                docstore.push_doc_to_remote('GitHubRemote', resource_id)
+            except:
+                m = traceback.format_exc()
+                _LOG.warn('Push of amendment {s} failed. Details: {m}'.format(s=resource_id, m=m))
+                if os.path.exists(fail_file):
+                    _LOG.warn('push failure file "{f}" already exists. This event not logged there'.format(f=fail_file))
+                else:
+                    timestamp = datetime.datetime.utcnow().isoformat()
+                    try:
+                        ga = docstore.create_git_action(resource_id)
+                    except:
+                        m = 'Could not create an adaptor for git actions on amendment ID "{}". ' \
+                            'If you are confident that this is a valid amendment ID, please report this as a bug.'
+                        m = m.format(resource_id)
+                        raise HTTP(400, json.dumps({'error': 1, 'description': m}))
+                    master_sha = ga.get_master_sha()
+                    obj = {'date': timestamp,
+                           'amendment': resource_id,
+                           'commit': master_sha,
+                           'stacktrace': m}
+                    api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
+                    _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+                raise HTTP(409, json.dumps({
+                    "error": 1,
+                    "description": "Could not push! Details: {m}".format(m=m)
+                }))
+
         elif doc_type.lower() == 'favorites':
             raise NotImplementedError('TODO: add push behavior for favorites!') 
 
