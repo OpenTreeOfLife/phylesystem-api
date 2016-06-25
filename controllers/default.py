@@ -677,21 +677,6 @@ def amendment(*args, **kwargs):
         raise HTTP(400, json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.env.request_method) }))
 
     auth_info = api_utils.authenticate(**kwargs)
-    if amendment_id is None:
-        # try to extract a usable amendment ID from the JSON payload (based on JSON elements and ottids used)
-        url = amendment_obj.get('url', None)
-        if url is None:
-            raise HTTP(400, json.dumps({"error": 1, "description": "no amendment URL provided in query string or JSON payload"}))
-        try:
-            amendment_id = url.split('/amendment/')[1]
-        except:
-            _LOG.exception('{} failed'.format(request.env.request_method))
-            raise HTTP(404, json.dumps({"error": 1, "description": "invalid URL, no amendment id found: {}".format(url)}))
-        try:
-            assert amendment_id.split('/')[0] == owner_id
-        except:
-            _LOG.exception('{} failed'.format(request.env.request_method))
-            raise HTTP(404, json.dumps({"error": 1, "description": "amendment URL in JSON doesn't match logged-in user: {}".format(url)}))
 
     # some request types imply git commits; gather any user-provided commit message
     try:
