@@ -207,12 +207,62 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
     except:
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
 
-    # TODO: build a working URL and nudge the index!
-    # nudge URL should be '/v3/taxonomy/process_additions'
-    msg = json.dumps(payload)
+    # build a working URL, gather amendment body, and nudge the index!
+    amendments_api_base_url = get_amendments_api_base_url(request)
 
-    # Clear any cached study lists (both verbose and non-verbose)
-    api_utils.clear_matching_cache_keys(".*find_studies.*")
+    if len(added_ott_ids) > 0:
+        nudge_url = "{b}v3/taxonomy/process_additions".format(b=amendments_api_base_url)
+        nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
+
+        for ott_id in add_ott_ids:
+            # fetch the JSON body of each new amendment and submit it for indexing
+            fetch_url = "{b}v3/amendment/{i}".format(b=amendments_api_base_url, i=ott_id)
+            req = urllib2.Request(
+                url=nudge_url,
+            )
+            try:
+                nudge_response = urllib2.urlopen(req).read()
+                # strip away metadata (version history, etc.)
+                amendment_blob = json.loads( nudge_response ).get('data')
+            except Exception, e:
+                # bail and report the error in webhook response
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                msg += """fetch of amendment failed!'
+    fetch_url: %s
+    ott_id: %s
+    %s""" % (fetch_url, ott_id, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+                break
+
+            # N.B. that gluon.tools.fetch() can't be used here, since it won't send
+            # "raw" JSON data as taxomachine expects
+            req = urllib2.Request(
+                url=nudge_url,
+                data=json.dumps({"addition_document": amendment_blob}),
+                headers={"Content-Type": "application/json"}
+            )
+            try:
+                nudge_response = urllib2.urlopen(req).read()
+                msg = nudge_response   # TODO: REMOVE THIS!
+            except Exception, e:
+                # report the error in webhook response
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                msg += """indexNexsons failed!'
+    nudge_url: %s
+    added_ott_ids: %s
+    %s""" % (nudge_url, added_ott-ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+
+    # LATER: add handlers for modified and removed taxa?
+    if len(modified_ott_ids) > 0:
+        raise HTTP(400,json.dumps({
+            "error":1,
+            "description":"We don't currently re-index modified taxa!"}))
+    if len(removed_ott_ids) > 0:
+        raise HTTP(400,json.dumps({
+            "error":1,
+            "description":"We don't currently re-index removed taxa!"}))
+
+    # N.B. If we had any cached amendment results, we'd clear them now
+    #api_utils.clear_matching_cache_keys(...)
 
     github_webhook_url = "%s/settings/hooks" % amendments_repo_url
     full_msg = """This URL should be called by a webhook set in the amendments repo:

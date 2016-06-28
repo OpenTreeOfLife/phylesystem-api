@@ -676,7 +676,9 @@ def amendment(*args, **kwargs):
     if (amendment_obj is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.env.request_method) }))
 
-    auth_info = api_utils.authenticate(**kwargs)
+    if request.env.request_method != 'GET':
+        # all other methods require authentication
+        auth_info = api_utils.authenticate(**kwargs)
 
     # some request types imply git commits; gather any user-provided commit message
     try:
