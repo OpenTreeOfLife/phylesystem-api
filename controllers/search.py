@@ -241,3 +241,13 @@ def _harvest_study_ids_from_paths( path_list, target_array ):
             # skip any intermediate directories in docstore repo
             study_id = path_parts[ len(path_parts) - 2 ]
             target_array.append(study_id)
+
+def _harvest_ott_ids_from_paths( path_list, target_array ):
+    for path in path_list:
+        path_parts = path.split('/')
+        # ignore changes to counter file, other directories, etc.
+        if path_parts[0] == "amendments":
+            # skip intermediate directories in docstore repo
+            amendment_file_name = path_parts.pop()
+            ott_id = amendment_file_name[:-5]
+            target_array.append(ott_id)
