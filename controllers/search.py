@@ -234,9 +234,10 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
 
             # N.B. that gluon.tools.fetch() can't be used here, since it won't send
             # "raw" JSON data as taxomachine expects
+            POST_data = json.dumps({"addition_document": amendment_blob})
             req = urllib2.Request(
                 url=nudge_url,
-                data=json.dumps({"addition_document": amendment_blob}),
+                data=POST_data,
                 headers={"Content-Type": "application/json"}
             )
             try:
@@ -245,10 +246,11 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
             except Exception, e:
                 # report the error in webhook response
                 exc_type, exc_value, exc_traceback = sys.exc_info()
-                msg += """indexNexsons failed!'
+                msg += """index amendments failed!'
     nudge_url: %s
+    POST_data: %s
     added_ott_ids: %s
-    %s""" % (nudge_url, added_ott_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    %s""" % (nudge_url, POST_data, added_ott_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
 
     # LATER: add handlers for modified and removed taxa?
     if len(modified_ott_ids) > 0:
