@@ -218,11 +218,12 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
             fetch_url = "{b}v3/amendment/{i}".format(b=amendments_api_base_url, i=ott_id)
             req = urllib2.Request(
                 url=nudge_url,
+                data={}
             )
             try:
-                nudge_response = urllib2.urlopen(req).read()
+                fetch_response = urllib2.urlopen(req).read()
                 # strip away metadata (version history, etc.)
-                amendment_blob = json.loads( nudge_response ).get('data')
+                amendment_blob = json.loads( fetch_response ).get('data')
             except Exception, e:
                 # bail and report the error in webhook response
                 exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -249,9 +250,10 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
                 msg += """index amendments failed!'
     nudge_url: %s
     POST_data: %s
+    fetch_response: %s
     nudge_response: %s
     added_ott_ids: %s
-    %s""" % (nudge_url, POST_data, nudge_response, added_ott_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    %s""" % (nudge_url, POST_data, fetch_response, nudge_response, added_ott_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
 
     # LATER: add handlers for modified and removed taxa?
     if len(modified_ott_ids) > 0:
