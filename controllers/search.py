@@ -217,8 +217,8 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
             # fetch the JSON body of each new amendment and submit it for indexing
             fetch_url = "{b}v3/amendment/{i}".format(b=amendments_api_base_url, i=ott_id)
             req = urllib2.Request(
-                url=nudge_url,
-                data={}
+                url=fetch_url,
+                data=""  # to force POST method
             )
             try:
                 fetch_response = urllib2.urlopen(req).read()
@@ -229,8 +229,9 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 msg += """fetch of amendment failed!'
     fetch_url: %s
+    fetch_response: %s
     ott_id: %s
-    %s""" % (fetch_url, ott_id, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    %s""" % (fetch_url, fetch_response, ott_id, traceback.format_exception(exc_type, exc_value, exc_traceback),)
                 break
 
             # N.B. that gluon.tools.fetch() can't be used here, since it won't send
