@@ -248,7 +248,7 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
                 msg += """indexNexsons failed!'
     nudge_url: %s
     added_ott_ids: %s
-    %s""" % (nudge_url, added_ott-ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    %s""" % (nudge_url, added_ott_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
 
     # LATER: add handlers for modified and removed taxa?
     if len(modified_ott_ids) > 0:
