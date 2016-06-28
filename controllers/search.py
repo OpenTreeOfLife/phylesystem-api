@@ -29,14 +29,7 @@ because web2py does not recognize URLs that contain a colon
 other than specifying a port, even if URL encoded.
 
 """
-        app_name = request.application
-        conf = SafeConfigParser(allow_no_value=True)
-        if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
-            conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
-        else:
-            conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
-
-        opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
+        opentree_docstore_url = _read_from_local_config(request, "apis", "opentree_docstore_url")
 
         # support JSONP request from another domain
         if jsoncallback or callback:
@@ -53,7 +46,7 @@ other than specifying a port, even if URL encoded.
 
     return locals()
 
-def nudgeIndexOnUpdates():
+def nudgeStudyIndexOnUpdates():
     """"Support method to update oti index in response to GitHub webhooks
 
 This examines the JSON payload of a GitHub webhook to see which studies have
@@ -65,14 +58,8 @@ Finally, we clear the cached study list (response to find_studies with no args).
 
 N.B. This depends on a GitHub webhook on the chosen docstore.
 """
-    app_name = request.application
-    conf = SafeConfigParser(allow_no_value=True)
-    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
-        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
-    else:
-        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+    opentree_docstore_url = _read_from_local_config(request, "apis", "opentree_docstore_url")
 
-    opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
     payload = request.vars
     msg = ''
 
@@ -184,6 +171,68 @@ removed_study_ids: %s
         return full_msg
     else:
         raise HTTP(500, full_msg)
+
+def nudgeTaxonIndexOnUpdates():
+    """"Support method to update taxon index (taxomachine) in response to GitHub webhooks
+
+This examines the JSON payload of a GitHub webhook to see which taxa have
+been added, modified, or removed. Then it calls the appropriate index service to
+(re)index these taxa, or to delete a taxon's information if it was deleted in
+an amendment.
+
+TODO: Clear any cached taxon list.
+
+N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
+"""
+    amendments_repo_url = _read_from_local_config(request, "apis", "amendments_repo_url")
+    payload = request.vars
+    if payload['repository']['url'] != amendments_repo_url:
+        raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
+
+    msg = ''
+    try:
+        # how we nudge the index depends on which taxa are new, changed, or deleted
+        added_ott_ids = [ ]
+        modified_ott_ids = [ ]
+        removed_ott_ids = [ ]
+        # TODO: Should any of these lists override another? maybe use commit timestamps to "trump" based on later operations?
+        for commit in payload['commits']:
+            _harvest_ott_ids_from_paths( commit['added'], added_ott_ids )
+            _harvest_ott_ids_from_paths( commit['modified'], modified_ott_ids )
+            _harvest_ott_ids_from_paths( commit['removed'], removed_ott_ids )
+        # "flatten" each list to remove duplicates
+        added_ott_ids = list(set(added_ott_ids))
+        modified_ott_ids = list(set(modified_ott_ids))
+        removed_ott_ids = list(set(removed_ott_ids))
+    except:
+        raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
+
+    # TODO: build a working URL and nudge the index!
+    # nudge URL should be '/v3/taxonomy/process_additions'
+    msg = json.dumps(payload)
+
+    # Clear any cached study lists (both verbose and non-verbose)
+    api_utils.clear_matching_cache_keys(".*find_studies.*")
+
+    github_webhook_url = "%s/settings/hooks" % amendments_repo_url
+    full_msg = """This URL should be called by a webhook set in the amendments repo:
+<br /><br />
+<a href="%s">%s</a><br />
+<pre>%s</pre>
+""" % (github_webhook_url, github_webhook_url, msg,)
+    if msg == '':
+        return full_msg
+    else:
+        raise HTTP(500, full_msg)
+
+def _read_from_local_config(request, section_name, key_name):
+    app_name = request.application
+    conf = SafeConfigParser(allow_no_value=True)
+    if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
+        conf.read("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,))
+    else:
+        conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
+    return conf.get(section_name, key_name)
 
 def _harvest_study_ids_from_paths( path_list, target_array ):
     for path in path_list:
