@@ -218,8 +218,7 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
             fetch_url = "{b}v3/amendment/{i}".format(b=amendments_api_base_url, i=ott_id)
             fetch_response = None
             req = urllib2.Request(
-                url=fetch_url,
-                data=""  # to force POST method
+                url=fetch_url
             )
             try:
                 fetch_response = urllib2.urlopen(req).read()
