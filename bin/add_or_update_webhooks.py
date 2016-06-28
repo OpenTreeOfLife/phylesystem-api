@@ -12,13 +12,13 @@ else:
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 2:
-    amendments_repo_url = sys.argv[1]
+    amendments_repo_url = sys.argv[2]
 else:
     print "Please specify the taxonomic-amendment repo URL as second argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 3:
-    opentree_api_base_url = sys.argv[2].rstrip("/")
+    opentree_api_base_url = sys.argv[3].rstrip("/")
     nudge_study_index_url = "%s/phylesystem/search/nudgeStudyIndexOnUpdates" % opentree_api_base_url
     nudge_taxon_index_url = "%s/phylesystem/search/nudgeTaxonIndexOnUpdates" % opentree_api_base_url
 else:
@@ -26,7 +26,7 @@ else:
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 4:
-    oauth_token_file = sys.argv[3]
+    oauth_token_file = sys.argv[4]
 else:
     oauth_token_file = None
 
