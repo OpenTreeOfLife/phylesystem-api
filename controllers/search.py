@@ -208,7 +208,7 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
 
     # build a working URL, gather amendment body, and nudge the index!
-    amendments_api_base_url = get_amendments_api_base_url(request)
+    amendments_api_base_url = api_utils.get_amendments_api_base_url(request)
 
     if len(added_ott_ids) > 0:
         nudge_url = "{b}v3/taxonomy/process_additions".format(b=amendments_api_base_url)
