@@ -213,7 +213,7 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
     if len(added_ott_ids) > 0:
         nudge_url = "{b}v3/taxonomy/process_additions".format(b=amendments_api_base_url)
 
-        for ott_id in add_ott_ids:
+        for ott_id in added_ott_ids:
             # fetch the JSON body of each new amendment and submit it for indexing
             fetch_url = "{b}v3/amendment/{i}".format(b=amendments_api_base_url, i=ott_id)
             req = urllib2.Request(
