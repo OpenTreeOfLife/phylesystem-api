@@ -236,7 +236,7 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
 
             # N.B. that gluon.tools.fetch() can't be used here, since it won't send
             # "raw" JSON data as taxomachine expects
-            POST_data = json.dumps({"addition_document": amendment_blob})
+            POST_data = """{"addition_document": {%s}""" %s json.dumps(amendment_blob)
             nudge_response = None
             req = urllib2.Request(
                 url=nudge_url,
