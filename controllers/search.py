@@ -245,8 +245,8 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
                 headers={"Content-Type": "application/json"}
             )
             try:
+                # N.B. we don't expect anything interesting here, probably just an empty dict
                 nudge_response = urllib2.urlopen(req).read()
-                msg = nudge_response   # TODO: REMOVE THIS!
             except Exception, e:
                 # report the error in webhook response
                 exc_type, exc_value, exc_traceback = sys.exc_info()
