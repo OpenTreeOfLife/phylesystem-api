@@ -282,6 +282,19 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
     else:
         raise HTTP(500, full_msg)
 
+def nudgeIllustrationIndexOnUpdates():
+    """"Support method to update illustration index (TBD!) in response to GitHub webhooks
+
+This examines the JSON payload of a GitHub webhook to see which illustrations have
+been added, modified, or removed. Then it calls the appropriate index service to
+(re)index or delete these illustrations.
+
+TODO: Clear any cached illustration list.
+
+N.B. This depends on a GitHub webhook on the tree-illustratoins docstore!
+"""
+    return """This is currently a no-op, pending development of an index for tree illustrations!""")
+
 def _read_from_local_config(request, section_name, key_name):
     app_name = request.application
     conf = SafeConfigParser(allow_no_value=True)
