@@ -8,25 +8,32 @@ this_script = sys.argv[0]
 if len(sys.argv) > 1:
     opentree_docstore_url = sys.argv[1]
 else:
-    print "Please specify the Open Tree doc-store URL as first argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    print "Please specify the Open Tree doc-store URL as first argument: '%s <studies-repo-URL> <amendments-repo-URL> <illustrations-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 2:
     amendments_repo_url = sys.argv[2]
 else:
-    print "Please specify the taxonomic-amendment repo URL as second argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    print "Please specify the taxonomic-amendment repo URL as second argument: '%s <studies-repo-URL> <amendments-repo-URL> <illustrations-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 3:
-    opentree_api_base_url = sys.argv[3].rstrip("/")
-    nudge_study_index_url = "%s/phylesystem/search/nudgeStudyIndexOnUpdates" % opentree_api_base_url
-    nudge_taxon_index_url = "%s/phylesystem/search/nudgeTaxonIndexOnUpdates" % opentree_api_base_url
+    illustrations_repo_url = sys.argv[3]
 else:
-    print "Please specify the Open Tree API public URL as third argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    print "Please specify the tree-illustrations repo URL as third argument: '%s <studies-repo-URL> <amendments-repo-URL> <illustrations-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 4:
-    oauth_token_file = sys.argv[4]
+    opentree_api_base_url = sys.argv[4].rstrip("/")
+    nudge_study_index_url = "%s/phylesystem/search/nudgeStudyIndexOnUpdates" % opentree_api_base_url
+    nudge_taxon_index_url = "%s/phylesystem/search/nudgeTaxonIndexOnUpdates" % opentree_api_base_url
+    nudge_illustration_index_url = "%s/phylesystem/search/nudgeIllustrationIndexOnUpdates" % opentree_api_base_url
+else:
+    print "Please specify the Open Tree API public URL as fourth argument: '%s <studies-repo-URL> <amendments-repo-URL> <illustrations-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    sys.exit(1)  # signal to the caller that something went wrong
+
+if len(sys.argv) > 5:
+    oauth_token_file = sys.argv[5]
 else:
     oauth_token_file = None
 
@@ -105,6 +112,8 @@ if not(prompt_for_manual_webhooks):
     # N.B. this might fail, flipping prompt_for_manual_webhooks!
     install_webhook(opentree_docstore_url, nudge_study_index_url)
     install_webhook(amendments_repo_url, nudge_taxon_index_url)
+    install_webhook(illustrations_repo_url, nudge_illustration_index_url)
+    # N.B. that there's currently now index for illustrations, so it's a no-op
 
 if prompt_for_manual_webhooks:
     # fall back to our prompts for manual action
@@ -129,9 +138,9 @@ if prompt_for_manual_webhooks:
     Please ensure the required webhook for indexing new taxa (and other
     taxonomic amendments) is in place on GitHub. You can manage webhooks for
     this repo at:
-        
+
         %s/settings/hooks
-        
+
     Find (or add) a webhook with these properties:
         Payload URL: %s
         Payload version: application/vnd.github.v3+json
@@ -140,5 +149,20 @@ if prompt_for_manual_webhooks:
 
     ***************************************************************
         """ %  (amendments_repo_url, nudge_taxon_index_url)
+
+    print """
+    Please ensure the required webhook for re-indexing tree illustrations is in
+    place on GitHub. You can manage webhooks for this repo at:
+
+        %s/settings/hooks
+
+    Find (or add) a webhook with these properties:
+        Payload URL: %s
+        Payload version: application/vnd.github.v3+json
+        Events: push
+        Active: true
+
+    ***************************************************************
+        """ %  (illustrations_repo_url, nudge_illustration_index_url)
 
 sys.exit(0)
