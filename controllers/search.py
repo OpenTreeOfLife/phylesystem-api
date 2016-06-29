@@ -234,13 +234,14 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
     %s""" % (fetch_url, fetch_response, ott_id, traceback.format_exception(exc_type, exc_value, exc_traceback),)
                 break
 
-            # N.B. that gluon.tools.fetch() can't be used here, since it won't send
-            # "raw" JSON data as taxomachine expects
-            POST_data = """{"addition_document": %s""" % json.dumps(amendment_blob)
+            # Extra weirdness required here, as neo4j needs an encoded *string*
+            # of the amendment JSON, within a second JSON wrapper :-/
+            POST_blob = {"addition_document": json.dumps(amendment_blob) }
+            POST_string = json.dumps(POST_blob) 
             nudge_response = None
             req = urllib2.Request(
                 url=nudge_url,
-                data=POST_data,
+                data=POST_string,
                 headers={"Content-Type": "application/json"}
             )
             try:
