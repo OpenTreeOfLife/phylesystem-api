@@ -3,6 +3,7 @@ from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
 from peyotl.collections import TreeCollectionStore
 from peyotl.amendments import TaxonomicAmendmentStore
+from peyotl.illustrations import IllustrationStore
 from peyotl.utility import read_config as read_peyotl_config
 from peyotl.utility import get_config as get_peyotl_config
 from ConfigParser import SafeConfigParser
@@ -165,6 +166,49 @@ def get_taxonomic_amendment_store(request):
     _LOG.debug('assumed_doc_version = {}'.format(_TAXONOMIC_AMENDMENT_STORE.assumed_doc_version))
     return _TAXONOMIC_AMENDMENT_STORE
 
+_ILLUSTRATION_STORE = None
+def get_illustration_store(request):
+    global _ILLUSTRATION_STORE
+    if _ILLUSTRATION_STORE is not None:
+        return _ILLUSTRATION_STORE
+    _LOG = get_logger(request, 'ot_api')
+    _LOG.debug("getting _ILLUSTRATION_STORE...")
+    from gitdata import GitData  #TODO?
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_illustrations_config(request)
+    _LOG.debug("  repo_parent={}".format(repo_parent))
+    _LOG.debug("  repo_remote={}".format(repo_remote))
+    _LOG.debug("  git_ssh={}".format(git_ssh))
+    _LOG.debug("  pkey={}".format(pkey))
+    _LOG.debug("  git_hub_remote={}".format(git_hub_remote))
+    push_mirror = os.path.join(repo_parent, 'mirror')
+    pmi = {
+        'parent_dir': push_mirror,
+        'remote_map': {
+            'GitHubRemote': git_hub_remote,
+            },
+        }
+    mirror_info = {'push':pmi}
+    conf = get_conf_object(request)
+    import pprint
+    _LOG.debug("  conf:")
+    _LOG.debug(pprint.pformat(conf))
+    a = {}
+    try:
+        # any keyword args to pass along from config?
+        #new_study_prefix = conf.get('apis', 'new_study_prefix')
+        #a['new_study_prefix'] = new_study_prefix
+        pass
+    except:
+        pass
+    _ILLUSTRATION_STORE = IllustrationStore(repos_par=repo_parent,
+                                            git_ssh=git_ssh,
+                                            pkey=pkey,
+                                            git_action_class=GitData, #TODO?
+                                            mirror_info=mirror_info,
+                                            **a)
+    _LOG.debug('assumed_doc_version = {}'.format(_ILLUSTRATION_STORE.assumed_doc_version))
+    return _ILLUSTRATION_STORE
+
 
 def get_failed_push_filepath(request, doc_type=None):
     filenames_by_content_type = {'nexson': "PUSH_FAILURE_nexson.json",
@@ -262,6 +306,29 @@ def read_amendments_config(request):
     except:
         max_filesize = '20000000'
     return amendments_repo_parent, amendments_repo_remote, git_ssh, pkey, git_hub_remote, max_filesize
+
+def read_illustrations_config(request):
+    """Load settings for a minor repo with shared tree illustrations"""
+    conf = get_conf_object(request)
+    illustrations_repo_parent   = conf.get("apis","illustrations_repo_parent")
+    illustrations_repo_remote = conf.get("apis", "illustrations_repo_remote")
+    try:
+        git_ssh     = conf.get("apis", "git_ssh")
+    except:
+        git_ssh = 'ssh'
+    try:
+        pkey        = conf.get("apis", "pkey")
+    except:
+        pkey = None
+    try:
+        git_hub_remote = conf.get("apis", "git_hub_remote")
+    except:
+        git_hub_remote = 'git@github.com:OpenTreeOfLife'
+    try:
+        max_filesize = conf.get("filesize", "illustrations_max_file_size")
+    except:
+        max_filesize = '20000000'
+    return illustrations_repo_parent, illustrations_repo_remote, git_ssh, pkey, git_hub_remote, max_filesize
 
 def read_favorites_config(request):
     """Load settings for a minor repo with per-user 'favorites' information"""

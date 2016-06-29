@@ -14,6 +14,8 @@ from peyotl.collections import OWNER_ID_PATTERN, \
 from peyotl.collections.validation import validate_collection
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
+from peyotl.illustrations import ILLUSTRATION_ID_PATTERN
+from peyotl.illustrations.validation import validate_illustration
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
                                  extract_tree, \
@@ -808,6 +810,254 @@ def amendment(*args, **kwargs):
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
 
 
+# TREE ILLUSTRATIONS
+
+def illustrations(*args, **kwargs):
+    """Handle an incoming URL targeting /v3/illustrations/
+    This includes:
+        /v3/illustrations/list_all
+        /v3/illustrations/store_config
+        /v3/illustrations/push_failure
+    """
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("OPTIONS!"), **(response.headers))
+    # N.B. other request methods don't really matter for these functions!
+    # extract and validate the intended API call
+    assert request.args[0].lower() == 'illustrations'
+    if len(request.args) < 2:
+        raise HTTP(404, T('No method specified! Try illustrations/list_all, store_config, or push_failure'))
+    api_call = request.args[1]   # ignore anything later in the URL
+    if api_call == 'list_all':
+        # For now, let's just return all illustrations (complete JSON)
+        response.view = 'generic.json'
+        docstore = api_utils.get_illustration_store(request)
+        # Convert these to more closely resemble the output of find_all_studies
+        illustration_list = []
+        for id, props in docstore.iter_doc_objs():
+            # reckon and add 'lastModified' property, based on commit history?
+            latest_commit = docstore.get_version_history_for_doc_id(id)[0]
+            props.update({
+                'id': id,
+                'lastModified': {
+                        'author_name': latest_commit.get('author_name'),
+                        'relative_date': latest_commit.get('relative_date'),
+                        'display_date': latest_commit.get('date'),
+                        'ISO_date': latest_commit.get('date_ISO_8601'),
+                        'sha': latest_commit.get('id')  # this is the commit hash
+                        }
+                })
+            illustration_list.append(props)
+        return json.dumps(illustration_list)
+    elif api_call == 'store_config':
+        response.view = 'generic.json'
+        docstore = api_utils.get_illustration_store(request)
+        cd = docstore.get_configuration_dict()
+        return json.dumps(cd)
+    elif api_call == 'push_failure':
+        # this should find a type-specific PUSH_FAILURE file
+        request.vars['doc_type'] = 'illustration'
+        return push_failure()
+    raise HTTP(404, T('No such method as illustrations/{}'.format(api_call)))
+
+def illustration(*args, **kwargs):
+    """Handle an incoming URL targeting /v3/illustration/{ILLUSTRATION_ID}
+    Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
+    """
+    _LOG = api_utils.get_logger(request, 'ot_api.illustration')
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("single-illustration OPTIONS!"), **(response.headers))
+
+    def __extract_and_validate_illustration(request, kwargs):
+        # TODO: work from a manifest, test for all required elements?
+        from pprint import pprint
+        try:
+            illustration_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+        except HTTP, err:
+            # payload not found
+            return None, None, None
+        try:
+            errors, illustration_adaptor = validate_illustration(illustration_obj)
+        except HTTP, err:
+            _LOG.exception('JSON payload failed validation (raising HTTP response)')
+            pprint(err)
+            raise err
+        except Exception, err:
+            _LOG.exception('JSON payload failed validation (reporting err.msg)')
+            pprint(err)
+            try:
+                msg = err.get('msg', 'No message found')
+            except:
+                msg = str(err)
+            _raise_HTTP_from_msg(msg)
+        if len(errors) > 0:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            msg = 'JSON payload failed validation with {nerrors} errors:\n{errors}'.format(nerrors=len(errors), errors='\n  '.join(errors))
+            _LOG.exception(msg)
+            _raise_HTTP_from_msg(msg)
+        return illustration_obj, errors, illustration_adaptor
+
+    assert request.args[0].lower() == 'illustration'
+    # check for an existing illustration ID
+    illustration_id = None
+    if len(request.args) > 1:
+        illustration_id = request.args[1]
+        if not ILLUSTRATION_ID_PATTERN.match(illustration_id):
+            raise HTTP(400, json.dumps({"error": 1, "description": "invalid illustration ID ({}) provided".format(illustration_id)}))
+            # TODO: OR ignore the submitted id and generate a new one
+            #illustration_id = None
+
+    elif request.env.request_method != 'POST':
+        # N.B. this id is optional when creating a new illustration
+        raise HTTP(400, json.dumps({"error": 1, "description": 'illustration ID expected after "illustration/"'}))
+
+    # fetch and parse the JSON payload, if any
+    illustration_obj, illustration_errors, illustration_adapter = __extract_and_validate_illustration(request,
+                                                                                              kwargs)
+    if (illustration_obj is None) and request.env.request_method in ('POST','PUT'):
+        raise HTTP(400, json.dumps({"error": 1, "description": "illustration JSON expected for HTTP method {}".format(request.env.request_method) }))
+
+    if request.env.request_method != 'GET':
+        # all other methods require authentication
+        auth_info = api_utils.authenticate(**kwargs)
+
+    # some request types imply git commits; gather any user-provided commit message
+    try:
+        commit_msg = kwargs.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+
+    if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
+        # support JSONP requests from another domain
+        response.view = 'generic.jsonp'
+
+    if request.env.request_method == 'GET':
+        # fetch the current illustration JSON
+        _LOG.debug('GET /v2/illustration/{}'.format(str(illustration_id)))
+        version_history = None
+        comment_html = None
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        _LOG.debug('parent_sha = {}'.format(parent_sha))
+        # return the correct nexson of study_id, using the specified view
+        illustrations = api_utils.get_illustration_store(request)
+        try:
+            r = illustrations.return_doc(illustration_id, commit_sha=parent_sha, return_WIP_map=True)
+        except:
+            _LOG.exception('GET failed')
+            raise HTTP(404, json.dumps({"error": 1, "description": "Illustration '{}' GET failure".format(illustration_id)}))
+        try:
+            illustration_json, head_sha, wip_map = r
+            ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
+            version_history = illustrations.get_version_history_for_doc_id(illustration_id)
+        except:
+            _LOG.exception('GET failed')
+            e = sys.exc_info()[0]
+            _raise_HTTP_from_msg(e)
+        if not illustration_json:
+            raise HTTP(404, "Illustration '{s}' has no JSON data!".format(s=illustration_id))
+
+        try:
+            external_url = illustrations.get_public_url(illustration_id)
+        except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.exception('illustration {} not found in external_url'.format(illustration))
+            external_url = 'NOT FOUND'
+        result = {'sha': head_sha,
+                 'data': illustration_json,
+                 'branch2sha': wip_map,
+                 'external_url': external_url,
+                 }
+        if version_history:
+            result['versionHistory'] = version_history
+        return result
+
+    if request.env.request_method == 'PUT':
+        # update an existing illustration with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.PUT')
+        # submit new json for this id, and read the results
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        merged_sha = None  #TODO: kwargs.get('???', None)
+        docstore = api_utils.get_illustration_store(request)
+        try:
+            r = docstore.update_existing_illustration(illustration_id,
+                                                   illustration_obj,
+                                                   auth_info,
+                                                   parent_sha,
+                                                   merged_sha,
+                                                   commit_msg=commit_msg)
+            commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+
+        # check for 'merge needed'?
+        mn = commit_return.get('merge_needed')
+        if (mn is not None) and (not mn):
+            __deferred_push_to_gh_call(request, illustration_id, doc_type='illustration', **kwargs)
+        return commit_return
+
+    if request.env.request_method == 'POST':
+        # Create a new illustration with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.POST')
+        # submit the json and proposed id (if any), and read the results
+        docstore = api_utils.get_taxonomic_illustration_store(request)
+
+        # N.B. add_new_illustration below takes care of minting new ottids,
+        # assigning them to new taxa, and returning a per-taxon mapping to the
+        # caller. It will assign the new illustration id accordingly!
+        try:
+            r = docstore.add_new_illustration(illustration_obj,
+                                           auth_info,
+                                           commit_msg=commit_msg)
+            new_illustration_id, commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+        if commit_return['error'] != 0:
+            _LOG.debug('add_new_illustration failed with error code')
+            raise HTTP(400, json.dumps(commit_return))
+        __deferred_push_to_gh_call(request, new_illustration_id, doc_type='illustration', **kwargs)
+        return commit_return
+
+    if request.env.request_method == 'DELETE':
+        # remove this illustration from the docstore
+        _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.POST')
+        docstore = api_utils.get_illustration_store(request)
+        parent_sha = kwargs.get('starting_commit_SHA')
+        if parent_sha is None:
+            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        try:
+            x = docstore.delete_illustration(illustration_id,
+                                          auth_info,
+                                          parent_sha,
+                                          commit_msg=commit_msg)
+            if x.get('error') == 0:
+                __deferred_push_to_gh_call(request, None, doc_type='illustration', **kwargs)
+            return x
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            _LOG.exception('Unknown error in illustration deletion')
+            raise HTTP(400, traceback.format_exc())
+            #raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in illustration deletion'}))
+
+    raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
+
+
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
 # This allows us to normalize all API method URLs under v1/, even for
 # non-RESTful methods.
@@ -826,6 +1076,8 @@ _route_tag2func = {'index':index,
                    'collection': collection,
                    'amendments': amendments,
                    'amendment': amendment,
+                   'illustrations': illustrations,
+                   'illustration': illustration,
                    #TODO: 'following': following,
                   }
 
