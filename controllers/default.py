@@ -950,38 +950,57 @@ def illustration(*args, **kwargs):
         comment_html = None
         parent_sha = kwargs.get('starting_commit_SHA', None)
         _LOG.debug('parent_sha = {}'.format(parent_sha))
-        # return the correct nexson of study_id, using the specified view
         illustrations = api_utils.get_illustration_store(request)
-        try:
-            r = illustrations.return_doc(illustration_id, commit_sha=parent_sha, return_WIP_map=True)
-        except:
-            _LOG.exception('GET failed')
-            raise HTTP(404, json.dumps({"error": 1, "description": "Illustration '{}' GET failure".format(illustration_id)}))
-        try:
-            illustration_json, head_sha, wip_map = r
-            ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
-            version_history = illustrations.get_version_history_for_doc_id(illustration_id)
-        except:
-            _LOG.exception('GET failed')
-            e = sys.exc_info()[0]
-            _raise_HTTP_from_msg(e)
-        if not illustration_json:
-            raise HTTP(404, "Illustration '{s}' has no JSON data!".format(s=illustration_id))
 
-        try:
-            external_url = illustrations.get_public_url(illustration_id)
-        except:
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.exception('illustration {} not found in external_url'.format(illustration))
-            external_url = 'NOT FOUND'
-        result = {'sha': head_sha,
-                 'data': illustration_json,
-                 'branch2sha': wip_map,
-                 'external_url': external_url,
-                 }
-        if version_history:
-            result['versionHistory'] = version_history
-        return result
+        if request.extension == 'zip':
+            # build and return a standalone ZIP archive of this illustration's folder
+            try:
+                zip_file = illustrations.create_illustration_archive(illustration_id, commit_sha=parent_sha)
+            except:
+                _LOG.exception('GET (zip creation) failed')
+                e = sys.exc_info()[0]
+                _raise_HTTP_from_msg(e)
+            # open the specified file (its absolute path in filename) and stream its contents
+            try:
+                response.headers['Content-type'] = 'application/zip, application/octet-stream'
+                response.headers['Content-Transfer-Encoding'] = 'binary'
+                return response.stream(zip_file, chunk_size=64*1024, attachment=True, filename="{}.zip".format(illustration_id))
+            except:
+                _LOG.exception('GET (zip download) failed')
+                e = sys.exc_info()[0]
+                _raise_HTTP_from_msg(e)
+        else:
+            # return the usual JSON core + metadata for this illustration
+            try:
+                r = illustrations.return_doc(illustration_id, commit_sha=parent_sha, return_WIP_map=True)
+            except:
+                _LOG.exception('GET failed')
+                raise HTTP(404, json.dumps({"error": 1, "description": "Illustration '{}' GET failure".format(illustration_id)}))
+            try:
+                illustration_json, head_sha, wip_map = r
+                ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
+                version_history = illustrations.get_version_history_for_doc_id(illustration_id)
+            except:
+                _LOG.exception('GET failed')
+                e = sys.exc_info()[0]
+                _raise_HTTP_from_msg(e)
+            if not illustration_json:
+                raise HTTP(404, "Illustration '{s}' has no JSON data!".format(s=illustration_id))
+
+            try:
+                external_url = illustrations.get_public_url(illustration_id)
+            except:
+                _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+                _LOG.exception('illustration {} not found in external_url'.format(illustration))
+                external_url = 'NOT FOUND'
+            result = {'sha': head_sha,
+                     'data': illustration_json,
+                     'branch2sha': wip_map,
+                     'external_url': external_url,
+                     }
+            if version_history:
+                result['versionHistory'] = version_history
+            return result
 
     if request.env.request_method == 'PUT':
         # update an existing illustration with the data provided
