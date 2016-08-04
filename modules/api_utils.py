@@ -2,6 +2,7 @@ from github import Github, BadCredentialsException
 from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
 from peyotl.collections import TreeCollectionStore
+from peyotl.amendments import TaxonomicAmendmentStore
 from peyotl.utility import read_config as read_peyotl_config
 from peyotl.utility import get_config as get_peyotl_config
 from ConfigParser import SafeConfigParser
@@ -121,10 +122,54 @@ def get_tree_collection_store(request):
     _LOG.debug('assumed_doc_version = {}'.format(_TREE_COLLECTION_STORE.assumed_doc_version))
     return _TREE_COLLECTION_STORE
 
+_TAXONOMIC_AMENDMENT_STORE = None
+def get_taxonomic_amendment_store(request):
+    global _TAXONOMIC_AMENDMENT_STORE
+    if _TAXONOMIC_AMENDMENT_STORE is not None:
+        return _TAXONOMIC_AMENDMENT_STORE
+    _LOG = get_logger(request, 'ot_api')
+    _LOG.debug("getting _TAXONOMIC_AMENDMENT_STORE...")
+    from gitdata import GitData  #TODO?
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_amendments_config(request)
+    _LOG.debug("  repo_parent={}".format(repo_parent))
+    _LOG.debug("  repo_remote={}".format(repo_remote))
+    _LOG.debug("  git_ssh={}".format(git_ssh))
+    _LOG.debug("  pkey={}".format(pkey))
+    _LOG.debug("  git_hub_remote={}".format(git_hub_remote))
+    push_mirror = os.path.join(repo_parent, 'mirror')
+    pmi = {
+        'parent_dir': push_mirror,
+        'remote_map': {
+            'GitHubRemote': git_hub_remote,
+            },
+        }
+    mirror_info = {'push':pmi}
+    conf = get_conf_object(request)
+    import pprint
+    _LOG.debug("  conf:")
+    _LOG.debug(pprint.pformat(conf))
+    a = {}
+    try:
+        # any keyword args to pass along from config?
+        #new_study_prefix = conf.get('apis', 'new_study_prefix')
+        #a['new_study_prefix'] = new_study_prefix
+        pass
+    except:
+        pass
+    _TAXONOMIC_AMENDMENT_STORE = TaxonomicAmendmentStore(repos_par=repo_parent,
+                                                         git_ssh=git_ssh,
+                                                         pkey=pkey,
+                                                         git_action_class=GitData, #TODO?
+                                                         mirror_info=mirror_info,
+                                                         **a)
+    _LOG.debug('assumed_doc_version = {}'.format(_TAXONOMIC_AMENDMENT_STORE.assumed_doc_version))
+    return _TAXONOMIC_AMENDMENT_STORE
+
 
 def get_failed_push_filepath(request, doc_type=None):
     filenames_by_content_type = {'nexson': "PUSH_FAILURE_nexson.json",
                                  'collection': "PUSH_FAILURE_collection.json",
+                                 'amendment': "PUSH_FAILURE_amendment.json",
                                  'favorites': "PUSH_FAILURE_favorites.json"}
     content_type = doc_type or request.vars.get('doc_type', 'nexson')
     failure_filename = filenames_by_content_type[content_type]
@@ -194,6 +239,29 @@ def read_collections_config(request):
     except:
         max_filesize = '20000000'
     return collections_repo_parent, collections_repo_remote, git_ssh, pkey, git_hub_remote, max_filesize
+
+def read_amendments_config(request):
+    """Load settings for a minor repo with shared taxonomic amendments"""
+    conf = get_conf_object(request)
+    amendments_repo_parent   = conf.get("apis","amendments_repo_parent")
+    amendments_repo_remote = conf.get("apis", "amendments_repo_remote")
+    try:
+        git_ssh     = conf.get("apis", "git_ssh")
+    except:
+        git_ssh = 'ssh'
+    try:
+        pkey        = conf.get("apis", "pkey")
+    except:
+        pkey = None
+    try:
+        git_hub_remote = conf.get("apis", "git_hub_remote")
+    except:
+        git_hub_remote = 'git@github.com:OpenTreeOfLife'
+    try:
+        max_filesize = conf.get("filesize", "amendments_max_file_size")
+    except:
+        max_filesize = '20000000'
+    return amendments_repo_parent, amendments_repo_remote, git_ssh, pkey, git_hub_remote, max_filesize
 
 def read_favorites_config(request):
     """Load settings for a minor repo with per-user 'favorites' information"""
@@ -401,6 +469,14 @@ def get_oti_domain(request):
 def get_collections_api_base_url(request):
     conf = get_conf_object(request)
     base_url = conf.get("apis", "collections_api_base_url")
+    if base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        base_url = "https:" + base_url
+    return base_url
+
+def get_amendments_api_base_url(request):
+    conf = get_conf_object(request)
+    base_url = conf.get("apis", "amendments_api_base_url")
     if base_url.startswith('//'):
         # Prepend scheme to a scheme-relative URL
         base_url = "https:" + base_url
