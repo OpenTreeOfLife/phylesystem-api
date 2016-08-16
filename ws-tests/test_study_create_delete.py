@@ -18,6 +18,7 @@ exit_if_api_is_readonly(__file__)
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'cc0_agreement' : 'true',
+         'import_method' : 'import-method-POST',
 }
 
 r = test_http_json_method(SUBMIT_URI,
