@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-# This file has been copied to the ws-tests directory of some other
-# open tree repositories.  Please propagate improvements to these
-# other copies.
+# This file was copied a version in the germinator repo, which was based
+# on an earlier version that was in the phylesystem-api repo.
 
 from ConfigParser import SafeConfigParser
 from cStringIO import StringIO
@@ -102,9 +101,10 @@ def summarize_gzipped_json_response(resp):
         return False
 
 def get_obj_from_http(url,
-                     verb='GET',
-                     data=None,
-                     headers=None):
+                      verb='GET',
+                      data=None,
+                      params=None,
+                      headers=None):
     '''Call `url` with the http method of `verb`. 
     If specified `data` is passed using json.dumps
     returns the json content of the web service or raise an HTTP error
@@ -119,18 +119,23 @@ def get_obj_from_http(url,
                                 translate(url),
                                 headers=headers,
                                 data=json.dumps(data),
+                                params=params,
                                 allow_redirects=True)
     else:
         resp = requests.request(verb,
                                 translate(url),
                                 headers=headers,
+                                params=params,
                                 allow_redirects=True)
-    debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
-    debug('Got status code {c}\n'.format(c=resp.status_code))
+    debug('Sent {v} to {s}'.format(v=verb, s=resp.url))
+    debug('Got status code {c}'.format(c=resp.status_code))
     if resp.status_code != 200:
-        debug('Full response: {r}\n'.format(r=resp.text))
+        debug('Full response: {r}'.format(r=resp.text))
         raise_for_status(resp)
     return resp.json()
+
+# Returns two results if return_bool_data.
+# Otherwise returns one result.
 
 def test_http_json_method(url,
                      verb='GET',
@@ -163,17 +168,17 @@ def test_http_json_method(url,
                                 translate(url),
                                 headers=headers,
                                 allow_redirects=True)
-        debug('Sent {v} to {s}\n'.format(v=verb, s=resp.url))
-    debug('Got status code {c} (expecting {e})\n'.format(c=resp.status_code,e=expected_status))
     if resp.status_code != expected_status:
-        debug('Did not get expect response status. Got:\n{s}'.format(s=resp.status_code))
-        debug('Full response: {r}\n'.format(r=resp.text))
+        debug('Sent {v} to {s}'.format(v=verb, s=resp.url))
+        debug('Got status code {c} (expecting {e})'.format(c=resp.status_code,e=expected_status))
+        debug('Did not get expected response status. Got:\n{s}'.format(s=resp.status_code))
+        debug('Full response: {r}'.format(r=resp.text))
         raise_for_status(resp)
         # this is required for the case when we expect a 4xx/5xx but a successful return code is returned
         return fail_return
     if expected_response is not None:
         if not is_json:
-             return (True, resp.text, True) if return_bool_data else True
+             return (True, resp.text) if return_bool_data else True
         try:
             results = resp.json()
             if results != expected_response:
@@ -185,10 +190,10 @@ def test_http_json_method(url,
         if _VERBOSITY_LEVEL > 1:
             debug(unicode(results))
     elif _VERBOSITY_LEVEL > 1:
-        debug('Full response: {r}\n'.format(r=resp.text))
+        debug('Full response: {r}'.format(r=resp.text))
     if not is_json:
-             return (True, resp.text, True) if return_bool_data else True
-    return (True, resp.json(), True) if return_bool_data else True
+             return (True, resp.text) if return_bool_data else True
+    return (True, resp.json()) if return_bool_data else True
 
 def raise_for_status(resp):
     try:
@@ -213,24 +218,30 @@ def exit_if_api_is_readonly(fn):
         return
     if _VERBOSITY_LEVEL > 0:
         debug('Running in read-only mode. Skipped {}'.format(fn))
-    else:
-        sys.stderr.write('s')
-    sys.exit(0)
+    # This coordinates with run_tests.sh
+    sys.exit(3)
 
 
 # Mimic the behavior of apache so that services can be tested without
-# having apache running.  See opentree/deploy/setup/opentree-shared.conf
+# having apache running.  See germinator/deploy/setup/opentree-shared.conf
 
 translations = [('/v2/study/', '/phylesystem/v1/study/'),
                 ('/cached/', '/phylesystem/default/cached/'),
                 # treemachine
-                ('/v2/tree_of_life/', '/db/data/ext/tree_of_life/graphdb/'),
                 ('/v2/graph/', '/db/data/ext/graph/graphdb/'),
+                ('/v2/tree_of_life/', '/db/data/ext/tree_of_life/graphdb/'),
+                ('/v3/tree_of_life/', '/db/data/ext/tree_of_life_v3/graphdb/'),
                 # taxomachine
+                ('/taxomachine/v1/', '/db/data/ext/TNRS/graphdb/'),
                 ('/v2/tnrs/', '/db/data/ext/tnrs_v2/graphdb/'),
                 ('/v2/taxonomy/', '/db/data/ext/taxonomy/graphdb/'),
+                ('/v3/tnrs/', '/db/data/ext/tnrs_v3/graphdb/'),
+                ('/v3/taxonomy/', '/db/data/ext/taxonomy_v3/graphdb/'),
                 # oti
+                ('/v3/studies/', '/db/data/ext/studies/graphdb/'),
                 ('/v2/studies/', '/db/data/ext/studies/graphdb/'),
+                # smasher (port 8081)
+                ('/v2/conflict/', '/')
 ]
 
 def translate(s):
