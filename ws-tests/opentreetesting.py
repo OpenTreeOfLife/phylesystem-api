@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-# This file was copied a version in the germinator repo, which was based
-# on an earlier version that was in the phylesystem-api repo.
+# This file was copied from a version in the germinator repo, which
+# was in turn based on an earlier version from the phylesystem-api
+# repo.
 
 from ConfigParser import SafeConfigParser
 from cStringIO import StringIO
