@@ -15,7 +15,7 @@ Run all of the tests using:
   * 2globalconf.sh copies the global testing config to the active location
   * 2localconf.sh copies the local testing config to the active location.
   * test_*.py should take no arguments and use its exit code to indicate
-        passing or failing the tests.
+        passing (0), failing (1), or skipping (3) the tests
   * run_tests.sh runs all of the test_*.py files and summarizes the number
         of tests and failures.
   * to suppress tests that have side effects (PUT/POST), set configuration
