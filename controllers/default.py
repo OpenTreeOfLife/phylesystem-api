@@ -604,6 +604,11 @@ def amendments(*args, **kwargs):
                 })
             amendment_list.append(props)
         return json.dumps(amendment_list)
+    elif api_call == 'amendment_list':
+        response.view = 'generic.json'
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        ids = docstore.get_amendment_ids()
+        return json.dumps(ids)
     elif api_call == 'store_config':
         response.view = 'generic.json'
         docstore = api_utils.get_taxonomic_amendment_store(request)
