@@ -23,8 +23,6 @@ m = n['nexml']['^bogus_timestamp'] = datetime.datetime.utcnow().isoformat()
 
 exit_if_api_is_readonly(__file__)
 
-#from peyotl import write_as_json
-#write_as_json(n, '9-0.0.0.json')
 data = { 'nexson' : n,
          'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
          'starting_commit_SHA': starting_commit_SHA,
