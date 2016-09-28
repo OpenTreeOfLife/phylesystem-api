@@ -6,6 +6,7 @@ import anyjson
 import traceback
 from sh import git
 from peyotl import can_convert_nexson_forms, convert_nexson_format
+from peyotl.utility import coerce_amendment_dois_to_urls
 from peyotl.utility.str_util import slugify
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
@@ -640,6 +641,7 @@ def amendment(*args, **kwargs):
         except HTTP, err:
             # payload not found
             return None, None, None
+        coerce_amendment_dois_to_urls(amendment_obj)
         try:
             errors, amendment_adaptor = validate_amendment(amendment_obj)
         except HTTP, err:
@@ -677,7 +679,7 @@ def amendment(*args, **kwargs):
 
     # fetch and parse the JSON payload, if any
     amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request,
-                                                                                              kwargs)
+                                                                                          kwargs)
     if (amendment_obj is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.env.request_method) }))
 
@@ -722,7 +724,7 @@ def amendment(*args, **kwargs):
             _raise_HTTP_from_msg(e)
         if not amendment_json:
             raise HTTP(404, "Amendment '{s}' has no JSON data!".format(s=amendment_id))
-
+        coerce_amendment_dois_to_urls(amendment_json)
         try:
             external_url = amendments.get_public_url(amendment_id)
         except:
