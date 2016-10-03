@@ -82,12 +82,15 @@ see test.conf for config file examples)
   * apihost - base URL for all tests, the part preceding "/v2",
     perhaps including a port number.  Value should start with 'http'
     and should not end with '/'.
-  * allowwrite - true or false, default true.  If false, suppress any
-    tests that might have a side effect (e.g. writing to a
-    phylesystem).  Default false.  Useful for checking a production server.
   * translate - true or false, default false.  If true, URLs are first
     rewritten the same way the open tree apache server would rewrite
     them before being used in an HTTP request.  This is intended for
     local testing in the absence of a locally configured apache
     server.  This allows tests to be written in terms of advertised /v2
     URLs even if they are not directly supported by the web2py or neo4j server.
+
+The `host:allowwrite=true` command line argument allows tests that have 
+    side effects (e.g. writing to a phylesystem) to run. This can only 
+    be invoked via the command line. The default for this setting is false.
+    Useful for checking a production server.
+  
