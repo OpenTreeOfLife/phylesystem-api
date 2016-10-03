@@ -1071,7 +1071,7 @@ def v1():
                     return fetched.text
                 except Exception as x:
                     _LOG.exception('file_get failed')
-                    return HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
+                    raise HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
         elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:
