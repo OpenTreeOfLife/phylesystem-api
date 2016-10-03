@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 import sys, os
-from opentreetesting import test_http_json_method, config
-DOMAIN = config('host', 'apihost')
+from opentreetesting import test_http_json_method, writable_api_host_and_oauth_or_exit
+DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/10'
 data = { 'nexson': {'bogus' : 5},
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token')
-
+         'auth_token': auth_token
 }
 if test_http_json_method(SUBMIT_URI,
                          'PUT',

@@ -1,16 +1,13 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
+from opentreetesting import test_http_json_method, writable_api_host_and_oauth_or_exit
 import datetime
 import codecs
 import copy
 import json
 import sys
 import os
-
-
-
+DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study_id = 'pg_99'
-DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 #A full integration test, with GET, PUT, POST, MERGE and a merge conflict, 
 #test get and save sha
@@ -33,12 +30,9 @@ ac += 1
 acurr_obj['nexml']["^acount"] = ac
 
 data = { 'nexson' : acurr_obj,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,
 }
-
-exit_if_api_is_readonly(__file__)
-
 r2 = test_http_json_method(SUBMIT_URI,
                          'PUT',
                          data=data,
@@ -51,7 +45,6 @@ assert(r2[1]['merge_needed']==False)
 r2_sha=r2[1]['sha']
 
 #Now get the outcome of the Merge, so that a curator could look at it.
-DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 
 data = {
@@ -72,7 +65,7 @@ zc = zcurr_obj.get("^zcount", 0)
 zc += 1
 zcurr_obj["^zcount"] = zc
 data = { 'nexson' : zcurr_obj,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,
 }
 
@@ -112,7 +105,7 @@ ac += 1
 acurr_obj['nexml']["^acount"] = ac
 
 data = { 'nexson' : acurr_obj,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,
 }
 r4 = test_http_json_method(SUBMIT_URI,
@@ -132,7 +125,7 @@ zc = zcurr_obj.get("^zcount", 0)
 zc += 1
 zcurr_obj["^zcount"] = zc
 data = { 'nexson' : zcurr_obj,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,
 }
 
@@ -148,14 +141,10 @@ assert(r5[1]['merge_needed']==True)
 r5_sha=r5[1]['sha']
 
 # sixth commit is the merge
-DOMAIN = config('host', 'apihost')
 starting_commit_SHA = r5_sha
 SUBMIT_URI = DOMAIN + '/phylesystem/merge/v1/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
 
-data = {
-        'auth_token' :  os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
-       
-}
+data = {'auth_token' : auth_token,}
 
 r6 = test_http_json_method(SUBMIT_URI,
                          'PUT',
@@ -172,14 +161,13 @@ merged_sha = r6[1]['merged_sha']
  
         
 # add a 7th commit onto commit 6. This should NOT merge to master because we don't give it the secret arg.
-DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 starting_commit_SHA = r6[1]['sha']
 zc += 1
 zcurr_obj["^zcount"] = zc
 
 data = { 'nexson' : zcurr_obj,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,
 }
 r7 = test_http_json_method(SUBMIT_URI,
@@ -195,14 +183,13 @@ assert(r7[1]['merge_needed']==True)
 
         
 # add a 7th commit onto commit 6. This should merge to master because we don't give it the secret arg.
-DOMAIN = config('host', 'apihost')
 SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
 starting_commit_SHA = r7[1]['sha']
 zc += 1
 zcurr_obj["^zcount"] = zc
 
 data = { 'nexson' : zcurr_obj,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,
          'merged_SHA' : merged_sha
 }

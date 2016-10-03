@@ -1,20 +1,13 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
+from opentreetesting import test_http_json_method, writable_api_host_and_oauth_or_exit
 from peyotl import convert_nexson_format
 import datetime
 import codecs
 import json
 import sys
 import os
-SCRIPT_NAME = os.path.split(sys.argv[0])[1]
-auth_token = os.environ.get('GITHUB_OAUTH_TOKEN')
-if auth_token is None:
-    sys.stderr.write('{} skipped due to lack of GITHUB_OAUTH_TOKEN in env\n')
-    sys.exit(3)
-
-# this makes it easier to test concurrent pushes to different branches
+DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study_id = 12
-DOMAIN = config('host', 'apihost')
 URL = DOMAIN + '/phylesystem/v1/study/%s' % study_id
 r = test_http_json_method(URL,
                           'GET',
@@ -39,9 +32,6 @@ else:
     m.append(el)
 el['$'] = datetime.datetime.utcnow().isoformat()
 n = convert_nexson_format(n, '1.2')
-
-exit_if_api_is_readonly(__file__)
-
 data = { 'nexson' : n,
          'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,

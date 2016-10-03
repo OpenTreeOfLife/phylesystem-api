@@ -21,6 +21,8 @@ else:
     sys.exit(1)
 NEW_URL = SUBMIT_URI + '/bogusid'
 x = test_http_json_method(NEW_URL, 'GET', expected_status=404)
+if r[0]:
+    sys.exit(1)
 NEW_URL = SUBMIT_URI + '/' + fid
 r = test_http_json_method(NEW_URL,
                           'GET',
