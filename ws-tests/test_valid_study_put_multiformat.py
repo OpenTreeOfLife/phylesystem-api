@@ -6,13 +6,25 @@ import codecs
 import json
 import sys
 import os
+SCRIPT_NAME = os.path.split(sys.argv[0])[1]
+auth_token = os.environ.get('GITHUB_OAUTH_TOKEN')
+if auth_token is None:
+    sys.stderr.write('{} skipped due to lack of GITHUB_OAUTH_TOKEN in env\n')
+    sys.exit(3)
 
 # this makes it easier to test concurrent pushes to different branches
 study_id = 12
-
 DOMAIN = config('host', 'apihost')
-starting_commit_SHA = config('host', 'parentsha')
-
+URL = DOMAIN + '/phylesystem/v1/study/%s' % study_id
+r = test_http_json_method(URL,
+                          'GET',
+                          expected_status=200,
+                          return_bool_data=True,
+                          headers={'content-type':'text/plain', 'accept':'text/plain'},
+                          is_json=True)
+if not r[0]:
+    sys.exit(1)
+starting_commit_SHA = r[1]['branch2sha']['master']
 SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/%s' % study_id
 fn = 'data/{s}.json'.format(s=study_id)
 inpf = codecs.open(fn, 'rU', encoding='utf-8')
@@ -31,7 +43,7 @@ n = convert_nexson_format(n, '1.2')
 exit_if_api_is_readonly(__file__)
 
 data = { 'nexson' : n,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,
 }
 if test_http_json_method(SUBMIT_URI,
