@@ -5,8 +5,7 @@ import json
 import anyjson
 import traceback
 from sh import git
-from peyotl import can_convert_nexson_forms, convert_nexson_format
-from peyotl.utility.str_util import slugify
+from peyotl import convert_nexson_format
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.collections import OWNER_ID_PATTERN, \
@@ -16,7 +15,6 @@ from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
-                                 extract_tree, \
                                  PhyloSchema, \
                                  read_as_json, \
                                  BY_ID_HONEY_BADGERFISH
@@ -1073,7 +1071,7 @@ def v1():
                     return fetched.text
                 except Exception as x:
                     _LOG.exception('file_get failed')
-                    return HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
+                    raise HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
         elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:

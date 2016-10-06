@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from peyotl.api import OTI, APIDomains
+from peyotl.api import OTI
 import api_utils
 import json
 def _raise400(msg):

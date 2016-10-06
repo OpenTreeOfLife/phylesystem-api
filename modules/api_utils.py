@@ -4,7 +4,6 @@ from peyotl.phylesystem import Phylesystem
 from peyotl.collections import TreeCollectionStore
 from peyotl.amendments import TaxonomicAmendmentStore
 from peyotl.utility import read_config as read_peyotl_config
-from peyotl.utility import get_config as get_peyotl_config
 from ConfigParser import SafeConfigParser
 from datetime import datetime
 import tempfile

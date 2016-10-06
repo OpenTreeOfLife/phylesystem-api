@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys, os
-from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
-DOMAIN = config('host', 'apihost')
+from opentreetesting import test_http_json_method, writable_api_host_and_oauth_or_exit
+DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study = '10'
 SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/' + study
 data = {'output_nexml2json':'1.2'}
@@ -16,12 +16,9 @@ if isinstance(c, list):
     c = c[0]
 c = c + 1
 d['nexml']['^ot:testCount'] = c
-
-exit_if_api_is_readonly(__file__)
-
 starting_commit_SHA = r[1]['sha']
 data = { 'nexson' : d,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,
 }
 r2 = test_http_json_method(SUBMIT_URI,
