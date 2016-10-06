@@ -1,7 +1,7 @@
 from github import Github, BadCredentialsException
 from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
-from peyotl.collections import TreeCollectionStore
+from peyotl.collections_store import TreeCollectionStore
 from peyotl.amendments import TaxonomicAmendmentStore
 from peyotl.utility import read_config as read_peyotl_config
 from ConfigParser import SafeConfigParser

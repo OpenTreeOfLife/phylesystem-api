@@ -8,9 +8,9 @@ from sh import git
 from peyotl import convert_nexson_format
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
-from peyotl.collections import OWNER_ID_PATTERN, \
+from peyotl.collections_store import OWNER_ID_PATTERN, \
                                COLLECTION_ID_PATTERN
-from peyotl.collections.validation import validate_collection
+from peyotl.collections_store.validation import validate_collection
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
 from peyotl.nexson_syntax import get_empty_nexson, \
