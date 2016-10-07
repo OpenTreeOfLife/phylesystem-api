@@ -117,7 +117,10 @@ def unmerged_branches():
 def external_url():
     response.view = 'generic.json'
     try:
-        study_id = request.args[1]
+        study_id = request.args[0]
+        # hacky way to support */external_url/STUDY_ID and */v1/external_url/STUDY_ID
+        if study_id == 'external_url':
+            study_id = request.args[1]
     except:
         raise HTTP(400, '{"error": 1, "description": "Expecting study_id as the argument"}')
     phylesystem = api_utils.get_phylesystem(request)
