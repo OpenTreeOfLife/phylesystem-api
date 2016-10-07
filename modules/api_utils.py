@@ -47,7 +47,7 @@ def get_phylesystem(request):
     global _PHYLESYSTEM
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
-    from gitdata import GitData
+    from peyotl.phylesystem.git_actions import PhylesystemGitAction as GitData
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = read_phylesystem_config(request)
     peyotl_config, cfg_filename = read_peyotl_config()
     if 'phylesystem' not in peyotl_config.sections():
@@ -85,7 +85,7 @@ def get_tree_collection_store(request):
         return _TREE_COLLECTION_STORE
     _LOG = get_logger(request, 'ot_api')
     _LOG.debug("getting _TREE_COLLECTION_STORE...")
-    from gitdata import GitData  #TODO?
+    from peyotl.phylesystem.git_actions import PhylesystemGitAction as GitData #TODO?
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_collections_config(request)
     _LOG.debug("  repo_parent={}".format(repo_parent))
     _LOG.debug("  repo_remote={}".format(repo_remote))
@@ -128,7 +128,7 @@ def get_taxonomic_amendment_store(request):
         return _TAXONOMIC_AMENDMENT_STORE
     _LOG = get_logger(request, 'ot_api')
     _LOG.debug("getting _TAXONOMIC_AMENDMENT_STORE...")
-    from gitdata import GitData  #TODO?
+    from peyotl.phylesystem.git_actions import PhylesystemGitAction as GitData    #TODO?
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_amendments_config(request)
     _LOG.debug("  repo_parent={}".format(repo_parent))
     _LOG.debug("  repo_remote={}".format(repo_remote))

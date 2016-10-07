@@ -1,34 +1,35 @@
-import requests
-import urllib2
-import os, sys
+import copy
 import json
-import anyjson
+import os
+import re
+import sys
 import traceback
-from sh import git
+import urllib2
+from urllib import urlencode
+
+import anyjson
+import requests
+from gluon.contrib.markdown.markdown2 import markdown
+from gluon.html import web2pyHTMLParser
+from gluon.http import HTTP
+from gluon.tools import fetch
 from peyotl import convert_nexson_format
-from peyotl.phylesystem.git_workflows import GitWorkflowError, \
-                                             validate_and_convert_nexson
+from peyotl.amendments import AMENDMENT_ID_PATTERN
+from peyotl.amendments.validation import validate_amendment
 from peyotl.collections_store import OWNER_ID_PATTERN, \
                                COLLECTION_ID_PATTERN
 from peyotl.collections_store.validation import validate_collection
-from peyotl.amendments import AMENDMENT_ID_PATTERN
-from peyotl.amendments.validation import validate_amendment
+from peyotl.external import import_nexson_from_treebase
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
                                  PhyloSchema, \
                                  read_as_json, \
                                  BY_ID_HONEY_BADGERFISH
-from peyotl.external import import_nexson_from_treebase
-from github import Github, BadCredentialsException
+from peyotl.phylesystem.git_workflows import GitWorkflowError, \
+                                             validate_and_convert_nexson
+
 import api_utils
-from gluon.tools import fetch
-from urllib import urlencode
-from gluon.html import web2pyHTMLParser
-import re
-from gluon.contrib.markdown.markdown2 import markdown
-from gluon.http import HTTP
-from ConfigParser import SafeConfigParser
-import copy
+
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
     from open_tree_tasks import call_http_json
@@ -58,7 +59,7 @@ link_regex = re.compile(r'''
 link_replace = r'\1'
 # NOTE the funky constructor required to use this below
 def _markdown_to_html(markdown_src='', open_links_in_new_window=False):
-    html = XML(markdown(markdown_src, extras={'link-patterns':None}, link_patterns=[(link_regex, link_replace)]).encode('utf-8'), sanitize=False).flatten()
+    html = XML(markdown(markdown_src, extras={'link-patterns': None}, link_patterns=[(link_regex, link_replace)]).encode('utf-8'), sanitize=False).flatten()
     if open_links_in_new_window:
         html = re.sub(r' href=',
                       r' target="_blank" href=',
