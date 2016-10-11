@@ -14,6 +14,7 @@ m = n['nexml']['^bogus_timestamp'] = datetime.datetime.utcnow().isoformat()
 data = { 'nexson' : n,
          'auth_token': auth_token,
          'cc0_agreement' : 'true',
+         'import_method' : 'import-method-POST',
 }
 r = test_http_json_method(SUBMIT_URI,
                          'POST',
