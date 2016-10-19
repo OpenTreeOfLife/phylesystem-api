@@ -5,20 +5,18 @@ import json
 import anyjson
 import traceback
 from sh import git
-from peyotl import can_convert_nexson_forms, convert_nexson_format
-from peyotl.utility.str_util import slugify
+from peyotl import convert_nexson_format
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
-from peyotl.collections import OWNER_ID_PATTERN, \
+from peyotl.collections_store import OWNER_ID_PATTERN, \
                                COLLECTION_ID_PATTERN
-from peyotl.collections.validation import validate_collection
+from peyotl.collections_store.validation import validate_collection
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
 from peyotl.illustrations import ILLUSTRATION_ID_PATTERN
 from peyotl.illustrations.validation import validate_illustration
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
-                                 extract_tree, \
                                  PhyloSchema, \
                                  read_as_json, \
                                  BY_ID_HONEY_BADGERFISH
@@ -122,6 +120,9 @@ def external_url():
     response.view = 'generic.json'
     try:
         study_id = request.args[0]
+        # hacky way to support */external_url/STUDY_ID and */v1/external_url/STUDY_ID
+        if study_id == 'external_url':
+            study_id = request.args[1]
     except:
         raise HTTP(400, '{"error": 1, "description": "Expecting study_id as the argument"}')
     phylesystem = api_utils.get_phylesystem(request)
@@ -606,6 +607,11 @@ def amendments(*args, **kwargs):
                 })
             amendment_list.append(props)
         return json.dumps(amendment_list)
+    elif api_call == 'amendment_list':
+        response.view = 'generic.json'
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        ids = docstore.get_amendment_ids()
+        return json.dumps(ids)
     elif api_call == 'store_config':
         response.view = 'generic.json'
         docstore = api_utils.get_taxonomic_amendment_store(request)
@@ -1351,7 +1357,7 @@ def v1():
                     return fetched.text
                 except Exception as x:
                     _LOG.exception('file_get failed')
-                    return HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
+                    raise HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
         elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:
@@ -1467,6 +1473,7 @@ def v1():
             # logic for others, just in case we revert based on user feedback.
             importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
             importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
+            importing_from_post_arg = (import_method == 'import-method-POST')
             importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)
             importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi_for_crossref) or \
                                           (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
@@ -1506,6 +1513,11 @@ def v1():
             #                                                    nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
             elif importing_from_crossref_API:
                 new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi_for_crossref, ref_string=publication_ref, include_cc0=cc0_agreement)
+            elif importing_from_post_arg:
+                bundle = __extract_and_validate_nexson(request,
+                                                       repo_nexml2json,
+                                                       kwargs)
+                new_study_nexson = bundle[0]
             else:   # assumes 'import-method-MANUAL_ENTRY', or insufficient args above
                 new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
                 if publication_doi:
@@ -1514,33 +1526,34 @@ def v1():
 
             nexml = new_study_nexson['nexml']
 
-            # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
-            if cc0_agreement:
-                nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
-            elif using_existing_license:
-                existing_license = kwargs.get('alternate_license', '')
-                if existing_license == 'CC-0':
-                    nexml['^xhtml:license'] = {'@name': 'CC0', '@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
-                    pass
-                elif existing_license == 'CC-BY-2.0':
-                    nexml['^xhtml:license'] = {'@name': 'CC-BY 2.0', '@href': 'http://creativecommons.org/licenses/by/2.0/'}
-                    pass
-                elif existing_license == 'CC-BY-2.5':
-                    nexml['^xhtml:license'] = {'@name': 'CC-BY 2.5', '@href': 'http://creativecommons.org/licenses/by/2.5/'}
-                    pass
-                elif existing_license == 'CC-BY-3.0':
-                    nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
-                    pass
-                # NOTE that we don't offer CC-BY 4.0, which is problematic for data
-                elif existing_license == 'CC-BY':
-                    # default to version 3, if not specified. 
-                    nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
-                    pass
-                else:  # assume it's something else
-                    alt_license_name = kwargs.get('alt_license_name', '')
-                    alt_license_url = kwargs.get('alt_license_URL', '')
-                    # OK to add a name here? mainly to capture submitter's intent
-                    nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
+            if not importing_from_post_arg:
+                # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
+                if cc0_agreement:
+                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+                elif using_existing_license:
+                    existing_license = kwargs.get('alternate_license', '')
+                    if existing_license == 'CC-0':
+                        nexml['^xhtml:license'] = {'@name': 'CC0', '@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+                        pass
+                    elif existing_license == 'CC-BY-2.0':
+                        nexml['^xhtml:license'] = {'@name': 'CC-BY 2.0', '@href': 'http://creativecommons.org/licenses/by/2.0/'}
+                        pass
+                    elif existing_license == 'CC-BY-2.5':
+                        nexml['^xhtml:license'] = {'@name': 'CC-BY 2.5', '@href': 'http://creativecommons.org/licenses/by/2.5/'}
+                        pass
+                    elif existing_license == 'CC-BY-3.0':
+                        nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
+                        pass
+                    # NOTE that we don't offer CC-BY 4.0, which is problematic for data
+                    elif existing_license == 'CC-BY':
+                        # default to version 3, if not specified. 
+                        nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
+                        pass
+                    else:  # assume it's something else
+                        alt_license_name = kwargs.get('alt_license_name', '')
+                        alt_license_url = kwargs.get('alt_license_URL', '')
+                        # OK to add a name here? mainly to capture submitter's intent
+                        nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
 
             nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
 

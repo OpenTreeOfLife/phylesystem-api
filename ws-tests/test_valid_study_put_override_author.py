@@ -1,13 +1,23 @@
 #!/usr/bin/env python
-from opentreetesting import test_http_json_method, config, exit_if_api_is_readonly
+from opentreetesting import test_http_json_method, writable_api_host_and_oauth_or_exit
 import datetime
 import codecs
 import json
 import sys
 import os
-
-DOMAIN = config('host', 'apihost')
-starting_commit_SHA = config('host', 'parentsha')
+DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
+# this makes it easier to test concurrent pushes to different branches
+study_id = "12"
+URL = DOMAIN + '/phylesystem/v1/study/%s' % study_id
+r = test_http_json_method(URL,
+                          'GET',
+                          expected_status=200,
+                          return_bool_data=True,
+                          headers={'content-type':'text/plain', 'accept':'text/plain'},
+                          is_json=True)
+if not r[0]:
+    sys.exit(1)
+starting_commit_SHA = r[1]['branch2sha']['master']
 
 study_id="12"
 SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
@@ -23,11 +33,8 @@ else:
     el = {'@property': 'bogus_timestamp', '@xsi:type': 'nex:LiteralMeta'}
     m.append(el)
 el['$'] = datetime.datetime.utcnow().isoformat()
-
-exit_if_api_is_readonly(__file__)
-
 data = { 'nexson' : n,
-         'auth_token': os.environ.get('GITHUB_OAUTH_TOKEN', 'bogus_token'),
+         'auth_token': auth_token,
          'author_name': "Some Author",
          'author_email': "author@author.com",
          'starting_commit_SHA': starting_commit_SHA,
