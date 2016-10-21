@@ -5,6 +5,10 @@ import json, requests, sys
 # check args for repo-URL, Open Tree API URL, GitHub auth-key?
 this_script = sys.argv[0]
 
+print "==== INCOMING ARGUMENTS"
+for arg in sys.argv:
+    print "  "+ arg
+
 if len(sys.argv) > 1:
     opentree_docstore_url = sys.argv[1]
 else:
