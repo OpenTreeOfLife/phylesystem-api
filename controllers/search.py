@@ -65,6 +65,7 @@ it was deleted from the docstore.
 
 N.B. This depends on a GitHub webhook on the chosen docstore.
 """
+    # get various parameters from config file
     app_name = request.application
     conf = SafeConfigParser(allow_no_value=True)
     if os.path.isfile("%s/applications/%s/private/localconfig" % (os.path.abspath('.'), app_name,)):
@@ -83,9 +84,6 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     payload = request.vars
     msg = ''
 
-    # EXAMPLE of a working curl call to nudge index:
-    # curl -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
-
     # get list of study ids to be added / modified / removed
     try:
         # how we nudge the index depends on which studies are new, changed, or deleted
@@ -102,7 +100,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         # also "flatten" each list to remove duplicates
         add_or_update_ids = added_study_ids + modified_study_ids
         add_or_update_ids = list(set(add_or_update_ids))
-        removed_study_ids = list(set(removed_study_ids))
+        remove_ids = list(set(removed_study_ids))
 
     except:
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
@@ -110,7 +108,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     if payload['repository']['url'] != opentree_docstore_url:
         raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
 
-    #nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
+    # nexson_url_template only needed for oti method, not otindex
     nexson_url_template = URL(r=request,
                               c="default",
                               f="v1",
@@ -120,70 +118,81 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
                               host=True,
                               url_encode=False)
 
-
+    # call both the oti and otindex methods
     if len(add_or_update_ids) > 0:
-        # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
-        nudge_url = "%s/../ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
-        nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
+        _oti_add_update_studies( add_or_update_ids, oti_base_url, nexson_url_template )
+        #_otindex_add_update_studies( add_or_update_ids, otindex_base_url )
 
-        # N.B. that gluon.tools.fetch() can't be used here, since it won't send
-        # "raw" JSON data as treemachine expects
-        req = urllib2.Request(
-            url=nudge_url,
-            data=json.dumps({
-                "urls": nexson_urls
-            }),
-            headers={"Content-Type": "application/json"}
-        )
-        try:
-            nudge_response = urllib2.urlopen(req).read()
-            updated_study_ids = json.loads( nudge_response )
-        except Exception, e:
-            # TODO: log oti exceptions into my response
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            msg += """indexNexsons failed!'
-nudge_url: %s
-nexson_url_template: %s
-nexson_urls: %s
-%s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    if len(remove_ids) > 0:
+        _oti_remove_studies(remove_ids,oti_base_url, nexson_url_template)
+        #_otindex_add_update_studies( add_or_update_ids, otindex_base_url )
 
-        # TODO: check returned IDs against our original lists... what if something failed?
+def _oti_add_update_studies( add_or_update_ids, oti_base_url, nexson_url_template ):
+    # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
+    nudge_url = "%s/../ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
+    nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
 
-    if len(removed_study_ids) > 0:
-        # Un-index the studies that were removed from docstore
-        # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
-        remove_url = "%s/../ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
-        req = urllib2.Request(
-            url=remove_url,
-            data=json.dumps({
-                "ids": removed_study_ids
-            }),
-            headers={"Content-Type": "application/json"}
-        )
-        try:
-            remove_response = urllib2.urlopen(req).read()
-            unindexed_study_ids = json.loads( remove_response )
-        except Exception, e:
-            # TODO: log oti exceptions into my response
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            msg += """unindexNexsons failed!'
-remove_url: %s
-removed_study_ids: %s
-%s""" % (remove_url, removed_study_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    # EXAMPLE of a working curl call to nudge index:
+    # curl -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
 
-        # TODO: check returned IDs against our original list... what if something failed?
+    # N.B. that gluon.tools.fetch() can't be used here, since it won't send
+    # "raw" JSON data as treemachine expects
+    req = urllib2.Request(
+        url=nudge_url,
+        data=json.dumps({
+            "urls": nexson_urls
+        }),
+        headers={"Content-Type": "application/json"}
+    )
+    try:
+        nudge_response = urllib2.urlopen(req).read()
+        updated_study_ids = json.loads( nudge_response )
+    except Exception, e:
+        # TODO: log oti exceptions into my response
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        msg += """indexNexsons failed!'
+            nudge_url: %s
+            nexson_url_template: %s
+            nexson_urls: %s
+            %s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+
+# TODO: check returned IDs against our original lists... what if something failed?
+
+def _oti_remove_studies( remove_ids, oti_base_url, nexson_url_template ):
+    # Un-index the studies that were removed from docstore
+    # N.B. The indexing service lives outside of the v1/ space,
+    # so we "back out" these URLs with ".."
+    remove_url = "%s/../ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
+    req = urllib2.Request(
+        url=remove_url,
+        data=json.dumps({
+            "ids": removed_study_ids
+        }),
+        headers={"Content-Type": "application/json"}
+    )
+    try:
+        remove_response = urllib2.urlopen(req).read()
+        unindexed_study_ids = json.loads( remove_response )
+    except Exception, e:
+        # TODO: log oti exceptions into my response
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        msg += """unindexNexsons failed!'
+            remove_url: %s
+            removed_study_ids: %s
+            %s""" % (remove_url, removed_study_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+
+    # TODO: check returned IDs against our original list... what if something failed?
 
     github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
     full_msg = """This URL should be called by a webhook set in the docstore repo:
-<br /><br />
-<a href="%s">%s</a><br />
-<pre>%s</pre>
-""" % (github_webhook_url, github_webhook_url, msg,)
+    <br /><br />
+    <a href="%s">%s</a><br />
+    <pre>%s</pre>
+    """ % (github_webhook_url, github_webhook_url, msg,)
     if msg == '':
         return full_msg
     else:
         raise HTTP(500, full_msg)
-
 
 def _harvest_study_ids_from_paths( path_list, target_array ):
     for path in path_list:
