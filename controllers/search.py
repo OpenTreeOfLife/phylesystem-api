@@ -72,8 +72,12 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     else:
         conf.read("%s/applications/%s/private/config" % (os.path.abspath('.'), app_name,))
 
+    # set up URLs for both oti and the new otindex
     oti_base_url = conf.get("apis", "oti_base_url")
-    api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
+    otindex_base_url = conf.get("apis","otindex_base_url")
+
+    # api_base_url looks like leftover cruft; doesn't get used
+    # api_base_url = "%s/ext/QueryServices/graphdb/" % (oti_base_url,)
 
     opentree_docstore_url = conf.get("apis", "opentree_docstore_url")
     payload = request.vars
@@ -82,9 +86,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     # EXAMPLE of a working curl call to nudge index:
     # curl -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
 
-    # Pull needed values from config file (typical values shown)
-    #   opentree_docstore_url = "https://github.com/OpenTreeOfLife/phylesystem"        # munge this to grab raw NexSON)
-    #   oti_base_url='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'    # confirm we're pushing to the right OTI service(s)!
+    # get list of study ids to be added / modified / removed
     try:
         # how we nudge the index depends on which studies are new, changed, or deleted
         added_study_ids = [ ]
@@ -96,9 +98,12 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
             _harvest_study_ids_from_paths( commit['modified'], modified_study_ids )
             _harvest_study_ids_from_paths( commit['removed'], removed_study_ids )
 
-        # "flatten" each list to remove duplicates
-        added_study_ids = list(set(added_study_ids))
-        modified_study_ids = list(set(modified_study_ids))
+        # add and update treated the same, so merge
+        # also "flatten" each list to remove duplicates
+        add_or_update_ids = added_study_ids + modified_study_ids
+        add_or_update_ids = list(set(add_or_update_ids))
+        #added_study_ids = list(set(added_study_ids))
+        #modified_study_ids = list(set(modified_study_ids))
         removed_study_ids = list(set(removed_study_ids))
 
     except:
@@ -109,19 +114,14 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
 
     #nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
     nexson_url_template = URL(r=request,
-                              c="default", 
-                              f="v1", 
-                              args=["study", "%s"], 
-                              vars={'output_nexml2json': '0.0.0'}, 
-                              scheme=True, 
+                              c="default",
+                              f="v1",
+                              args=["study", "%s"],
+                              vars={'output_nexml2json': '0.0.0'},
+                              scheme=True,
                               host=True,
                               url_encode=False)
 
-    # for now, let's just add/update new and modified studies using indexNexsons
-    add_or_update_ids = added_study_ids + modified_study_ids
-    # NOTE that passing deleted_study_ids (any non-existent file paths) will
-    # fail on oti, with a FileNotFoundException!
-    add_or_update_ids = list(set(add_or_update_ids))  # remove any duplicates
 
     if len(add_or_update_ids) > 0:
         # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
@@ -131,12 +131,12 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         # N.B. that gluon.tools.fetch() can't be used here, since it won't send
         # "raw" JSON data as treemachine expects
         req = urllib2.Request(
-            url=nudge_url, 
+            url=nudge_url,
             data=json.dumps({
                 "urls": nexson_urls
-            }), 
+            }),
             headers={"Content-Type": "application/json"}
-        ) 
+        )
         try:
             nudge_response = urllib2.urlopen(req).read()
             updated_study_ids = json.loads( nudge_response )
@@ -156,12 +156,12 @@ nexson_urls: %s
         # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
         remove_url = "%s/../ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
         req = urllib2.Request(
-            url=remove_url, 
+            url=remove_url,
             data=json.dumps({
                 "ids": removed_study_ids
-            }), 
+            }),
             headers={"Content-Type": "application/json"}
-        ) 
+        )
         try:
             remove_response = urllib2.urlopen(req).read()
             unindexed_study_ids = json.loads( remove_response )
@@ -185,6 +185,7 @@ removed_study_ids: %s
         return full_msg
     else:
         raise HTTP(500, full_msg)
+
 
 def _harvest_study_ids_from_paths( path_list, target_array ):
     for path in path_list:
