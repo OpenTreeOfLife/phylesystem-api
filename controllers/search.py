@@ -102,8 +102,6 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         # also "flatten" each list to remove duplicates
         add_or_update_ids = added_study_ids + modified_study_ids
         add_or_update_ids = list(set(add_or_update_ids))
-        #added_study_ids = list(set(added_study_ids))
-        #modified_study_ids = list(set(modified_study_ids))
         removed_study_ids = list(set(removed_study_ids))
 
     except:
