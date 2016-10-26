@@ -5,16 +5,16 @@ import json
 import anyjson
 import traceback
 from sh import git
-from peyotl import can_convert_nexson_forms, convert_nexson_format
-from peyotl.utility.str_util import slugify
+from peyotl import convert_nexson_format
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
-from peyotl.collections import OWNER_ID_PATTERN, \
+from peyotl.collections_store import OWNER_ID_PATTERN, \
                                COLLECTION_ID_PATTERN
-from peyotl.collections.validation import validate_collection
+from peyotl.collections_store.validation import validate_collection
+from peyotl.amendments import AMENDMENT_ID_PATTERN
+from peyotl.amendments.validation import validate_amendment
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
-                                 extract_tree, \
                                  PhyloSchema, \
                                  read_as_json, \
                                  BY_ID_HONEY_BADGERFISH
@@ -118,6 +118,9 @@ def external_url():
     response.view = 'generic.json'
     try:
         study_id = request.args[0]
+        # hacky way to support */external_url/STUDY_ID and */v1/external_url/STUDY_ID
+        if study_id == 'external_url':
+            study_id = request.args[1]
     except:
         raise HTTP(400, '{"error": 1, "description": "Expecting study_id as the argument"}')
     phylesystem = api_utils.get_phylesystem(request)
@@ -436,7 +439,7 @@ def collection(*args, **kwargs):
             raise HTTP(404, "Collection '{s}' has no JSON data!".format(s=collection_id))
         # add/restore the url field (using the visible fetch URL)
         base_url = api_utils.get_collections_api_base_url(request)
-        collection_json['url'] = '{b}/collection/{i}'.format(b=base_url,
+        collection_json['url'] = '{b}/v2/collection/{i}'.format(b=base_url,
                                                             i=collection_id)
         try:
             external_url = collections.get_public_url(collection_id)
@@ -558,6 +561,259 @@ def collection(*args, **kwargs):
 
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
 
+
+# TAXONOMIC AMENDMENTS
+
+def amendments(*args, **kwargs):
+    """Handle an incoming URL targeting /v3/amendments/
+    This includes:
+        /v3/amendments/list_all
+        /v3/amendments/store_config
+        /v3/amendments/push_failure
+    """
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("OPTIONS!"), **(response.headers))
+    # N.B. other request methods don't really matter for these functions!
+    # extract and validate the intended API call
+    assert request.args[0].lower() == 'amendments'
+    if len(request.args) < 2:
+        raise HTTP(404, T('No method specified! Try amendments/list_all, store_config, or push_failure'))
+    api_call = request.args[1]   # ignore anything later in the URL
+    if api_call == 'list_all':
+        # For now, let's just return all amendments (complete JSON)
+        response.view = 'generic.json'
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        # Convert these to more closely resemble the output of find_all_studies
+        amendment_list = []
+        for id, props in docstore.iter_doc_objs():
+            # reckon and add 'lastModified' property, based on commit history?
+            latest_commit = docstore.get_version_history_for_doc_id(id)[0]
+            props.update({
+                'id': id,
+                'lastModified': {
+                        'author_name': latest_commit.get('author_name'),
+                        'relative_date': latest_commit.get('relative_date'),
+                        'display_date': latest_commit.get('date'),
+                        'ISO_date': latest_commit.get('date_ISO_8601'),
+                        'sha': latest_commit.get('id')  # this is the commit hash
+                        }
+                })
+            amendment_list.append(props)
+        return json.dumps(amendment_list)
+    elif api_call == 'amendment_list':
+        response.view = 'generic.json'
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        ids = docstore.get_amendment_ids()
+        return json.dumps(ids)
+    elif api_call == 'store_config':
+        response.view = 'generic.json'
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        cd = docstore.get_configuration_dict()
+        return json.dumps(cd)
+    elif api_call == 'push_failure':
+        # this should find a type-specific PUSH_FAILURE file
+        request.vars['doc_type'] = 'amendment'
+        return push_failure()
+    raise HTTP(404, T('No such method as amendments/{}'.format(api_call)))
+
+def amendment(*args, **kwargs):
+    """Handle an incoming URL targeting /v3/amendment/{AMENDMENT_ID}
+    Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
+    """
+    _LOG = api_utils.get_logger(request, 'ot_api.amendment')
+    if request.env.request_method == 'OPTIONS':
+        "A simple method for approving CORS preflight request"
+        if request.env.http_access_control_request_method:
+             response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTP(200, T("single-amendment OPTIONS!"), **(response.headers))
+
+    def __extract_and_validate_amendment(request, kwargs):
+        from pprint import pprint
+        try:
+            amendment_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+        except HTTP, err:
+            # payload not found
+            return None, None, None
+        try:
+            errors, amendment_adaptor = validate_amendment(amendment_obj)
+        except HTTP, err:
+            _LOG.exception('JSON payload failed validation (raising HTTP response)')
+            pprint(err)
+            raise err
+        except Exception, err:
+            _LOG.exception('JSON payload failed validation (reporting err.msg)')
+            pprint(err)
+            try:
+                msg = err.get('msg', 'No message found')
+            except:
+                msg = str(err)
+            _raise_HTTP_from_msg(msg)
+        if len(errors) > 0:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            msg = 'JSON payload failed validation with {nerrors} errors:\n{errors}'.format(nerrors=len(errors), errors='\n  '.join(errors))
+            _LOG.exception(msg)
+            _raise_HTTP_from_msg(msg)
+        return amendment_obj, errors, amendment_adaptor
+
+    assert request.args[0].lower() == 'amendment'
+    # check for an existing amendment ID
+    amendment_id = None
+    if len(request.args) > 1:
+        amendment_id = request.args[1]
+        if not AMENDMENT_ID_PATTERN.match(amendment_id):
+            raise HTTP(400, json.dumps({"error": 1, "description": "invalid amendment ID ({}) provided".format(amendment_id)}))
+            # TODO: OR ignore the submitted id and generate a new one
+            #amendment_id = None
+
+    elif request.env.request_method != 'POST':
+        # N.B. this id is optional when creating a new amendment
+        raise HTTP(400, json.dumps({"error": 1, "description": 'amendment ID expected after "amendment/"'}))
+
+    # fetch and parse the JSON payload, if any
+    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request,
+                                                                                              kwargs)
+    if (amendment_obj is None) and request.env.request_method in ('POST','PUT'):
+        raise HTTP(400, json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.env.request_method) }))
+
+    if request.env.request_method != 'GET':
+        # all other methods require authentication
+        auth_info = api_utils.authenticate(**kwargs)
+
+    # some request types imply git commits; gather any user-provided commit message
+    try:
+        commit_msg = kwargs.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+
+    if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
+        # support JSONP requests from another domain
+        response.view = 'generic.jsonp'
+
+    if request.env.request_method == 'GET':
+        # fetch the current amendment JSON
+        _LOG.debug('GET /v2/amendment/{}'.format(str(amendment_id)))
+        version_history = None
+        comment_html = None
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        _LOG.debug('parent_sha = {}'.format(parent_sha))
+        # return the correct nexson of study_id, using the specified view
+        amendments = api_utils.get_taxonomic_amendment_store(request)
+        try:
+            r = amendments.return_doc(amendment_id, commit_sha=parent_sha, return_WIP_map=True)
+        except:
+            _LOG.exception('GET failed')
+            raise HTTP(404, json.dumps({"error": 1, "description": "Amendment '{}' GET failure".format(amendment_id)}))
+        try:
+            amendment_json, head_sha, wip_map = r
+            ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
+            version_history = amendments.get_version_history_for_doc_id(amendment_id)
+        except:
+            _LOG.exception('GET failed')
+            e = sys.exc_info()[0]
+            _raise_HTTP_from_msg(e)
+        if not amendment_json:
+            raise HTTP(404, "Amendment '{s}' has no JSON data!".format(s=amendment_id))
+
+        try:
+            external_url = amendments.get_public_url(amendment_id)
+        except:
+            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            _LOG.exception('amendment {} not found in external_url'.format(amendment))
+            external_url = 'NOT FOUND'
+        result = {'sha': head_sha,
+                 'data': amendment_json,
+                 'branch2sha': wip_map,
+                 'external_url': external_url,
+                 }
+        if version_history:
+            result['versionHistory'] = version_history
+        return result
+
+    if request.env.request_method == 'PUT':
+        # update an existing amendment with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.PUT')
+        # submit new json for this id, and read the results
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        merged_sha = None  #TODO: kwargs.get('???', None)
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        try:
+            r = docstore.update_existing_amendment(amendment_id,
+                                                   amendment_obj,
+                                                   auth_info,
+                                                   parent_sha,
+                                                   merged_sha,
+                                                   commit_msg=commit_msg)
+            commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+
+        # check for 'merge needed'?
+        mn = commit_return.get('merge_needed')
+        if (mn is not None) and (not mn):
+            __deferred_push_to_gh_call(request, amendment_id, doc_type='amendment', **kwargs)
+        return commit_return
+
+    if request.env.request_method == 'POST':
+        # Create a new amendment with the data provided
+        _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
+        # submit the json and proposed id (if any), and read the results
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+
+        # N.B. add_new_amendment below takes care of minting new ottids,
+        # assigning them to new taxa, and returning a per-taxon mapping to the
+        # caller. It will assign the new amendment id accordingly!
+        try:
+            r = docstore.add_new_amendment(amendment_obj,
+                                           auth_info,
+                                           commit_msg=commit_msg)
+            new_amendment_id, commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+        if commit_return['error'] != 0:
+            _LOG.debug('add_new_amendment failed with error code')
+            raise HTTP(400, json.dumps(commit_return))
+        __deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', **kwargs)
+        return commit_return
+
+    if request.env.request_method == 'DELETE':
+        # remove this amendment from the docstore
+        _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        parent_sha = kwargs.get('starting_commit_SHA')
+        if parent_sha is None:
+            raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+        try:
+            x = docstore.delete_amendment(amendment_id,
+                                          auth_info,
+                                          parent_sha,
+                                          commit_msg=commit_msg)
+            if x.get('error') == 0:
+                __deferred_push_to_gh_call(request, None, doc_type='amendment', **kwargs)
+            return x
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            _LOG.exception('Unknown error in amendment deletion')
+            raise HTTP(400, traceback.format_exc())
+            #raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in amendment deletion'}))
+
+    raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
+
+
 # Names here will intercept GET and POST requests to /v1/{METHOD_NAME}
 # This allows us to normalize all API method URLs under v1/, even for
 # non-RESTful methods.
@@ -574,6 +830,8 @@ _route_tag2func = {'index':index,
                    # NOTE singular vs. plural forms
                    'collections': collections,
                    'collection': collection,
+                   'amendments': amendments,
+                   'amendment': amendment,
                    #TODO: 'following': following,
                   }
 
@@ -595,7 +853,7 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
         # if no DOI exists, there are no known duplicates
         return [ ]
     oti_base_url = api_utils.get_oti_base_url(request)
-    fetch_url = '%s/singlePropertySearchForStudies' % oti_base_url
+    fetch_url = '%s/v3/studies/find_studies' % oti_base_url
     try:
         dupe_lookup_response = fetch(
             fetch_url,
@@ -816,7 +1074,7 @@ def v1():
                     return fetched.text
                 except Exception as x:
                     _LOG.exception('file_get failed')
-                    return HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
+                    raise HTTP(404, 'Could not retrieve file. Exception: "{}"'.format(str(x)))
         elif out_schema.format_str == 'nexson' and out_schema.version == repo_nexml2json:
             result_data = study_nexson
         else:
@@ -932,6 +1190,7 @@ def v1():
             # logic for others, just in case we revert based on user feedback.
             importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
             importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
+            importing_from_post_arg = (import_method == 'import-method-POST')
             importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)
             importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi_for_crossref) or \
                                           (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
@@ -971,6 +1230,11 @@ def v1():
             #                                                    nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
             elif importing_from_crossref_API:
                 new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi_for_crossref, ref_string=publication_ref, include_cc0=cc0_agreement)
+            elif importing_from_post_arg:
+                bundle = __extract_and_validate_nexson(request,
+                                                       repo_nexml2json,
+                                                       kwargs)
+                new_study_nexson = bundle[0]
             else:   # assumes 'import-method-MANUAL_ENTRY', or insufficient args above
                 new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
                 if publication_doi:
@@ -979,33 +1243,34 @@ def v1():
 
             nexml = new_study_nexson['nexml']
 
-            # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
-            if cc0_agreement:
-                nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
-            elif using_existing_license:
-                existing_license = kwargs.get('alternate_license', '')
-                if existing_license == 'CC-0':
-                    nexml['^xhtml:license'] = {'@name': 'CC0', '@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
-                    pass
-                elif existing_license == 'CC-BY-2.0':
-                    nexml['^xhtml:license'] = {'@name': 'CC-BY 2.0', '@href': 'http://creativecommons.org/licenses/by/2.0/'}
-                    pass
-                elif existing_license == 'CC-BY-2.5':
-                    nexml['^xhtml:license'] = {'@name': 'CC-BY 2.5', '@href': 'http://creativecommons.org/licenses/by/2.5/'}
-                    pass
-                elif existing_license == 'CC-BY-3.0':
-                    nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
-                    pass
-                # NOTE that we don't offer CC-BY 4.0, which is problematic for data
-                elif existing_license == 'CC-BY':
-                    # default to version 3, if not specified. 
-                    nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
-                    pass
-                else:  # assume it's something else
-                    alt_license_name = kwargs.get('alt_license_name', '')
-                    alt_license_url = kwargs.get('alt_license_URL', '')
-                    # OK to add a name here? mainly to capture submitter's intent
-                    nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
+            if not importing_from_post_arg:
+                # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
+                if cc0_agreement:
+                    nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+                elif using_existing_license:
+                    existing_license = kwargs.get('alternate_license', '')
+                    if existing_license == 'CC-0':
+                        nexml['^xhtml:license'] = {'@name': 'CC0', '@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+                        pass
+                    elif existing_license == 'CC-BY-2.0':
+                        nexml['^xhtml:license'] = {'@name': 'CC-BY 2.0', '@href': 'http://creativecommons.org/licenses/by/2.0/'}
+                        pass
+                    elif existing_license == 'CC-BY-2.5':
+                        nexml['^xhtml:license'] = {'@name': 'CC-BY 2.5', '@href': 'http://creativecommons.org/licenses/by/2.5/'}
+                        pass
+                    elif existing_license == 'CC-BY-3.0':
+                        nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
+                        pass
+                    # NOTE that we don't offer CC-BY 4.0, which is problematic for data
+                    elif existing_license == 'CC-BY':
+                        # default to version 3, if not specified. 
+                        nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
+                        pass
+                    else:  # assume it's something else
+                        alt_license_name = kwargs.get('alt_license_name', '')
+                        alt_license_url = kwargs.get('alt_license_URL', '')
+                        # OK to add a name here? mainly to capture submitter's intent
+                        nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
 
             nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
 

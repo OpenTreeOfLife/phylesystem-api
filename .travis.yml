@@ -10,7 +10,7 @@ before_install:
 
 install:
    - "git clone https://github.com/OpenTreeOfLife/peyotl.git && cd peyotl && pip install -r requirements.txt &&  python setup.py develop && cd .. "
-   - pip install -r requirements.txt --use-mirrors
+   - pip install -r requirements.txt
    # Travis builder defaults don't play nicely with multiprocessing.Queue
    - "sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm"
 

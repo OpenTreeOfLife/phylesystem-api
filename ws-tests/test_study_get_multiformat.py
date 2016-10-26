@@ -51,23 +51,26 @@ def dict_eq(a, b):
             sys.stdout.write('  keys in b only "{a}"."\n'.format(a=bo))
             d = False
     for k in ka:
-        va = a[k]
-        vb = b[k]
-        if va != vb:
-            if isinstance(va, dict) and isinstance(vb, dict):
-                if not dict_eq(va, vb):
-                    d = False
-            elif isinstance(va, list) and isinstance(vb, list):
-                for n, ela in enumerate(va):
-                    elb = vb[n]
-                    if not dict_eq(ela, elb):
+        if k in kb:
+            va = a[k]
+            vb = b[k]
+            if va != vb:
+                if isinstance(va, dict) and isinstance(vb, dict):
+                    if not dict_eq(va, vb):
                         d = False
-                if len(va) != len(vb):
+                elif isinstance(va, list) and isinstance(vb, list):
+                    for n, ela in enumerate(va):
+                        elb = vb[n]
+                        if not dict_eq(ela, elb):
+                            d = False
+                    if len(va) != len(vb):
+                        d = False
+                        sys.stdout.write('  lists for {} differ in length.\n'.format(k))
+                else:
                     d = False
-                    sys.stdout.write('  lists for {} differ in length.\n'.format(k))
-            else:
-                d = False
-                sys.stdout.write('  value for {k}: "{a}" != "{b}"\n'.format(k=k, a=va, b=vb))
+                    sys.stdout.write('  value for {k}: "{a}" != "{b}"\n'.format(k=k, a=va, b=vb))
+        else:
+            d = False
     return d
 
 

@@ -6,22 +6,30 @@ import json, requests, sys
 this_script = sys.argv[0]
 
 if len(sys.argv) > 1:
-	opentree_docstore_url = sys.argv[1]
+    opentree_docstore_url = sys.argv[1]
 else:
-    print "Please specify the Open Tree doc-store URL as first argument: '%s <repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    print "Please specify the Open Tree doc-store URL as first argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 2:
-	opentree_api_base_url = sys.argv[2].rstrip("/")
+    amendments_repo_url = sys.argv[2]
 else:
-    print "Please specify the Open Tree API public URL as second argument: '%s <repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    print "Please specify the taxonomic-amendment repo URL as second argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
     sys.exit(1)  # signal to the caller that something went wrong
- 
+
 if len(sys.argv) > 3:
-	oauth_token_file = sys.argv[3]
+    opentree_api_base_url = sys.argv[3].rstrip("/")
+    nudge_study_index_url = "%s/phylesystem/search/nudgeStudyIndexOnUpdates" % opentree_api_base_url
+    nudge_taxon_index_url = "%s/phylesystem/search/nudgeTaxonIndexOnUpdates" % opentree_api_base_url
+else:
+    print "Please specify the Open Tree API public URL as third argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    sys.exit(1)  # signal to the caller that something went wrong
+
+if len(sys.argv) > 4:
+    oauth_token_file = sys.argv[4]
 else:
     oauth_token_file = None
- 
+
 # To do this automatically via the GitHub API, we need an OAuth token for bot
 # user 'opentreeapi' on GitHub, with scope 'public_repo' and permission to
 # manage hooks. This is stored in yet another sensitive file.
@@ -33,8 +41,8 @@ else:
 
 # Alternately, we could prompt the user for their GitHub username and password...
 
-if not(prompt_for_manual_webhooks):
-    docstore_repo_name = opentree_docstore_url.rstrip('/').split('/').pop()
+def install_webhook(repo_url, nudge_index_url):
+    docstore_repo_name = repo_url.rstrip('/').split('/').pop()
     webhook_url = 'https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name
     r = requests.get(webhook_url,
                      headers={"Authorization": ("token %s" % auth_token)})
@@ -45,8 +53,8 @@ if not(prompt_for_manual_webhooks):
         print 'Webhook URL: [%s]' % webhook_url
         print 'Webhook response:\n%s\n' % r.text.encode('utf-8')
         prompt_for_manual_webhooks = True
+        return
 
-if not(prompt_for_manual_webhooks):
     # look for an existing hook that will do the job...
     found_matching_webhook = False
     for hook in hooks_info:
@@ -54,18 +62,20 @@ if not(prompt_for_manual_webhooks):
             if (hook.get('name') == "web" and 
                 hook.get('active') == True and
                 hook.get('events') and ("push" in hook['events']) and
-                hook.get('config') and (hook['config']['url'] == "%s/../search/nudgeIndexOnUpdates" % opentree_api_base_url)
+                hook.get('config') and (hook['config']['url'] == nudge_index_url)
             ):
                 found_matching_webhook = True
         except:
             print 'Unexpected webhook response: ', r.text
             # Rather than failing outright, let's keep going with the manual prompt below
             prompt_for_manual_webhooks = True
+            return
+
     if found_matching_webhook:
         print "Found a matching webhook in the docstore repo!"
-        sys.exit(0)
-    elif prompt_for_manual_webhooks == False:
-        print "Adding a webhook to the docstore repo..."
+        return
+    else:
+        print "Adding a webhook to the %s repo..." % docstore_repo_name
         hook_settings = {
             "name": "web",
             "active": True,
@@ -73,7 +83,7 @@ if not(prompt_for_manual_webhooks):
                 "push"
             ],
             "config": {
-                "url": ("%s/../search/nudgeIndexOnUpdates" % opentree_api_base_url),
+                "url": nudge_index_url,
                 "content_type": "json"
             }
         }
@@ -90,23 +100,45 @@ if not(prompt_for_manual_webhooks):
             print r.text
             prompt_for_manual_webhooks = True
 
+if not(prompt_for_manual_webhooks):
+    # try to install webhooks via GitHub API
+    # N.B. this might fail, flipping prompt_for_manual_webhooks!
+    install_webhook(opentree_docstore_url, nudge_study_index_url)
+    install_webhook(amendments_repo_url, nudge_taxon_index_url)
+
 if prompt_for_manual_webhooks:
-    # fall back to our prompt for manual action
+    # fall back to our prompts for manual action
     print """
     ***************************************************************
 
-    Please ensure the required webhook is in place on GitHub. You can
-    manage webhooks for this repo at:
-        
+    Please ensure the required webhook for re-indexing studies is in place on
+    GitHub. You can manage webhooks for this repo at:
+
         %s/settings/hooks
-        
+
     Find (or add) a webhook with these properties:
-        Payload URL: %s/../search/nudgeIndexOnUpdates
+        Payload URL: %s
         Payload version: application/vnd.github.v3+json
         Events: push
         Active: true
 
     ***************************************************************
-        """ %  (opentree_docstore_url, opentree_api_base_url)
+        """ %  (opentree_docstore_url, nudge_study_index_url)
+
+    print """
+    Please ensure the required webhook for indexing new taxa (and other
+    taxonomic amendments) is in place on GitHub. You can manage webhooks for
+    this repo at:
+        
+        %s/settings/hooks
+        
+    Find (or add) a webhook with these properties:
+        Payload URL: %s
+        Payload version: application/vnd.github.v3+json
+        Events: push
+        Active: true
+
+    ***************************************************************
+        """ %  (amendments_repo_url, nudge_taxon_index_url)
 
 sys.exit(0)
