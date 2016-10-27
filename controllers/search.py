@@ -61,7 +61,6 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     opentree_docstore_url = _read_from_local_config(request, "apis", "opentree_docstore_url")
 
     payload = request.vars
-    msg = ''
 
     # get list of study ids to be added / modified / removed
     try:
@@ -98,13 +97,61 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
                               url_encode=False)
 
     # call both the oti and otindex methods
+    msg = ''
     if len(add_or_update_ids) > 0:
-        _oti_add_update_studies( add_or_update_ids, oti_base_url, nexson_url_template )
+        msg = _oti_add_update_studies(
+            add_or_update_ids,
+            oti_base_url,
+            nexson_url_template )
         #_otindex_add_update_studies( add_or_update_ids, otindex_base_url )
 
     if len(remove_ids) > 0:
-        _oti_remove_studies(remove_ids,oti_base_url, nexson_url_template)
-        #_otindex_add_update_studies( add_or_update_ids, otindex_base_url )
+        msg = _oti_remove_studies(
+            remove_ids,
+            oti_base_url,
+            nexson_url_template)
+        #_otindex_remove_studies( remove_ids, otindex_base_url )
+
+    # TODO: check returned IDs against our original list... what if something failed?
+
+    # Clear any cached study lists (both verbose and non-verbose)
+    api_utils.clear_matching_cache_keys(".*find_studies.*")
+
+    github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
+    full_msg = """This URL should be called by a webhook set in the docstore repo:
+    <br /><br />
+    <a href="%s">%s</a><br />
+    <pre>%s</pre>
+    """ % (github_webhook_url, github_webhook_url, msg,)
+    if msg == '':
+        return full_msg
+    else:
+        raise HTTP(500, full_msg)
+
+def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
+    nudge_url = "{o}/v3/add_update_studies".format(o=otindex_base_url)
+    # can call otindex with list of either github urls or study ids
+    data = { "studies" : add_or_update_ids }
+    req = urllib2.Request(
+        url=nudge_url,
+        data=json.dumps(data),
+        headers={"Content-Type": "application/json"}
+    )
+    try:
+        nudge_response = urllib2.urlopen(req).read()
+        updated_study_ids = json.loads( nudge_response )
+    except Exception, e:
+        # TODO: log oti exceptions into my response
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        msg += """indexNexsons failed!'
+            nudge_url: %s
+            nexson_url_template: %s
+            nexson_urls: %s
+            %s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+
+
+def _otindex_remove_studies(add_or_update_ids, otindex_base_url):
+    # do stuff
 
 def _oti_add_update_studies( add_or_update_ids, oti_base_url, nexson_url_template ):
     # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
@@ -160,21 +207,6 @@ def _oti_remove_studies( remove_ids, oti_base_url, nexson_url_template ):
             removed_study_ids: %s
             %s""" % (remove_url, removed_study_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
 
-    # TODO: check returned IDs against our original list... what if something failed?
-
-    # Clear any cached study lists (both verbose and non-verbose)
-    api_utils.clear_matching_cache_keys(".*find_studies.*")
-
-    github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
-    full_msg = """This URL should be called by a webhook set in the docstore repo:
-    <br /><br />
-    <a href="%s">%s</a><br />
-    <pre>%s</pre>
-    """ % (github_webhook_url, github_webhook_url, msg,)
-    if msg == '':
-        return full_msg
-    else:
-        raise HTTP(500, full_msg)
 
 def nudgeTaxonIndexOnUpdates():
     """"Support method to update taxon index (taxomachine) in response to GitHub webhooks
