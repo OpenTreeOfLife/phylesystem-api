@@ -99,18 +99,22 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     # call both the oti and otindex methods
     msg = ''
     if len(add_or_update_ids) > 0:
+        # oti call
         msg = _oti_add_update_studies(
             add_or_update_ids,
             oti_base_url,
             nexson_url_template )
-        #_otindex_add_update_studies( add_or_update_ids, otindex_base_url )
+        # otindex call
+        _otindex_add_update_studies( add_or_update_ids, otindex_base_url )
 
     if len(remove_ids) > 0:
+        # oti call
         msg = _oti_remove_studies(
             remove_ids,
             oti_base_url,
             nexson_url_template)
-        #_otindex_remove_studies( remove_ids, otindex_base_url )
+        # otindex call
+        _otindex_remove_studies( remove_ids, otindex_base_url )
 
     # TODO: check returned IDs against our original list... what if something failed?
 
@@ -129,29 +133,34 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         raise HTTP(500, full_msg)
 
 def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
-    nudge_url = "{o}/v3/add_update_studies".format(o=otindex_base_url)
+    nudge_url = "{o}/v3/add_update".format(o=otindex_base_url)
     # can call otindex with list of either github urls or study ids
     data = { "studies" : add_or_update_ids }
-    req = urllib2.Request(
-        url=nudge_url,
-        data=json.dumps(data),
-        headers={"Content-Type": "application/json"}
-    )
+    resp = requests.request(verb='POST',
+                            nudge_url,
+                            headers=headers,
+                            data=json.dumps(data),
+                            allow_redirects=True)
     try:
-        nudge_response = urllib2.urlopen(req).read()
-        updated_study_ids = json.loads( nudge_response )
-    except Exception, e:
-        # TODO: log oti exceptions into my response
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-        msg += """indexNexsons failed!'
-            nudge_url: %s
-            nexson_url_template: %s
-            nexson_urls: %s
-            %s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+        response = resp.json()
+    except Exception as e:
+        raise HTTP(500, json.dumps({"error": 1,
+                                    "description": "Unexpected error calling otindex: {}".format(e.message)}))
 
-
-def _otindex_remove_studies(add_or_update_ids, otindex_base_url):
-    # do stuff
+def _otindex_remove_studies(remove_ids, otindex_base_url):
+    nudge_url = "{o}/v3/remove".format(o=otindex_base_url)
+    # can call otindex with list of either github urls or study ids
+    data = { "studies" : remove_ids }
+    resp = requests.request(verb='POST',
+                            nudge_url,
+                            headers=headers,
+                            data=json.dumps(data),
+                            allow_redirects=True)
+    try:
+        response = resp.json()
+    except Exception as e:
+        raise HTTP(500, json.dumps({"error": 1,
+                                    "description": "Unexpected error calling otindex: {}".format(e.message)}))
 
 def _oti_add_update_studies( add_or_update_ids, oti_base_url, nexson_url_template ):
     # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
