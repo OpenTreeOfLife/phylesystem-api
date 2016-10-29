@@ -43,14 +43,14 @@ phylesystem.get_configuration_dict() on a local instance (using peyotl).
 
 #### external_url
 
-    curl https://api.opentreeoflife.org/phylesystem/external_url/9
+    curl https://api.opentreeoflife.org/phylesystem/external_url/pg_09
 
 Returns a JSON object with the canonical study ID and a url for the version of the 
 study in the repo on the master branch:
 
     {
         "url": "https://raw.githubusercontent.com/OpenTreeOfLife/phylesystem-0/master/study/pg_09/pg_09/pg_09.json", 
-        "study_id": "9"
+        "study_id": "pg_09"
     }
 
 ### Getting a Github Oauth token
