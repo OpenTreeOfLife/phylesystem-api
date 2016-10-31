@@ -139,13 +139,12 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
 def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
     nudge_url = "{o}/v3/add_update".format(o=otindex_base_url)
     # can call otindex with list of either github urls or study ids
-    data = { "studies" : add_or_update_ids }
+    payload = { "studies" : add_or_update_ids }
     headers={"Content-Type": "application/json"}
-    resp = requests.request(nudge_url,
-                            'POST',
-                            headers=headers,
-                            data=json.dumps(data),
-                            allow_redirects=True)
+    resp = requests.post(nudge_url,
+                        headers=headers,
+                        data=payload,
+                        allow_redirects=True)
     try:
         response = resp.json()
     except Exception as e:
@@ -155,13 +154,12 @@ def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
 def _otindex_remove_studies(remove_ids, otindex_base_url):
     nudge_url = "{o}/v3/remove".format(o=otindex_base_url)
     # can call otindex with list of either github urls or study ids
-    data = { "studies" : remove_ids }
+    payload = { "studies" : remove_ids }
     headers={"Content-Type": "application/json"}
-    resp = requests.request(nudge_url,
-                            'POST',
-                            headers=headers,
-                            data=json.dumps(data),
-                            allow_redirects=True)
+    resp = requests.post(nudge_url,
+                        headers=headers,
+                        data=payload,
+                        allow_redirects=True)
     try:
         response = resp.json()
     except Exception as e:
