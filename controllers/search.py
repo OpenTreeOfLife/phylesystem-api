@@ -86,6 +86,10 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     if payload['repository']['url'] != opentree_docstore_url:
         raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
 
+    # get index URLs from config
+    oti_base_url = api_utils.get_oti_base_url(request)
+    otindex_base_url = api_utils.get_otindex_base_url(request)
+    
     # nexson_url_template only needed for oti method, not otindex
     nexson_url_template = URL(r=request,
                               c="default",
