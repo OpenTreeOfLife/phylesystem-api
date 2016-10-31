@@ -89,7 +89,7 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     # get index URLs from config
     oti_base_url = api_utils.get_oti_base_url(request)
     otindex_base_url = api_utils.get_otindex_base_url(request)
-    
+
     # nexson_url_template only needed for oti method, not otindex
     nexson_url_template = URL(r=request,
                               c="default",
@@ -183,19 +183,19 @@ def _oti_add_update_studies( add_or_update_ids, oti_base_url, nexson_url_templat
         }),
         headers={"Content-Type": "application/json"}
     )
+    msg=''
     try:
         nudge_response = urllib2.urlopen(req).read()
         updated_study_ids = json.loads( nudge_response )
     except Exception, e:
         # TODO: log oti exceptions into my response
         exc_type, exc_value, exc_traceback = sys.exc_info()
-        msg += """indexNexsons failed!'
+        msg = """indexNexsons failed!'
             nudge_url: %s
             nexson_url_template: %s
             nexson_urls: %s
             %s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
-
-# TODO: check returned IDs against our original lists... what if something failed?
+    return msg
 
 def _oti_remove_studies( remove_ids, oti_base_url, nexson_url_template ):
     # Un-index the studies that were removed from docstore
@@ -209,17 +209,18 @@ def _oti_remove_studies( remove_ids, oti_base_url, nexson_url_template ):
         }),
         headers={"Content-Type": "application/json"}
     )
+    msg=''
     try:
         remove_response = urllib2.urlopen(req).read()
         unindexed_study_ids = json.loads( remove_response )
     except Exception, e:
         # TODO: log oti exceptions into my response
         exc_type, exc_value, exc_traceback = sys.exc_info()
-        msg += """unindexNexsons failed!'
+        msg = """unindexNexsons failed!'
             remove_url: %s
             removed_study_ids: %s
             %s""" % (remove_url, removed_study_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
-
+    return msg
 
 def nudgeTaxonIndexOnUpdates():
     """"Support method to update taxon index (taxomachine) in response to GitHub webhooks
