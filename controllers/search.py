@@ -107,19 +107,19 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     msg = ''
     if len(add_or_update_ids) > 0:
         # oti call
-        # msg = _oti_add_update_studies(
-        #     add_or_update_ids,
-        #     oti_base_url,
-        #     nexson_url_template )
+        msg = _oti_add_update_studies(
+            add_or_update_ids,
+            oti_base_url,
+            nexson_url_template )
         # otindex call
         _otindex_add_update_studies( add_or_update_ids, otindex_base_url )
 
     if len(remove_ids) > 0:
         # oti call
-        # msg = _oti_remove_studies(
-        #     remove_ids,
-        #     oti_base_url,
-        #     nexson_url_template)
+        msg = _oti_remove_studies(
+            remove_ids,
+            oti_base_url,
+            nexson_url_template)
         # otindex call
         _otindex_remove_studies( remove_ids, otindex_base_url )
 
