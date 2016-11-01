@@ -140,34 +140,34 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         raise HTTP(500, full_msg)
 
 def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
-    nudge_url = "{o}/v3/add_update".format(o=otindex_base_url)
+    nudge_url = "{o}/v3/studies/add_update".format(o=otindex_base_url)
     # can call otindex with list of either github urls or study ids
     payload = { "studies" : add_or_update_ids }
     headers={"Content-Type": "application/json"}
     resp = requests.post(nudge_url,
                         headers=headers,
-                        data=payload,
+                        data=json.dumps(payload),
                         allow_redirects=True)
     try:
         response = resp.json()
-        if 'failed_studies' in response:
+        if len(response['failed_studies'] > 0:
             f = response['failed_studies']
             _LOG.debug("Could not update following studies: {s}".format(s=f))
     except Exception as e:
         raise HTTP(500, json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)}))
 
 def _otindex_remove_studies(remove_ids, otindex_base_url):
-    nudge_url = "{o}/v3/remove".format(o=otindex_base_url)
+    nudge_url = "{o}/v3/studies/remove".format(o=otindex_base_url)
     # can call otindex with list of either github urls or study ids
     payload = { "studies" : remove_ids }
     headers={"Content-Type": "application/json"}
     resp = requests.post(nudge_url,
                         headers=headers,
-                        data=payload,
+                        data=json.dumps(payload),
                         allow_redirects=True)
     try:
         response = resp.json()
-        if 'failed_studies' in response:
+        if len(response['failed_studies'] > 0:
             f = response['failed_studies']
             _LOG.debug("Could not remove the following studies {s}".format(s=f))
     except Exception as e:
