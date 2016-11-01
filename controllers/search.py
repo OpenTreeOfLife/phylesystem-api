@@ -9,6 +9,9 @@ import sys
 import traceback
 import api_utils
 
+# logger for indexing failures
+_LOG = api_utils.get_logger(None,'index.log')
+
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -147,9 +150,11 @@ def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
                         allow_redirects=True)
     try:
         response = resp.json()
+        if 'failed_studies' in response:
+            f = response['failed_studies']
+            _LOG.debug("Could not update following studies: {s}".format(s=f))
     except Exception as e:
-        raise HTTP(500, json.dumps({"error": 1,
-                                    "description": "Unexpected error calling otindex: {}".format(e.message)}))
+        raise HTTP(500, json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)}))
 
 def _otindex_remove_studies(remove_ids, otindex_base_url):
     nudge_url = "{o}/v3/remove".format(o=otindex_base_url)
@@ -162,9 +167,11 @@ def _otindex_remove_studies(remove_ids, otindex_base_url):
                         allow_redirects=True)
     try:
         response = resp.json()
+        if 'failed_studies' in response:
+            f = response['failed_studies']
+            _LOG.debug("Could not remove the following studies {s}".format(s=f))
     except Exception as e:
-        raise HTTP(500, json.dumps({"error": 1,
-                                    "description": "Unexpected error calling otindex: {}".format(e.message)}))
+        raise HTTP(500, json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)}))
 
 def _oti_add_update_studies( add_or_update_ids, oti_base_url, nexson_url_template ):
     # N.B. The indexing service lives outside of the v1/ space, so we "back out" these URLs with ".."
