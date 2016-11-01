@@ -150,7 +150,7 @@ def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
                         allow_redirects=True)
     try:
         response = resp.json()
-        if len(response['failed_studies'] > 0:
+        if len(response['failed_studies']) > 0:
             f = response['failed_studies']
             _LOG.debug("Could not update following studies: {s}".format(s=f))
     except Exception as e:
@@ -167,7 +167,7 @@ def _otindex_remove_studies(remove_ids, otindex_base_url):
                         allow_redirects=True)
     try:
         response = resp.json()
-        if len(response['failed_studies'] > 0:
+        if len(response['failed_studies']) > 0:
             f = response['failed_studies']
             _LOG.debug("Could not remove the following studies {s}".format(s=f))
     except Exception as e:
