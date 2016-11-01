@@ -10,7 +10,7 @@ import traceback
 import api_utils
 
 # logger for indexing failures
-_LOG = api_utils.get_logger(None,'index.log')
+_LOG = api_utils.get_logger(None)
 
 @request.restful()
 def v1():
