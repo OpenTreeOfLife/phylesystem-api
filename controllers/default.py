@@ -95,7 +95,8 @@ def index():
         "documentation_url": "https://github.com/OpenTreeOfLife/phylesystem-api/tree/master/docs"
     })
 
-def trees_in_synth():
+def trees_in_synth(*valist, **kwargs):
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
         # support JSONP requests from another domain
         response.view = 'generic.jsonp'
@@ -114,7 +115,7 @@ def trees_in_synth():
     except:
         raise HTTP(500, 'Could not parse file from {}'.format(url_of_synth_config))
     try:
-        coll_id_list = cfg.get_section('synthesis', 'collections').split()
+        coll_id_list = cfg.get('synthesis', 'collections').split()
     except:
         raise HTTP(500, 'Could not find a collection list in file from {}'.format(url_of_synth_config))
     coll_list = []
