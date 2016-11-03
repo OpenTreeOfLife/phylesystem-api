@@ -859,6 +859,7 @@ def amendment(*args, **kwargs):
 # This allows us to normalize all API method URLs under v1/, even for
 # non-RESTful methods.
 _route_tag2func = {'index':index,
+                   'trees_in_synth': trees_in_synth,
                    'study_list': study_list,
                    'phylesystem_config': phylesystem_config,
                    'unmerged_branches': unmerged_branches,
