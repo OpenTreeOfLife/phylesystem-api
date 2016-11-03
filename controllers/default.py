@@ -132,7 +132,7 @@ def trees_in_synth():
         _LOG.exception('concatenation of collections failed')
         e = sys.exc_info()[0]
         _raise_HTTP_from_msg(e)
-    return result
+    return json.dumps(result)
 
 
 def study_list():
