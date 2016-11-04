@@ -5,7 +5,7 @@ import json
 import anyjson
 import traceback
 from sh import git
-from peyotl import convert_nexson_format
+from peyotl import convert_nexson_format, concatenate_collections
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.collections_store import OWNER_ID_PATTERN, \
@@ -29,6 +29,7 @@ from gluon.contrib.markdown.markdown2 import markdown
 from gluon.http import HTTP
 from ConfigParser import SafeConfigParser
 import copy
+from cStringIO import StringIO
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
     from open_tree_tasks import call_http_json
@@ -93,6 +94,47 @@ def index():
         "source_url": "https://github.com/OpenTreeOfLife/phylesystem-api/",
         "documentation_url": "https://github.com/OpenTreeOfLife/phylesystem-api/tree/master/docs"
     })
+
+def trees_in_synth(*valist, **kwargs):
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
+        # support JSONP requests from another domain
+        response.view = 'generic.jsonp'
+    else:
+        response.view = 'generic.json'
+    # URL could be configurable, but I'm not sure we've ever changed this...
+    url_of_synth_config = 'https://raw.githubusercontent.com/mtholder/propinquity/master/config.opentree.synth'
+    try:
+        resp = requests.get(url_of_synth_config)
+        conf_fo = StringIO(resp.content)
+    except:
+        raise HTTP(504, 'Could not fetch synthesis list from {}'.format(url_of_synth_config))
+    cfg = SafeConfigParser()
+    try:
+        cfg.readfp(conf_fo)
+    except:
+        raise HTTP(500, 'Could not parse file from {}'.format(url_of_synth_config))
+    try:
+        coll_id_list = cfg.get('synthesis', 'collections').split()
+    except:
+        raise HTTP(500, 'Could not find a collection list in file from {}'.format(url_of_synth_config))
+    coll_list = []
+    cds = api_utils.get_tree_collection_store(request)
+    for coll_id in coll_id_list:
+        try:
+            coll_list.append(cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0])
+        except:
+            msg = 'GET of collection {} failed'.format(coll_id)
+            _LOG.exception(msg)
+            raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+    try:
+        result = concatenate_collections(coll_list)
+    except:
+        _LOG.exception('concatenation of collections failed')
+        e = sys.exc_info()[0]
+        _raise_HTTP_from_msg(e)
+    return json.dumps(result)
+
 
 def study_list():
     response.view = 'generic.json'
@@ -818,6 +860,7 @@ def amendment(*args, **kwargs):
 # This allows us to normalize all API method URLs under v1/, even for
 # non-RESTful methods.
 _route_tag2func = {'index':index,
+                   'trees_in_synth': trees_in_synth,
                    'study_list': study_list,
                    'phylesystem_config': phylesystem_config,
                    'unmerged_branches': unmerged_branches,
