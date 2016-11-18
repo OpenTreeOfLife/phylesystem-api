@@ -209,7 +209,7 @@ def _oti_remove_studies( remove_ids, oti_base_url, nexson_url_template ):
     req = urllib2.Request(
         url=remove_url,
         data=json.dumps({
-            "ids": removed_study_ids
+            "ids": remove_ids
         }),
         headers={"Content-Type": "application/json"}
     )
@@ -222,8 +222,8 @@ def _oti_remove_studies( remove_ids, oti_base_url, nexson_url_template ):
         exc_type, exc_value, exc_traceback = sys.exc_info()
         msg = """unindexNexsons failed!'
             remove_url: %s
-            removed_study_ids: %s
-            %s""" % (remove_url, removed_study_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+            remove_ids: %s
+            %s""" % (remove_url, remove_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
     return msg
 
 def nudgeTaxonIndexOnUpdates():
