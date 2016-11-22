@@ -204,7 +204,7 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
         # update (or add) the decision list for this collection
         coll['decisions'] = decision_list
         # update the default collection (forces re-indexing)
-        auth_info = auth_info or api_utils.authenticate(**kwargs)
+        auth_info = api_utils.authenticate(**kwargs)
         owner_id = auth_info.get('login', None)
         parent_sha = kwargs.get('starting_commit_SHA', None)
         merged_sha = None  #TODO: kwargs.get('???', None)
@@ -246,7 +246,7 @@ def exclude_tree_from_synth(study_id=None, tree_id=None, **kwargs):
     # find this tree in ANY synth-input collection; if found, remove it and update the collection
     coll_id_list = _get_synth_input_collection_ids()
     cds = api_utils.get_tree_collection_store(request)
-    auth_info = auth_info or api_utils.authenticate(**kwargs)
+    auth_info = api_utils.authenticate(**kwargs)
     owner_id = auth_info.get('login', None)
     for coll_id in coll_id_list:
         try:
