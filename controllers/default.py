@@ -5,7 +5,9 @@ import json
 import anyjson
 import traceback
 from sh import git
-from peyotl import convert_nexson_format, concatenate_collections
+from peyotl import convert_nexson_format, \
+                   concatenate_collections, \
+                   tree_is_in_collection
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.collections_store import OWNER_ID_PATTERN, \
@@ -96,28 +98,17 @@ def index():
     })
 
 def trees_in_synth(*valist, **kwargs):
+    """Return an "artificial" collection that contains all trees (and
+    contributors) from all of the tree collections that contribute to
+    synthesis.
+    """
     _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
         # support JSONP requests from another domain
         response.view = 'generic.jsonp'
     else:
         response.view = 'generic.json'
-    # URL could be configurable, but I'm not sure we've ever changed this...
-    url_of_synth_config = 'https://raw.githubusercontent.com/mtholder/propinquity/master/config.opentree.synth'
-    try:
-        resp = requests.get(url_of_synth_config)
-        conf_fo = StringIO(resp.content)
-    except:
-        raise HTTP(504, 'Could not fetch synthesis list from {}'.format(url_of_synth_config))
-    cfg = SafeConfigParser()
-    try:
-        cfg.readfp(conf_fo)
-    except:
-        raise HTTP(500, 'Could not parse file from {}'.format(url_of_synth_config))
-    try:
-        coll_id_list = cfg.get('synthesis', 'collections').split()
-    except:
-        raise HTTP(500, 'Could not find a collection list in file from {}'.format(url_of_synth_config))
+    coll_id_list = _get_synth_input_collection_ids()
     coll_list = []
     cds = api_utils.get_tree_collection_store(request)
     for coll_id in coll_id_list:
@@ -134,6 +125,164 @@ def trees_in_synth(*valist, **kwargs):
         e = sys.exc_info()[0]
         _raise_HTTP_from_msg(e)
     return json.dumps(result)
+
+def _get_synth_input_collection_ids():
+    """Return a list of all collection ids for the collections that contribute
+    to synthesis (based on the current propinquity configuration).
+    """
+    # URL could be configurable, but I'm not sure we've ever changed this...
+    url_of_synth_config = 'https://raw.githubusercontent.com/mtholder/propinquity/master/config.opentree.synth'
+    try:
+        resp = requests.get(url_of_synth_config)
+        conf_fo = StringIO(resp.content)
+    except:
+        raise HTTP(504, 'Could not fetch synthesis list from {}'.format(url_of_synth_config))
+    cfg = SafeConfigParser()
+    try:
+        cfg.readfp(conf_fo)
+    except:
+        raise HTTP(500, 'Could not parse file from {}'.format(url_of_synth_config))
+    try:
+        coll_id_list = cfg.get('synthesis', 'collections').split()
+    except:
+        raise HTTP(500, 'Could not find a collection list in file from {}'.format(url_of_synth_config))
+    return coll_id_list
+
+def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
+    #import pdb; pdb.set_trace()
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
+        # support JSONP requests from another domain
+        response.view = 'generic.jsonp'
+    else:
+        response.view = 'generic.json'
+    study_id = study_id.strip()
+    tree_id = tree_id.strip()
+    # check for empty/missing ids
+    if (study_id == '') or (tree_id == ''):
+        raise HTTP(400, '{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
+    # examine this study and tree, to confirm it exists *and* to capture its name
+    sds = api_utils.get_phylesystem(request)
+    try:
+        found_study = sds.return_doc(study_id, commit_sha=None, return_WIP_map=False)[0]
+        tree_list = found_study.get('trees')[0].get('tree')
+        for tree in tree_list:
+            if tree['@id'] == tree_id:
+                found_tree = tree
+        found_tree_name = found_tree['@label'] or tree_id
+    except:  # report a missing/misidentified tree
+        raise HTTP(404, '{"error": 1, "description": "Specified tree \'t{}\' in study \'s{}\' not found! Save this study and try again?"}'.format(s=study_id,t=tree_id))
+    already_included_in_synth_input_collections = False
+    # Look ahead to see if it's already in an included collection; if so, skip
+    # adding it again.
+    coll_id_list = _get_synth_input_collection_ids()
+    cds = api_utils.get_tree_collection_store(request)
+    for coll_id in coll_id_list:
+        try:
+            coll = cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
+        except:
+            msg = 'GET of collection {} failed'.format(coll_id)
+            _LOG.exception(msg)
+            raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+        if tree_is_in_collection(coll, study_id, tree_id):
+            already_included_in_synth_input_collections = True
+    if not already_included_in_synth_input_collections:
+        # find the default synth-input collection and parse its JSON
+        default_collection_id = coll_id_list[-1]
+        # N.B. For now, we assume that the last listed synth-input collection
+        # is the sensible default, so we already have it in coll
+        decision_list = coll.get('decisions', [])
+        # construct and add a sensible decision entry for this tree
+        decision_list.append({
+            'name': found_tree_name or "",
+            'treeID': tree_id,
+            'studyID': study_id,
+            'SHA': "",
+            'decision': "INCLUDED",
+            'comments': "Added via API (include_tree_in_synth) from {p}".format(p=found_study['^ot:studyPublicationReference'])
+            })
+        # update (or add) the decision list for this collection
+        coll['decisions'] = decision_list
+        # update the default collection (forces re-indexing)
+        auth_info = auth_info or api_utils.authenticate(**kwargs)
+        owner_id = auth_info.get('login', None)
+        parent_sha = kwargs.get('starting_commit_SHA', None)
+        merged_sha = None  #TODO: kwargs.get('???', None)
+        try:
+            r = cds.update_existing_collection(owner_id,
+                                               default_collection_id,
+                                               coll,
+                                               auth_info,
+                                               parent_sha,
+                                               merged_sha,
+                                               commit_msg="Updated via API (include_tree_in_synth)")
+            commit_return = r
+        except GitWorkflowError, err:
+            _raise_HTTP_from_msg(err.msg)
+        except:
+            raise HTTP(400, traceback.format_exc())
+
+        # check for 'merge needed'?
+        mn = commit_return.get('merge_needed')
+        if (mn is not None) and (not mn):
+            __deferred_push_to_gh_call(request, default_collection_id, doc_type='collection', **kwargs)
+
+    # fetch and return the updated list of synth-input trees
+    return json.dumps( trees_in_synth(valist, kwargs) )
+
+def exclude_tree_from_synth(study_id=None, tree_id=None, **kwargs):
+    #import pdb; pdb.set_trace()
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
+        # support JSONP requests from another domain
+        response.view = 'generic.jsonp'
+    else:
+        response.view = 'generic.json'
+    study_id = study_id.strip()
+    tree_id = tree_id.strip()
+    # check for empty/missing ids
+    if (study_id == '') or (tree_id == ''):
+        raise HTTP(400, '{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
+    # find this tree in ANY synth-input collection; if found, remove it and update the collection
+    coll_id_list = _get_synth_input_collection_ids()
+    cds = api_utils.get_tree_collection_store(request)
+    auth_info = auth_info or api_utils.authenticate(**kwargs)
+    owner_id = auth_info.get('login', None)
+    for coll_id in coll_id_list:
+        try:
+            coll = cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
+        except:
+            msg = 'GET of collection {} failed'.format(coll_id)
+            _LOG.exception(msg)
+            raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+        if tree_is_in_collection(coll, study_id, tree_id):
+            # remove it and update the collection
+            decision_list = coll.get('decisions', [])
+            coll['decisions'] = [d for d in decision_list if (d['studyID'] != study_id and d['treeID'] != tree_id)]
+            # update the collection (forces re-indexing)
+            parent_sha = kwargs.get('starting_commit_SHA', None)
+            merged_sha = None  #TODO: kwargs.get('???', None)
+            try:
+                r = cds.update_existing_collection(owner_id,
+                                                   coll_id,
+                                                   coll,
+                                                   auth_info,
+                                                   parent_sha,
+                                                   merged_sha,
+                                                   commit_msg="Updated via API (include_tree_in_synth)")
+                commit_return = r
+            except GitWorkflowError, err:
+                _raise_HTTP_from_msg(err.msg)
+            except:
+                raise HTTP(400, traceback.format_exc())
+
+            # check for 'merge needed'?
+            mn = commit_return.get('merge_needed')
+            if (mn is not None) and (not mn):
+                __deferred_push_to_gh_call(request, coll_id, doc_type='collection', **kwargs)
+
+    # fetch and return the updated list of synth-input trees
+    return json.dumps( trees_in_synth(valist, kwargs) )
 
 
 def study_list():
@@ -861,6 +1010,8 @@ def amendment(*args, **kwargs):
 # non-RESTful methods.
 _route_tag2func = {'index':index,
                    'trees_in_synth': trees_in_synth,
+                   'include_tree_in_synth': include_tree_in_synth,
+                   'exclude_tree_from_synth': exclude_tree_from_synth,
                    'study_list': study_list,
                    'phylesystem_config': phylesystem_config,
                    'unmerged_branches': unmerged_branches,
