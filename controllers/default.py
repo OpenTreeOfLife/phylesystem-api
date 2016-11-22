@@ -156,8 +156,8 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
         response.view = 'generic.jsonp'
     else:
         response.view = 'generic.json'
-    study_id = study_id.strip()
-    tree_id = tree_id.strip()
+    study_id = (study_id or "").strip()
+    tree_id = (tree_id or "").strip()
     # check for empty/missing ids
     if (study_id == '') or (tree_id == ''):
         raise HTTP(400, '{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
@@ -238,8 +238,8 @@ def exclude_tree_from_synth(study_id=None, tree_id=None, **kwargs):
         response.view = 'generic.jsonp'
     else:
         response.view = 'generic.json'
-    study_id = study_id.strip()
-    tree_id = tree_id.strip()
+    study_id = (study_id or "").strip()
+    tree_id = (tree_id or "").strip()
     # check for empty/missing ids
     if (study_id == '') or (tree_id == ''):
         raise HTTP(400, '{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
