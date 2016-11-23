@@ -235,7 +235,7 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
             __deferred_push_to_gh_call(request, default_collection_id, doc_type='collection', **kwargs)
 
     # fetch and return the updated list of synth-input trees
-    return json.dumps( trees_in_synth(valist, kwargs) )
+    return json.dumps( trees_in_synth(kwargs) )
 
 def exclude_tree_from_synth(study_id=None, tree_id=None, **kwargs):
     #import pdb; pdb.set_trace()
@@ -289,7 +289,7 @@ def exclude_tree_from_synth(study_id=None, tree_id=None, **kwargs):
                 __deferred_push_to_gh_call(request, coll_id, doc_type='collection', **kwargs)
 
     # fetch and return the updated list of synth-input trees
-    return json.dumps( trees_in_synth(valist, kwargs) )
+    return json.dumps( trees_in_synth(kwargs) )
 
 
 def study_list():
