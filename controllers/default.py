@@ -163,13 +163,17 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
         raise HTTP(400, '{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
     # examine this study and tree, to confirm it exists *and* to capture its name
     sds = api_utils.get_phylesystem(request)
+    found_study = None
     try:
         found_study = sds.return_doc(study_id, commit_sha=None, return_WIP_map=False)[0]
-        tree_list = found_study.get('trees')[0].get('tree')
-        for tree in tree_list:
-            if tree['@id'] == tree_id:
-                found_tree = tree
+        tree_collections_by_id = found_study.get('nexml').get('treesById')
+        for trees_id, trees_collection in tree_collections_by_id.items():
+            trees_by_id = trees_collection.get('treeById')
+            if tree_id in trees_by_id.keys():
+                _LOG.exception('*** FOUND IT ***')
+                found_tree = trees_by_id.get(tree_id)
         found_tree_name = found_tree['@label'] or tree_id
+        _LOG.exception('*** FOUND IT: {}'.format(found_tree_name))
     except:  # report a missing/misidentified tree
         raise HTTP(404, '{{"error": 1, "description": "Specified tree \'{t}\' in study \'{s}\' not found! Save this study and try again?"}}'.format(s=study_id,t=tree_id))
     already_included_in_synth_input_collections = False
@@ -199,7 +203,7 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
             'studyID': study_id,
             'SHA': "",
             'decision': "INCLUDED",
-            'comments': "Added via API (include_tree_in_synth) from {p}".format(p=found_study['^ot:studyPublicationReference'])
+            'comments': "Added via API (include_tree_in_synth) from {p}".format(p=found_study.get('nexml')['^ot:studyPublicationReference'])
             })
         # update (or add) the decision list for this collection
         coll['decisions'] = decision_list
@@ -208,6 +212,9 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
         owner_id = auth_info.get('login', None)
         parent_sha = kwargs.get('starting_commit_SHA', None)
         merged_sha = None  #TODO: kwargs.get('???', None)
+        _LOG.exception('======')
+        _LOG.exception(json.dumps(coll))
+        _LOG.exception('======')
         try:
             r = cds.update_existing_collection(owner_id,
                                                default_collection_id,
