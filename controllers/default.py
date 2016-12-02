@@ -265,7 +265,8 @@ def exclude_tree_from_synth(study_id=None, tree_id=None, **kwargs):
         if tree_is_in_collection(coll, study_id, tree_id):
             # remove it and update the collection
             decision_list = coll.get('decisions', [])
-            coll['decisions'] = [d for d in decision_list if (d['studyID'] != study_id and d['treeID'] != tree_id)]
+            coll['decisions'] = [d for d in decision_list if not ((d['studyID'] == study_id) and (d['treeID'] == tree_id))]
+            # N.B. that _both_ ids (for study and tree) must match to remove a decision!
             # update the collection (forces re-indexing)
             parent_sha = kwargs.get('starting_commit_SHA', None)
             merged_sha = None  #TODO: kwargs.get('???', None)
