@@ -9,6 +9,9 @@ import sys
 import traceback
 import api_utils
 
+# logger for indexing failures
+_LOG = api_utils.get_logger(None)
+
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -61,14 +64,8 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     opentree_docstore_url = _read_from_local_config(request, "apis", "opentree_docstore_url")
 
     payload = request.vars
-    msg = ''
 
-    # EXAMPLE of a working curl call to nudge index:
-    # curl -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
-
-    # Pull needed values from config file (typical values shown)
-    #   opentree_docstore_url = "https://github.com/OpenTreeOfLife/phylesystem"        # munge this to grab raw NexSON)
-    #   oti_base_url='http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti'    # confirm we're pushing to the right OTI service(s)!
+    # get list of study ids to be added / modified / removed
     try:
         # how we nudge the index depends on which studies are new, changed, or deleted
         added_study_ids = [ ]
@@ -80,10 +77,11 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
             _harvest_study_ids_from_paths( commit['modified'], modified_study_ids )
             _harvest_study_ids_from_paths( commit['removed'], removed_study_ids )
 
-        # "flatten" each list to remove duplicates
-        added_study_ids = list(set(added_study_ids))
-        modified_study_ids = list(set(modified_study_ids))
-        removed_study_ids = list(set(removed_study_ids))
+        # add and update treated the same, so merge
+        # also "flatten" each list to remove duplicates
+        add_or_update_ids = added_study_ids + modified_study_ids
+        add_or_update_ids = list(set(add_or_update_ids))
+        remove_ids = list(set(removed_study_ids))
 
     except:
         raise HTTP(400,json.dumps({"error":1, "description":"malformed GitHub payload"}))
@@ -91,86 +89,142 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
     if payload['repository']['url'] != opentree_docstore_url:
         raise HTTP(400,json.dumps({"error":1, "description":"wrong repo for this API instance"}))
 
-    #nexson_url_template = opentree_docstore_url.replace("github.com", "raw.github.com") + "/master/study/%s/%s.json"
+    # get index URLs from config
+    oti_base_url = api_utils.get_oti_base_url(request)
+    otindex_base_url = api_utils.get_otindex_base_url(request)
+
+    # nexson_url_template only needed for oti method, not otindex
     nexson_url_template = URL(r=request,
-                              c="default", 
-                              f="v1", 
-                              args=["study", "%s"], 
-                              vars={'output_nexml2json': '0.0.0'}, 
-                              scheme=True, 
+                              c="default",
+                              f="v1",
+                              args=["study", "%s"],
+                              vars={'output_nexml2json': '0.0.0'},
+                              scheme=True,
                               host=True,
                               url_encode=False)
 
-    # for now, let's just add/update new and modified studies using indexNexsons
-    add_or_update_ids = added_study_ids + modified_study_ids
-    # NOTE that passing deleted_study_ids (any non-existent file paths) will
-    # fail on oti, with a FileNotFoundException!
-    add_or_update_ids = list(set(add_or_update_ids))  # remove any duplicates
-
-    oti_base_url = api_utils.get_oti_base_url(request)  # WAS conf.get("apis", "oti_base_url")
+    # call both the oti and otindex methods
+    msg = ''
     if len(add_or_update_ids) > 0:
-        nudge_url = "%s/oti/ext/IndexServices/graphdb/indexNexsons" % (oti_base_url,)
-        nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
+        # oti call
+        msg = _oti_add_update_studies(
+            add_or_update_ids,
+            oti_base_url,
+            nexson_url_template )
+        # otindex call
+        _otindex_add_update_studies( add_or_update_ids, otindex_base_url )
 
-        # N.B. that gluon.tools.fetch() can't be used here, since it won't send
-        # "raw" JSON data as treemachine expects
-        req = urllib2.Request(
-            url=nudge_url, 
-            data=json.dumps({
-                "urls": nexson_urls
-            }), 
-            headers={"Content-Type": "application/json"}
-        ) 
-        try:
-            nudge_response = urllib2.urlopen(req).read()
-            updated_study_ids = json.loads( nudge_response )
-        except Exception, e:
-            # TODO: log oti exceptions into my response
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            msg += """indexNexsons failed!'
-nudge_url: %s
-nexson_url_template: %s
-nexson_urls: %s
-%s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    if len(remove_ids) > 0:
+        # oti call
+        msg = _oti_remove_studies(
+            remove_ids,
+            oti_base_url,
+            nexson_url_template)
+        # otindex call
+        _otindex_remove_studies( remove_ids, otindex_base_url )
 
-        # TODO: check returned IDs against our original lists... what if something failed?
-
-    if len(removed_study_ids) > 0:
-        # Un-index the studies that were removed from docstore
-        remove_url = "%s/oti/ext/IndexServices/graphdb/unindexNexsons" % (oti_base_url,)
-        req = urllib2.Request(
-            url=remove_url, 
-            data=json.dumps({
-                "ids": removed_study_ids
-            }), 
-            headers={"Content-Type": "application/json"}
-        ) 
-        try:
-            remove_response = urllib2.urlopen(req).read()
-            unindexed_study_ids = json.loads( remove_response )
-        except Exception, e:
-            # TODO: log oti exceptions into my response
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            msg += """unindexNexsons failed!'
-remove_url: %s
-removed_study_ids: %s
-%s""" % (remove_url, removed_study_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
-
-        # TODO: check returned IDs against our original list... what if something failed?
+    # TODO: check returned IDs against our original list... what if something failed?
 
     # Clear any cached study lists (both verbose and non-verbose)
     api_utils.clear_matching_cache_keys(".*find_studies.*")
 
     github_webhook_url = "%s/settings/hooks" % opentree_docstore_url
     full_msg = """This URL should be called by a webhook set in the docstore repo:
-<br /><br />
-<a href="%s">%s</a><br />
-<pre>%s</pre>
-""" % (github_webhook_url, github_webhook_url, msg,)
+    <br /><br />
+    <a href="%s">%s</a><br />
+    <pre>%s</pre>
+    """ % (github_webhook_url, github_webhook_url, msg,)
     if msg == '':
         return full_msg
     else:
         raise HTTP(500, full_msg)
+
+def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
+    nudge_url = "{o}/v3/studies/add_update".format(o=otindex_base_url)
+    # can call otindex with list of either github urls or study ids
+    payload = { "studies" : add_or_update_ids }
+    headers={"Content-Type": "application/json"}
+    resp = requests.post(nudge_url,
+                        headers=headers,
+                        data=json.dumps(payload),
+                        allow_redirects=True)
+    try:
+        response = resp.json()
+        if len(response['failed_studies']) > 0:
+            f = response['failed_studies']
+            _LOG.debug("Could not update following studies: {s}".format(s=f))
+    except Exception as e:
+        raise HTTP(500, json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)}))
+
+def _otindex_remove_studies(remove_ids, otindex_base_url):
+    nudge_url = "{o}/v3/studies/remove".format(o=otindex_base_url)
+    # can call otindex with list of either github urls or study ids
+    payload = { "studies" : remove_ids }
+    headers={"Content-Type": "application/json"}
+    resp = requests.post(nudge_url,
+                        headers=headers,
+                        data=json.dumps(payload),
+                        allow_redirects=True)
+    try:
+        response = resp.json()
+        if len(response['failed_studies']) > 0:
+            f = response['failed_studies']
+            _LOG.debug("Could not remove the following studies {s}".format(s=f))
+    except Exception as e:
+        raise HTTP(500, json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)}))
+
+def _oti_add_update_studies( add_or_update_ids, oti_base_url, nexson_url_template ):
+    nudge_url = "{b}oti/ext/IndexServices/graphdb/indexNexsons".format(b=oti_base_url)
+    nexson_urls = [ (nexson_url_template % (study_id,)) for study_id in add_or_update_ids ]
+
+    # EXAMPLE of a working curl call to nudge index:
+    # curl -X POST -d '{"urls": ["https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/10/10.json", "https://raw.github.com/OpenTreeOfLife/phylesystem/master/study/9/9.json"]}' -H "Content-type: application/json" http://ec2-54-203-194-13.us-west-2.compute.amazonaws.com/oti/ext/IndexServices/graphdb/indexNexsons
+
+    # N.B. that gluon.tools.fetch() can't be used here, since it won't send
+    # "raw" JSON data as treemachine expects
+    req = urllib2.Request(
+        url=nudge_url,
+        data=json.dumps({
+            "urls": nexson_urls
+        }),
+        headers={"Content-Type": "application/json"}
+    )
+    msg=''
+    try:
+        nudge_response = urllib2.urlopen(req).read()
+        updated_study_ids = json.loads( nudge_response )
+    except Exception, e:
+        # TODO: log oti exceptions into my response
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        msg = """indexNexsons failed!'
+            nudge_url: %s
+            nexson_url_template: %s
+            nexson_urls: %s
+            %s""" % (nudge_url, nexson_url_template, nexson_urls, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    return msg
+
+def _oti_remove_studies( remove_ids, oti_base_url, nexson_url_template ):
+    # Un-index the studies that were removed from docstore
+    remove_url = "{b}oti/ext/IndexServices/graphdb/unindexNexsons".format(b=oti_base_url)
+    req = urllib2.Request(
+        url=remove_url,
+        data=json.dumps({
+            "ids": remove_ids
+        }),
+        headers={"Content-Type": "application/json"}
+    )
+    msg=''
+    try:
+        remove_response = urllib2.urlopen(req).read()
+        unindexed_study_ids = json.loads( remove_response )
+    except Exception, e:
+        # TODO: log oti exceptions into my response
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        msg = """unindexNexsons failed!'
+            remove_url: %s
+            remove_ids: %s
+            %s""" % (remove_url, remove_ids, traceback.format_exception(exc_type, exc_value, exc_traceback),)
+    return msg
 
 def nudgeTaxonIndexOnUpdates():
     """"Support method to update taxon index (taxomachine) in response to GitHub webhooks
@@ -237,7 +291,7 @@ N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
             # Extra weirdness required here, as neo4j needs an encoded *string*
             # of the amendment JSON, within a second JSON wrapper :-/
             POST_blob = {"addition_document": json.dumps(amendment_blob) }
-            POST_string = json.dumps(POST_blob) 
+            POST_string = json.dumps(POST_blob)
             nudge_response = None
             req = urllib2.Request(
                 url=nudge_url,

@@ -22,7 +22,7 @@ def atomic_write_json_if_not_found(obj, dest, request):
         return False
     dir = get_private_dir(request)
     handle, tmpfn = tempfile.mkstemp(suffix='.json', dir=dir, text=True)
-    # mkstemp opens the file and returns a file descriptor, 
+    # mkstemp opens the file and returns a file descriptor,
     #   but we are using write_as_json to open with the right encoding
     os.close(handle)
     write_as_json(obj, tmpfn, indent=2, sort_keys=True)
@@ -499,11 +499,11 @@ def get_logger(request, name="ot_api"):
     return logger
 
 def log_time_diff(log_obj, operation='', prev_time=None):
-    '''If prev_time is not None, logs (at debug level) to 
-    log_obj the difference between now and the naive datetime 
+    '''If prev_time is not None, logs (at debug level) to
+    log_obj the difference between now and the naive datetime
     object prev_time.
     `operation` is a string describing what events were timed.
-    The current time is returned to allow for several 
+    The current time is returned to allow for several
     calls with the form
        x = log_time_diff(_LOG, 'no op', x)
        foo()
@@ -517,6 +517,11 @@ def log_time_diff(log_obj, operation='', prev_time=None):
         t = td.total_seconds()
         log_obj.debug('Timed operation "{o}" took {t:f} seconds'.format(o=operation, t=t))
     return n
+
+def get_otindex_base_url(request):
+    conf = get_conf_object(request)
+    otindex_base_url = conf.get("apis", "otindex_base_url")
+    return otindex_base_url
 
 def get_oti_base_url(request):
     conf = get_conf_object(request)
@@ -575,4 +580,3 @@ def clear_matching_cache_keys(key_pattern):
         _LOG.debug(k)
     _LOG.debug("===")
     _LOG.debug("  %d items removed" % (item_count_before - item_count_after,))
-
