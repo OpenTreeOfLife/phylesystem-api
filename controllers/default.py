@@ -504,7 +504,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
     except:
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
-        raise HTTP(400, json.dumps({"error": 1, "description": 'no collection JSON found in request'}))
+        raise HTTP(400, json.dumps({"error": 1, "description": 'no document JSON found in request'}))
     return json_obj
 
 def collection(*args, **kwargs):
@@ -1127,7 +1127,7 @@ def illustration(*args, **kwargs):
 
     # fetch and parse the JSON payload, if any
     illustration_obj, illustration_errors, illustration_adapter = __extract_and_validate_illustration(request,
-                                                                                              kwargs)
+                                                                                                      kwargs)
     if (illustration_obj is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "illustration JSON expected for HTTP method {}".format(request.env.request_method) }))
 
@@ -1249,7 +1249,7 @@ def illustration(*args, **kwargs):
         # Create a new illustration with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.POST')
         # submit the json and proposed id (if any), and read the results
-        docstore = api_utils.get_taxonomic_illustration_store(request)
+        docstore = api_utils.get_illustration_store(request)
 
         # N.B. add_new_illustration below takes care of minting new ottids,
         # assigning them to new taxa, and returning a per-taxon mapping to the
