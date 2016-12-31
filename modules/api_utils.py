@@ -213,7 +213,8 @@ def get_failed_push_filepath(request, doc_type=None):
     filenames_by_content_type = {'nexson': "PUSH_FAILURE_nexson.json",
                                  'collection': "PUSH_FAILURE_collection.json",
                                  'amendment': "PUSH_FAILURE_amendment.json",
-                                 'favorites': "PUSH_FAILURE_favorites.json"}
+                                 'favorites': "PUSH_FAILURE_favorites.json",
+                                 'illustration': "PUSH_FAILURE_illustration.json"}
     content_type = doc_type or request.vars.get('doc_type', 'nexson')
     failure_filename = filenames_by_content_type[content_type]
     return os.path.join(get_private_dir(request), failure_filename)
