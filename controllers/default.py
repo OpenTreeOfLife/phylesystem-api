@@ -1233,7 +1233,10 @@ def illustration(*args, **kwargs):
             _raise_HTTP_from_msg(e)
         if not illustration_json:
             raise HTTP(404, "Illustration '{s}' has no JSON data!".format(s=illustration_id))
-
+        # add/restore the url field (using the visible fetch URL)
+        base_url = api_utils.get_illustrations_api_base_url(request)
+        illustration_json['metadata']['url'] = '{b}/v3/illustration/{i}'.format(b=base_url,
+                                                                                i=illustration_id)
         try:
             external_url = illustrations.get_public_url(illustration_id)
         except:
@@ -1259,11 +1262,11 @@ def illustration(*args, **kwargs):
         docstore = api_utils.get_illustration_store(request)
         try:
             r = docstore.update_existing_illustration(illustration_id,
-                                                   illustration_obj,
-                                                   auth_info,
-                                                   parent_sha,
-                                                   merged_sha,
-                                                   commit_msg=commit_msg)
+                                                      illustration_obj,
+                                                      auth_info,
+                                                      parent_sha,
+                                                      merged_sha,
+                                                      commit_msg=commit_msg)
             commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
@@ -1281,14 +1284,12 @@ def illustration(*args, **kwargs):
         _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.POST')
         # submit the json and proposed id (if any), and read the results
         docstore = api_utils.get_illustration_store(request)
-
-        # N.B. add_new_illustration below takes care of minting new ottids,
-        # assigning them to new taxa, and returning a per-taxon mapping to the
-        # caller. It will assign the new illustration id accordingly!
         try:
-            r = docstore.add_new_illustration(illustration_obj,
-                                           auth_info,
-                                           commit_msg=commit_msg)
+            r = docstore.add_new_illustration(owner_id,
+                                              illustration_obj,
+                                              auth_info,
+                                              illustration_id,
+                                              commit_msg=commit_msg)
             new_illustration_id, commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)

@@ -546,6 +546,14 @@ def get_collections_api_base_url(request):
         base_url = "https:" + base_url
     return base_url
 
+def get_illustrations_api_base_url(request):
+    conf = get_conf_object(request)
+    base_url = conf.get("apis", "illustrations_api_base_url")
+    if base_url.startswith('//'):
+        # Prepend scheme to a scheme-relative URL
+        base_url = "https:" + base_url
+    return base_url
+
 def get_amendments_api_base_url(request):
     conf = get_conf_object(request)
     base_url = conf.get("apis", "amendments_api_base_url")
