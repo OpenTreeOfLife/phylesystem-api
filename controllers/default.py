@@ -11,7 +11,7 @@ from peyotl import convert_nexson_format, \
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 from peyotl.collections_store import OWNER_ID_PATTERN, \
-                               COLLECTION_ID_PATTERN
+                                     COLLECTION_ID_PATTERN
 from peyotl.collections_store.validation import validate_collection
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
@@ -1113,13 +1113,22 @@ def illustration(*args, **kwargs):
 
     assert request.args[0].lower() == 'illustration'
     # check for an existing illustration ID
+    owner_id = None
     illustration_id = None
     if len(request.args) > 1:
-        illustration_id = request.args[1]
+        # do we have the owner's id (GitHub username)?
+        owner_id = request.args[1]
+        if not OWNER_ID_PATTERN.match(owner_id):
+            raise HTTP(400, json.dumps({"error": 1, "description": "invalid owner ID ({}) provided".format(owner_id)}))
+    if len(request.args) > 2:
+        illustration_id = ('/').join(request.args[1:3])
         if not ILLUSTRATION_ID_PATTERN.match(illustration_id):
-            raise HTTP(400, json.dumps({"error": 1, "description": "invalid illustration ID ({}) provided".format(illustration_id)}))
-            # TODO: OR ignore the submitted id and generate a new one
-            #illustration_id = None
+            #raise HTTP(400, json.dumps({"error": 1, "description": 'invalid illustration ID provided'}))
+            # ignore the submitted id and generate a new one
+            illustration_id = None
+    elif request.env.request_method != 'POST':
+        # N.B. this id is optional when creating a new illustration
+        raise HTTP(400, json.dumps({"error": 1, "description": 'illustration ID expected after "illustration/"'}))
 
     elif request.env.request_method != 'POST':
         # N.B. this id is optional when creating a new illustration
@@ -1131,9 +1140,30 @@ def illustration(*args, **kwargs):
     if (illustration_obj is None) and request.env.request_method in ('POST','PUT'):
         raise HTTP(400, json.dumps({"error": 1, "description": "illustration JSON expected for HTTP method {}".format(request.env.request_method) }))
 
+    auth_info = None
     if request.env.request_method != 'GET':
         # all other methods require authentication
         auth_info = api_utils.authenticate(**kwargs)
+        if owner_id is None:
+            # set this explicitly to the logged-in userid (make sure the user is allowed!)
+            owner_id = auth_info.get('login', None)
+        if owner_id is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
+    if illustration_id is None:
+        # try to extract a usable illustration ID from the JSON payload (confirm owner_id against above)
+        url = illustration_obj.get('metadata').get('url', None)
+        if url is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": "no illustration URL provided in query string or JSON payload"}))
+        try:
+            illustration_id = url.split('/illustration/')[1]
+        except:
+            _LOG.exception('{} failed'.format(request.env.request_method))
+            raise HTTP(404, json.dumps({"error": 1, "description": "invalid URL, no illustration id found: {}".format(url)}))
+        try:
+            assert illustration_id.split('/')[0] == owner_id
+        except:
+            _LOG.exception('{} failed'.format(request.env.request_method))
+            raise HTTP(404, json.dumps({"error": 1, "description": "illustration URL in JSON doesn't match logged-in user: {}".format(url)}))
 
     # some request types imply git commits; gather any user-provided commit message
     try:
@@ -1222,6 +1252,7 @@ def illustration(*args, **kwargs):
     if request.env.request_method == 'PUT':
         # update an existing illustration with the data provided
         _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.PUT')
+        auth_info = auth_info or api_utils.authenticate(**kwargs)
         # submit new json for this id, and read the results
         parent_sha = kwargs.get('starting_commit_SHA', None)
         merged_sha = None  #TODO: kwargs.get('???', None)
