@@ -1299,6 +1299,10 @@ def illustration(*args, **kwargs):
             _LOG.debug('add_new_illustration failed with error code')
             raise HTTP(400, json.dumps(commit_return))
         __deferred_push_to_gh_call(request, new_illustration_id, doc_type='illustration', **kwargs)
+        # add a complete URL to response, so client can update its doc in progress
+        base_url = api_utils.get_illustrations_api_base_url(request)
+        commit_return['resource_url'] = '{b}/v3/illustration/{i}'.format(b=base_url,
+                                                                         i=commit_return['resource_id'])
         return commit_return
 
     if request.env.request_method == 'DELETE':
