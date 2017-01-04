@@ -640,8 +640,8 @@ def collection(*args, **kwargs):
             raise HTTP(404, "Collection '{s}' has no JSON data!".format(s=collection_id))
         # add/restore the url field (using the visible fetch URL)
         base_url = api_utils.get_collections_api_base_url(request)
-        collection_json['url'] = '{b}/v2/collection/{i}'.format(b=base_url,
-                                                            i=collection_id)
+        collection_json['url'] = '{b}v2/collection/{i}'.format(b=base_url,
+                                                               i=collection_id)
         try:
             external_url = collections.get_public_url(collection_id)
         except:
@@ -1235,8 +1235,8 @@ def illustration(*args, **kwargs):
             raise HTTP(404, "Illustration '{s}' has no JSON data!".format(s=illustration_id))
         # add/restore the url field (using the visible fetch URL)
         base_url = api_utils.get_illustrations_api_base_url(request)
-        illustration_json['metadata']['url'] = '{b}/v3/illustration/{i}'.format(b=base_url,
-                                                                                i=illustration_id)
+        illustration_json['metadata']['url'] = '{b}v3/illustration/{i}'.format(b=base_url,
+                                                                               i=illustration_id)
         try:
             external_url = illustrations.get_public_url(illustration_id)
         except:
@@ -1301,8 +1301,8 @@ def illustration(*args, **kwargs):
         __deferred_push_to_gh_call(request, new_illustration_id, doc_type='illustration', **kwargs)
         # add a complete URL to response, so client can update its doc in progress
         base_url = api_utils.get_illustrations_api_base_url(request)
-        commit_return['resource_url'] = '{b}/v3/illustration/{i}'.format(b=base_url,
-                                                                         i=commit_return['resource_id'])
+        commit_return['resource_url'] = '{b}v3/illustration/{i}'.format(b=base_url,
+                                                                        i=commit_return['resource_id'])
         return commit_return
 
     if request.env.request_method == 'DELETE':
