@@ -1085,6 +1085,7 @@ def illustration(*args, **kwargs):
     def __extract_and_validate_illustration(request, kwargs):
         # TODO: work from a manifest, test for all required elements?
         from pprint import pprint
+        _LOG = api_utils.get_logger(request, 'ot_api.illustration')
         try:
             illustration_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
         except HTTP, err:
