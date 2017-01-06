@@ -18,7 +18,7 @@ def v1():
     def PUT(resource_id=None, jsoncallback=None, callback=None, _=None, doc_type='nexson', **kwargs):
         """OpenTree API methods relating to updating branches
 
-        'doc_type' should be 'nexson' (default), 'collection', or 'favorites'
+        'doc_type' should be one of the types listed below ('nexson' [default], 'collection', 'amendment', etc.)
 
         curl -X POST http://localhost:8000/api/push/v1?resource_id=9
         curl -X POST http://localhost:8000/api/push/v1?resource_id=TestUserB/my-favorite-trees&doc_type=collection
@@ -120,10 +120,41 @@ def v1():
                     "description": "Could not push! Details: {m}".format(m=m)
                 }))
 
+        elif doc_type.lower() == 'illustration':
+            docstore = api_utils.get_illustration_store(request)
+            try:
+                docstore.push_doc_to_remote('GitHubRemote', resource_id)
+            except:
+                m = traceback.format_exc()
+                _LOG.warn('Push of illustration {s} failed. Details: {m}'.format(s=resource_id, m=m))
+                if os.path.exists(fail_file):
+                    _LOG.warn('push failure file "{f}" already exists. This event not logged there'.format(f=fail_file))
+                else:
+                    timestamp = datetime.datetime.utcnow().isoformat()
+                    try:
+                        ga = docstore.create_git_action(resource_id)
+                    except:
+                        m = 'Could not create an adaptor for git actions on illustration ID "{}". ' \
+                            'If you are confident that this is a valid illustration ID, please report this as a bug.'
+                        m = m.format(resource_id)
+                        raise HTTP(400, json.dumps({'error': 1, 'description': m}))
+                    master_sha = ga.get_master_sha()
+                    obj = {'date': timestamp,
+                           'illustration': resource_id,
+                           'commit': master_sha,
+                           'stacktrace': m}
+                    api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
+                    _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+                raise HTTP(409, json.dumps({
+                    "error": 1,
+                    "description": "Could not push! Details: {m}".format(m=m)
+                }))
+
         elif doc_type.lower() == 'favorites':
             raise NotImplementedError('TODO: add push behavior for favorites!') 
 
         else:
+            _LOG.warn("Can't push unknown doc_type '{}'".format(doc_type))
             raise ValueError("Can't push unknown doc_type '{}'".format(doc_type)) 
 
         if os.path.exists(fail_file):
