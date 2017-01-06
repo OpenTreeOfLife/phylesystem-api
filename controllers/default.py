@@ -1234,7 +1234,8 @@ def illustration(*args, **kwargs):
             _raise_HTTP_from_msg(e)
         if not illustration_json:
             raise HTTP(404, "Illustration '{s}' has no JSON data!".format(s=illustration_id))
-        # add/restore the url field (using the visible fetch URL)
+        # add/restore the 'url' and 'sha' fields (using the visible fetch URL)
+        illustration_json['metadata']['sha'] = head_sha
         base_url = api_utils.get_illustrations_api_base_url(request)
         illustration_json['metadata']['url'] = '{b}v3/illustration/{i}'.format(b=base_url,
                                                                                i=illustration_id)
