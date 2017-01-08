@@ -347,7 +347,7 @@ TODO: Clear any cached illustration list.
 
 N.B. This depends on a GitHub webhook on the tree-illustratoins docstore!
 """
-    return """This is currently a no-op, pending development of an index for tree illustrations!""")
+    return """This is currently a no-op, pending development of an index for tree illustrations!"""
 
 def _read_from_local_config(request, section_name, key_name):
     app_name = request.application
