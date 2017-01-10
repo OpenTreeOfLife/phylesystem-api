@@ -1216,6 +1216,8 @@ def illustration(*args, **kwargs):
             _LOG.warn('request.args: {}'.format( ('/').join(request.args)))
             _LOG.warn('request.extension: {}'.format(request.extension))
             _LOG.warn('subresource_path: {}'.format(subresource_path))
+            _LOG.warn('request.env:')
+            _LOG.warn(request.env)
             try:
                 full_path_to_subresource = illustrations.retrieve_illustration_subresource(illustration_id, subresource_path)
                 # use default headers for type and disposition
