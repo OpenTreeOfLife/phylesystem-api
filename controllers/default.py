@@ -1210,14 +1210,11 @@ def illustration(*args, **kwargs):
 
         if len(request.args) > 3:
             # return a matching sub-resource within the illustration's folder (eg, an image or font file)
-            subresource_path = ('/').join(request.args[3:])
-            if request.extension:
-                subresource_path = "{p}.{e}".format(p=subresource_path, e=request.extension)
-            _LOG.warn('request.args: {}'.format( ('/').join(request.args)))
-            _LOG.warn('request.extension: {}'.format(request.extension))
+            #subresource_path = ('/').join(request.args[3:])
+            # N.B. that we use request.env instead, which preserves any file extension, e.g.
+            #   '/v3/illustration/jimallman/second-system/foo/bar.txt'
+            subresource_path = request.env.script_url.split(illustration_id)[1]
             _LOG.warn('subresource_path: {}'.format(subresource_path))
-            _LOG.warn('request.env:')
-            _LOG.warn(request.env)
             try:
                 full_path_to_subresource = illustrations.retrieve_illustration_subresource(illustration_id, subresource_path)
                 # use default headers for type and disposition
