@@ -1131,9 +1131,11 @@ def illustration(*args, **kwargs):
         # N.B. this id is optional when creating a new illustration
         raise HTTP(400, json.dumps({"error": 1, "description": 'illustration ID expected after "illustration/"'}))
 
-    elif request.env.request_method != 'POST':
-        # N.B. this id is optional when creating a new illustration
-        raise HTTP(400, json.dumps({"error": 1, "description": 'illustration ID expected after "illustration/"'}))
+    ##subresource_path = None
+    ##if len(request.args) > 3:
+    ##    # there's a further subresource path defined, EX: illustration/jimallman/2011-fig-1/data/posterior.cvs
+    ##    subresource_path = ('/').join(request.args[3:])
+    ##    # add simple subresource actions here, and bail early?
 
     # fetch and parse the JSON payload, if any
     illustration_obj, illustration_errors, illustration_adapter = __extract_and_validate_illustration(request,
@@ -1209,6 +1211,11 @@ def illustration(*args, **kwargs):
         if len(request.args) > 3:
             # return a matching sub-resource within the illustration's folder (eg, an image or font file)
             subresource_path = ('/').join(request.args[3:])
+            if request.extension:
+                subresource_path = "{p}.{e}".format(p=subresource_path, e=request.extension)
+            _LOG.warn('request.args: {}'.format( ('/').join(request.args)))
+            _LOG.warn('request.extension: {}'.format(request.extension))
+            _LOG.warn('subresource_path: {}'.format(subresource_path))
             try:
                 full_path_to_subresource = illustrations.retrieve_illustration_subresource(illustration_id, subresource_path)
                 # use default headers for type and disposition
@@ -1218,7 +1225,7 @@ def illustration(*args, **kwargs):
                 e = sys.exc_info()[0]
                 _raise_HTTP_from_msg(e)
 
-        # otherwise, return the usual JSON core + metadata for this illustration
+        # otherwise, return the usual JSON core (main.json) + metadata for this illustration
         try:
             r = illustrations.return_doc(illustration_id, commit_sha=parent_sha, return_WIP_map=True)
         except:
