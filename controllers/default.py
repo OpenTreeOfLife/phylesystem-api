@@ -1214,9 +1214,11 @@ def illustration(*args, **kwargs):
             # N.B. that we use request.env instead, which preserves any file extension, e.g.
             #   '/v3/illustration/jimallman/second-system/foo/bar.txt'
             subresource_path = request.env.script_url.split(illustration_id)[1]
+            subresource_path = subresource_path[1:]  # remove initial slash
             _LOG.warn('subresource_path: {}'.format(subresource_path))
             try:
                 full_path_to_subresource = illustrations.retrieve_illustration_subresource(illustration_id, subresource_path)
+                _LOG.warn('full_path_to_subresource: [{}]'.format(full_path_to_subresource))
                 # use default headers for type and disposition
                 return response.stream(full_path_to_subresource, chunk_size=64*1024)
             except:
