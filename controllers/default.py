@@ -1222,8 +1222,8 @@ def illustration(*args, **kwargs):
                 # use default headers for type and disposition
                 return response.stream(full_path_to_subresource, chunk_size=64*1024)
             except HTTP:
-                # this should be either a 200 (expected stream) or an appropriate error
-                pass
+                # this should be either a 200 (expected stream) or an appropriate HTTP error
+                raise
             except:
                 _LOG.exception('GET (subresource fetch) failed')
                 e = sys.exc_info()[0]
