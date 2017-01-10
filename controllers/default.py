@@ -1224,10 +1224,17 @@ def illustration(*args, **kwargs):
             except HTTP:
                 # this should be either a 200 (expected stream) or an appropriate HTTP error
                 raise
+            except ValueErrorXX:
+                raise HTTP(404, json.dumps({
+                    "error": 1, 
+                    "description": "No subresource found at '{i}/{p}'. Please check the path and try again.".format(
+                        i=illustration_id, 
+                        p=subresource_path)
+                }))
             except:
                 _LOG.exception('GET (subresource fetch) failed')
-                e = sys.exc_info()[0]
-                _raise_HTTP_from_msg(e)
+                import traceback
+                _raise_HTTP_from_msg(traceback.format_exc())
 
         # otherwise, return the usual JSON core (main.json) + metadata for this illustration
         try:
