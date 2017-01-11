@@ -1334,9 +1334,9 @@ def illustration(*args, **kwargs):
             # delete just the matching sub-resource within this illustration's folder (eg, an image or font file)
             try:
                 x = docstore.delete_illustration_subresource(illustration_id,
-                                                             subresource_path,
                                                              auth_info,
                                                              parent_sha,
+                                                             subresource_path=subresource_path,
                                                              doctype_display_name='illustration subresource',
                                                              commit_msg=commit_msg)
                 if x.get('error') == 0:
