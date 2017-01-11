@@ -1337,10 +1337,10 @@ def illustration(*args, **kwargs):
                                                              auth_info,
                                                              parent_sha,
                                                              subresource_path=subresource_path,
-                                                             doctype_display_name='illustration subresource',
+                                                             doctype_display_name='illustration',
                                                              commit_msg=commit_msg)
                 if x.get('error') == 0:
-                    __deferred_push_to_gh_call(request, None, doc_type='illustration subresource', **kwargs)
+                    __deferred_push_to_gh_call(request, None, doc_type='illustration', **kwargs)
                 return x
             except GitWorkflowError, err:
                 _raise_HTTP_from_msg(err.msg)
