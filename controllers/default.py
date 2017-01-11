@@ -1337,7 +1337,7 @@ def illustration(*args, **kwargs):
                                                              subresource_path,
                                                              auth_info,
                                                              parent_sha,
-                                                             doctype_display_name='illustration subresource'
+                                                             doctype_display_name='illustration subresource',
                                                              commit_msg=commit_msg)
                 if x.get('error') == 0:
                     __deferred_push_to_gh_call(request, None, doc_type='illustration subresource', **kwargs)
