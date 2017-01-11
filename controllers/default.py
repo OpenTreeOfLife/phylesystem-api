@@ -1327,7 +1327,7 @@ def illustration(*args, **kwargs):
         # remove this illustration from the docstore
         _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.DELETE')
         docstore = api_utils.get_illustration_store(request)
-        parent_sha = kwargs.get('starting_commit_SHA')
+        parent_sha = kwargs.get('starting_commit_SHA', 'master')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
         if subresource_path:
