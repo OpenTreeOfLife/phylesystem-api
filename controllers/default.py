@@ -1346,6 +1346,7 @@ def illustration(*args, **kwargs):
                 _raise_HTTP_from_msg(err.msg)
             except:
                 _LOG.exception('Unknown error in subresource deletion')
+                import traceback
                 raise HTTP(400, traceback.format_exc())
         else:
             # delete the main illustration and all subresources
