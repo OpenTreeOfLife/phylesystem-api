@@ -1106,7 +1106,6 @@ def illustration(*args, **kwargs):
                 msg = str(err)
             _raise_HTTP_from_msg(msg)
         if len(errors) > 0:
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             msg = 'JSON payload failed validation with {nerrors} errors:\n{errors}'.format(nerrors=len(errors), errors='\n  '.join(errors))
             _LOG.exception(msg)
             _raise_HTTP_from_msg(msg)
@@ -1131,11 +1130,16 @@ def illustration(*args, **kwargs):
         # N.B. this id is optional when creating a new illustration
         raise HTTP(400, json.dumps({"error": 1, "description": 'illustration ID expected after "illustration/"'}))
 
-    ##subresource_path = None
-    ##if len(request.args) > 3:
-    ##    # there's a further subresource path defined, EX: illustration/jimallman/2011-fig-1/data/posterior.cvs
-    ##    subresource_path = ('/').join(request.args[3:])
-    ##    # add simple subresource actions here, and bail early?
+    subresource_path = None
+    if len(request.args) > 3:
+        # there's a further subresource path defined, EX: illustration/jimallman/2011-fig-1/data/posterior.cvs
+        #subresource_path = ('/').join(request.args[3:])
+        # N.B. that we use request.env instead, which preserves any file extension, e.g.
+        #   '/v3/illustration/jimallman/second-system/foo/bar.txt'
+        subresource_path = request.env.script_url.split(illustration_id)[1]
+        subresource_path = subresource_path[1:]  # remove initial slash
+        _LOG.warn('FOUND a subresource path: {}'.format(subresource_path))
+        # adapt each request method below to manage this subresource
 
     # fetch and parse the JSON payload, if any
     illustration_obj, illustration_errors, illustration_adapter = __extract_and_validate_illustration(request,
@@ -1208,14 +1212,8 @@ def illustration(*args, **kwargs):
                 e = sys.exc_info()[0]
                 _raise_HTTP_from_msg(e)
 
-        if len(request.args) > 3:
+        if subresource_path:
             # return a matching sub-resource within the illustration's folder (eg, an image or font file)
-            #subresource_path = ('/').join(request.args[3:])
-            # N.B. that we use request.env instead, which preserves any file extension, e.g.
-            #   '/v3/illustration/jimallman/second-system/foo/bar.txt'
-            subresource_path = request.env.script_url.split(illustration_id)[1]
-            subresource_path = subresource_path[1:]  # remove initial slash
-            _LOG.warn('subresource_path: {}'.format(subresource_path))
             try:
                 full_path_to_subresource = illustrations.retrieve_illustration_subresource(illustration_id, subresource_path)
                 _LOG.warn('full_path_to_subresource: [{}]'.format(full_path_to_subresource))
@@ -1327,26 +1325,44 @@ def illustration(*args, **kwargs):
 
     if request.env.request_method == 'DELETE':
         # remove this illustration from the docstore
-        _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.POST')
+        _LOG = api_utils.get_logger(request, 'ot_api.default.illustrations.DELETE')
         docstore = api_utils.get_illustration_store(request)
         parent_sha = kwargs.get('starting_commit_SHA')
         if parent_sha is None:
             raise HTTP(400, 'Expecting a "starting_commit_SHA" argument with the SHA of the parent')
-        try:
-            x = docstore.delete_illustration(illustration_id,
-                                          auth_info,
-                                          parent_sha,
-                                          commit_msg=commit_msg)
-            if x.get('error') == 0:
-                __deferred_push_to_gh_call(request, None, doc_type='illustration', **kwargs)
-            return x
-        except GitWorkflowError, err:
-            _raise_HTTP_from_msg(err.msg)
-        except:
-            _LOG.exception('Unknown error in illustration deletion')
-            raise HTTP(400, traceback.format_exc())
-            #raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in illustration deletion'}))
-
+        if subresource_path:
+            # delete just the matching sub-resource within this illustration's folder (eg, an image or font file)
+            try:
+                x = docstore.delete_illustration_subresource(illustration_id,
+                                                             subresource_path,
+                                                             auth_info,
+                                                             parent_sha,
+                                                             doctype_display_name='illustration subresource'
+                                                             commit_msg=commit_msg)
+                if x.get('error') == 0:
+                    __deferred_push_to_gh_call(request, None, doc_type='illustration subresource', **kwargs)
+                return x
+            except GitWorkflowError, err:
+                _raise_HTTP_from_msg(err.msg)
+            except:
+                _LOG.exception('Unknown error in subresource deletion')
+                raise HTTP(400, traceback.format_exc())
+        else:
+            # delete the main illustration and all subresources
+            try:
+                x = docstore.delete_illustration(illustration_id,
+                                                 auth_info,
+                                                 parent_sha,
+                                                 commit_msg=commit_msg)
+                if x.get('error') == 0:
+                    __deferred_push_to_gh_call(request, None, doc_type='illustration', **kwargs)
+                return x
+            except GitWorkflowError, err:
+                _raise_HTTP_from_msg(err.msg)
+            except:
+                _LOG.exception('Unknown error in illustration deletion')
+                raise HTTP(400, traceback.format_exc())
+                #raise HTTP(400, json.dumps({"error": 1, "description": 'Unknown error in illustration deletion'}))
     raise HTTP(500, T("Unknown HTTP method '{}'".format(request.env.request_method)))
 
 
