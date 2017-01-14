@@ -1024,6 +1024,7 @@ def illustrations(*args, **kwargs):
         /v3/illustrations/store_config
         /v3/illustrations/push_failure
     """
+    _LOG = api_utils.get_logger(request, 'ot_api.illustrations')
     if request.env.request_method == 'OPTIONS':
         "A simple method for approving CORS preflight request"
         if request.env.http_access_control_request_method:
@@ -1041,10 +1042,12 @@ def illustrations(*args, **kwargs):
         # For now, let's just return all illustrations (complete JSON)
         response.view = 'generic.json'
         docstore = api_utils.get_illustration_store(request)
+        _LOG.warn('docstore: {}'.format(docstore))
         # Convert these to more closely resemble the output of find_all_studies
         illustration_list = []
         for id, props in docstore.iter_doc_objs():
             # reckon and add 'lastModified' property, based on commit history?
+            _LOG.warn('iter_doc_objs foud this ID: {}'.format(id))
             latest_commit = docstore.get_version_history_for_doc_id(id)[0]
             props.update({
                 'id': id,
