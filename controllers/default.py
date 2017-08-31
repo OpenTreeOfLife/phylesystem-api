@@ -205,7 +205,7 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
             'studyID': study_id,
             'SHA': "",
             'decision': "INCLUDED",
-            'comments': "Added via API (include_tree_in_synth) from {p}".format(p=found_study.get('nexml')['^ot:studyPublicationReference'])
+            'comments': u"Added via API (include_tree_in_synth) from {p}".format(p=found_study.get('nexml')['^ot:studyPublicationReference'])
             })
         # update (or add) the decision list for this collection
         coll['decisions'] = decision_list
