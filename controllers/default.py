@@ -1271,10 +1271,9 @@ def illustration(*args, **kwargs):
                  'branch2sha': wip_map,
                  'external_url': external_url,
                  }
-        if subresource_list:
-            result['subresource_list'] = subresource_list
         if version_history:
             result['versionHistory'] = version_history
+        result['subresource_list'] = subresource_list
         return result
 
     if request.env.request_method == 'PUT':
