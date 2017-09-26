@@ -1248,7 +1248,7 @@ def illustration(*args, **kwargs):
             ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
             version_history = illustrations.get_version_history_for_doc_id(illustration_id)
             # describe any subresources using standard subpaths, e.g. `inputs/my_data.csv`
-            subresource_paths = illustrations.get_subresource_list_for_doc_id(illustration_id)
+            subresource_paths = illustrations.get_subresource_list_for_illustration_id(illustration_id)
         except:
             _LOG.exception('GET failed')
             e = sys.exc_info()[0]
