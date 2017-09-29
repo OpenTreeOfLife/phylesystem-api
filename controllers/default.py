@@ -501,6 +501,25 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
             json_obj = json.loads(json_obj)
         if data_field_name in json_obj:
             json_obj = json_obj[data_field_name]
+
+        from pprint import pprint
+        pprint('...BEFORE testing for ZIP file...')
+        if not isinstance(json_obj, dict):
+            pprint('...testing for ZIP file... request.vars:')
+            # check for ZIP archive; retrieve its inner JSON file if available
+            # (in this case, data_field_name is its path in the archive, e.g.
+            # 'main.json')
+            pprint(request.vars)
+            if ('update.zip' in request.vars):
+                filelike = request.vars['update.zip'].file
+                zip1 = zipfile.Zipfile(filelike)
+                pprint(">>> zip1 is a ", type(zip1))
+                zipdata = request.vars['update.zip'].value
+                zip2 = zipfile.Zipfile(zipdata)
+                pprint(">>> zip2 is a ", type(zip2))
+                ##import pdb; pdb.set_trace()
+                #if (isinstance(zipfile, file):
+
     except:
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
@@ -1090,7 +1109,7 @@ def illustration(*args, **kwargs):
         from pprint import pprint
         _LOG = api_utils.get_logger(request, 'ot_api.illustration')
         try:
-            illustration_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+            illustration_obj = __extract_json_from_http_call(request, data_field_name='main.json', **kwargs)
         except HTTP, err:
             # payload not found
             return None, None, None
