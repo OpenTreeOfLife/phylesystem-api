@@ -498,29 +498,33 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
             json_obj = request.body.read()
 
         from pprint import pprint
-        pprint(">>> DUMB json_obj is a {}".format( type(json_obj)) )
+        pprint(">>> DUMB json_obj is a {}".format( type(json_obj) ))
         pprint(json_obj)
         if not isinstance(json_obj, dict):
-            json_obj = json.loads(json_obj)
+            # check for a JSON string, or perhaps a ZIP payload
+            try:
+                json_obj = json.loads(json_obj)
+            except ValueError, e:
+                import zipfile
+                pprint('...testing for ZIP file... request.vars:')
+                # check for ZIP archive; retrieve its inner JSON file if available
+                # (in this case, data_field_name is its path in the archive, e.g.
+                # 'main.json')
+                pprint(request.vars)
+                if ('update.zip' in request.vars):
+                    filelike = request.vars['update.zip'].file
+                    zip1 = zipfile.Zipfile(filelike)
+                    pprint(">>> zip1 is a {}".format( type(zip1) ))
+                    zipdata = request.vars['update.zip'].value
+                    zip2 = zipfile.Zipfile(zipdata)
+                    pprint(">>> zip2 is a {}".format( type(zip2) ))
+                    ##import pdb; pdb.set_trace()
+                    #if (isinstance(zipfile, file):
+
+        # check for "inner JSON" in case it's wrapped in metadata
         if data_field_name in json_obj:
             json_obj = json_obj[data_field_name]
 
-        pprint('...BEFORE testing for ZIP file...')
-        if not isinstance(json_obj, dict):
-            pprint('...testing for ZIP file... request.vars:')
-            # check for ZIP archive; retrieve its inner JSON file if available
-            # (in this case, data_field_name is its path in the archive, e.g.
-            # 'main.json')
-            pprint(request.vars)
-            if ('update.zip' in request.vars):
-                filelike = request.vars['update.zip'].file
-                zip1 = zipfile.Zipfile(filelike)
-                pprint(">>> zip1 is a {}".format( type(zip1)) )
-                zipdata = request.vars['update.zip'].value
-                zip2 = zipfile.Zipfile(zipdata)
-                pprint(">>> zip2 is a {}".format( type(zip2)) )
-                ##import pdb; pdb.set_trace()
-                #if (isinstance(zipfile, file):
 
     except:
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
