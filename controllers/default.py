@@ -498,7 +498,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
             json_obj = request.body.read()
 
         from pprint import pprint
-        pprint(">>> DUMB json_obj is a ", type(json_obj))
+        pprint(">>> DUMB json_obj is a {}".format( type(json_obj)) )
         pprint(json_obj)
         if not isinstance(json_obj, dict):
             json_obj = json.loads(json_obj)
@@ -515,10 +515,10 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
             if ('update.zip' in request.vars):
                 filelike = request.vars['update.zip'].file
                 zip1 = zipfile.Zipfile(filelike)
-                pprint(">>> zip1 is a ", type(zip1))
+                pprint(">>> zip1 is a {}".format( type(zip1)) )
                 zipdata = request.vars['update.zip'].value
                 zip2 = zipfile.Zipfile(zipdata)
-                pprint(">>> zip2 is a ", type(zip2))
+                pprint(">>> zip2 is a {}".format( type(zip2)) )
                 ##import pdb; pdb.set_trace()
                 #if (isinstance(zipfile, file):
 
