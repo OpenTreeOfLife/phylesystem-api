@@ -497,12 +497,14 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
         else:
             json_obj = request.body.read()
 
+        from pprint import pprint
+        pprint(">>> DUMB json_obj is a ", type(json_obj))
+        pprint(json_obj)
         if not isinstance(json_obj, dict):
             json_obj = json.loads(json_obj)
         if data_field_name in json_obj:
             json_obj = json_obj[data_field_name]
 
-        from pprint import pprint
         pprint('...BEFORE testing for ZIP file...')
         if not isinstance(json_obj, dict):
             pprint('...testing for ZIP file... request.vars:')
