@@ -504,7 +504,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
             # check for a JSON string, or perhaps a ZIP payload
             try:
                 json_obj = json.loads(json_obj)
-            except ValueError:
+            except ValueError, err:
                 import zipfile
                 pprint('...testing for ZIP file... request.vars:')
                 # check for ZIP archive; retrieve its inner JSON file if available
@@ -519,13 +519,13 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
                     if (isinstance(zipped, zipfile.ZipFile)):
                         pprint(">>> zipped is LEGIT! Here's what's inside...")
                         zip_listing = zipped.namelist()
-                        pprint(zip_listing)  # OR .infolist()
+                        pprint(zip_listing)
                         if (data_field_name in zip_listing):
                             pprint(">>> zipped is LEGIT! Here's what's inside...")
                             json_obj = json.loads(zipped.read(data_field_name)) 
                         else:
                             pprint(">>> expected file '{}' NOT FOUND in this archive!".format(data_field_name))
-                        pprint(">>> json_obj is now a {}".format(type(json_obj))
+                        pprint(">>> json_obj is now a {}".format(type(json_obj)))
             finally:
                 pprint('FINALLY OUTPUT')
         else:
