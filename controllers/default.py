@@ -489,17 +489,21 @@ def collections(*args, **kwargs):
 
 def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
     """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
+    from pprint import pprint
     json_obj = None
     try:
         # check for kwarg data_field_name, or load the full request body
         if data_field_name in kwargs:
+            pprint('SETTING A')
             json_obj = kwargs.get(data_field_name, {})
         else:
+            pprint('SETTING B')
             json_obj = request.body.read()
 
         if not isinstance(json_obj, dict):
             # check for a JSON string, or perhaps a ZIP payload
             try:
+                pprint('SETTING C')
                 json_obj = json.loads(json_obj)
             except ValueError, err:
                 import zipfile
@@ -513,6 +517,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
                         # zipped archive is legit! what's inside?
                         zip_listing = zipped.namelist()
                         if (data_field_name in zip_listing):
+                            pprint('SETTING D')
                             json_obj = json.loads(zipped.read(data_field_name)) 
                         else:
                             raise Exception("expected file '{}' NOT FOUND in this archive!".format(data_field_name))
@@ -524,12 +529,16 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
                             raise Exception(msg)
         # check for "inner JSON" in case it's wrapped in metadata
         if isinstance(json_obj, dict) and (data_field_name in json_obj):
+            pprint('SETTING E')
             json_obj = json_obj[data_field_name]
-
+        if not isinstance(json_obj, dict):
+            pprint('BOUNCING WITH ERROR')
+            raise Exception("expected JSON dict was NOT FOUND anywhere in the request!")
     except:
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
         raise HTTP(400, json.dumps({"error": 1, "description": 'no document JSON found in request'}))
+    pprint('RETURNING '.format(json_obj))
     return json_obj
 
 def collection(*args, **kwargs):
