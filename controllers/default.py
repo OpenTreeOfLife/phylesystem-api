@@ -526,13 +526,17 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
                         else:
                             pprint(">>> expected file '{}' NOT FOUND in this archive!".format(data_field_name))
                         pprint(">>> json_obj is now a {}".format(type(json_obj))
-        pprint('HELLO')
+            finally:
+                pprint('FINALLY OUTPUT')
+        else:
+            pprint('ELSE OUTPUT')
+
+        pprint('MAIN OUTPUT')
+
         # check for "inner JSON" in case it's wrapped in metadata
-        ##if isinstance(json_obj, dict) and (data_field_name in json_obj):
-        if isinstance(json_obj, dict):
-            if (data_field_name in json_obj):
-                pprint(">>> retrieving JSON core from property '{}'...".format( data_field_name ))
-                json_obj = json_obj[data_field_name]
+        if isinstance(json_obj, dict) and (data_field_name in json_obj):
+            pprint(">>> retrieving JSON core from property '{}'...".format( data_field_name ))
+            json_obj = json_obj[data_field_name]
 
     except:
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
