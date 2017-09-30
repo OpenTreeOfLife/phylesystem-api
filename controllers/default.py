@@ -521,13 +521,10 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
                         pprint(zip1.namelist())  # OR .infolist()
                         # TODO TODO TODO 
 
-
-        pprint(">>> data_field_name: {}".format( data_field_name ))
         # check for "inner JSON" in case it's wrapped in metadata
-        if data_field_name in json_obj:
-            pprint(">>> data_field_name in json_obj? ".format( data_field_name in json_obj ))
+        if isinstance(json_obj, dict) and (data_field_name in json_obj):
+            pprint(">>> retrieving JSON core from property '{}'...".format( data_field_name ))
             json_obj = json_obj[data_field_name]
-
 
     except:
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
