@@ -1115,7 +1115,8 @@ def illustration(*args, **kwargs):
         from pprint import pprint
         _LOG = api_utils.get_logger(request, 'ot_api.illustration')
         try:
-            illustration_obj = __extract_json_from_http_call(request, data_field_name='main.json', **kwargs)
+            #illustration_obj = __extract_json_from_http_call(request, data_field_name='main.json', **kwargs)
+            illustration_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
         except HTTP, err:
             # payload not found
             return None, None, None
