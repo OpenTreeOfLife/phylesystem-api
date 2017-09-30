@@ -497,45 +497,33 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
         else:
             json_obj = request.body.read()
 
-        from pprint import pprint
-        pprint(">>> DUMB json_obj is a {}".format( type(json_obj) ))
-        ##pprint(json_obj)
         if not isinstance(json_obj, dict):
             # check for a JSON string, or perhaps a ZIP payload
             try:
                 json_obj = json.loads(json_obj)
             except ValueError, err:
                 import zipfile
-                pprint('...testing for ZIP file... request.vars:')
                 # check for ZIP archive; retrieve its inner JSON file if available
                 # (in this case, data_field_name is its path in the archive, e.g.
                 # 'main.json')
-                pprint(request.vars)
                 if ('archive' in request.vars):
-                    pprint(">>> FOUND archive")
                     filelike = request.vars['archive'].file
                     zipped = zipfile.ZipFile(filelike)
-                    pprint(">>> zipped is a {}".format( type(zipped) ))
                     if (isinstance(zipped, zipfile.ZipFile)):
-                        pprint(">>> zipped is LEGIT! Here's what's inside...")
+                        # zipped archive is legit! what's inside?
                         zip_listing = zipped.namelist()
-                        pprint(zip_listing)
                         if (data_field_name in zip_listing):
-                            pprint(">>> zipped is LEGIT! Here's what's inside...")
                             json_obj = json.loads(zipped.read(data_field_name)) 
                         else:
-                            pprint(">>> expected file '{}' NOT FOUND in this archive!".format(data_field_name))
-                        pprint(">>> json_obj is now a {}".format(type(json_obj)))
-            finally:
-                pprint('FINALLY OUTPUT')
-        else:
-            pprint('ELSE OUTPUT')
-
-        pprint('MAIN OUTPUT')
-
+                            raise Exception("expected file '{}' NOT FOUND in this archive!".format(data_field_name))
+                        try:
+                            assert isinstance(json_obj, dict)
+                        except:
+                            msg = "FOUND '{}' in the archive, but it's invalid (won't parse to a dict)".format(data_field_name)
+                            _LOG.exception(msg)
+                            raise Exception(msg)
         # check for "inner JSON" in case it's wrapped in metadata
         if isinstance(json_obj, dict) and (data_field_name in json_obj):
-            pprint(">>> retrieving JSON core from property '{}'...".format( data_field_name ))
             json_obj = json_obj[data_field_name]
 
     except:
