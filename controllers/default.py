@@ -511,26 +511,16 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
                 # (in this case, data_field_name is its path in the archive, e.g.
                 # 'main.json')
                 pprint(request.vars)
-                if ('update.zip' in request.vars):
-                    pprint(">>> FOUND update.zip")
-                    filelike = request.vars['update.zip'].file
-                    zip1 = zipfile.ZipFile(filelike)
-                    pprint(">>> zip1 is a {}".format( type(zip1) ))
-                    zipdata = request.vars['update.zip'].value
-                    zip2 = zipfile.ZipFile(zipdata)
-                    pprint(">>> zip2 is a {}".format( type(zip2) ))
-                    ##import pdb; pdb.set_trace()
-                    #if (isinstance(zipfile, file):
                 if ('archive' in request.vars):
                     pprint(">>> FOUND archive")
                     filelike = request.vars['archive'].file
                     zip1 = zipfile.ZipFile(filelike)
                     pprint(">>> zip1 is a {}".format( type(zip1) ))
-                    zipdata = request.vars['archive'].value
-                    zip2 = zipfile.ZipFile(zipdata)
-                    pprint(">>> zip2 is a {}".format( type(zip2) ))
-                    ##import pdb; pdb.set_trace()
-                    #if (isinstance(zipfile, file):
+                    if (isinstance(zipfile.ZipFile, zip1):
+                        pprint(">>> zip1 is LEGIT! Here's what's inside...")
+                        pprint(zip1.info_list())
+                        # TODO TODO TODO 
+
 
         pprint(">>> data_field_name: {}".format( data_field_name ))
         # check for "inner JSON" in case it's wrapped in metadata
