@@ -1116,6 +1116,8 @@ def illustration(*args, **kwargs):
         _LOG = api_utils.get_logger(request, 'ot_api.illustration')
         try:
             illustration_obj = __extract_json_from_http_call(request, data_field_name='main.json', **kwargs)
+            pprint(">>>> illustration_obj is a {}".format(type(illustration_obj)))
+            pprint(illustration_obj)
         except HTTP, err:
             # payload not found
             return None, None, None
