@@ -514,12 +514,18 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
                 if ('archive' in request.vars):
                     pprint(">>> FOUND archive")
                     filelike = request.vars['archive'].file
-                    zip1 = zipfile.ZipFile(filelike)
-                    pprint(">>> zip1 is a {}".format( type(zip1) ))
-                    if (isinstance(zip1, zipfile.ZipFile)):
-                        pprint(">>> zip1 is LEGIT! Here's what's inside...")
-                        pprint(zip1.namelist())  # OR .infolist()
-                        # TODO TODO TODO 
+                    zipped = zipfile.ZipFile(filelike)
+                    pprint(">>> zipped is a {}".format( type(zipped) ))
+                    if (isinstance(zipped, zipfile.ZipFile)):
+                        pprint(">>> zipped is LEGIT! Here's what's inside...")
+                        zip_listing = zipped.namelist()
+                        pprint(zip_listing)  # OR .infolist()
+                        if (data_field_name in zip_listing):
+                            pprint(">>> zipped is LEGIT! Here's what's inside...")
+                            json_obj = json.loads(zipped.read(data_field_name)) 
+                        else:
+                            pprint(">>> expected file '{}' NOT FOUND in this archive!".format(data_field_name))
+                        pprint(">>> json_obj is now a {}".format(type(json_obj))
 
         # check for "inner JSON" in case it's wrapped in metadata
         if isinstance(json_obj, dict) and (data_field_name in json_obj):
