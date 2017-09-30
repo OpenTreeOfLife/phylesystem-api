@@ -504,7 +504,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
             # check for a JSON string, or perhaps a ZIP payload
             try:
                 json_obj = json.loads(json_obj)
-            except ValueError, e:
+            except ValueError:
                 import zipfile
                 pprint('...testing for ZIP file... request.vars:')
                 # check for ZIP archive; retrieve its inner JSON file if available
