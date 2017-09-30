@@ -516,7 +516,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
                     filelike = request.vars['archive'].file
                     zip1 = zipfile.ZipFile(filelike)
                     pprint(">>> zip1 is a {}".format( type(zip1) ))
-                    if (isinstance(zipfile.ZipFile, zip1):
+                    if (isinstance(zipfile.ZipFile, zip1)):
                         pprint(">>> zip1 is LEGIT! Here's what's inside...")
                         pprint(zip1.info_list())
                         # TODO TODO TODO 
