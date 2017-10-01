@@ -1241,12 +1241,12 @@ def illustration(*args, **kwargs):
             except HTTP, e:
                 _LOG.exception(">>>>>>>>>> HTTP ERROR returning ZIP stream!")
                 e_type, e_value, e_traceback = sys.exc_info()
-                _LOG.exception(">>>>>>>>>> e_type:")
-                _LOG.exception(e_type)
-                _LOG.exception(">>>>>>>>>> e_value:")
-                _LOG.exception(e_value)
-                _LOG.exception(">>>>>>>>>> e_traceback:")
-                _LOG.exception(e_traceback)
+                _LOG.exception(">>>>>>>>>> e_type: {}".format(e_type))
+                #_LOG.exception(e_type)
+                _LOG.exception(">>>>>>>>>> e_value: {}".format(e_value))
+                #_LOG.exception(e_value)
+                _LOG.exception(">>>>>>>>>> e_traceback: {}".format(e_traceback))
+                #_LOG.exception(e_traceback)
                 _LOG.exception("<<<<<<<<<<<")
             except:
                 _LOG.exception('GET (zip download) failed')
