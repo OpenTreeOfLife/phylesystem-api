@@ -1172,11 +1172,12 @@ def illustration(*args, **kwargs):
         _LOG.warn('FOUND a subresource path: {}'.format(subresource_path))
         # adapt each request method below to manage this subresource
 
-    # fetch and parse the JSON payload, if any
-    illustration_obj, illustration_errors, illustration_adapter = __extract_and_validate_illustration(request,
-                                                                                                      kwargs)
-    if (illustration_obj is None) and request.env.request_method in ('POST','PUT'):
-        raise HTTP(400, json.dumps({"error": 1, "description": "illustration JSON expected for HTTP method {}".format(request.env.request_method) }))
+    if request.env.request_method in ('POST','PUT'):
+        # fetch and parse the JSON payload, if any
+        illustration_obj, illustration_errors, illustration_adapter = __extract_and_validate_illustration(request,
+                                                                                                          kwargs)
+        if illustration_obj is None:
+            raise HTTP(400, json.dumps({"error": 1, "description": "illustration JSON expected for HTTP method {}".format(request.env.request_method) }))
 
     auth_info = None
     if request.env.request_method != 'GET':
@@ -1242,12 +1243,9 @@ def illustration(*args, **kwargs):
                 # check for HTTP 200 OK (success), report all others
                 e_type, e_value = sys.exc_info()[:2]
                 if (e_type == HTTP) and (e_value.status == 200):
-                    # looking good... raise to the caller?
-                    _LOG.exception("HTTP 200 OK, looking good...")
+                    # looking good... raise to send the stream!
                     raise e_value
-                _LOG.exception(">>>>>>>>>> e_type: '{}' <{}>: {}".format(e_type, type(e_type), (e_type == HTTP)))
-                _LOG.exception(">>>>>>>>>> e_value.status: '{}' <{}>: {}".format(e_value.status, type(e_value.status), (e_value.status == 200)))
-
+                # something else has gone wrong
                 _LOG.exception('GET (zip download) failed')
                 e = sys.exc_info()[0]
                 _raise_HTTP_from_msg(e)
