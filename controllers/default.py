@@ -1245,8 +1245,8 @@ def illustration(*args, **kwargs):
                     # looking good... raise to the caller?
                     _LOG.exception("HTTP 200 OK, looking good...")
                     raise e
-                _LOG.exception(">>>>>>>>>> e_type: {}".format(e_type))
-                _LOG.exception(">>>>>>>>>> e_value: {}".format(e_value))
+                _LOG.exception(">>>>>>>>>> e_type: '{}' <{}>: {}".format(e_type, type(e_type), (e_type == HTTP)))
+                _LOG.exception(">>>>>>>>>> e_value: '{}' <{}>: {}".format(e_value, type(e_value), (e_value == '200 OK')))
 
                 _LOG.exception('GET (zip download) failed')
                 e = sys.exc_info()[0]
