@@ -1240,13 +1240,11 @@ def illustration(*args, **kwargs):
                 return response.stream(full_path_to_zipfile, chunk_size=64*1024, attachment=True, filename="{}.zip".format(illustration_id))
             except HTTP, e:
                 _LOG.exception(">>>>>>>>>> HTTP ERROR returning ZIP stream!")
-                e_type, e_value, e_traceback = sys.exc_info()
+                e_type, e_value = sys.exc_info()[:2]
                 _LOG.exception(">>>>>>>>>> e_type: {}".format(e_type))
                 #_LOG.exception(e_type)
                 _LOG.exception(">>>>>>>>>> e_value: {}".format(e_value))
                 #_LOG.exception(e_value)
-                _LOG.exception(">>>>>>>>>> e_traceback: {}".format(e_traceback))
-                #_LOG.exception(e_traceback)
                 _LOG.exception("<<<<<<<<<<<")
             except:
                 _LOG.exception('GET (zip download) failed')
