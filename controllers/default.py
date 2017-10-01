@@ -1241,7 +1241,7 @@ def illustration(*args, **kwargs):
             except:
                 # check for HTTP 200 OK (success), report all others
                 e_type, e_value = sys.exc_info()[:2]
-                if (e_type == gluon.http.HTTP) and (e_value == '200 OK'):
+                if (e_type == HTTP) and (e_value == '200 OK'):
                     # looking good... raise to the caller?
                     _LOG.exception("HTTP 200 OK, looking good...")
                     raise e
