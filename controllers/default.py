@@ -1238,15 +1238,16 @@ def illustration(*args, **kwargs):
                 response.headers['Content-type'] = 'application/zip, application/octet-stream'
                 response.headers['Content-Transfer-Encoding'] = 'binary'
                 return response.stream(full_path_to_zipfile, chunk_size=64*1024, attachment=True, filename="{}.zip".format(illustration_id))
-            except HTTP, e:
-                _LOG.exception(">>>>>>>>>> HTTP ERROR returning ZIP stream!")
-                e_type, e_value = sys.exc_info()[:2]
-                _LOG.exception(">>>>>>>>>> e_type: {}".format(e_type))
-                #_LOG.exception(e_type)
-                _LOG.exception(">>>>>>>>>> e_value: {}".format(e_value))
-                #_LOG.exception(e_value)
-                _LOG.exception("<<<<<<<<<<<")
             except:
+                # check for HTTP 200 OK (success), report all others
+                e_type, e_value = sys.exc_info()[:2]
+                if (e_type === gluon.http.HTTP) and (e_value === '200 OK'):
+                    # looking good... raise to the caller?
+                    _LOG.exception("HTTP 200 OK, looking good...")
+                    raise e
+                _LOG.exception(">>>>>>>>>> e_type: {}".format(e_type))
+                _LOG.exception(">>>>>>>>>> e_value: {}".format(e_value))
+
                 _LOG.exception('GET (zip download) failed')
                 e = sys.exc_info()[0]
                 _raise_HTTP_from_msg(e)
