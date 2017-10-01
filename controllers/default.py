@@ -1241,13 +1241,12 @@ def illustration(*args, **kwargs):
             except:
                 # check for HTTP 200 OK (success), report all others
                 e_type, e_value = sys.exc_info()[:2]
-                if (e_type == HTTP) and (e_value.status == '200 OK'):
+                if (e_type == HTTP) and (e_value.status == 200):
                     # looking good... raise to the caller?
                     _LOG.exception("HTTP 200 OK, looking good...")
                     raise e
                 _LOG.exception(">>>>>>>>>> e_type: '{}' <{}>: {}".format(e_type, type(e_type), (e_type == HTTP)))
-                _LOG.exception(">>>>>>>>>> e_value: '{}' <{}>: {}".format(e_value, type(e_value), (e_value == '200 OK')))
-                _LOG.exception(">>>>>>>>>> e_value.status: '{}' <{}>: {}".format(e_value.status, type(e_value.status), (e_value.status == '200 OK')))
+                _LOG.exception(">>>>>>>>>> e_value.status: '{}' <{}>: {}".format(e_value.status, type(e_value.status), (e_value.status == 200)))
 
                 _LOG.exception('GET (zip download) failed')
                 e = sys.exc_info()[0]
