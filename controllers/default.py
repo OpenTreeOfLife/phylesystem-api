@@ -1244,7 +1244,7 @@ def illustration(*args, **kwargs):
                 if (e_type == HTTP) and (e_value.status == 200):
                     # looking good... raise to the caller?
                     _LOG.exception("HTTP 200 OK, looking good...")
-                    raise e
+                    raise e_value
                 _LOG.exception(">>>>>>>>>> e_type: '{}' <{}>: {}".format(e_type, type(e_type), (e_type == HTTP)))
                 _LOG.exception(">>>>>>>>>> e_value.status: '{}' <{}>: {}".format(e_value.status, type(e_value.status), (e_value.status == 200)))
 
