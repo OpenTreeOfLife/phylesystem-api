@@ -1269,7 +1269,7 @@ def illustration(*args, **kwargs):
 
             # add/overwrite keys in its current metadata
             # N.B. we use a light touch here, to preserve other existing keys
-            illustration_json['metadata'].extend({
+            illustration_json['metadata'].update({
                 'url': full_url,
                 'external_url': external_url,
                 'sha': head_sha,        # from parent scope
