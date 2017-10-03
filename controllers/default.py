@@ -1226,10 +1226,83 @@ def illustration(*args, **kwargs):
         _LOG.debug('parent_sha = {}'.format(parent_sha))
         illustrations = api_utils.get_illustration_store(request)
 
+        if subresource_path:
+            # return a matching sub-resource within the illustration's folder (eg, an image or font file)
+            try:
+                full_path_to_subresource = illustrations.retrieve_illustration_subresource(illustration_id, subresource_path)
+                _LOG.warn('full_path_to_subresource: [{}]'.format(full_path_to_subresource))
+                # use default headers for type and disposition
+                return response.stream(full_path_to_subresource, chunk_size=64*1024)
+            except HTTP:
+                # this should be either a 200 (expected stream) or an appropriate HTTP error
+                raise
+            except ValueError:
+                raise HTTP(404, json.dumps({
+                    "error": 1,
+                    "description": "No subresource found at '{i}/{p}'. Please check the path and try again.".format(
+                        i=illustration_id,
+                        p=subresource_path)
+                }))
+            except:
+                _LOG.exception('GET (subresource fetch) failed')
+                import traceback
+                _raise_HTTP_from_msg(traceback.format_exc())
+
+        # all other resposes must include the JSON "core" file
+        def update_metadata_in_JSON_core( illustration_json ):
+            # add/restore the 'url' and 'sha' fields (using the visible fetch URL)
+            assert(type(illustration_json['metadata']) == dict)
+            # gather latest information about GitHub storage
+            base_url = api_utils.get_illustrations_api_base_url(request)
+            full_url = '{b}v3/illustration/{i}'.format(b=base_url, i=illustration_id)
+            # TODO: Clarify the difference, if any, between `url` and `external_url`!
+            try:
+                external_url = illustrations.get_public_url(illustration_id)
+            except:
+                _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+                _LOG.exception('illustration {} not found in external_url'.format(illustration))
+                external_url = 'NOT FOUND'
+
+            # add/overwrite keys in its current metadata
+            # N.B. we use a light touch here, to preserve other existing keys
+            illustration_json['metadata'].extend({
+                'url': full_url,
+                'external_url': external_url,
+                'sha': head_sha,        # from parent scope
+                'branch2sha': wip_map,  # from parent scope
+                'subresource_list': subresource_list,
+                'versionHistory': version_history or [ ],
+            })
+            return illustration_json
+
         if request.extension == 'zip':
             # build and return a standalone ZIP archive of this illustration's folder
             try:
                 full_path_to_zipfile = illustrations.create_illustration_archive(illustration_id, commit_sha=parent_sha)
+                # read and modify archived `main.json` (add metadata here, but *not* in git)
+                import zipfile
+                zipped = zipfile.ZipFile(full_path_to_zipfile, 'a')  # `append` mode
+                if (isinstance(zipped, zipfile.ZipFile)):
+                    # zipped archive is legit! what's inside?
+                    zip_listing = zipped.namelist()
+                    if ('main.json' in zip_listing):
+                        illustration_json = json.loads(zipped.read('main.json'))
+                    else:
+                        raise Exception("expected file 'main.json' NOT FOUND in this archive!")
+                    try:
+                        assert isinstance(illustration_json, dict)
+                    except:
+                        msg = "FOUND 'main.json' in the archive, but it's invalid (won't parse to a dict)"
+                        _LOG.exception(msg)
+                        raise Exception(msg)
+                    core_with_metadata = update_metadata_in_JSON_core(illustration_json)
+                else:
+                    msg = "Unable to load this illustration archive, or it's broken"
+                    _LOG.exception(msg)
+                    raise Exception(msg)
+                core_with_metadata = update_metadata_in_JSON_core(illustration_json)
+                zipped.writestr('main.json', json.dumps(core_with_metadata))
+                # the modified archive is now ready for download
             except:
                 _LOG.exception('GET (zip creation) failed')
                 e = sys.exc_info()[0]
@@ -1250,29 +1323,7 @@ def illustration(*args, **kwargs):
                 e = sys.exc_info()[0]
                 _raise_HTTP_from_msg(e)
 
-        if subresource_path:
-            # return a matching sub-resource within the illustration's folder (eg, an image or font file)
-            try:
-                full_path_to_subresource = illustrations.retrieve_illustration_subresource(illustration_id, subresource_path)
-                _LOG.warn('full_path_to_subresource: [{}]'.format(full_path_to_subresource))
-                # use default headers for type and disposition
-                return response.stream(full_path_to_subresource, chunk_size=64*1024)
-            except HTTP:
-                # this should be either a 200 (expected stream) or an appropriate HTTP error
-                raise
-            except ValueError:
-                raise HTTP(404, json.dumps({
-                    "error": 1, 
-                    "description": "No subresource found at '{i}/{p}'. Please check the path and try again.".format(
-                        i=illustration_id, 
-                        p=subresource_path)
-                }))
-            except:
-                _LOG.exception('GET (subresource fetch) failed')
-                import traceback
-                _raise_HTTP_from_msg(traceback.format_exc())
-
-        # otherwise, return the usual JSON core (main.json) + metadata for this illustration
+        # otherwise, return the usual JSON core (`main.json` + current metadata) for this illustration
         try:
             r = illustrations.return_doc(illustration_id, commit_sha=parent_sha, return_WIP_map=True)
         except:
@@ -1281,7 +1332,7 @@ def illustration(*args, **kwargs):
         try:
             illustration_json, head_sha, wip_map = r
             ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
-            version_history = illustrations.get_version_history_for_doc_id(illustration_id)
+            version_historyyy illustrations.get_version_history_for_doc_id(illustration_id)
             # describe any subresources using standard subpaths, e.g. `inputs/my_data.csv`
             subresource_list = illustrations.get_subresource_list_for_illustration_id(illustration_id)
         except:
@@ -1290,26 +1341,9 @@ def illustration(*args, **kwargs):
             _raise_HTTP_from_msg(e)
         if not illustration_json:
             raise HTTP(404, "Illustration '{s}' has no JSON data!".format(s=illustration_id))
-        # add/restore the 'url' and 'sha' fields (using the visible fetch URL)
-        illustration_json['metadata']['sha'] = head_sha
-        base_url = api_utils.get_illustrations_api_base_url(request)
-        illustration_json['metadata']['url'] = '{b}v3/illustration/{i}'.format(b=base_url,
-                                                                               i=illustration_id)
-        try:
-            external_url = illustrations.get_public_url(illustration_id)
-        except:
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.exception('illustration {} not found in external_url'.format(illustration))
-            external_url = 'NOT FOUND'
-        result = {'sha': head_sha,
-                 'data': illustration_json,
-                 'branch2sha': wip_map,
-                 'external_url': external_url,
-                 }
-        if version_history:
-            result['versionHistory'] = version_history
-        result['subresource_list'] = subresource_list
-        return result
+        core_with_metadata = update_metadata_in_JSON_core(illustration_json)
+        return core_with_metadata
+
 
     if request.env.request_method == 'PUT':
         # update an existing illustration with the data provided
