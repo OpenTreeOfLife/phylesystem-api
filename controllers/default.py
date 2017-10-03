@@ -1262,6 +1262,10 @@ def illustration(*args, **kwargs):
                 _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
                 _LOG.exception('illustration {} not found in external_url'.format(illustration))
                 external_url = 'NOT FOUND'
+            ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
+            version_history = illustrations.get_version_history_for_doc_id(illustration_id)
+            # describe any subresources using standard subpaths, e.g. `inputs/my_data.csv`
+            subresource_list = illustrations.get_subresource_list_for_illustration_id(illustration_id)
 
             # add/overwrite keys in its current metadata
             # N.B. we use a light touch here, to preserve other existing keys
@@ -1331,10 +1335,6 @@ def illustration(*args, **kwargs):
             raise HTTP(404, json.dumps({"error": 1, "description": "Illustration '{}' GET failure".format(illustration_id)}))
         try:
             illustration_json, head_sha, wip_map = r
-            ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
-            version_historyyy illustrations.get_version_history_for_doc_id(illustration_id)
-            # describe any subresources using standard subpaths, e.g. `inputs/my_data.csv`
-            subresource_list = illustrations.get_subresource_list_for_illustration_id(illustration_id)
         except:
             _LOG.exception('GET failed')
             e = sys.exc_info()[0]
