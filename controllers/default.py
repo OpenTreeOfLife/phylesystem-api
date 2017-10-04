@@ -1318,6 +1318,7 @@ def illustration(*args, **kwargs):
                     raise Exception(msg)
                 core_with_metadata = update_metadata_in_JSON_core(illustration_json)
                 zipped.writestr('main.json', json.dumps(core_with_metadata))
+                zipped.close()
                 # the modified archive is now ready for download
             except:
                 _LOG.exception('GET (zip creation) failed')
