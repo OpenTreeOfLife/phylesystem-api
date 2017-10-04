@@ -1248,8 +1248,21 @@ def illustration(*args, **kwargs):
                 import traceback
                 _raise_HTTP_from_msg(traceback.format_exc())
 
+        # gather illustration storage metadata (sha, versions, WIP map)
+        try:
+            r = illustrations.return_doc(illustration_id, commit_sha=parent_sha, return_WIP_map=True)
+        except:
+            _LOG.exception('GET failed')
+            raise HTTP(404, json.dumps({"error": 1, "description": "Illustration '{}' GET failure".format(illustration_id)}))
+        try:
+            illustration_json, head_sha, wip_map = r
+        except:
+            _LOG.exception('GET failed')
+            e = sys.exc_info()[0]
+            _raise_HTTP_from_msg(e)
+
         # all other resposes must include the JSON "core" file
-        def update_metadata_in_JSON_core( illustration_json ):
+        def update_metadata_in_JSON_core(illustration_json):
             # add/restore the 'url' and 'sha' fields (using the visible fetch URL)
             assert(type(illustration_json['metadata']) == dict)
             # gather latest information about GitHub storage
@@ -1299,7 +1312,6 @@ def illustration(*args, **kwargs):
                         msg = "FOUND 'main.json' in the archive, but it's invalid (won't parse to a dict)"
                         _LOG.exception(msg)
                         raise Exception(msg)
-                    core_with_metadata = update_metadata_in_JSON_core(illustration_json)
                 else:
                     msg = "Unable to load this illustration archive, or it's broken"
                     _LOG.exception(msg)
@@ -1328,17 +1340,6 @@ def illustration(*args, **kwargs):
                 _raise_HTTP_from_msg(e)
 
         # otherwise, return the usual JSON core (`main.json` + current metadata) for this illustration
-        try:
-            r = illustrations.return_doc(illustration_id, commit_sha=parent_sha, return_WIP_map=True)
-        except:
-            _LOG.exception('GET failed')
-            raise HTTP(404, json.dumps({"error": 1, "description": "Illustration '{}' GET failure".format(illustration_id)}))
-        try:
-            illustration_json, head_sha, wip_map = r
-        except:
-            _LOG.exception('GET failed')
-            e = sys.exc_info()[0]
-            _raise_HTTP_from_msg(e)
         if not illustration_json:
             raise HTTP(404, "Illustration '{s}' has no JSON data!".format(s=illustration_id))
         core_with_metadata = update_metadata_in_JSON_core(illustration_json)
