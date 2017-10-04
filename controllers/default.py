@@ -1267,8 +1267,9 @@ def illustration(*args, **kwargs):
             assert(type(illustration_json['metadata']) == dict)
             # gather latest information about GitHub storage
             base_url = api_utils.get_illustrations_api_base_url(request)
-            full_url = '{b}v3/illustration/{i}'.format(b=base_url, i=illustration_id)
-            # TODO: Clarify the difference, if any, between `url` and `external_url`!
+            full_url = '{b}v3/illustration/{i}.zip'.format(b=base_url, i=illustration_id)
+            # N.B. that `url` is the one used by the API, while `external_url`
+            # points to the JSON core file on `raw.githubusercontent.com`
             try:
                 external_url = illustrations.get_public_url(illustration_id)
             except:
