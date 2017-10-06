@@ -33,6 +33,7 @@ from gluon.contrib.markdown.markdown2 import markdown
 from gluon.http import HTTP
 from ConfigParser import SafeConfigParser
 import copy
+import zipfile
 from cStringIO import StringIO
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
@@ -502,31 +503,38 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
             try:
                 json_obj = json.loads(json_obj)
             except ValueError, err:
-                import zipfile
                 # check for ZIP archive; retrieve its inner JSON file if available
                 # (in this case, data_field_name is its path in the archive, e.g.
                 # 'main.json')
                 if ('archive' in request.vars):
                     filelike = request.vars['archive'].file
-                    zipped = zipfile.ZipFile(filelike)
-                    if (isinstance(zipped, zipfile.ZipFile)):
-                        # zipped archive is legit! what's inside?
-                        zip_listing = zipped.namelist()
-                        if (data_field_name in zip_listing):
-                            json_obj = json.loads(zipped.read(data_field_name)) 
-                        else:
-                            raise Exception("expected file '{}' NOT FOUND in this archive!".format(data_field_name))
-                        try:
-                            assert isinstance(json_obj, dict)
-                        except:
-                            msg = "FOUND '{}' in the archive, but it's invalid (won't parse to a dict)".format(data_field_name)
-                            _LOG.exception(msg)
-                            raise Exception(msg)
+                    try:
+                        with zipfile.ZipFile(filelike) as zipped:
+                            # zipped archive is legit! what's inside?
+                            zip_listing = zipped.namelist()
+                            if (data_field_name in zip_listing):
+                                json_obj = json.loads(zipped.read(data_field_name)) 
+                                try:
+                                    assert isinstance(json_obj, dict)
+                                except:
+                                    msg = "FOUND '{}' in the archive, but it's invalid (won't parse to a dict)".format(data_field_name)
+                                    _LOG.exception(msg)
+                                    raise Exception(msg)
+                    except IOError:
+                        msg = "Expected file '{}' NOT FOUND in this archive!".format(data_field_name)
+                        _LOG.exception(msg)
+                        raise Exception(msg)
+                    except:
+                        msg = "FOUND archive data, but it's not a valid ZIP archive"
+                        _LOG.exception(msg)
+                        raise Exception(msg)
         # check for "inner JSON" in case it's wrapped in metadata
         if isinstance(json_obj, dict) and (data_field_name in json_obj):
             json_obj = json_obj[data_field_name]
         if not isinstance(json_obj, dict):
-            raise Exception("expected JSON dict was NOT FOUND anywhere in the request!")
+            msg = "Expected JSON dict was NOT FOUND anywhere in the request!"
+            _LOG.exception(msg)
+            raise Exception(msg)
     except:
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
@@ -1298,29 +1306,27 @@ def illustration(*args, **kwargs):
             try:
                 full_path_to_zipfile = illustrations.create_illustration_archive(illustration_id, commit_sha=parent_sha)
                 # read and modify archived `main.json` (add metadata here, but *not* in git)
-                import zipfile
-                zipped = zipfile.ZipFile(full_path_to_zipfile, 'a')  # `append` mode
-                if (isinstance(zipped, zipfile.ZipFile)):
-                    # zipped archive is legit! what's inside?
-                    zip_listing = zipped.namelist()
-                    if ('main.json' in zip_listing):
-                        illustration_json = json.loads(zipped.read('main.json'))
+                with zipfile.ZipFile(full_path_to_zipfile, 'a') as zipped:   # `append` mode
+                    if (isinstance(zipped, zipfile.ZipFile)):
+                        # zipped archive is legit! what's inside?
+                        zip_listing = zipped.namelist()
+                        if ('main.json' in zip_listing):
+                            illustration_json = json.loads(zipped.read('main.json'))
+                        else:
+                            raise Exception("expected file 'main.json' NOT FOUND in this archive!")
+                        try:
+                            assert isinstance(illustration_json, dict)
+                        except:
+                            msg = "FOUND 'main.json' in the archive, but it's invalid (won't parse to a dict)"
+                            _LOG.exception(msg)
+                            raise Exception(msg)
                     else:
-                        raise Exception("expected file 'main.json' NOT FOUND in this archive!")
-                    try:
-                        assert isinstance(illustration_json, dict)
-                    except:
-                        msg = "FOUND 'main.json' in the archive, but it's invalid (won't parse to a dict)"
+                        msg = "Unable to load this illustration archive, or it's broken"
                         _LOG.exception(msg)
                         raise Exception(msg)
-                else:
-                    msg = "Unable to load this illustration archive, or it's broken"
-                    _LOG.exception(msg)
-                    raise Exception(msg)
-                core_with_metadata = update_metadata_in_JSON_core(illustration_json)
-                zipped.writestr('main.json', json.dumps(core_with_metadata))
-                zipped.close()
-                # the modified archive is now ready for download
+                    core_with_metadata = update_metadata_in_JSON_core(illustration_json)
+                    zipped.writestr('main.json', json.dumps(core_with_metadata))
+                    # the modified archive is now ready for download
             except:
                 _LOG.exception('GET (zip creation) failed')
                 e = sys.exc_info()[0]
@@ -1347,6 +1353,11 @@ def illustration(*args, **kwargs):
         core_with_metadata = update_metadata_in_JSON_core(illustration_json)
         return core_with_metadata
 
+    # is there an incoming (ZIP) archive with all files included, vs. just the JSON core?
+    try:
+        incoming_archive = request.vars['archive'].file
+    except:
+        incoming_archive = None
 
     if request.env.request_method == 'PUT':
         # update an existing illustration with the data provided
@@ -1362,7 +1373,8 @@ def illustration(*args, **kwargs):
                                                       auth_info,
                                                       parent_sha,
                                                       merged_sha,
-                                                      commit_msg=commit_msg)
+                                                      commit_msg=commit_msg,
+                                                      archive=incoming_archive)
             commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
@@ -1385,7 +1397,8 @@ def illustration(*args, **kwargs):
                                               illustration_obj,
                                               auth_info,
                                               illustration_id,
-                                              commit_msg=commit_msg)
+                                              commit_msg=commit_msg,
+                                              archive=incoming_archive)
             new_illustration_id, commit_return = r
         except GitWorkflowError, err:
             _raise_HTTP_from_msg(err.msg)
