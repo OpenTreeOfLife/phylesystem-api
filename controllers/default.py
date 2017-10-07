@@ -1203,6 +1203,9 @@ def illustration(*args, **kwargs):
             raise HTTP(400, json.dumps({"error": 1, "description": "no illustration URL provided in query string or JSON payload"}))
         try:
             illustration_id = url.split('/illustration/')[1]
+            # strip any .zip extension found
+            if illustration_id.lower().endswith('.zip'):
+                illustration_id = illustration_id[:-4]
         except:
             _LOG.exception('{} failed'.format(request.env.request_method))
             raise HTTP(404, json.dumps({"error": 1, "description": "invalid URL, no illustration id found: {}".format(url)}))
