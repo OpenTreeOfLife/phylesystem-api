@@ -1094,7 +1094,11 @@ def illustrations(*args, **kwargs):
                         }
                 })
             illustration_list.append(props)
-        return json.dumps(illustration_list)
+        # sort to show newest (most recently created OR modified) first
+        sorted_list = sorted(illustration_list,
+                             key=lambda a: a['lastModified']['ISO_date'],
+                             reverse=True)
+        return json.dumps(sorted_list)
     elif api_call == 'store_config':
         response.view = 'generic.json'
         docstore = api_utils.get_illustration_store(request)
