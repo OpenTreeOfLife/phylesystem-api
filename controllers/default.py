@@ -32,6 +32,7 @@ from gluon.http import HTTP
 from ConfigParser import SafeConfigParser
 import copy
 import bleach
+from bleach.sanitizer import Cleaner
 from cStringIO import StringIO
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
