@@ -74,7 +74,7 @@ ot_cleaner = Cleaner(tags=ot_markdown_tags)
 
 def _markdown_to_html(markdown_src='', open_links_in_new_window=False):
     html = XML(markdown(markdown_src, extras={'link-patterns':None}, link_patterns=[(link_regex, link_replace)]).encode('utf-8'), sanitize=False).flatten()
-    # TODO: scrub HTML output with bleach
+    # scrub HTML output with bleach
     html = ot_cleaner.clean(html)
     if open_links_in_new_window:
         html = re.sub(r' href=',
