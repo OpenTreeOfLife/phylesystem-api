@@ -31,6 +31,8 @@ from gluon.contrib.markdown.markdown2 import markdown
 from gluon.http import HTTP
 from ConfigParser import SafeConfigParser
 import copy
+import bleach
+from bleach.sanitizer import Cleaner
 from cStringIO import StringIO
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
@@ -60,8 +62,20 @@ link_regex = re.compile(r'''
 # this do-nothing version makes a sensible hyperlink
 link_replace = r'\1'
 # NOTE the funky constructor required to use this below
+
+# Define a consistent cleaner to sanitize user input. We need a few
+# elements that are common in our markdown but missing from the Bleach
+# whitelist.
+# N.B. HTML comments are stripped by default. Non-allowed tags will appear
+# "naked" in output, so we can identify any bad actors.
+allowed_curation_comment_tags = [u'p', u'br', u'h1', u'h2', u'h3', u'h4', u'h5', u'h6', u'hr', u'pre', u'code']  # any others?
+ot_markdown_tags = list(set( bleach.sanitizer.ALLOWED_TAGS + allowed_curation_comment_tags))
+ot_cleaner = Cleaner(tags=ot_markdown_tags)
+
 def _markdown_to_html(markdown_src='', open_links_in_new_window=False):
     html = XML(markdown(markdown_src, extras={'link-patterns':None}, link_patterns=[(link_regex, link_replace)]).encode('utf-8'), sanitize=False).flatten()
+    # scrub HTML output with bleach
+    html = ot_cleaner.clean(html)
     if open_links_in_new_window:
         html = re.sub(r' href=',
                       r' target="_blank" href=',
