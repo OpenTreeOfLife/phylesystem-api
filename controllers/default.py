@@ -1070,15 +1070,21 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
         return [ ]
     oti_base_url = api_utils.get_oti_base_url(request)
     fetch_url = '%s/v3/studies/find_studies' % oti_base_url
+    fetch_args = {
+        "property": "ot:studyPublication",
+        "value": study_DOI,
+        "exact": False
+        }
     try:
-        dupe_lookup_response = fetch(
-            fetch_url,
-            data={
-                "property": "ot:studyPublication",
-                "value": study_DOI,
-                "exact": False
-            }
-        )
+        import simplejson
+        req = urllib2.Request(url=fetch_url, data=simplejson.dumps(fetch_args), headers={"Content-Type": "application/json"})
+        dupe_lookup_response = urllib2.urlopen(req).read()
+
+        # OLD method, using gluon.fetch
+        #dupe_lookup_response = fetch(
+        #    fetch_url,
+        #    data=fetch_args
+        #)
     except:
         raise HTTP(400, traceback.format_exc())
     dupe_lookup_response = unicode(dupe_lookup_response, 'utf-8') # make sure it's Unicode!
@@ -1090,6 +1096,8 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
     except ValueError:
         # ignore error, if oti is lagging and doesn't have this study yet
         pass
+    #pprint('duplicate_study_ids:')
+    #pprint(duplicate_study_ids)
     return duplicate_study_ids
 
 @request.restful()
