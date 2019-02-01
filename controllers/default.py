@@ -187,8 +187,9 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
                 _LOG.exception('*** FOUND IT ***')
                 found_tree = trees_by_id.get(tree_id)
         found_tree_name = found_tree['@label'] or tree_id
-        _LOG.exception('*** FOUND IT: {}'.format(found_tree_name))
+        #_LOG.exception('*** FOUND IT: {}'.format(found_tree_name))
     except:  # report a missing/misidentified tree
+        _LOG.exception('problem finding tree')
         raise HTTP(404, '{{"error": 1, "description": "Specified tree \'{t}\' in study \'{s}\' not found! Save this study and try again?"}}'.format(s=study_id,t=tree_id))
     already_included_in_synth_input_collections = False
     # Look ahead to see if it's already in an included collection; if so, skip
