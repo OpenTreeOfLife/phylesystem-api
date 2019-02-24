@@ -393,12 +393,16 @@ def cached():
         the_response = urllib2.urlopen(req).read()
         ##pprint('RESPONSE:')
         ##pprint(the_response)
+        #print '...returning a sensible urllib2 response...'
         return the_response
-
+    except urllib2.URLError, e:
+        # throw a web2py exception (copying status code and message from urllib2.URLError) so we don't poison the cache!
+        # REMINDER: By default, Web2py's RAM cache will ignore any response whose code doesn't match 1xx, 2xx, or 3xx!
+        #print '>>> urllib2.URLError! TRYING TO RETURN ITS VALUES IN A WEB2PY EXCEPTION...'
+        raise HTTP(e.code, e.reason)
     except Exception, e:
-        # throw 403 or 500 or just leave it
-        return ('ERROR', e.message)
-
+        #print '>>> some other Exception! TRYING TO RETURN ITS VALUES IN A WEB2PY EXCEPTION...'
+        raise HTTP(500, 'Unknown exception in cached call!')
 
 
 def reponexsonformat():
