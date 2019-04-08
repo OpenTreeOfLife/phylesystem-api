@@ -1085,6 +1085,7 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
             }
         )
     except:
+        _LOG.exception('fetch duplicate dois failed')
         raise HTTP(400, traceback.format_exc())
     dupe_lookup_response = unicode(dupe_lookup_response, 'utf-8') # make sure it's Unicode!
     response_json = anyjson.loads(dupe_lookup_response)
