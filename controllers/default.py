@@ -1,6 +1,7 @@
 import requests
 import urllib2
 import os, sys
+
 import json
 import anyjson
 import traceback
@@ -1076,19 +1077,17 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
     oti_base_url = api_utils.get_oti_base_url(request)
     fetch_url = '%s/v3/studies/find_studies' % oti_base_url
     try:
-        dupe_lookup_response = fetch(
-            fetch_url,
-            data={
+        _LOG.debug('trying with requests')
+        data = json.dumps({
                 "property": "ot:studyPublication",
                 "value": study_DOI,
-                "exact": False
-            }
-        )
+                "exact": False})
+        _LOG.debug('data is {}'.format(data))
+        r = requests.post(url = fetch_url, data = data)
+        response_json = r.json()
     except:
         _LOG.exception('fetch duplicate dois failed')
         raise HTTP(400, traceback.format_exc())
-    dupe_lookup_response = unicode(dupe_lookup_response, 'utf-8') # make sure it's Unicode!
-    response_json = anyjson.loads(dupe_lookup_response)
     duplicate_study_ids = [x['ot:studyId'] for x in response_json['matched_studies']]
     # Remove this study's ID; any others that remain are duplicates
     try:
@@ -1097,6 +1096,7 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
         # ignore error, if oti is lagging and doesn't have this study yet
         pass
     return duplicate_study_ids
+
 
 @request.restful()
 def v1():
