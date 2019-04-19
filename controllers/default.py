@@ -1076,6 +1076,7 @@ def _fetch_duplicate_study_ids(study_DOI=None, study_ID=None):
         return [ ]
     oti_base_url = api_utils.get_oti_base_url(request)
     fetch_url = '%s/v3/studies/find_studies' % oti_base_url
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     try:
         _LOG.debug('trying with requests')
         data = json.dumps({
