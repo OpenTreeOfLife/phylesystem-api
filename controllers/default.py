@@ -1659,20 +1659,38 @@ def v1():
         return blob
 
     def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
+        # look for matching studies via CrossRef.org API
+        # N.B. that the URL is very different for DOI vs. reference string!
+        best_match = None
+        no_match_found = False
         if doi:
-            # use the supplied DOI to fetch study metadata
-            search_term = doi
+            try:
+                # use the supplied DOI to fetch study metadata
+                doi_lookup_response = fetch(
+                    'https://api.crossref.org/works/%s' % 
+                    urlencode(doi)
+                )
+            except urllib2.URLError, e:
+                # CrossRef API returns 404 if it doesn't find a match
+                no_match_found = True
         elif ref_string:
             # use the supplied reference text to fetch study metadata
-            search_term = ref_string
+            doi_lookup_response = fetch(
+                'https://api.crossref.org/works?%s' % 
+                urlencode({'query': ref_string})
+            )
 
-        # look for matching studies via CrossRef.org API
-        doi_lookup_response = fetch(
-            'http://search.crossref.org/dois?%s' % 
-            urlencode({'q': search_term})
-        )
         doi_lookup_response = unicode(doi_lookup_response, 'utf-8')   # make sure it's Unicode!
         matching_records = anyjson.loads(doi_lookup_response)
+
+            if no_match_found:
+                # Add a bogus reference string to signal the lack of results
+                if doi:
+                    meta_publication_reference = u'No matching publication found for this DOI!'
+                else:
+                    meta_publication_reference = u'No matching publication found for this reference string'
+                meta_publication_url = u''
+                meta_year = u''
 
         # if we got a match, grab the first (probably only) record
         if len(matching_records) > 0:
