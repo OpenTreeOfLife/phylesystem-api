@@ -1665,6 +1665,7 @@ def v1():
         # consistent behavior and response.
         best_match = None
         no_match_found = False
+        meta_publication_reference = u''
         try:
             if doi:
                 # use the supplied DOI to fetch study metadata
@@ -1726,8 +1727,6 @@ def v1():
 
     # We need another API call to fetch a plain-text reference string.
     # NB - this is probabl APA style (based on conversation with CrossRef API team)
-    if not meta_publication_reference:
-        meta_publication_reference = u''
     if doi:
         try:
             # use the supplied (or recovered) DOI to fetch a plain-text reference string
