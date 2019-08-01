@@ -1725,29 +1725,28 @@ def v1():
             # capture the raw DOI so we can try to retrieve a reference string below
             doi = match.get('DOi', u'')
 
-    # We need another API call to fetch a plain-text reference string.
-    # NB - this is probabl APA style (based on conversation with CrossRef API team)
-    if doi:
-        try:
-            # use the supplied (or recovered) DOI to fetch a plain-text reference string
-            lookup_response = fetch(
-                'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
-                urlencode(doi)
-            )
-            # make sure it's Unicode!
-            raw_publication_reference = unicode(lookup_response, 'utf-8')
-            # make sure it's plain text (no markup)!
-            ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
-            # root of this tree is the complete mini-DOM
-            ref_root = ref_element_tree.elements()[0]
-            # reduce this root to plain text (strip any tags)
-            meta_publication_reference = ref_root.flatten().decode('utf-8')
+        # We need another API call to fetch a plain-text reference string.
+        # NB - this is probabl APA style (based on conversation with CrossRef API team)
+        if doi:
+            try:
+                # use the supplied (or recovered) DOI to fetch a plain-text reference string
+                lookup_response = fetch(
+                    'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
+                    urlencode(doi)
+                )
+                # make sure it's Unicode!
+                raw_publication_reference = unicode(lookup_response, 'utf-8')
+                # make sure it's plain text (no markup)!
+                ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
+                # root of this tree is the complete mini-DOM
+                ref_root = ref_element_tree.elements()[0]
+                # reduce this root to plain text (strip any tags)
+                meta_publication_reference = ref_root.flatten().decode('utf-8')
 
-        except urllib2.URLError, e:
-            # Any response but 200 means no match found, or the CrossRef
-            # service is down for some reason.
-            meta_publication_reference = u'No matching publication found for this DOI!'
-            
+            except urllib2.URLError, e:
+                # Any response but 200 means no match found, or the CrossRef
+                # service is down for some reason.
+                meta_publication_reference = u'No matching publication found for this DOI!'
 
         # add any found values to a fresh NexSON template
         nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=include_cc0)
