@@ -25,7 +25,7 @@ from peyotl.external import import_nexson_from_treebase
 from github import Github, BadCredentialsException
 import api_utils
 from gluon.tools import fetch
-from urllib import urlencode
+from urllib import urlencode, quote_plus
 from gluon.html import web2pyHTMLParser
 import re
 from gluon.contrib.markdown.markdown2 import markdown
@@ -1737,11 +1737,11 @@ def v1():
                 # use the supplied (or recovered) DOI to fetch a plain-text reference string
                 _GLOG.debug(
                     'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
-                    urlencode(doi)
+                    quote_plus(doi)
                 )
                 lookup_response = fetch(
                     'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
-                    urlencode(doi)
+                    quote_plus(doi)
                 )
                 _GLOG.debug('RAW ref-text lookup response:')
                 _GLOG.debug(lookup_response)
