@@ -1735,11 +1735,11 @@ def v1():
             _GLOG.debug('we have a DOI, looking for ref-text...')
             try:
                 # use the supplied (or recovered) DOI to fetch a plain-text reference string
-                lookup_response = fetch(
+                _GLOG.debug(
                     'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
                     urlencode(doi)
                 )
-                _GLOG.debug(
+                lookup_response = fetch(
                     'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
                     urlencode(doi)
                 )
@@ -1761,6 +1761,8 @@ def v1():
             except urllib2.URLError, e:
                 # Any response but 200 means no match found, or the CrossRef
                 # service is down for some reason.
+                _GLOG.debug("URLError fetching ref-text!!")
+                _GLOG.debug(e)
                 meta_publication_reference = u'No matching publication found for this DOI!'
 
         # add any found values to a fresh NexSON template
