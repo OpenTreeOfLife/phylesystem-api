@@ -1673,10 +1673,6 @@ def v1():
                     'https://api.crossref.org/works?%s' %
                     urlencode({'rows': 1, 'filter': 'doi:'+ doi})
                 )
-                _GLOG.debug(
-                    'https://api.crossref.org/works?%s' %
-                    urlencode({'rows': 1, 'filter': 'doi:'+ doi})
-                )
             elif ref_string:
                 # use the supplied reference text to fetch study metadata
                 lookup_response = fetch(
@@ -1732,31 +1728,20 @@ def v1():
         # We need another API call to fetch a plain-text reference string.
         # NB - this is probabl APA style (based on conversation with CrossRef API team)
         if doi:
-            _GLOG.debug('we have a DOI, looking for ref-text...')
             try:
                 # use the supplied (or recovered) DOI to fetch a plain-text reference string
-                _GLOG.debug(
-                    'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
-                    quote_plus(doi)
-                )
                 lookup_response = fetch(
                     'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
                     quote_plus(doi)
                 )
-                _GLOG.debug('RAW ref-text lookup response:')
-                _GLOG.debug(lookup_response)
                 # make sure it's Unicode!
                 raw_publication_reference = unicode(lookup_response, 'utf-8')
-                _GLOG.debug('Unicode ref-text lookup response:')
-                _GLOG.debug(raw_publication_reference)
                 # make sure it's plain text (no markup)!
                 ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
                 # root of this tree is the complete mini-DOM
                 ref_root = ref_element_tree.elements()[0]
                 # reduce this root to plain text (strip any tags)
                 meta_publication_reference = ref_root.flatten().decode('utf-8')
-                _GLOG.debug('Flattened ref-text:')
-                _GLOG.debug(meta_publication_reference)
 
             except urllib2.URLError, e:
                 # Any response but 200 means no match found, or the CrossRef
