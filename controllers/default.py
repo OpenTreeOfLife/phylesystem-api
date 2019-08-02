@@ -1680,7 +1680,7 @@ def v1():
                     urlencode({'rows': 1, 'query': ref_string})
                 )
             lookup_response = unicode(lookup_response, 'utf-8')   # make sure it's Unicode!
-            response_json = anyjson.loads(doi_lookup_response)
+            response_json = anyjson.loads(lookup_response)
             response_status = response_json.get('status', u'')
             if response_status == u'ok':
                 matching_records = response_json.get('message', {}).get('items', [])
