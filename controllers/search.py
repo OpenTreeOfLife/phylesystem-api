@@ -138,13 +138,16 @@ def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
                         headers=headers,
                         data=json.dumps(payload),
                         allow_redirects=True)
+    msg = ''
     try:
         response = resp.json()
         if len(response['failed_studies']) > 0:
             f = response['failed_studies']
             _LOG.debug("Could not update following studies: {s}".format(s=f))
     except Exception as e:
-        raise HTTP(500, json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)}))
+        msg = json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)})
+    return msg
+
 
 def _otindex_remove_studies(remove_ids, otindex_base_url):
     nudge_url = "{o}/v3/studies/remove".format(o=otindex_base_url)
@@ -155,13 +158,15 @@ def _otindex_remove_studies(remove_ids, otindex_base_url):
                         headers=headers,
                         data=json.dumps(payload),
                         allow_redirects=True)
+    msg = ''
     try:
         response = resp.json()
         if len(response['failed_studies']) > 0:
             f = response['failed_studies']
             _LOG.debug("Could not remove the following studies {s}".format(s=f))
     except Exception as e:
-        raise HTTP(500, json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)}))
+        msg = json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)})
+    return msg
 
 
 def nudgeTaxonIndexOnUpdates():
