@@ -12,6 +12,7 @@ import json
 import os
 
 
+#@TEMP #@TODO this should be config dependent...
 READ_ONLY_MODE = True
 
 def get_private_dir(request):
