@@ -5,6 +5,11 @@ import codecs
 import json
 import os
 
+def check_not_read_only():
+    if api_utils.READ_ONLY_MODE:
+        raise HTTP(403, json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
+    return True
+
 @request.restful()
 def v1():
     """The OpenTree API v1: Merge Controller
@@ -23,9 +28,11 @@ def v1():
         curl -X POST http://localhost:8000/api/push/v1?resource_id=9
         curl -X POST http://localhost:8000/api/push/v1?resource_id=TestUserB/my-favorite-trees&doc_type=collection
         """
+        if not check_not_read_only():
+            raise HTTP(500, "should raise from check_not_read_only")
         _LOG = api_utils.get_logger(request, 'ot_api.push.v1.PUT')
         fail_file = api_utils.get_failed_push_filepath(request, doc_type=doc_type)
-        _LOG.debug(">> fail_file for type '{t}': {f}".format(t=doc_type, f=fail_file))
+        # _LOG.debug(">> fail_file for type '{t}': {f}".format(t=doc_type, f=fail_file))
         # support JSONP request from another domain
         if jsoncallback or callback:
             response.view = 'generic.jsonp'

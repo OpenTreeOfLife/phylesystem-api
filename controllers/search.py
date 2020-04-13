@@ -12,6 +12,11 @@ import api_utils
 # logger for indexing failures
 _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
 
+def check_not_read_only():
+    if api_utils.READ_ONLY_MODE:
+        raise HTTP(403, json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
+    return True
+
 @request.restful()
 def v1():
     "The OpenTree API v1"
@@ -61,6 +66,8 @@ Finally, we clear the cached study list (response to find_studies with no args).
 
 N.B. This depends on a GitHub webhook on the chosen docstore.
 """
+    if not check_not_read_only():
+        raise HTTP(500, "should raise from check_not_read_only")
     opentree_docstore_url = _read_from_local_config(request, "apis", "opentree_docstore_url")
 
     payload = request.vars
@@ -130,6 +137,8 @@ N.B. This depends on a GitHub webhook on the chosen docstore.
         raise HTTP(500, full_msg)
 
 def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
+    if not check_not_read_only():
+        raise HTTP(500, "should raise from check_not_read_only")
     nudge_url = "{o}/v3/studies/add_update".format(o=otindex_base_url)
     # can call otindex with list of either github urls or study ids
     payload = { "studies" : add_or_update_ids }
@@ -143,13 +152,15 @@ def _otindex_add_update_studies(add_or_update_ids, otindex_base_url):
         response = resp.json()
         if len(response['failed_studies']) > 0:
             f = response['failed_studies']
-            _LOG.debug("Could not update following studies: {s}".format(s=f))
+            _LOG.warn("Could not update following studies: {s}".format(s=f))
     except Exception as e:
         msg = json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)})
     return msg
 
 
 def _otindex_remove_studies(remove_ids, otindex_base_url):
+    if not check_not_read_only():
+        raise HTTP(500, "should raise from check_not_read_only")
     nudge_url = "{o}/v3/studies/remove".format(o=otindex_base_url)
     # can call otindex with list of either github urls or study ids
     payload = { "studies" : remove_ids }
@@ -163,7 +174,7 @@ def _otindex_remove_studies(remove_ids, otindex_base_url):
         response = resp.json()
         if len(response['failed_studies']) > 0:
             f = response['failed_studies']
-            _LOG.debug("Could not remove the following studies {s}".format(s=f))
+            _LOG.warn("Could not remove the following studies {s}".format(s=f))
     except Exception as e:
         msg = json.dumps({"description": "Unexpected error calling otindex: {}".format(e.message)})
     return msg
@@ -181,6 +192,8 @@ TODO: Clear any cached taxon list.
 
 N.B. This depends on a GitHub webhook on the taxonomic-amendments docstore!
 """
+    if not check_not_read_only():
+        raise HTTP(500, "should raise from check_not_read_only")
     amendments_repo_url = _read_from_local_config(request, "apis", "amendments_repo_url")
     payload = request.vars
     if payload['repository']['url'] != amendments_repo_url:

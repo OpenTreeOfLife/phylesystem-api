@@ -11,6 +11,9 @@ import logging
 import json
 import os
 
+
+READ_ONLY_MODE = True
+
 def get_private_dir(request):
     app_name = request.application
     leader = request.env.web2py_path
@@ -84,14 +87,8 @@ def get_tree_collection_store(request):
     if _TREE_COLLECTION_STORE is not None:
         return _TREE_COLLECTION_STORE
     _LOG = get_logger(request, 'ot_api')
-    _LOG.debug("getting _TREE_COLLECTION_STORE...")
     from gitdata import GitData  #TODO?
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_collections_config(request)
-    _LOG.debug("  repo_parent={}".format(repo_parent))
-    _LOG.debug("  repo_remote={}".format(repo_remote))
-    _LOG.debug("  git_ssh={}".format(git_ssh))
-    _LOG.debug("  pkey={}".format(pkey))
-    _LOG.debug("  git_hub_remote={}".format(git_hub_remote))
     push_mirror = os.path.join(repo_parent, 'mirror')
     pmi = {
         'parent_dir': push_mirror,
@@ -102,8 +99,6 @@ def get_tree_collection_store(request):
     mirror_info = {'push':pmi}
     conf = get_conf_object(request)
     import pprint
-    _LOG.debug("  conf:")
-    _LOG.debug(pprint.pformat(conf))
     a = {}
     try:
         # any keyword args to pass along from config?
@@ -126,15 +121,8 @@ def get_taxonomic_amendment_store(request):
     global _TAXONOMIC_AMENDMENT_STORE
     if _TAXONOMIC_AMENDMENT_STORE is not None:
         return _TAXONOMIC_AMENDMENT_STORE
-    _LOG = get_logger(request, 'ot_api')
-    _LOG.debug("getting _TAXONOMIC_AMENDMENT_STORE...")
     from gitdata import GitData  #TODO?
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_amendments_config(request)
-    _LOG.debug("  repo_parent={}".format(repo_parent))
-    _LOG.debug("  repo_remote={}".format(repo_remote))
-    _LOG.debug("  git_ssh={}".format(git_ssh))
-    _LOG.debug("  pkey={}".format(pkey))
-    _LOG.debug("  git_hub_remote={}".format(git_hub_remote))
     push_mirror = os.path.join(repo_parent, 'mirror')
     pmi = {
         'parent_dir': push_mirror,
@@ -145,8 +133,6 @@ def get_taxonomic_amendment_store(request):
     mirror_info = {'push':pmi}
     conf = get_conf_object(request)
     import pprint
-    _LOG.debug("  conf:")
-    _LOG.debug(pprint.pformat(conf))
     a = {}
     try:
         # any keyword args to pass along from config?
@@ -498,18 +484,18 @@ def clear_matching_cache_keys(key_pattern):
     # ASSUMES we're working with RAM cache
     # NOTE that we apparently need to "clear" (using a bogus regex) to get a fresh view of the cache
     from gluon import current
-    _LOG = get_logger(current.request, 'ot_api')
+    #_LOG = get_logger(current.request, 'ot_api')
     current.cache.ram.clear(regex='^_BOGUS_CACHE_KEY_$')
     item_count_before = len(current.cache.ram.storage.keys())
-    _LOG.debug("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
-    for k in current.cache.ram.storage.keys():
-        _LOG.debug(k)
-    _LOG.debug("===")
-    _LOG.debug("> clearing cached items matching [%s]" % key_pattern)
+    # _LOG.debug("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
+    #for k in current.cache.ram.storage.keys():
+    #    _LOG.debug(k)
+    #_LOG.debug("===")
+    #_LOG.debug("> clearing cached items matching [%s]" % key_pattern)
     current.cache.ram.clear(regex=key_pattern)
     item_count_after = len(current.cache.ram.storage.keys())
-    _LOG.debug("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
-    for k in current.cache.ram.storage.keys():
-        _LOG.debug(k)
-    _LOG.debug("===")
-    _LOG.debug("  %d items removed" % (item_count_before - item_count_after,))
+    #_LOG.debug("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
+    #for k in current.cache.ram.storage.keys():
+    #    _LOG.debug(k)
+    #_LOG.debug("===")
+    #_LOG.debug("  %d items removed" % (item_count_before - item_count_after,))
