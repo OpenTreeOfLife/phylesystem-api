@@ -5,6 +5,11 @@ import api_utils
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              merge_from_master
 
+def check_not_read_only():
+    if api_utils.READ_ONLY_MODE:
+        raise HTTP(403, json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
+    return True
+
 @request.restful()
 def v1():
     """The OpenTree API v1: Merge Controller
@@ -41,6 +46,8 @@ def v1():
             "description": "Could not merge master into WIP! Details: ..."
         }
         """
+        if not check_not_read_only():
+            raise HTTP(500, "should raise from check_not_read_only")
 
         # support JSONP request from another domain
         if jsoncallback or callback:
