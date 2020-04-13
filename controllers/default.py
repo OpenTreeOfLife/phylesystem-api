@@ -1786,6 +1786,8 @@ def v1():
 
     def DELETE(resource, resource_id=None, *args, **kwargs):
         "Open Tree API methods relating to deleting existing resources"
+        if not check_not_read_only():
+            raise HTTP(500, "should raise from check_not_read_only")
         delegate = _route_tag2func.get(resource)
         if delegate:
             return delegate(**kwargs)
