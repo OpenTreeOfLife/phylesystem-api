@@ -17,23 +17,19 @@ def call_http_json(url,
             'accept' : 'application/json',
         }
     with open('/tmp/celeryerr', 'a') as fe:
-        fe.write('url =' + url + '\n')
-        fe.write('verb =' + verb + '\n')
-        fe.write('data =' + str(data) + '\n')
+        fe.write("{} to \"{}\"\n".format(verb, url))
                 
     resp = None
     try:
-        if data:
-            resp = requests.request(verb,
-                                    url,
-                                    headers=headers,
-                                    data=json.dumps(data),
-                                    allow_redirects=True)
+        if data and False:
+            pass
+            # resp = requests.request(verb,
+            #                         url,
+            #                         headers=headers,
+            #                         data=json.dumps(data),
+            #                         allow_redirects=True)
         else:
-            resp = requests.request(verb,
-                                    url,
-                                    headers=headers,
-                                    allow_redirects=True)
+            resp = requests.request(verb, url, headers=headers, allow_redirects=True)
         resp.raise_for_status()
         return resp.status_code, resp.json()
     except:
