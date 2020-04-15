@@ -80,6 +80,10 @@ def get_phylesystem(request):
                                **a)
     _LOG = get_logger(request, 'ot_api')
     _LOG.debug('[[[[[[ repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
+    if READ_ONLY_MODE:
+        _LOG.warn('phylesytem-api running in READ_ONLY_MODE')
+    else:
+        _LOG.warn('phylesytem-api NOT running in READ_ONLY_MODE')
     return _PHYLESYSTEM
 
 _TREE_COLLECTION_STORE = None
