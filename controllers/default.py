@@ -370,7 +370,12 @@ def cached():
     root_relative_url = request.env.request_uri.split('/cached/')[-1]
     ##pprint('ROOT-RELATIVE URL: ')
     ##pprint(root_relative_url)
-    fetch_url = '%s://%s/%s' % (request.env.wsgi_url_scheme, request.env.http_host, root_relative_url)
+    #@TODO this is a hack
+    base_url = request.env.http_host
+    base_url = api_utils.get_collections_api_base_url(request)
+    fetch_url = '{}/{}'.format(base_url, root_relative_url)
+    # fetch_url = '%s://%s/%s' % (request.env.wsgi_url_scheme, request.env.http_host, root_relative_url)
+    
     ##pprint('PROXYING TO SIMPLE URL: ')
     ##pprint(fetch_url)
 
