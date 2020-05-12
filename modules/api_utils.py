@@ -12,7 +12,7 @@ import json
 import os
 
 
-#@TEMP #@TODO this should be config dependent...
+# this will be updated by config below; start safe by default
 READ_ONLY_MODE = True
 
 def get_private_dir(request):
@@ -52,7 +52,7 @@ def get_phylesystem(request):
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
     from gitdata import GitData
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = read_phylesystem_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, READ_ONLY_MODE = read_phylesystem_config(request)
     peyotl_config, cfg_filename = read_peyotl_config()
     if 'phylesystem' not in peyotl_config.sections():
         peyotl_config.add_section('phylesystem')
@@ -205,7 +205,11 @@ def read_phylesystem_config(request):
         max_num_trees = int(max_num_trees)
     except ValueError:
             raise HTTP(400, json.dumps({"error": 1, "description": 'max number of trees per study in config is not an integer'}))
-    return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees
+    try:
+        read_only = conf.get("apis", "read_only") == 'true'
+    except:
+        read_only = False
+    return repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only
 
 def read_collections_config(request):
     """Load settings for a minor repo with shared tree collections"""
