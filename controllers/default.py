@@ -1136,7 +1136,7 @@ def v1():
     response.headers['Access-Control-Max-Age'] = 86400  # cache for a day
 
     phylesystem = api_utils.get_phylesystem(request)
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees = api_utils.read_phylesystem_config(request)
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     #_LOG.debug('Max file size set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
     repo_nexml2json = phylesystem.repo_nexml2json
     #_LOG.debug("phylesystem created with repo_nexml2json={}".format(repo_nexml2json))
