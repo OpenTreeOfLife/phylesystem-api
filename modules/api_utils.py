@@ -48,6 +48,7 @@ def compose_push_to_github_url(request, resource_id):
 from gluon import *
 _PHYLESYSTEM = None
 def get_phylesystem(request):
+    global READ_ONLY_MODE
     global _PHYLESYSTEM
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
