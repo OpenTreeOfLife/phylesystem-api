@@ -62,14 +62,13 @@ variable
 
     $GITHUB_OAUTH_TOKEN
 
-To get a Github OAuth token, you can use ```curl``` as well:
+~To get a Github OAuth token, you can use ```curl``` as well...~
 
-    curl -u USERNAME -X POST https://api.github.com/authorizations \
-        --data '{"scopes":["public_repo"],"note":"description"}'
-
-where USERNAME is your Github login/username. The above will
-return JSON containing a "token" key, which is your new OAuth
-token.
+UPDATE: This [method is now deprecated](https://developer.github.com/changes/2020-02-14-deprecating-password-auth/)
+and will stop working in November 2020. You can now [generate personal access tokens on the GitHub
+website](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+for use with command-line tools. As mentioned there, you'll need to copy this
+token immediately to your clipboard and save it in a secure location.
 
 To put it into an environment variable:
 
