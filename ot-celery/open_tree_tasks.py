@@ -49,7 +49,7 @@ def call_http_json(url,
             try:
                 return x, 'Error: response with text = ' + resp.text
             except:
-                m = 'Unknown error: '
+                m = 'Unknown error: ' + traceback.format_exc()
                 with open('/tmp/celeryerr', 'a') as fe:
                     fe.write(m + '\n')
                 return x, m
