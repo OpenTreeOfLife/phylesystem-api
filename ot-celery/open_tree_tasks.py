@@ -22,12 +22,11 @@ def call_http_json(url,
     resp = None
     try:
         if data:
-            pass
-            # resp = requests.request(verb,
-            #                         url,
-            #                         headers=headers,
-            #                         data=json.dumps(data),
-            #                         allow_redirects=True)
+            resp = requests.request(verb,
+                                    url,
+                                    headers=headers,
+                                    data=json.dumps(data),
+                                    allow_redirects=True)
         else:
             resp = requests.request(verb, url, headers=headers, allow_redirects=True)
         resp.raise_for_status()
@@ -49,7 +48,7 @@ def call_http_json(url,
             try:
                 return x, 'Error: response with text = ' + resp.text
             except:
-                m = 'Unknown error: ' + traceback.format_exc()
+                m = 'Unknown error: ' # + traceback.format_exc()
                 with open('/tmp/celeryerr', 'a') as fe:
                     fe.write(m + '\n')
                 return x, m
