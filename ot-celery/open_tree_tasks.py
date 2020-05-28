@@ -21,7 +21,7 @@ def call_http_json(url,
                 
     resp = None
     try:
-        if data and False:
+        if data:
             pass
             # resp = requests.request(verb,
             #                         url,
@@ -34,22 +34,22 @@ def call_http_json(url,
         return resp.status_code, resp.json()
     except:
         with open('/tmp/celeryerr', 'a') as fe:
-            fe.write('E1: ' + traceback.format_exc() + '\n')
+            fe.write('E1: \n')
         try:
             x = resp.status_code
         except:
             with open('/tmp/celeryerr', 'a') as fe:
-                fe.write('E2: ' + traceback.format_exc() + '\n')
+                fe.write('E2:\n')
             x = -1
         try:
             return x, 'Error response with JSON = ' + json.dumps(resp.json())
         except:
             with open('/tmp/celeryerr', 'a') as fe:
-               fe.write('E3: ' + traceback.format_exc() + '\n')
+               fe.write('E3:\n')
             try:
                 return x, 'Error: response with text = ' + resp.text
             except:
-                m = 'Unknown error: ' + traceback.format_exc()
+                m = 'Unknown error: '
                 with open('/tmp/celeryerr', 'a') as fe:
                     fe.write(m + '\n')
                 return x, m
