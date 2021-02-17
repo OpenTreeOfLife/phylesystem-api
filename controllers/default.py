@@ -687,6 +687,17 @@ def collection(*args, **kwargs):
                  }
         if version_history:
             result['versionHistory'] = version_history
+
+            # reckon and add 'lastModified' property, based on commit history?
+            latest_commit = docstore.get_version_history_for_doc_id(id)[0]
+            last_modified = {
+                'author_name': latest_commit.get('author_name'),
+                'relative_date': latest_commit.get('relative_date'),
+                'display_date': latest_commit.get('date'),
+                'ISO_date': latest_commit.get('date_ISO_8601'),
+                'sha': latest_commit.get('id')  # this is the commit hash
+            }
+            result['lastModified'] = last_modified
         return result
 
     if request.env.request_method == 'PUT':
