@@ -689,7 +689,7 @@ def collection(*args, **kwargs):
             result['versionHistory'] = version_history
 
             # reckon and add 'lastModified' property, based on commit history?
-            latest_commit = docstore.get_version_history_for_doc_id(id)[0]
+            latest_commit = version_history[0]
             last_modified = {
                 'author_name': latest_commit.get('author_name'),
                 'relative_date': latest_commit.get('relative_date'),
