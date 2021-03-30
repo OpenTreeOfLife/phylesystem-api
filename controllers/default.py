@@ -728,6 +728,8 @@ def collection(*args, **kwargs):
         mn = commit_return.get('merge_needed')
         if (mn is not None) and (not mn):
             __deferred_push_to_gh_call(request, collection_id, doc_type='collection', **kwargs)
+        # Add updated commit history to the blob
+        commit_return['versionHistory'] = docstore.get_version_history_for_doc_id(collection_id)
         return commit_return
         #
         #        parent_sha = kwargs.get('starting_commit_SHA')
