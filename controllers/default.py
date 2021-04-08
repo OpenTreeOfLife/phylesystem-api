@@ -687,6 +687,17 @@ def collection(*args, **kwargs):
                  }
         if version_history:
             result['versionHistory'] = version_history
+
+            # reckon and add 'lastModified' property, based on commit history?
+            latest_commit = version_history[0]
+            last_modified = {
+                'author_name': latest_commit.get('author_name'),
+                'relative_date': latest_commit.get('relative_date'),
+                'display_date': latest_commit.get('date'),
+                'ISO_date': latest_commit.get('date_ISO_8601'),
+                'sha': latest_commit.get('id')  # this is the commit hash
+            }
+            result['lastModified'] = last_modified
         return result
 
     if request.env.request_method == 'PUT':
@@ -717,6 +728,8 @@ def collection(*args, **kwargs):
         mn = commit_return.get('merge_needed')
         if (mn is not None) and (not mn):
             __deferred_push_to_gh_call(request, collection_id, doc_type='collection', **kwargs)
+        # Add updated commit history to the blob
+        commit_return['versionHistory'] = docstore.get_version_history_for_doc_id(collection_id)
         return commit_return
         #
         #        parent_sha = kwargs.get('starting_commit_SHA')
