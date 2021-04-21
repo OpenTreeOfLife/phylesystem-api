@@ -127,6 +127,7 @@ def get_taxonomic_amendment_store(request):
     global _TAXONOMIC_AMENDMENT_STORE
     if _TAXONOMIC_AMENDMENT_STORE is not None:
         return _TAXONOMIC_AMENDMENT_STORE
+    _LOG = get_logger(request, 'ot_api')
     from gitdata import GitData  #TODO?
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_amendments_config(request)
     push_mirror = os.path.join(repo_parent, 'mirror')
