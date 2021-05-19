@@ -644,6 +644,7 @@ def collection(*args, **kwargs):
         # fetch the current collection JSON
         # _LOG.debug('GET /v2/collection/{}'.format(str(collection_id)))
         version_history = None
+        synthesis_history = None
         comment_html = None
         parent_sha = kwargs.get('starting_commit_SHA', None)
         # _LOG.debug('parent_sha = {}'.format(parent_sha))
@@ -658,6 +659,7 @@ def collection(*args, **kwargs):
             collection_json, head_sha, wip_map = r
             ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
             version_history = collections.get_version_history_for_doc_id(collection_id)
+            synthesis_history = collections.get_version_history_for_doc_id(collection_id)
             try:
                 # pre-render internal description (assumes markdown!)
                 comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True )
@@ -698,6 +700,8 @@ def collection(*args, **kwargs):
                 'sha': latest_commit.get('id')  # this is the commit hash
             }
             result['lastModified'] = last_modified
+        if synthesis_history:
+            result['synthHistory'] = synthesis_history
         return result
 
     if request.env.request_method == 'PUT':
