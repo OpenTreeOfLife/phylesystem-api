@@ -84,6 +84,7 @@ def _markdown_to_html(markdown_src='', open_links_in_new_window=False):
     return html
 
 def _get_synthesis_history_for_collection(collection_id):
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     base_url = api_utils.get_collections_api_base_url(request)
     # TODO: Remove this temporary server!
     # TODO: Use cached output? Nudge on any change to synth status?
@@ -570,7 +571,7 @@ def collection(*args, **kwargs):
     """Handle an incoming URL targeting /v2/collection/{COLLECTION_ID}
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
-    # _LOG = api_utils.get_logger(request, 'ot_api.collection')
+    _LOG = api_utils.get_logger(request, 'ot_api.collection')
     if request.env.request_method == 'OPTIONS':
         "A simple method for approving CORS preflight request"
         if request.env.http_access_control_request_method:
@@ -701,7 +702,7 @@ def collection(*args, **kwargs):
         except:
             # log the error, but continue with empty history
             e = sys.exc_info()[0]
-            _LOG.exception('synthesis_history fatch failed:')
+            _LOG.exception('synthesis_history fetch failed:')
             _LOG.exception(e)
             synthesis_history = None
         if not collection_json:
