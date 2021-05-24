@@ -83,6 +83,34 @@ def _markdown_to_html(markdown_src='', open_links_in_new_window=False):
                       html)
     return html
 
+def _get_synthesis_history_for_collection(collection_id):
+    base_url = api_utils.get_collections_api_base_url(request)
+    # TODO: Remove this temporary server!
+    # TODO: Use cached output? Nudge on any change to synth status?
+    base_url = 'https://ot38.opentreeoflife.org/'
+    synth_history_url = '{}v3/tree_of_life/list_custom_built_trees'.format(base_url)
+    try:
+        resp = requests.get(synth_history_url)
+    except:
+        raise HTTP(504, 'Could not fetch custom-built trees from {}'.format(synth_history_url))
+    resp = unicode(resp, 'utf-8')   # make sure it's Unicode!
+    try:
+        response_json = anyjson.loads(resp)
+    except:
+        raise HTTP(500, 'Could not parse file from {}'.format(synth_history_url))
+
+    # gather any synthesis run that included this collection
+    collection_history = new dict()
+    for synth_id, synth_details in response_json.items():
+        collection_ids_string = synth_details.get('collections', None)
+        if collection_ids_string:
+            if collection_id in collection_ids_string.split(','):
+                collection_history[ synth_id ] = synth_details
+        else:
+            msg = 'Missing collections string for synth-run {}!'.format(synth_id)
+            _LOG.exception(msg)
+    return collection_history
+
 def render_markdown(src):
     # Convert POSTed Markdown to HTML (e.g., for previews in web UI)
     return _markdown_to_html( src, open_links_in_new_window=True )
@@ -659,7 +687,6 @@ def collection(*args, **kwargs):
             collection_json, head_sha, wip_map = r
             ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
             version_history = collections.get_version_history_for_doc_id(collection_id)
-            synthesis_history = collections.get_version_history_for_doc_id(collection_id)
             try:
                 # pre-render internal description (assumes markdown!)
                 comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True )
@@ -669,6 +696,14 @@ def collection(*args, **kwargs):
             # _LOG.exception('GET failed')
             e = sys.exc_info()[0]
             _raise_HTTP_from_msg(e)
+        try:
+            synthesis_history = _get_synthesis_history_for_collection(collection_id)
+        except:
+            # log the error, but continue with empty history
+            e = sys.exc_info()[0]
+            _LOG.exception('synthesis_history fatch failed:')
+            _LOG.exception(e)
+            synthesis_history = None
         if not collection_json:
             raise HTTP(404, "Collection '{s}' has no JSON data!".format(s=collection_id))
         # add/restore the url field (using the visible fetch URL)
