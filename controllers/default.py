@@ -95,9 +95,9 @@ def _get_synthesis_history_for_collection(collection_id):
     except:
         raise HTTP(504, 'Could not fetch custom-built trees from {}'.format(synth_history_url))
     try:
-        response_json = anyjson.loads(resp)
+        response_json = anyjson.loads(resp.text)
     except:
-        raise HTTP(500, 'Could not parse file from {}'.format(synth_history_url))
+        _LOG.exception('Could not parse synth-history file from {}'.format(synth_history_url))
 
     # gather any synthesis run that included this collection
     collection_history = {}
