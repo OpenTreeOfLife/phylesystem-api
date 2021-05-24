@@ -100,7 +100,7 @@ def _get_synthesis_history_for_collection(collection_id):
         raise HTTP(500, 'Could not parse file from {}'.format(synth_history_url))
 
     # gather any synthesis run that included this collection
-    collection_history = new dict()
+    collection_history = {}
     for synth_id, synth_details in response_json.items():
         collection_ids_string = synth_details.get('collections', None)
         if collection_ids_string:
