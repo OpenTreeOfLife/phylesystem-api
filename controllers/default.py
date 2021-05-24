@@ -94,7 +94,6 @@ def _get_synthesis_history_for_collection(collection_id):
         resp = requests.get(synth_history_url)
     except:
         raise HTTP(504, 'Could not fetch custom-built trees from {}'.format(synth_history_url))
-    resp = unicode(resp.text, 'utf-8')   # make sure it's Unicode!
     try:
         response_json = anyjson.loads(resp)
     except:
