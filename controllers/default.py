@@ -88,6 +88,7 @@ def _get_synthesis_history_for_collection(collection_id):
     base_url = api_utils.get_collections_api_base_url(request)
     # TODO: Remove this temporary server!
     # TODO: Use cached output? Nudge on any change to synth status?
+    # SEE `findAllSynthesisRuns_url` in curation-app config
     base_url = 'https://ot38.opentreeoflife.org/'
     synth_history_url = '{}v3/tree_of_life/list_custom_built_trees'.format(base_url)
     try:
