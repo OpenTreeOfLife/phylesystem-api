@@ -117,6 +117,19 @@ phylesystem-api==0.0
   - waitress [required: Any, installed: 2.0.0]
 pipdeptree==2.0.0
   - pip [required: >=6.0.0, installed: 21.2.1]
+PyGithub==1.55
+  - deprecated [required: Any, installed: 1.2.12]
+    - wrapt [required: >=1.10,<2, installed: 1.12.1]
+  - pyjwt [required: >=2.0, installed: 2.1.0]
+  - pynacl [required: >=1.4.0, installed: 1.4.0]
+    - cffi [required: >=1.4.1, installed: 1.14.6]
+      - pycparser [required: Any, installed: 2.20]
+    - six [required: Any, installed: 1.16.0]
+  - requests [required: >=2.14.0, installed: 2.26.0]
+    - certifi [required: >=2017.4.17, installed: 2021.5.30]
+    - charset-normalizer [required: ~=2.0.0, installed: 2.0.3]
+    - idna [required: >=2.5,<4, installed: 3.2]
+    - urllib3 [required: >=1.21.1,<1.27, installed: 1.26.6]
 pytest-cov==2.12.1
   - coverage [required: >=5.2.1, installed: 5.5]
   - pytest [required: >=4.6, installed: 6.2.4]
