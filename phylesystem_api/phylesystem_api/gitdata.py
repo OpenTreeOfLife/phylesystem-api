@@ -1,7 +1,6 @@
 from peyotl.phylesystem.git_actions import PhylesystemGitAction
 from sh import git
 import os
-import api_utils
 
 class GitData(PhylesystemGitAction):
     def __init__(self, repo, **kwargs):

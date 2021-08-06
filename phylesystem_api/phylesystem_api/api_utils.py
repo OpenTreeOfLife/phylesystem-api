@@ -4,7 +4,7 @@ from peyotl.phylesystem import Phylesystem
 from peyotl.collections_store import TreeCollectionStore
 from peyotl.amendments import TaxonomicAmendmentStore
 from peyotl.utility import read_config as read_peyotl_config
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 from datetime import datetime
 import tempfile
 import logging
@@ -16,9 +16,10 @@ import os
 READ_ONLY_MODE = True
 
 def get_private_dir(request):
-    app_name = request.application
-    leader = request.env.web2py_path
-    return '%s/applications/%s/private' % (leader, app_name)
+    #app_name = request.application
+    #leader = request.env.web2py_path
+    #return '%s/applications/%s/private' % (leader, app_name)
+    return "./private/"
 
 def atomic_write_json_if_not_found(obj, dest, request):
     if os.path.exists(dest):
@@ -45,14 +46,13 @@ def compose_push_to_github_url(request, resource_id):
                                            r=resource_id)
 
 # this allows us to raise HTTP(...)
-from gluon import *
 _PHYLESYSTEM = None
 def get_phylesystem(request):
     global READ_ONLY_MODE
     global _PHYLESYSTEM
     if _PHYLESYSTEM is not None:
         return _PHYLESYSTEM
-    from gitdata import GitData
+    from phylesystem_api.gitdata import GitData
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, READ_ONLY_MODE = read_phylesystem_config(request)
     peyotl_config, cfg_filename = read_peyotl_config()
     if 'phylesystem' not in peyotl_config.sections():
@@ -93,7 +93,7 @@ def get_tree_collection_store(request):
     if _TREE_COLLECTION_STORE is not None:
         return _TREE_COLLECTION_STORE
     _LOG = get_logger(request, 'ot_api')
-    from gitdata import GitData  #TODO?
+    from phylesystem_api.gitdata import GitData
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_collections_config(request)
     push_mirror = os.path.join(repo_parent, 'mirror')
     pmi = {
@@ -128,7 +128,7 @@ def get_taxonomic_amendment_store(request):
     if _TAXONOMIC_AMENDMENT_STORE is not None:
         return _TAXONOMIC_AMENDMENT_STORE
     _LOG = get_logger(request, 'ot_api')
-    from gitdata import GitData  #TODO?
+    from phylesystem_api.gitdata import GitData
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_amendments_config(request)
     push_mirror = os.path.join(repo_parent, 'mirror')
     pmi = {
@@ -168,14 +168,11 @@ def get_failed_push_filepath(request, doc_type=None):
     return os.path.join(get_private_dir(request), failure_filename)
 
 def get_conf_object(request):
-    app_name = request.application
     conf = SafeConfigParser(allow_no_value=True)
-    localconfig_filename = os.path.join(get_private_dir(request), "localconfig")
+    this_dir = os.path.dirname(__file__)
+    localconfig_filename = os.path.normpath(this_dir +'/../../api.config')
     if os.path.isfile(localconfig_filename):
         conf.readfp(open(localconfig_filename))
-    else:
-        filename = os.path.join(get_private_dir(request), "config")
-        conf.readfp(open(filename))
     return conf
 
 def read_phylesystem_config(request):

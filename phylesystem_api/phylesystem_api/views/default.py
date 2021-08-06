@@ -1,6 +1,7 @@
 from pyramid.view import view_config
 from pyramid.response import Response
 from phylesystem_api.markdown import _markdown_to_html
+import phylesystem_api.api_utils as api_utils
 
 @view_config(route_name='home', renderer='phylesystem_api:templates/home.jinja2')
 def home_view(request):
