@@ -1,4 +1,7 @@
-from pyramid.view import view_config
+from pyramid.view import (
+                          view_config,
+                          notfound_view_config,
+                         )
 from pyramid.response import Response
 from phylesystem_api.markdown import _markdown_to_html
 import phylesystem_api.api_utils as api_utils
@@ -7,6 +10,15 @@ import phylesystem_api.api_utils as api_utils
 def home_view(request):
     # a simple README web page for the curious
     return {'title': 'phylesystem API'}
+
+# all other pages should be JSON, so here's a suitable 404 response
+@notfound_view_config(renderer='json',
+                      accept='application/json')
+def notfound(request):
+    return Response(
+        body=json.dumps({'message': 'Nothing found at this URL'}),
+        status='404 Not Found',
+        content_type='application/json')
 
 @view_config(route_name='render_markdown')
 def render_markdown(request):
