@@ -172,7 +172,6 @@ def _get_synth_input_collection_ids():
     return coll_id_list
 
 def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
-    #import pdb; pdb.set_trace()
     # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
         # support JSONP requests from another domain
@@ -262,7 +261,6 @@ def include_tree_in_synth(study_id=None, tree_id=None, **kwargs):
     return trees_in_synth(kwargs)
 
 def exclude_tree_from_synth(study_id=None, tree_id=None, **kwargs):
-    #import pdb; pdb.set_trace()
     # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     if kwargs.get('jsoncallback', None) or kwargs.get('callback', None):
         # support JSONP requests from another domain

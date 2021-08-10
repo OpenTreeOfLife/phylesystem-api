@@ -1,13 +1,12 @@
 from pyramid.view import view_config
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
-from pyramid.httpexceptions import (HTTPException,
+from pyramid.httpexceptions import (
+                                    HTTPException,
                                     HTTPError,
                                     HTTPNotFound, 
                                     HTTPBadRequest,
                                     HTTPInternalServerError,
                                    )
-
-
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
 import json
@@ -52,7 +51,6 @@ def find_studies(request):
         _raise400('"verbose" setting must be a boolean')
     field = request.params.get('property')
     try:
-        import pdb; pdb.set_trace()
         if field is None:
             resp = oti.find_all_studies(verbose=verbose)
         else:
@@ -78,18 +76,26 @@ def find_studies(request):
     return json.dumps(resp)
 
 
-def find_trees():
-    oti = _init(request, response)
-    verbose = _bool_arg(request.params.get('verbose', False))
+@view_config(route_name='find_trees', renderer='json')
+def find_trees(request):
+    # if behavior varies based on /v1/, /v2/, ...
+    api_version = request.matchdict['api_version']
+    #import pdb; pdb.set_trace()
+    try:
+        msg = request.json_body
+    except:
+        _raise400('missing or invalid request JSON')
+    oti = _init(request, request.response)
+    verbose = _bool_arg(msg.get('verbose', False))
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
-    field = request.params.get('property')
+    field = msg.get('property')
     if field is None:
         _raise400('A "property" argument must be used.')
-    value = request.params.get('value')
+    value = msg.get('value')
     if value is None:
         _raise400('A "value" argument must be used.')
-    exact = _bool_arg(request.params.get('exact', False))
+    exact = _bool_arg(msg.get('exact', False))
     if (exact is not True) and (exact is not False):
         _raise400('"exact" setting must be a boolean')
     try:
@@ -99,7 +105,8 @@ def find_trees():
     except ValueError as x:
         _raise400(x.message)
     except Exception as x:
+        msg = ",".join(x.args)
         raise HTTPInternalServerError(
                 body=json.dumps({"error": 1, 
-                                 "description": "Unexpected error calling oti: {}".format(x.message)}))
+                                 "description": "Unexpected error calling oti: {}".format(msg)}))
     return json.dumps(resp)
