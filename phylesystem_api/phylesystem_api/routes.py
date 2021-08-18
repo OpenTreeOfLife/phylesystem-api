@@ -5,3 +5,4 @@ def includeme(config):
     config.add_route('phylesystem_config', '/{api_version}/phylesystem_config')
     config.add_route('find_studies', '/{api_version}/studies/find_studies')
     config.add_route('find_trees', '/{api_version}/studies/find_trees')
+    config.add_route('find_collections', '/{api_version}/collections/find_collections')
