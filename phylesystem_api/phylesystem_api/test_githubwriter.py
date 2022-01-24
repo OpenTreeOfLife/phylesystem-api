@@ -1,10 +1,10 @@
-from nose       import with_setup
+from nose import with_setup
 from nose.tools import *
 import os
 import sys
 import github
 
-from githubwriter import GithubWriter
+from phylesystem_api.githubwriter import GithubWriter
 
 def test_basic():
 

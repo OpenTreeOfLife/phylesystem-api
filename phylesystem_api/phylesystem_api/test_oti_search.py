@@ -1,6 +1,6 @@
 import unittest
 import os, sys
-from oti_search import OTISearch
+from phylesystem_api.oti_search import OTISearch
 from ConfigParser import SafeConfigParser
 
 class TestOTISearch(unittest.TestCase):

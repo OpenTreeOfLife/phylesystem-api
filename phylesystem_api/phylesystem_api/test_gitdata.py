@@ -2,7 +2,7 @@ import unittest
 import os
 import sys
 import time
-from gitdata import GitData, MergeException
+from phylesystem_api.gitdata import GitData, MergeException
 import simplejson as json
 from sh import git
 from ConfigParser import SafeConfigParser
