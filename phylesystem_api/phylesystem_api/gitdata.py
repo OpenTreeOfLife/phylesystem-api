@@ -41,4 +41,5 @@ class GitData(PhylesystemGitAction):
         new_sha      = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
         return new_sha.strip()
 
-
+class MergeException(Exception):
+    pass
