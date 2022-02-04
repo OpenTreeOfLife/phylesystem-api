@@ -494,14 +494,14 @@ def clear_matching_cache_keys(key_pattern):
     from gluon import current
     #_LOG = get_logger(current.request, 'ot_api')
     current.cache.ram.clear(regex='^_BOGUS_CACHE_KEY_$')
-    item_count_before = len(current.cache.ram.storage.keys())
+    item_count_before = len(list(current.cache.ram.storage.keys()))
     # _LOG.debug("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
     #for k in current.cache.ram.storage.keys():
     #    _LOG.debug(k)
     #_LOG.debug("===")
     #_LOG.debug("> clearing cached items matching [%s]" % key_pattern)
     current.cache.ram.clear(regex=key_pattern)
-    item_count_after = len(current.cache.ram.storage.keys())
+    item_count_after = len(list(current.cache.ram.storage.keys()))
     #_LOG.debug("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
     #for k in current.cache.ram.storage.keys():
     #    _LOG.debug(k)

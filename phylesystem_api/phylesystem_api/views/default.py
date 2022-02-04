@@ -84,9 +84,9 @@ def include_tree_in_synth(request):
     try:
         found_study = sds.return_doc(study_id, commit_sha=None, return_WIP_map=False)[0]
         tree_collections_by_id = found_study.get('nexml').get('treesById')
-        for trees_id, trees_collection in tree_collections_by_id.items():
+        for trees_id, trees_collection in list(tree_collections_by_id.items()):
             trees_by_id = trees_collection.get('treeById')
-            if tree_id in trees_by_id.keys():
+            if tree_id in list(trees_by_id.keys()):
                 # _LOG.exception('*** FOUND IT ***')
                 found_tree = trees_by_id.get(tree_id)
         found_tree_name = found_tree['@label'] or tree_id
@@ -121,7 +121,7 @@ def include_tree_in_synth(request):
             'studyID': study_id,
             'SHA': "",
             'decision': "INCLUDED",
-            'comments': u"Added via API (include_tree_in_synth) from {p}".format(p=found_study.get('nexml')['^ot:studyPublicationReference'])
+            'comments': "Added via API (include_tree_in_synth) from {p}".format(p=found_study.get('nexml')['^ot:studyPublicationReference'])
             })
         # update (or add) the decision list for this collection
         coll['decisions'] = decision_list
@@ -147,7 +147,7 @@ def include_tree_in_synth(request):
                                                merged_sha,
                                                commit_msg="Updated via API (include_tree_in_synth)")
             commit_return = r
-        except GitWorkflowError, err:
+        except GitWorkflowError as err:
             _raise_HTTP_from_msg(err.msg)
         except:
             raise HTTP(400, traceback.format_exc())
@@ -199,7 +199,7 @@ def exclude_tree_from_synth(request):
                                                    merged_sha,
                                                    commit_msg="Updated via API (include_tree_in_synth)")
                 commit_return = r
-            except GitWorkflowError, err:
+            except GitWorkflowError as err:
                 _raise_HTTP_from_msg(err.msg)
             except:
                 raise HTTP(400, traceback.format_exc())

@@ -11,7 +11,7 @@ class GithubWriter(object):
         if not oauth:
             oauth = os.getenv('GITHUB_OAUTH_TOKEN', 'invalid')
         if oauth == 'invalid':
-            print "Could not find OAUTH token!"
+            print("Could not find OAUTH token!")
         self.oauth = oauth
         self.gh    = Github(oauth)
 
@@ -26,7 +26,7 @@ class GithubWriter(object):
         def inner(*args, **kwargs):
             try:
                 return f(*args,**kwargs)
-            except github.GithubException, e:
+            except github.GithubException as e:
                 if e.status == 502:
                     # We got a bad gateway timeout, which happens occasionally
                     # Retry one more time
@@ -66,7 +66,7 @@ class GithubWriter(object):
         "Return true if a branch exists, false otherwise"
         try:
             ref = self.repo.get_git_ref("heads/%s" % branch)
-        except github.UnknownObjectException, e:
+        except github.UnknownObjectException as e:
             return 0
 
         return 1

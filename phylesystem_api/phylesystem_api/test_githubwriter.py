@@ -14,7 +14,7 @@ def test_basic():
 
     sha = gw.get_latest_sha()
     assert_equals( len(sha) , 40, 'Got a reasonable looking sha back:%s ' % sha)
-    print("sha of master = %s" % sha)
+    print(("sha of master = %s" % sha))
 
     assert_false( gw.branch_exists("really_please_dont_exist") )
 
@@ -23,7 +23,7 @@ def test_basic():
     tree = gw.get_tree(sha)
 
     assert_equals( len(tree.sha) , 40, 'Got a reasonable looking sha back:%s ' % tree.sha)
-    print("tree sha of master = %s" % tree.sha)
+    print(("tree sha of master = %s" % tree.sha))
 
     blob = gw.create_blob("some other content", "utf-8")
 
