@@ -10,4 +10,4 @@ r = test_http_json_method(SUBMIT_URI,
                           return_bool_data=True)
 if not r[0]:
     sys.exit(1)
-print(r[1])
+print((r[1]))
