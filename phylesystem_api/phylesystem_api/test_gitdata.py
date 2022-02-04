@@ -5,7 +5,12 @@ import time
 from phylesystem_api.gitdata import GitData, MergeException
 import simplejson as json
 from sh import git
-from ConfigParser import SafeConfigParser
+try:
+    # Python 2 only:
+    from ConfigParser import SafeConfigParser
+except ImportError:
+    # Python 2 and 3 (after ``pip install configparser``)
+    from configparser import SafeConfigParser
 
 class TestGitData(unittest.TestCase):
     @classmethod

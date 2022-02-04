@@ -11,6 +11,6 @@ r = test_http_json_method(SUBMIT_URI,
                           return_bool_data=True,
                           is_json=False)
 if r[0]:
-    print r[1]
+    print(r[1])
     sys.exit(0)
 sys.exit(1)

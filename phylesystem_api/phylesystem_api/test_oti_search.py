@@ -1,7 +1,12 @@
 import unittest
 import os, sys
 from phylesystem_api.oti_search import OTISearch
-from ConfigParser import SafeConfigParser
+try:
+    # Python 2 only:
+    from ConfigParser import SafeConfigParser
+except ImportError:
+    # Python 2 and 3 (after ``pip install configparser``)
+    from configparser import SafeConfigParser
 
 class TestOTISearch(unittest.TestCase):
     @classmethod

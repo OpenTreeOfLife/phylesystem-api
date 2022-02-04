@@ -11,7 +11,7 @@ r = test_http_json_method(SUBMIT_URI,
                           return_bool_data=True,
                           is_json=False)
 if r[0]:
-    print r[1]
+    print(r[1])
     assert '[pre-ingroup-marker]' not in r[1]
 else:
     sys.exit(1)
@@ -23,7 +23,7 @@ r = test_http_json_method(SUBMIT_URI,
                           return_bool_data=True,
                           is_json=False)
 if r[0]:
-    print r[1]
+    print(r[1])
     assert '[pre-ingroup-marker]' in r[1]
 else:
     sys.exit(1)

@@ -25,4 +25,4 @@ r = test_http_json_method(SUBMIT_URI,
 if not r[0]:
     sys.exit(1)
 resp = r[1]
-print resp
+print(resp)

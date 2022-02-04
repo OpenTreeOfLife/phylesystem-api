@@ -32,4 +32,4 @@ r3 = test_http_json_method(PUSH_URI,
                            'PUT',
                            expected_status=200,
                            return_bool_data=True)
-print r3
+print(r3)
