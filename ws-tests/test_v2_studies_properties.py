@@ -2,10 +2,10 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-CONTROLLER = DOMAIN + '/phylesystem/studies'
+CONTROLLER = DOMAIN + '/v3/studies'
 SUBMIT_URI = CONTROLLER + '/properties'
 r = test_http_json_method(SUBMIT_URI,
-                          'GET',
+                          'POST',
                           expected_status=200,
                           return_bool_data=True)
 assert r[0] is True
