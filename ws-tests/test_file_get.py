@@ -9,7 +9,7 @@ if '/api.opentree' in DOMAIN:
 else:
     study = 'pg_90'
 # '/file' means get list of supplementary files
-SUBMIT_URI = '{d}/phylesystem/v1/study/{s}/file'.format(d=DOMAIN, s=study)
+SUBMIT_URI = '{d}/study/{s}/file'.format(d=DOMAIN, s=study)
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
                           expected_status=200,

@@ -3,7 +3,7 @@
 # This file was copied from the phylesystem-api repo and is intended
 # to replace it.
 
-from configparser import SafeConfigParser
+from configparser import ConfigParser
 from io import StringIO
 import requests
 import gzip
@@ -33,9 +33,10 @@ def config(section=None, param=None, default=None):
         None is returned.
     '''
     global _CONFIG, _CONFIG_FN
+    #import pdb; pdb.set_trace()
     if _CONFIG is None:
         _CONFIG_FN = os.path.abspath('test.conf')
-        _CONFIG = SafeConfigParser()
+        _CONFIG = ConfigParser()
         _CONFIG.read(_CONFIG_FN)
         parse_argv_as_options(_CONFIG)
     if section is None and param is None:
@@ -255,10 +256,11 @@ def writable_api_host_and_oauth_or_exit(fn):
 # Mimic the behavior of apache so that services can be tested without
 # having apache running.  See deploy/setup/opentree-shared.conf
 
-translations = [('/v2/study/', '/phylesystem/v1/study/'),
+translations = [('/v3/study/', '/phylesystem/v1/study/'),
                 ('/cached/', '/phylesystem/default/cached/'),
                 # treemachine
                 ('/v2/graph/', '/db/data/ext/graph/graphdb/'),
+                ('/v3/graph/', '/db/data/ext/graph/graphdb/'),
                 ('/v2/tree_of_life/', '/db/data/ext/tree_of_life/graphdb/'),
                 ('/v3/tree_of_life/', '/db/data/ext/tree_of_life_v3/graphdb/'),
                 # taxomachine
@@ -271,7 +273,8 @@ translations = [('/v2/study/', '/phylesystem/v1/study/'),
                 ('/v3/studies/', '/db/data/ext/studies/graphdb/'),
                 ('/v2/studies/', '/db/data/ext/studies/graphdb/'),
                 # smasher (port 8081)
-                ('/v2/conflict/', '/')
+                ('/v2/conflict/', '/'),
+                ('/v3/conflict/', '/')
 ]
 
 def translate(s):

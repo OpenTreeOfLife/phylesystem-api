@@ -6,7 +6,7 @@ import json
 import sys
 import os
 DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/'
+SUBMIT_URI = DOMAIN + '/v3/study/'
 inpf = codecs.open('data/10.json', 'rU', encoding='utf-8')
 n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
@@ -26,7 +26,7 @@ if not r[0]:
 resp = r[1]
 starting_commit_SHA = resp['sha']
 c_id = resp['resource_id']
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/%s' % c_id
+SUBMIT_URI = DOMAIN + '/v3/study/%s' % c_id
 data = {
          'auth_token': auth_token,
          'starting_commit_SHA': starting_commit_SHA,

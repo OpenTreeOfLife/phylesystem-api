@@ -5,7 +5,7 @@ import json
 import sys
 import os
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/10'
+SUBMIT_URI = DOMAIN + '/v3/study/10'
 data = {'output_nexml2json':'0.0.0'}
 pb = test_http_json_method(SUBMIT_URI, 
                            'GET',

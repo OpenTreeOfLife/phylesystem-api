@@ -4,7 +4,7 @@ from opentreetesting import test_http_json_method, writable_api_host_and_oauth_o
 #This test should only pass if filesize is set very low in the config and/or max tree number is set to 0
 DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study = '10'
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/' + study
+SUBMIT_URI = DOMAIN + '/v3/study/' + study
 data = {'output_nexml2json':'1.2'}
 r = test_http_json_method(SUBMIT_URI,
                           'GET',

@@ -2,7 +2,7 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v2/collections/find_collections'
+SUBMIT_URI = DOMAIN + '/v3/collections/find_collections'
 #sys.stderr.write('Calling "{}"...\n'.format(SUBMIT_URI))
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
