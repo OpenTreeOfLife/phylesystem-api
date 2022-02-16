@@ -11,6 +11,14 @@ from peyotl import concatenate_collections, \
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
                                              validate_and_convert_nexson
 import phylesystem_api.api_utils as api_utils
+try:
+    import anyjson
+except:
+    import json
+    class Wrapper(object):
+        pass
+    anyjson = Wrapper()
+    anyjson.loads = json.loads
 
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
@@ -30,8 +38,9 @@ def home_view(request):
                       accept='application/json')
 def notfound(request):
     return Response(
-        body=json.dumps({'message': 'Nothing found at this URL'}),
+        body=anyjson.dumps({'message': 'Nothing found at this URL'}),
         status='404 Not Found',
+        charset='UTF-8',
         content_type='application/json')
 
 @view_config(route_name='render_markdown')
@@ -62,14 +71,14 @@ def trees_in_synth(request):
         except:
             msg = 'GET of collection {} failed'.format(coll_id)
             # _LOG.exception(msg)
-            raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
     try:
         result = concatenate_collections(coll_list)
     except:
         # _LOG.exception('concatenation of collections failed')
         e = sys.exc_info()[0]
         _raise_HTTP_from_msg(e)
-    return json.dumps(result)
+    return anyjson.dumps(result)
 
 @view_config(route_name='include_tree_in_synth', renderer='json')
 def include_tree_in_synth(request):
@@ -105,7 +114,7 @@ def include_tree_in_synth(request):
         except:
             msg = 'GET of collection {} failed'.format(coll_id)
             # _LOG.exception(msg)
-            raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         if tree_is_in_collection(coll, study_id, tree_id):
             already_included_in_synth_input_collections = True
     if not already_included_in_synth_input_collections:
@@ -131,13 +140,13 @@ def include_tree_in_synth(request):
             owner_id = auth_info.get('login', None)
         except:
             msg = 'include_tree_in_synth(): Authentication failed'
-            raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         try:
             parent_sha = kwargs.get('starting_commit_SHA', None)
             merged_sha = None  #TODO: kwargs.get('???', None)
         except:
             msg = 'include_tree_in_synth(): fetch of starting_commit_SHA failed'
-            raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         try:
             r = cds.update_existing_collection(owner_id,
                                                default_collection_id,
@@ -175,13 +184,13 @@ def exclude_tree_from_synth(request):
         owner_id = auth_info.get('login', None)
     except:
         msg = 'include_tree_in_synth(): Authentication failed'
-        raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+        raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
     for coll_id in coll_id_list:
         try:
             coll = cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
         except:
             msg = 'GET of collection {} failed'.format(coll_id)
-            raise HTTP(404, json.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         if tree_is_in_collection(coll, study_id, tree_id):
             # remove it and update the collection
             decision_list = coll.get('decisions', [])
@@ -237,11 +246,11 @@ def _get_synth_input_collection_ids():
     return coll_id_list
 
 def _raise_HTTP_from_msg(msg):
-    raise HTTP(400, json.dumps({"error": 1, "description": msg}))
+    raise HTTP(400, anyjson.dumps({"error": 1, "description": msg}))
 
 def check_not_read_only():
     if api_utils.READ_ONLY_MODE:
-        raise HTTP(403, json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
+        raise HTTP(403, anyjson.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     return True
 
 def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):

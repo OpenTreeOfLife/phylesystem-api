@@ -3,7 +3,15 @@ import urllib2
 import os, sys
 
 import json
-import anyjson
+try:
+    import anyjson
+except:
+    import json
+    class Wrapper(object):
+        pass
+    anyjson = Wrapper()
+    anyjson.loads = json.loads
+
 import traceback
 from sh import git
 from peyotl import convert_nexson_format, \
@@ -88,7 +96,7 @@ def render_markdown(src):
     return _markdown_to_html( src, open_links_in_new_window=True )
 
 def _raise_HTTP_from_msg(msg):
-    raise HTTP(400, json.dumps({"error": 1, "description": msg}))
+    raise HTTP(400, anyjson.dumps({"error": 1, "description": msg}))
 
 
 
