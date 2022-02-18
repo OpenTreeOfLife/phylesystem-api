@@ -1,6 +1,8 @@
 def includeme(config):
     config.add_static_view('static', 'static', cache_max_age=3600)
-    config.add_route('home', '/')  # tiny README for the curious
+    config.add_route('index', '/')  # simple homepage for the curious
+    config.add_route('api_root', '/{api_version}/')  # tiny API description with links to code/docs
+    config.add_route('study_properties', '/{api_version}/studies/properties')
     config.add_route('render_markdown', '/{api_version}/render_markdown')
     config.add_route('phylesystem_config', '/{api_version}/phylesystem_config')
     config.add_route('find_studies', '/{api_version}/studies/find_studies')

@@ -28,8 +28,9 @@ def _bool_arg(v):
             return False
     return v
 
-def properties():
-    oti = _init(request, response)
+@view_config(route_name='study_properties', renderer='json')
+def properties(request):
+    oti = _init(request, request.response)
     n = list(oti.node_search_term_set)
     n.sort()
     t = list(oti.tree_search_term_set)

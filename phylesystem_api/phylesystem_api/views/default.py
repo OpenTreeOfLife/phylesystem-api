@@ -28,10 +28,22 @@ except:
     call_http_json = None
     _GLOG.debug('call_http_json was not imported from open_tree_tasks')
 
-@view_config(route_name='home', renderer='phylesystem_api:templates/home.jinja2')
+@view_config(route_name='index', renderer='phylesystem_api:templates/home.jinja2')
 def home_view(request):
     # a simple README web page for the curious
     return {'title': 'phylesystem API'}
+
+@view_config(route_name='api_root', renderer='json',
+             request_method='POST')
+def base_API_view(request):
+    # a tiny JSON description of the API and where to find documentation
+    api_version = request.matchdict['api_version']
+    # TODO: Modify URLs if they differ across API versions
+    return {
+        "description": "The Open Tree API {}".format(api_version),
+        "documentation_url": "https://github.com/OpenTreeOfLife/phylesystem-api/tree/master/docs",
+        "source_url": "https://github.com/OpenTreeOfLife/phylesystem-api"
+    }
 
 # all other pages should be JSON, so here's a suitable 404 response
 @notfound_view_config(renderer='json',
