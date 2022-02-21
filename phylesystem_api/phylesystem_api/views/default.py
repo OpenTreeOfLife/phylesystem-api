@@ -36,6 +36,7 @@ def home_view(request):
 @view_config(route_name='api_root', renderer='json',
              request_method='POST')
 @view_config(route_name='api_version_root', renderer='json')
+@view_config(route_name='api_version_noslash', renderer='json')
 @view_config(route_name='studies_root', renderer='json')
 @view_config(route_name='amendments_root', renderer='json')
 @view_config(route_name='collections_root', renderer='json')
@@ -51,7 +52,8 @@ def base_API_view(request):
 
 # all other pages should be JSON, so here's a suitable 404 response
 @notfound_view_config(renderer='json',
-                      accept='application/json')
+                      accept='application/json',
+                      append_slash=True)
 def notfound(request):
     return Response(
         body=anyjson.dumps({'message': 'Nothing found at this URL'}),
