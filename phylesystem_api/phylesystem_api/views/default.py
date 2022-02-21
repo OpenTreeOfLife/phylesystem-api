@@ -35,6 +35,10 @@ def home_view(request):
 
 @view_config(route_name='api_root', renderer='json',
              request_method='POST')
+@view_config(route_name='api_version_root', renderer='json')
+@view_config(route_name='studies_root', renderer='json')
+@view_config(route_name='amendments_root', renderer='json')
+@view_config(route_name='collections_root', renderer='json')
 def base_API_view(request):
     # a tiny JSON description of the API and where to find documentation
     api_version = request.matchdict['api_version']
