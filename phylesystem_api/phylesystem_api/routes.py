@@ -9,9 +9,10 @@ def includeme(config):
     config.add_route('studies_root', '/{api_version}/studies/')
     config.add_route('amendments_root', '/{api_version}/amendments/')
     config.add_route('collections_root', '/{api_version}/collections/')
-    # general utilities
+    # utilities (generally for internal use, not documented)
     config.add_route('render_markdown', '/{api_version}/render_markdown')
     config.add_route('phylesystem_config', '/{api_version}/phylesystem_config')
+    config.add_route('raw_study_list', '/{api_version}/study_list')
     # study/tree routes
     config.add_route('study_properties', '/{api_version}/studies/properties')
     config.add_route('find_studies', '/{api_version}/studies/find_studies')

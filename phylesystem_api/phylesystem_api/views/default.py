@@ -74,6 +74,12 @@ def phylesystem_config(request):
     phylesystem = api_utils.get_phylesystem(request)
     return phylesystem.get_configuration_dict()
 
+@view_config(route_name='raw_study_list', renderer='json')
+def study_list(request):
+    phylesystem = api_utils.get_phylesystem(request)
+    studies = phylesystem.get_study_ids()
+    return anyjson.dumps(studies)
+
 @view_config(route_name='trees_in_synth', renderer='json')
 def trees_in_synth(request):
     """Return an "artificial" collection that contains all trees (and
