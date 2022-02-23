@@ -10,4 +10,5 @@ r = test_http_json_method(SUBMIT_URI,
                           return_bool_data=True)
 assert r[0] is True
 assert len(r[1]) > 0
-assert list(r[1][0].keys()) == ['ot:studyId']
+assert len(r[1]['matched_studies']) > 0
+assert list(r[1]['matched_studies'][0].keys()) == ['ot:studyId']
