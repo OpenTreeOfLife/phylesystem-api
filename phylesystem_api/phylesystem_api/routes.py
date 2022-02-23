@@ -7,8 +7,8 @@ def includeme(config):
     config.add_route('api_version_root', '/{api_version}/')
     config.add_route('api_version_noslash', '/{api_version}')
     config.add_route('studies_root', '/{api_version}/studies/')
-    config.add_route('amendments_root', '/{api_version}/amendments/')
     config.add_route('collections_root', '/{api_version}/collections/')
+    config.add_route('amendments_root', '/{api_version}/amendments/')
     # utilities (generally for internal use, not documented)
     config.add_route('render_markdown', '/{api_version}/render_markdown')
     config.add_route('phylesystem_config', '/{api_version}/phylesystem_config')
@@ -17,7 +17,16 @@ def includeme(config):
     config.add_route('study_properties', '/{api_version}/studies/properties')
     config.add_route('find_studies', '/{api_version}/studies/find_studies')
     config.add_route('find_trees', '/{api_version}/studies/find_trees')
-    config.add_route('find_collections', '/{api_version}/collections/find_collections')
     config.add_route('trees_in_synth', '/{api_version}/trees_in_synth')
     config.add_route('include_tree_in_synth', '/{api_version}/include_tree_in_synth')
     config.add_route('exclude_tree_from_synth', '/{api_version}/exclude_tree_from_synth')
+    config.add_route('get_study', '/{api_version}/study/{study_id}')
+    """
+    config.add_route('get_study_file', '/{api_version}/study/{study_id}')
+    config.add_route('get_study_external_url', '/{api_version}/study/{study_id}')
+    config.add_route('get_study_tree', '/{api_version}/study/{study_id}')
+    config.add_route('get_study_tree_newick', '/{api_version}/study/{study_id}')
+    """
+    # tree collection routes
+    config.add_route('find_collections', '/{api_version}/collections/find_collections')
+    # taxonomic amendment routes
