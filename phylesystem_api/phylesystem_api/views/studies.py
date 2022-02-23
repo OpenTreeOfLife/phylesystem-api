@@ -37,9 +37,9 @@ def properties(request):
     t.sort()
     s = list(oti.study_search_term_set)
     s.sort()
-    return json.dumps({'node_properties': n,
-                       'tree_properties': t,
-                       'study_properties': s})
+    return {'node_properties': n,
+            'tree_properties': t,
+            'study_properties': s}
 
 
 @view_config(route_name='find_studies', renderer='json')
@@ -74,7 +74,7 @@ def find_studies(request):
         raise HTTPInternalServerError(
                 body=json.dumps({"error": 1, 
                                  "description": "Unexpected error calling oti: {}".format(msg)}))
-    return json.dumps(resp)
+    return resp
 
 
 @view_config(route_name='find_trees', renderer='json')
@@ -110,4 +110,4 @@ def find_trees(request):
         raise HTTPInternalServerError(
                 body=json.dumps({"error": 1, 
                                  "description": "Unexpected error calling oti: {}".format(msg)}))
-    return json.dumps(resp)
+    return resp
