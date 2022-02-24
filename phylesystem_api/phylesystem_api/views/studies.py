@@ -53,7 +53,8 @@ def find_studies(request):
     field = request.params.get('property')
     try:
         if field is None:
-            resp = oti.find_all_studies(verbose=verbose)
+            match_list = oti.find_all_studies(verbose=verbose)
+            resp = {'matched_studies': match_list}
         else:
             value = request.params.get('value')
             if value is None:
@@ -100,7 +101,8 @@ def find_trees(request):
     if (exact is not True) and (exact is not False):
         _raise400('"exact" setting must be a boolean')
     try:
-        resp = oti.find_trees({field: value}, verbose=verbose, exact=exact)
+        match_list = oti.find_trees({field: value}, verbose=verbose, exact=exact)
+        resp = {'matched_studies': match_list}
     except HTTPException:
         raise
     except ValueError as x:
