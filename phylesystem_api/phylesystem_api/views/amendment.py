@@ -14,8 +14,6 @@ import json
 
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
-def _raise_HTTP_from_msg(msg):
-    raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
 
 def _raise_on_CORS_preflight(request):
     "A simple method for approving CORS preflight request"
@@ -68,6 +66,7 @@ def amendment(request):
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
+    _raise_on_CORS_preflight(request)
 
     def __extract_and_validate_amendment(request, kwargs):
         from pprint import pprint

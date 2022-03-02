@@ -2,8 +2,8 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v3/amendments/list_all'
-# NB - This vaguely-named methd returns all amendments (complete JSON)
+SUBMIT_URI = DOMAIN + '/v3/amendments/amendment_list'
+# NB - This poorly-named methd returns a list of just their IDs
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
                           expected_status=200,

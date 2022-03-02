@@ -30,4 +30,8 @@ def includeme(config):
     # tree collection routes
     config.add_route('find_collections', '/{api_version}/collections/find_collections')
     # taxonomic amendment routes
+    config.add_route('list_all_amendment_ids', '/{api_version}/amendments/amendment_list')
+    config.add_route('list_all_amendments', '/{api_version}/amendments/list_all')
+    config.add_route('get_amendments_config', '/{api_version}/amendments/store_config')
+    config.add_route('amendments_push_failure', '/{api_version}/amendments/push_failure')
     config.add_route('get_amendment', '/{api_version}/amendment/{amendment_id}')
