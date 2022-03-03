@@ -15,15 +15,6 @@ import json
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
 
-def _raise_on_CORS_preflight(request):
-    "A simple method for approving CORS preflight request"
-    if request.method == 'OPTIONS':
-        if request.env.http_access_control_request_method:
-             request.response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
-        if request.env.http_access_control_request_headers:
-             request.response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
-        raise HTTPOk("single-amendment OPTIONS!", **(request.response.headers))
-
 def _init(request, response):
     response.view = 'generic.json'
     # CORS support for cross-domain API requests (from anywhere)
@@ -66,7 +57,7 @@ def amendment(request):
     Use our typical mapping of HTTP verbs to (sort of) CRUD actions.
     """
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-    _raise_on_CORS_preflight(request)
+    api_utils.raise_on_CORS_preflight(request)
 
     def __extract_and_validate_amendment(request, kwargs):
         from pprint import pprint

@@ -11,5 +11,5 @@ r = test_http_json_method(SUBMIT_URI,
 if not r[0]:
     sys.exit(1)
 assert len(r) == 2
-assert isinstance(r[1], list)
+assert isinstance(r[1], dict)
 #print r[1]

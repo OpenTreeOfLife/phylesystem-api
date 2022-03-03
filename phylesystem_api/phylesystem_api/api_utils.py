@@ -392,7 +392,6 @@ def get_logger(request, name="ot_api"):
     Returns a logger with name set as given, and configured
     to the level given by the environment variable _LOGGING_LEVEL_ENVAR.
     """
-
 #     package_dir = os.path.dirname(module_path)
 #     config_filepath = os.path.join(package_dir, _LOGGING_CONFIG_FILE)
 #     if os.path.exists(config_filepath):
@@ -507,3 +506,13 @@ def clear_matching_cache_keys(key_pattern):
     #    _LOG.debug(k)
     #_LOG.debug("===")
     #_LOG.debug("  %d items removed" % (item_count_before - item_count_after,))
+
+def raise_on_CORS_preflight(request):
+    "A simple method for approving CORS preflight request"
+    if request.method == 'OPTIONS':
+        if request.env.http_access_control_request_method:
+             request.response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+        if request.env.http_access_control_request_headers:
+             request.response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+        raise HTTPOk("single-amendment OPTIONS!", **(request.response.headers))
+

@@ -14,15 +14,6 @@ import phylesystem_api.api_utils as api_utils
 import os, sys
 import json
 
-def _raise_on_CORS_preflight(request):
-    "A simple method for approving CORS preflight request"
-    if request.method == 'OPTIONS':
-        if request.env.http_access_control_request_method:
-             request.response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
-        if request.env.http_access_control_request_headers:
-             request.response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
-        raise HTTPOk("single-amendment OPTIONS!", **(request.response.headers))
-
 def _init(request, response):
     response.view = 'generic.json'
     # CORS support for cross-domain API requests (from anywhere)
@@ -50,7 +41,7 @@ def list_all_amendment_ids(request):
 
 @view_config(route_name='list_all_amendments', renderer='json')
 def list_all(request):
-    _raise_on_CORS_preflight(request)
+    api_utils.raise_on_CORS_preflight(request)
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
     # TODO: proxy to oti for a filtered list?
@@ -86,7 +77,7 @@ def list_all(request):
 
 @view_config(route_name='get_amendments_config', renderer='json')
 def get_amendments_config(request):
-    _raise_on_CORS_preflight(request)
+    api_utils.raise_on_CORS_preflight(request)
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
     docstore = api_utils.get_taxonomic_amendment_store(request)
@@ -94,7 +85,7 @@ def get_amendments_config(request):
 
 @view_config(route_name='amendments_push_failure', renderer='json')
 def amendments_push_failure(request):
-    _raise_on_CORS_preflight(request)
+    api_utils.raise_on_CORS_preflight(request)
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
     # this should find a type-specific push_failure file

@@ -33,7 +33,6 @@ def config(section=None, param=None, default=None):
         None is returned.
     '''
     global _CONFIG, _CONFIG_FN
-    #import pdb; pdb.set_trace()
     if _CONFIG is None:
         _CONFIG_FN = os.path.abspath('test.conf')
         _CONFIG = ConfigParser()
