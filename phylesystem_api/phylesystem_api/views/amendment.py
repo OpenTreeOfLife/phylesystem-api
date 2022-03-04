@@ -99,8 +99,7 @@ def create_amendment(request):
     except:
         commit_msg = None
 
-    if not check_not_read_only():
-        raise HTTPInternalServerError(body="should raise from check_not_read_only")
+    api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
     amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, kwargs)
@@ -210,8 +209,7 @@ def update_amendment(request):
     if (amendment_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.method) }))
 
-    if not check_not_read_only():
-        raise HTTPInternalServerError(body="should raise from check_not_read_only")
+    api_utils.raise_if_read_only()
 
     # update an existing amendment with the data provided
     # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.PUT')
@@ -262,8 +260,8 @@ def delete_amendment(request):
     except:
         commit_msg = None
 
-    if not check_not_read_only():
-        raise HTTPInternalServerError(body="should raise from check_not_read_only")
+    api_utils.raise_if_read_only()
+
     # remove this amendment from the docstore
     # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
     docstore = api_utils.get_taxonomic_amendment_store(request)

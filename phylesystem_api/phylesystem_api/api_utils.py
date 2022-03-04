@@ -6,6 +6,16 @@ from peyotl.amendments import TaxonomicAmendmentStore
 from peyotl.utility import read_config as read_peyotl_config
 from configparser import SafeConfigParser
 from datetime import datetime
+# see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
+from pyramid.httpexceptions import (
+                                    HTTPException,
+                                    HTTPOk,
+                                    HTTPError,
+                                    HTTPNotFound,
+                                    HTTPBadRequest,
+                                    HTTPInternalServerError,
+                                    HTTPForbidden,
+                                   )
 import tempfile
 import logging
 import json
@@ -203,7 +213,7 @@ def read_phylesystem_config(request):
     try:
         max_num_trees = int(max_num_trees)
     except ValueError:
-            raise HTTP(400, json.dumps({"error": 1, "description": 'max number of trees per study in config is not an integer'}))
+            raise HTTPBadRequest( json.dumps({"error": 1, "description": 'max number of trees per study in config is not an integer'}))
     try:
         read_only = conf.get("apis", "read_only") == 'true'
     except:
@@ -314,7 +324,7 @@ def authenticate(**kwargs):
     auth_token   = kwargs.get('auth_token','')
 
     if not auth_token:
-        raise HTTP(400,json.dumps({
+        raise HTTPBadRequest(json.dumps({
             "error": 1,
             "description":"You must provide an auth_token to authenticate to the OpenTree API"
         }))
@@ -324,7 +334,7 @@ def authenticate(**kwargs):
     try:
         auth_info['login'] = gh_user.login
     except BadCredentialsException:
-        raise HTTP(400,json.dumps({
+        raise HTTPBadRequest(json.dumps({
             "error": 1,
             "description":"You have provided an invalid or expired authentication token"
         }))
@@ -515,4 +525,10 @@ def raise_on_CORS_preflight(request):
         if request.env.http_access_control_request_headers:
              request.response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
         raise HTTPOk("single-amendment OPTIONS!", **(request.response.headers))
+
+def raise_if_read_only():
+    "Add this to any web view that is disabled in a read-only setup"
+    if READ_ONLY_MODE:
+        raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
+    return True
 
