@@ -520,11 +520,14 @@ def clear_matching_cache_keys(key_pattern):
 def raise_on_CORS_preflight(request):
     "A simple method for approving CORS preflight request"
     if request.method == 'OPTIONS':
-        if request.env.http_access_control_request_method:
-             request.response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
-        if request.env.http_access_control_request_headers:
-             request.response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
-        raise HTTPOk("single-amendment OPTIONS!", **(request.response.headers))
+        # NB - This is VERY welcoming, which is our current API posture!
+        requested_methods = request.headers.get('Access-Control-Allow-Methods', None)
+        requested_headers = request.headers.get('Access-Control-Allow-Headers', None)
+        if requested_methods:
+            request.response.headers['Access-Control-Allow-Methods'] = requested_methods
+        if requested_headers:
+            request.response.headers['Access-Control-Allow-Headers'] = requested_headers
+        raise HTTPOk("CORS preflight!", headers=request.response.headers)
 
 def raise_if_read_only():
     "Add this to any web view that is disabled in a read-only setup"
