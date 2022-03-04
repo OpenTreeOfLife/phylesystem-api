@@ -45,6 +45,7 @@ def includeme(config):
     config.add_route('list_all_amendments', '/{api_version}/amendments/list_all')
     config.add_route('get_amendments_config', '/{api_version}/amendments/store_config')
     config.add_route('amendments_push_failure', '/{api_version}/amendments/push_failure')
+    config.add_route('amendment_CORS_preflight', '/{api_version}/amendment/{amendment_id}', request_method='OPTIONS')
     config.add_route('create_amendment', '/{api_version}/amendment/{amendment_id}', request_method='POST')
     config.add_route('fetch_amendment', '/{api_version}/amendment/{amendment_id}', request_method='GET')
     config.add_route('update_amendment', '/{api_version}/amendment/{amendment_id}', request_method='PUT')

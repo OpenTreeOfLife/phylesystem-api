@@ -79,10 +79,13 @@ def __extract_and_validate_amendment(request, kwargs):
         raise HTTPBadRequest(body=msg)
     return amendment_obj, errors, amendment_adaptor
 
+@view_config(route_name='amendment_CORS_preflight', renderer='json')
+def amendment_CORS_preflight(request):
+    api_utils.raise_on_CORS_preflight(request)
+
 @view_config(route_name='create_amendment', renderer='json')
 def create_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-    api_utils.raise_on_CORS_preflight(request)
 
     # this method requires authentication
     auth_info = api_utils.authenticate(**request.params)
@@ -134,8 +137,6 @@ def create_amendment(request):
 def fetch_amendment(request):
     # NB - This method does not require authentication!
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-    api_utils.raise_on_CORS_preflight(request)
-
     api_version = request.matchdict['api_version']
     amendment_id = request.matchdict['amendment_id']
     if not AMENDMENT_ID_PATTERN.match(amendment_id):
@@ -187,8 +188,6 @@ def fetch_amendment(request):
 @view_config(route_name='update_amendment', renderer='json')
 def update_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-    api_utils.raise_on_CORS_preflight(request)
-
     api_version = request.matchdict['api_version']
     amendment_id = request.matchdict['amendment_id']
     if not AMENDMENT_ID_PATTERN.match(amendment_id):
@@ -246,8 +245,6 @@ def update_amendment(request):
 @view_config(route_name='delete_amendment', renderer='json')
 def delete_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-    api_utils.raise_on_CORS_preflight(request)
-
     api_version = request.matchdict['api_version']
     amendment_id = request.matchdict.get['amendment_id']
     if not AMENDMENT_ID_PATTERN.match(amendment_id):
