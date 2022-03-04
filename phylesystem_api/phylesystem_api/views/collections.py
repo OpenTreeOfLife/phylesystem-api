@@ -3,9 +3,10 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import (
                                     HTTPException,
                                     HTTPError,
-                                    HTTPNotFound, 
+                                    HTTPNotFound,
                                     HTTPBadRequest,
                                     HTTPInternalServerError,
+                                    HTTPNotImplemented,
                                    )
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
@@ -26,16 +27,37 @@ def _bool_arg(v):
             return False
     return v
 
-@view_config(route_name='collections_properties', renderer='json')
-def collection_properties(request):
-    pass
+@view_config(route_name='get_collections_config', renderer='json')
+def get_collections_config(request):
+    api_utils.raise_on_CORS_preflight(request)
+    docstore = api_utils.get_tree_collection_store(request)
+    return docstore.get_configuration_dict()
 
-@view_config(route_name='collections_find_trees', renderer='json')
-def find_trees(request):
-    pass
+@view_config(route_name='collections_push_failure', renderer='json')
+def collections_push_failure(request):
+    # this should find a type-specific PUSH_FAILURE file
+    api_utils.raise_on_CORS_preflight(request)
+    request.matchdict['doc_type'] = 'collection'
+    return push_failure()
+
+@view_config(route_name='list_all_collection_ids', renderer='json')
+def list_all_collection_ids(request):
+    docstore = api_utils.get_tree_collection_store(request)
+    return docstore.get_collection_ids()
+
+@view_config(route_name='collection_properties', renderer='json')
+def collection_properties(request):
+    api_utils.raise_on_CORS_preflight(request)
+    raise HTTPNotImplemented("Now we'd list all searchable properties in tree collections!")
+
+@view_config(route_name='find_trees_in_collections', renderer='json')
+def find_trees_in_collections(request):
+    api_utils.raise_on_CORS_preflight(request)
+    raise HTTPNotImplemented("Now we'd list all collections holding trees that match the criteria provided!")
 
 @view_config(route_name='find_collections', renderer='json')
 def find_collections(request):
+    api_utils.raise_on_CORS_preflight(request)
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
     # TODO: proxy to oti for a filtered list?
@@ -65,6 +87,6 @@ def find_collections(request):
     except Exception as x:
         msg = ",".join(x.args)
         raise HTTPInternalServerError(
-                body=json.dumps({"error": 1, 
+                body=json.dumps({"error": 1,
                                  "description": "Unexpected error calling oti: {}".format(msg)}))
     return json.dumps(collection_list)

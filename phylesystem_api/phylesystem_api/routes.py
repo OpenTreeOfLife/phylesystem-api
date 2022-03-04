@@ -34,8 +34,11 @@ def includeme(config):
     #
     # TREE COLLECTION ROUTES
     #
-    config.add_route('collections_properties', '/{api_version}/collections/properties')
-    config.add_route('collections_find_trees', '/{api_version}/collections/properties')
+    config.add_route('list_all_collection_ids', '/{api_version}/collections/collection_list')
+    config.add_route('get_collections_config', '/{api_version}/collections/store_config')
+    config.add_route('collections_push_failure', '/{api_version}/collections/push_failure')
+    config.add_route('collection_properties', '/{api_version}/collections/properties')
+    config.add_route('find_trees_in_collections', '/{api_version}/collections/find_trees')
     config.add_route('find_collections', '/{api_version}/collections/find_collections')
     config.add_route('create_collection', '/{api_version}/collection')
     config.add_route('collection_CORS_preflight', '/{api_version}/collection/{collection_id}', request_method='OPTIONS')
