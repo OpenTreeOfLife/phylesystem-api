@@ -26,6 +26,13 @@ def _bool_arg(v):
             return False
     return v
 
+@view_config(route_name='collections_properties', renderer='json')
+def collection_properties(request):
+    pass
+
+@view_config(route_name='collections_find_trees', renderer='json')
+def find_trees(request):
+    pass
 
 @view_config(route_name='find_collections', renderer='json')
 def find_collections(request):

@@ -83,7 +83,7 @@ def __extract_and_validate_amendment(request, kwargs):
 def amendment_CORS_preflight(request):
     api_utils.raise_on_CORS_preflight(request)
 
-@view_config(route_name='create_amendment', renderer='json')
+@view_config(route_name='create_amendment', renderer='json', request_method='POST')
 def create_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
 

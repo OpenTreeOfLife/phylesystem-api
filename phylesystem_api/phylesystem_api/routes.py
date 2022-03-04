@@ -22,8 +22,9 @@ def includeme(config):
     config.add_route('trees_in_synth', '/{api_version}/trees_in_synth')
     config.add_route('include_tree_in_synth', '/{api_version}/include_tree_in_synth')
     config.add_route('exclude_tree_from_synth', '/{api_version}/exclude_tree_from_synth')
-    #config.add_route('create_study', '/{api_version}/study/{study_id}', request_method='GET')
-    config.add_route('fetch_study', '/{api_version}/study/{study_id}', request_method='POST')
+    #config.add_route('create_study', '/{api_version}/study')
+    config.add_route('study_CORS_preflight', '/{api_version}/study/{study_id}', request_method='OPTIONS')
+    config.add_route('fetch_study', '/{api_version}/study/{study_id}', request_method='GET')
     #config.add_route('update_study', '/{api_version}/study/{study_id}', request_method='PUT')
     #config.add_route('delete_study', '/{api_version}/study/{study_id}', request_method='DELETE')
     #config.add_route('get_study_file', '/{api_version}/study/{study_id}')
@@ -33,11 +34,14 @@ def includeme(config):
     #
     # TREE COLLECTION ROUTES
     #
+    config.add_route('collections_properties', '/{api_version}/collections/properties')
+    config.add_route('collections_find_trees', '/{api_version}/collections/properties')
     config.add_route('find_collections', '/{api_version}/collections/find_collections')
-    #config.add_route('create_collection', '/{api_version}/collection/{collection_id}', request_method='GET')
-    #config.add_route('fetch_collection', '/{api_version}/collection/{collection_id}', request_method='POST')
-    #config.add_route('update_collection', '/{api_version}/collection/{collection_id}', request_method='PUT')
-    #config.add_route('delete_collection', '/{api_version}/collection/{collection_id}', request_method='DELETE')
+    config.add_route('create_collection', '/{api_version}/collection')
+    config.add_route('collection_CORS_preflight', '/{api_version}/collection/{collection_id}', request_method='OPTIONS')
+    config.add_route('fetch_collection', '/{api_version}/collection/{collection_id}', request_method='GET')
+    config.add_route('update_collection', '/{api_version}/collection/{collection_id}', request_method='PUT')
+    config.add_route('delete_collection', '/{api_version}/collection/{collection_id}', request_method='DELETE')
     #
     # TAXONOMIC AMENDMENT ROUTES
     #
@@ -45,8 +49,8 @@ def includeme(config):
     config.add_route('list_all_amendments', '/{api_version}/amendments/list_all')
     config.add_route('get_amendments_config', '/{api_version}/amendments/store_config')
     config.add_route('amendments_push_failure', '/{api_version}/amendments/push_failure')
+    config.add_route('create_amendment', '/{api_version}/amendment')
     config.add_route('amendment_CORS_preflight', '/{api_version}/amendment/{amendment_id}', request_method='OPTIONS')
-    config.add_route('create_amendment', '/{api_version}/amendment/{amendment_id}', request_method='POST')
     config.add_route('fetch_amendment', '/{api_version}/amendment/{amendment_id}', request_method='GET')
     config.add_route('update_amendment', '/{api_version}/amendment/{amendment_id}', request_method='PUT')
     config.add_route('delete_amendment', '/{api_version}/amendment/{amendment_id}', request_method='DELETE')
