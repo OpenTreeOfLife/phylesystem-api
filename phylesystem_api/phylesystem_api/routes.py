@@ -13,25 +13,39 @@ def includeme(config):
     config.add_route('render_markdown', '/{api_version}/render_markdown')
     config.add_route('phylesystem_config', '/{api_version}/phylesystem_config')
     config.add_route('raw_study_list', '/{api_version}/study_list')
-    # study/tree routes
+    #
+    # STUDY/TREE ROUTES
+    #
     config.add_route('study_properties', '/{api_version}/studies/properties')
     config.add_route('find_studies', '/{api_version}/studies/find_studies')
     config.add_route('find_trees', '/{api_version}/studies/find_trees')
     config.add_route('trees_in_synth', '/{api_version}/trees_in_synth')
     config.add_route('include_tree_in_synth', '/{api_version}/include_tree_in_synth')
     config.add_route('exclude_tree_from_synth', '/{api_version}/exclude_tree_from_synth')
-    config.add_route('get_study', '/{api_version}/study/{study_id}')
-    """
-    config.add_route('get_study_file', '/{api_version}/study/{study_id}')
-    config.add_route('get_study_external_url', '/{api_version}/study/{study_id}')
-    config.add_route('get_study_tree', '/{api_version}/study/{study_id}')
-    config.add_route('get_study_tree_newick', '/{api_version}/study/{study_id}')
-    """
-    # tree collection routes
+    #config.add_route('create_study', '/{api_version}/study/{study_id}', request_method='GET')
+    config.add_route('fetch_study', '/{api_version}/study/{study_id}', request_method='POST')
+    #config.add_route('update_study', '/{api_version}/study/{study_id}', request_method='PUT')
+    #config.add_route('delete_study', '/{api_version}/study/{study_id}', request_method='DELETE')
+    #config.add_route('get_study_file', '/{api_version}/study/{study_id}')
+    #config.add_route('get_study_external_url', '/{api_version}/study/{study_id}')
+    #config.add_route('get_study_tree', '/{api_version}/study/{study_id}')
+    #config.add_route('get_study_tree_newick', '/{api_version}/study/{study_id}')
+    #
+    # TREE COLLECTION ROUTES
+    #
     config.add_route('find_collections', '/{api_version}/collections/find_collections')
-    # taxonomic amendment routes
+    #config.add_route('create_collection', '/{api_version}/collection/{collection_id}', request_method='GET')
+    #config.add_route('fetch_collection', '/{api_version}/collection/{collection_id}', request_method='POST')
+    #config.add_route('update_collection', '/{api_version}/collection/{collection_id}', request_method='PUT')
+    #config.add_route('delete_collection', '/{api_version}/collection/{collection_id}', request_method='DELETE')
+    #
+    # TAXONOMIC AMENDMENT ROUTES
+    #
     config.add_route('list_all_amendment_ids', '/{api_version}/amendments/amendment_list')
     config.add_route('list_all_amendments', '/{api_version}/amendments/list_all')
     config.add_route('get_amendments_config', '/{api_version}/amendments/store_config')
     config.add_route('amendments_push_failure', '/{api_version}/amendments/push_failure')
-    config.add_route('get_amendment', '/{api_version}/amendment/{amendment_id}')
+    config.add_route('create_amendment', '/{api_version}/amendment/{amendment_id}', request_method='POST')
+    config.add_route('fetch_amendment', '/{api_version}/amendment/{amendment_id}', request_method='GET')
+    config.add_route('update_amendment', '/{api_version}/amendment/{amendment_id}', request_method='PUT')
+    config.add_route('delete_amendment', '/{api_version}/amendment/{amendment_id}', request_method='DELETE')
