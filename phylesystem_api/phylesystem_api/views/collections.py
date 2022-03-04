@@ -8,8 +8,10 @@ from pyramid.httpexceptions import (
                                     HTTPInternalServerError,
                                     HTTPNotImplemented,
                                    )
+from peyotl.nexson_syntax import read_as_json
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
+import os
 import json
 
 def _init(request, response):
@@ -38,7 +40,17 @@ def collections_push_failure(request):
     # this should find a type-specific PUSH_FAILURE file
     api_utils.raise_on_CORS_preflight(request)
     request.matchdict['doc_type'] = 'collection'
-    return push_failure()
+    fail_file = api_utils.get_failed_push_filepath(request)
+    if os.path.exists(fail_file):
+        try:
+            blob = read_as_json(fail_file)
+        except:
+            blob = {'message': 'could not read push fail file'}
+        blob['pushes_succeeding'] = False
+    else:
+        blob = {'pushes_succeeding': True}
+    blob['doc_type'] = request.matchdict['doc_type']
+    return blob
 
 @view_config(route_name='list_all_collection_ids', renderer='json')
 def list_all_collection_ids(request):
@@ -89,4 +101,4 @@ def find_collections(request):
         raise HTTPInternalServerError(
                 body=json.dumps({"error": 1,
                                  "description": "Unexpected error calling oti: {}".format(msg)}))
-    return json.dumps(collection_list)
+    return collection_list
