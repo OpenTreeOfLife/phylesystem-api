@@ -183,6 +183,7 @@ def update_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
     auth_info = api_utils.authenticate(**request.params)
+    owner_id = auth_info.get('login', None)
 
     api_version = request.matchdict['api_version']
     collection_id = request.matchdict['collection_id']
@@ -248,6 +249,7 @@ def delete_collection(request):
 
     # remove this collection from the docstore
     auth_info = api_utils.authenticate(**request.params)
+    owner_id = auth_info.get('login', None)
     docstore = api_utils.get_tree_collection_store(request)
     parent_sha = request.params.get('starting_commit_SHA')
     if parent_sha is None:
