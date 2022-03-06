@@ -21,6 +21,14 @@ import logging
 import json
 import os
 
+#_GLOG = get_logger(None, 'api_utils')
+try:
+    from open_tree_tasks import call_http_json
+    #_GLOG.debug('call_http_json imported')
+except:
+    call_http_json = None
+    #_GLOG.debug('call_http_json was not imported from open_tree_tasks')
+
 
 # this will be updated by config below; start safe by default
 READ_ONLY_MODE = True
@@ -535,3 +543,15 @@ def raise_if_read_only():
         raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     return True
 
+def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
+    raise_if_read_only()
+    # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    if call_http_json is not None:
+        # Pass the resource_id in data, so that two-part collection IDs will be recognized
+        # (else the second part will trigger an unwanted JSONP response from the push)
+        url = api_utils.compose_push_to_github_url(request, resource_id=None)
+        auth_token = copy.copy(request.params.get('auth_token'))
+        data = {'doc_type': doc_type, 'resource_id': resource_id}
+        if auth_token is not None:
+            data['auth_token'] = auth_token
+        call_http_json.delay(url=url, verb='PUT', data=data)

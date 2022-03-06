@@ -188,7 +188,7 @@ def include_tree_in_synth(request):
         # check for 'merge needed'?
         mn = commit_return.get('merge_needed')
         if (mn is not None) and (not mn):
-            __deferred_push_to_gh_call(request, default_collection_id, doc_type='collection', **kwargs)
+            api_utils.deferred_push_to_gh_call(request, default_collection_id, doc_type='collection', **kwargs)
 
     # fetch and return the updated list of synth-input trees
     return trees_in_synth(kwargs)
@@ -240,7 +240,7 @@ def exclude_tree_from_synth(request):
             # check for 'merge needed'?
             mn = commit_return.get('merge_needed')
             if (mn is not None) and (not mn):
-                __deferred_push_to_gh_call(request, coll_id, doc_type='collection', **kwargs)
+                api_utils.deferred_push_to_gh_call(request, coll_id, doc_type='collection', **kwargs)
 
     # fetch and return the updated list of synth-input trees
     return trees_in_synth(kwargs)
@@ -277,16 +277,3 @@ def check_not_read_only():
         raise HTTP(403, anyjson.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     return True
 
-def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
-    if not check_not_read_only():
-        raise HTTP(500, "should raise from check_not_read_only")
-    # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    if call_http_json is not None:
-        # Pass the resource_id in data, so that two-part collection IDs will be recognized
-        # (else the second part will trigger an unwanted JSONP response from the push)
-        url = api_utils.compose_push_to_github_url(request, resource_id=None)
-        auth_token = copy.copy(kwargs.get('auth_token'))
-        data = {'doc_type': doc_type, 'resource_id': resource_id}
-        if auth_token is not None:
-            data['auth_token'] = auth_token
-        call_http_json.delay(url=url, verb='PUT', data=data)

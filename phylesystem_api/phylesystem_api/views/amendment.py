@@ -15,22 +15,6 @@ import json
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
 
-def _init(request, response):
-    response.view = 'generic.json'
-    # CORS support for cross-domain API requests (from anywhere)
-    response.headers['Access-Control-Allow-Origin'] = "*"
-    response.headers['Access-Control-Allow-Credentials'] = 'true'
-    return OTI(oti=api_utils.get_oti_domain(request))
-
-def _bool_arg(v):
-    if isinstance(v, str):
-        u = v.upper()
-        if u in ['TRUE', 'YES']:
-            return True
-        if u in ['FALSE', 'NO']:
-            return False
-    return v
-
 def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
     """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
     json_obj = None
@@ -79,6 +63,7 @@ def __extract_and_validate_amendment(request, kwargs):
         raise HTTPBadRequest(body=msg)
     return amendment_obj, errors, amendment_adaptor
 
+@view_config(route_name='create_amendment', renderer='json', request_method='OPTIONS')
 @view_config(route_name='amendment_CORS_preflight', renderer='json')
 def amendment_CORS_preflight(request):
     api_utils.raise_on_CORS_preflight(request)
@@ -125,7 +110,7 @@ def create_amendment(request):
     if commit_return['error'] != 0:
         # _LOG.debug('add_new_amendment failed with error code')
         raise HTTPBadRequest(body=json.dumps(commit_return))
-    __deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', **request.params)
+    api_utils.deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', **request.params)
     return commit_return
 
 
@@ -233,7 +218,7 @@ def update_amendment(request):
     # check for 'merge needed'?
     mn = commit_return.get('merge_needed')
     if (mn is not None) and (not mn):
-        __deferred_push_to_gh_call(request, amendment_id, doc_type='amendment', **request.params)
+        api_utils.deferred_push_to_gh_call(request, amendment_id, doc_type='amendment', **request.params)
     return commit_return
 
 
@@ -274,7 +259,7 @@ def delete_amendment(request):
                                       parent_sha,
                                       commit_msg=commit_msg)
         if x.get('error') == 0:
-            __deferred_push_to_gh_call(request, None, doc_type='amendment', **request.params)
+            api_utils.deferred_push_to_gh_call(request, None, doc_type='amendment', **request.params)
         return x
     except GitWorkflowError as err:
         raise HTTPBadRequest(body=err.msg)
