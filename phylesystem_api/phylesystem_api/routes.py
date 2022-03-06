@@ -22,15 +22,15 @@ def includeme(config):
     config.add_route('trees_in_synth', '/{api_version}/trees_in_synth')
     config.add_route('include_tree_in_synth', '/{api_version}/include_tree_in_synth')
     config.add_route('exclude_tree_from_synth', '/{api_version}/exclude_tree_from_synth')
-    #config.add_route('create_study', '/{api_version}/study')
+    config.add_route('create_study', '/{api_version}/study')
     config.add_route('study_CORS_preflight', '/{api_version}/study/{study_id}', request_method='OPTIONS')
     config.add_route('fetch_study', '/{api_version}/study/{study_id}', request_method='GET')
-    #config.add_route('update_study', '/{api_version}/study/{study_id}', request_method='PUT')
-    #config.add_route('delete_study', '/{api_version}/study/{study_id}', request_method='DELETE')
-    #config.add_route('get_study_file', '/{api_version}/study/{study_id}')
-    #config.add_route('get_study_external_url', '/{api_version}/study/{study_id}')
-    #config.add_route('get_study_tree', '/{api_version}/study/{study_id}')
-    #config.add_route('get_study_tree_newick', '/{api_version}/study/{study_id}')
+    config.add_route('update_study', '/{api_version}/study/{study_id}', request_method='PUT')
+    config.add_route('delete_study', '/{api_version}/study/{study_id}', request_method='DELETE')
+    config.add_route('get_study_file', '/{api_version}/study/{study_id}')
+    config.add_route('get_study_external_url', '/{api_version}/study/{study_id}')
+    config.add_route('get_study_tree', '/{api_version}/study/{study_id}')
+    config.add_route('get_study_tree_newick', '/{api_version}/study/{study_id}')
     #
     # TREE COLLECTION ROUTES
     #
