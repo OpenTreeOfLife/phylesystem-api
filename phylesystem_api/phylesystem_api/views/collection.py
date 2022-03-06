@@ -4,7 +4,7 @@ from pyramid.httpexceptions import (
                                     HTTPException,
                                     HTTPOk,
                                     HTTPError,
-                                    HTTPNotFound, 
+                                    HTTPNotFound,
                                     HTTPBadRequest,
                                     HTTPInternalServerError,
                                    )
@@ -44,8 +44,8 @@ def __extract_and_validate_collection(request, kwargs):
         raise HTTPBadRequest(msg)
     return collection_obj, errors, collection_adaptor
 
-@view_config(route_name='collection_CORS_preflight', renderer='json')
 @view_config(route_name='create_collection', renderer='json', request_method='OPTIONS')
+@view_config(route_name='collection_CORS_preflight', renderer='json')
 def collection_CORS_preflight(request):
     api_utils.raise_on_CORS_preflight(request)
 
@@ -62,8 +62,8 @@ def create_collection(request):
 
     api_utils.raise_if_read_only()
 
-    # fetch and parse the JSON payload, if any 
-    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, kwargs)
+    # fetch and parse the JSON payload, if any
+    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.params)
     if (amendment_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.method) }))
 
@@ -88,17 +88,17 @@ def create_collection(request):
             assert collection_id.split('/')[0] == owner_id
         except:
             # _LOG.exception('{} failed'.format(request.env.request_method))
-            raise HTTP(404, json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
 
     # Create a new collection with the data provided
     auth_info = auth_info or api_utils.authenticate(**request.params)
     # submit the json and proposed id (if any), and read the results
     docstore = api_utils.get_tree_collection_store(request)
     try:
-        r = docstore.add_new_collection(owner_id, 
-                                        collection_obj, 
+        r = docstore.add_new_collection(owner_id,
+                                        collection_obj,
                                         auth_info,
-                                        collection_id, 
+                                        collection_id,
                                         commit_msg=commit_msg)
         new_collection_id, commit_return = r
     except GitWorkflowError as err:
@@ -108,14 +108,161 @@ def create_collection(request):
     if commit_return['error'] != 0:
         # _LOG.debug('add_new_collection failed with error code')
         raise HTTPBadRequest(json.dumps(commit_return))
-    api_utils.deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **kwargs)
+    api_utils.deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **request.params)
     return commit_return
 
-@view_config(route_name='create_collection', renderer='json', request_method='POST')
-def create_collection(request):
-    pass
-"""
-fetch_collection
-update_collection
-delete_collection
-"""
+@view_config(route_name='fetch_collection', renderer='json')
+def fetch_collection(request):
+    # NB - This method does not require authentication!
+    # _LOG = api_utils.get_logger(request, 'ot_api.collection')
+    api_version = request.matchdict['api_version']
+    collection_id = request.matchdict['collection_id']
+    if not COLLECTION_ID_PATTERN.match(collection_id):
+        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid collection ID ({}) provided".format(collection_id)}))
+
+    # gather details to return with the JSON core document
+    version_history = None
+    comment_html = None
+    parent_sha = request.params.get('starting_commit_SHA', None)
+    # _LOG.debug('parent_sha = {}'.format(parent_sha))
+    # return the correct nexson of study_id, using the specified view
+    collections = api_utils.get_tree_collection_store(request)
+    try:
+        r = collections.return_doc(collection_id, commit_sha=parent_sha, return_WIP_map=True)
+    except:
+        # _LOG.exception('GET failed')
+        raise HTTPNotFound(body=json.dumps({"error": 1, "description": "Collection '{}' GET failure".format(collection_id)}))
+    try:
+        collection_json, head_sha, wip_map = r
+        ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
+        version_history = collections.get_version_history_for_doc_id(collection_id)
+        try:
+            # pre-render internal description (assumes markdown!)
+            comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True )
+        except:
+            comment_html = ''
+    except:
+        # _LOG.exception('GET failed')
+        e = sys.exc_info()[0]
+        raise HTTPBadRequest(e)
+    if not collection_json:
+        raise HTTPNotFound(body="Collection '{s}' has no JSON data!".format(s=collection_id))
+    # add/restore the url field (using the visible fetch URL)
+    base_url = api_utils.get_collections_api_base_url(request)
+    collection_json['url'] = '{b}/v2/collection/{i}'.format(b=base_url,
+                                                        i=collection_id)
+    try:
+        external_url = collections.get_public_url(collection_id)
+    except:
+        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        # _LOG.exception('collection {} not found in external_url'.format(collection))
+        external_url = 'NOT FOUND'
+    result = {'sha': head_sha,
+             'data': collection_json,
+             'branch2sha': wip_map,
+             'commentHTML': comment_html,
+             'external_url': external_url,
+             }
+    if version_history:
+        result['versionHistory'] = version_history
+
+        # reckon and add 'lastModified' property, based on commit history?
+        latest_commit = version_history[0]
+        last_modified = {
+            'author_name': latest_commit.get('author_name'),
+            'relative_date': latest_commit.get('relative_date'),
+            'display_date': latest_commit.get('date'),
+            'ISO_date': latest_commit.get('date_ISO_8601'),
+            'sha': latest_commit.get('id')  # this is the commit hash
+        }
+        result['lastModified'] = last_modified
+    return result
+
+@view_config(route_name='update_collection', renderer='json')
+def update_collection(request):
+    # _LOG = api_utils.get_logger(request, 'ot_api.collection')
+    # NB - This method requires authentication!
+    auth_info = api_utils.authenticate(**request.params)
+
+    api_version = request.matchdict['api_version']
+    collection_id = request.matchdict['collection_id']
+    if not COLLECTION_ID_PATTERN.match(collection_id):
+        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid collection ID ({}) provided".format(collection_id)}))
+
+    try:
+        commit_msg = request.params.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+
+    api_utils.raise_if_read_only()
+
+    # submit new json for this id, and read the results
+    parent_sha = request.params.get('starting_commit_SHA', None)
+    merged_sha = None  #TODO: request.params.get('???', None)
+    docstore = api_utils.get_tree_collection_store(request)
+    try:
+        r = docstore.update_existing_collection(owner_id,
+                                                collection_id,
+                                                collection_obj,
+                                                auth_info,
+                                                parent_sha,
+                                                merged_sha,
+                                                commit_msg=commit_msg)
+        commit_return = r
+    except GitWorkflowError as err:
+        raise HTTPBadRequest(err.msg)
+    except:
+        raise HTTPBadRequest(traceback.format_exc())
+
+    # check for 'merge needed'?
+    mn = commit_return.get('merge_needed')
+    if (mn is not None) and (not mn):
+        api_utils.deferred_push_to_gh_call(request, collection_id, doc_type='collection', **request.params)
+    # Add updated commit history to the blob
+    commit_return['versionHistory'] = docstore.get_version_history_for_doc_id(collection_id)
+    return commit_return
+
+@view_config(route_name='delete_collection', renderer='json')
+def delete_collection(request):
+    # _LOG = api_utils.get_logger(request, 'ot_api.collection')
+    # NB - This method requires authentication!
+    auth_info = api_utils.authenticate(**request.params)
+
+    api_version = request.matchdict['api_version']
+    collection_id = request.matchdict['collection_id']
+    if not COLLECTION_ID_PATTERN.match(collection_id):
+        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid collection ID ({}) provided".format(collection_id)}))
+
+    try:
+        commit_msg = request.params.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+
+    api_utils.raise_if_read_only()
+
+    # remove this collection from the docstore
+    auth_info = api_utils.authenticate(**request.params)
+    docstore = api_utils.get_tree_collection_store(request)
+    parent_sha = request.params.get('starting_commit_SHA')
+    if parent_sha is None:
+        raise HTTPBadRequest('Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+    try:
+        x = docstore.delete_collection(collection_id,
+                                       auth_info,
+                                       parent_sha,
+                                       commit_msg=commit_msg)
+        if x.get('error') == 0:
+            api_utils.deferred_push_to_gh_call(request, None, doc_type='collection', **request.params)
+        return x
+    except GitWorkflowError as err:
+        raise HTTPBadRequest(err.msg)
+    except:
+        # _LOG.exception('Unknown error in collection deletion')
+        # raise HTTPBadRequest(traceback.format_exc())
+        raise HTTPBadRequest(json.dumps({"error": 1, "description": 'Unknown error in collection deletion'}))
