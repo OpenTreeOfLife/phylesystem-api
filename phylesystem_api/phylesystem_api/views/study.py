@@ -41,6 +41,9 @@ def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
+        # sometimes we need to tweak the incoming kwargs, so let's 
+        # make a mutable MultiDict copy of Pyramid's immutable NestedMultiDict
+        kwargs = kwargs.copy()
         msg = None
         if 'output_nexml2json' not in kwargs:
             kwargs['output_nexml2json'] = '0.0.0'
@@ -73,41 +76,36 @@ def fetch_study(request):
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
     returning_full_study = False
-    #content_id = None
+    content_id = None
     version_history = None
     comment_html = None
     final_path_part = request.path.split('/')[-1]
     # does this look like a filename? if so, grab its extension
     try: 
         request_extension = final_path_part.split('.')[1]
+        if request_extension not in('html', 'json'): 
+            request_extension = '.{}'.format(request_extension)
     except IndexError:
         request_extension = None
-    if request_extension not in('html', 'json'):
-        type_ext = '.{}'.format(request_extension)
-    else:
-        type_ext = None
     out_schema = __validate_output_nexml2json(request.params,
                                               'study',
-                                              type_ext,
+                                              request_extension,
                                               content_id=content_id)
-
-
-
-    parent_sha = kwargs.get('starting_commit_SHA')
+    parent_sha = request.params.get('starting_commit_SHA')
     # _LOG.debug('parent_sha = {}'.format(parent_sha))
     # return the correct nexson of study_id, using the specified view
     phylesystem = api_utils.get_phylesystem(request)
     try:
-        r = phylesystem.return_study(resource_id, commit_sha=parent_sha, return_WIP_map=True)
+        r = phylesystem.return_study(study_id, commit_sha=parent_sha, return_WIP_map=True)
     except:
         # _LOG.exception('GET failed')
-        raise HTTP(404, json.dumps({"error": 1, "description": 'Study #%s GET failure' % resource_id}))
+        raise HTTPNotFound(body=json.dumps({"error": 1, "description": 'Study #%s GET failure' % study_id}))
     try:
         study_nexson, head_sha, wip_map = r
         if returning_full_study:
-            blob_sha = phylesystem.get_blob_sha_for_study_id(resource_id, head_sha)
+            blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
             phylesystem.add_validation_annotation(study_nexson, blob_sha)
-            version_history = phylesystem.get_version_history_for_study_id(resource_id)
+            version_history = phylesystem.get_version_history_for_study_id(study_id)
             try:
                 comment_html = _markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
             except:
@@ -136,13 +134,13 @@ def fetch_study(request):
         except KeyError:
             study_DOI = None
         try:
-            duplicate_study_ids = _fetch_duplicate_study_ids(study_DOI, resource_id)
+            duplicate_study_ids = _fetch_duplicate_study_ids(study_DOI, study_id)
         except:
             # _LOG.exception('call to OTI check for duplicate DOIs failed')
             duplicate_study_ids = None
 
         try:
-            shard_name = _fetch_shard_name(resource_id)
+            shard_name = _fetch_shard_name(study_id)
         except:
             # _LOG.exception('check for shard name failed')
             shard_name = None
