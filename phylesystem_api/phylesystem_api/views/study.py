@@ -10,15 +10,14 @@ from pyramid.httpexceptions import (
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
 import json
+from peyotl.phylesystem.git_workflows import GitWorkflowError, \
+                                             validate_and_convert_nexson
 from peyotl.nexson_syntax import get_empty_nexson, \
                                  extract_supporting_file_messages, \
                                  PhyloSchema, \
                                  read_as_json, \
                                  BY_ID_HONEY_BADGERFISH
 from peyotl.external import import_nexson_from_treebase
-
-def _raise400(msg):
-    raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
 
 def _init(request, response):
     response.view = 'generic.json'
@@ -127,7 +126,7 @@ def fetch_study(request):
         except:
             msg = "Exception in coercing to the required NexSON version for validation. "
             # _LOG.exception(msg)
-            raise HTTP(400, msg)
+            raise HTTPBadRequest(msg)
     if returning_full_study and out_schema.is_json():
         try:
             study_DOI = study_nexson['nexml']['^ot:studyPublication']['@href']
@@ -167,6 +166,22 @@ def study_CORS_preflight(request):
 
 @view_config(route_name='create_study', renderer='json', request_method='POST')
 def create_study(request):
+    api_version = request.matchdict['api_version']
+
+    # this method requires authentication
+    auth_info = api_utils.authenticate(**request.params)
+
+    # gather any user-provided git-commit message
+    try:
+        commit_msg = request.params.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+
+    api_utils.raise_if_read_only()
+
     phylesystem = api_utils.get_phylesystem(request)
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     repo_nexml2json = phylesystem.repo_nexml2json
@@ -174,17 +189,93 @@ def create_study(request):
 
 @view_config(route_name='update_study', renderer='json')
 def update_study(request):
+    api_version = request.matchdict['api_version']
+    study_id = request.matchdict.get['study_id']
+
+    # this method requires authentication
+    auth_info = api_utils.authenticate(**request.params)
+
+    parent_sha = request.params.get('starting_commit_SHA')
+    if parent_sha is None:
+        raise HTTPBadRequest('Expecting a "starting_commit_SHA" argument with the SHA of the parent')
+    master_file_blob_included = request.params.get('merged_SHA')
+
+    # gather any user-provided git-commit message
+    try:
+        commit_msg = request.params.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+
+    api_utils.raise_if_read_only()
+
     phylesystem = api_utils.get_phylesystem(request)
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     repo_nexml2json = phylesystem.repo_nexml2json
-    pass
+    bundle = __extract_and_validate_nexson(request,
+                                           repo_nexml2json,
+                                           request.params)
+    nexson, annotation, nexson_adaptor = bundle
+    try:
+        gd = phylesystem.create_git_action(study_id)
+    except KeyError, err:
+        # _LOG.debug('PUT failed in create_git_action (probably a bad study ID)')
+        raise HTTPBadRequest("invalid study ID, please check the URL")
+    try:
+        blob = __finish_write_verb(phylesystem,
+                                   gd,
+                                   nexson=nexson,
+                                   resource_id=study_id,
+                                   auth_info=auth_info,
+                                   adaptor=nexson_adaptor,
+                                   annotation=annotation,
+                                   parent_sha=parent_sha,
+                                   commit_msg=commit_msg,
+                                   master_file_blob_included=master_file_blob_included)
+    except GitWorkflowError, err:
+        # _LOG.exception('PUT failed in __finish_write_verb')
+        raise HTTPBadRequest(err.msg)
+    #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
+    mn = blob.get('merge_needed')
+    if (mn is not None) and (not mn):
+        __deferred_push_to_gh_call(request, study_id, doc_type='nexson', **request.params)
+    # Add updated commit history to the blob
+    blob['versionHistory'] = phylesystem.get_version_history_for_study_id(study_id)
+    return blob
+
 
 @view_config(route_name='delete_study', renderer='json')
 def delete_study(request):
+    api_version = request.matchdict['api_version']
+    study_id = request.matchdict.get['study_id']
+
+    # this method requires authentication
+    auth_info = api_utils.authenticate(**request.params)
+
+    # gather any user-provided git-commit message
+    try:
+        commit_msg = request.params.get('commit_msg','')
+        if commit_msg.strip() == '':
+            # git rejects empty commit messages
+            commit_msg = None
+    except:
+        commit_msg = None
+
+    api_utils.raise_if_read_only()
+
     phylesystem = api_utils.get_phylesystem(request)
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
-    repo_nexml2json = phylesystem.repo_nexml2json
-    pass
+    try:
+        x = phylesystem.delete_study(study_id, auth_info, parent_sha, commit_msg=commit_msg)
+        if x.get('error') == 0:
+            __deferred_push_to_gh_call(request, None, doc_type='nexson', **request.params)
+        return x
+    except GitWorkflowError as err:
+        raise HTTPBadRequest(err.msg)
+    except:
+        # _LOG.exception('Exception getting nexson content in phylesystem.delete_study')
+        raise HTTPBadRequest(json.dumps({"error": 1, "description": 'Unknown error in study deletion'}))
 
 @view_config(route_name='get_study_file', renderer='json')
 def get_study_file(request):
