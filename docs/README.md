@@ -131,11 +131,14 @@ Or equivalently, (after v2 has been it is deployed to the dev server):
 *   The `output_nexml2json` arg specifies the version of the NeXML -> NexSON 
 mapping to be used. See [the NexSON wiki](https://github.com/OpenTreeOfLife/api.opentreeoflife.org/wiki/HoneyBadgerFish)
 for details. Currently the only supported values are:
-  *  0.0.0  badgerfish convention
-  *  1.0.0  the first version of the "honey badgerfish" convention
-  *  1.2.1  the "by ID" version of the "honey badgerfish" convention
-The default for this parameter is 0.0.0, but this is subject to change.
-Consider the call without the output_nexml2json argument to be brittle!
+
+    *  0.0.0  badgerfish convention
+    *  1.0.0  the first version of the "honey badgerfish" convention
+    *  1.2.1  the "by ID" version of the "honey badgerfish" convention
+
+    The default for this parameter is 0.0.0, but this is subject to change.
+    Consider the call without the output_nexml2json argument to be brittle!
+
 *   `starting_commit_SHA` This is optional 
 which will return the version of the study from a specific commit sha.
 If no `starting_commit_SHA` is given, GET will return study from master.
