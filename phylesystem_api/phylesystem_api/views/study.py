@@ -86,11 +86,20 @@ def fetch_study(request):
             request_extension = '.{}'.format(request_extension)
     except IndexError:
         request_extension = None
-    out_schema = __validate_output_nexml2json(request.params,
+    try:
+        json_data = request.json_body
+    except:
+        # no JSON payload provided
+        json_data = {}
+    out_schema = __validate_output_nexml2json(json_data,
                                               'study',
                                               request_extension,
                                               content_id=content_id)
-    parent_sha = request.params.get('starting_commit_SHA')
+    try:
+        parent_sha = request.json_body.get('starting_commit_SHA', None)
+    except:
+        # probably a simple request w/o JSON payload
+        parent_sha = None
     # _LOG.debug('parent_sha = {}'.format(parent_sha))
     # return the correct nexson of study_id, using the specified view
     phylesystem = api_utils.get_phylesystem(request)
@@ -169,11 +178,11 @@ def create_study(request):
     api_version = request.matchdict['api_version']
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.params)
+    auth_info = api_utils.authenticate(**request.json_body)
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = request.params.get('commit_msg','')
+        commit_msg = request.json_body.get('commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -182,10 +191,122 @@ def create_study(request):
 
     api_utils.raise_if_read_only()
 
+    # we're creating a new study (possibly with import instructions in the payload)
+    import_from_location = request.json_body.get('import_from_location', '')
+    treebase_id = request.json_body.get('treebase_id', '')
+    nexml_fetch_url = request.json_body.get('nexml_fetch_url', '')
+    nexml_pasted_string = request.json_body.get('nexml_pasted_string', '')
+    publication_doi = request.json_body.get('publication_DOI', '')
+    # if a URL or something other than a valid DOI was entered, don't submit it to crossref API
+    publication_doi_for_crossref = __make_valid_DOI(publication_doi) or None
+    publication_ref = request.json_body.get('publication_reference', '')
+    # is the submitter explicity applying the CC0 waiver to a new study?
+    cc0_agreement = (request.json_body.get('chosen_license', '') == 'apply-new-CC0-waiver' and
+                     request.json_body.get('cc0_agreement', '') == 'true')
+    # look for the chosen import method, e.g,
+    # 'import-method-PUBLICATION_DOI' or 'import-method-MANUAL_ENTRY'
+    import_method = request.json_body.get('import_method', '')
+    ##dryad_DOI = request.json_body.get('dryad_DOI', '')
+
+    # Create initial study NexSON using the chosen import method.
+    #
+    # N.B. We're currently using a streamlined creation path with just
+    # two methods (TreeBASE ID and publication DOI). But let's keep the
+    # logic for others, just in case we revert based on user feedback.
+    importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
+    importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
+    importing_from_post_arg = (import_method == 'import-method-POST')
+    importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)
+    importing_from_crossref_API = (import_method == 'import-method-PUBLICATION_DOI' and publication_doi_for_crossref) or \
+                                  (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
+
+    # Are they using an existing license or waiver (CC0, CC-BY, something else?)
+    using_existing_license = (request.json_body.get('chosen_license', '') == 'study-data-has-existing-license')
+
+    # any of these methods should returna parsed NexSON dict (vs. string)
+    if importing_from_treebase_id:
+        # make sure the treebase ID is an integer
+        treebase_id = "".join(treebase_id.split())  # remove all whitespace
+        treebase_id = treebase_id.lstrip('S').lstrip('s')  # allow for possible leading 'S'?
+        try:
+            treebase_id = int(treebase_id)
+        except ValueError as e:
+            raise HTTPBadRequest(json.dumps({
+                "error": 1,
+                "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s" % (treebase_id, e.message)
+            }))
+        try:
+            new_study_nexson = import_nexson_from_treebase(treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH)
+        except Exception as e:
+            raise HTTPInternalServerError(json.dumps({
+                "error": 1,
+                "description": "Unexpected error parsing the file obtained from TreeBASE. Please report this bug to the Open Tree of Life developers."
+            }))
+    elif importing_from_crossref_API:
+        new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi_for_crossref, ref_string=publication_ref, include_cc0=cc0_agreement)
+    elif importing_from_post_arg:
+        bundle = __extract_and_validate_nexson(request,
+                                               repo_nexml2json,
+                                               request.json_body)
+        new_study_nexson = bundle[0]
+    else:   # assumes 'import-method-MANUAL_ENTRY', or insufficient args above
+        new_study_nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=cc0_agreement)
+        if publication_doi:
+            # submitter entered an invalid DOI (or other URL); add it now
+            new_study_nexson['nexml'][u'^ot:studyPublication'] = {'@href': publication_doi}
+
+    nexml = new_study_nexson['nexml']
+
+    if not importing_from_post_arg:
+        # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
+        if cc0_agreement:
+            nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+        elif using_existing_license:
+            existing_license = request.json_body.get('alternate_license', '')
+            if existing_license == 'CC-0':
+                nexml['^xhtml:license'] = {'@name': 'CC0', '@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
+                pass
+            elif existing_license == 'CC-BY-2.0':
+                nexml['^xhtml:license'] = {'@name': 'CC-BY 2.0', '@href': 'http://creativecommons.org/licenses/by/2.0/'}
+                pass
+            elif existing_license == 'CC-BY-2.5':
+                nexml['^xhtml:license'] = {'@name': 'CC-BY 2.5', '@href': 'http://creativecommons.org/licenses/by/2.5/'}
+                pass
+            elif existing_license == 'CC-BY-3.0':
+                nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
+                pass
+            # NOTE that we don't offer CC-BY 4.0, which is problematic for data
+            elif existing_license == 'CC-BY':
+                # default to version 3, if not specified. 
+                nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
+                pass
+            else:  # assume it's something else
+                alt_license_name = request.json_body.get('alt_license_name', '')
+                alt_license_url = request.json_body.get('alt_license_URL', '')
+                # OK to add a name here? mainly to capture submitter's intent
+                nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
+
+    nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
+
     phylesystem = api_utils.get_phylesystem(request)
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     repo_nexml2json = phylesystem.repo_nexml2json
-    pass
+    new_study_id = None  # TODO: should we ever specify an ID here?
+    try:
+        r = phylesystem.ingest_new_study(new_study_nexson,
+                                         repo_nexml2json,
+                                         auth_info,
+                                         new_study_id)
+        new_resource_id, commit_return = r
+    except GitWorkflowError as err:
+        raise HTTPBadRequest(err.msg)
+    except:
+        raise HTTPBadRequest(traceback.format_exc())
+    if commit_return['error'] != 0:
+        # _LOG.debug('ingest_new_study failed with error code')
+        raise HTTPBadRequest(json.dumps(commit_return))
+    __deferred_push_to_gh_call(request, new_resource_id, doc_type='nexson', **request.json_body)
+    return commit_return
+
 
 @view_config(route_name='update_study', renderer='json')
 def update_study(request):
@@ -193,16 +314,16 @@ def update_study(request):
     study_id = request.matchdict.get['study_id']
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.params)
+    auth_info = api_utils.authenticate(**request.json_body)
 
-    parent_sha = request.params.get('starting_commit_SHA')
+    parent_sha = request.json_body.get('starting_commit_SHA')
     if parent_sha is None:
         raise HTTPBadRequest('Expecting a "starting_commit_SHA" argument with the SHA of the parent')
-    master_file_blob_included = request.params.get('merged_SHA')
+    master_file_blob_included = request.json_body.get('merged_SHA')
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = request.params.get('commit_msg','')
+        commit_msg = request.json_body.get('commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -216,11 +337,11 @@ def update_study(request):
     repo_nexml2json = phylesystem.repo_nexml2json
     bundle = __extract_and_validate_nexson(request,
                                            repo_nexml2json,
-                                           request.params)
+                                           request.json_body)
     nexson, annotation, nexson_adaptor = bundle
     try:
         gd = phylesystem.create_git_action(study_id)
-    except KeyError, err:
+    except KeyError as err:
         # _LOG.debug('PUT failed in create_git_action (probably a bad study ID)')
         raise HTTPBadRequest("invalid study ID, please check the URL")
     try:
@@ -234,13 +355,13 @@ def update_study(request):
                                    parent_sha=parent_sha,
                                    commit_msg=commit_msg,
                                    master_file_blob_included=master_file_blob_included)
-    except GitWorkflowError, err:
+    except GitWorkflowError as err:
         # _LOG.exception('PUT failed in __finish_write_verb')
         raise HTTPBadRequest(err.msg)
     #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
     mn = blob.get('merge_needed')
     if (mn is not None) and (not mn):
-        __deferred_push_to_gh_call(request, study_id, doc_type='nexson', **request.params)
+        __deferred_push_to_gh_call(request, study_id, doc_type='nexson', **request.json_body)
     # Add updated commit history to the blob
     blob['versionHistory'] = phylesystem.get_version_history_for_study_id(study_id)
     return blob
@@ -252,11 +373,11 @@ def delete_study(request):
     study_id = request.matchdict.get['study_id']
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.params)
+    auth_info = api_utils.authenticate(**request.json_body)
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = request.params.get('commit_msg','')
+        commit_msg = request.json_body.get('commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -269,7 +390,7 @@ def delete_study(request):
     try:
         x = phylesystem.delete_study(study_id, auth_info, parent_sha, commit_msg=commit_msg)
         if x.get('error') == 0:
-            __deferred_push_to_gh_call(request, None, doc_type='nexson', **request.params)
+            __deferred_push_to_gh_call(request, None, doc_type='nexson', **request.json_body)
         return x
     except GitWorkflowError as err:
         raise HTTPBadRequest(err.msg)

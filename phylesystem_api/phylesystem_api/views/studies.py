@@ -47,19 +47,19 @@ def find_studies(request):
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
     oti = _init(request, request.response)
-    verbose = _bool_arg(request.params.get('verbose', False))
+    verbose = _bool_arg(request.json_body.get('verbose', False))
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
-    field = request.params.get('property')
+    field = request.json_body.get('property')
     try:
         if field is None:
             match_list = oti.find_all_studies(verbose=verbose)
             resp = {'matched_studies': match_list}
         else:
-            value = request.params.get('value')
+            value = request.json_body.get('value')
             if value is None:
                 _raise400('If "property" is sent, a "value" argument must be used.')
-            exact = _bool_arg(request.params.get('exact', False))
+            exact = _bool_arg(request.json_body.get('exact', False))
             if (exact is not True) and (exact is not False):
                 _raise400('"exact" setting must be a boolean')
             try:

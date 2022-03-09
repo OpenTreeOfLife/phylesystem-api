@@ -53,7 +53,7 @@ def collection_CORS_preflight(request):
 def create_collection(request):
     # gather any user-provided git-commit message
     try:
-        commit_msg = request.params.get('commit_msg','')
+        commit_msg = request.json_body.get('commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -63,14 +63,14 @@ def create_collection(request):
     api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
-    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.params)
+    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.json_body)
     if (amendment_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.method) }))
 
     auth_info = None
     if owner_id is None:
         # set this explicitly to the logged-in userid (make sure the user is allowed!)
-        auth_info = api_utils.authenticate(**request.params)
+        auth_info = api_utils.authenticate(**request.json_body)
         owner_id = auth_info.get('login', None)
         if owner_id is None:
             raise HTTPBadRequest(json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
@@ -91,7 +91,7 @@ def create_collection(request):
             raise HTTPNotFound(body=json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
 
     # Create a new collection with the data provided
-    auth_info = auth_info or api_utils.authenticate(**request.params)
+    auth_info = auth_info or api_utils.authenticate(**request.json_body)
     # submit the json and proposed id (if any), and read the results
     docstore = api_utils.get_tree_collection_store(request)
     try:
@@ -108,7 +108,7 @@ def create_collection(request):
     if commit_return['error'] != 0:
         # _LOG.debug('add_new_collection failed with error code')
         raise HTTPBadRequest(json.dumps(commit_return))
-    api_utils.deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **request.params)
+    api_utils.deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **request.json_body)
     return commit_return
 
 @view_config(route_name='fetch_collection', renderer='json')
@@ -123,7 +123,7 @@ def fetch_collection(request):
     # gather details to return with the JSON core document
     version_history = None
     comment_html = None
-    parent_sha = request.params.get('starting_commit_SHA', None)
+    parent_sha = request.json_body.get('starting_commit_SHA', None)
     # _LOG.debug('parent_sha = {}'.format(parent_sha))
     # return the correct nexson of study_id, using the specified view
     collections = api_utils.get_tree_collection_store(request)
@@ -182,7 +182,7 @@ def fetch_collection(request):
 def update_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
-    auth_info = api_utils.authenticate(**request.params)
+    auth_info = api_utils.authenticate(**request.json_body)
     owner_id = auth_info.get('login', None)
 
     api_version = request.matchdict['api_version']
@@ -191,7 +191,7 @@ def update_collection(request):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid collection ID ({}) provided".format(collection_id)}))
 
     try:
-        commit_msg = request.params.get('commit_msg','')
+        commit_msg = request.json_body.get('commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -201,8 +201,8 @@ def update_collection(request):
     api_utils.raise_if_read_only()
 
     # submit new json for this id, and read the results
-    parent_sha = request.params.get('starting_commit_SHA', None)
-    merged_sha = None  #TODO: request.params.get('???', None)
+    parent_sha = request.json_body.get('starting_commit_SHA', None)
+    merged_sha = None  #TODO: request.json_body.get('???', None)
     docstore = api_utils.get_tree_collection_store(request)
     try:
         r = docstore.update_existing_collection(owner_id,
@@ -221,7 +221,7 @@ def update_collection(request):
     # check for 'merge needed'?
     mn = commit_return.get('merge_needed')
     if (mn is not None) and (not mn):
-        api_utils.deferred_push_to_gh_call(request, collection_id, doc_type='collection', **request.params)
+        api_utils.deferred_push_to_gh_call(request, collection_id, doc_type='collection', **request.json_body)
     # Add updated commit history to the blob
     commit_return['versionHistory'] = docstore.get_version_history_for_doc_id(collection_id)
     return commit_return
@@ -230,7 +230,7 @@ def update_collection(request):
 def delete_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
-    auth_info = api_utils.authenticate(**request.params)
+    auth_info = api_utils.authenticate(**request.json_body)
 
     api_version = request.matchdict['api_version']
     collection_id = request.matchdict['collection_id']
@@ -238,7 +238,7 @@ def delete_collection(request):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid collection ID ({}) provided".format(collection_id)}))
 
     try:
-        commit_msg = request.params.get('commit_msg','')
+        commit_msg = request.json_body.get('commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -248,10 +248,10 @@ def delete_collection(request):
     api_utils.raise_if_read_only()
 
     # remove this collection from the docstore
-    auth_info = api_utils.authenticate(**request.params)
+    auth_info = api_utils.authenticate(**request.json_body)
     owner_id = auth_info.get('login', None)
     docstore = api_utils.get_tree_collection_store(request)
-    parent_sha = request.params.get('starting_commit_SHA')
+    parent_sha = request.json_body.get('starting_commit_SHA')
     if parent_sha is None:
         raise HTTPBadRequest('Expecting a "starting_commit_SHA" argument with the SHA of the parent')
     try:
@@ -260,7 +260,7 @@ def delete_collection(request):
                                        parent_sha,
                                        commit_msg=commit_msg)
         if x.get('error') == 0:
-            api_utils.deferred_push_to_gh_call(request, None, doc_type='collection', **request.params)
+            api_utils.deferred_push_to_gh_call(request, None, doc_type='collection', **request.json_body)
         return x
     except GitWorkflowError as err:
         raise HTTPBadRequest(err.msg)
