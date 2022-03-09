@@ -11,6 +11,7 @@ from pyramid.httpexceptions import (
 from peyotl.nexson_syntax import read_as_json
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
+from phylesystem_api.api_utils import find_in_request
 import os
 import json
 

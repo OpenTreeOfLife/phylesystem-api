@@ -9,6 +9,7 @@ from pyramid.httpexceptions import (
                                    )
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
+from phylesystem_api.api_utils import find_in_request
 import json
 def _raise400(msg):
     raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
@@ -47,19 +48,19 @@ def find_studies(request):
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
     oti = _init(request, request.response)
-    verbose = _bool_arg(request.json_body.get('verbose', False))
+    verbose = _bool_arg(find_in_request('verbose', False))
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
-    field = request.json_body.get('property')
+    field = find_in_request('property', None)
     try:
         if field is None:
             match_list = oti.find_all_studies(verbose=verbose)
             resp = {'matched_studies': match_list}
         else:
-            value = request.json_body.get('value')
+            value = find_in_request('value', None)
             if value is None:
                 _raise400('If "property" is sent, a "value" argument must be used.')
-            exact = _bool_arg(request.json_body.get('exact', False))
+            exact = _bool_arg(find_in_request('exact', False))
             if (exact is not True) and (exact is not False):
                 _raise400('"exact" setting must be a boolean')
             try:

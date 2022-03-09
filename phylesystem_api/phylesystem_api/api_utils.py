@@ -555,3 +555,19 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
         if auth_token is not None:
             data['auth_token'] = auth_token
         call_http_json.delay(url=url, verb='PUT', data=data)
+
+def find_in_request(request, property_name, default_value=None, return_all_values=False):
+    """Search JSON body (if any), then try GET/POST keys"""
+    try:
+        # recommended practice is all vars in the JSON body
+        return request.json_body.get(property_name)
+    except:
+        # sometimes we allow vars from the query-string or form values
+        try:
+            # NB - request.params combines GET and POST into a shared MultiDict
+            if return_all_values:
+                return request.params.getall(property_name)
+            else:
+                return request.params.get(property_name)
+        except:
+            return default_value

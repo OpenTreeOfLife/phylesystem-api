@@ -10,6 +10,7 @@ from pyramid.httpexceptions import (
                                    )
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
+from phylesystem_api.api_utils import find_in_request
 import json
 
 from peyotl.amendments import AMENDMENT_ID_PATTERN
@@ -77,7 +78,7 @@ def create_amendment(request):
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = request.json_body.get('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -131,7 +132,7 @@ def fetch_amendment(request):
     version_history = None
     comment_html = None
     try:
-        parent_sha = request.json_body.get('starting_commit_SHA', None)
+        parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     except:
         # probably a simple request w/o JSON payload
         parent_sha = None
@@ -186,7 +187,7 @@ def update_amendment(request):
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = request.json_body.get('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -203,8 +204,8 @@ def update_amendment(request):
     # update an existing amendment with the data provided
     # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.PUT')
     # submit new json for this id, and read the results
-    parent_sha = request.json_body.get('starting_commit_SHA', None)
-    merged_sha = None  #TODO: request.json_body.get('???', None)
+    parent_sha = find_in_request(request, 'starting_commit_SHA', None)
+    merged_sha = None  #TODO: find_in_request(request, '???', None)
     docstore = api_utils.get_taxonomic_amendment_store(request)
     try:
         r = docstore.update_existing_amendment(amendment_id,
@@ -242,7 +243,7 @@ def delete_amendment(request):
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = request.json_body.get('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -254,7 +255,7 @@ def delete_amendment(request):
     # remove this amendment from the docstore
     # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
     docstore = api_utils.get_taxonomic_amendment_store(request)
-    parent_sha = request.json_body.get('starting_commit_SHA')
+    parent_sha = find_in_request(request, 'starting_commit_SHA')
     if parent_sha is None:
         raise HTTPBadRequest(body='Expecting a "starting_commit_SHA" argument with the SHA of the parent')
     try:
