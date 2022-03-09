@@ -97,7 +97,7 @@ def fetch_study(request):
                                               request_extension,
                                               content_id=content_id)
     try:
-        parent_sha = find_in_request('starting_commit_SHA', None)
+        parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     except:
         # probably a simple request w/o JSON payload
         parent_sha = None
@@ -183,7 +183,7 @@ def create_study(request):
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = find_in_request('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -193,21 +193,21 @@ def create_study(request):
     api_utils.raise_if_read_only()
 
     # we're creating a new study (possibly with import instructions in the payload)
-    import_from_location = find_in_request('import_from_location', '')
-    treebase_id = find_in_request('treebase_id', '')
-    nexml_fetch_url = find_in_request('nexml_fetch_url', '')
-    nexml_pasted_string = find_in_request('nexml_pasted_string', '')
-    publication_doi = find_in_request('publication_DOI', '')
+    import_from_location = find_in_request(request, 'import_from_location', '')
+    treebase_id = find_in_request(request, 'treebase_id', '')
+    nexml_fetch_url = find_in_request(request, 'nexml_fetch_url', '')
+    nexml_pasted_string = find_in_request(request, 'nexml_pasted_string', '')
+    publication_doi = find_in_request(request, 'publication_DOI', '')
     # if a URL or something other than a valid DOI was entered, don't submit it to crossref API
     publication_doi_for_crossref = __make_valid_DOI(publication_doi) or None
-    publication_ref = find_in_request('publication_reference', '')
+    publication_ref = find_in_request(request, 'publication_reference', '')
     # is the submitter explicity applying the CC0 waiver to a new study?
-    cc0_agreement = (find_in_request('chosen_license', '') == 'apply-new-CC0-waiver' and
-                     find_in_request('cc0_agreement', '') == 'true')
+    cc0_agreement = (find_in_request(request, 'chosen_license', '') == 'apply-new-CC0-waiver' and
+                     find_in_request(request, 'cc0_agreement', '') == 'true')
     # look for the chosen import method, e.g,
     # 'import-method-PUBLICATION_DOI' or 'import-method-MANUAL_ENTRY'
-    import_method = find_in_request('import_method', '')
-    ##dryad_DOI = find_in_request('dryad_DOI', '')
+    import_method = find_in_request(request, 'import_method', '')
+    ##dryad_DOI = find_in_request(request, 'dryad_DOI', '')
 
     # Create initial study NexSON using the chosen import method.
     #
@@ -222,7 +222,7 @@ def create_study(request):
                                   (import_method == 'import-method-PUBLICATION_REFERENCE' and publication_ref)
 
     # Are they using an existing license or waiver (CC0, CC-BY, something else?)
-    using_existing_license = (find_in_request('chosen_license', '') == 'study-data-has-existing-license')
+    using_existing_license = (find_in_request(request, 'chosen_license', '') == 'study-data-has-existing-license')
 
     # any of these methods should returna parsed NexSON dict (vs. string)
     if importing_from_treebase_id:
@@ -263,7 +263,7 @@ def create_study(request):
         if cc0_agreement:
             nexml['^xhtml:license'] = {'@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
         elif using_existing_license:
-            existing_license = find_in_request('alternate_license', '')
+            existing_license = find_in_request(request, 'alternate_license', '')
             if existing_license == 'CC-0':
                 nexml['^xhtml:license'] = {'@name': 'CC0', '@href': 'http://creativecommons.org/publicdomain/zero/1.0/'}
                 pass
@@ -282,8 +282,8 @@ def create_study(request):
                 nexml['^xhtml:license'] = {'@name': 'CC-BY 3.0', '@href': 'http://creativecommons.org/licenses/by/3.0/'}
                 pass
             else:  # assume it's something else
-                alt_license_name = find_in_request('alt_license_name', '')
-                alt_license_url = find_in_request('alt_license_URL', '')
+                alt_license_name = find_in_request(request, 'alt_license_name', '')
+                alt_license_url = find_in_request(request, 'alt_license_URL', '')
                 # OK to add a name here? mainly to capture submitter's intent
                 nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
 
@@ -317,14 +317,14 @@ def update_study(request):
     # this method requires authentication
     auth_info = api_utils.authenticate(**request.json_body)
 
-    parent_sha = find_in_request('starting_commit_SHA')
+    parent_sha = find_in_request(request, 'starting_commit_SHA')
     if parent_sha is None:
         raise HTTPBadRequest('Expecting a "starting_commit_SHA" argument with the SHA of the parent')
-    master_file_blob_included = find_in_request('merged_SHA')
+    master_file_blob_included = find_in_request(request, 'merged_SHA')
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = find_in_request('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -378,7 +378,7 @@ def delete_study(request):
 
     # gather any user-provided git-commit message
     try:
-        commit_msg = find_in_request('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None

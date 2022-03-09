@@ -7,10 +7,12 @@ from peyotl.utility import read_config as read_peyotl_config
 from configparser import SafeConfigParser
 from datetime import datetime
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
+from pyramid.request import Request
 from pyramid.httpexceptions import (
                                     HTTPException,
                                     HTTPOk,
                                     HTTPError,
+                                    HTTPServerError,
                                     HTTPNotFound,
                                     HTTPBadRequest,
                                     HTTPInternalServerError,
@@ -559,15 +561,22 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
 def find_in_request(request, property_name, default_value=None, return_all_values=False):
     """Search JSON body (if any), then try GET/POST keys"""
     try:
+        assert(isinstance(request, Request))
+    except AssertionError:
+        raise HTTPServerError(json.dumps({"error": 1, "description": 'request not provided in call to api_utils.find_in_request!'}))
+    try:
         # recommended practice is all vars in the JSON body
-        return request.json_body.get(property_name)
+        found_value = request.json_body.get(property_name)
     except:
+        found_value = None
+    if found_value is None:
         # sometimes we allow vars from the query-string or form values
-        try:
+        if return_all_values:
             # NB - request.params combines GET and POST into a shared MultiDict
-            if return_all_values:
-                return request.params.getall(property_name)
-            else:
-                return request.params.get(property_name)
-        except:
-            return default_value
+            found_value = request.params.getall(property_name)
+        else:
+            # NB this returns None if default not specified!
+            found_value = request.params.get(property_name, default_value)
+    if found_value is None:
+        return default_value
+    return found_value

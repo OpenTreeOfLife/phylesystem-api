@@ -48,25 +48,27 @@ def find_studies(request):
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
     oti = _init(request, request.response)
-    verbose = _bool_arg(find_in_request('verbose', False))
+    verbose = _bool_arg(find_in_request(request, 'verbose', False))
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
-    field = find_in_request('property', None)
+    field = find_in_request(request, 'property', None)
     try:
         if field is None:
             match_list = oti.find_all_studies(verbose=verbose)
             resp = {'matched_studies': match_list}
         else:
-            value = find_in_request('value', None)
+            value = find_in_request(request, 'value', None)
             if value is None:
                 _raise400('If "property" is sent, a "value" argument must be used.')
-            exact = _bool_arg(find_in_request('exact', False))
+            exact = _bool_arg(find_in_request(request, 'exact', False))
             if (exact is not True) and (exact is not False):
                 _raise400('"exact" setting must be a boolean')
             try:
-                resp = oti.find_studies({field: value}, verbose=verbose, exact=exact)
+                match_list = oti.find_studies({field: value}, verbose=verbose, exact=exact)
+                resp = {'matched_studies': match_list}
             except ValueError as x:
                 _raise400(x.message)
+
     except HTTPException:
         raise
     except HTTPError:
@@ -83,7 +85,6 @@ def find_studies(request):
 def find_trees(request):
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
-    #import pdb; pdb.set_trace()
     try:
         msg = request.json_body
     except:

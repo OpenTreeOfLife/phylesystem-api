@@ -54,7 +54,7 @@ def collection_CORS_preflight(request):
 def create_collection(request):
     # gather any user-provided git-commit message
     try:
-        commit_msg = find_in_request('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -124,7 +124,7 @@ def fetch_collection(request):
     # gather details to return with the JSON core document
     version_history = None
     comment_html = None
-    parent_sha = find_in_request('starting_commit_SHA', None)
+    parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     # _LOG.debug('parent_sha = {}'.format(parent_sha))
     # return the correct nexson of study_id, using the specified view
     collections = api_utils.get_tree_collection_store(request)
@@ -192,7 +192,7 @@ def update_collection(request):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid collection ID ({}) provided".format(collection_id)}))
 
     try:
-        commit_msg = find_in_request('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -202,8 +202,8 @@ def update_collection(request):
     api_utils.raise_if_read_only()
 
     # submit new json for this id, and read the results
-    parent_sha = find_in_request('starting_commit_SHA', None)
-    merged_sha = None  #TODO: find_in_request('???', None)
+    parent_sha = find_in_request(request, 'starting_commit_SHA', None)
+    merged_sha = None  #TODO: find_in_request(request, '???', None)
     docstore = api_utils.get_tree_collection_store(request)
     try:
         r = docstore.update_existing_collection(owner_id,
@@ -239,7 +239,7 @@ def delete_collection(request):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid collection ID ({}) provided".format(collection_id)}))
 
     try:
-        commit_msg = find_in_request('commit_msg','')
+        commit_msg = find_in_request(request, 'commit_msg','')
         if commit_msg.strip() == '':
             # git rejects empty commit messages
             commit_msg = None
@@ -252,7 +252,7 @@ def delete_collection(request):
     auth_info = api_utils.authenticate(**request.json_body)
     owner_id = auth_info.get('login', None)
     docstore = api_utils.get_tree_collection_store(request)
-    parent_sha = find_in_request('starting_commit_SHA', None)
+    parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     if parent_sha is None:
         raise HTTPBadRequest('Expecting a "starting_commit_SHA" argument with the SHA of the parent')
     try:
