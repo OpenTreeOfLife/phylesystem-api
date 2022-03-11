@@ -12,7 +12,6 @@ from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
 import json
-
 from peyotl.collections_store import OWNER_ID_PATTERN, \
                                      COLLECTION_ID_PATTERN
 from peyotl.collections_store.validation import validate_collection
@@ -139,7 +138,7 @@ def fetch_collection(request):
         version_history = collections.get_version_history_for_doc_id(collection_id)
         try:
             # pre-render internal description (assumes markdown!)
-            comment_html = _markdown_to_html(collection_json['description'], open_links_in_new_window=True )
+            comment_html = api_utils.markdown_to_html(collection_json['description'], open_links_in_new_window=True )
         except:
             comment_html = ''
     except:

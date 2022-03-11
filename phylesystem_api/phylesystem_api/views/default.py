@@ -3,7 +3,6 @@ from pyramid.view import (
                           notfound_view_config,
                          )
 from pyramid.response import Response
-from phylesystem_api.markdown import _markdown_to_html
 import requests
 from peyotl import concatenate_collections, \
                    tree_is_in_collection
@@ -65,7 +64,7 @@ def notfound(request):
 def render_markdown(request):
     # Convert POSTed Markdown to HTML (e.g., for previews in web UI)
     src = request.body.decode('utf-8')
-    html = _markdown_to_html( src, open_links_in_new_window=True )
+    html = api_utils.markdown_to_html( src, open_links_in_new_window=True )
     return Response(body=html, content_type='text/html')
 
 @view_config(route_name='phylesystem_config', renderer='json')

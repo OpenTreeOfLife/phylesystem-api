@@ -100,7 +100,7 @@ def fetch_study(request):
             phylesystem.add_validation_annotation(study_nexson, blob_sha)
             version_history = phylesystem.get_version_history_for_study_id(study_id)
             try:
-                comment_html = _markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
+                comment_html = api_utils.markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
             except:
                 comment_html = ''
     except:
@@ -501,14 +501,14 @@ def get_study_tree(request):
 
     try:
         study_nexson, head_sha, wip_map = r
-        if returning_full_study:
-            blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
-            phylesystem.add_validation_annotation(study_nexson, blob_sha)
-            version_history = phylesystem.get_version_history_for_study_id(study_id)
-            try:
-                comment_html = _markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
-            except:
-                comment_html = ''
+        blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
+        phylesystem.add_validation_annotation(study_nexson, blob_sha)
+        version_history = phylesystem.get_version_history_for_study_id(study_id)
+        import pdb; pdb.set_trace()
+        try:
+            comment_html = api_utils.markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
+        except:
+            comment_html = ''
     except:
         # _LOG.exception('GET failed')
         e = sys.exc_info()[0]
