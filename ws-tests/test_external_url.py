@@ -2,7 +2,7 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v3/study/external_url/pg_99'
+SUBMIT_URI = DOMAIN + '/v3/study/external_url/pg_388'
 print(SUBMIT_URI)
 r = test_http_json_method(SUBMIT_URI,
                           'POST',

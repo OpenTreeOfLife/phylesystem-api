@@ -19,59 +19,45 @@ from peyotl.nexson_syntax import get_empty_nexson, \
                                  read_as_json, \
                                  BY_ID_HONEY_BADGERFISH
 from peyotl.external import import_nexson_from_treebase
+import requests
+import sys
 
-def _init(request, response):
-    response.view = 'generic.json'
-    # CORS support for cross-domain API requests (from anywhere)
-    response.headers['Access-Control-Allow-Origin'] = "*"
-    response.headers['Access-Control-Allow-Credentials'] = 'true'
-    return OTI(oti=api_utils.get_oti_domain(request))
-def _bool_arg(v):
-    if isinstance(v, str):
-        u = v.upper()
-        if u in ['TRUE', 'YES']:
-            return True
-        if u in ['FALSE', 'NO']:
-            return False
-    return v
+def __validate_output_nexml2json(repo_nexml2json, kwargs, resource, type_ext, content_id=None):
+    # sometimes we need to tweak the incoming kwargs, so let's 
+    # make a mutable MultiDict copy of Pyramid's immutable NestedMultiDict
+    kwargs = kwargs.copy()
+    msg = None
+    if 'output_nexml2json' not in kwargs:
+        kwargs['output_nexml2json'] = '0.0.0'
+    biv = kwargs.get('bracket_ingroup')
+    if biv and (isinstance(biv, str) or isinstance(biv, unicode)):
+        if biv.lower() in ['f', 'false', '0']:
+            kwargs['bracket_ingroup'] = False
+        else:
+            kwargs['bracket_ingroup'] = True
+    try:
+        schema = PhyloSchema(schema=kwargs.get('format'),
+                             type_ext=type_ext,
+                             content=resource,
+                             content_id=content_id,
+                             repo_nexml2json=repo_nexml2json,
+                             **kwargs)
+        if not schema.can_convert_from(resource):
+            msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json,
+                                                          d=schema.description)
+    except ValueError as x:
+        #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        msg = str(x)
+        #_LOG.exception('GET failing: {m}'.format(m=msg))
+    if msg:
+        #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        #_LOG.debug('output sniffing err msg = ' + msg)
+        raise HTTPBadRequest(json.dumps({"error": 1, "description": msg}))
+    return schema
 
 @view_config(route_name='fetch_study', renderer='json')
 def fetch_study(request):
-    phylesystem = api_utils.get_phylesystem(request)
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
-    repo_nexml2json = phylesystem.repo_nexml2json
-    def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
-        # sometimes we need to tweak the incoming kwargs, so let's 
-        # make a mutable MultiDict copy of Pyramid's immutable NestedMultiDict
-        kwargs = kwargs.copy()
-        msg = None
-        if 'output_nexml2json' not in kwargs:
-            kwargs['output_nexml2json'] = '0.0.0'
-        biv = kwargs.get('bracket_ingroup')
-        if biv and (isinstance(biv, str) or isinstance(biv, unicode)):
-            if biv.lower() in ['f', 'false', '0']:
-                kwargs['bracket_ingroup'] = False
-            else:
-                kwargs['bracket_ingroup'] = True
-        try:
-            schema = PhyloSchema(schema=kwargs.get('format'),
-                                 type_ext=type_ext,
-                                 content=resource,
-                                 content_id=content_id,
-                                 repo_nexml2json=repo_nexml2json,
-                                 **kwargs)
-            if not schema.can_convert_from(resource):
-                msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json,
-                                                              d=schema.description)
-        except ValueError as x:
-            #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            msg = str(x)
-            #_LOG.exception('GET failing: {m}'.format(m=msg))
-        if msg:
-            #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            #_LOG.debug('output sniffing err msg = ' + msg)
-            raise HTTPBadRequest(json.dumps({"error": 1, "description": msg}))
-        return schema
     
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
@@ -92,18 +78,16 @@ def fetch_study(request):
     except:
         # no JSON payload provided
         json_data = {}
-    out_schema = __validate_output_nexml2json(json_data,
+    phylesystem = api_utils.get_phylesystem(request)
+    repo_nexml2json = phylesystem.repo_nexml2json
+    out_schema = __validate_output_nexml2json(repo_nexml2json,
+                                              json_data,
                                               'study',
                                               request_extension,
                                               content_id=content_id)
-    try:
-        parent_sha = find_in_request(request, 'starting_commit_SHA', None)
-    except:
-        # probably a simple request w/o JSON payload
-        parent_sha = None
+    parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     # _LOG.debug('parent_sha = {}'.format(parent_sha))
     # return the correct nexson of study_id, using the specified view
-    phylesystem = api_utils.get_phylesystem(request)
     try:
         r = phylesystem.return_study(study_id, commit_sha=parent_sha, return_WIP_map=True)
     except:
@@ -137,6 +121,7 @@ def fetch_study(request):
             msg = "Exception in coercing to the required NexSON version for validation. "
             # _LOG.exception(msg)
             raise HTTPBadRequest(msg)
+
     if returning_full_study and out_schema.is_json():
         try:
             study_DOI = study_nexson['nexml']['^ot:studyPublication']['@href']
@@ -312,7 +297,7 @@ def create_study(request):
 @view_config(route_name='update_study', renderer='json')
 def update_study(request):
     api_version = request.matchdict['api_version']
-    study_id = request.matchdict.get['study_id']
+    study_id = request.matchdict['study_id']
 
     # this method requires authentication
     auth_info = api_utils.authenticate(**request.json_body)
@@ -334,8 +319,8 @@ def update_study(request):
     api_utils.raise_if_read_only()
 
     phylesystem = api_utils.get_phylesystem(request)
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     repo_nexml2json = phylesystem.repo_nexml2json
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     bundle = __extract_and_validate_nexson(request,
                                            repo_nexml2json,
                                            request.json_body)
@@ -371,7 +356,7 @@ def update_study(request):
 @view_config(route_name='delete_study', renderer='json')
 def delete_study(request):
     api_version = request.matchdict['api_version']
-    study_id = request.matchdict.get['study_id']
+    study_id = request.matchdict['study_id']
 
     # this method requires authentication
     auth_info = api_utils.authenticate(**request.json_body)
@@ -399,20 +384,151 @@ def delete_study(request):
         # _LOG.exception('Exception getting nexson content in phylesystem.delete_study')
         raise HTTPBadRequest(json.dumps({"error": 1, "description": 'Unknown error in study deletion'}))
 
-@view_config(route_name='get_study_file', renderer='json')
+@view_config(route_name='get_study_file_list', renderer='json')
+@view_config(route_name='get_study_single_file', renderer='json')
 def get_study_file(request):
     api_utils.raise_on_CORS_preflight(request)
-    pass
+
+    api_version = request.matchdict['api_version']
+    study_id = request.matchdict['study_id']
+    file_id = request.matchdict.get('file_id', None)
+
+    result_data = None
+    try:
+        json_data = request.json_body
+    except:
+        # no JSON payload provided
+        json_data = {}
+    phylesystem = api_utils.get_phylesystem(request)
+    repo_nexml2json = phylesystem.repo_nexml2json
+    out_schema = __validate_output_nexml2json(repo_nexml2json,
+                                              json_data,
+                                              'file',
+                                              None,
+                                              content_id=study_id)
+    parent_sha = find_in_request(request, 'starting_commit_SHA', None)
+    try:
+        r = phylesystem.return_study(study_id, commit_sha=parent_sha, return_WIP_map=True)
+    except:
+        # _LOG.exception('GET failed')
+        raise HTTPNotFound(body=json.dumps({"error": 1, "description": 'Study #%s GET failure' % study_id}))
+    study_nexson, head_sha, wip_map = r
+    # TODO: return a description of the requested file, or a list of all files
+    m_list = extract_supporting_file_messages(study_nexson)
+    if file_id is None:
+        r = []
+        for m in m_list:
+            files = m.get('data', {}).get('files', {}).get('file', [])
+            for f in files:
+                if '@url' in f:
+                    r.append({'id': m['@id'],
+                              'filename': f.get('@filename', ''),
+                              'url_fragment': f['@url']})
+                    break
+        return r
+    else:
+        try:
+            matching = None
+            for m in m_list:
+                if m['@id'] == file_id:
+                    matching = m
+                    break
+            if matching is None:
+                raise HTTPNotFound(body='No file with id="{f}" found in study="{s}"'.format(f=file_id, s=study_id))
+            u = None
+            files = m.get('data', {}).get('files', {}).get('file', [])
+            for f in files:
+                if '@url' in f:
+                    u = f['@url']
+                    break
+            if u is None:
+                raise HTTPNotFound(body='No @url found in the message with id="{f}" found in study="{s}"'.format(f=file_id, s=study_id))
+            #TEMPORARY HACK TODO
+            u = u.replace('uploadid=', 'uploadId=')
+            #TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
+            if u.startswith('/curator'):
+                u = 'https://tree.opentreeoflife.org' + u
+            request.response.headers['Content-Type'] = 'text/plain'
+            fetched = requests.get(u)
+            fetched.raise_for_status()
+            return fetched.text
+        except Exception as x:
+            # _LOG.exception('file_get failed')
+            raise HTTPNotFound(body='Could not retrieve file. Exception: "{}"'.format(str(x)))
+
 
 @view_config(route_name='get_study_external_url', renderer='json')
 def get_study_external_url(request):
     api_utils.raise_on_CORS_preflight(request)
-    pass
+
+    api_version = request.matchdict['api_version']
+    study_id = request.matchdict['study_id']
+
+    phylesystem = api_utils.get_phylesystem(request)
+    try:
+        u = phylesystem.get_public_url(study_id)
+        return json.dumps({'url': u, 'study_id': study_id})
+    except:
+        raise HTTPNotFound(body='{"error": 1, "description": "study not found"}')
 
 @view_config(route_name='get_study_tree', renderer='json')
 def get_study_tree(request):
     api_utils.raise_on_CORS_preflight(request)
-    pass
+
+    api_version = request.matchdict['api_version']
+    study_id = request.matchdict['study_id']
+    tree_id = request.matchdict['tree_id']
+
+    result_data = None
+    try:
+        json_data = request.json_body
+    except:
+        # no JSON payload provided
+        json_data = {}
+    phylesystem = api_utils.get_phylesystem(request)
+    repo_nexml2json = phylesystem.repo_nexml2json
+    out_schema = __validate_output_nexml2json(repo_nexml2json,
+                                              json_data,
+                                              'tree',
+                                              None,
+                                              content_id=tree_id)
+    parent_sha = find_in_request(request, 'starting_commit_SHA', None)
+    try:
+        r = phylesystem.return_study(study_id, commit_sha=parent_sha, return_WIP_map=True)
+    except:
+        # _LOG.exception('GET failed')
+        raise HTTPNotFound(body=json.dumps({"error": 1, "description": 'Study #%s GET failure' % study_id}))
+
+    try:
+        study_nexson, head_sha, wip_map = r
+        if returning_full_study:
+            blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
+            phylesystem.add_validation_annotation(study_nexson, blob_sha)
+            version_history = phylesystem.get_version_history_for_study_id(study_id)
+            try:
+                comment_html = _markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
+            except:
+                comment_html = ''
+    except:
+        # _LOG.exception('GET failed')
+        e = sys.exc_info()[0]
+        raise HTTPBadRequest(e)
+
+    try:
+        serialize = not out_schema.is_json()
+        src_schema = PhyloSchema('nexson', version=repo_nexml2json)
+        result_data = out_schema.convert(study_nexson,
+                                         serialize=serialize,
+                                         src_schema=src_schema)
+    except:
+        msg = "Exception in coercing to the required NexSON version for validation. "
+        # _LOG.exception(msg)
+        raise HTTPBadRequest( msg)
+
+    if not result_data:
+        raise HTTPNotFound(body='subresource "tree/{t}" not found in study "{s}"'.format(t=tree_id,
+                                                                                 s=study_id))
+    return result_data
 
 @view_config(route_name='get_study_tree_newick', renderer='json')
 def get_study_tree_newick(request):
