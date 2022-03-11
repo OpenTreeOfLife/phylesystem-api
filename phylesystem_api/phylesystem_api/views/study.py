@@ -30,7 +30,7 @@ def __validate_output_nexml2json(repo_nexml2json, kwargs, resource, type_ext, co
     if 'output_nexml2json' not in kwargs:
         kwargs['output_nexml2json'] = '0.0.0'
     biv = kwargs.get('bracket_ingroup')
-    if biv and (isinstance(biv, str) or isinstance(biv, unicode)):
+    if biv and isinstance(biv, str):
         if biv.lower() in ['f', 'false', '0']:
             kwargs['bracket_ingroup'] = False
         else:
@@ -504,7 +504,6 @@ def get_study_tree(request):
         blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
         phylesystem.add_validation_annotation(study_nexson, blob_sha)
         version_history = phylesystem.get_version_history_for_study_id(study_id)
-        import pdb; pdb.set_trace()
         try:
             comment_html = api_utils.markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
         except:
@@ -525,7 +524,7 @@ def get_study_tree(request):
         # _LOG.exception(msg)
         raise HTTPBadRequest( msg)
 
-    if not result_data:
+    if result_data is None:
         raise HTTPNotFound(body='subresource "tree/{t}" not found in study "{s}"'.format(t=tree_id,
                                                                                  s=study_id))
     return result_data
