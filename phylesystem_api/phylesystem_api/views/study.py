@@ -477,7 +477,13 @@ def get_study_tree(request):
 
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
-    tree_id = request.matchdict['tree_id']
+    tree_id_with_extension = request.matchdict['tree_id_with_extension']
+    tree_name_parts = tree_id_with_extension.split('.')
+    tree_id = tree_name_parts[0]
+    if len(tree_name_parts) > 1:
+        file_ext = ".{}".format(tree_name_parts[1])
+    else:
+        file_ext = None
 
     result_data = None
     try:
@@ -490,7 +496,7 @@ def get_study_tree(request):
     out_schema = __validate_output_nexml2json(repo_nexml2json,
                                               json_data,
                                               'tree',
-                                              None,
+                                              file_ext,
                                               content_id=tree_id)
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     try:
@@ -528,12 +534,3 @@ def get_study_tree(request):
         raise HTTPNotFound(body='subresource "tree/{t}" not found in study "{s}"'.format(t=tree_id,
                                                                                  s=study_id))
     return result_data
-
-@view_config(route_name='get_study_tree_newick', renderer='json')
-def get_study_tree_newick(request):
-    api_utils.raise_on_CORS_preflight(request)
-    pass
-
-
-
-

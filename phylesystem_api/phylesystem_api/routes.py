@@ -30,8 +30,7 @@ def includeme(config):
     config.add_route('get_study_file_list', '/{api_version}/study/{study_id}/file')
     config.add_route('get_study_single_file', '/{api_version}/study/{study_id}/file/{file_id}')
     config.add_route('get_study_external_url', '/{api_version}/study/external_url/{study_id}')
-    config.add_route('get_study_tree', '/{api_version}/study/{study_id}/tree/{tree_id}')
-    config.add_route('get_study_tree_newick', '/{api_version}/study/{study_id}')
+    config.add_route('get_study_tree', '/{api_version}/study/{study_id}/tree/{tree_id_with_extension}')
     #
     # TREE COLLECTION ROUTES
     #
