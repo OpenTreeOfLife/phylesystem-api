@@ -6,6 +6,7 @@ from pyramid.httpexceptions import (
                                     HTTPNotFound, 
                                     HTTPBadRequest,
                                     HTTPInternalServerError,
+                                    HTTPForbidden,
                                    )
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
@@ -21,6 +22,43 @@ from peyotl.nexson_syntax import get_empty_nexson, \
 from peyotl.external import import_nexson_from_treebase
 import requests
 import sys
+
+def __extract_nexson_from_http_call(request, **kwargs):
+    """Returns the nexson blob from `kwargs` or the request.body"""
+    try:
+        # check for kwarg 'nexson', or load the full request body
+        if 'nexson' in kwargs:
+            nexson = kwargs.get('nexson', {})
+        else:
+            nexson = request.json_body
+        if not isinstance(nexson, dict):
+            nexson = json.loads(nexson)
+        if 'nexson' in nexson:
+            nexson = nexson['nexson']
+    except:
+        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        # _LOG.exception('Exception getting nexson content in __extract_nexson_from_http_call')
+        raise HTTPBadRequest(json.dumps({"error": 1, "description": 'NexSON must be valid JSON'}))
+    return nexson
+
+def __extract_and_validate_nexson(request, repo_nexml2json, kwargs):
+    try:
+        nexson = __extract_nexson_from_http_call(request, **kwargs)
+        #from peyotl.manip import count_num_trees
+        #numtrees=count_num_trees(nexson,repo_nexml2json)
+        #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        #_LOG.debug('number of trees in nexson is {}, max number of trees is {}'.format(numtrees,max_num_trees))
+        repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
+        bundle = validate_and_convert_nexson(nexson,
+                                             repo_nexml2json,
+                                             allow_invalid=False,
+                                             max_num_trees_per_study=max_num_trees)
+        nexson, annotation, validation_log, nexson_adaptor = bundle
+    except GitWorkflowError as err:
+        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        # _LOG.exception('PUT failed in validation')
+        raise HTTPBadRequest(err.msg or 'No message found')
+    return nexson, annotation, nexson_adaptor
 
 def __validate_output_nexml2json(repo_nexml2json, kwargs, resource, type_ext, content_id=None):
     # sometimes we need to tweak the incoming kwargs, so let's 
@@ -55,13 +93,66 @@ def __validate_output_nexml2json(repo_nexml2json, kwargs, resource, type_ext, co
         raise HTTPBadRequest(json.dumps({"error": 1, "description": msg}))
     return schema
 
+def __finish_write_verb(phylesystem,
+                        git_data, 
+                        nexson,
+                        resource_id,
+                        auth_info,
+                        adaptor,
+                        annotation,
+                        parent_sha,
+                        commit_msg='',
+                        master_file_blob_included=None):
+    '''Called by PUT and POST handlers to avoid code repetition.'''
+    # global TIMING
+    #TODO, need to make this spawn a thread to do the second commit rather than block
+    a = phylesystem.annotate_and_write(git_data, 
+                                       nexson,
+                                       resource_id,
+                                       auth_info,
+                                       adaptor,
+                                       annotation,
+                                       parent_sha,
+                                       commit_msg,
+                                       master_file_blob_included)
+    annotated_commit = a
+    # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
+    if annotated_commit['error'] != 0:
+        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        # _LOG.debug('annotated_commit failed')
+        raise HTTP(400, json.dumps(annotated_commit))
+    return annotated_commit
+
+def check_not_read_only():
+    if api_utils.READ_ONLY_MODE:
+        raise HTTPForbidden(anyjson.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
+    return True
+
+def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
+    check_not_read_only()
+    try:
+        from open_tree_tasks import call_http_json
+        #_LOG.debug('call_http_json imported')
+    except:
+        call_http_json = None
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v3')
+        _LOG.debug('call_http_json was not imported from open_tree_tasks')
+    if call_http_json is not None:
+        # Pass the resource_id in data, so that two-part collection IDs will be recognized
+        # (else the second part will trigger an unwanted JSONP response from the push)
+        url = api_utils.compose_push_to_github_url(request, resource_id=None)
+        auth_token = copy.copy(kwargs.get('auth_token'))
+        data = {'doc_type': doc_type, 'resource_id': resource_id}
+        if auth_token is not None:
+            data['auth_token'] = auth_token
+        call_http_json.delay(url=url, verb='PUT', data=data)
+
 @view_config(route_name='fetch_study', renderer='json')
 def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
-    returning_full_study = False
     content_id = None
     version_history = None
     comment_html = None
@@ -95,14 +186,13 @@ def fetch_study(request):
         raise HTTPNotFound(body=json.dumps({"error": 1, "description": 'Study #%s GET failure' % study_id}))
     try:
         study_nexson, head_sha, wip_map = r
-        if returning_full_study:
-            blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
-            phylesystem.add_validation_annotation(study_nexson, blob_sha)
-            version_history = phylesystem.get_version_history_for_study_id(study_id)
-            try:
-                comment_html = api_utils.markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
-            except:
-                comment_html = ''
+        blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
+        phylesystem.add_validation_annotation(study_nexson, blob_sha)
+        version_history = phylesystem.get_version_history_for_study_id(study_id)
+        try:
+            comment_html = api_utils.markdown_to_html(study_nexson['nexml']['^ot:comment'], open_links_in_new_window=True )
+        except:
+            comment_html = ''
     except:
         # _LOG.exception('GET failed')
         e = sys.exc_info()[0]
@@ -122,7 +212,7 @@ def fetch_study(request):
             # _LOG.exception(msg)
             raise HTTPBadRequest(msg)
 
-    if returning_full_study and out_schema.is_json():
+    if out_schema.is_json():
         try:
             study_DOI = study_nexson['nexml']['^ot:studyPublication']['@href']
         except KeyError:
@@ -296,6 +386,7 @@ def create_study(request):
 
 @view_config(route_name='update_study', renderer='json')
 def update_study(request):
+    #import pdb; pdb.set_trace()
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
 
