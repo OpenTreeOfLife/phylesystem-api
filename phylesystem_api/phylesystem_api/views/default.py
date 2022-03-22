@@ -271,8 +271,3 @@ def _get_synth_input_collection_ids():
 def _raise_HTTP_from_msg(msg):
     raise HTTP(400, anyjson.dumps({"error": 1, "description": msg}))
 
-def check_not_read_only():
-    if api_utils.READ_ONLY_MODE:
-        raise HTTP(403, anyjson.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
-    return True
-
