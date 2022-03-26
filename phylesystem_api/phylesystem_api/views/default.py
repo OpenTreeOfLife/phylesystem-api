@@ -2,6 +2,14 @@ from pyramid.view import (
                           view_config,
                           notfound_view_config,
                          )
+from pyramid.httpexceptions import (
+                                    HTTPException,
+                                    HTTPError,
+                                    HTTPNotFound,
+                                    HTTPBadRequest,
+                                    HTTPInternalServerError,
+                                    HTTPForbidden,
+                                   )
 from pyramid.response import Response
 import requests
 from peyotl import concatenate_collections, \
@@ -26,6 +34,8 @@ try:
 except:
     call_http_json = None
     _GLOG.debug('call_http_json was not imported from open_tree_tasks')
+
+from beaker.cache import cache_region
 
 @view_config(route_name='index', renderer='phylesystem_api:templates/home.jinja2')
 def home_view(request):
@@ -59,6 +69,60 @@ def notfound(request):
         status='404 Not Found',
         charset='UTF-8',
         content_type='application/json')
+
+@view_config(route_name='pull_through_cache')
+def pull_through_cache(request):
+    """
+    This emulates the "pull-through" RAM cache used in web2py. It should return
+    a matching cached value if possible, else fetch fresh results from the
+    original URL. If the original URL returns an error (non-200 status), return
+    the error without caching the result.
+    """
+    api_utils.raise_on_CORS_preflight(request)
+    target_url = request.matchdict.get('target_url')
+
+    @cache_region('short_term', 'pull-through')
+    def fetch_and_cache(url):
+        # let's restrict this to URLs on this api server, to avoid shenanigans
+        #import pdb; pdb.set_trace()
+        root_relative_url = "/{}".format(url)
+        fetch_url = request.relative_url(root_relative_url)
+        print("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
+        try:
+            if request.method == 'POST':
+                # assume a typical API request with JSON payload
+                fetch_args = request.POST  # {'startingTaxonOTTId': ""}
+                print("  fetch_args: {}".format(fetch_args))
+                fetched = requests.post(url=fetch_url,
+                                        data=anyjson.dumps(fetch_args),
+                                        headers={"Content-Type": "application/json"})
+            else:
+                fetched = requests.get(fetch_url)
+            # TODO: For more flexibility, we might examine and mimic the original request (headers, etc)
+            fetched.raise_for_status()
+            fetched.encoding = 'utf-8' # Optional: requests infers this internally
+            try:
+                test_for_json = fetched.json()  # missing JSON payload will raise an error
+                return Response(
+                    body=fetched.text,  # missing JSON payload will raise an error
+                    status='200 OK',
+                    charset='UTF-8',
+                    content_type='application/json')
+            except requests.exceptions.JSONDecodeError:
+                return Response(
+                    body=response.text,
+                    status='200 OK',
+                    charset='UTF-8',
+                    content_type='text/plain')
+        except requests.RequestException as e:
+            # throw an exception (hopefully copying its status code and message) so we don't poison the cache!
+            # NB - We don't want to cache this response, but we DO want to return its payload
+            raise HTTPException(body=str(e))
+        except Exception as e:
+            raise HTTPBadRequest(body='Unknown exception in cached call!')
+
+    return fetch_and_cache(target_url)
+
 
 @view_config(route_name='render_markdown')
 def render_markdown(request):

@@ -13,6 +13,7 @@ def includeme(config):
     config.add_route('render_markdown', '/{api_version}/render_markdown')
     config.add_route('phylesystem_config', '/{api_version}/phylesystem_config')
     config.add_route('raw_study_list', '/{api_version}/study_list')
+    config.add_route('pull_through_cache', '/cached/{target_url:.*}')
     #
     # STUDY/TREE ROUTES
     #
