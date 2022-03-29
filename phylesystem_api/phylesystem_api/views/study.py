@@ -120,7 +120,7 @@ def __finish_write_verb(phylesystem,
     if annotated_commit['error'] != 0:
         # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # _LOG.debug('annotated_commit failed')
-        raise HTTP(400, json.dumps(annotated_commit))
+        raise HTTPBadRequest(body=json.dumps(annotated_commit))
     return annotated_commit
 
 def check_not_read_only():

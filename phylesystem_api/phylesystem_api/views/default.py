@@ -164,7 +164,7 @@ def trees_in_synth(request):
     except:
         # _LOG.exception('concatenation of collections failed')
         e = sys.exc_info()[0]
-        _raise_HTTP_from_msg(e)
+        raise HTTPBadRequest(body=e)
     return anyjson.dumps(result)
 
 @view_config(route_name='include_tree_in_synth', renderer='json')
@@ -173,7 +173,7 @@ def include_tree_in_synth(request):
     tree_id = kwargs.get('tree_id', "").strip()
     # check for empty/missing ids
     if (study_id == '') or (tree_id == ''):
-        raise HTTP(400, '{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
+        raise HTTPBadRequest(body='{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
     # examine this study and tree, to confirm it exists *and* to capture its name
     sds = api_utils.get_phylesystem(request)
     found_study = None
@@ -244,9 +244,9 @@ def include_tree_in_synth(request):
                                                commit_msg="Updated via API (include_tree_in_synth)")
             commit_return = r
         except GitWorkflowError as err:
-            _raise_HTTP_from_msg(err.msg)
+            raise HTTPBadRequest(body=err.msg)
         except:
-            raise HTTP(400, traceback.format_exc())
+            raise HTTPBadRequest(body=traceback.format_exc())
 
         # check for 'merge needed'?
         mn = commit_return.get('merge_needed')
@@ -262,7 +262,7 @@ def exclude_tree_from_synth(request):
     tree_id = kwargs.get('tree_id', "").strip()
     # check for empty/missing ids
     if (study_id == '') or (tree_id == ''):
-        raise HTTP(400, '{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
+        raise HTTPBadRequest(body='{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
     # find this tree in ANY synth-input collection; if found, remove it and update the collection
     coll_id_list = _get_synth_input_collection_ids()
     cds = api_utils.get_tree_collection_store(request)
@@ -296,9 +296,9 @@ def exclude_tree_from_synth(request):
                                                    commit_msg="Updated via API (include_tree_in_synth)")
                 commit_return = r
             except GitWorkflowError as err:
-                _raise_HTTP_from_msg(err.msg)
+                raise HTTPBadRequest(body=err.msg)
             except:
-                raise HTTP(400, traceback.format_exc())
+                raise HTTPBadRequest(body=traceback.format_exc())
 
             # check for 'merge needed'?
             mn = commit_return.get('merge_needed')
@@ -325,13 +325,10 @@ def _get_synth_input_collection_ids():
     try:
         cfg.readfp(conf_fo)
     except:
-        raise HTTP(500, 'Could not parse file from {}'.format(url_of_synth_config))
+        raise HTTPInternalServerError(body='Could not parse file from {}'.format(url_of_synth_config))
     try:
         coll_id_list = cfg.get('synthesis', 'collections').split()
     except:
-        raise HTTP(500, 'Could not find a collection list in file from {}'.format(url_of_synth_config))
+        raise HTTPInternalServerError(body='Could not find a collection list in file from {}'.format(url_of_synth_config))
     return coll_id_list
-
-def _raise_HTTP_from_msg(msg):
-    raise HTTP(400, anyjson.dumps({"error": 1, "description": msg}))
 
