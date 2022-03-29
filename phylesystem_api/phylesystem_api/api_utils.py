@@ -18,10 +18,12 @@ from pyramid.httpexceptions import (
                                     HTTPInternalServerError,
                                     HTTPForbidden,
                                    )
+from beaker.cache import cache_managers
 import tempfile
 import logging
 import json
 import os
+import re
 
 #_GLOG = get_logger(None, 'api_utils')
 try:
@@ -508,24 +510,57 @@ def get_favorites_api_base_url(request):
     return base_url
 
 def clear_matching_cache_keys(key_pattern):
-    # ASSUMES we're working with RAM cache
-    # NOTE that we apparently need to "clear" (using a bogus regex) to get a fresh view of the cache
-    from gluon import current
-    #_LOG = get_logger(current.request, 'ot_api')
-    current.cache.ram.clear(regex='^_BOGUS_CACHE_KEY_$')
-    item_count_before = len(list(current.cache.ram.storage.keys()))
-    # _LOG.debug("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
-    #for k in current.cache.ram.storage.keys():
-    #    _LOG.debug(k)
-    #_LOG.debug("===")
+    # emulate our regex-powered cache clearing, as used in web2py
+    """
+    # brute force method, will clear all Beaker caches
+    for _cache in cache_managers.values():
+        _cache.clear()
+    """
+    assert len(cache_managers) == 1
+    # NB - code below may change if we use multiple caches/regions!
+    active_cache = list(cache_managers.values())[0]
+    ns_mgr = active_cache.namespace
+    namespaces = ns_mgr.namespaces.dict
+    """
+    This yields specific namespaces in the active cache, and keys/values for each cached item, e.g. 
+    {
+      '/Users/jima/projects/opentree/phylesystem-api/phylesystem_api/phylesystem_api/views/default.py|fetch_and_cache': {
+        b'pull-through v3/amendments/list_all': (1648487894.102585, 600, <Response at 0x10f75fc10 200 OK>),
+        b'another key': (1648487894.102585, 600, <Response at 0x10f75fc10 200 OK>)
+      },
+      'another namespace': {
+        b'first key': (...),
+        b'second key': (...)
+      }
+    }
+    """
+    assert len(namespaces) == 1
+    active_namespace = list(namespaces.values())[0]
+    # NB - again, code may change if we use multiple namespaces here
+    item_count_before = len(list(active_namespace.items()))
+    """
+    print("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
+    for k, v in active_namespace.items():
+        print('{k} ===> {v}'.format(k=k,v=v))
+    print("===")
+    """
     #_LOG.debug("> clearing cached items matching [%s]" % key_pattern)
-    current.cache.ram.clear(regex=key_pattern)
-    item_count_after = len(list(current.cache.ram.storage.keys()))
-    #_LOG.debug("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
-    #for k in current.cache.ram.storage.keys():
-    #    _LOG.debug(k)
-    #_LOG.debug("===")
-    #_LOG.debug("  %d items removed" % (item_count_before - item_count_after,))
+
+    matching_keys = []
+    for k, v in active_namespace.items():
+        if re.match(key_pattern, str(k)):
+            matching_keys.append(k)
+    for matching_key in matching_keys:
+        del active_namespace[ matching_key ]
+
+    """
+    item_count_after = len(list(active_namespace.items()))
+    print("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
+    for k, v in active_namespace.items():
+        print('{k} ===> {v}'.format(k,v))
+    print("===")
+    print("  %d items removed" % (item_count_before - item_count_after,))
+    """
 
 def raise_on_CORS_preflight(request):
     "A simple method for approving CORS preflight request"
