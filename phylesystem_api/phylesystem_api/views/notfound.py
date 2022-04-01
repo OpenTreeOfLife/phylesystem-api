@@ -1,9 +1,22 @@
 from pyramid.view import notfound_view_config
+from pyramid.response import Response
+try:
+    import anyjson
+except:
+    import json
+    class Wrapper(object):
+        pass
+    anyjson = Wrapper()
+    anyjson.loads = json.loads
 
 
-@notfound_view_config(renderer='phylesystem_api:templates/404.jinja2',
-                      accept='text/html',
+# most API pages should be JSON, so here's a suitable 404 response
+@notfound_view_config(renderer='json',
+                      accept='application/json',
                       append_slash=True)
-def notfound_view(request):
-    request.response.status = 404
-    return {}
+def notfound(request):
+    return Response(
+        body=anyjson.dumps({'message': 'Nothing found at this URL'}),
+        status='404 Not Found',
+        charset='UTF-8',
+        content_type='application/json')

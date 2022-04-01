@@ -3,6 +3,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import (
                                     HTTPException,
                                     HTTPError,
+                                    HTTPConflict,
                                     HTTPNotFound, 
                                     HTTPBadRequest,
                                     HTTPInternalServerError,
@@ -10,6 +11,8 @@ from pyramid.httpexceptions import (
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
+from peyotl.phylesystem.git_workflows import GitWorkflowError, \
+                                             merge_from_master
 import json
 def _raise400(msg):
     raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
@@ -115,3 +118,58 @@ def find_trees(request):
                 body=json.dumps({"error": 1, 
                                  "description": "Unexpected error calling oti: {}".format(msg)}))
     return resp
+
+
+@view_config(route_name='merge_study_changes', renderer='json')
+def merge_study_changes(request):
+    """OpenTree API methods relating to updating branches
+
+    curl -X PUT https://devapi.opentreeoflife.org/v3/studies/merge?study_id=9&starting_commit_SHA=152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
+
+    If the request is successful, a JSON response similar to this will be returned:
+
+    {
+        "error": 0,
+        "branch_name": "my_user_9_2",
+        "description": "Updated branch",
+        "sha": "dcab222749c9185797645378d0bda08d598f81e7",
+        "merged_SHA": "16463623459987070600ab2757540c06ddepa608",
+    }
+
+    'merged_SHA' must be included in the next PUT for this study (unless you are
+        happy with your work languishing on a WIP branch instead of master).
+
+    If there is an error, an HTTP 400 error will be returned with a JSON response similar
+    to this:
+
+    {
+        "error": 1,
+        "description": "Could not merge master into WIP! Details: ..."
+    }
+    """
+    # if behavior varies based on /v1/, /v2/, ...
+    api_version = request.matchdict['api_version']
+    resource_id = request.matchdict['study_id']
+    starting_commit_SHA = request.matchdict['starting_commit_SHA']
+
+    api_utils.raise_if_read_only()
+
+    # this method requires authentication
+    auth_info = api_utils.authenticate(**request.json_body)
+
+    phylesystem = api_utils.get_phylesystem(request)
+    gd = phylesystem.create_git_action(resource_id)
+    try:
+        return merge_from_master(gd, resource_id, auth_info, starting_commit_SHA)
+    except GitWorkflowError as err:
+        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": err.msg}))
+    except:
+        import traceback
+        m = traceback.format_exc()
+        raise HTTPConflict(detail=json.dumps({
+            "error": 1,
+            "description": "Could not merge! Details: %s" % (m)
+        }))
+
+    #import pdb; pdb.set_trace()
+    return locals()

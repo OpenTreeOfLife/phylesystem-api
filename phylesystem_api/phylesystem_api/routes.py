@@ -1,5 +1,10 @@
 def includeme(config):
     config.add_static_view('static', 'static', cache_max_age=3600)
+    """
+    config.add_notfound_view(append_slash=True,
+                             renderer='json',
+                             accept='application/json')
+    """
     # show a simple HTML homepage for the curious
     config.add_route('index', '/')
     # some (unused) URLs just show a tiny API description, with links to code + docs
@@ -13,6 +18,7 @@ def includeme(config):
     config.add_route('render_markdown', '/{api_version}/render_markdown')
     config.add_route('phylesystem_config', '/{api_version}/phylesystem_config')
     config.add_route('raw_study_list', '/{api_version}/study_list')
+    config.add_route('merge_study_changes', '/{api_version}/studies/merge/{study_id}/{starting_commit_SHA}')
     config.add_route('pull_through_cache', '/cached/{target_url:.*}')
     #
     # STUDY/TREE ROUTES

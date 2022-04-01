@@ -57,6 +57,7 @@ rg3 = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, r
 
 assert(rg3[0]==True)
 assert(rg3[1]['sha']==r2[1]['sha'])
+# check for successful merge? FAILS if more than one branch
 assert(len(rg3[1]['branch2sha'])==1)
    
 #test merge failure when new branch is behind master
@@ -142,7 +143,7 @@ r5_sha=r5[1]['sha']
 
 # sixth commit is the merge
 starting_commit_SHA = r5_sha
-SUBMIT_URI = DOMAIN + '/phylesystem/merge/v3/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
+SUBMIT_URI = DOMAIN + '/v3/studies/merge/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
 
 data = {'auth_token' : auth_token,}
 

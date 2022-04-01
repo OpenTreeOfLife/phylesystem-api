@@ -386,7 +386,6 @@ def create_study(request):
 
 @view_config(route_name='update_study', renderer='json')
 def update_study(request):
-    #import pdb; pdb.set_trace()
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
 

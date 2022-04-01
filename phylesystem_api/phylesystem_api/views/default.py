@@ -1,7 +1,4 @@
-from pyramid.view import (
-                          view_config,
-                          notfound_view_config,
-                         )
+from pyramid.view import view_config
 from pyramid.httpexceptions import (
                                     HTTPException,
                                     HTTPError,
@@ -58,17 +55,6 @@ def base_API_view(request):
         "documentation_url": "https://github.com/OpenTreeOfLife/phylesystem-api/tree/master/docs",
         "source_url": "https://github.com/OpenTreeOfLife/phylesystem-api"
     }
-
-# all other pages should be JSON, so here's a suitable 404 response
-@notfound_view_config(renderer='json',
-                      accept='application/json',
-                      append_slash=True)
-def notfound(request):
-    return Response(
-        body=anyjson.dumps({'message': 'Nothing found at this URL'}),
-        status='404 Not Found',
-        charset='UTF-8',
-        content_type='application/json')
 
 @view_config(route_name='pull_through_cache')
 def pull_through_cache(request):
