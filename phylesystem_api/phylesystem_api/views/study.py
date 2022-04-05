@@ -60,6 +60,34 @@ def __extract_and_validate_nexson(request, repo_nexml2json, kwargs):
         raise HTTPBadRequest(err.msg or 'No message found')
     return nexson, annotation, nexson_adaptor
 
+def __make_valid_DOI(candidate):
+    # Try to convert the candidate string to a proper, minimal DOI. Return the DOI,
+    # or None if conversion is not possible.
+    #   WORKS: http://dx.doi.org/10.999...
+    #   WORKS: 10.999...
+    #   FAILS: 11.999...
+    #   WORKS: doi:10.999...
+    #   WORKS: DOI:10.999...
+    #   FAILS: http://example.com/
+    #   WORKS: http://example.com/10.blah
+    #   FAILS: something-else
+    doi_prefix = '10.'
+    # All existing DOIs use the directory indicator '10.', see
+    #   http://www.doi.org/doi_handbook/2_Numbering.html#2.2.2
+
+    # Remove all whitespace from the candidate string
+    if not candidate:
+        return None
+    candidate = "".join(candidate.split())
+    if doi_prefix in candidate:
+        # Strip everything up to the first '10.'
+        doi_parts = candidate.split(doi_prefix)
+        doi_parts[0] = ''
+        # Remove any preamble and return the minimal DOI
+        return doi_prefix.join(doi_parts)
+    else:
+        return None
+
 def __validate_output_nexml2json(repo_nexml2json, kwargs, resource, type_ext, content_id=None):
     # sometimes we need to tweak the incoming kwargs, so let's 
     # make a mutable MultiDict copy of Pyramid's immutable NestedMultiDict
@@ -254,7 +282,7 @@ def create_study(request):
     api_version = request.matchdict['api_version']
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
 
     # gather any user-provided git-commit message
     try:
@@ -321,6 +349,8 @@ def create_study(request):
     elif importing_from_crossref_API:
         new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi_for_crossref, ref_string=publication_ref, include_cc0=cc0_agreement)
     elif importing_from_post_arg:
+        phylesystem = api_utils.get_phylesystem(request)
+        repo_nexml2json = phylesystem.repo_nexml2json
         bundle = __extract_and_validate_nexson(request,
                                                repo_nexml2json,
                                                request.json_body)
@@ -362,7 +392,7 @@ def create_study(request):
                 # OK to add a name here? mainly to capture submitter's intent
                 nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
 
-    nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
+    nexml['^ot:curatorName'] = auth_info.get('name', '')
 
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
@@ -390,7 +420,7 @@ def update_study(request):
     study_id = request.matchdict['study_id']
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
 
     parent_sha = find_in_request(request, 'starting_commit_SHA')
     if parent_sha is None:
@@ -449,7 +479,7 @@ def delete_study(request):
     study_id = request.matchdict['study_id']
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
 
     # gather any user-provided git-commit message
     try:

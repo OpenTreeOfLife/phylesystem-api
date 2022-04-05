@@ -1541,7 +1541,7 @@ def v1():
                         # OK to add a name here? mainly to capture submitter's intent
                         nexml['^xhtml:license'] = {'@name': alt_license_name, '@href': alt_license_url}
 
-            nexml['^ot:curatorName'] = auth_info.get('name', '').decode('utf-8')
+            nexml['^ot:curatorName'] = auth_info.get('name', '')
 
         phylesystem = api_utils.get_phylesystem(request)
         try:
@@ -1789,7 +1789,7 @@ def v1():
                 # root of this tree is the complete mini-DOM
                 ref_root = ref_element_tree.elements()[0]
                 # reduce this root to plain text (strip any tags)
-                meta_publication_reference = ref_root.flatten().decode('utf-8')
+                meta_publication_reference = ref_root.flatten()
 
             except urllib2.URLError, e:
                 # Any response but 200 means no match found, or the CrossRef

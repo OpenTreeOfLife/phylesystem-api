@@ -319,7 +319,7 @@ def read_logging_config(request):
         logging_filepath = None
     return level, logging_format_name, logging_filepath
 
-def authenticate(**kwargs):
+def authenticate(request):
     """Verify that we received a valid Github authentication token
 
     This method takes a dict of keyword arguments and optionally
@@ -333,7 +333,7 @@ def authenticate(**kwargs):
 
     """
     # this is the GitHub API auth-token for a logged-in curator
-    auth_token   = kwargs.get('auth_token','')
+    auth_token   = find_in_request(request, 'auth_token', '')
 
     if not auth_token:
         raise HTTPBadRequest(json.dumps({
@@ -350,20 +350,12 @@ def authenticate(**kwargs):
             "error": 1,
             "description":"You have provided an invalid or expired authentication token"
         }))
-
-    auth_info['name'] = kwargs.get('author_name')
-    auth_info['email'] = kwargs.get('author_email')
-
     # use the Github Oauth token to get a name/email if not specified
     # we don't provide these as default values above because they would
     # generate API calls regardless of author_name/author_email being specifed
-
-    if auth_info['name'] is None:
-        auth_info['name'] = gh_user.name
-    if auth_info['email'] is None:
-        auth_info['email']= gh_user.email
+    auth_info['name'] = find_in_request(request, 'author_name', gh_user.name)
+    auth_info['email'] = find_in_request(request, 'author_email', gh_user.email)
     return auth_info
-
 
 _LOGGING_LEVEL_ENVAR="OT_API_LOGGING_LEVEL"
 _LOGGING_FORMAT_ENVAR="OT_API_LOGGING_FORMAT"

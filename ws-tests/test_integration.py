@@ -34,10 +34,10 @@ data = { 'nexson' : acurr_obj,
          'starting_commit_SHA': starting_commit_SHA,
 }
 r2 = test_http_json_method(SUBMIT_URI,
-                         'PUT',
-                         data=data,
-                         expected_status=200,
-                         return_bool_data=True)
+                           'PUT',
+                           data=data,
+                           expected_status=200,
+                           return_bool_data=True)
 
 assert(r2[0]==True)
 assert(r2[1]['resource_id']==study_id)

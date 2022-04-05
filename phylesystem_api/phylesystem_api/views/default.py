@@ -112,7 +112,7 @@ def pull_through_cache(request):
 @view_config(route_name='render_markdown')
 def render_markdown(request):
     # Convert POSTed Markdown to HTML (e.g., for previews in web UI)
-    src = request.body.decode('utf-8')
+    src = request.body
     html = api_utils.markdown_to_html( src, open_links_in_new_window=True )
     return Response(body=html, content_type='text/html')
 
@@ -208,7 +208,7 @@ def include_tree_in_synth(request):
         coll['decisions'] = decision_list
         # update the default collection (forces re-indexing)
         try:
-            auth_info = api_utils.authenticate(**kwargs)
+            auth_info = api_utils.authenticate(request)
             owner_id = auth_info.get('login', None)
         except:
             msg = 'include_tree_in_synth(): Authentication failed'
@@ -252,7 +252,7 @@ def exclude_tree_from_synth(request):
     coll_id_list = _get_synth_input_collection_ids()
     cds = api_utils.get_tree_collection_store(request)
     try:
-        auth_info = api_utils.authenticate(**kwargs)
+        auth_info = api_utils.authenticate(request)
         owner_id = auth_info.get('login', None)
     except:
         msg = 'include_tree_in_synth(): Authentication failed'
