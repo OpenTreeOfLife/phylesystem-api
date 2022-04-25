@@ -3,6 +3,7 @@ from pyramid.httpexceptions import (
                                     HTTPException,
                                     HTTPError,
                                     HTTPNotFound,
+                                    HTTPConflict,
                                     HTTPBadRequest,
                                     HTTPInternalServerError,
                                     HTTPForbidden,
@@ -13,8 +14,13 @@ from peyotl import concatenate_collections, \
                    tree_is_in_collection
 
 from peyotl.phylesystem.git_workflows import GitWorkflowError, \
+                                             merge_from_master, \
                                              validate_and_convert_nexson
 import phylesystem_api.api_utils as api_utils
+import traceback
+import datetime
+import codecs
+import os
 try:
     import anyjson
 except:
@@ -293,8 +299,6 @@ def exclude_tree_from_synth(request):
     # fetch and return the updated list of synth-input trees
     return trees_in_synth(kwargs)
 
-
-
 def _get_synth_input_collection_ids():
     """Return a list of all collection ids for the collections that contribute
     to synthesis (based on the current propinquity configuration).
@@ -317,3 +321,182 @@ def _get_synth_input_collection_ids():
         raise HTTPInternalServerError(body='Could not find a collection list in file from {}'.format(url_of_synth_config))
     return coll_id_list
 
+@view_config(route_name='merge_docstore_changes', renderer='json')
+def merge_docstore_changes(request):
+    """Undocumented method to merge changes FROM master, i.e.
+any work merged by others since these edits began.
+
+    curl -X PUT https://devapi.opentreeoflife.org/v3/merge_docstore_changes/ot_9999/152316261261342&auth_token=$GITHUB_OAUTH_TOKEN
+
+    If the request is successful, a JSON response similar to this will be returned:
+
+    {
+        "error": 0,
+        "branch_name": "my_user_9_2",
+        "description": "Updated branch",
+        "sha": "dcab222749c9185797645378d0bda08d598f81e7",
+        "merged_SHA": "16463623459987070600ab2757540c06ddepa608",
+    }
+
+    'merged_SHA' must be included in the next PUT for this study (unless you are
+        happy with your work languishing on a WIP branch instead of master).
+
+    If there is an error, an HTTP 400 error will be returned with a JSON response similar
+    to this:
+
+    {
+        "error": 1,
+        "description": "Could not merge master into WIP! Details: ..."
+    }
+    """
+    # if behavior varies based on /v1/, /v2/, ...
+    api_version = request.matchdict['api_version']
+    resource_id = request.matchdict['doc_id']
+    starting_commit_SHA = request.matchdict['starting_commit_SHA']
+
+    api_utils.raise_if_read_only()
+
+    # this method requires authentication
+    auth_info = api_utils.authenticate(request)
+
+    phylesystem = api_utils.get_phylesystem(request)
+    gd = phylesystem.create_git_action(resource_id)
+    try:
+        return merge_from_master(gd, resource_id, auth_info, starting_commit_SHA)
+    except GitWorkflowError as err:
+        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": err.msg}))
+    except:
+        m = traceback.format_exc()
+        raise HTTPConflict(detail=json.dumps({
+            "error": 1,
+            "description": "Could not merge! Details: %s" % (m)
+        }))
+
+    #import pdb; pdb.set_trace()
+    return locals()
+
+@view_config(route_name='push_docstore_changes', renderer='json')
+def push_docstore_changes(request):
+    """OpenTree API method to update branch on master
+
+    curl -X POST http://devapi.opentreeoflife.org/v3/push_docstore_changes/ot_999
+    """
+    # if behavior varies based on /v1/, /v2/, ...
+    api_version = request.matchdict['api_version']
+    doc_type = request.matchdict['doc_type']
+    resource_id = request.matchdict['doc_id']
+
+    api_utils.raise_if_read_only()
+
+    _LOG = api_utils.get_logger(request, 'ot_api.push.v3.PUT')
+    fail_file = api_utils.get_failed_push_filepath(request, doc_type=doc_type)
+    _LOG.debug(">> fail_file for type '{t}': {f}".format(t=doc_type, f=fail_file))
+
+    # this method requires authentication
+    auth_info = api_utils.authenticate(request)
+
+    # TODO
+    if doc_type.lower() == 'nexson':
+        phylesystem = api_utils.get_phylesystem(request)
+        try:
+            phylesystem.push_study_to_remote('GitHubRemote', resource_id)
+        except:
+            m = traceback.format_exc()
+            _LOG.warn('Push of study {s} failed. Details: {m}'.format(s=resource_id, m=m))
+            if os.path.exists(fail_file):
+                _LOG.warn('push failure file "{f}" already exists. This event not logged there'.format(f=fail_file))
+            else:
+                timestamp = datetime.datetime.utcnow().isoformat()
+                try:
+                    ga = phylesystem.create_git_action(resource_id)
+                except:
+                    m = 'Could not create an adaptor for git actions on study ID "{}". ' \
+                        'If you are confident that this is a valid study ID, please report this as a bug.'
+                    m = m.format(resource_id)
+                    raise HTTPBadRequest(body=json.dumps({'error': 1, 'description': m}))
+                master_sha = ga.get_master_sha()
+                obj = {'date': timestamp,
+                       'study': resource_id,
+                       'commit': master_sha,
+                       'stacktrace': m}
+                api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
+                _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+            raise HTTPConflict(json.dumps({
+                "error": 1,
+                "description": "Could not push! Details: {m}".format(m=m)
+            }))
+
+    elif doc_type.lower() == 'collection':
+        docstore = api_utils.get_tree_collection_store(request)
+        try:
+            docstore.push_doc_to_remote('GitHubRemote', resource_id)
+        except:
+            m = traceback.format_exc()
+            _LOG.warn('Push of collection {s} failed. Details: {m}'.format(s=resource_id, m=m))
+            if os.path.exists(fail_file):
+                _LOG.warn('push failure file "{f}" already exists. This event not logged there'.format(f=fail_file))
+            else:
+                timestamp = datetime.datetime.utcnow().isoformat()
+                try:
+                    ga = docstore.create_git_action(resource_id)
+                except:
+                    m = 'Could not create an adaptor for git actions on collection ID "{}". ' \
+                        'If you are confident that this is a valid collection ID, please report this as a bug.'
+                    m = m.format(resource_id)
+                    raise HTTPBadRequest(body=json.dumps({'error': 1, 'description': m}))
+                master_sha = ga.get_master_sha()
+                obj = {'date': timestamp,
+                       'collection': resource_id,
+                       'commit': master_sha,
+                       'stacktrace': m}
+                api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
+                _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+            raise HTTP(409, json.dumps({
+                "error": 1,
+                "description": "Could not push! Details: {m}".format(m=m)
+            }))
+
+    elif doc_type.lower() == 'amendment':
+        docstore = api_utils.get_taxonomic_amendment_store(request)
+        try:
+            docstore.push_doc_to_remote('GitHubRemote', resource_id)
+        except:
+            m = traceback.format_exc()
+            _LOG.warn('Push of amendment {s} failed. Details: {m}'.format(s=resource_id, m=m))
+            if os.path.exists(fail_file):
+                _LOG.warn('push failure file "{f}" already exists. This event not logged there'.format(f=fail_file))
+            else:
+                timestamp = datetime.datetime.utcnow().isoformat()
+                try:
+                    ga = docstore.create_git_action(resource_id)
+                except:
+                    m = 'Could not create an adaptor for git actions on amendment ID "{}". ' \
+                        'If you are confident that this is a valid amendment ID, please report this as a bug.'
+                    m = m.format(resource_id)
+                    raise HTTPBadRequest(body=json.dumps({'error': 1, 'description': m}))
+                master_sha = ga.get_master_sha()
+                obj = {'date': timestamp,
+                       'amendment': resource_id,
+                       'commit': master_sha,
+                       'stacktrace': m}
+                api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
+                _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+            raise HTTP(409, json.dumps({
+                "error": 1,
+                "description": "Could not push! Details: {m}".format(m=m)
+            }))
+
+    else:
+        raise HTTPBadRequest(body="Can't push unknown doc_type '{}'".format(doc_type)) 
+
+    if os.path.exists(fail_file):
+        # log any old fail_file, and remove it because the pushes are working
+        with codecs.open(fail_file, 'rU', encoding='utf-8') as inpf:
+            prev_fail = json.load(inpf)
+        os.unlink(fail_file)
+        fail_log_file = codecs.open(fail_file + '.log', mode='a', encoding='utf-8')
+        json.dump(prev_fail, fail_log_file, indent=2, encoding='utf-8')
+        fail_log_file.close()
+
+    return {'error': 0,
+            'description': 'Push succeeded'}

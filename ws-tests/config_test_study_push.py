@@ -29,7 +29,7 @@ r2 = test_http_json_method(SUBMIT_URI,
                            expected_status=400,
                            return_bool_data=True)
 
-PUSH_URI = DOMAIN + '/push/v1/' + study
+PUSH_URI = DOMAIN + '/v3/push_docstore_changes/nexson/' + study
 r3 = test_http_json_method(PUSH_URI,
                            'PUT',
                            expected_status=400,

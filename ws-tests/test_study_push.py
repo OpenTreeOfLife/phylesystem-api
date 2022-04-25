@@ -27,7 +27,7 @@ r2 = test_http_json_method(SUBMIT_URI,
                            expected_status=200,
                            return_bool_data=True)
 
-PUSH_URI = DOMAIN + '/v3/studies/push/' + study
+PUSH_URI = DOMAIN + '/v3/push_docstore_changes/nexson/' + study
 data = { 'auth_token': auth_token }
 r3 = test_http_json_method(PUSH_URI,
                            'PUT',

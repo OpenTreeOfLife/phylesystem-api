@@ -317,7 +317,7 @@ def create_study(request):
     # N.B. We're currently using a streamlined creation path with just
     # two methods (TreeBASE ID and publication DOI). But let's keep the
     # logic for others, just in case we revert based on user feedback.
-    importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id)
+    importing_from_treebase_id = (import_method == 'import-method-TREEBASE_ID' and treebase_id != '')
     importing_from_nexml_fetch = (import_method == 'import-method-NEXML' and nexml_fetch_url)
     importing_from_post_arg = (import_method == 'import-method-POST')
     importing_from_nexml_string = (import_method == 'import-method-NEXML' and nexml_pasted_string)

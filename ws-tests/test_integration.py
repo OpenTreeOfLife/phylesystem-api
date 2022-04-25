@@ -143,7 +143,7 @@ r5_sha=r5[1]['sha']
 
 # sixth commit is the merge
 starting_commit_SHA = r5_sha
-SUBMIT_URI = DOMAIN + '/v3/studies/merge/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
+SUBMIT_URI = DOMAIN + '/v3/merge_docstore_changes/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
 
 data = {'auth_token' : auth_token,}
 
