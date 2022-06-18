@@ -190,9 +190,12 @@ def get_failed_push_filepath(request, doc_type=None):
     return os.path.join(get_private_dir(request), failure_filename)
 
 def get_conf_object(request):
+    # There's apparently no easy way to retrieve the fully parsed
+    # configuration from within the app. But we can access the variables
+    # from the [app:main] setion, so we'll retrieve the full path to
+    # our chosen INI file from there.
     conf = SafeConfigParser(allow_no_value=True)
-    this_dir = os.path.dirname(__file__)
-    localconfig_filename = os.path.normpath(this_dir +'/../../api.config')
+    localconfig_filename = request.registry.settings['config_file_path']
     if os.path.isfile(localconfig_filename):
         conf.readfp(open(localconfig_filename))
     return conf
