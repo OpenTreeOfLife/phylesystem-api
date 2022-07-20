@@ -83,7 +83,6 @@ def pull_through_cache(request):
         fetch_url = request.relative_url(root_relative_url)
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         try:
-            from multidict import MultiDict
             if request.method == 'POST':
                 # assume a typical API request with JSON payload
                 try:
@@ -91,11 +90,8 @@ def pull_through_cache(request):
                     fetch_args = request.json  # {'startingTaxonOTTId': ""}
                 except:
                     _LOG.warn("  request.POST is a {}".format(type(request.POST)))
-                    if is_instance(request.POST, MultiDict):
-                        # in this case, directly coercing payload to JSON fails
-                        fetch_args = request.POST.to_dict(flat=False)
-                    else:
-                        fetch_args = request.POST
+                    # NB - This is always a MultiDict, so directly coercing to JSON fails
+                    fetch_args = request.POST.to_dict(flat=False)
                 _LOG.warn("  fetch_args: {}".format(fetch_args))
                 fetched = requests.post(url=fetch_url,
                                         data=anyjson.dumps(fetch_args),
