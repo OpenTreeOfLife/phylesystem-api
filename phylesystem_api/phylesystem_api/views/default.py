@@ -72,21 +72,21 @@ def pull_through_cache(request):
     _LOG = api_utils.get_logger(request, 'ot_api')
     api_utils.raise_on_CORS_preflight(request)
     target_url = request.matchdict.get('target_url')
-    _LOG.debug(">> target_url: {}".format(target_url))
+    _LOG.warn(">> target_url: {}".format(target_url))
 
     @cache_region('short_term', 'pull-through')
     def fetch_and_cache(url):
         # let's restrict this to URLs on this api server, to avoid shenanigans
         #import pdb; pdb.set_trace()
         root_relative_url = "/{}".format(url)
-        _LOG.debug(">> root_relative_url: {}".format(root_relative_url))
+        _LOG.warn(">> root_relative_url: {}".format(root_relative_url))
         fetch_url = request.relative_url(root_relative_url)
-        _LOG.debug("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
+        _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         try:
             if request.method == 'POST':
                 # assume a typical API request with JSON payload
                 fetch_args = request.POST  # {'startingTaxonOTTId': ""}
-                _LOG.debug("  fetch_args: {}".format(fetch_args))
+                _LOG.warn("  fetch_args: {}".format(fetch_args))
                 fetched = requests.post(url=fetch_url,
                                         data=anyjson.dumps(fetch_args),
                                         headers={"Content-Type": "application/json"})
@@ -111,13 +111,13 @@ def pull_through_cache(request):
         except requests.RequestException as e:
             # throw an exception (hopefully copying its status code and message) so we don't poison the cache!
             # NB - We don't want to cache this response, but we DO want to return its payload
-            _LOG.debug("  request exception: {}".format(str(e)))
+            _LOG.warn("  request exception: {}".format(str(e)))
             raise HTTPException(body=str(e))
         except Exception as e:
-            _LOG.debug("  UNKNOWN request exception: {}".format(str(e)))
+            _LOG.warn("  UNKNOWN request exception: {}".format(str(e)))
             raise HTTPBadRequest(body='Unknown exception in cached call!')
 
-    _LOG.debug("...trying to fetch-and-cache...")
+    _LOG.warn("...trying to fetch-and-cache...")
     return fetch_and_cache(target_url)
 
 
