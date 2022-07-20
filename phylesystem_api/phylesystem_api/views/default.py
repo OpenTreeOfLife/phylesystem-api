@@ -85,16 +85,9 @@ def pull_through_cache(request):
         try:
             if request.method == 'POST':
                 # assume a typical API request with JSON payload
-                try:
-                    _LOG.warn("  request.json is a {}".format(type(request.json)))
-                    fetch_args = request.json  # {'startingTaxonOTTId': ""}
-                except:
-                    _LOG.warn("  request.POST is a {}".format(type(request.POST)))
-                    # NB - This is always a MultiDict, so directly coercing to JSON fails
-                    fetch_args = request.POST.to_dict(flat=False)
-                _LOG.warn("  fetch_args: {}".format(fetch_args))
+                # (pass this along unchanged)
                 fetched = requests.post(url=fetch_url,
-                                        data=anyjson.dumps(fetch_args),
+                                        data=request.body,
                                         headers={"Content-Type": "application/json"})
             else:
                 fetched = requests.get(fetch_url)
