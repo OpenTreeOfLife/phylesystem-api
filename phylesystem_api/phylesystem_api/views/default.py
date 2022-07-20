@@ -85,7 +85,10 @@ def pull_through_cache(request):
         try:
             if request.method == 'POST':
                 # assume a typical API request with JSON payload
-                fetch_args = request.POST  # {'startingTaxonOTTId': ""}
+                try:
+                    fetch_args = request.json  # {'startingTaxonOTTId': ""}
+                except:
+                    fetch_args = request.POST  # if coercing payload to JSON fails
                 _LOG.warn("  fetch_args: {}".format(fetch_args))
                 fetched = requests.post(url=fetch_url,
                                         data=anyjson.dumps(fetch_args),
