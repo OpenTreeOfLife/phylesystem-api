@@ -88,7 +88,7 @@ def pull_through_cache(request):
                 # (pass this along unchanged)
                 fetched = requests.post(url=fetch_url,
                                         data=request.body,
-                                        headers={"Content-Type": "application/json"})
+                                        headers=request.headers)
             elif request.method == 'OPTIONS':
                 fetched = requests.options(url=fetch_url,
                                            data=request.body,
