@@ -69,7 +69,7 @@ def pull_through_cache(request):
     original URL. If the original URL returns an error (non-200 status), return
     the error without caching the result.
     """
-    _LOG = api_utils.get_logger(request, 'phylesystemapi.pull_through_cache')
+    _LOG = api_utils.get_logger(request, 'ot_api')
     api_utils.raise_on_CORS_preflight(request)
     target_url = request.matchdict.get('target_url')
     _LOG.debug(">> target_url: {}".format(target_url))
