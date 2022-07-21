@@ -82,20 +82,26 @@ def pull_through_cache(request):
         _LOG.warn(">> root_relative_url: {}".format(root_relative_url))
         fetch_url = request.relative_url(root_relative_url)
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
+        _LOG.warn("  request.method = {}".format(request.method))
         try:
             if request.method == 'POST':
                 # assume a typical API request with JSON payload
                 # (pass this along unchanged)
+                _LOG.warn("  treating as POST")
                 fetched = requests.post(url=fetch_url,
                                         data=request.body,
                                         headers=request.headers)
             elif request.method == 'OPTIONS':
+                _LOG.warn("  treating as OPTIONS")
+                _LOG.warn("  headers: {}".format(request.headers))
                 fetched = requests.options(url=fetch_url,
                                            data=request.body,
                                            headers=request.headers)
             else:
+                _LOG.warn("  treating as GET")
                 fetched = requests.get(fetch_url)
             # TODO: For more flexibility, we might examine and mimic the original request (headers, etc)
+            _LOG.warn("... and now we're back with fetched, which is a {}".format( type(fetched) ))
             fetched.raise_for_status()
             fetched.encoding = 'utf-8' # Optional: requests infers this internally
             try:
