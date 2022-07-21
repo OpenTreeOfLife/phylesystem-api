@@ -107,12 +107,14 @@ def pull_through_cache(request):
             try:
                 test_for_json = fetched.json()  # missing JSON payload will raise an error
                 return Response(
+                    headers=fetched.headers,
                     body=fetched.text,  # missing JSON payload will raise an error
                     status='200 OK',
                     charset='UTF-8',
                     content_type='application/json')
             except requests.exceptions.JSONDecodeError:
                 return Response(
+                    headers=fetched.headers,
                     body=response.text,
                     status='200 OK',
                     charset='UTF-8',
