@@ -326,7 +326,7 @@ def _get_synth_input_collection_ids():
         resp = requests.get(url_of_synth_config)
         conf_fo = StringIO(resp.content)
     except:
-        raise HTTP(504, 'Could not fetch synthesis list from {}'.format(url_of_synth_config))
+        raise HTTPGatewayTimeout(body ='Could not fetch synthesis list from {}'.format(url_of_synth_config))
     cfg = SafeConfigParser()
     try:
         cfg.readfp(conf_fo)
