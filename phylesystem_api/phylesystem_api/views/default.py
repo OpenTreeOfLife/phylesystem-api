@@ -469,7 +469,7 @@ def push_docstore_changes(request):
                        'stacktrace': m}
                 api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
                 _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
-            raise HTTP(409, json.dumps({
+            raise HTTPConflict(body=json.dumps({
                 "error": 1,
                 "description": "Could not push! Details: {m}".format(m=m)
             }))
@@ -499,7 +499,7 @@ def push_docstore_changes(request):
                        'stacktrace': m}
                 api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
                 _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
-            raise HTTP(409, json.dumps({
+            raise HTTPConflict(body=json.dumps({
                 "error": 1,
                 "description": "Could not push! Details: {m}".format(m=m)
             }))
