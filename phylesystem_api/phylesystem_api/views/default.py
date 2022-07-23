@@ -7,6 +7,7 @@ from pyramid.httpexceptions import (
                                     HTTPBadRequest,
                                     HTTPInternalServerError,
                                     HTTPForbidden,
+                                    HTTPGatewayTimeout,
                                    )
 from pyramid.response import Response
 import requests
