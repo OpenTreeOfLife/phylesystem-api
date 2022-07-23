@@ -166,7 +166,7 @@ def trees_in_synth(request):
         except:
             msg = 'GET of collection {} failed'.format(coll_id)
             # _LOG.exception(msg)
-            raise HTTPBadRequest(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
     try:
         result = concatenate_collections(coll_list)
     except:
@@ -197,7 +197,7 @@ def include_tree_in_synth(request):
         #_LOG.exception('*** FOUND IT: {}'.format(found_tree_name))
     except:  # report a missing/misidentified tree
         # _LOG.exception('problem finding tree')
-        raise HTTPBadRequest(body='{{"error": 1, "description": "Specified tree \'{t}\' in study \'{s}\' not found! Save this study and try again?"}}'.format(s=study_id,t=tree_id))
+        raise HTTP(404, '{{"error": 1, "description": "Specified tree \'{t}\' in study \'{s}\' not found! Save this study and try again?"}}'.format(s=study_id,t=tree_id))
     already_included_in_synth_input_collections = False
     # Look ahead to see if it's already in an included collection; if so, skip
     # adding it again.
@@ -209,7 +209,7 @@ def include_tree_in_synth(request):
         except:
             msg = 'GET of collection {} failed'.format(coll_id)
             # _LOG.exception(msg)
-            raise HTTPBadRequest(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         if tree_is_in_collection(coll, study_id, tree_id):
             already_included_in_synth_input_collections = True
     if not already_included_in_synth_input_collections:
@@ -235,13 +235,13 @@ def include_tree_in_synth(request):
             owner_id = auth_info.get('login', None)
         except:
             msg = 'include_tree_in_synth(): Authentication failed'
-            raise HTTPBadRequest(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         try:
             parent_sha = request.params.get('starting_commit_SHA', None)
             merged_sha = None  #TODO: request.params.get('???', None)
         except:
             msg = 'include_tree_in_synth(): fetch of starting_commit_SHA failed'
-            raise HTTPBadRequest(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         try:
             r = cds.update_existing_collection(owner_id,
                                                default_collection_id,
@@ -279,13 +279,13 @@ def exclude_tree_from_synth(request):
         owner_id = auth_info.get('login', None)
     except:
         msg = 'include_tree_in_synth(): Authentication failed'
-        raise HTTPBadRequest(body=anyjson.dumps({"error": 1, "description": msg}))
+        raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
     for coll_id in coll_id_list:
         try:
             coll = cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
         except:
             msg = 'GET of collection {} failed'.format(coll_id)
-            raise HTTPBadRequest(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         if tree_is_in_collection(coll, study_id, tree_id):
             # remove it and update the collection
             decision_list = coll.get('decisions', [])
