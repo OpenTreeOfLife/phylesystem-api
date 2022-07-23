@@ -177,8 +177,8 @@ def trees_in_synth(request):
 
 @view_config(route_name='include_tree_in_synth', renderer='json')
 def include_tree_in_synth(request):
-    study_id = kwargs.get('study_id', "").strip()
-    tree_id = kwargs.get('tree_id', "").strip()
+    study_id = request.params.get('study_id', "").strip()
+    tree_id = request.params.get('tree_id', "").strip()
     # check for empty/missing ids
     if (study_id == '') or (tree_id == ''):
         raise HTTPBadRequest(body='{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
@@ -237,8 +237,8 @@ def include_tree_in_synth(request):
             msg = 'include_tree_in_synth(): Authentication failed'
             raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
         try:
-            parent_sha = kwargs.get('starting_commit_SHA', None)
-            merged_sha = None  #TODO: kwargs.get('???', None)
+            parent_sha = request.params.get('starting_commit_SHA', None)
+            merged_sha = None  #TODO: request.params.get('???', None)
         except:
             msg = 'include_tree_in_synth(): fetch of starting_commit_SHA failed'
             raise HTTP(404, anyjson.dumps({"error": 1, "description": msg}))
@@ -266,8 +266,8 @@ def include_tree_in_synth(request):
 
 @view_config(route_name='exclude_tree_from_synth', renderer='json')
 def exclude_tree_from_synth(request):
-    study_id = kwargs.get('study_id', "").strip()
-    tree_id = kwargs.get('tree_id', "").strip()
+    study_id = request.params.get('study_id', "").strip()
+    tree_id = request.params.get('tree_id', "").strip()
     # check for empty/missing ids
     if (study_id == '') or (tree_id == ''):
         raise HTTPBadRequest(body='{"error": 1, "description": "Expecting study_id and tree_id arguments"}')
@@ -292,8 +292,8 @@ def exclude_tree_from_synth(request):
             coll['decisions'] = [d for d in decision_list if not ((d['studyID'] == study_id) and (d['treeID'] == tree_id))]
             # N.B. that _both_ ids (for study and tree) must match to remove a decision!
             # update the collection (forces re-indexing)
-            parent_sha = kwargs.get('starting_commit_SHA', None)
-            merged_sha = None  #TODO: kwargs.get('???', None)
+            parent_sha = request.params.get('starting_commit_SHA', None)
+            merged_sha = None  #TODO: request.params.get('???', None)
             try:
                 r = cds.update_existing_collection(owner_id,
                                                    coll_id,
