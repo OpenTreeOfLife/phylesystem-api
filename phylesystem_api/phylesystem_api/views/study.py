@@ -192,15 +192,10 @@ def fetch_study(request):
             request_extension = '.{}'.format(request_extension)
     except IndexError:
         request_extension = None
-    try:
-        json_data = request.json_body
-    except:
-        # no JSON payload provided
-        json_data = {}
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     out_schema = __validate_output_nexml2json(repo_nexml2json,
-                                              json_data,
+                                              request.params,   # combined GET and POST
                                               'study',
                                               request_extension,
                                               content_id=content_id)
@@ -514,15 +509,10 @@ def get_study_file(request):
     file_id = request.matchdict.get('file_id', None)
 
     result_data = None
-    try:
-        json_data = request.json_body
-    except:
-        # no JSON payload provided
-        json_data = {}
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     out_schema = __validate_output_nexml2json(repo_nexml2json,
-                                              json_data,
+                                              request.params,   # combined GET and POST
                                               'file',
                                               None,
                                               content_id=study_id)
@@ -606,15 +596,10 @@ def get_study_tree(request):
         file_ext = None
 
     result_data = None
-    try:
-        json_data = request.json_body
-    except:
-        # no JSON payload provided
-        json_data = {}
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     out_schema = __validate_output_nexml2json(repo_nexml2json,
-                                              json_data,
+                                              request.params,   # combined GET and POST
                                               'tree',
                                               file_ext,
                                               content_id=tree_id)
