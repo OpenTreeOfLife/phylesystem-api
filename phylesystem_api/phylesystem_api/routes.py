@@ -43,10 +43,10 @@ def includeme(config):
     config.add_route('find_trees_in_collections', '/{api_version}/collections/find_trees')
     config.add_route('find_collections', '/{api_version}/collections/find_collections')
     config.add_route('create_collection', '/{api_version}/collection/')
-    config.add_route('collection_CORS_preflight', '/{api_version}/collection/{collection_id}', request_method='OPTIONS')
-    config.add_route('fetch_collection', '/{api_version}/collection/{collection_id}', request_method='GET')
-    config.add_route('update_collection', '/{api_version}/collection/{collection_id}', request_method='PUT')
-    config.add_route('delete_collection', '/{api_version}/collection/{collection_id}', request_method='DELETE')
+    config.add_route('collection_CORS_preflight', '/{api_version}/collection/{collection_id:.*}', request_method='OPTIONS')
+    config.add_route('fetch_collection', '/{api_version}/collection/{collection_id:.*}', request_method='GET')
+    config.add_route('update_collection', '/{api_version}/collection/{collection_id:.*}', request_method='PUT')
+    config.add_route('delete_collection', '/{api_version}/collection/{collection_id:.*}', request_method='DELETE')
     #
     # TAXONOMIC AMENDMENT ROUTES
     #
