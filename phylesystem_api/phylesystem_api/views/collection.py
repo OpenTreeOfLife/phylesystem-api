@@ -182,7 +182,7 @@ def fetch_collection(request):
 def update_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
     owner_id = auth_info.get('login', None)
 
     api_version = request.matchdict['api_version']
