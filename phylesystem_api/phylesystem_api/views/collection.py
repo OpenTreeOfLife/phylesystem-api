@@ -9,6 +9,7 @@ from pyramid.httpexceptions import (
                                     HTTPInternalServerError,
                                    )
 from peyotl.api import OTI
+from peyotl.phylesystem.git_workflows import GitWorkflowError
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
 import json
@@ -70,7 +71,7 @@ def create_collection(request):
     auth_info = None
     if owner_id is None:
         # set this explicitly to the logged-in userid (make sure the user is allowed!)
-        auth_info = api_utils.authenticate(**request.json_body)
+        auth_info = api_utils.authenticate(request)
         owner_id = auth_info.get('login', None)
         if owner_id is None:
             raise HTTPBadRequest(json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
@@ -91,7 +92,7 @@ def create_collection(request):
             raise HTTPNotFound(body=json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
 
     # Create a new collection with the data provided
-    auth_info = auth_info or api_utils.authenticate(**request.json_body)
+    auth_info = auth_info or api_utils.authenticate(request)
     # submit the json and proposed id (if any), and read the results
     docstore = api_utils.get_tree_collection_store(request)
     try:
@@ -230,7 +231,7 @@ def update_collection(request):
 def delete_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
 
     api_version = request.matchdict['api_version']
     collection_id = request.matchdict['collection_id']
@@ -248,7 +249,7 @@ def delete_collection(request):
     api_utils.raise_if_read_only()
 
     # remove this collection from the docstore
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
     owner_id = auth_info.get('login', None)
     docstore = api_utils.get_tree_collection_store(request)
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)

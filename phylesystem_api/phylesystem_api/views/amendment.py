@@ -9,6 +9,7 @@ from pyramid.httpexceptions import (
                                     HTTPInternalServerError,
                                    )
 from peyotl.api import OTI
+from peyotl.phylesystem.git_workflows import GitWorkflowError
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
 import json
@@ -74,7 +75,7 @@ def create_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
 
     # gather any user-provided git-commit message
     try:
@@ -183,7 +184,7 @@ def update_amendment(request):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid amendment ID ({}) provided".format(amendment_id)}))
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
 
     # gather any user-provided git-commit message
     try:
@@ -239,7 +240,7 @@ def delete_amendment(request):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "invalid amendment ID ({}) provided".format(amendment_id)}))
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(**request.json_body)
+    auth_info = api_utils.authenticate(request)
 
     # gather any user-provided git-commit message
     try:
