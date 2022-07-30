@@ -67,7 +67,7 @@ def create_collection(request):
 
     # fetch and parse the JSON payload, if any
     collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.json_body)
-    if (amendment_obj is None):
+    if (collection_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.method) }))
 
     auth_info = None
@@ -202,6 +202,11 @@ def update_collection(request):
         commit_msg = None
 
     api_utils.raise_if_read_only()
+
+    # fetch and parse the JSON payload, if any
+    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.json_body)
+    if (collection_obj is None):
+        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.method) }))
 
     # submit new json for this id, and read the results
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)
