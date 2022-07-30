@@ -19,6 +19,26 @@ from peyotl.collections_store import OWNER_ID_PATTERN, \
                                      COLLECTION_ID_PATTERN
 from peyotl.collections_store.validation import validate_collection
 
+def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
+    """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
+    json_obj = None
+    try:
+        # check for kwarg data_field_name, or load the full request body
+        if data_field_name in kwargs:
+            json_obj = kwargs.get(data_field_name, {})
+        else:
+            json_obj = request.body.read()
+
+        if not isinstance(json_obj, dict):
+            json_obj = json.loads(json_obj)
+        if data_field_name in json_obj:
+            json_obj = json_obj[data_field_name]
+    except:
+        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        # _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
+        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": 'no collection JSON found in request'}))
+    return json_obj
+
 def __extract_and_validate_collection(request, kwargs):
     from pprint import pprint
     try:
