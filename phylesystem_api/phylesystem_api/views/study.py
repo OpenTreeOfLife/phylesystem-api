@@ -471,11 +471,16 @@ def update_study(request):
 
 @view_config(route_name='delete_study', renderer='json')
 def delete_study(request):
+    _LOG = api_utils.get_logger(request, 'delete_study')
+    _LOG.warn('delete_study STARTING...')
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
+    _LOG.warn('api_version='.format(api_version))
+    _LOG.warn('study_id='.format(study_id))
 
     # this method requires authentication
     auth_info = api_utils.authenticate(request)
+    _LOG.warn('auth_info='.format(auth_info))
 
     # gather any user-provided git-commit message
     try:
@@ -485,10 +490,12 @@ def delete_study(request):
             commit_msg = None
     except:
         commit_msg = None
+    _LOG.warn('commit_msg='.format(commit_msg))
 
     api_utils.raise_if_read_only()
 
     phylesystem = api_utils.get_phylesystem(request)
+    _LOG.warn('trying to delete now...')
     try:
         x = phylesystem.delete_study(study_id, auth_info, parent_sha, commit_msg=commit_msg)
         if x.get('error') == 0:
