@@ -507,7 +507,7 @@ def delete_study(request):
         _LOG.warn(x)
         if x.get('error') == 0:
             _LOG.warn('calling deferred push...')
-            __deferred_push_to_gh_call(request, None, doc_type='nexson', **request.json_body)
+            __deferred_push_to_gh_call(request, None, doc_type='nexson', **request.params)
             _LOG.warn('back from deferred push')
         return x
     except GitWorkflowError as err:
