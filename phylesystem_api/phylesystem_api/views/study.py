@@ -495,7 +495,8 @@ def delete_study(request):
     api_utils.raise_if_read_only()
 
     phylesystem = api_utils.get_phylesystem(request)
-    _LOG.warn('trying to delete now...')
+    _LOG.warn('trying to delete now... via:')
+    _LOG.warn(phylesystem.delete_study)
     try:
         x = phylesystem.delete_study(study_id, auth_info, parent_sha, commit_msg=commit_msg)
         if x.get('error') == 0:
