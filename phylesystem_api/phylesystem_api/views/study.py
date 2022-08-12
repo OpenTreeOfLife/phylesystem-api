@@ -494,6 +494,8 @@ def delete_study(request):
 
     api_utils.raise_if_read_only()
 
+    parent_sha = find_in_request(request, 'starting_commit_SHA', None)
+
     phylesystem = api_utils.get_phylesystem(request)
     _LOG.warn('trying to delete now... via:')
     _LOG.warn(phylesystem.delete_study)
