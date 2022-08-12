@@ -503,12 +503,20 @@ def delete_study(request):
     _LOG.warn(phylesystem.delete_study)
     try:
         x = phylesystem.delete_study(study_id, auth_info, parent_sha, commit_msg=commit_msg)
+        _LOG.warn('initial return x:')
+        _LOG.warn(x)
         if x.get('error') == 0:
+            _LOG.warn('calling deferred push...')
             __deferred_push_to_gh_call(request, None, doc_type='nexson', **request.json_body)
+            _LOG.warn('back from deferred push')
         return x
     except GitWorkflowError as err:
+        _LOG.warn('got a GitWorkflowError:')
+        _LOG.warn(err)
         raise HTTPBadRequest(err.msg)
-    except:
+    except Exception as err:
+        _LOG.warn('some other kind of error')
+        _LOG.warn(err)
         # _LOG.exception('Exception getting nexson content in phylesystem.delete_study')
         raise HTTPBadRequest(json.dumps({"error": 1, "description": 'Unknown error in study deletion'}))
 
