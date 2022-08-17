@@ -95,21 +95,21 @@ def create_collection(request):
     owner_id = auth_info.get('login', None)
     if owner_id is None:
         raise HTTPBadRequest(json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
-    if collection_id is None:
-        # try to extract a usable collection ID from the JSON payload (confirm owner_id against above)
-        url = collection_obj.get('url', None)
-        if url is None:
-            raise HTTPBadRequest(json.dumps({"error": 1, "description": "no collection URL provided in query string or JSON payload"}))
-        try:
-            collection_id = url.split('/collection/')[1]
-        except:
-            # _LOG.exception('{} failed'.format(request.env.request_method))
-            raise HTTPNotFound(json.dumps({"error": 1, "description": "invalid URL, no collection id found: {}".format(url)}))
-        try:
-            assert collection_id.split('/')[0] == owner_id
-        except:
-            # _LOG.exception('{} failed'.format(request.env.request_method))
-            raise HTTPNotFound(body=json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
+
+    # try to extract a usable collection ID from the JSON payload (confirm owner_id against above)
+    url = collection_obj.get('url', None)
+    if url is None:
+        raise HTTPBadRequest(json.dumps({"error": 1, "description": "no collection URL provided in query string or JSON payload"}))
+    try:
+        collection_id = url.split('/collection/')[1]
+    except:
+        # _LOG.exception('{} failed'.format(request.env.request_method))
+        raise HTTPNotFound(json.dumps({"error": 1, "description": "invalid URL, no collection id found: {}".format(url)}))
+    try:
+        assert collection_id.split('/')[0] == owner_id
+    except:
+        # _LOG.exception('{} failed'.format(request.env.request_method))
+        raise HTTPNotFound(body=json.dumps({"error": 1, "description": "collection URL in JSON doesn't match logged-in user: {}".format(url)}))
 
     # Create a new collection with the data provided
     auth_info = auth_info or api_utils.authenticate(request)
