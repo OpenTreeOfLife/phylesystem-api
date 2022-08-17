@@ -219,6 +219,7 @@ def update_collection(request):
     except:
         commit_msg = None
 
+    phylesystem = api_utils.get_phylesystem(request)   # set READONLY flag before testing!
     api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
@@ -271,6 +272,7 @@ def delete_collection(request):
     except:
         commit_msg = None
 
+    phylesystem = api_utils.get_phylesystem(request)   # set READONLY flag before testing!
     api_utils.raise_if_read_only()
 
     # remove this collection from the docstore
@@ -286,7 +288,7 @@ def delete_collection(request):
                                        parent_sha,
                                        commit_msg=commit_msg)
         if x.get('error') == 0:
-            api_utils.deferred_push_to_gh_call(request, None, doc_type='collection', **request.json_body)
+            api_utils.deferred_push_to_gh_call(request, None, doc_type='collection', **request.params)
         return x
     except GitWorkflowError as err:
         raise HTTPBadRequest(err.msg)
