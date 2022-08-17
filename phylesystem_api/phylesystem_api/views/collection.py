@@ -83,7 +83,7 @@ def create_collection(request):
     except:
         commit_msg = None
 
-    docstore = api_utils.get_tree_collection_store(request)  # init before testing READONLY
+    phylesystem = api_utils.get_phylesystem(request)   # set READONLY flag before testing!
     api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
@@ -114,6 +114,7 @@ def create_collection(request):
     # Create a new collection with the data provided
     auth_info = auth_info or api_utils.authenticate(request)
     # submit the json and proposed id (if any), and read the results
+    docstore = api_utils.get_tree_collection_store(request)
     try:
         r = docstore.add_new_collection(owner_id,
                                         collection_obj,
