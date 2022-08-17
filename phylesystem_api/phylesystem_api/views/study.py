@@ -289,6 +289,7 @@ def create_study(request):
     except:
         commit_msg = None
 
+    phylesystem = api_utils.get_phylesystem(request)   # set READONLY flag before testing!
     api_utils.raise_if_read_only()
 
     # we're creating a new study (possibly with import instructions in the payload)
@@ -345,7 +346,6 @@ def create_study(request):
     elif importing_from_crossref_API:
         new_study_nexson = _new_nexson_with_crossref_metadata(doi=publication_doi_for_crossref, ref_string=publication_ref, include_cc0=cc0_agreement)
     elif importing_from_post_arg:
-        phylesystem = api_utils.get_phylesystem(request)
         repo_nexml2json = phylesystem.repo_nexml2json
         bundle = __extract_and_validate_nexson(request,
                                                repo_nexml2json,
@@ -390,7 +390,6 @@ def create_study(request):
 
     nexml['^ot:curatorName'] = auth_info.get('name', '')
 
-    phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     new_study_id = None  # TODO: should we ever specify an ID here?
     try:
@@ -432,9 +431,9 @@ def update_study(request):
     except:
         commit_msg = None
 
+    phylesystem = api_utils.get_phylesystem(request)   # set READONLY flag before testing!
     api_utils.raise_if_read_only()
 
-    phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     bundle = __extract_and_validate_nexson(request,
@@ -495,10 +494,10 @@ def delete_study(request):
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     _LOG.warn('parent_sha={}'.format(parent_sha))
 
+    phylesystem = api_utils.get_phylesystem(request)   # set READONLY flag before testing!
     api_utils.raise_if_read_only()
     _LOG.warn('passed the read-only test')
 
-    phylesystem = api_utils.get_phylesystem(request)
     _LOG.warn('trying to delete now... via:')
     _LOG.warn(phylesystem.delete_study)
     try:
