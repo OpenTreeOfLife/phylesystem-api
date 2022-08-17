@@ -86,17 +86,14 @@ def create_collection(request):
     api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
-    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.json_body)
+    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.params)
     if (collection_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.method) }))
 
-    auth_info = None
+    auth_info = api_utils.authenticate(request)
+    owner_id = auth_info.get('login', None)
     if owner_id is None:
-        # set this explicitly to the logged-in userid (make sure the user is allowed!)
-        auth_info = api_utils.authenticate(request)
-        owner_id = auth_info.get('login', None)
-        if owner_id is None:
-            raise HTTPBadRequest(json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
+        raise HTTPBadRequest(json.dumps({"error": 1, "description": "no GitHub userid found for HTTP method {}".format(request.env.request_method) }))
     if collection_id is None:
         # try to extract a usable collection ID from the JSON payload (confirm owner_id against above)
         url = collection_obj.get('url', None)
@@ -131,7 +128,7 @@ def create_collection(request):
     if commit_return['error'] != 0:
         # _LOG.debug('add_new_collection failed with error code')
         raise HTTPBadRequest(json.dumps(commit_return))
-    api_utils.deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **request.json_body)
+    api_utils.deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **request.params)
     return commit_return
 
 @view_config(route_name='fetch_collection', renderer='json')
@@ -224,7 +221,7 @@ def update_collection(request):
     api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
-    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.json_body)
+    collection_obj, collection_errors, collection_adapter = __extract_and_validate_collection(request, request.params)
     if (collection_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "collection JSON expected for HTTP method {}".format(request.method) }))
 
