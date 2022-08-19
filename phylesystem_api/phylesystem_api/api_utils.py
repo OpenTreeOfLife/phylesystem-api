@@ -631,6 +631,10 @@ ot_cleaner = Cleaner(tags=ot_markdown_tags, attributes=ot_markdown_attributes)
 
 def markdown_to_html(markdown_src='', open_links_in_new_window=False):
     extensions = ['mdx_linkify', ]
+    try:  # coerce byte-string to Unicode
+        markdown_src = markdown_src.decode('utf-8')
+    except (UnicodeDecodeError, AttributeError):
+        pass
     html = markdown.markdown(markdown_src, extensions=extensions, )
     # NB - This is clumsy, but seems impossible to do with a second extension
     # like `markdown-link-attr-modifier`
@@ -640,4 +644,8 @@ def markdown_to_html(markdown_src='', open_links_in_new_window=False):
                       html)
     # scrub HTML output with bleach
     html = ot_cleaner.clean(html)
+    try:  # coerce byte-string to Unicode
+        html = html.decode('utf-8')
+    except (UnicodeDecodeError, AttributeError):
+        pass
     return html
