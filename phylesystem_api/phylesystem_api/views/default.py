@@ -137,18 +137,9 @@ def pull_through_cache(request):
 @view_config(route_name='render_markdown')
 def render_markdown(request):
     # Convert POSTed Markdown to HTML (e.g., for previews in web UI)
-    _LOG = api_utils.get_logger(request, 'ot_api')
-    _LOG.warn('request.params:')
-    _LOG.warn(request.params)
-    _LOG.warn('request.params.get(src):')
-    _LOG.warn(request.params.get('src', None))
-    _LOG.warn('request.params[src]:')
-    _LOG.warn(request.params['src'])
-    if request.params.get('src', None):
-        _LOG.warn('found src!')
-        src = request.params.get('src')
+    if 'src' in request.params:
+        src = request.params.get('src', '')
     else:
-        _LOG.warn('src NOT FOUND')
         src = request.body
     html = api_utils.markdown_to_html( src, open_links_in_new_window=True )
     return Response(body=html, content_type='text/html')
