@@ -137,7 +137,10 @@ def pull_through_cache(request):
 @view_config(route_name='render_markdown')
 def render_markdown(request):
     # Convert POSTed Markdown to HTML (e.g., for previews in web UI)
-    src = request.body
+    if request.params.get('src', None):
+        src = request.params.get('src')
+    else:
+        src = request.body
     html = api_utils.markdown_to_html( src, open_links_in_new_window=True )
     return Response(body=html, content_type='text/html')
 
