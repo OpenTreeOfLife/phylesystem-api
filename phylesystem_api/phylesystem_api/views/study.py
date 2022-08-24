@@ -1,5 +1,6 @@
 import traceback
 from pyramid.view import view_config
+from pyramid.encode import quote_plus, urlencode
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
                                     HTTPException,
