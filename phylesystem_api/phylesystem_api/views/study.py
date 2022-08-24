@@ -273,6 +273,108 @@ def fetch_study(request):
 def study_CORS_preflight(request):
     api_utils.raise_on_CORS_preflight(request)
 
+def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
+    # look for matching studies via CrossRef.org API
+    # N.B. The recommended API method is very different for DOI vs.
+    # a reference string, but we can also use the filter option to get
+    # consistent behavior and response.
+    best_match = None
+    no_match_found = False
+    meta_publication_reference = u''
+    try:
+        if doi:
+            # use the supplied DOI to fetch study metadata
+            lookup_response = fetch(
+                'https://api.crossref.org/works?%s' %
+                urlencode({'rows': 1, 'filter': 'doi:'+ doi})
+            )
+        elif ref_string:
+            # use the supplied reference text to fetch study metadata
+            lookup_response = fetch(
+                'https://api.crossref.org/works?%s' %
+                urlencode({'rows': 1, 'query': ref_string})
+            )
+        lookup_response = unicode(lookup_response, 'utf-8')   # make sure it's Unicode!
+        response_json = anyjson.loads(lookup_response)
+        response_status = response_json.get('status', u'')
+        if response_status == u'ok':
+            matching_records = response_json.get('message', {}).get('items', [])
+            if len(matching_records) == 0:
+                no_match_found = True
+        else:
+            # Something went wrong (TODO: Capture and log any error message?)
+            no_match_found = True
+
+    except urllib2.URLError, e:
+        # Both calls above should return a 200 status even if there's no match.
+        # So apparently the CrossRef service is down for some reason.
+        no_match_found = True
+
+    if no_match_found:
+        # Add a bogus reference string to signal the lack of results
+        meta_publication_url = u''
+        meta_year = u''
+        if doi:
+            meta_publication_reference = u'No matching publication found for this DOI!'
+        else:
+            meta_publication_reference = u'No matching publication found for this reference string'
+    else:
+        # We got a match! These are sorted by score, so we should assume the
+        # first (possibly only) record is the best match.
+        # See https://github.com/CrossRef/rest-api-doc#sort-order
+        match = matching_records[0];
+        meta_publication_url = match.get('URL', u'')  # should be its DOI in URL form
+        # Try to capture the publication year (print first, or online)
+        meta_year = u''
+        date_parts = match.get('published-print', {}).get('date-parts', [])
+        if len(date_parts) == 0:
+            # try again using online publication
+            date_parts = match.get('published-online', {}).get('date-parts', [])
+        if len(date_parts) > 0:
+            # retrieve its inner parts list (not sure why this is nested)
+            inner_date_parts = date_parts[0];
+            if len(inner_date_parts) > 0:
+                # first/only element here should be a year
+                meta_year = inner_date_parts[0]
+
+        # capture the raw DOI so we can try to retrieve a reference string below
+        doi = match.get('DOI', u'')
+
+    # We need another API call to fetch a plain-text reference string.
+    # NB - this is probabl APA style (based on conversation with CrossRef API team)
+    if doi:
+        try:
+            # use the supplied (or recovered) DOI to fetch a plain-text reference string
+            lookup_response = fetch(
+                'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
+                quote_plus(doi)
+            )
+            # make sure it's Unicode!
+            raw_publication_reference = unicode(lookup_response, 'utf-8')
+            # make sure it's plain text (no markup)!
+            ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
+            # root of this tree is the complete mini-DOM
+            ref_root = ref_element_tree.elements()[0]
+            # reduce this root to plain text (strip any tags)
+            meta_publication_reference = ref_root.flatten()
+
+        except urllib2.URLError, e:
+            # Any response but 200 means no match found, or the CrossRef
+            # service is down for some reason.
+            _GLOG.debug("URLError fetching ref-text!!")
+            _GLOG.debug(e)
+            meta_publication_reference = u'No matching publication found for this DOI!'
+
+    # add any found values to a fresh NexSON template
+    nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=include_cc0)
+    nexml_el = nexson['nexml']
+    nexml_el[u'^ot:studyPublicationReference'] = meta_publication_reference
+    if meta_publication_url:
+        nexml_el[u'^ot:studyPublication'] = {'@href': meta_publication_url}
+    if meta_year:
+        nexml_el[u'^ot:studyYear'] = meta_year
+    return nexson
+
 @view_config(route_name='create_study', renderer='json', request_method='POST')
 def create_study(request):
     api_version = request.matchdict['api_version']
