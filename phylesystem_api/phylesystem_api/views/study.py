@@ -154,7 +154,7 @@ def __finish_write_verb(phylesystem,
 
 def check_not_read_only():
     if api_utils.READ_ONLY_MODE:
-        raise HTTPForbidden(anyjson.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
+        raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     return True
 
 def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
@@ -284,18 +284,18 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
     try:
         if doi:
             # use the supplied DOI to fetch study metadata
-            lookup_response = fetch(
+            lookup_response = requests.get(
                 'https://api.crossref.org/works?%s' %
                 urlencode({'rows': 1, 'filter': 'doi:'+ doi})
             )
         elif ref_string:
             # use the supplied reference text to fetch study metadata
-            lookup_response = fetch(
+            lookup_response = requests.get(
                 'https://api.crossref.org/works?%s' %
                 urlencode({'rows': 1, 'query': ref_string})
             )
         lookup_response = unicode(lookup_response, 'utf-8')   # make sure it's Unicode!
-        response_json = anyjson.loads(lookup_response)
+        response_json = json.loads(lookup_response)
         response_status = response_json.get('status', u'')
         if response_status == u'ok':
             matching_records = response_json.get('message', {}).get('items', [])
@@ -305,7 +305,7 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
             # Something went wrong (TODO: Capture and log any error message?)
             no_match_found = True
 
-    except urllib2.URLError, e:
+    except requests.RequestException as e:
         # Both calls above should return a 200 status even if there's no match.
         # So apparently the CrossRef service is down for some reason.
         no_match_found = True
@@ -345,20 +345,16 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
     if doi:
         try:
             # use the supplied (or recovered) DOI to fetch a plain-text reference string
-            lookup_response = fetch(
+            lookup_response = requests.get(
                 'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
                 quote_plus(doi)
             )
             # make sure it's Unicode!
             raw_publication_reference = unicode(lookup_response, 'utf-8')
             # make sure it's plain text (no markup)!
-            ref_element_tree = web2pyHTMLParser(raw_publication_reference).tree
-            # root of this tree is the complete mini-DOM
-            ref_root = ref_element_tree.elements()[0]
-            # reduce this root to plain text (strip any tags)
-            meta_publication_reference = ref_root.flatten()
+            meta_publication_reference = api_utils.remove_tags(raw_publication_reference)
 
-        except urllib2.URLError, e:
+        except requests.RequestException as e:
             # Any response but 200 means no match found, or the CrossRef
             # service is down for some reason.
             _GLOG.debug("URLError fetching ref-text!!")

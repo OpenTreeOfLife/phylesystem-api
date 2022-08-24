@@ -24,6 +24,10 @@ import logging
 import json
 import os
 import re
+try:
+    import xml.etree.cElementTree as ElementTree
+except ImportError:
+    import xml.etree.ElementTree as ElementTree
 
 #_GLOG = get_logger(None, 'api_utils')
 try:
@@ -649,3 +653,7 @@ def markdown_to_html(markdown_src='', open_links_in_new_window=False):
     except (UnicodeDecodeError, AttributeError):
         pass
     return html
+
+# another simple clean function to strip ALL tags (and entities from HTML
+def remove_tags(markup):
+    return ''.join(ElementTree.fromstring(markup).itertext())
