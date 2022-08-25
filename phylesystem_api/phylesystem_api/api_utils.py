@@ -656,4 +656,8 @@ def markdown_to_html(markdown_src='', open_links_in_new_window=False):
 
 # another simple clean function to strip ALL tags (and entities from HTML
 def remove_tags(markup):
-    return ''.join(ElementTree.fromstring(markup).itertext())
+    try:
+        return u''.join(ElementTree.fromstring(markup).itertext())
+    except ElementTree.ParseError:
+        return markup
+
