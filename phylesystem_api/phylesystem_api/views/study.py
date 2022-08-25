@@ -288,17 +288,13 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
             lookup_response = requests.get(
                 'https://api.crossref.org/works?%s' %
                 urlencode({'rows': 1, 'filter': 'doi:'+ doi})
-            )
+            ).text  # always Unicode
         elif ref_string:
             # use the supplied reference text to fetch study metadata
             lookup_response = requests.get(
                 'https://api.crossref.org/works?%s' %
                 urlencode({'rows': 1, 'query': ref_string})
-            )
-        try:  # coerce to Unicode
-            lookup_response = lookup_response.decode('utf-8')
-        except (UnicodeDecodeError, AttributeError):
-            pass
+            ).text  # always Unicode
         response_json = json.loads(lookup_response)
         response_status = response_json.get('status', u'')
         if response_status == u'ok':
@@ -352,11 +348,7 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
             lookup_response = requests.get(
                 'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
                 quote_plus(doi)
-            )
-            try:  # coerce to Unicode
-                raw_publication_reference = lookup_response.decode('utf-8')
-            except (UnicodeDecodeError, AttributeError):
-                raw_publication_reference = u''  # should fail below due to invalid XML
+            ).text  # always Unicode
             # make sure it's plain text (no markup)!
             meta_publication_reference = api_utils.remove_tags(raw_publication_reference)
 
