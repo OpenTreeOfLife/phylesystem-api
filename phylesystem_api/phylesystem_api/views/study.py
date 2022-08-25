@@ -295,8 +295,11 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
                 'https://api.crossref.org/works?%s' %
                 urlencode({'rows': 1, 'query': ref_string})
             ).text  # always Unicode
-        response_json = json.loads(lookup_response)
-        response_status = response_json.get('status', u'')
+        try:
+            response_json = json.loads(lookup_response)
+            response_status = response_json.get('status', u'')
+        except:
+            response_status = u'missing or malformed response text'
         if response_status == u'ok':
             matching_records = response_json.get('message', {}).get('items', [])
             if len(matching_records) == 0:
