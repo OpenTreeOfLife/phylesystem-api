@@ -356,7 +356,7 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
             try:  # coerce to Unicode
                 raw_publication_reference = lookup_response.decode('utf-8')
             except (UnicodeDecodeError, AttributeError):
-                raw_publication_reference = u'')  # should fail below due to invalid XML
+                raw_publication_reference = u''  # should fail below due to invalid XML
             # make sure it's plain text (no markup)!
             meta_publication_reference = api_utils.remove_tags(raw_publication_reference)
 
