@@ -353,7 +353,7 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
                 quote_plus(doi)
             ).text  # always Unicode
             # make sure it's plain text (no markup)!
-            meta_publication_reference = api_utils.remove_tags(raw_publication_reference)
+            meta_publication_reference = api_utils.remove_tags(lookup_response)
 
         except requests.RequestException as e:
             # Any response but 200 means no match found, or the CrossRef
