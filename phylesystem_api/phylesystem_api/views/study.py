@@ -351,7 +351,7 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
             lookup_response = requests.get(
                 'https://api.crossref.org/works/%s/transform/text/x-bibliography' %
                 quote_plus(doi)
-            ).text  # always Unicode
+            ).content   # vs .text, which would decode to Unicode
             # make sure it's plain text (no markup)!
             meta_publication_reference = api_utils.remove_tags(lookup_response)
 
