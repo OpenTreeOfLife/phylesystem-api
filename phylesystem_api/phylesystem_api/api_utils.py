@@ -656,27 +656,16 @@ def markdown_to_html(markdown_src='', open_links_in_new_window=False):
 
 # another simple clean function to strip ALL tags (and entities from HTML
 def remove_tags(markup):
-    _LOG = get_logger(request, 'api_utils')
-    _LOG.warn(">>> initial markup:")
-    _LOG.warn(markup)
     try:  # coerce Unicode to byte-string (required by ElementTree)
         markup = markup.encode('utf-8')
-        _LOG.warn("encoding SUCCEEDED:")
     except (UnicodeDecodeError, AttributeError):
-        _LOG.warn("encoding FAILED:")
         pass
-    _LOG.warn(markup)
     try:
         markup = u''.join(ElementTree.fromstring(markup).itertext())
-        _LOG.warn("ElementTree SUCCEEDED:")
     except ElementTree.ParseError:
         # if it won't parse (badly-formed XML/HTML, or plaintext), return unchanged
-        _LOG.warn("ElementTree FAILED:")
         pass
-    _LOG.warn(markup)
     # return value should be Unicode, not bytes
     markup = markup.decode('utf-8')
-    _LOG.warn("<<< final markup:")
-    _LOG.warn(markup)
     return markup
 
