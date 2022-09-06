@@ -77,11 +77,11 @@ def get_phylesystem(request):
     global READ_ONLY_MODE
     global _PHYLESYSTEM
     _LOG = get_logger(request, 'api_utils')
-    _LOG.warn('@@@ checking for _PHYLESYSTEM singleton...READ_ONLY_MODE? {}'.format(READ_ONLY_MODE))
+    _LOG.debug('@@@ checking for _PHYLESYSTEM singleton...READ_ONLY_MODE? {}'.format(READ_ONLY_MODE))
     if _PHYLESYSTEM is not None:
-        _LOG.warn('@@@ FOUND it, returning now')
+        _LOG.debug('@@@ FOUND it, returning now')
         return _PHYLESYSTEM
-    _LOG.warn('@@@ NOT FOUND, creating now')
+    _LOG.debug('@@@ NOT FOUND, creating now')
     from phylesystem_api.gitdata import GitData
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, READ_ONLY_MODE = read_phylesystem_config(request)
     peyotl_config, cfg_filename = read_peyotl_config()
