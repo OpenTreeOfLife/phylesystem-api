@@ -77,7 +77,7 @@ def get_phylesystem(request):
     global READ_ONLY_MODE
     global _PHYLESYSTEM
     _LOG = get_logger(request, 'api_utils')
-    _LOG.warn('@@@ checking for _PHYLESYSTEM singleton...')
+    _LOG.warn('@@@ checking for _PHYLESYSTEM singleton...READ_ONLY_MODE? {}'.format(READ_ONLY_MODE))
     if _PHYLESYSTEM is not None:
         _LOG.warn('@@@ FOUND it, returning now')
         return _PHYLESYSTEM
@@ -617,6 +617,7 @@ def find_in_request(request, property_name, default_value=None, return_all_value
     if found_value is None:
         return default_value
     return found_value
+
 
 
 # Define a consistent cleaner to sanitize user input. We need a few
