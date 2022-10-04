@@ -180,7 +180,8 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
 @view_config(route_name='fetch_study', renderer=None)
 def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
-    
+    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    _LOG.debug("Fetching study")
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
     content_id = None
@@ -191,6 +192,7 @@ def fetch_study(request):
     try: 
         request_extension = final_path_part.split('.')[1]
         assert request.extension == request_extension
+        _LOG.debug("Request extension is {}".format)
         if request_extension not in('html', 'json'): 
             request_extension = '.{}'.format(request_extension)
     except IndexError:
