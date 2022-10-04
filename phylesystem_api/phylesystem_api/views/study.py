@@ -187,11 +187,11 @@ def fetch_study(request):
     content_id = None
     version_history = None
     comment_html = None
-    final_path_part = request.path.split('/')[-1]
+    final_path_part = request.path.split('/')[-1] ##TODO What if there are other parts...
     # does this look like a filename? if so, grab its extension
     try: 
         request_extension = final_path_part.split('.')[1]
-        assert request.extension == request_extension
+#        assert request.extension == request_extension
         _LOG.debug("Request extension is {}".format)
         if request_extension not in('html', 'json'): 
             request_extension = '.{}'.format(request_extension)
