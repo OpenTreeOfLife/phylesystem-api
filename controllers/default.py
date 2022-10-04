@@ -1158,7 +1158,7 @@ def v1():
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     #_LOG.debug('Max file size set to {}, max num trees set to {}'.format(max_filesize, max_num_trees))
     repo_nexml2json = phylesystem.repo_nexml2json
-    LOG.debug("phylesystem created with repo_nexml2json={}".format(repo_nexml2json))
+    #_LOG.debug("phylesystem created with repo_nexml2json={}".format(repo_nexml2json))
     def __validate_output_nexml2json(kwargs, resource, type_ext, content_id=None):
         msg = None
         if 'output_nexml2json' not in kwargs:
@@ -1180,12 +1180,12 @@ def v1():
                 msg = 'Cannot convert from {s} to {d}'.format(s=repo_nexml2json,
                                                               d=schema.description)
         except ValueError, x:
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
             msg = str(x)
             #_LOG.exception('GET failing: {m}'.format(m=msg))
         if msg:
-            _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-            _LOG.debug('output sniffing err msg = ' + msg)
+            #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            #_LOG.debug('output sniffing err msg = ' + msg)
             raise HTTP(400, json.dumps({"error": 1, "description": msg}))
         return schema
     def __finish_write_verb(phylesystem,
@@ -1213,8 +1213,8 @@ def v1():
         annotated_commit = a
         # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
         if annotated_commit['error'] != 0:
-             _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-             _LOG.debug('annotated_commit failed')
+            # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+            # _LOG.debug('annotated_commit failed')
             raise HTTP(400, json.dumps(annotated_commit))
         return annotated_commit
 
@@ -1228,6 +1228,7 @@ def v1():
             **kwargs):
         "OpenTree API methods relating to reading"
         _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
+        _LOG.warn
         delegate = _route_tag2func.get(resource)
         if delegate:
             return delegate(**kwargs)

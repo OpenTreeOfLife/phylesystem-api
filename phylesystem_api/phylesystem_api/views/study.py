@@ -177,7 +177,7 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
             data['auth_token'] = auth_token
         call_http_json.delay(url=url, verb='PUT', data=data)
 
-@view_config(route_name='fetch_study', renderer='json')
+@view_config(route_name='fetch_study', renderer=None)
 def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     
@@ -190,6 +190,7 @@ def fetch_study(request):
     # does this look like a filename? if so, grab its extension
     try: 
         request_extension = final_path_part.split('.')[1]
+        assert request.extension == request_extension
         if request_extension not in('html', 'json'): 
             request_extension = '.{}'.format(request_extension)
     except IndexError:
