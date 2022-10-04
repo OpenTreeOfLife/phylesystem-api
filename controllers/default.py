@@ -1227,7 +1227,7 @@ def v1():
             _=None,
             **kwargs):
         "OpenTree API methods relating to reading"
-        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v1.GET')
         delegate = _route_tag2func.get(resource)
         if delegate:
             return delegate(**kwargs)
@@ -1238,7 +1238,7 @@ def v1():
         if resource_id is None:
             raise HTTP(400, json.dumps({"error": 1, "description": 'study ID expected after "study/"'}))
         valid_subresources = ('tree', 'meta', 'otus', 'otu', 'otumap')
-        # _LOG.debug('GET default/v1/{}/{}'.format(str(resource), str(resource_id)))
+        _LOG.debug('GET default/v1/{}/{}'.format(str(resource), str(resource_id)))
         returning_full_study = False
         returning_tree = False
         content_id = None
@@ -1246,6 +1246,7 @@ def v1():
         comment_html = None
         if request.extension not in('html', 'json'):
             type_ext = '.' + request.extension
+            _LOG.debug('type_ext is {}'.format(str(type_ext)))
         else:
             type_ext = None
         if subresource is None:
