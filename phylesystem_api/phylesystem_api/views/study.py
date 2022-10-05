@@ -271,7 +271,7 @@ def fetch_study(request):
             result['versionHistory'] = version_history
         return render_to_response('json', result, request)
     else:
-        _LOG.debug(result_data)
+        # _LOG.debug(result_data)
         return render_to_response('string', result_data, request)
 
 @view_config(route_name='create_study', renderer='json', request_method='OPTIONS')
