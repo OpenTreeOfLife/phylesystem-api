@@ -10,6 +10,7 @@ from pyramid.httpexceptions import (
                                     HTTPInternalServerError,
                                     HTTPForbidden,
                                    )
+from pyramid.renderers import render_to_response
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
@@ -189,14 +190,14 @@ def fetch_study(request):
     comment_html = None
     final_path_part = request.path.split('/')[-1] ##TODO What if there are other parts...
     # does this look like a filename? if so, grab its extension
-    try: 
-        request_extension = final_path_part.split('.')[1]
-#        assert request.extension == request_extension
+    request_extension = None
+    fpps = final_path_part.split('.')
+    if len(fpps) > 1:
+        request_extension = fpps[-1]
+        study_id = '.'.join(fpps[:-1])
         _LOG.debug("Request extension is {}".format)
         if request_extension not in('html', 'json'): 
             request_extension = '.{}'.format(request_extension)
-    except IndexError:
-        request_extension = None
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     out_schema = __validate_output_nexml2json(repo_nexml2json,
@@ -268,9 +269,10 @@ def fetch_study(request):
             result['shardName'] = shard_name
         if version_history:
             result['versionHistory'] = version_history
-        return result
+        return render_to_response('json', result, request)
     else:
-        return result_data
+        _LOG.debug(result_data)
+        return render_to_response('string', result_data, request)
 
 @view_config(route_name='create_study', renderer='json', request_method='OPTIONS')
 @view_config(route_name='study_CORS_preflight', renderer='json')
