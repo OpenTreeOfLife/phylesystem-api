@@ -177,30 +177,29 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
             data['auth_token'] = auth_token
         call_http_json.delay(url=url, verb='PUT', data=data)
 
-@view_config(route_name='fetch_study', renderer='json')
+@view_config(route_name='fetch_study', renderer=None)
 def fetch_study(request):
-    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
-    
+    repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)    
     _LOG = api_utils.get_logger(request, 'fetch_study')
     _LOG.debug('fetch_study STARTING...')
-
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id_or_filename']
     content_id = None
     version_history = None
     comment_html = None
     final_path_part = request.path.split('/')[-1]
-    _LOG.debug('final_path_part (possible filename):')
-    _LOG.debug(final_path_part)
+    # _LOG.debug('final_path_part (possible filename):')
+    # _LOG.debug(final_path_part)
     # does this look like a filename? if so, grab its extension
     try: 
         request_extension = final_path_part.split('.')[1]
+        _LOG.debug("Request extension is {}".format)
         if request_extension not in('html', 'json'): 
             request_extension = '.{}'.format(request_extension)
     except IndexError:
         request_extension = None
-    _LOG.debug('request_extension (file extension):')
-    _LOG.debug(request_extension)
+    # _LOG.debug('request_extension (file extension):')
+    # _LOG.debug(request_extension)
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     out_schema = __validate_output_nexml2json(repo_nexml2json,
@@ -210,8 +209,8 @@ def fetch_study(request):
                                               content_id=content_id)
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     # _LOG.debug('parent_sha = {}'.format(parent_sha))
-    _LOG.debug('out_schema.format_str:')
-    _LOG.debug(out_schema.format_str)
+    # _LOG.debug('out_schema.format_str:')
+    # _LOG.debug(out_schema.format_str)
     # return the correct nexson of study_id, using the specified view
     try:
         r = phylesystem.return_study(study_id, commit_sha=parent_sha, return_WIP_map=True)
@@ -278,9 +277,9 @@ def fetch_study(request):
             result['shardName'] = shard_name
         if version_history:
             result['versionHistory'] = version_history
-        return result
+        return render_to_response('json', result, request)
     else:
-        return result_data
+        return render_to_response('string', result_data, request)
 
 @view_config(route_name='create_study', renderer='json', request_method='OPTIONS')
 @view_config(route_name='study_CORS_preflight', renderer='json')
