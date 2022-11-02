@@ -63,10 +63,10 @@ def atomic_write_json_if_not_found(obj, dest, request):
 
 def compose_push_to_github_url(request, resource_id):
     if resource_id is None:
-        return '{p}://{d}/{a}/push/v1'.format(p=request.env.wsgi_url_scheme,
+        return '{p}://{d}/{a}/push_to_docstore/v1'.format(p=request.env.wsgi_url_scheme,
                                               d=request.env.http_host,
                                               a=request.application)
-    return '{p}://{d}/{a}/push/v1/{r}'.format(p=request.env.wsgi_url_scheme,
+    return '{p}://{d}/{a}/push_to_docstore/v1/{r}'.format(p=request.env.wsgi_url_scheme,
                                            d=request.env.http_host,
                                            a=request.application,
                                            r=resource_id)
