@@ -10,6 +10,7 @@ from pyramid.httpexceptions import (
                                     HTTPInternalServerError,
                                     HTTPForbidden,
                                    )
+from pyramid.renderers import render_to_response
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
