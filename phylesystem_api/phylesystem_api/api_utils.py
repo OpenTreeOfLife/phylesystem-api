@@ -30,12 +30,6 @@ except ImportError:
     import xml.etree.ElementTree as ElementTree
 
 #_GLOG = get_logger(None, 'api_utils')
-try:
-    from open_tree_tasks import call_http_json
-    #_GLOG.debug('call_http_json imported')
-except:
-    call_http_json = None
-    #_GLOG.debug('call_http_json was not imported from open_tree_tasks')
 
 
 # this will be updated by config below; start safe by default
@@ -582,18 +576,65 @@ def raise_if_read_only():
         raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     return True
 
+
+##Threads???
+def call_http_json(url,
+                   verb='GET',
+                   data=None,
+                   headers=None):
+    if headers is None:
+        headers = {
+            'content-type' : 'application/json',
+            'accept' : 'application/json',
+        }
+    with open('/tmp/callhttperr', 'a') as fe:
+        fe.write("{} to \"{}\"\n".format(verb, url))
+                
+    resp = None
+    try:
+        if data:
+            resp = requests.request(verb,
+                                    url,
+                                    headers=headers,
+                                    data=json.dumps(data),
+                                    allow_redirects=True)
+        else:
+            resp = requests.request(verb, url, headers=headers, allow_redirects=True)
+        resp.raise_for_status()
+        return resp.status_code, resp.json()
+    except:
+        with open('/tmp/callhttperr', 'a') as fe:
+            fe.write('E1: \n')
+        try:
+            x = resp.status_code
+        except:
+            with open('/tmp/callhttperr', 'a') as fe:
+                fe.write('E2:\n')
+            x = -1
+        try:
+            return x, 'Error response with JSON = ' + json.dumps(resp.json())
+        except:
+            with open('/tmp/callhttperr', 'a') as fe:
+               fe.write('E3:\n')
+            try:
+                return x, 'Error: response with text = ' + resp.text
+            except:
+                m = 'Unknown error: ' # + traceback.format_exc()
+                with open('/tmp/callhttperr', 'a') as fe:
+                    fe.write(m + '\n')
+                return x, m
+
 def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     raise_if_read_only()
     # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    if call_http_json is not None:
-        # Pass the resource_id in data, so that two-part collection IDs will be recognized
-        # (else the second part will trigger an unwanted JSONP response from the push)
-        url = api_utils.compose_push_to_github_url(request, resource_id=None)
-        auth_token = copy.copy(request.json_body.get('auth_token'))
-        data = {'doc_type': doc_type, 'resource_id': resource_id}
-        if auth_token is not None:
-            data['auth_token'] = auth_token
-        call_http_json.delay(url=url, verb='PUT', data=data)
+    # Pass the resource_id in data, so that two-part collection IDs will be recognized
+    # (else the second part will trigger an unwanted JSONP response from the push)
+    url = api_utils.compose_push_to_github_url(request, resource_id=None)
+    auth_token = copy.copy(request.json_body.get('auth_token'))
+    data = {'doc_type': doc_type, 'resource_id': resource_id}
+    if auth_token is not None:
+        data['auth_token'] = auth_token
+    threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
 def find_in_request(request, property_name, default_value=None, return_all_values=False):
     """Search JSON body (if any), then try GET/POST keys"""
