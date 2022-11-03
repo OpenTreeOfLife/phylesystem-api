@@ -55,7 +55,7 @@ def atomic_write_json_if_not_found(obj, dest, request):
         return False
     os.rename(tmpfn, dest)
     return True
-
+#### THIS IS THE ISSUE
 def compose_push_to_github_url(request, resource_id):
     if resource_id is None:
         return '{p}://{d}/{a}/push_to_docstore/v1'.format(p=request.env.wsgi_url_scheme,

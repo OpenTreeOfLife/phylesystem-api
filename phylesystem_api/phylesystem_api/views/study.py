@@ -163,6 +163,7 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
     check_not_read_only()
     try:
         from phylesystem_api.api_utils import call_http_json
+        _LOG = api_utils.get_logger(request, 'ot_api.default.v3')
         _LOG.debug('call_http_json imported')
     except:
         call_http_json = None
