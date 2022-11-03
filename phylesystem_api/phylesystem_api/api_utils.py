@@ -29,7 +29,8 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ElementTree
 
-#_GLOG = get_logger(None, 'api_utils')
+_GLOG = logging.getLogger('api_utils')
+_GLOG.setLevel(logging.DEBUG)
 
 
 # this will be updated by config below; start safe by default

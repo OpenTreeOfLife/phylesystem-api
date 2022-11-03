@@ -34,11 +34,11 @@ except:
 
 _GLOG = api_utils.get_logger(None, 'ot_api.default.global')
 try:
-    from open_tree_tasks import call_http_json
+    from api_utils import call_http_json
     #_GLOG.debug('call_http_json imported')
 except:
     call_http_json = None
-    _GLOG.debug('call_http_json was not imported from open_tree_tasks')
+    _GLOG.debug('call_http_json was not imported from api_utils')
 
 from beaker.cache import cache_region
 

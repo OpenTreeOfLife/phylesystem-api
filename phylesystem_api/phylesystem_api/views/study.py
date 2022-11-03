@@ -162,12 +162,12 @@ def check_not_read_only():
 def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     check_not_read_only()
     try:
-        from open_tree_tasks import call_http_json
+        from api_utils import call_http_json
         #_LOG.debug('call_http_json imported')
     except:
         call_http_json = None
         _LOG = api_utils.get_logger(request, 'ot_api.default.v3')
-        _LOG.debug('call_http_json was not imported from open_tree_tasks')
+        _LOG.debug('call_http_json was not imported from api_utils')
     if call_http_json is not None:
         # Pass the resource_id in data, so that two-part collection IDs will be recognized
         # (else the second part will trigger an unwanted JSONP response from the push)
