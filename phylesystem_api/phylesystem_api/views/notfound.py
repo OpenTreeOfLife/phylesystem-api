@@ -1,5 +1,6 @@
 from pyramid.view import notfound_view_config
 from pyramid.response import Response
+import logging
 try:
     import anyjson
 except:
