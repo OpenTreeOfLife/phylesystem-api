@@ -171,7 +171,7 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
         _LOG.debug('call_http_json imported')
     except:
         call_http_json = None
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v3')
+        #_LOG = api_utils.get_logger(request, 'ot_api.default.v3')
         _LOG.debug('call_http_json was not imported from api_utils')
     if call_http_json is not None:
         # Pass the resource_id in data, so that two-part collection IDs will be recognized
