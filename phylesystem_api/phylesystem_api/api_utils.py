@@ -4,7 +4,7 @@ from peyotl.phylesystem import Phylesystem
 from peyotl.collections_store import TreeCollectionStore
 from peyotl.amendments import TaxonomicAmendmentStore
 from peyotl.utility import read_config as read_peyotl_config
-from configparser import SafeConfigParser
+from configparser import ConfigParser
 from datetime import datetime
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.request import Request
@@ -29,8 +29,11 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ElementTree
 
-_GLOG = logging.getLogger('api_utils')
-_GLOG.setLevel(logging.DEBUG)
+
+
+_LOG = logging.getLogger('phylesystem_api')
+_LOG.debug("start api_utils")
+
 
 
 # this will be updated by config below; start safe by default
@@ -71,7 +74,6 @@ _PHYLESYSTEM = None
 def get_phylesystem(request):
     global READ_ONLY_MODE
     global _PHYLESYSTEM
-    _LOG = get_logger(request, 'api_utils')
     _LOG.debug('@@@ checking for _PHYLESYSTEM singleton...READ_ONLY_MODE? {}'.format(READ_ONLY_MODE))
     if _PHYLESYSTEM is not None:
         _LOG.debug('@@@ FOUND it, returning now')
@@ -116,7 +118,7 @@ def get_tree_collection_store(request):
     global _TREE_COLLECTION_STORE
     if _TREE_COLLECTION_STORE is not None:
         return _TREE_COLLECTION_STORE
-    _LOG = get_logger(request, 'ot_api')
+#    _LOG = get_logger(request, 'ot_api')
     from phylesystem_api.gitdata import GitData
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_collections_config(request)
     push_mirror = os.path.join(repo_parent, 'mirror')
@@ -151,7 +153,7 @@ def get_taxonomic_amendment_store(request):
     global _TAXONOMIC_AMENDMENT_STORE
     if _TAXONOMIC_AMENDMENT_STORE is not None:
         return _TAXONOMIC_AMENDMENT_STORE
-    _LOG = get_logger(request, 'ot_api')
+#    _LOG = get_logger(request, 'ot_api')
     from phylesystem_api.gitdata import GitData
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize = read_amendments_config(request)
     push_mirror = os.path.join(repo_parent, 'mirror')
@@ -196,7 +198,7 @@ def get_conf_object(request):
     # configuration from within the app. But we can access the variables
     # from the [app:main] setion, so we'll retrieve the full path to
     # our chosen INI file from there.
-    conf = SafeConfigParser(allow_no_value=True)
+    conf = ConfigParser(allow_no_value=True)
     localconfig_filename = request.registry.settings['config_file_path']
     if os.path.isfile(localconfig_filename):
         conf.readfp(open(localconfig_filename))
@@ -361,7 +363,8 @@ def authenticate(request):
     auth_info['name'] = find_in_request(request, 'author_name', gh_user.name)
     auth_info['email'] = find_in_request(request, 'author_email', gh_user.email)
     return auth_info
-
+"""
+## using logging module directly
 _LOGGING_LEVEL_ENVAR="OT_API_LOGGING_LEVEL"
 _LOGGING_FORMAT_ENVAR="OT_API_LOGGING_FORMAT"
 _LOGGING_FILE_PATH_ENVAR = 'OT_API_LOG_FILE_PATH'
@@ -442,7 +445,7 @@ def get_logger(request, name="ot_api"):
         ch.setFormatter(logging_formatter)
         logger.addHandler(ch)
     return logger
-
+"""
 def log_time_diff(log_obj, operation='', prev_time=None):
     '''If prev_time is not None, logs (at debug level) to
     log_obj the difference between now and the naive datetime

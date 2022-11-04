@@ -32,7 +32,8 @@ except:
     anyjson = Wrapper()
     anyjson.loads = json.loads
 
-_GLOG = api_utils.get_logger(None, 'ot_api.default.global')
+_GLOG = logging.getLogger('phylesystem_api')
+
 try:
     from phylesystem_api.api_utils import call_http_json
     _GLOG.debug('call_http_json imported')
