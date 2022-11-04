@@ -60,7 +60,7 @@ def atomic_write_json_if_not_found(obj, dest, request):
     os.rename(tmpfn, dest)
     return True
 
-def compose_push_to_github_url(request, doc_type, resource_id):
+def compose_push_to_github_url(request, resource_id, doc_type):
    # if resource_id is None:
    #     call = '{p}://{d}/push_to_docstore/v1'.format(p=request.environ['wsgi.url_scheme'],
    #                                           d=request.environ['HTTP_HOST'])
@@ -69,7 +69,7 @@ def compose_push_to_github_url(request, doc_type, resource_id):
    #     return call
    #     _LOG.debug(call)
    #     return call
-    call = ('https://devphylesystemapi.opentreeoflife.org/v3/push_docstore_changes/{d}/{r}'.format(d=doctype, r=resource_id))
+    call = ('https://devphylesystemapi.opentreeoflife.org/v3/push_docstore_changes/{d}/{r}'.format(d=doc_type, r=resource_id))
     _LOG.debug(call)
     return call
 
