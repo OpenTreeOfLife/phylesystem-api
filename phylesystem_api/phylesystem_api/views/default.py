@@ -23,6 +23,7 @@ import traceback
 import datetime
 import codecs
 import os
+import logging
 try:
     import anyjson
 except:
