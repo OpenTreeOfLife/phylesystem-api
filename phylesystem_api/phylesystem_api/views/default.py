@@ -73,7 +73,7 @@ def pull_through_cache(request):
     original URL. If the original URL returns an error (non-200 status), return
     the error without caching the result.
     """
-    _LOG = api_utils.get_logger(request, 'ot_api')
+#    _LOG = api_utils.get_logger(request, 'ot_api')
     api_utils.raise_on_CORS_preflight(request)
     target_url = request.matchdict.get('target_url')
     _LOG.warn(">> target_url: {}".format(target_url))
@@ -412,7 +412,7 @@ def push_docstore_changes(request):
 
     api_utils.raise_if_read_only()
 
-    _LOG = api_utils.get_logger(request, 'ot_api.push.v3.PUT')
+#    _LOG = api_utils.get_logger(request, 'ot_api.push.v3.PUT')
     fail_file = api_utils.get_failed_push_filepath(request, doc_type=doc_type)
     _LOG.debug(">> fail_file for type '{t}': {f}".format(t=doc_type, f=fail_file))
 
