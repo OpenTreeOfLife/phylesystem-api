@@ -25,6 +25,10 @@ from peyotl.nexson_syntax import get_empty_nexson, \
 from peyotl.external import import_nexson_from_treebase
 import requests
 import sys
+import logging
+
+_LOG = logging.getLogger('phylesystem_api')
+
 
 def __extract_nexson_from_http_call(request, **kwargs):
     """Returns the nexson blob from `kwargs` or the request.body"""
@@ -163,7 +167,7 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
     check_not_read_only()
     try:
         from phylesystem_api.api_utils import call_http_json
-        _LOG = api_utils.get_logger(request, 'ot_api.default.v3')
+        #_LOG = api_utils.get_logger(request, 'ot_api.default.v3')
         _LOG.debug('call_http_json imported')
     except:
         call_http_json = None
@@ -182,7 +186,7 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
 @view_config(route_name='fetch_study', renderer=None)
 def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
-    _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+    #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     _LOG.debug("Fetching study")
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
@@ -575,7 +579,7 @@ def update_study(request):
 
 @view_config(route_name='delete_study', renderer='json')
 def delete_study(request):
-    _LOG = api_utils.get_logger(request, 'delete_study')
+    #_LOG = api_utils.get_logger(request, 'delete_study')
     _LOG.warn('delete_study STARTING...')
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
