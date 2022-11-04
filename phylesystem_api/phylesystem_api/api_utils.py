@@ -595,42 +595,17 @@ def call_http_json(url,
             'content-type' : 'application/json',
             'accept' : 'application/json',
         }
-    with open('/tmp/callhttperr', 'a') as fe:
-        fe.write("{} to \"{}\"\n".format(verb, url))
-                
-    resp = None
-    try:
-        if data:
-            resp = requests.request(verb,
-                                    url,
-                                    headers=headers,
-                                    data=json.dumps(data),
-                                    allow_redirects=True)
-        else:
-            resp = requests.request(verb, url, headers=headers, allow_redirects=True)
-        resp.raise_for_status()
-        return resp.status_code, resp.json()
-    except:
-        with open('/tmp/callhttperr', 'a') as fe:
-            fe.write('E1: \n')
-        try:
-            x = resp.status_code
-        except:
-            with open('/tmp/callhttperr', 'a') as fe:
-                fe.write('E2:\n')
-            x = -1
-        try:
-            return x, 'Error response with JSON = ' + json.dumps(resp.json())
-        except:
-            with open('/tmp/callhttperr', 'a') as fe:
-               fe.write('E3:\n')
-            try:
-                return x, 'Error: response with text = ' + resp.text
-            except:
-                m = 'Unknown error: ' # + traceback.format_exc()
-                with open('/tmp/callhttperr', 'a') as fe:
-                    fe.write(m + '\n')
-                return x, m
+    if data:
+        resp = requests.request(verb,
+                                url,
+                                headers=headers,
+                                data=json.dumps(data),
+                                allow_redirects=True)
+    else:
+        resp = requests.request(verb, url, headers=headers, allow_redirects=True)
+    resp.raise_for_status()
+    return resp.status_code, resp.json()
+    
 
 def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     raise_if_read_only()
@@ -642,7 +617,8 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     data = {'doc_type': doc_type, 'resource_id': resource_id}
     if auth_token is not None:
         data['auth_token'] = auth_token
-    threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
+    call_http_json(url=url, verb='PUT', data=data)
+#    threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
 def find_in_request(request, property_name, default_value=None, return_all_values=False):
     """Search JSON body (if any), then try GET/POST keys"""
