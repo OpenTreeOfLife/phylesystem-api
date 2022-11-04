@@ -22,6 +22,7 @@ from beaker.cache import cache_managers
 import tempfile
 import logging
 import json
+import requests
 import os
 import re
 try:
