@@ -33,14 +33,14 @@ except:
     anyjson = Wrapper()
     anyjson.loads = json.loads
 
-_GLOG = logging.getLogger('phylesystem_api')
+_LOG = logging.getLogger('phylesystem_api')
 
 try:
     from phylesystem_api.api_utils import call_http_json
-    _GLOG.debug('call_http_json imported')
+    _LOG.debug('call_http_json imported')
 except:
     call_http_json = None
-    _GLOG.debug('call_http_json was not imported from api_utils')
+    _LOG.debug('call_http_json was not imported from api_utils')
 
 from beaker.cache import cache_region
 
