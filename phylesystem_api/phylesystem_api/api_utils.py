@@ -363,8 +363,8 @@ def authenticate(request):
     auth_info['name'] = find_in_request(request, 'author_name', gh_user.name)
     auth_info['email'] = find_in_request(request, 'author_email', gh_user.email)
     return auth_info
-"""
-## using logging module directly
+
+''' ## using logging module directly
 _LOGGING_LEVEL_ENVAR="OT_API_LOGGING_LEVEL"
 _LOGGING_FORMAT_ENVAR="OT_API_LOGGING_FORMAT"
 _LOGGING_FILE_PATH_ENVAR = 'OT_API_LOG_FILE_PATH'
@@ -445,7 +445,7 @@ def get_logger(request, name="ot_api"):
         ch.setFormatter(logging_formatter)
         logger.addHandler(ch)
     return logger
-"""
+'''
 def log_time_diff(log_obj, operation='', prev_time=None):
     '''If prev_time is not None, logs (at debug level) to
     log_obj the difference between now and the naive datetime
