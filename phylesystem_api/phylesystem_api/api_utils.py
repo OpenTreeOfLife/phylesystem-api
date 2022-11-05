@@ -61,14 +61,12 @@ def atomic_write_json_if_not_found(obj, dest, request):
     return True
 
 def compose_push_to_github_url(request, resource_id, doc_type):
-   # if resource_id is None:
-   #     call = '{p}://{d}/push_to_docstore/v1'.format(p=request.environ['wsgi.url_scheme'],
-   #                                           d=request.environ['HTTP_HOST'])
-   #     call = 'https://devphylesystemapi.opentreeoflife.org/v3/push_docstore_changes/'
-   #     _LOG.debug(call)
-   #     return call
-   #     _LOG.debug(call)
-   #     return call
+    ## TODO FIX HARDCODING!!
+    # call = '{p}://{d}/push_docstore_changes/{dt}/{r}'.format(p=request.environ['wsgi.url_scheme'],
+    #             d=request.environ['HTTP_HOST'],
+    #             dt=doc_type,
+    #             r=resource_id)
+    ##requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://localhost:6544/push_docstore_changes/nexson/tt_268/
     call = ('https://devphylesystemapi.opentreeoflife.org/v3/push_docstore_changes/{d}/{r}'.format(d=doc_type, r=resource_id))
     _LOG.debug(call)
     return call
