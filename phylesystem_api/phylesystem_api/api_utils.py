@@ -61,13 +61,10 @@ def atomic_write_json_if_not_found(obj, dest, request):
     return True
 
 def compose_push_to_github_url(request, resource_id, doc_type):
-    ## TODO FIX HARDCODING!!
-    # call = '{p}://{d}/push_docstore_changes/{dt}/{r}'.format(p=request.environ['wsgi.url_scheme'],
-    #             d=request.environ['HTTP_HOST'],
-    #             dt=doc_type,
-    #             r=resource_id)
-    ##requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http://localhost:6544/push_docstore_changes/nexson/tt_268/
-    call = ('https://devphylesystemapi.opentreeoflife.org/v3/push_docstore_changes/{d}/{r}'.format(d=doc_type, r=resource_id))
+    call = '{p}://{d}/v3/push_docstore_changes/{dt}/{r}'.format(p=request.environ['wsgi.url_scheme'],
+                 d=request.environ['HTTP_HOST'],
+                 dt=doc_type,
+                 r=resource_id)
     _LOG.debug(call)
     return call
 
@@ -584,7 +581,6 @@ def raise_if_read_only():
     return True
 
 
-##Threads???
 def call_http_json(url,
                    verb='GET',
                    data=None,
@@ -616,8 +612,8 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     data = {'doc_type': doc_type, 'resource_id': resource_id}
     if auth_token is not None:
         data['auth_token'] = auth_token
-    call_http_json(url=url, verb='PUT', data=data)
-#    threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
+    #call_http_json(url=url, verb='PUT', data=data)
+    threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
 def find_in_request(request, property_name, default_value=None, return_all_values=False):
     """Search JSON body (if any), then try GET/POST keys"""

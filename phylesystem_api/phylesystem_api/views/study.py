@@ -27,6 +27,7 @@ import requests
 import sys
 import copy
 import logging
+import threading
 
 _LOG = logging.getLogger('phylesystem_api')
 
@@ -182,8 +183,8 @@ def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs
         data = {}
         if auth_token is not None:
             data['auth_token'] = auth_token
-        call_http_json(url=url, verb='PUT', data=data)
-        #threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
+        #call_http_json(url=url, verb='PUT', data=data)
+        threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
 
 @view_config(route_name='fetch_study', renderer=None)
