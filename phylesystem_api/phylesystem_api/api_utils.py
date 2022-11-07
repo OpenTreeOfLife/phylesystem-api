@@ -25,6 +25,8 @@ import json
 import requests
 import os
 import re
+import copy
+import threading
 try:
     import xml.etree.cElementTree as ElementTree
 except ImportError:
