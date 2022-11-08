@@ -411,7 +411,7 @@ def push_docstore_changes(request):
     _LOG.debug(request.__dict__)
     _LOG.debug(request.matchdict)
     _LOG.debug(request.POST)
-     api_version = request.matchdict['api_version']
+    api_version = request.matchdict['api_version']
     doc_type = request.matchdict.get('doc_type', None)
     resource_id = request.matchdict.get('doc_id', None)
  
