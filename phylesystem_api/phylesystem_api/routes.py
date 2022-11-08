@@ -15,6 +15,8 @@ def includeme(config):
     config.add_route('pull_through_cache', '/cached/{target_url:.*}')
     config.add_route('merge_docstore_changes', '/{api_version}/merge_docstore_changes/{doc_id}/{starting_commit_SHA}')
     config.add_route('push_docstore_changes', '/{api_version}/push_docstore_changes/{doc_type}/{doc_id}')
+    config.add_route('push_docstore_changes_bare', '/{api_version}/push_docstore_changes',  request_method='PUT')
+
     #
     # STUDY/TREE ROUTES
     #

@@ -400,10 +400,11 @@ any work merged by others since these edits began.
     return locals()
 
 @view_config(route_name='push_docstore_changes', renderer='json')
+@view_config(route_name='push_docstore_changes_bare', renderer='json')
 def push_docstore_changes(request):
     """OpenTree API method to update branch on master
 
-    curl -X POST http://devapi.opentreeoflife.org/v3/push_docstore_changes/ot_999
+    curl -X POST http://devapi.opentreeoflife.org/v3/push_docstore_changes/nexson/ot_999
     """
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
