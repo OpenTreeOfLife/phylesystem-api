@@ -408,8 +408,16 @@ def push_docstore_changes(request):
     """
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
-    doc_type = request.matchdict['doc_type']
-    resource_id = request.matchdict['doc_id']
+    _LOG.debug(request.__dict__)
+    _LOG.debug(request.matchdict)
+    _LOG.debug(request.POST)
+     api_version = request.matchdict['api_version']
+    doc_type = request.matchdict.get('doc_type', None)
+    resource_id = request.matchdict.get('doc_id', None)
+ 
+    if resource_id == None:
+          doc_type = request.POST['doc_type']
+          resource_id = request.POST['doc_id']
 
     api_utils.raise_if_read_only()
 
