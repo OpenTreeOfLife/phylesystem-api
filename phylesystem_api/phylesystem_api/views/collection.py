@@ -212,6 +212,8 @@ def update_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
     auth_info = api_utils.authenticate(request)
+    _LOG.debug("COLLECTION: update_collection")
+    _LOG.debug("COLLECTION: auth_info {}".format(auth_info))
     owner_id = auth_info.get('login', None)
 
     api_version = request.matchdict['api_version']

@@ -71,8 +71,8 @@ def compose_push_to_github_url(request, resource_id, doc_type):
                                                                     d=request.environ['HTTP_HOST'],
                                                                     dt=doc_type,
                                                                     r=resource_id)
-    _LOG.debug("Logging push to github call")
-    _LOG.debug(call)
+    #_LOG.debug("Logging push to github call")
+    #_LOG.debug(call)
     return call
 
 
@@ -81,11 +81,11 @@ _PHYLESYSTEM = None
 def get_phylesystem(request):
     global READ_ONLY_MODE
     global _PHYLESYSTEM
-    _LOG.debug('@@@ checking for _PHYLESYSTEM singleton...READ_ONLY_MODE? {}'.format(READ_ONLY_MODE))
+    #_LOG.debug('@@@ checking for _PHYLESYSTEM singleton...READ_ONLY_MODE? {}'.format(READ_ONLY_MODE))
     if _PHYLESYSTEM is not None:
         _LOG.debug('@@@ FOUND it, returning now')
         return _PHYLESYSTEM
-    _LOG.debug('@@@ NOT FOUND, creating now')
+    #_LOG.debug('@@@ NOT FOUND, creating now')
     from phylesystem_api.gitdata import GitData
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, READ_ONLY_MODE = read_phylesystem_config(request)
     peyotl_config, cfg_filename = read_peyotl_config()
@@ -113,7 +113,7 @@ def get_phylesystem(request):
                                git_action_class=GitData,
                                mirror_info=mirror_info,
                                **a)
-    _LOG.debug('[[[[[[ repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
+    #_LOG.debug('[[[[[[ repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     if READ_ONLY_MODE:
         _LOG.warn('phylesytem-api running in READ_ONLY_MODE')
     else:
@@ -152,7 +152,7 @@ def get_tree_collection_store(request):
                                                  git_action_class=GitData, #TODO?
                                                  mirror_info=mirror_info,
                                                  **a)
-    _LOG.debug('assumed_doc_version = {}'.format(_TREE_COLLECTION_STORE.assumed_doc_version))
+    #_LOG.debug('assumed_doc_version = {}'.format(_TREE_COLLECTION_STORE.assumed_doc_version))
     return _TREE_COLLECTION_STORE
 
 _TAXONOMIC_AMENDMENT_STORE = None
