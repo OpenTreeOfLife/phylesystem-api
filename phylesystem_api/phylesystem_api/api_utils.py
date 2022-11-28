@@ -625,8 +625,8 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     data = {'doc_type': doc_type, 'resource_id': resource_id}
     if auth_token is not None:
         data['auth_token'] = auth_token
-    #call_http_json(url=url, verb='PUT', data=data)
-    threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
+    call_http_json(url=url, verb='PUT', data=data)
+    #threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
 def find_in_request(request, property_name, default_value=None, return_all_values=False):
     """Search JSON body (if any), then try GET/POST keys"""
