@@ -19,6 +19,10 @@ from peyotl.collections_store import OWNER_ID_PATTERN, \
                                      COLLECTION_ID_PATTERN
 from peyotl.collections_store.validation import validate_collection
 
+
+_LOG = logging.getLogger('phylesystem_api')
+
+
 def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
     """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
     json_obj = None
@@ -113,6 +117,9 @@ def create_collection(request):
 
     # Create a new collection with the data provided
     auth_info = auth_info or api_utils.authenticate(request)
+    _LOG.debug('COLLECTIONS: auth_info is {}'.format(auth_info))
+
+
     # submit the json and proposed id (if any), and read the results
     docstore = api_utils.get_tree_collection_store(request)
     try:
