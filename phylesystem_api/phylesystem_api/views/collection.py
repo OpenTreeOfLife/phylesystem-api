@@ -1,5 +1,6 @@
 import traceback
 import sys
+import logging
 from pyramid.view import view_config
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
