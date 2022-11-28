@@ -71,6 +71,7 @@ def compose_push_to_github_url(request, resource_id, doc_type):
                                                                     d=request.environ['HTTP_HOST'],
                                                                     dt=doc_type,
                                                                     r=resource_id)
+    _LOG.debug("Logging push to github call")
     _LOG.debug(call)
     return call
 
@@ -597,12 +598,18 @@ def call_http_json(url,
             'accept' : 'application/json',
         }
     if data:
+        _LOG.debug("running http json call with DATA")
+        _LOG.debug("url: {}".format(url))
+        _LOG.debug("headers: {}".format(headers))
+        _LOG.debug("data: {}".format(json.dumps(data)))
         resp = requests.request(verb,
                                 url,
                                 headers=headers,
                                 data=json.dumps(data),
                                 allow_redirects=True)
+
     else:
+        _LOG.debug("running http json call NO DATA")
         resp = requests.request(verb, url, headers=headers, allow_redirects=True)
     resp.raise_for_status()
     return resp.status_code, resp.json()
