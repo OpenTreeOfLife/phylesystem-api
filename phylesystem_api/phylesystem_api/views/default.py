@@ -375,7 +375,7 @@ any work merged by others since these edits began.
     """
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
-    resource_id = request.matchdict['doc_id']
+    resource_id = request.matchdict['resource_id']
     starting_commit_SHA = request.matchdict['starting_commit_SHA']
 
     api_utils.raise_if_read_only()
@@ -425,9 +425,11 @@ def push_docstore_changes(request):
 #    _LOG = api_utils.get_logger(request, 'ot_api.push.v3.PUT')
     fail_file = api_utils.get_failed_push_filepath(request, doc_type=doc_type)
     _LOG.debug(">> fail_file for type '{t}': {f}".format(t=doc_type, f=fail_file))
+    _LOG.debug("Going to authenicateeee")
 
     # this method requires authentication
     auth_info = api_utils.authenticate(request)
+    _LOG.debug("Made it past auth")
 
     # TODO
     if doc_type.lower() == 'nexson':
@@ -461,10 +463,13 @@ def push_docstore_changes(request):
             }))
 
     elif doc_type.lower() == 'collection':
+        _LOG.debug("in collections")
         docstore = api_utils.get_tree_collection_store(request)
         try:
+            _LOG.debug("calling peyotl push")
             docstore.push_doc_to_remote('GitHubRemote', resource_id)
         except:
+            _LOG.debug("in collections except")
             m = traceback.format_exc()
             _LOG.warn('Push of collection {s} failed. Details: {m}'.format(s=resource_id, m=m))
             if os.path.exists(fail_file):
