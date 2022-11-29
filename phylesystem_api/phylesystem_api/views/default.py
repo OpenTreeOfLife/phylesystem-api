@@ -411,14 +411,13 @@ def push_docstore_changes(request):
     _LOG.debug("push_docstore_changes")
 #    _LOG.debug(request.__dict__)
     _LOG.debug(request.matchdict)
-    _LOG.debug("push_docstore_changes REQUEST PARAMS")
-    _LOG.debug(request.params)
     api_version = request.matchdict['api_version']
     doc_type = request.matchdict.get('doc_type', None)
     resource_id = request.matchdict.get('doc_id', None) #Whyyyyy doc id here??
 #    resource_id = request.matchdict.get('resource_id', None)
 
     data = request.json_body
+    _LOG.debug("push_docstore_changes data:")
     _LOG.debug(data)
     if resource_id == None:
           doc_type = data['doc_type']
