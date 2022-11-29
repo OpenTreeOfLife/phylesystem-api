@@ -165,29 +165,9 @@ def check_not_read_only():
         raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     return True
 
-def __deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
-    check_not_read_only()
-    try:
-        from phylesystem_api.api_utils import call_http_json
-        #_LOG = api_utils.get_logger(request, 'ot_api.default.v3')
-        _LOG.debug('call_http_json imported')
-    except:
-        call_http_json = None
-        #_LOG = api_utils.get_logger(request, 'ot_api.default.v3')
-        _LOG.debug('call_http_json was not imported from api_utils')
-    if call_http_json is not None:
-        # Pass the resource_id in data, so that two-part collection IDs will be recognized
-        # (else the second part will trigger an unwanted JSONP response from the push)
-        url = api_utils.compose_push_to_github_url(request, resource_id, doc_type)
-        auth_token = copy.copy(kwargs.get('auth_token'))
-        data = {}
-        if auth_token is not None:
-            data['auth_token'] = auth_token
-        #call_http_json(url=url, verb='PUT', data=data)
-        threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
 
-@view_config(route_name='fetch_study', renderer=None)
+@view_config(route_name='fetch_study', renafrer=None)
 def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
@@ -518,7 +498,7 @@ def create_study(request):
     if commit_return['error'] != 0:
         # _LOG.debug('ingest_new_study failed with error code')
         raise HTTPBadRequest(json.dumps(commit_return))
-    __deferred_push_to_gh_call(request, new_resource_id, doc_type='nexson', **request.params)
+    api_utils.deferred_push_to_gh_call(request, new_resource_id, doc_type='nexson', **request.params)
     return commit_return
 
 
@@ -577,7 +557,7 @@ def update_study(request):
     #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
     mn = blob.get('merge_needed')
     if (mn is not None) and (not mn):
-        __deferred_push_to_gh_call(request, study_id, doc_type='nexson', **request.params)
+        api_utils.deferred_push_to_gh_call(request, study_id, doc_type='nexson', **request.params)
     # Add updated commit history to the blob
     blob['versionHistory'] = phylesystem.get_version_history_for_study_id(study_id)
     return blob
@@ -621,7 +601,7 @@ def delete_study(request):
         _LOG.warn(x)
         if x.get('error') == 0:
             _LOG.warn('calling deferred push...')
-            __deferred_push_to_gh_call(request, None, doc_type='nexson', **request.params)
+            api_utils.deferred_push_to_gh_call(request, None, doc_type='nexson', **request.params)
             _LOG.warn('back from deferred push')
         return x
     except GitWorkflowError as err:

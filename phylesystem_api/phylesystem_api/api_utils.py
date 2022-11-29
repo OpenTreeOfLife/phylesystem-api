@@ -615,27 +615,28 @@ def call_http_json(url,
     return resp.status_code, resp.json()
     
 
+
 def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
-    raise_if_read_only()
-    # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    # Pass the resource_id in data, so that two-part collection IDs will be recognized
-    # (else the second part will trigger an unwanted JSONP response from the push)
-    _LOG.debug("deferred_push_to_gh_call")
-    url = compose_push_to_github_url(request, resource_id=None, doc_type=doc_type)
-    _LOG.debug("deferred_push_to_gh_call url is :{}".format(url))
-    _LOG.debug("deferred_push_to_gh_call data is :{}".format(request.json_body))
-    auth_token = copy.copy(request.json_body.get('auth_token'))
-    _LOG.debug("deferred_push_to_gh_call auth token 1 is :{}".format(auth_token))
-    data = {'doc_type': doc_type, 'resource_id': resource_id}
-    if auth_token is not None:
-        data['auth_token'] = auth_token
-    else:
-        _LOG.debug("deferred_push_to_gh_call trying auththenicate")
-        data = request.json_body
-        data['auth_token'] = data['auth_token']
-        _LOG.debug("deferred_push_to_gh_call auth token 2 is :{}".format(auth_token))
-    call_http_json(url=url, verb='PUT', data=data)
-    #threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
+    check_not_read_only()
+    try:
+        from phylesystem_api.api_utils import call_http_json
+        #_LOG = api_utils.get_logger(request, 'ot_api.default.v3')
+        _LOG.debug('call_http_json imported')
+    except:
+        call_http_json = None
+        #_LOG = api_utils.get_logger(request, 'ot_api.default.v3')
+        _LOG.debug('call_http_json was not imported from api_utils')
+    if call_http_json is not None:
+        # Pass the resource_id in data, so that two-part collection IDs will be recognized
+        # (else the second part will trigger an unwanted JSONP response from the push)
+        url = api_utils.compose_push_to_github_url(request, resource_id, doc_type)
+        auth_token = copy.copy(kwargs.get('auth_token'))
+        data = {}
+        if auth_token is not None:
+            data['auth_token'] = auth_token
+        #call_http_json(url=url, verb='PUT', data=data)
+        threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
+
 
 def find_in_request(request, property_name, default_value=None, return_all_values=False):
     """Search JSON body (if any), then try GET/POST keys"""

@@ -207,6 +207,7 @@ def fetch_collection(request):
         result['lastModified'] = last_modified
     return result
 
+
 @view_config(route_name='update_collection', renderer='json')
 def update_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
