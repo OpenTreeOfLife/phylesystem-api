@@ -73,7 +73,7 @@ def amendment_CORS_preflight(request):
     api_utils.raise_on_CORS_preflight(request)
 
 @view_config(route_name='create_amendment', renderer='json', request_method='POST')
-def create_amendment(request):
+def create_amendment(request, **kwargs)):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
 
     # this method requires authentication
