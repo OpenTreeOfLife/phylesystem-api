@@ -623,18 +623,17 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     _LOG.debug("deferred_push_to_gh_call")
     url = compose_push_to_github_url(request, resource_id=None, doc_type=doc_type)
     _LOG.debug("deferred_push_to_gh_call url is :{}".format(url))
+    _LOG.debug("deferred_push_to_gh_call data is :{}".format(request.json_body))
     auth_token = copy.copy(request.json_body.get('auth_token'))
     _LOG.debug("deferred_push_to_gh_call auth token 1 is :{}".format(auth_token))
     data = {'doc_type': doc_type, 'resource_id': resource_id}
     if auth_token is not None:
         data['auth_token'] = auth_token
     else:
-        _LOG.debug("deferred_push_to_gh_call trying auththenicate:{}".format(auth_token))
-        auth_info = authenticate(request)
-        data['auth_token'] = auth_info['auth_token']
+        _LOG.debug("deferred_push_to_gh_call trying auththenicate")
+        data = request.json_body
+        data['auth_token'] = data['auth_token']
         _LOG.debug("deferred_push_to_gh_call auth token 2 is :{}".format(auth_token))
-
-
     call_http_json(url=url, verb='PUT', data=data)
     #threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
