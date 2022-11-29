@@ -160,10 +160,6 @@ def __finish_write_verb(phylesystem,
         raise HTTPBadRequest(body=json.dumps(annotated_commit))
     return annotated_commit
 
-def check_not_read_only():
-    if api_utils.READ_ONLY_MODE:
-        raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
-    return True
 
 
 

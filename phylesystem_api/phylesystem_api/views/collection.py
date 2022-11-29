@@ -44,7 +44,7 @@ def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": 'no collection JSON found in request'}))
     return json_obj
 
-def __extract_and_validate_collection(request, kwargs):
+def __extract_and_validate_collection(request, **kwargs):
     from pprint import pprint
     try:
         collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
