@@ -409,9 +409,10 @@ def push_docstore_changes(request):
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict['api_version']
     _LOG.debug("push_docstore_changes")
-    _LOG.debug(request.__dict__)
+#    _LOG.debug(request.__dict__)
     _LOG.debug(request.matchdict)
-    assert 'auth_token' in request.matchdict
+    _LOG.debug("push_docstore_changes REQUEST PARAMS")
+    _LOG.debug(request.params)
     api_version = request.matchdict['api_version']
     doc_type = request.matchdict.get('doc_type', None)
     resource_id = request.matchdict.get('doc_id', None) #Whyyyyy doc id here??
