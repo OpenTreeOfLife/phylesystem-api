@@ -615,15 +615,19 @@ def call_http_json(url,
     return resp.status_code, resp.json()
     
 
-
 def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
+    ##TODO Thius needs to create a bare URL for collections, and pass in the resource id etc as data
     if READ_ONLY_MODE:
         raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     # Pass the resource_id in data, so that two-part collection IDs will be recognized
     # (else the second part will trigger an unwanted JSONP response from the push)
+    if doc_type=='collection':
+        data = {'resource_id':resource_id, 'doc_type':doc_type}
+        resource_id = None #to make bare url
+    else:
+        data = {}
     url = compose_push_to_github_url(request, resource_id, doc_type)
     auth_token = copy.copy(kwargs.get('auth_token'))
-    data = {}
     if auth_token is not None:
         data['auth_token'] = auth_token
     #call_http_json(url=url, verb='PUT', data=data)
