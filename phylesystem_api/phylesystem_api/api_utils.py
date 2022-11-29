@@ -621,7 +621,7 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
         raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     # Pass the resource_id in data, so that two-part collection IDs will be recognized
     # (else the second part will trigger an unwanted JSONP response from the push)
-    if doc_type=='collection':
+    if doc_type=='collection' or doc_type=='amendment':
         data = {'resource_id':resource_id, 'doc_type':doc_type}
         resource_id = None #to make bare url
     else:
