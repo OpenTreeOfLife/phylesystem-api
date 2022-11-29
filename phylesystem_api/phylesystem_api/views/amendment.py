@@ -91,7 +91,7 @@ def create_amendment(request):
     api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
-    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, kwargs)
+    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, **kwargs)
     if (amendment_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.method) }))
 
@@ -198,7 +198,7 @@ def update_amendment(request):
         commit_msg = None
 
     # fetch and parse the JSON payload, if any
-    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, kwargs)
+    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, **kwargs)
     if (amendment_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.method) }))
 
