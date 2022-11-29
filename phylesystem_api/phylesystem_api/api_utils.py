@@ -621,7 +621,7 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
         raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     # Pass the resource_id in data, so that two-part collection IDs will be recognized
     # (else the second part will trigger an unwanted JSONP response from the push)
-    url = api_utils.compose_push_to_github_url(request, resource_id, doc_type)
+    url = compose_push_to_github_url(request, resource_id, doc_type)
     auth_token = copy.copy(kwargs.get('auth_token'))
     data = {}
     if auth_token is not None:
