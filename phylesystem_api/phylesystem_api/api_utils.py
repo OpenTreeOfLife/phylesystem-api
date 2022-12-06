@@ -43,10 +43,8 @@ _LOG.debug("start api_utils")
 READ_ONLY_MODE = True
 
 def get_private_dir(request):
-    #app_name = request.application
-    #leader = request.env.web2py_path
-    #return '%s/applications/%s/private' % (leader, app_name)
-    return "./private/"
+    _LOG.debug("WHY PROVATE DIR")
+    return "~/private/"
 
 def atomic_write_json_if_not_found(obj, dest, request):
     if os.path.exists(dest):
@@ -617,6 +615,7 @@ def call_http_json(url,
 
 def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     ##TODO Thius needs to create a bare URL for collections, and pass in the resource id etc as data
+    _LOG.debug("deferred_push_to_gh_call")
     if READ_ONLY_MODE:
         raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     # Pass the resource_id in data, so that two-part collection IDs will be recognized

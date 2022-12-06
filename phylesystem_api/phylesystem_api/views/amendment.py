@@ -19,6 +19,11 @@ import json
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
 
+
+
+_LOG = logging.getLogger('phylesystem_api')
+
+
 def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
     """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
     json_obj = None
@@ -74,6 +79,7 @@ def amendment_CORS_preflight(request):
 
 @view_config(route_name='create_amendment', renderer='json', request_method='POST')
 def create_amendment(request, **kwargs):
+    _LOG.debug("Begin create ammendemt")
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
 
     # this method requires authentication
@@ -114,6 +120,7 @@ def create_amendment(request, **kwargs):
     if commit_return['error'] != 0:
         # _LOG.debug('add_new_amendment failed with error code')
         raise HTTPBadRequest(body=json.dumps(commit_return))
+    _LOG.debug("create ammendemt deferred_push_to_gh_call")
     api_utils.deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', **request.json_body)
     return commit_return
 
