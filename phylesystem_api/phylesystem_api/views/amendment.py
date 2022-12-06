@@ -95,8 +95,8 @@ def create_amendment(request, **kwargs):
     except:
         commit_msg = None
 
+    phylesystem = api_utils.get_phylesystem(request)   # set READONLY flag before testing!
     api_utils.raise_if_read_only()
-
     # fetch and parse the JSON payload, if any
     amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, **kwargs)
     if (amendment_obj is None):
