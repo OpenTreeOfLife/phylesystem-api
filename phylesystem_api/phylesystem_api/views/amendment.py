@@ -15,6 +15,7 @@ from peyotl.phylesystem.git_workflows import GitWorkflowError
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
 import json
+import logging
 
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
