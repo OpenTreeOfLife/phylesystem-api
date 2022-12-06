@@ -122,7 +122,7 @@ def create_amendment(request, **kwargs):
         # _LOG.debug('add_new_amendment failed with error code')
         raise HTTPBadRequest(body=json.dumps(commit_return))
     _LOG.debug("create ammendemt deferred_push_to_gh_call")
-    api_utils.deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', **request.json_body)
+    api_utils.deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', **request.params)
     return commit_return
 
 
