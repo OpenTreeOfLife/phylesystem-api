@@ -596,10 +596,10 @@ def call_http_json(url,
             'accept' : 'application/json',
         }
     if data:
-        _LOG.debug("running http json call with DATA")
-        _LOG.debug("url: {}".format(url))
-        _LOG.debug("headers: {}".format(headers))
-        _LOG.debug("data: {}".format(json.dumps(data)))
+        #_LOG.debug("running http json call with DATA")
+        #_LOG.debug("url: {}".format(url))
+        #_LOG.debug("headers: {}".format(headers))
+        #_LOG.debug("data: {}".format(json.dumps(data)))
         resp = requests.request(verb,
                                 url,
                                 headers=headers,
@@ -607,7 +607,7 @@ def call_http_json(url,
                                 allow_redirects=True)
 
     else:
-        _LOG.debug("running http json call NO DATA")
+        #_LOG.debug("running http json call NO DATA")
         resp = requests.request(verb, url, headers=headers, allow_redirects=True)
     resp.raise_for_status()
     return resp.status_code, resp.json()
@@ -615,7 +615,7 @@ def call_http_json(url,
 
 def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     ##TODO Thius needs to create a bare URL for collections, and pass in the resource id etc as data
-    _LOG.debug("deferred_push_to_gh_call")
+    #_LOG.debug("deferred_push_to_gh_call")
     if READ_ONLY_MODE:
         raise HTTPForbidden(json.dumps({"error": 1, "description": "phylesystem-api running in read-only mode"}))
     # Pass the resource_id in data, so that two-part collection IDs will be recognized
@@ -629,6 +629,7 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     auth_token = copy.copy(kwargs.get('auth_token'))
     if auth_token is not None:
         data['auth_token'] = auth_token
+    assert data.get('auth_token')
     #call_http_json(url=url, verb='PUT', data=data)
     threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
