@@ -2,14 +2,18 @@
 import sys
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-if '/api.opentree' in DOMAIN:
+if 'api.opentree' in DOMAIN:
     study = 'ot_134'
 #elif '/devapi.opentree' in DOMAIN:
 #    study = 'tt_23'
 else:
     study = 'pg_90'
+
+# jimA (03/10/2022) - this works in the current repo
+study = 'ot_134'
+
 # '/file' means get list of supplementary files
-SUBMIT_URI = '{d}/phylesystem/v1/study/{s}/file'.format(d=DOMAIN, s=study)
+SUBMIT_URI = '{d}/v3/study/{s}/file'.format(d=DOMAIN, s=study)
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
                           expected_status=200,

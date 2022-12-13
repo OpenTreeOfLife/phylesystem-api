@@ -3,7 +3,7 @@ import sys, os
 from opentreetesting import test_http_json_method, writable_api_host_and_oauth_or_exit
 DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study = '10'
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/' + study
+SUBMIT_URI = DOMAIN + '/v3/study/' + study
 data = {'output_nexml2json':'1.2'}
 r = test_http_json_method(SUBMIT_URI,
                           'GET',
@@ -27,9 +27,11 @@ r2 = test_http_json_method(SUBMIT_URI,
                            expected_status=200,
                            return_bool_data=True)
 
-PUSH_URI = DOMAIN + '/phylesystem/push/v1/' + study
+PUSH_URI = DOMAIN + '/v3/push_docstore_changes/nexson/' + study
+data = { 'auth_token': auth_token }
 r3 = test_http_json_method(PUSH_URI,
                            'PUT',
+                           data=data,
                            expected_status=200,
                            return_bool_data=True)
-print r3
+print(r3)

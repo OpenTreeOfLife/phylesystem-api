@@ -8,7 +8,7 @@ import sys
 import os
 DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study_id = 'pg_99'
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/v3/study/{s}'.format(s=study_id)
 #A full integration test, with GET, PUT, POST, MERGE and a merge conflict, 
 #test get and save sha
 data = {'output_nexml2json':'1.2'}
@@ -34,10 +34,10 @@ data = { 'nexson' : acurr_obj,
          'starting_commit_SHA': starting_commit_SHA,
 }
 r2 = test_http_json_method(SUBMIT_URI,
-                         'PUT',
-                         data=data,
-                         expected_status=200,
-                         return_bool_data=True)
+                           'PUT',
+                           data=data,
+                           expected_status=200,
+                           return_bool_data=True)
 
 assert(r2[0]==True)
 assert(r2[1]['resource_id']==study_id)
@@ -45,7 +45,7 @@ assert(r2[1]['merge_needed']==False)
 r2_sha=r2[1]['sha']
 
 #Now get the outcome of the Merge, so that a curator could look at it.
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/v3/study/{s}'.format(s=study_id)
 
 data = {
         'output_nexml2json':'1.2',
@@ -57,6 +57,7 @@ rg3 = test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=200, r
 
 assert(rg3[0]==True)
 assert(rg3[1]['sha']==r2[1]['sha'])
+# check for successful merge? FAILS if more than one branch
 assert(len(rg3[1]['branch2sha'])==1)
    
 #test merge failure when new branch is behind master
@@ -92,7 +93,7 @@ assert(len(rg1[1]['branch2sha'])>=2)
 # but not for other studies...
 alt_study_id='10'
 data = {'output_nexml2json':'1.2'}
-alt_SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=alt_study_id)
+alt_SUBMIT_URI = DOMAIN + '/v3/study/{s}'.format(s=alt_study_id)
 rg2 = test_http_json_method(alt_SUBMIT_URI, 'GET', data=data, expected_status=200, return_bool_data=True)
 assert(rg2[0]==True)
 assert(len(rg2[1]['branch2sha'])==1)
@@ -142,7 +143,7 @@ r5_sha=r5[1]['sha']
 
 # sixth commit is the merge
 starting_commit_SHA = r5_sha
-SUBMIT_URI = DOMAIN + '/phylesystem/merge/v1/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
+SUBMIT_URI = DOMAIN + '/v3/merge_docstore_changes/{s}/{scs}'.format(s=study_id,scs=starting_commit_SHA)
 
 data = {'auth_token' : auth_token,}
 
@@ -161,7 +162,7 @@ merged_sha = r6[1]['merged_sha']
  
         
 # add a 7th commit onto commit 6. This should NOT merge to master because we don't give it the secret arg.
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/v3/study/{s}'.format(s=study_id)
 starting_commit_SHA = r6[1]['sha']
 zc += 1
 zcurr_obj["^zcount"] = zc
@@ -183,7 +184,7 @@ assert(r7[1]['merge_needed']==True)
 
         
 # add a 7th commit onto commit 6. This should merge to master because we don't give it the secret arg.
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/v3/study/{s}'.format(s=study_id)
 starting_commit_SHA = r7[1]['sha']
 zc += 1
 zcurr_obj["^zcount"] = zc

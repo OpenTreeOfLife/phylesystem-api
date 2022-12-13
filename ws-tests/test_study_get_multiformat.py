@@ -5,7 +5,7 @@ import json
 import sys
 import os
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/10'
+SUBMIT_URI = DOMAIN + '/v3/study/10'
 data = {'output_nexml2json':'0.0.0'}
 pb = test_http_json_method(SUBMIT_URI, 
                            'GET',
@@ -32,7 +32,7 @@ def dict_eq(a, b):
     if a == b:
         return True
     d = True
-    ka, kb = a.keys(), b.keys()
+    ka, kb = list(a.keys()), list(b.keys())
     ka.sort()
     kb.sort()
     if ka != kb:
@@ -42,7 +42,7 @@ def dict_eq(a, b):
         ao = list(ao)
         ao.sort()
         bo = sb - sa
-        c = set([u'^ot:candidateTreeForSynthesis', u'^ot:tag'])
+        c = set(['^ot:candidateTreeForSynthesis', '^ot:tag'])
         bextra = bo - c
         bo = list(bextra)
         bo.sort()

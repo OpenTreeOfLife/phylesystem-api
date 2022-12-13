@@ -2,8 +2,8 @@
 import sys, os
 from opentreetesting import test_http_json_method, config
 DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/10'
+SUBMIT_URI = DOMAIN + '/v1/study/10'
 data = {'output_nexml2json':'x0.0.0'}
-if test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=400):
+if test_http_json_method(SUBMIT_URI, 'GET', data=data, expected_status=404):
     sys.exit(0)
 sys.exit(1)

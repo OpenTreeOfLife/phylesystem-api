@@ -8,7 +8,7 @@ import sys
 import os
 DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study_id = 12
-URL = DOMAIN + '/phylesystem/v1/study/%s' % study_id
+URL = DOMAIN + '/v3/study/%s' % study_id
 r = test_http_json_method(URL,
                           'GET',
                           expected_status=200,
@@ -18,7 +18,7 @@ r = test_http_json_method(URL,
 if not r[0]:
     sys.exit(1)
 starting_commit_SHA = r[1]['branch2sha']['master']
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/%s' % study_id
+SUBMIT_URI = DOMAIN + '/v3/study/%s' % study_id
 fn = 'data/{s}.json'.format(s=study_id)
 inpf = codecs.open(fn, 'rU', encoding='utf-8')
 n = json.load(inpf)

@@ -7,7 +7,7 @@ import sys
 import os
 DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study_id = 12
-SUBMIT_URI = DOMAIN + '/phylesystem/v1/study/{s}'.format(s=study_id)
+SUBMIT_URI = DOMAIN + '/v3/study/{s}'.format(s=study_id)
 fn = 'data/{s}.json'.format(s=study_id)
 inpf = codecs.open(fn, 'rU', encoding='utf-8')
 n = json.load(inpf)
