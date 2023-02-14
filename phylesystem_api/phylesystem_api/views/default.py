@@ -158,7 +158,7 @@ def phylesystem_config(request):
 def study_list(request):
     phylesystem = api_utils.get_phylesystem(request)
     studies = phylesystem.get_study_ids()
-    return anyjson.dumps(studies)
+    return studies
 
 @view_config(route_name='trees_in_synth', renderer='json')
 def trees_in_synth(request):
@@ -182,7 +182,6 @@ def trees_in_synth(request):
         # _LOG.exception('concatenation of collections failed')
         e = sys.exc_info()[0]
         raise HTTPBadRequest(body=e)
-    #return anyjson.dumps(result)
     return result
 
 @view_config(route_name='include_tree_in_synth', renderer='json')
