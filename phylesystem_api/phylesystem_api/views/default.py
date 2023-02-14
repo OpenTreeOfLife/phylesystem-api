@@ -12,6 +12,8 @@ from pyramid.httpexceptions import (
                                    )
 from pyramid.response import Response
 import requests
+from io import StringIO
+from configparser import ConfigParser
 from peyotl import concatenate_collections, \
                    tree_is_in_collection
 
@@ -331,10 +333,10 @@ def _get_synth_input_collection_ids():
     url_of_synth_config = 'https://raw.githubusercontent.com/mtholder/propinquity/master/config.opentree.synth'
     try:
         resp = requests.get(url_of_synth_config)
-        conf_fo = StringIO(resp.content)
+        conf_fo = StringIO(resp.content.decode('utf-8'))
     except:
         raise HTTPGatewayTimeout(body ='Could not fetch synthesis list from {}'.format(url_of_synth_config))
-    cfg = SafeConfigParser()
+    cfg = ConfigParser()
     try:
         cfg.readfp(conf_fo)
     except:
