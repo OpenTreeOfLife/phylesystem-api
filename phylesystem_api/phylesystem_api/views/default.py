@@ -182,7 +182,8 @@ def trees_in_synth(request):
         # _LOG.exception('concatenation of collections failed')
         e = sys.exc_info()[0]
         raise HTTPBadRequest(body=e)
-    return anyjson.dumps(result)
+    #return anyjson.dumps(result)
+    return result
 
 @view_config(route_name='include_tree_in_synth', renderer='json')
 def include_tree_in_synth(request):
