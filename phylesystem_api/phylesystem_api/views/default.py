@@ -85,13 +85,12 @@ def pull_through_cache(request):
         root_relative_url = "/{}".format(url)
         _LOG.warn(">> root_relative_url: {}".format(root_relative_url))
 #        fetch_url = request.relative_url(root_relative_url)
-        ## NEEDS correct domain....
-        phylesystem = api_utils.get_phylesystem(request)
-        config_dict =  phylesystem.get_configuration_dict()
         _LOG.warn(config_dict)
         fetch_url = "https://devapi.opentreeoflife.org" + root_relative_url
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warn("  request.method = {}".format(request.method))
+        s = requests.session()
+        s.config['keep_alive'] = False
         try:
             if request.method == 'POST':
                 # assume a typical API request with JSON payload
