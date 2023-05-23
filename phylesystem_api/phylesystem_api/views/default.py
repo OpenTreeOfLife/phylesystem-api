@@ -84,7 +84,11 @@ def pull_through_cache(request):
         #import pdb; pdb.set_trace()
         root_relative_url = "/{}".format(url)
         _LOG.warn(">> root_relative_url: {}".format(root_relative_url))
-        fetch_url = request.relative_url(root_relative_url)
+#        fetch_url = request.relative_url(root_relative_url)
+        ## NEEDS correct domain....
+        config_dict =  phylesystem.get_configuration_dict()
+        _LOG.warn(config_dict)
+        fetch_url = "https://devapi.opentreeoflife.org" + root_relative_url
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warn("  request.method = {}".format(request.method))
         try:
