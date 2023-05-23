@@ -88,8 +88,6 @@ def pull_through_cache(request):
         fetch_url = "https://devapi.opentreeoflife.org" + root_relative_url
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warn("  request.method = {}".format(request.method))
-        s = requests.session()
-        s.config['keep_alive'] = False
         try:
             if request.method == 'POST':
                 # assume a typical API request with JSON payload
