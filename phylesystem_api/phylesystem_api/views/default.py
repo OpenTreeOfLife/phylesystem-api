@@ -86,6 +86,7 @@ def pull_through_cache(request):
         _LOG.warn(">> root_relative_url: {}".format(root_relative_url))
 #        fetch_url = request.relative_url(root_relative_url)
         ## NEEDS correct domain....
+        phylesystem = api_utils.get_phylesystem(request)
         config_dict =  phylesystem.get_configuration_dict()
         _LOG.warn(config_dict)
         fetch_url = "https://devapi.opentreeoflife.org" + root_relative_url
