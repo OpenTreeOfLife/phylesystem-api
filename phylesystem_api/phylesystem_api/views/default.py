@@ -89,11 +89,12 @@ def pull_through_cache(request):
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warn("  request.method = {}".format(request.method))
         _LOG.warn("  STARTING request Connection header: {}".format( request.headers.get('Connection', '')))
-        proxy_safe_headers = request.headers.set('Connection', 'Close')
+        #proxy_safe_headers = ???
+        request.headers.setdefault('Connection', 'Close')
         _LOG.warn("  MODIFIED request Connection header: {}".format( request.headers.get('Connection', '')))
-        _LOG.warn("  proxy_safe_headers:")
-        _LOG.warn( proxy_safe_headers )
-        _LOG.warn("  proxy_safe_headers Connection header: {}".format( proxy_safe_headers.get('Connection', '')))
+        #_LOG.warn("  proxy_safe_headers:")
+        #_LOG.warn( proxy_safe_headers )
+        #_LOG.warn("  proxy_safe_headers Connection header: {}".format( proxy_safe_headers.get('Connection', '')))
 
         try:
             if request.method == 'POST':
