@@ -90,13 +90,19 @@ def pull_through_cache(request):
         _LOG.warn("  request.method = {}".format(request.method))
 
         # modify or discard "hop-by-hop" headers
-        _LOG.warn("  STARTING request.headers:")
-        _LOG.warn( dict(request.headers) )
-        _LOG.warn("  STARTING request headers: {}".format( request.headers.get('Connection', '')))
-        request.headers.pop('Connection', None)  
-        request.headers.pop('Keep-Alive', None)  
-        _LOG.warn("  MODIFIED request.headers:")
-        _LOG.warn( dict(request.headers) )
+        hop_by_hop_headers = ['Keep-Alive',
+                              'Transfer-Encoding',
+                              'TE',
+                              'Connection',
+                              'Trailer',
+                              'Upgrade',
+                              'Proxy-Authorization',
+                              'Proxy-Authenticate',
+                              ]
+        for bad_header in hop_by_hop_headers:
+            request.headers.pop(bad_header, None)
+        #_LOG.warn("  MODIFIED request.headers:")
+        #_LOG.warn( dict(request.headers) )
 
         try:
             if request.method == 'POST':
@@ -123,16 +129,22 @@ def pull_through_cache(request):
             fetched.encoding = 'utf-8' # Optional: requests infers this internally
 
             # modify or discard "hop-by-hop" headers
-            _LOG.warn("  STARTING fetched.headers:")
-            _LOG.warn( dict(fetched.headers) )
-            fetched.headers.pop('Connection', None)  
-            fetched.headers.pop('Keep-Alive', None)  
-            _LOG.warn("  MODIFIED fetched.headers:")
-            _LOG.warn( dict(fetched.headers) )
+            hop_by_hop_headers = ['Keep-Alive',
+                                  'Transfer-Encoding',
+                                  'TE',
+                                  'Connection',
+                                  'Trailer',
+                                  'Upgrade',
+                                  'Proxy-Authorization',
+                                  'Proxy-Authenticate',
+                                  ]
+            for bad_header in hop_by_hop_headers:
+                fetched.headers.pop(bad_header, None)
+            #_LOG.warn("  MODIFIED fetched.headers:")
+            #_LOG.warn( dict(fetched.headers) )
 
             try:
                 test_for_json = fetched.json()  # missing JSON payload will raise an error
-                _LOG.warn("... AFTER test_for_json")
                 return Response(
                     headers=fetched.headers,
                     body=fetched.text,  # missing JSON payload will raise an error
@@ -140,7 +152,6 @@ def pull_through_cache(request):
                     charset='UTF-8',
                     content_type='application/json')
             except requests.exceptions.JSONDecodeError:
-                _LOG.warn("... ERROR in test_for_json")
                 return Response(
                     headers=fetched.headers,
                     body=response.text,
