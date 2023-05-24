@@ -94,6 +94,7 @@ def pull_through_cache(request):
         _LOG.warn( dict(request.headers) )
         _LOG.warn("  STARTING request headers: {}".format( request.headers.get('Connection', '')))
         request.headers.pop('Connection')  
+        request.headers.pop('Keep-Alive')  
         _LOG.warn("  MODIFIED request.headers:")
         _LOG.warn( dict(request.headers) )
 
@@ -102,6 +103,7 @@ def pull_through_cache(request):
                 # assume a typical API request with JSON payload
                 # (pass this along unchanged)
                 _LOG.warn("  treating as POST")
+                _LOG.warn("  headers: {}".format(request.headers))
                 fetched = requests.post(url=fetch_url,
                                         data=request.body,
                                         headers=request.headers)
@@ -117,9 +119,11 @@ def pull_through_cache(request):
             # TODO: For more flexibility, we might examine and mimic the original request (headers, etc)
             _LOG.warn("... and now we're back with fetched, which is a {}".format( type(fetched) ))
             fetched.raise_for_status()
+            _LOG.warn("... AFTER fetched.raise_for_status()")
             fetched.encoding = 'utf-8' # Optional: requests infers this internally
             try:
                 test_for_json = fetched.json()  # missing JSON payload will raise an error
+                _LOG.warn("... AFTER test_for_json")
                 return Response(
                     headers=fetched.headers,
                     body=fetched.text,  # missing JSON payload will raise an error
@@ -127,6 +131,7 @@ def pull_through_cache(request):
                     charset='UTF-8',
                     content_type='application/json')
             except requests.exceptions.JSONDecodeError:
+                _LOG.warn("... ERROR in test_for_json")
                 return Response(
                     headers=fetched.headers,
                     body=response.text,
