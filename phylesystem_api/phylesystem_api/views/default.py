@@ -121,6 +121,15 @@ def pull_through_cache(request):
             fetched.raise_for_status()
             _LOG.warn("... AFTER fetched.raise_for_status()")
             fetched.encoding = 'utf-8' # Optional: requests infers this internally
+
+            # modify or discard "hop-by-hop" headers
+            _LOG.warn("  STARTING fetched.headers:")
+            _LOG.warn( dict(fetched.headers) )
+            fetched.headers.pop('Connection')  
+            fetched.headers.pop('Keep-Alive')  
+            _LOG.warn("  MODIFIED fetched.headers:")
+            _LOG.warn( dict(fetched.headers) )
+
             try:
                 test_for_json = fetched.json()  # missing JSON payload will raise an error
                 _LOG.warn("... AFTER test_for_json")
