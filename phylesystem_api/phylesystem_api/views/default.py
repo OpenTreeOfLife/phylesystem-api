@@ -88,17 +88,14 @@ def pull_through_cache(request):
         fetch_url = "https://devapi.opentreeoflife.org" + root_relative_url
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warn("  request.method = {}".format(request.method))
-        _LOG.warn("  request.headers.items() :")
-        _LOG.warn( request.headers.items() )
-        _LOG.warn("  dict(request.headers) :")
+
+        # modify or discard "hop-by-hop" headers
+        _LOG.warn("  STARTING request.headers:")
         _LOG.warn( dict(request.headers) )
-        _LOG.warn("  STARTING request Connection header: {}".format( request.headers.get('Connection', '')))
-        #proxy_safe_headers = ???
-        request.headers['Connection'] = 'Close'
-        _LOG.warn("  MODIFIED request Connection header: {}".format( request.headers.get('Connection', '')))
-        #_LOG.warn("  proxy_safe_headers:")
-        #_LOG.warn( proxy_safe_headers )
-        #_LOG.warn("  proxy_safe_headers Connection header: {}".format( proxy_safe_headers.get('Connection', '')))
+        _LOG.warn("  STARTING request headers: {}".format( request.headers.get('Connection', '')))
+        request.headers.pop('Connection')  
+        _LOG.warn("  MODIFIED request.headers:")
+        _LOG.warn( dict(request.headers) )
 
         try:
             if request.method == 'POST':
