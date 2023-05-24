@@ -1,6 +1,9 @@
 # Rename this file to "api.config" to make it active
 
 [apis]
+api_version = 3
+default_apis_base_url = {{ apis_common_base_URL }}
+production_apis_base_url = {{ apis_production_base_URL }}
 
 # if true, blocks all writing behavior
 read_only = READ_ONLY_MODE
@@ -37,11 +40,12 @@ following_repo_remote   = FOLLOWING_REPO_REMOTE
 git_ssh     = GIT_SSH
 pkey        = PKEY
 
-oti_base_url = OTI_BASE_URL
-otindex_base_url = OTINDEX_BASE_URL 
-collections_api_base_url = COLLECTIONS_API_BASE_URL
-amendments_api_base_url = AMENDMENTS_API_BASE_URL
-favorites_api_base_url = FAVORITES_API_BASE_URL
+# deprecate these overly-specific base URLs? or copy same value to all?
+##oti_base_url = OTI_BASE_URL
+##otindex_base_url = OTINDEX_BASE_URL 
+##collections_api_base_url = COLLECTIONS_API_BASE_URL
+##amendments_api_base_url = AMENDMENTS_API_BASE_URL
+##favorites_api_base_url = FAVORITES_API_BASE_URL
 
 opentree_docstore_url = OPENTREE_DOCSTORE_URL
 # Push scripts will substitute the OTI_BASE_URL server-config variables, shared
