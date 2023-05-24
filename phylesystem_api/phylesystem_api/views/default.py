@@ -88,6 +88,8 @@ def pull_through_cache(request):
         fetch_url = "https://devapi.opentreeoflife.org" + root_relative_url
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warn("  request.method = {}".format(request.method))
+        _LOG.warn("  request.headers:")
+        _LOG.warn( request.headers )
         _LOG.warn("  STARTING request Connection header: {}".format( request.headers.get('Connection', '')))
         #proxy_safe_headers = ???
         request.headers['Connection'] = 'Close'
