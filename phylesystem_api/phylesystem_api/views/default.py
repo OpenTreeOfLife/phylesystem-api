@@ -93,8 +93,8 @@ def pull_through_cache(request):
         _LOG.warn("  STARTING request.headers:")
         _LOG.warn( dict(request.headers) )
         _LOG.warn("  STARTING request headers: {}".format( request.headers.get('Connection', '')))
-        request.headers.pop('Connection')  
-        request.headers.pop('Keep-Alive')  
+        request.headers.pop('Connection', None)  
+        request.headers.pop('Keep-Alive', None)  
         _LOG.warn("  MODIFIED request.headers:")
         _LOG.warn( dict(request.headers) )
 
@@ -125,8 +125,8 @@ def pull_through_cache(request):
             # modify or discard "hop-by-hop" headers
             _LOG.warn("  STARTING fetched.headers:")
             _LOG.warn( dict(fetched.headers) )
-            fetched.headers.pop('Connection')  
-            fetched.headers.pop('Keep-Alive')  
+            fetched.headers.pop('Connection', None)  
+            fetched.headers.pop('Keep-Alive', None)  
             _LOG.warn("  MODIFIED fetched.headers:")
             _LOG.warn( dict(fetched.headers) )
 
