@@ -78,6 +78,17 @@ def pull_through_cache(request):
     target_url = request.matchdict.get('target_url')
     _LOG.warn(">> target_url: {}".format(target_url))
 
+    # Some headers should not be used when adding to our RAM cache
+    hop_by_hop_headers = ['Keep-Alive',
+                          'Transfer-Encoding',
+                          'TE',
+                          'Connection',
+                          'Trailer',
+                          'Upgrade',
+                          'Proxy-Authorization',
+                          'Proxy-Authenticate',
+                          ]
+
     @cache_region('short_term', 'pull-through')
     def fetch_and_cache(url):
         # let's restrict this to URLs on this api server, to avoid shenanigans
@@ -90,15 +101,6 @@ def pull_through_cache(request):
         _LOG.warn("  request.method = {}".format(request.method))
 
         # modify or discard "hop-by-hop" headers
-        hop_by_hop_headers = ['Keep-Alive',
-                              'Transfer-Encoding',
-                              'TE',
-                              'Connection',
-                              'Trailer',
-                              'Upgrade',
-                              'Proxy-Authorization',
-                              'Proxy-Authenticate',
-                              ]
         for bad_header in hop_by_hop_headers:
             request.headers.pop(bad_header, None)
         #_LOG.warn("  MODIFIED request.headers:")
@@ -125,19 +127,9 @@ def pull_through_cache(request):
             # TODO: For more flexibility, we might examine and mimic the original request (headers, etc)
             _LOG.warn("... and now we're back with fetched, which is a {}".format( type(fetched) ))
             fetched.raise_for_status()
-            _LOG.warn("... AFTER fetched.raise_for_status()")
             fetched.encoding = 'utf-8' # Optional: requests infers this internally
 
             # modify or discard "hop-by-hop" headers
-            hop_by_hop_headers = ['Keep-Alive',
-                                  'Transfer-Encoding',
-                                  'TE',
-                                  'Connection',
-                                  'Trailer',
-                                  'Upgrade',
-                                  'Proxy-Authorization',
-                                  'Proxy-Authenticate',
-                                  ]
             for bad_header in hop_by_hop_headers:
                 fetched.headers.pop(bad_header, None)
             #_LOG.warn("  MODIFIED fetched.headers:")
