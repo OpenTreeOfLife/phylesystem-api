@@ -12,6 +12,8 @@ from pyramid.httpexceptions import (
                                    )
 from pyramid.response import Response
 import requests
+from io import StringIO
+from configparser import ConfigParser
 from peyotl import concatenate_collections, \
                    tree_is_in_collection
 
@@ -156,7 +158,7 @@ def phylesystem_config(request):
 def study_list(request):
     phylesystem = api_utils.get_phylesystem(request)
     studies = phylesystem.get_study_ids()
-    return anyjson.dumps(studies)
+    return studies
 
 @view_config(route_name='trees_in_synth', renderer='json')
 def trees_in_synth(request):
@@ -180,7 +182,7 @@ def trees_in_synth(request):
         # _LOG.exception('concatenation of collections failed')
         e = sys.exc_info()[0]
         raise HTTPBadRequest(body=e)
-    return anyjson.dumps(result)
+    return result
 
 @view_config(route_name='include_tree_in_synth', renderer='json')
 def include_tree_in_synth(request):
@@ -331,10 +333,10 @@ def _get_synth_input_collection_ids():
     url_of_synth_config = 'https://raw.githubusercontent.com/mtholder/propinquity/master/config.opentree.synth'
     try:
         resp = requests.get(url_of_synth_config)
-        conf_fo = StringIO(resp.content)
+        conf_fo = StringIO(resp.content.decode('utf-8'))
     except:
         raise HTTPGatewayTimeout(body ='Could not fetch synthesis list from {}'.format(url_of_synth_config))
-    cfg = SafeConfigParser()
+    cfg = ConfigParser()
     try:
         cfg.readfp(conf_fo)
     except:
