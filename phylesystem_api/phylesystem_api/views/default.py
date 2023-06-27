@@ -67,6 +67,15 @@ def base_API_view(request):
         "source_url": "https://github.com/OpenTreeOfLife/phylesystem-api"
     }
 
+
+
+# Create a unique cache key with the URL and any vars (GET *and* POST) to its "query string"
+# ALSO include the request method (HTTP verb) to respond to OPTIONS requests
+def create_unique_cache_key(target_url, request):
+    unique_key = "cached:{}:{}:{}".format(request.method, target_url, request.body)
+    _LOG.warn(">> unique cache key: {}".format(unique_key))
+    return unique_key
+
 @view_config(route_name='pull_through_cache')
 def pull_through_cache(request):
     """
@@ -93,9 +102,7 @@ def pull_through_cache(request):
                           'Proxy-Authenticate',
                           ]
 
-    # Create a unique cache key with the URL and any vars (GET *and* POST) to its "query string"
-    # ALSO include the request method (HTTP verb) to respond to OPTIONS requests
-    @cache_region('short_term', "cached:{}:{}:{}".format(request.method, target_url, request.body))
+    @cache_region('short_term', create_unique_cache_key(target_url, request))
     def fetch_and_cache(url):
         # let's restrict this to URLs on this api server, to avoid shenanigans
         #import pdb; pdb.set_trace()
