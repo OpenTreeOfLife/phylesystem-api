@@ -81,8 +81,6 @@ def pull_through_cache(request):
     # gather any request elements used to build a unique cache key
     target_url = request.matchdict.get('target_url')
     _LOG.warn(">> target_url: {}".format(target_url))
-    post_payload = request.body
-    _LOG.warn(">> post_payload: {}".format(post_payload))
 
     # Some headers should not be used when adding to our RAM cache
     hop_by_hop_headers = ['Keep-Alive',
@@ -95,8 +93,10 @@ def pull_through_cache(request):
                           'Proxy-Authenticate',
                           ]
 
-    @cache_region('short_term', 'pull-through')
-    def fetch_and_cache(url, post_payload):
+    # Create a unique cache key with the URL and any vars (GET *and* POST) to its "query string"
+    # ALSO include the request method (HTTP verb) to respond to OPTIONS requests
+    @cache_region('short_term', "cached:{}:{}:{}".format(request.method, target_url, request.body))
+    def fetch_and_cache(url):
         # let's restrict this to URLs on this api server, to avoid shenanigans
         #import pdb; pdb.set_trace()
         root_relative_url = "/{}".format(url)
@@ -166,7 +166,7 @@ def pull_through_cache(request):
             raise HTTPBadRequest(body='Unknown exception in cached call!')
 
     _LOG.warn("...trying to fetch-and-cache...")
-    return fetch_and_cache(target_url, post_payload)
+    return fetch_and_cache(target_url)
 
 
 @view_config(route_name='render_markdown')
