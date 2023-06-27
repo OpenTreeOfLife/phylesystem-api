@@ -77,8 +77,12 @@ def pull_through_cache(request):
     """
 #    _LOG = api_utils.get_logger(request, 'ot_api')
     api_utils.raise_on_CORS_preflight(request)
+
+    # gather any request elements used to build a unique cache key
     target_url = request.matchdict.get('target_url')
     _LOG.warn(">> target_url: {}".format(target_url))
+    post_payload = request.body
+    _LOG.warn(">> post_payload: {}".format(post_payload))
 
     # Some headers should not be used when adding to our RAM cache
     hop_by_hop_headers = ['Keep-Alive',
@@ -92,7 +96,7 @@ def pull_through_cache(request):
                           ]
 
     @cache_region('short_term', 'pull-through')
-    def fetch_and_cache(url):
+    def fetch_and_cache(url, post_payload):
         # let's restrict this to URLs on this api server, to avoid shenanigans
         #import pdb; pdb.set_trace()
         root_relative_url = "/{}".format(url)
@@ -162,7 +166,7 @@ def pull_through_cache(request):
             raise HTTPBadRequest(body='Unknown exception in cached call!')
 
     _LOG.warn("...trying to fetch-and-cache...")
-    return fetch_and_cache(target_url)
+    return fetch_and_cache(target_url, post_payload)
 
 
 @view_config(route_name='render_markdown')
