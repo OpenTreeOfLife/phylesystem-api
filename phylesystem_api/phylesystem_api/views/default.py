@@ -73,7 +73,7 @@ def base_API_view(request):
 # ALSO include the request method (HTTP verb) to respond to OPTIONS requests
 def create_unique_cache_key(target_url, request):
     unique_key = "cached:{}:{}:{}".format(request.method, target_url, request.body.decode('utf-8'))
-    _LOG.warn(">> unique cache key: {}".format(unique_key))
+    #_LOG.warn(">> unique cache key: {}".format(unique_key))
     return unique_key
 
 @view_config(route_name='pull_through_cache')
