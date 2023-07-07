@@ -108,8 +108,9 @@ def pull_through_cache(request):
         #import pdb; pdb.set_trace()
         root_relative_url = "/{}".format(url)
         _LOG.warn(">> root_relative_url: {}".format(root_relative_url))
-#        fetch_url = request.relative_url(root_relative_url)
-        fetch_url = "https://devapi.opentreeoflife.org" + root_relative_url
+        conf_obj = api_utils.get_conf_object
+        base_url = conf.get("apis", "default_apis_base_url")
+        fetch_url =  base_url + root_relative_url
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warn("  request.method = {}".format(request.method))
 
