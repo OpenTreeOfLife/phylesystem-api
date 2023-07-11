@@ -170,14 +170,15 @@ def fetch_study(request):
     _LOG.debug("Fetching study")
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
+    _LOG.debug('study_id = {}'.format(study_id))
     content_id = None
     version_history = None
     comment_html = None
-    final_path_part = request.path.split('/')[-1] ##TODO What if there are other parts...
     # does this look like a filename? if so, grab its extension
     request_extension = None
-    fpps = final_path_part.split('.')
+    fpps = study_id.split('.')
     if len(fpps) > 1:
+        _LOG.debug('len(fpps) > 1')
         request_extension = fpps[-1]
         study_id = '.'.join(fpps[:-1])
         _LOG.debug("Request extension is {}".format)
