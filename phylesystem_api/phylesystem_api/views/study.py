@@ -162,7 +162,8 @@ def __finish_write_verb(phylesystem,
 
 
 
-@view_config(route_name='fetch_study', renderer=None)
+@view_config(route_name='fetch_study', renderer=None, request_method='GET')
+@view_config(route_name='fetch_study_label', renderer=None, request_method='GET')
 def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
