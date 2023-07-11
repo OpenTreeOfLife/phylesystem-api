@@ -162,22 +162,23 @@ def __finish_write_verb(phylesystem,
 
 
 
-
-@view_config(route_name='fetch_study', renderer=None)
+@view_config(route_name='fetch_study', renderer=None, request_method='GET')
+@view_config(route_name='fetch_study_label', renderer=None, request_method='GET')
 def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
     #_LOG = api_utils.get_logger(request, 'ot_api.default.v1')
     _LOG.debug("Fetching study")
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
+    _LOG.debug('study_id = {}'.format(study_id))
     content_id = None
     version_history = None
     comment_html = None
-    final_path_part = request.path.split('/')[-1] ##TODO What if there are other parts...
     # does this look like a filename? if so, grab its extension
     request_extension = None
-    fpps = final_path_part.split('.')
+    fpps = study_id.split('.')
     if len(fpps) > 1:
+        _LOG.debug('len(fpps) > 1')
         request_extension = fpps[-1]
         study_id = '.'.join(fpps[:-1])
         _LOG.debug("Request extension is {}".format)
@@ -693,6 +694,7 @@ def get_study_external_url(request):
         raise HTTPNotFound(body='{"error": 1, "description": "study not found"}')
 
 @view_config(route_name='get_study_tree', renderer='json')
+@view_config(route_name='get_study_tree_label', renderer='json')
 def get_study_tree(request):
     api_utils.raise_on_CORS_preflight(request)
 

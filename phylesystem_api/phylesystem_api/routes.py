@@ -16,7 +16,6 @@ def includeme(config):
     config.add_route('merge_docstore_changes', '/{api_version}/merge_docstore_changes/{doc_id}/{starting_commit_SHA}')
     config.add_route('push_docstore_changes', '/{api_version}/push_docstore_changes/{doc_type}/{doc_id}')
     config.add_route('push_docstore_changes_bare', '/{api_version}/push_docstore_changes',  request_method='PUT')
-
     #
     # STUDY/TREE ROUTES
     #
@@ -29,12 +28,15 @@ def includeme(config):
     config.add_route('create_study', '/{api_version}/study/')
     config.add_route('study_CORS_preflight', '/{api_version}/study/{study_id}', request_method='OPTIONS')
     config.add_route('fetch_study', '/{api_version}/study/{study_id}', request_method='GET')
+    config.add_route('fetch_study_label', '/{api_version}/study/{study_id}/', request_method='GET')
     config.add_route('update_study', '/{api_version}/study/{study_id}', request_method='PUT')
     config.add_route('delete_study', '/{api_version}/study/{study_id}', request_method='DELETE')
     config.add_route('get_study_file_list', '/{api_version}/study/{study_id}/file')
     config.add_route('get_study_single_file', '/{api_version}/study/{study_id}/file/{file_id}')
     config.add_route('get_study_external_url', '/{api_version}/study/external_url/{study_id}')
     config.add_route('get_study_tree', '/{api_version}/study/{study_id}/tree/{tree_id_with_extension}')
+    config.add_route('get_study_tree_label', '/{api_version}/study/{study_id}/tree/{tree_id_with_extension}/')
+
     #
     # TREE COLLECTION ROUTES
     #
