@@ -162,7 +162,7 @@ def __finish_write_verb(phylesystem,
 
 
 
-
+@view_config(route_name='fetch_study_label', renderer=None) ## IS this allowed???
 @view_config(route_name='fetch_study', renderer=None)
 def fetch_study(request):
     repo_parent, repo_remote, git_ssh, pkey, git_hub_remote, max_filesize, max_num_trees, read_only_mode = api_utils.read_phylesystem_config(request)
@@ -693,6 +693,7 @@ def get_study_external_url(request):
         raise HTTPNotFound(body='{"error": 1, "description": "study not found"}')
 
 @view_config(route_name='get_study_tree', renderer='json')
+@view_config(route_name='get_study_tree_label', renderer='json')
 def get_study_tree(request):
     api_utils.raise_on_CORS_preflight(request)
 
