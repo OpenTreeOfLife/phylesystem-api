@@ -43,7 +43,7 @@ _LOG.debug("start api_utils")
 READ_ONLY_MODE = True
 
 def get_private_dir(request):
-    _LOG.debug("WHY PROVATE DIR")
+    _LOG.debug("WHY PRIVATE DIR")
     return "~/private/"
 
 def atomic_write_json_if_not_found(obj, dest, request):
