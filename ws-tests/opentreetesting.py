@@ -158,11 +158,17 @@ def test_http_json_method(url,
             'accept' : 'application/json',
         }
     if data:
-        resp = requests.request(verb,
-                                translate(url),
+        if verb == 'GET':
+            resp = requests.get(translate(url),
                                 headers=headers,
-                                data=json.dumps(data),
+                                params=data,
                                 allow_redirects=True)
+        else:
+            resp = requests.request(verb,
+                                    translate(url),
+                                    headers=headers,
+                                    data=json.dumps(data),
+                                    allow_redirects=True)
     else:
         resp = requests.request(verb,
                                 translate(url),
