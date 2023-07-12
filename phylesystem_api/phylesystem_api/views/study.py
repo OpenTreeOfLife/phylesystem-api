@@ -693,8 +693,8 @@ def get_study_external_url(request):
     except:
         raise HTTPNotFound(body='{"error": 1, "description": "study not found"}')
 
-@view_config(route_name='get_study_tree', renderer='json')
-@view_config(route_name='get_study_tree_label', renderer='json')
+@view_config(route_name='get_study_tree', renderer=None)
+@view_config(route_name='get_study_tree_label', renderer=None)
 def get_study_tree(request):
     api_utils.raise_on_CORS_preflight(request)
 
@@ -751,4 +751,8 @@ def get_study_tree(request):
     if result_data is None:
         raise HTTPNotFound(body='subresource "tree/{t}" not found in study "{s}"'.format(t=tree_id,
                                                                                  s=study_id))
-    return result_data
+    if out_schema.is_json():
+        return render_to_response('json', result_data, request)
+    else:
+        # _LOG.debug(result_data)
+        return render_to_response('string', result_data, request)
