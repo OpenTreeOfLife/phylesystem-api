@@ -209,7 +209,7 @@ def fetch_study(request):
         except:
             comment_html = ''
     except:
-        # _LOG.exception('GET failed')
+        _LOG.exception('GET failed')
         e = sys.exc_info()[0]
         raise HTTPBadRequest(e)
 
