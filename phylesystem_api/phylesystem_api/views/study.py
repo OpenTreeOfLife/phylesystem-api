@@ -97,7 +97,11 @@ def __make_valid_DOI(candidate):
     else:
         return None
 
-def __validate_output_nexml2json(repo_nexml2json, kwargs, resource, type_ext, content_id=None):
+def __validate_output_nexml2json(repo_nexml2json,
+                                 kwargs,
+                                 resource,
+                                 type_ext,
+                                 content_id=None):
     # sometimes we need to tweak the incoming kwargs, so let's 
     # make a mutable MultiDict copy of Pyramid's immutable NestedMultiDict
     kwargs = kwargs.copy()
@@ -171,7 +175,6 @@ def fetch_study(request):
     api_version = request.matchdict['api_version']
     study_id = request.matchdict['study_id']
     _LOG.debug('study_id = {}'.format(study_id))
-    content_id = None
     version_history = None
     comment_html = None
     # does this look like a filename? if so, grab its extension
@@ -189,8 +192,8 @@ def fetch_study(request):
     out_schema = __validate_output_nexml2json(repo_nexml2json,
                                               request.params,   # combined GET and POST
                                               'study',
-                                              request_extension,
-                                              content_id=content_id)
+                                              type_ext=request_extension,
+                                              content_id=None)
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     # _LOG.debug('parent_sha = {}'.format(parent_sha))
     # return the correct nexson of study_id, using the specified view
@@ -626,7 +629,7 @@ def get_study_file(request):
     out_schema = __validate_output_nexml2json(repo_nexml2json,
                                               request.params,   # combined GET and POST
                                               'file',
-                                              None,
+                                              type_ext=None,
                                               content_id=study_id)
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     try:
@@ -696,10 +699,6 @@ def get_study_external_url(request):
 @view_config(route_name='get_study_tree', renderer=None)
 @view_config(route_name='get_study_tree_label', renderer=None)
 def get_study_tree(request):
-    api_utils.raise_on_CORS_preflight(request)
-
-    api_version = request.matchdict['api_version']
-    study_id = request.matchdict['study_id']
     tree_id_with_extension = request.matchdict['tree_id_with_extension']
     tree_name_parts = tree_id_with_extension.split('.')
     tree_id = tree_name_parts[0]
@@ -707,15 +706,48 @@ def get_study_tree(request):
         file_ext = ".{}".format(tree_name_parts[1])
     else:
         file_ext = None
+    return _fine_grained_get(request, 'tree', content_id=tree_id, file_ext=file_ext)
 
+@view_config(route_name='get_study_otus', renderer=None)
+@view_config(route_name='get_study_otus_slash', renderer=None)
+def get_study_otus(request):
+    return _fine_grained_get(request, 'otus')
+
+@view_config(route_name='get_study_otu', renderer=None)
+@view_config(route_name='get_study_otu_slash', renderer=None)
+def get_study_otu(request):
+    return _fine_grained_get(request, 'otu')
+
+@view_config(route_name='get_study_otu_by_id', renderer=None)
+@view_config(route_name='get_study_otu_by_id_slash', renderer=None)
+def get_study_otu(request):
+    otu_id = request.matchdict['otu_id']
+    return _fine_grained_get(request, 'otu', content_id=otu_id)
+
+@view_config(route_name='get_study_otumap', renderer=None)
+@view_config(route_name='get_study_otumap_slash', renderer=None)
+def get_study_otumap(request):
+    return _fine_grained_get(request, 'otumap')
+
+@view_config(route_name='get_study_meta', renderer=None)
+@view_config(route_name='get_study_meta_slash', renderer=None)
+def get_study_ometa(request):
+    return _fine_grained_get(request, 'meta')
+
+def _fine_grained_get(request,
+                      subresource,
+                      content_id=None,
+                      file_ext=None):
+    api_utils.raise_on_CORS_preflight(request)
+    study_id = request.matchdict['study_id']
     result_data = None
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     out_schema = __validate_output_nexml2json(repo_nexml2json,
                                               request.params,   # combined GET and POST
-                                              'tree',
-                                              file_ext,
-                                              content_id=tree_id)
+                                              subresource,
+                                              type_ext=file_ext,
+                                              content_id=content_id)
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)
     try:
         r = phylesystem.return_study(study_id, commit_sha=parent_sha, return_WIP_map=True)
@@ -733,7 +765,7 @@ def get_study_tree(request):
         except:
             comment_html = ''
     except:
-        # _LOG.exception('GET failed')
+        _LOG.exception('GET failed')
         e = sys.exc_info()[0]
         raise HTTPBadRequest(e)
 
@@ -749,10 +781,9 @@ def get_study_tree(request):
         raise HTTPBadRequest( msg)
 
     if result_data is None:
-        raise HTTPNotFound(body='subresource "tree/{t}" not found in study "{s}"'.format(t=tree_id,
-                                                                                 s=study_id))
+        m = 'subresource "{b}/{t}" not found in study "{s}"'
+        m = m.format(b=subresource, t=content_id, s=study_id)
+        raise HTTPNotFound(body=m)
     if out_schema.is_json():
         return render_to_response('json', result_data, request)
-    else:
-        # _LOG.debug(result_data)
-        return render_to_response('string', result_data, request)
+    return render_to_response('string', result_data, request)
