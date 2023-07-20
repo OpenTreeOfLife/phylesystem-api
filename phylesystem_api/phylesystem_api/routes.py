@@ -36,7 +36,19 @@ def includeme(config):
     config.add_route('get_study_external_url', '/{api_version}/study/external_url/{study_id}')
     config.add_route('get_study_tree', '/{api_version}/study/{study_id}/tree/{tree_id_with_extension}')
     config.add_route('get_study_tree_label', '/{api_version}/study/{study_id}/tree/{tree_id_with_extension}/')
-
+    #
+    # STUDY/OTHER FINE-GRAINED ACCESS ROUTES
+    #
+    config.add_route('get_study_otu_by_id', '/{api_version}/study/{study_id}/otu/{otu_id}')
+    config.add_route('get_study_otu_by_id_slash', '/{api_version}/study/{study_id}/otu/{otu_id}/')
+    config.add_route('get_study_otu', '/{api_version}/study/{study_id}/otu')
+    config.add_route('get_study_otu_slash', '/{api_version}/study/{study_id}/otu/')
+    config.add_route('get_study_otus', '/{api_version}/study/{study_id}/otus')
+    config.add_route('get_study_otus_slash', '/{api_version}/study/{study_id}/otus/')
+    config.add_route('get_study_otumap', '/{api_version}/study/{study_id}/otumap')
+    config.add_route('get_study_otumap_slash', '/{api_version}/study/{study_id}/otumap/')
+    config.add_route('get_study_meta', '/{api_version}/study/{study_id}/meta')
+    config.add_route('get_study_meta_slash', '/{api_version}/study/{study_id}/meta/')
     #
     # TREE COLLECTION ROUTES
     #
