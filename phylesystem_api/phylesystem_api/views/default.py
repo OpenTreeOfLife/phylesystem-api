@@ -67,6 +67,15 @@ def base_API_view(request):
         "source_url": "https://github.com/OpenTreeOfLife/phylesystem-api"
     }
 
+
+
+# Create a unique cache key with the URL and any vars (GET *and* POST) to its "query string"
+# ALSO include the request method (HTTP verb) to respond to OPTIONS requests
+def create_unique_cache_key(target_url, request):
+    unique_key = "cached:{}:{}:{}".format(request.method, target_url, request.body.decode('utf-8'))
+    #_LOG.warn(">> unique cache key: {}".format(unique_key))
+    return unique_key
+
 @view_config(route_name='pull_through_cache')
 def pull_through_cache(request):
     """
@@ -77,23 +86,46 @@ def pull_through_cache(request):
     """
 #    _LOG = api_utils.get_logger(request, 'ot_api')
     api_utils.raise_on_CORS_preflight(request)
+
+    # gather any request elements used to build a unique cache key
     target_url = request.matchdict.get('target_url')
     _LOG.warn(">> target_url: {}".format(target_url))
 
-    @cache_region('short_term', 'pull-through')
+    # Some headers should not be used when adding to our RAM cache
+    hop_by_hop_headers = ['Keep-Alive',
+                          'Transfer-Encoding',
+                          'TE',
+                          'Connection',
+                          'Trailer',
+                          'Upgrade',
+                          'Proxy-Authorization',
+                          'Proxy-Authenticate',
+                          ]
+
+    @cache_region('short_term', create_unique_cache_key(target_url, request))
     def fetch_and_cache(url):
         # let's restrict this to URLs on this api server, to avoid shenanigans
         #import pdb; pdb.set_trace()
         root_relative_url = "/{}".format(url)
         _LOG.warn(">> root_relative_url: {}".format(root_relative_url))
-        fetch_url = request.relative_url(root_relative_url)
+        conf = api_utils.get_conf_object(request)
+        base_url = conf.get("apis", "default_apis_base_url")
+        fetch_url =  base_url + root_relative_url
         _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warn("  request.method = {}".format(request.method))
+
+        # modify or discard "hop-by-hop" headers
+        for bad_header in hop_by_hop_headers:
+            request.headers.pop(bad_header, None)
+        #_LOG.warn("  MODIFIED request.headers:")
+        #_LOG.warn( dict(request.headers) )
+
         try:
             if request.method == 'POST':
                 # assume a typical API request with JSON payload
                 # (pass this along unchanged)
                 _LOG.warn("  treating as POST")
+                _LOG.warn("  headers: {}".format(request.headers))
                 fetched = requests.post(url=fetch_url,
                                         data=request.body,
                                         headers=request.headers)
@@ -110,6 +142,13 @@ def pull_through_cache(request):
             _LOG.warn("... and now we're back with fetched, which is a {}".format( type(fetched) ))
             fetched.raise_for_status()
             fetched.encoding = 'utf-8' # Optional: requests infers this internally
+
+            # modify or discard "hop-by-hop" headers
+            for bad_header in hop_by_hop_headers:
+                fetched.headers.pop(bad_header, None)
+            #_LOG.warn("  MODIFIED fetched.headers:")
+            #_LOG.warn( dict(fetched.headers) )
+
             try:
                 test_for_json = fetched.json()  # missing JSON payload will raise an error
                 return Response(

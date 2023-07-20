@@ -43,7 +43,7 @@ _LOG.debug("start api_utils")
 READ_ONLY_MODE = True
 
 def get_private_dir(request):
-    _LOG.debug("WHY PROVATE DIR")
+    _LOG.debug("WHY PRIVATE DIR")
     return "~/private/"
 
 def atomic_write_json_if_not_found(obj, dest, request):
@@ -669,7 +669,7 @@ from bleach.sanitizer import Cleaner
 # N.B. HTML comments are stripped by default. Non-allowed tags will appear
 # "naked" in output, so we can identify any bad actors.
 allowed_curation_comment_tags = ['p', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'pre', 'code']  # any others?
-ot_markdown_tags = list(set( bleach.sanitizer.ALLOWED_TAGS + allowed_curation_comment_tags))
+ot_markdown_tags = list(set(bleach.sanitizer.ALLOWED_TAGS)) + list(set(allowed_curation_comment_tags))
 # allow hyperlinks with target="_blank"
 ot_markdown_attributes = {}
 ot_markdown_attributes.update(bleach.sanitizer.ALLOWED_ATTRIBUTES)
