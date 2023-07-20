@@ -331,6 +331,12 @@ def read_logging_config(request):
         logging_filepath = None
     return level, logging_format_name, logging_filepath
 
+def _raise_missing_auth_token():
+    raise HTTPBadRequest(json.dumps({
+            "error": 1,
+            "description":"You must provide an auth_token to authenticate to the OpenTree API"
+        }))
+
 def authenticate(request):
     """Verify that we received a valid Github authentication token
 
@@ -345,13 +351,10 @@ def authenticate(request):
 
     """
     # this is the GitHub API auth-token for a logged-in curator
-    auth_token   = find_in_request(request, 'auth_token', '')
+    auth_token = find_in_request(request, 'auth_token', '')
 
     if not auth_token:
-        raise HTTPBadRequest(json.dumps({
-            "error": 1,
-            "description":"You must provide an auth_token to authenticate to the OpenTree API"
-        }))
+        _raise_missing_auth_token()
     gh           = Github(auth_token)
     gh_user      = gh.get_user()
     auth_info = {}
@@ -367,6 +370,7 @@ def authenticate(request):
     # generate API calls regardless of author_name/author_email being specifed
     auth_info['name'] = find_in_request(request, 'author_name', gh_user.name)
     auth_info['email'] = find_in_request(request, 'author_email', gh_user.email)
+    auth_info['auth_token'] = auth_token
     return auth_info
 
 ''' ## using logging module directly
@@ -613,7 +617,7 @@ def call_http_json(url,
     return resp.status_code, resp.json()
     
 
-def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
+def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', auth_token=None):
     ##TODO Thius needs to create a bare URL for collections, and pass in the resource id etc as data
     #_LOG.debug("deferred_push_to_gh_call")
     if READ_ONLY_MODE:
@@ -626,10 +630,9 @@ def deferred_push_to_gh_call(request, resource_id, doc_type='nexson', **kwargs):
     else:
         data = {}
     url = compose_push_to_github_url(request, resource_id, doc_type)
-    auth_token = copy.copy(kwargs.get('auth_token'))
-    if auth_token is not None:
-        data['auth_token'] = auth_token
-    assert data.get('auth_token')
+    if not auth_token:
+        _raise_missing_auth_token()
+    data['auth_token'] = auth_token
     #call_http_json(url=url, verb='PUT', data=data)
     threading.Thread(target=call_http_json, args=(url, 'PUT', data,)).start()
 
@@ -712,3 +715,25 @@ def remove_tags(markup):
     markup = markup.decode('utf-8')
     return markup
 
+def extract_json_from_http_call(request, data_field_name='data', request_params=None):
+    """Returns the json blob (as a deserialized object) from `request_params` or the request.body.
+
+    request_params can be the Pyramids request.params multidict or just a dict.
+    """
+    json_obj = None
+    try:
+        # check for kwarg data_field_name, or load the full request body
+        if data_field_name in request_params:
+            json_obj = request_params.get(data_field_name, {})
+        else:
+            json_obj = request.json_body
+
+        if not isinstance(json_obj, dict):
+            json_obj = json.loads(json_obj)
+        if data_field_name in json_obj:
+            json_obj = json_obj[data_field_name]
+    except:
+        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
+        # _LOG.exception('Exception getting JSON content in extract_json_from_http_call')
+        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": 'no collection JSON found in request'}))
+    return json_obj
