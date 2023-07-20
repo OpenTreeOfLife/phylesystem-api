@@ -14,7 +14,7 @@ from pyramid.httpexceptions import (
 from peyotl.api import OTI
 from peyotl.phylesystem.git_workflows import GitWorkflowError
 import phylesystem_api.api_utils as api_utils
-from phylesystem_api.api_utils import find_in_request
+from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
 import json
 from peyotl.collections_store import OWNER_ID_PATTERN, \
                                      COLLECTION_ID_PATTERN
@@ -23,31 +23,10 @@ from peyotl.collections_store.validation import validate_collection
 
 _LOG = logging.getLogger('phylesystem_api')
 
-
-def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
-    """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
-    json_obj = None
-    try:
-        # check for kwarg data_field_name, or load the full request body
-        if data_field_name in kwargs:
-            json_obj = kwargs.get(data_field_name, {})
-        else:
-            json_obj = request.json_body
-
-        if not isinstance(json_obj, dict):
-            json_obj = json.loads(json_obj)
-        if data_field_name in json_obj:
-            json_obj = json_obj[data_field_name]
-    except:
-        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-        # _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
-        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": 'no collection JSON found in request'}))
-    return json_obj
-
-def __extract_and_validate_collection(request, **kwargs):
+def __extract_and_validate_collection(request, request_params):
     from pprint import pprint
     try:
-        collection_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+        collection_obj = extract_json_from_http_call(request, data_field_name='json', request_params=request_params)
     except HTTPException as err:
         # payload not found
         return None, None, None
@@ -137,7 +116,7 @@ def create_collection(request):
     if commit_return['error'] != 0:
         # _LOG.debug('add_new_collection failed with error code')
         raise HTTPBadRequest(json.dumps(commit_return))
-    api_utils.deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', **request.params)
+    api_utils.deferred_push_to_gh_call(request, new_collection_id, doc_type='collection', auth_token=auth_info['auth_token'])
     return commit_return
 
 @view_config(route_name='fetch_collection', renderer='json')
@@ -259,7 +238,7 @@ def update_collection(request):
     # check for 'merge needed'?
     mn = commit_return.get('merge_needed')
     if (mn is not None) and (not mn):
-        api_utils.deferred_push_to_gh_call(request, collection_id, doc_type='collection', **request.json_body)
+        api_utils.deferred_push_to_gh_call(request, collection_id, doc_type='collection', auth_token=auth_info['auth_token'])
     # Add updated commit history to the blob
     commit_return['versionHistory'] = docstore.get_version_history_for_doc_id(collection_id)
     return commit_return
@@ -287,7 +266,6 @@ def delete_collection(request):
     api_utils.raise_if_read_only()
 
     # remove this collection from the docstore
-    auth_info = api_utils.authenticate(request)
     owner_id = auth_info.get('login', None)
     docstore = api_utils.get_tree_collection_store(request)
     parent_sha = find_in_request(request, 'starting_commit_SHA', None)
@@ -299,7 +277,7 @@ def delete_collection(request):
                                        parent_sha,
                                        commit_msg=commit_msg)
         if x.get('error') == 0:
-            api_utils.deferred_push_to_gh_call(request, None, doc_type='collection', **request.params)
+            api_utils.deferred_push_to_gh_call(request, None, doc_type='collection', auth_token=auth_info['auth_token'])
         return x
     except GitWorkflowError as err:
         raise HTTPBadRequest(err.msg)

@@ -307,7 +307,7 @@ def include_tree_in_synth(request):
         # check for 'merge needed'?
         mn = commit_return.get('merge_needed')
         if (mn is not None) and (not mn):
-            api_utils.deferred_push_to_gh_call(request, default_collection_id, doc_type='collection', **kwargs)
+            api_utils.deferred_push_to_gh_call(request, default_collection_id, doc_type='collection', auth_token=auth_info['auth_token'])
 
     # fetch and return the updated list of synth-input trees
     return trees_in_synth(kwargs)
@@ -359,7 +359,7 @@ def exclude_tree_from_synth(request):
             # check for 'merge needed'?
             mn = commit_return.get('merge_needed')
             if (mn is not None) and (not mn):
-                api_utils.deferred_push_to_gh_call(request, coll_id, doc_type='collection', **kwargs)
+                api_utils.deferred_push_to_gh_call(request, coll_id, doc_type='collection', auth_token=auth_info['auth_token'])
 
     # fetch and return the updated list of synth-input trees
     return trees_in_synth(kwargs)

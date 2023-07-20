@@ -498,7 +498,7 @@ def create_study(request):
     if commit_return['error'] != 0:
         # _LOG.debug('ingest_new_study failed with error code')
         raise HTTPBadRequest(json.dumps(commit_return))
-    api_utils.deferred_push_to_gh_call(request, new_resource_id, doc_type='nexson', **request.params)
+    api_utils.deferred_push_to_gh_call(request, new_resource_id, doc_type='nexson', auth_token=auth_info['auth_token'])
     return commit_return
 
 
@@ -557,7 +557,7 @@ def update_study(request):
     #TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
     mn = blob.get('merge_needed')
     if (mn is not None) and (not mn):
-        api_utils.deferred_push_to_gh_call(request, study_id, doc_type='nexson', **request.params)
+        api_utils.deferred_push_to_gh_call(request, study_id, doc_type='nexson', auth_token=auth_info['auth_token'])
     # Add updated commit history to the blob
     blob['versionHistory'] = phylesystem.get_version_history_for_study_id(study_id)
     return blob
@@ -601,7 +601,7 @@ def delete_study(request):
         _LOG.warn(x)
         if x.get('error') == 0:
             _LOG.warn('calling deferred push...')
-            api_utils.deferred_push_to_gh_call(request, None, doc_type='nexson', **request.params)
+            api_utils.deferred_push_to_gh_call(request, None, doc_type='nexson', auth_token=auth_info['auth_token'])
             _LOG.warn('back from deferred push')
         return x
     except GitWorkflowError as err:

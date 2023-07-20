@@ -13,7 +13,7 @@ from pyramid.httpexceptions import (
 from peyotl.api import OTI
 from peyotl.phylesystem.git_workflows import GitWorkflowError
 import phylesystem_api.api_utils as api_utils
-from phylesystem_api.api_utils import find_in_request
+from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
 import json
 import logging
 
@@ -25,30 +25,10 @@ from peyotl.amendments.validation import validate_amendment
 _LOG = logging.getLogger('phylesystem_api')
 
 
-def __extract_json_from_http_call(request, data_field_name='data', **kwargs):
-    """Returns the json blob (as a deserialized object) from `kwargs` or the request.body"""
-    json_obj = None
-    try:
-        # check for kwarg data_field_name, or load the full request body
-        if data_field_name in kwargs:
-            json_obj = kwargs.get(data_field_name, {})
-        else:
-            json_obj = request.json_body
-
-        if not isinstance(json_obj, dict):
-            json_obj = json.loads(json_obj)
-        if data_field_name in json_obj:
-            json_obj = json_obj[data_field_name]
-    except:
-        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-        # _LOG.exception('Exception getting JSON content in __extract_json_from_http_call')
-        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": 'no collection JSON found in request'}))
-    return json_obj
-
-def __extract_and_validate_amendment(request, **kwargs):
+def __extract_and_validate_amendment(request, kwargs):
     from pprint import pprint
     try:
-        amendment_obj = __extract_json_from_http_call(request, data_field_name='json', **kwargs)
+        amendment_obj = extract_json_from_http_call(request, data_field_name='json', request_params=kwargs)
     except HTTPException as err:
         # payload not found
         return None, None, None
@@ -98,7 +78,7 @@ def create_amendment(request, **kwargs):
     phylesystem = api_utils.get_phylesystem(request)   # set READONLY flag before testing!
     api_utils.raise_if_read_only()
     # fetch and parse the JSON payload, if any
-    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, **kwargs)
+    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, kwargs)
     if (amendment_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.method) }))
 
@@ -122,7 +102,7 @@ def create_amendment(request, **kwargs):
         # _LOG.debug('add_new_amendment failed with error code')
         raise HTTPBadRequest(body=json.dumps(commit_return))
     _LOG.debug("create ammendemt deferred_push_to_gh_call")
-    api_utils.deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', **request.params)
+    api_utils.deferred_push_to_gh_call(request, new_amendment_id, doc_type='amendment', auth_token=auth_info['auth_token'])
     return commit_return
 
 
@@ -206,7 +186,7 @@ def update_amendment(request):
         commit_msg = None
 
     # fetch and parse the JSON payload, if any
-    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, **kwargs)
+    amendment_obj, amendment_errors, amendment_adapter = __extract_and_validate_amendment(request, kwargs)
     if (amendment_obj is None):
         raise HTTPBadRequest(body=json.dumps({"error": 1, "description": "amendment JSON expected for HTTP method {}".format(request.method) }))
 
@@ -234,7 +214,7 @@ def update_amendment(request):
     # check for 'merge needed'?
     mn = commit_return.get('merge_needed')
     if (mn is not None) and (not mn):
-        api_utils.deferred_push_to_gh_call(request, amendment_id, doc_type='amendment', **request.json_body)
+        api_utils.deferred_push_to_gh_call(request, amendment_id, doc_type='amendment', auth_token=auth_info['auth_token'])
     return commit_return
 
 
@@ -275,7 +255,7 @@ def delete_amendment(request):
                                       parent_sha,
                                       commit_msg=commit_msg)
         if x.get('error') == 0:
-            api_utils.deferred_push_to_gh_call(request, None, doc_type='amendment', **request.json_body)
+            api_utils.deferred_push_to_gh_call(request, None, doc_type='amendment', auth_token=auth_info['auth_token'])
         return x
     except GitWorkflowError as err:
         raise HTTPBadRequest(body=err.msg)
