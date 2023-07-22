@@ -4,29 +4,27 @@ from peyotl import convert_nexson_format
 import json
 import sys
 import os
-DOMAIN = config('host', 'apihost')
-SUBMIT_URI = DOMAIN + '/v3/study/10'
-data = {'output_nexml2json':'0.0.0'}
-pb = test_http_json_method(SUBMIT_URI, 
-                           'GET',
-                            data=data,
-                            expected_status=200,
-                            return_bool_data=True)
+
+DOMAIN = config("host", "apihost")
+SUBMIT_URI = DOMAIN + "/v3/study/10"
+data = {"output_nexml2json": "0.0.0"}
+pb = test_http_json_method(
+    SUBMIT_URI, "GET", data=data, expected_status=200, return_bool_data=True
+)
 if not pb[0]:
     sys.exit(1)
 
-data = {'output_nexml2json':'1.0.0'}
-pl = test_http_json_method(SUBMIT_URI, 
-                           'GET',
-                            data=data,
-                            expected_status=200,
-                            return_bool_data=True)
+data = {"output_nexml2json": "1.0.0"}
+pl = test_http_json_method(
+    SUBMIT_URI, "GET", data=data, expected_status=200, return_bool_data=True
+)
 if not pl[0]:
     sys.exit(1)
-badger = pb[1]['data']
-legacy = pl[1]['data']
-assert(badger != legacy)
-lfromb = convert_nexson_format(badger, '1.0.0', current_format='0.0.0')
+badger = pb[1]["data"]
+legacy = pl[1]["data"]
+assert badger != legacy
+lfromb = convert_nexson_format(badger, "1.0.0", current_format="0.0.0")
+
 
 def dict_eq(a, b):
     if a == b:
@@ -42,7 +40,7 @@ def dict_eq(a, b):
         ao = list(ao)
         ao.sort()
         bo = sb - sa
-        c = set(['^ot:candidateTreeForSynthesis', '^ot:tag'])
+        c = set(["^ot:candidateTreeForSynthesis", "^ot:tag"])
         bextra = bo - c
         bo = list(bextra)
         bo.sort()
@@ -65,19 +63,21 @@ def dict_eq(a, b):
                             d = False
                     if len(va) != len(vb):
                         d = False
-                        sys.stdout.write('  lists for {} differ in length.\n'.format(k))
+                        sys.stdout.write("  lists for {} differ in length.\n".format(k))
                 else:
                     d = False
-                    sys.stdout.write('  value for {k}: "{a}" != "{b}"\n'.format(k=k, a=va, b=vb))
+                    sys.stdout.write(
+                        '  value for {k}: "{a}" != "{b}"\n'.format(k=k, a=va, b=vb)
+                    )
         else:
             d = False
     return d
 
 
 if lfromb != legacy:
-    with open('.tmp1', 'w') as fo_one:
+    with open(".tmp1", "w") as fo_one:
         json.dump(legacy, fo_one, indent=0, sort_keys=True)
-    with open('.tmp2', 'w') as fo_one:
+    with open(".tmp2", "w") as fo_one:
         json.dump(lfromb, fo_one, indent=0, sort_keys=True)
-    assert(dict_eq(lfromb, legacy))
+    assert dict_eq(lfromb, legacy)
 sys.exit(0)

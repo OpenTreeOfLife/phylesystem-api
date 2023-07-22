@@ -2,9 +2,11 @@ from peyotl.phylesystem.git_actions import PhylesystemGitAction
 from sh import git
 import os
 
+
 class GitData(PhylesystemGitAction):
     def __init__(self, repo, **kwargs):
         PhylesystemGitAction.__init__(self, repo, **kwargs)
+
     def delete_remote_branch(self, remote, branch, env={}):
         "Delete a remote branch"
         # deleting a branch is the same as
@@ -34,12 +36,26 @@ class GitData(PhylesystemGitAction):
         if env["PKEY"]:
             new_env = os.environ.copy()
             new_env.update(env)
-            git(self.gitdir, self.gitwd, "pull", remote, "{}:{}".format(branch_to_pull,branch_to_pull), _env=new_env)
+            git(
+                self.gitdir,
+                self.gitwd,
+                "pull",
+                remote,
+                "{}:{}".format(branch_to_pull, branch_to_pull),
+                _env=new_env,
+            )
         else:
-            git(self.gitdir, self.gitwd, "pull", remote, "{}:{}".format(branch_to_pull,branch_to_pull))
+            git(
+                self.gitdir,
+                self.gitwd,
+                "pull",
+                remote,
+                "{}:{}".format(branch_to_pull, branch_to_pull),
+            )
 
-        new_sha      = git(self.gitdir, self.gitwd, "rev-parse","HEAD")
+        new_sha = git(self.gitdir, self.gitwd, "rev-parse", "HEAD")
         return new_sha.strip()
+
 
 class MergeException(Exception):
     pass

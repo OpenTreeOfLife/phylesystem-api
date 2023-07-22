@@ -1,12 +1,13 @@
 from pyramid.view import view_config
+
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
-                                    HTTPException,
-                                    HTTPError,
-                                    HTTPNotFound, 
-                                    HTTPBadRequest,
-                                    HTTPInternalServerError,
-                                   )
+    HTTPException,
+    HTTPError,
+    HTTPNotFound,
+    HTTPBadRequest,
+    HTTPInternalServerError,
+)
 from peyotl.api import OTI
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
@@ -17,25 +18,30 @@ import datetime
 import codecs
 import os
 
+
 def _raise400(msg):
     raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
 
+
 def _init(request, response):
-    response.view = 'generic.json'
+    response.view = "generic.json"
     # CORS support for cross-domain API requests (from anywhere)
-    response.headers['Access-Control-Allow-Origin'] = "*"
-    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
     return OTI(oti=api_utils.get_oti_domain(request))
+
+
 def _bool_arg(v):
     if isinstance(v, str):
         u = v.upper()
-        if u in ['TRUE', 'YES']:
+        if u in ["TRUE", "YES"]:
             return True
-        if u in ['FALSE', 'NO']:
+        if u in ["FALSE", "NO"]:
             return False
     return v
 
-@view_config(route_name='study_properties', renderer='json')
+
+@view_config(route_name="study_properties", renderer="json")
 def properties(request):
     oti = _init(request, request.response)
     n = list(oti.node_search_term_set)
@@ -44,34 +50,34 @@ def properties(request):
     t.sort()
     s = list(oti.study_search_term_set)
     s.sort()
-    return {'node_properties': n,
-            'tree_properties': t,
-            'study_properties': s}
+    return {"node_properties": n, "tree_properties": t, "study_properties": s}
 
 
-@view_config(route_name='find_studies', renderer='json')
+@view_config(route_name="find_studies", renderer="json")
 def find_studies(request):
     # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict['api_version']
+    api_version = request.matchdict["api_version"]
     oti = _init(request, request.response)
-    verbose = _bool_arg(find_in_request(request, 'verbose', False))
+    verbose = _bool_arg(find_in_request(request, "verbose", False))
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
-    field = find_in_request(request, 'property', None)
+    field = find_in_request(request, "property", None)
     try:
         if field is None:
             match_list = oti.find_all_studies(verbose=verbose)
-            resp = {'matched_studies': match_list}
+            resp = {"matched_studies": match_list}
         else:
-            value = find_in_request(request, 'value', None)
+            value = find_in_request(request, "value", None)
             if value is None:
                 _raise400('If "property" is sent, a "value" argument must be used.')
-            exact = _bool_arg(find_in_request(request, 'exact', False))
+            exact = _bool_arg(find_in_request(request, "exact", False))
             if (exact is not True) and (exact is not False):
                 _raise400('"exact" setting must be a boolean')
             try:
-                match_list = oti.find_studies({field: value}, verbose=verbose, exact=exact)
-                resp = {'matched_studies': match_list}
+                match_list = oti.find_studies(
+                    {field: value}, verbose=verbose, exact=exact
+                )
+                resp = {"matched_studies": match_list}
             except ValueError as x:
                 _raise400(x.message)
 
@@ -82,35 +88,40 @@ def find_studies(request):
     except Exception as x:
         msg = ",".join(x.args)
         raise HTTPInternalServerError(
-                body=json.dumps({"error": 1, 
-                                 "description": "Unexpected error calling oti: {}".format(msg)}))
+            body=json.dumps(
+                {
+                    "error": 1,
+                    "description": "Unexpected error calling oti: {}".format(msg),
+                }
+            )
+        )
     return resp
 
 
-@view_config(route_name='find_trees', renderer='json')
+@view_config(route_name="find_trees", renderer="json")
 def find_trees(request):
     # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict['api_version']
+    api_version = request.matchdict["api_version"]
     try:
         msg = request.json_body
     except:
-        _raise400('missing or invalid request JSON')
+        _raise400("missing or invalid request JSON")
     oti = _init(request, request.response)
-    verbose = _bool_arg(msg.get('verbose', False))
+    verbose = _bool_arg(msg.get("verbose", False))
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
-    field = msg.get('property')
+    field = msg.get("property")
     if field is None:
         _raise400('A "property" argument must be used.')
-    value = msg.get('value')
+    value = msg.get("value")
     if value is None:
         _raise400('A "value" argument must be used.')
-    exact = _bool_arg(msg.get('exact', False))
+    exact = _bool_arg(msg.get("exact", False))
     if (exact is not True) and (exact is not False):
         _raise400('"exact" setting must be a boolean')
     try:
         match_list = oti.find_trees({field: value}, verbose=verbose, exact=exact)
-        resp = {'matched_studies': match_list}
+        resp = {"matched_studies": match_list}
     except HTTPException:
         raise
     except ValueError as x:
@@ -118,6 +129,11 @@ def find_trees(request):
     except Exception as x:
         msg = ",".join(x.args)
         raise HTTPInternalServerError(
-                body=json.dumps({"error": 1, 
-                                 "description": "Unexpected error calling oti: {}".format(msg)}))
+            body=json.dumps(
+                {
+                    "error": 1,
+                    "description": "Unexpected error calling oti: {}".format(msg),
+                }
+            )
+        )
     return resp
