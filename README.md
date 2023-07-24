@@ -89,3 +89,14 @@ See the [peyotl wiki](https://github.com/OpenTreeOfLife/peyotl/wiki) for details
 # Authors
 
 See the CREDITS file
+
+# Code formatting
+Recommended `.git/hooks/pre-commit`:
+
+    #!/bin/sh
+    if ! black --check phylesystem_api/phylesystem_api phylesystem_api/setup.py phylesystem_api/tests ; then
+        black phylesystem_api/phylesystem_api phylesystem_api/setup.py phylesystem_api/tests
+        echo "code reformatted. commit again!"
+        exit 1
+    fi
+
