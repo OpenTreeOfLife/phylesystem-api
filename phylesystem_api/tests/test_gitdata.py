@@ -5,12 +5,14 @@ import time
 from phylesystem_api.gitdata import GitData, MergeException
 import simplejson as json
 from sh import git
+
 try:
     # Python 2 only:
     from ConfigParser import SafeConfigParser
 except ImportError:
     # Python 2 and 3 (after ``pip install configparser``)
     from configparser import SafeConfigParser
+
 
 class TestGitData(unittest.TestCase):
     @classmethod
@@ -21,8 +23,8 @@ class TestGitData(unittest.TestCase):
         else:
             conf.read("../private/config")
 
-        self.repo = conf.get("apis","repo_path")
-        self.gd   = GitData(repo=self.repo)
+        self.repo = conf.get("apis", "repo_path")
+        self.gd = GitData(repo=self.repo)
         self.orig_cwd = os.getcwd()
 
         # go into our data repo
@@ -37,7 +39,7 @@ class TestGitData(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-        git.branch("-D",self.testing_branch_name)
+        git.branch("-D", self.testing_branch_name)
 
     def test_merge(self):
         def cleanup_merge():
@@ -59,11 +61,11 @@ class TestGitData(unittest.TestCase):
 
         git.add("foo.txt")
 
-        git.commit("-m","Test commit")
+        git.commit("-m", "Test commit")
 
         new_sha = self.gd.merge("to_merge_1", "base_branch")
 
-        self.assertTrue( new_sha != "", "new_sha=%s is non-empty" % new_sha)
+        self.assertTrue(new_sha != "", "new_sha=%s is non-empty" % new_sha)
         self.assertEqual(len(new_sha), 40, "SHA is 40 chars")
 
         self.assertTrue(True, "Merge succeeded")
@@ -88,7 +90,7 @@ class TestGitData(unittest.TestCase):
         file.close()
 
         git.add("foo.txt")
-        git.commit("-m","Test commit")
+        git.commit("-m", "Test commit")
 
         git.checkout("master")
 
@@ -99,9 +101,11 @@ class TestGitData(unittest.TestCase):
         file.close()
 
         git.add("foo.txt")
-        git.commit("-m","Test commit")
+        git.commit("-m", "Test commit")
 
-        self.assertRaises(MergeException, lambda:  self.gd.merge("to_merge_1", "to_merge_2") )
+        self.assertRaises(
+            MergeException, lambda: self.gd.merge("to_merge_1", "to_merge_2")
+        )
 
     def test_current_branch(self):
         git.checkout(self.testing_branch_name)
@@ -116,92 +120,106 @@ class TestGitData(unittest.TestCase):
             json.loads(study_nexson)
         except:
             valid = 0
-        self.assertTrue( valid, "fetch_study(%s) returned valid JSON" % study_id)
+        self.assertTrue(valid, "fetch_study(%s) returned valid JSON" % study_id)
 
     def test_write(self):
         def cleanup_write():
             git.checkout("master")
-            git.branch("-D","johndoe_study_9998")
-            git.branch("-D","johndoe_study_9999")
+            git.branch("-D", "johndoe_study_9998")
+            git.branch("-D", "johndoe_study_9999")
 
         self.addCleanup(cleanup_write)
 
-        author   = "John Doe <john@doe.com>"
-        content  = '{"foo":"bar"}'
+        author = "John Doe <john@doe.com>"
+        content = '{"foo":"bar"}'
         study_id = 9999
-        branch   = "johndoe_study_%s" % study_id
-        new_sha  = self.gd.write_study(study_id,content,branch,author)
-        self.assertTrue( new_sha != "", "new_sha is non-empty")
+        branch = "johndoe_study_%s" % study_id
+        new_sha = self.gd.write_study(study_id, content, branch, author)
+        self.assertTrue(new_sha != "", "new_sha is non-empty")
         self.assertEqual(len(new_sha), 40, "SHA is 40 chars")
         fetched_content, head_sha = self.gd.fetch_study(9999)
-        self.assertEqual( content, fetched_content, "correct content found via fetch_study")
+        self.assertEqual(
+            content, fetched_content, "correct content found via fetch_study"
+        )
 
-        author   = "John Doe <john@doe.com>"
-        content  = '{"foo2":"bar2"}'
+        author = "John Doe <john@doe.com>"
+        content = '{"foo2":"bar2"}'
         study_id = 9998
-        branch   = "johndoe_study_%s" % study_id
-        new_sha  = self.gd.write_study(study_id,content,branch,author)
+        branch = "johndoe_study_%s" % study_id
+        new_sha = self.gd.write_study(study_id, content, branch, author)
 
-        merge_base_sha1 = git("merge-base","johndoe_study_9999","johndoe_study_9998").strip()
+        merge_base_sha1 = git(
+            "merge-base", "johndoe_study_9999", "johndoe_study_9998"
+        ).strip()
 
-        master_sha1     = git("rev-parse","master").strip()
+        master_sha1 = git("rev-parse", "master").strip()
 
-        self.assertEqual(master_sha1, merge_base_sha1, "Verify that writing new study branches from master and not the current branch")
+        self.assertEqual(
+            master_sha1,
+            merge_base_sha1,
+            "Verify that writing new study branches from master and not the current branch",
+        )
 
     def test_remove(self):
         def cleanup_remove():
             git.checkout("master")
-            git.branch("-D","johndoe_study_777")
+            git.branch("-D", "johndoe_study_777")
 
         self.addCleanup(cleanup_remove)
 
-        author   = "John Doe <john@doe.com>"
-        content  = '{"foo2":"bar3"}'
+        author = "John Doe <john@doe.com>"
+        content = '{"foo2":"bar3"}'
         study_id = 777
-        branch   = "johndoe_study_%s" % study_id
+        branch = "johndoe_study_%s" % study_id
 
-        new_sha  = self.gd.remove_study(study_id, branch, author)
-        self.assertTrue( new_sha != "", "new_sha is non-empty")
+        new_sha = self.gd.remove_study(study_id, branch, author)
+        self.assertTrue(new_sha != "", "new_sha is non-empty")
         self.assertEqual(len(new_sha), 40, "SHA is 40 chars")
 
         deleted_study_dir = "%s/study/%s" % (self.repo, study_id)
-        self.assertFalse( os.path.exists(deleted_study_dir), "%s should no longer exist" % deleted_study_dir )
-
+        self.assertFalse(
+            os.path.exists(deleted_study_dir),
+            "%s should no longer exist" % deleted_study_dir,
+        )
 
     def test_branch_exists(self):
         exists = self.gd.branch_exists("nothisdoesnotexist")
-        self.assertTrue( exists == 0, "branch does not exist")
+        self.assertTrue(exists == 0, "branch does not exist")
 
         branch_name = self.testing_branch_name
 
         exists = self.gd.branch_exists(branch_name)
-        self.assertTrue( exists, "%s branch exists" % branch_name)
+        self.assertTrue(exists, "%s branch exists" % branch_name)
+
     def test_newest_study_id(self):
         def cleanup_newest():
             git.checkout("master")
-            git.branch("-D","leto_study_o9999")
+            git.branch("-D", "leto_study_o9999")
 
         self.addCleanup(cleanup_newest)
 
         git.checkout("master")
         newest_id = self.gd.newest_study_id()
 
-        self.assertGreaterEqual( newest_id, 2600)
+        self.assertGreaterEqual(newest_id, 2600)
 
         git.checkout("-b", "leto_study_o9999")
 
         newest_id = self.gd.newest_study_id()
-        self.assertGreaterEqual( newest_id, 9999 )
+        self.assertGreaterEqual(newest_id, 9999)
+
 
 def suite():
     loader = unittest.TestLoader()
     testsuite = loader.loadTestsFromTestCase(TestGitData)
     return testsuite
 
+
 def test_main():
     testsuite = suite()
     runner = unittest.TextTestRunner(sys.stdout, verbosity=2)
     result = runner.run(testsuite)
+
 
 if __name__ == "__main__":
     test_main()
