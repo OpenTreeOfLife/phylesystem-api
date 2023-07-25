@@ -44,7 +44,8 @@ except:
     call_http_json = None
     _LOG.debug('call_http_json was not imported from api_utils')
 
-from beaker.cache import cache_region
+from beaker.cache import cache_region, \
+                         region_invalidate
 
 @view_config(route_name='index', renderer='phylesystem_api:templates/home.jinja2')
 def home_view(request):
@@ -139,7 +140,7 @@ def pull_through_cache(request):
 
 #config.add_route('clear_cache_keys', '/clear_cache_keys/{target_url:.*}')
 @view_config(route_name='clear_cache_keys', renderer='json')
-def pull_through_cache(request):
+def clear_cache_keys(request):
     """
     This clears any cached items (from the "pull-through" cache above) that
     match the encoded regular expression. It should return a summary of the
@@ -158,6 +159,8 @@ def pull_through_cache(request):
     api_utils.raise_on_CORS_preflight(request)
     key_pattern = request.matchdict.get('key_pattern')
     _LOG.warn(">> key_pattern: {}".format(key_pattern))
+
+    """
     # TODO: decode this from URL-encoding??
     response_dict = {
       'key_pattern': key_pattern,
@@ -166,8 +169,14 @@ def pull_through_cache(request):
     }
 
     # TODO: search and destroy any cached item with a matching key
+    region_invalidate(fetch_and_cache, 'short_term', 'pull-through', key_pattern)
+    # NB - Beaker has no build-in support for key-matching with regular expressions!
 
-    return response_dict   # as JSON
+    return response_dict
+    """
+    # Fow now, use the brute-force interpr
+    api_utils.clear_matching_cache_keys(key_pattern)
+    return "OK"   # dumb JSON response
 
 @view_config(route_name='render_markdown')
 def render_markdown(request):
