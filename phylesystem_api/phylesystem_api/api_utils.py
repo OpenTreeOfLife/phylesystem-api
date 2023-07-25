@@ -544,11 +544,14 @@ def clear_matching_cache_keys(key_pattern):
     # NB - again, code may change if we use multiple namespaces here
     item_count_before = len(list(active_namespace.items()))
     """
+    """
     print("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
     for k, v in active_namespace.items():
         print('{k} ===> {v}'.format(k=k,v=v))
     print("===")
     """
+    """
+
     #_LOG.debug("> clearing cached items matching [%s]" % key_pattern)
 
     matching_keys = []
@@ -559,12 +562,14 @@ def clear_matching_cache_keys(key_pattern):
         del active_namespace[ matching_key ]
 
     """
+    """
     item_count_after = len(list(active_namespace.items()))
     print("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
     for k, v in active_namespace.items():
         print('{k} ===> {v}'.format(k,v))
     print("===")
     print("  %d items removed" % (item_count_before - item_count_after,))
+    """
     """
 
 def raise_on_CORS_preflight(request):
