@@ -12,6 +12,9 @@ from pyramid.httpexceptions import (
     HTTPInternalServerError,
 )
 from pyramid.view import view_config
+import logging
+
+_LOG = logging.getLogger("phylesystem_api")
 
 
 def _init(request, response):
@@ -89,9 +92,8 @@ def list_all(request):
 
 @view_config(route_name="get_amendments_config", renderer="json")
 def get_amendments_config(request):
+    _LOG.debug("get_amendments_config")
     api_utils.raise_on_CORS_preflight(request)
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
     docstore = api_utils.get_taxonomic_amendment_store(request)
     return docstore.get_configuration_dict()
 

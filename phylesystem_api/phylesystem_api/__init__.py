@@ -9,4 +9,6 @@ def main(global_config, **settings):
         config.add_cors_preflight_handler()
         config.include(".routes")
         config.scan()
+    # for k, v in settings.items():
+    #     print("{k}: {v}".format(k=k, v=repr(v)))
     return config.make_wsgi_app()

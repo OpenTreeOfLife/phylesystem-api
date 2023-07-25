@@ -250,8 +250,9 @@ def get_conf_object(request):
     # our chosen INI file from there.
     conf = ConfigParser(allow_no_value=True)
     localconfig_filename = request.registry.settings["config_file_path"]
+    _LOG.debug('get_conf_object from "{}"'.format(localconfig_filename))
     if os.path.isfile(localconfig_filename):
-        conf.read_file(localconfig_filename)
+        conf.read(localconfig_filename)
     return conf
 
 
