@@ -13,6 +13,7 @@ def includeme(config):
     config.add_route("phylesystem_config", "/{api_version}/phylesystem_config")
     config.add_route("raw_study_list", "/{api_version}/study_list")
     config.add_route("pull_through_cache", "/cached/{target_url:.*}")
+    config.add_route("clear_cache_keys", "/clear_cache_keys/{key_pattern:.*}")
     config.add_route(
         "merge_docstore_changes",
         "/{api_version}/merge_docstore_changes/{doc_id}/{starting_commit_SHA}",
