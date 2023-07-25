@@ -137,6 +137,37 @@ def pull_through_cache(request):
     _LOG.warn("...trying to fetch-and-cache...")
     return fetch_and_cache(target_url)
 
+#config.add_route('clear_cache_keys', '/clear_cache_keys/{target_url:.*}')
+@view_config(route_name='clear_cache_keys', renderer='json')
+def pull_through_cache(request):
+    """
+    This clears any cached items (from the "pull-through" cache above) that
+    match the encoded regular expression. It should return a summary of the
+    items removed, something like:
+
+    {
+      "key_pattern": "^example:*",
+      "number_removed": 3,
+      "matching_items": [
+        "example:foo",
+        "example:BAR",
+        "example:BAZ123"
+        ]
+    }
+    """
+    api_utils.raise_on_CORS_preflight(request)
+    key_pattern = request.matchdict.get('key_pattern')
+    _LOG.warn(">> key_pattern: {}".format(key_pattern))
+    # TODO: decode this from URL-encoding??
+    response_dict = {
+      'key_pattern': key_pattern,
+      'number_removed': 0,
+      "matching_items": [ ]
+    }
+
+    # TODO: search and destroy any cached item with a matching key
+
+    return response_dict   # as JSON
 
 @view_config(route_name='render_markdown')
 def render_markdown(request):
