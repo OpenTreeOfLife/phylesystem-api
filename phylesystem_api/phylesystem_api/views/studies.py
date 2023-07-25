@@ -1,22 +1,17 @@
-from pyramid.view import view_config
+import json
+
+import phylesystem_api.api_utils as api_utils
+from peyotl.api import OTI
+from phylesystem_api.api_utils import find_in_request
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
     HTTPError,
-    HTTPNotFound,
     HTTPBadRequest,
     HTTPInternalServerError,
 )
-from peyotl.api import OTI
-import phylesystem_api.api_utils as api_utils
-from phylesystem_api.api_utils import find_in_request
-from peyotl.phylesystem.git_workflows import GitWorkflowError
-import json
-import traceback
-import datetime
-import codecs
-import os
+from pyramid.view import view_config
 
 
 def _raise400(msg):

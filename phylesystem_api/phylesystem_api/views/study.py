@@ -1,38 +1,32 @@
-import traceback
-from pyramid.view import view_config
-from pyramid.encode import quote_plus, urlencode
-
-# see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
-from pyramid.httpexceptions import (
-    HTTPException,
-    HTTPError,
-    HTTPNotFound,
-    HTTPBadRequest,
-    HTTPInternalServerError,
-    HTTPForbidden,
-)
-from pyramid.renderers import render_to_response
-from peyotl.api import OTI
-import phylesystem_api.api_utils as api_utils
-from phylesystem_api.api_utils import find_in_request
 import json
-from peyotl.phylesystem.git_workflows import (
-    GitWorkflowError,
-    validate_and_convert_nexson,
-)
+import logging
+import sys
+import traceback
+
+import phylesystem_api.api_utils as api_utils
+import requests
+from peyotl.external import import_nexson_from_treebase
 from peyotl.nexson_syntax import (
     get_empty_nexson,
     extract_supporting_file_messages,
     PhyloSchema,
-    read_as_json,
     BY_ID_HONEY_BADGERFISH,
 )
-from peyotl.external import import_nexson_from_treebase
-import requests
-import sys
-import copy
-import logging
-import threading
+from peyotl.phylesystem.git_workflows import (
+    GitWorkflowError,
+    validate_and_convert_nexson,
+)
+from phylesystem_api.api_utils import find_in_request
+from pyramid.encode import quote_plus, urlencode
+
+# see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
+from pyramid.httpexceptions import (
+    HTTPNotFound,
+    HTTPBadRequest,
+    HTTPInternalServerError,
+)
+from pyramid.renderers import render_to_response
+from pyramid.view import view_config
 
 _LOG = logging.getLogger("phylesystem_api")
 

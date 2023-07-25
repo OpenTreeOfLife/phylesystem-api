@@ -10,13 +10,9 @@ from datetime import datetime
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.request import Request
 from pyramid.httpexceptions import (
-    HTTPException,
     HTTPOk,
-    HTTPError,
     HTTPServerError,
-    HTTPNotFound,
     HTTPBadRequest,
-    HTTPInternalServerError,
     HTTPForbidden,
 )
 from beaker.cache import cache_managers
@@ -25,8 +21,6 @@ import logging
 import json
 import requests
 import os
-import re
-import copy
 import threading
 
 try:
@@ -51,8 +45,8 @@ def get_private_dir(request):
 def atomic_write_json_if_not_found(obj, dest, request):
     if os.path.exists(dest):
         return False
-    dir = get_private_dir(request)
-    handle, tmpfn = tempfile.mkstemp(suffix=".json", dir=dir, text=True)
+    pdir = get_private_dir(request)
+    handle, tmpfn = tempfile.mkstemp(suffix=".json", dir=pdir, text=True)
     # mkstemp opens the file and returns a file descriptor,
     #   but we are using write_as_json to open with the right encoding
     os.close(handle)
@@ -135,9 +129,9 @@ def get_phylesystem(request):
     )
     # _LOG.debug('[[[[[[ repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     if READ_ONLY_MODE:
-        _LOG.warn("phylesytem-api running in READ_ONLY_MODE")
+        _LOG.warning("phylesytem-api running in READ_ONLY_MODE")
     else:
-        _LOG.warn("phylesytem-api NOT running in READ_ONLY_MODE")
+        _LOG.warning("phylesytem-api NOT running in READ_ONLY_MODE")
     return _PHYLESYSTEM
 
 
@@ -167,9 +161,6 @@ def get_tree_collection_store(request):
         },
     }
     mirror_info = {"push": pmi}
-    conf = get_conf_object(request)
-    import pprint
-
     a = {}
     try:
         # any keyword args to pass along from config?
@@ -216,9 +207,6 @@ def get_taxonomic_amendment_store(request):
         },
     }
     mirror_info = {"push": pmi}
-    conf = get_conf_object(request)
-    import pprint
-
     a = {}
     try:
         # any keyword args to pass along from config?
@@ -263,7 +251,7 @@ def get_conf_object(request):
     conf = ConfigParser(allow_no_value=True)
     localconfig_filename = request.registry.settings["config_file_path"]
     if os.path.isfile(localconfig_filename):
-        conf.readfp(open(localconfig_filename))
+        conf.read_file(localconfig_filename)
     return conf
 
 
@@ -660,13 +648,11 @@ def clear_matching_cache_keys(key_pattern):
     assert len(namespaces) == 1
     active_namespace = list(namespaces.values())[0]
     # NB - again, code may change if we use multiple namespaces here
-    item_count_before = len(list(active_namespace.items()))
-    """
-    print("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
-    for k, v in active_namespace.items():
-        print('{k} ===> {v}'.format(k=k,v=v))
-    print("===")
-    """
+    # item_count_before = len(list(active_namespace.items()))
+    # print("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
+    # for k, v in active_namespace.items():
+    #     print('{k} ===> {v}'.format(k=k,v=v))
+    # print("===")
     # _LOG.debug("> clearing cached items matching [%s]" % key_pattern)
 
     matching_keys = []
@@ -676,14 +662,12 @@ def clear_matching_cache_keys(key_pattern):
     for matching_key in matching_keys:
         del active_namespace[matching_key]
 
-    """
-    item_count_after = len(list(active_namespace.items()))
-    print("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
-    for k, v in active_namespace.items():
-        print('{k} ===> {v}'.format(k,v))
-    print("===")
-    print("  %d items removed" % (item_count_before - item_count_after,))
-    """
+    # item_count_after = len(list(active_namespace.items()))
+    # print("=== %d RAM cache keys AFTER clearing: ===" % item_count_after)
+    # for k, v in active_namespace.items():
+    #     print('{k} ===> {v}'.format(k,v))
+    # print("===")
+    # print("  %d items removed" % (item_count_before - item_count_after,))
 
 
 def raise_on_CORS_preflight(request):
@@ -875,7 +859,6 @@ def extract_json_from_http_call(request, data_field_name="data", request_params=
 
     request_params can be the Pyramids request.params multidict or just a dict.
     """
-    json_obj = None
     try:
         # check for kwarg data_field_name, or load the full request body
         if data_field_name in request_params:

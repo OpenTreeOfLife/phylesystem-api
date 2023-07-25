@@ -1,6 +1,5 @@
-import simplejson as json
-import os
 import requests
+import simplejson as json
 
 
 class OTISearch(object):

@@ -1,7 +1,7 @@
-from github import Github
-import github
 import os
-import sys
+
+import github
+from github import Github
 
 github.enable_console_debug_logging()
 
