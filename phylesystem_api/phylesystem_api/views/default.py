@@ -138,7 +138,6 @@ def pull_through_cache(request):
     _LOG.warn("...trying to fetch-and-cache...")
     return fetch_and_cache(target_url)
 
-#config.add_route('clear_cache_keys', '/clear_cache_keys/{target_url:.*}')
 @view_config(route_name='clear_cache_keys', renderer='json')
 def clear_cache_keys(request):
     """
