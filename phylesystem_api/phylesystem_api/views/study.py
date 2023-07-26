@@ -614,7 +614,7 @@ def update_study(request):
     # this method requires authentication
     auth_info = api_utils.authenticate(request)
     _LOG.debug("STUDY: update_study")
-    _LOG.debug("STUDY: auth_info {}".format(auth_info))
+    # _LOG.debug("STUDY: auth_info {}".format(auth_info))
 
     parent_sha = find_in_request(request, "starting_commit_SHA")
     if parent_sha is None:

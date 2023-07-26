@@ -49,8 +49,11 @@ def home_view(request):
 @view_config(route_name="api_root", renderer="json", request_method="POST")
 @view_config(route_name="api_version_root", renderer="json")
 @view_config(route_name="studies_root", renderer="json")
+@view_config(route_name="studies_root_slash", renderer="json")
 @view_config(route_name="amendments_root", renderer="json")
+@view_config(route_name="amendments_root_slash", renderer="json")
 @view_config(route_name="collections_root", renderer="json")
+@view_config(route_name="collections_root_slash", renderer="json")
 def base_API_view(request):
     # a tiny JSON description of the API and where to find documentation
     api_version = request.matchdict["api_version"]
@@ -470,7 +473,6 @@ def merge_docstore_changes(request):
     api_version = request.matchdict["api_version"]
     resource_id = request.matchdict["doc_id"]
     starting_commit_SHA = request.matchdict["starting_commit_SHA"]
-
     api_utils.raise_if_read_only()
 
     # this method requires authentication
@@ -509,11 +511,10 @@ def push_docstore_changes(request):
     #    resource_id = request.matchdict.get('resource_id', None)
 
     data = request.json_body
-    _LOG.debug("push_docstore_changes data:")
-    _LOG.debug(data)
+    if doc_type is None:
+        doc_type = data.get("doc_type")
     if resource_id == None:
-        doc_type = data["doc_type"]
-        resource_id = data["resource_id"]
+        resource_id = data.get("resource_id")
 
     api_utils.raise_if_read_only()
 
