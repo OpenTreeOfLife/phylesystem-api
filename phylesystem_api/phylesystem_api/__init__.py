@@ -1,4 +1,5 @@
 from pyramid.config import Configurator
+from .api_utils import get_conf_object, get_phylesystem
 
 
 def main(global_config, **settings):
@@ -11,4 +12,7 @@ def main(global_config, **settings):
         config.scan()
     # for k, v in settings.items():
     #     print("{k}: {v}".format(k=k, v=repr(v)))
+    localconfig_filename = settings["config_file_path"]
+    conf_obj = get_conf_object(localconfig_filename=localconfig_filename)
+    _ps = get_phylesystem(request=None, conf_obj=conf_obj)
     return config.make_wsgi_app()

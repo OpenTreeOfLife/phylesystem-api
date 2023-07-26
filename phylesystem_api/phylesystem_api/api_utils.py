@@ -78,7 +78,7 @@ def compose_push_to_github_url(request, resource_id, doc_type):
 _PHYLESYSTEM = None
 
 
-def get_phylesystem(request):
+def get_phylesystem(request, conf_obj=None):
     global READ_ONLY_MODE
     global _PHYLESYSTEM
     # _LOG.debug('@@@ checking for _PHYLESYSTEM singleton...READ_ONLY_MODE? {}'.format(READ_ONLY_MODE))
@@ -88,6 +88,8 @@ def get_phylesystem(request):
     # _LOG.debug('@@@ NOT FOUND, creating now')
     from phylesystem_api.gitdata import GitData
 
+    if conf_obj is None:
+        conf_obj = get_conf_object(request)
     (
         repo_parent,
         repo_remote,
@@ -97,7 +99,7 @@ def get_phylesystem(request):
         max_filesize,
         max_num_trees,
         READ_ONLY_MODE,
-    ) = read_phylesystem_config(request)
+    ) = read_phylesystem_config(request, conf_obj=conf_obj)
     peyotl_config, cfg_filename = read_peyotl_config()
     if "phylesystem" not in peyotl_config.sections():
         peyotl_config.add_section("phylesystem")
@@ -112,10 +114,9 @@ def get_phylesystem(request):
         },
     }
     mirror_info = {"push": pmi}
-    conf = get_conf_object(request)
     a = {}
     try:
-        new_study_prefix = conf.get("apis", "new_study_prefix")
+        new_study_prefix = conf_obj.get("apis", "new_study_prefix")
         a["new_study_prefix"] = new_study_prefix
     except:
         pass
@@ -243,22 +244,34 @@ def get_failed_push_filepath(request, doc_type=None):
     return os.path.join(get_private_dir(request), failure_filename)
 
 
-def get_conf_object(request):
+def get_conf_object(request=None, localconfig_filename=None):
     # There's apparently no easy way to retrieve the fully parsed
     # configuration from within the app. But we can access the variables
     # from the [app:main] setion, so we'll retrieve the full path to
     # our chosen INI file from there.
+    if localconfig_filename is None:
+        assert request is not None
+        localconfig_filename = request.registry.settings["config_file_path"]
+    _LOG.debug(
+        'get_conf_object(localconfig_filename="{}")'.format(localconfig_filename)
+    )
+    if not os.path.isfile(localconfig_filename):
+        raise RuntimeError(
+            "localconfig_filename={} does not exist".format(localconfig_filename)
+        )
     conf = ConfigParser(allow_no_value=True)
-    localconfig_filename = request.registry.settings["config_file_path"]
-    _LOG.debug('get_conf_object from "{}"'.format(localconfig_filename))
-    if os.path.isfile(localconfig_filename):
-        conf.read(localconfig_filename)
+    conf.read(localconfig_filename)
     return conf
 
 
-def read_phylesystem_config(request):
+def read_phylesystem_config(request, conf_obj=None):
     """Load settings for managing the main Nexson docstore"""
-    conf = get_conf_object(request)
+    if conf_obj is None:
+        conf_obj = get_conf_object(request)
+    return _read_phylesystem_from_conf_obj(conf_obj)
+
+
+def _read_phylesystem_from_conf_obj(conf):
     repo_parent = conf.get("apis", "repo_parent")
     repo_remote = conf.get("apis", "repo_remote")
     try:

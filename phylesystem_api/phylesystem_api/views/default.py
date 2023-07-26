@@ -25,16 +25,7 @@ from pyramid.httpexceptions import (
 from pyramid.response import Response
 from pyramid.view import view_config
 
-try:
-    import anyjson
-except:
-    import json
-
-    class Wrapper(object):
-        pass
-
-    anyjson = Wrapper()
-    anyjson.loads = json.loads
+import json
 
 _LOG = logging.getLogger("phylesystem_api")
 
@@ -233,7 +224,7 @@ def trees_in_synth(request):
         except:
             msg = "GET of collection {} failed".format(coll_id)
             # _LOG.exception(msg)
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
     try:
         result = concatenate_collections(coll_list)
     except:
@@ -283,7 +274,7 @@ def include_tree_in_synth(request):
         except:
             msg = "GET of collection {} failed".format(coll_id)
             # _LOG.exception(msg)
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
         if tree_is_in_collection(coll, study_id, tree_id):
             already_included_in_synth_input_collections = True
     if not already_included_in_synth_input_collections:
@@ -313,13 +304,13 @@ def include_tree_in_synth(request):
             owner_id = auth_info.get("login", None)
         except:
             msg = "include_tree_in_synth(): Authentication failed"
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
         try:
             parent_sha = request.params.get("starting_commit_SHA", None)
             merged_sha = None  # TODO: request.params.get('???', None)
         except:
             msg = "include_tree_in_synth(): fetch of starting_commit_SHA failed"
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
         try:
             r = cds.update_existing_collection(
                 owner_id,
@@ -367,13 +358,13 @@ def exclude_tree_from_synth(request):
         owner_id = auth_info.get("login", None)
     except:
         msg = "include_tree_in_synth(): Authentication failed"
-        raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+        raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
     for coll_id in coll_id_list:
         try:
             coll = cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
         except:
             msg = "GET of collection {} failed".format(coll_id)
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
         if tree_is_in_collection(coll, study_id, tree_id):
             # remove it and update the collection
             decision_list = coll.get("decisions", [])
@@ -477,7 +468,7 @@ def merge_docstore_changes(request):
     """
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict["api_version"]
-    resource_id = request.matchdict["resource_id"]
+    resource_id = request.matchdict["doc_id"]
     starting_commit_SHA = request.matchdict["starting_commit_SHA"]
 
     api_utils.raise_if_read_only()
