@@ -1,6 +1,5 @@
-from pyramid.view import notfound_view_config
 from pyramid.response import Response
-import logging
+from pyramid.view import notfound_view_config
 
 try:
     import anyjson

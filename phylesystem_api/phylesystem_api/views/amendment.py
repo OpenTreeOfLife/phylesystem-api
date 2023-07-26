@@ -5,13 +5,9 @@ from pyramid.view import view_config
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPOk,
-    HTTPError,
     HTTPNotFound,
     HTTPBadRequest,
-    HTTPInternalServerError,
 )
-from peyotl.api import OTI
 from peyotl.phylesystem.git_workflows import GitWorkflowError
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
@@ -26,7 +22,6 @@ _LOG = logging.getLogger("phylesystem_api")
 
 
 def __extract_and_validate_amendment(request, kwargs):
-    from pprint import pprint
 
     try:
         amendment_obj = extract_json_from_http_call(
@@ -237,7 +232,7 @@ def update_amendment(request):
         amendment_obj,
         amendment_errors,
         amendment_adapter,
-    ) = __extract_and_validate_amendment(request, kwargs)
+    ) = __extract_and_validate_amendment(request, request.params)
     if amendment_obj is None:
         raise HTTPBadRequest(
             body=json.dumps(

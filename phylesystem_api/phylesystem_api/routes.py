@@ -5,14 +5,18 @@ def includeme(config):
     # some (unused) URLs just show a tiny API description, with links to code + docs
     config.add_route("api_root", "/")
     config.add_route("api_version_root", "/{api_version}/")
-    config.add_route("studies_root", "/{api_version}/studies/")
-    config.add_route("collections_root", "/{api_version}/collections/")
-    config.add_route("amendments_root", "/{api_version}/amendments/")
+    config.add_route("studies_root", "/{api_version}/studies")
+    config.add_route("studies_root_slash", "/{api_version}/studies/")
+    config.add_route("collections_root", "/{api_version}/collections")
+    config.add_route("collections_root_slash", "/{api_version}/collections/")
+    config.add_route("amendments_root", "/{api_version}/amendments")
+    config.add_route("amendments_root_slash", "/{api_version}/amendments/")
     # utilities (generally for internal use, not documented)
     config.add_route("render_markdown", "/{api_version}/render_markdown")
     config.add_route("phylesystem_config", "/{api_version}/phylesystem_config")
     config.add_route("raw_study_list", "/{api_version}/study_list")
     config.add_route("pull_through_cache", "/cached/{target_url:.*}")
+    config.add_route("clear_cache_keys", "/clear_cache_keys/{key_pattern:.*}")
     config.add_route(
         "merge_docstore_changes",
         "/{api_version}/merge_docstore_changes/{doc_id}/{starting_commit_SHA}",

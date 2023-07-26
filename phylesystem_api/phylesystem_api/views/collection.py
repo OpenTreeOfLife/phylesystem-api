@@ -1,25 +1,21 @@
-import traceback
-import sys
+import json
 import logging
-from pyramid.view import view_config
+import sys
+import traceback
+
+import phylesystem_api.api_utils as api_utils
+from peyotl.collections_store import COLLECTION_ID_PATTERN
+from peyotl.collections_store.validation import validate_collection
+from peyotl.phylesystem.git_workflows import GitWorkflowError
+from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPOk,
-    HTTPError,
     HTTPNotFound,
     HTTPBadRequest,
-    HTTPInternalServerError,
 )
-from peyotl.api import OTI
-from peyotl.phylesystem.git_workflows import GitWorkflowError
-import phylesystem_api.api_utils as api_utils
-from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
-import json
-from peyotl.collections_store import OWNER_ID_PATTERN, COLLECTION_ID_PATTERN
-from peyotl.collections_store.validation import validate_collection
-
+from pyramid.view import view_config
 
 _LOG = logging.getLogger("phylesystem_api")
 
