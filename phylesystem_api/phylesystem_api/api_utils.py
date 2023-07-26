@@ -662,12 +662,12 @@ def clear_matching_cache_keys(key_pattern):
     assert len(namespaces) == 1
     active_namespace = list(namespaces.values())[0]
     # NB - again, code may change if we use multiple namespaces here
+    # _LOG.debug("> clearing cached items matching [%s]" % key_pattern)
     # item_count_before = len(list(active_namespace.items()))
     # print("=== %d RAM cache keys BEFORE clearing: ===" % item_count_before)
     # for k, v in active_namespace.items():
     #     print('{k} ===> {v}'.format(k=k,v=v))
     # print("===")
-    # _LOG.debug("> clearing cached items matching [%s]" % key_pattern)
 
     matching_keys = []
     for k, v in active_namespace.items():
