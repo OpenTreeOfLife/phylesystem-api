@@ -191,8 +191,8 @@ def test_http_json_method(
             verb, translate(url), headers=headers, allow_redirects=True
         )
 
-    exps = resp.status_code != expected_status
-    if not exps and (isinstance(expected_status, list) or isinstance(expected_status, tuple) or isinstance(expected_status, set)):
+    exps = resp.status_code == expected_status
+    if (not exps) and (isinstance(expected_status, list) or isinstance(expected_status, tuple) or isinstance(expected_status, set)):
         exps = resp.status_code in expected_status
     if not exps:
         debug("Sent {v} to {s}".format(v=verb, s=resp.url))
