@@ -1,43 +1,31 @@
+import codecs
+import datetime
+import logging
+import os
 import sys
-from pyramid.view import view_config
+import traceback
+from configparser import ConfigParser
+from io import StringIO
+
+import phylesystem_api.api_utils as api_utils
+import requests
+from peyotl import concatenate_collections, tree_is_in_collection
+from peyotl.phylesystem.git_workflows import (
+    GitWorkflowError,
+    merge_from_master,
+)
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPError,
     HTTPNotFound,
     HTTPConflict,
     HTTPBadRequest,
     HTTPInternalServerError,
-    HTTPForbidden,
     HTTPGatewayTimeout,
 )
 from pyramid.response import Response
-import requests
-from io import StringIO
-from configparser import ConfigParser
-from peyotl import concatenate_collections, tree_is_in_collection
+from pyramid.view import view_config
 
-from peyotl.phylesystem.git_workflows import (
-    GitWorkflowError,
-    merge_from_master,
-    validate_and_convert_nexson,
-)
-import phylesystem_api.api_utils as api_utils
-import traceback
-import datetime
-import codecs
-import os
-import logging
-
-try:
-    import anyjson
-except:
-    import json
-
-    class Wrapper(object):
-        pass
-
-    anyjson = Wrapper()
-    anyjson.loads = json.loads
+import json
 
 _LOG = logging.getLogger("phylesystem_api")
 
@@ -49,8 +37,7 @@ except:
     call_http_json = None
     _LOG.debug("call_http_json was not imported from api_utils")
 
-from beaker.cache import cache_region, \
-                         region_invalidate
+from beaker.cache import cache_region, region_invalidate
 
 
 @view_config(route_name="index", renderer="phylesystem_api:templates/home.jinja2")
@@ -62,8 +49,11 @@ def home_view(request):
 @view_config(route_name="api_root", renderer="json", request_method="POST")
 @view_config(route_name="api_version_root", renderer="json")
 @view_config(route_name="studies_root", renderer="json")
+@view_config(route_name="studies_root_slash", renderer="json")
 @view_config(route_name="amendments_root", renderer="json")
+@view_config(route_name="amendments_root_slash", renderer="json")
 @view_config(route_name="collections_root", renderer="json")
+@view_config(route_name="collections_root_slash", renderer="json")
 def base_API_view(request):
     # a tiny JSON description of the API and where to find documentation
     api_version = request.matchdict["api_version"]
@@ -98,7 +88,7 @@ def pull_through_cache(request):
 
     # gather any request elements used to build a unique cache key
     target_url = request.matchdict.get("target_url")
-    _LOG.warn(">> target_url: {}".format(target_url))
+    _LOG.warning(">> target_url: {}".format(target_url))
 
     # Some headers should not be used when adding to our RAM cache
     hop_by_hop_headers = [
@@ -117,39 +107,39 @@ def pull_through_cache(request):
         # let's restrict this to URLs on this api server, to avoid shenanigans
         # import pdb; pdb.set_trace()
         root_relative_url = "/{}".format(url)
-        _LOG.warn(">> root_relative_url: {}".format(root_relative_url))
+        _LOG.warning(">> root_relative_url: {}".format(root_relative_url))
         conf = api_utils.get_conf_object(request)
         base_url = conf.get("apis", "default_apis_base_url")
         fetch_url = base_url + root_relative_url
-        _LOG.warn("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
-        _LOG.warn("  request.method = {}".format(request.method))
+        _LOG.warning("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
+        _LOG.warning("  request.method = {}".format(request.method))
 
         # modify or discard "hop-by-hop" headers
         for bad_header in hop_by_hop_headers:
             request.headers.pop(bad_header, None)
-        # _LOG.warn("  MODIFIED request.headers:")
-        # _LOG.warn( dict(request.headers) )
+        # _LOG.warning("  MODIFIED request.headers:")
+        # _LOG.warning( dict(request.headers) )
 
         try:
             if request.method == "POST":
                 # assume a typical API request with JSON payload
                 # (pass this along unchanged)
-                _LOG.warn("  treating as POST")
-                _LOG.warn("  headers: {}".format(request.headers))
+                _LOG.warning("  treating as POST")
+                _LOG.warning("  headers: {}".format(request.headers))
                 fetched = requests.post(
                     url=fetch_url, data=request.body, headers=request.headers
                 )
             elif request.method == "OPTIONS":
-                _LOG.warn("  treating as OPTIONS")
-                _LOG.warn("  headers: {}".format(request.headers))
+                _LOG.warning("  treating as OPTIONS")
+                _LOG.warning("  headers: {}".format(request.headers))
                 fetched = requests.options(
                     url=fetch_url, data=request.body, headers=request.headers
                 )
             else:
-                _LOG.warn("  treating as GET")
+                _LOG.warning("  treating as GET")
                 fetched = requests.get(fetch_url)
             # TODO: For more flexibility, we might examine and mimic the original request (headers, etc)
-            _LOG.warn(
+            _LOG.warning(
                 "... and now we're back with fetched, which is a {}".format(
                     type(fetched)
                 )
@@ -160,8 +150,8 @@ def pull_through_cache(request):
             # modify or discard "hop-by-hop" headers
             for bad_header in hop_by_hop_headers:
                 fetched.headers.pop(bad_header, None)
-            # _LOG.warn("  MODIFIED fetched.headers:")
-            # _LOG.warn( dict(fetched.headers) )
+            # _LOG.warning("  MODIFIED fetched.headers:")
+            # _LOG.warning( dict(fetched.headers) )
 
             try:
                 test_for_json = (
@@ -177,7 +167,7 @@ def pull_through_cache(request):
             except requests.exceptions.JSONDecodeError:
                 return Response(
                     headers=fetched.headers,
-                    body=response.text,
+                    body=fetched.text,
                     status="200 OK",
                     charset="UTF-8",
                     content_type="text/plain",
@@ -185,16 +175,17 @@ def pull_through_cache(request):
         except requests.RequestException as e:
             # throw an exception (hopefully copying its status code and message) so we don't poison the cache!
             # NB - We don't want to cache this response, but we DO want to return its payload
-            _LOG.warn("  request exception: {}".format(str(e)))
+            _LOG.warning("  request exception: {}".format(str(e)))
             raise HTTPException(body=str(e))
         except Exception as e:
-            _LOG.warn("  UNKNOWN request exception: {}".format(str(e)))
+            _LOG.warning("  UNKNOWN request exception: {}".format(str(e)))
             raise HTTPBadRequest(body="Unknown exception in cached call!")
 
-    _LOG.warn("...trying to fetch-and-cache...")
+    _LOG.warning("...trying to fetch-and-cache...")
     return fetch_and_cache(target_url)
 
-@view_config(route_name='clear_cache_keys', renderer='json')
+
+@view_config(route_name="clear_cache_keys", renderer="json")
 def clear_cache_keys(request):
     """
     This clears any cached items (from the "pull-through" cache above) that
@@ -212,7 +203,7 @@ def clear_cache_keys(request):
     }
     """
     api_utils.raise_on_CORS_preflight(request)
-    key_pattern = request.matchdict.get('key_pattern')
+    key_pattern = request.matchdict.get("key_pattern")
     _LOG.warn(">> key_pattern: {}".format(key_pattern))
 
     """
@@ -231,7 +222,8 @@ def clear_cache_keys(request):
     """
     # Fow now, use the brute-force interpr
     api_utils.clear_matching_cache_keys(key_pattern)
-    return "OK"   # dumb JSON response
+    return "OK"  # dumb JSON response
+
 
 @view_config(route_name="render_markdown")
 def render_markdown(request):
@@ -275,7 +267,7 @@ def trees_in_synth(request):
         except:
             msg = "GET of collection {} failed".format(coll_id)
             # _LOG.exception(msg)
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
     try:
         result = concatenate_collections(coll_list)
     except:
@@ -325,7 +317,7 @@ def include_tree_in_synth(request):
         except:
             msg = "GET of collection {} failed".format(coll_id)
             # _LOG.exception(msg)
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
         if tree_is_in_collection(coll, study_id, tree_id):
             already_included_in_synth_input_collections = True
     if not already_included_in_synth_input_collections:
@@ -355,13 +347,13 @@ def include_tree_in_synth(request):
             owner_id = auth_info.get("login", None)
         except:
             msg = "include_tree_in_synth(): Authentication failed"
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
         try:
             parent_sha = request.params.get("starting_commit_SHA", None)
             merged_sha = None  # TODO: request.params.get('???', None)
         except:
             msg = "include_tree_in_synth(): fetch of starting_commit_SHA failed"
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
         try:
             r = cds.update_existing_collection(
                 owner_id,
@@ -409,13 +401,13 @@ def exclude_tree_from_synth(request):
         owner_id = auth_info.get("login", None)
     except:
         msg = "include_tree_in_synth(): Authentication failed"
-        raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+        raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
     for coll_id in coll_id_list:
         try:
             coll = cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
         except:
             msg = "GET of collection {} failed".format(coll_id)
-            raise HTTPNotFound(body=anyjson.dumps({"error": 1, "description": msg}))
+            raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
         if tree_is_in_collection(coll, study_id, tree_id):
             # remove it and update the collection
             decision_list = coll.get("decisions", [])
@@ -519,9 +511,8 @@ def merge_docstore_changes(request):
     """
     # if behavior varies based on /v1/, /v2/, ...
     api_version = request.matchdict["api_version"]
-    resource_id = request.matchdict["resource_id"]
+    resource_id = request.matchdict["doc_id"]
     starting_commit_SHA = request.matchdict["starting_commit_SHA"]
-
     api_utils.raise_if_read_only()
 
     # this method requires authentication
@@ -540,9 +531,6 @@ def merge_docstore_changes(request):
                 {"error": 1, "description": "Could not merge! Details: %s" % (m)}
             )
         )
-
-    # import pdb; pdb.set_trace()
-    return locals()
 
 
 @view_config(route_name="push_docstore_changes", renderer="json")
@@ -563,11 +551,10 @@ def push_docstore_changes(request):
     #    resource_id = request.matchdict.get('resource_id', None)
 
     data = request.json_body
-    _LOG.debug("push_docstore_changes data:")
-    _LOG.debug(data)
+    if doc_type is None:
+        doc_type = data.get("doc_type")
     if resource_id == None:
-        doc_type = data["doc_type"]
-        resource_id = data["resource_id"]
+        resource_id = data.get("resource_id")
 
     api_utils.raise_if_read_only()
 
@@ -587,11 +574,11 @@ def push_docstore_changes(request):
             phylesystem.push_study_to_remote("GitHubRemote", resource_id)
         except:
             m = traceback.format_exc()
-            _LOG.warn(
+            _LOG.warning(
                 "Push of study {s} failed. Details: {m}".format(s=resource_id, m=m)
             )
             if os.path.exists(fail_file):
-                _LOG.warn(
+                _LOG.warning(
                     'push failure file "{f}" already exists. This event not logged there'.format(
                         f=fail_file
                     )
@@ -617,7 +604,7 @@ def push_docstore_changes(request):
                     "stacktrace": m,
                 }
                 api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
-                _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+                _LOG.warning('push failure file "{f}" created.'.format(f=fail_file))
             raise HTTPConflict(
                 json.dumps(
                     {
@@ -636,11 +623,11 @@ def push_docstore_changes(request):
         except:
             _LOG.debug("in collections except")
             m = traceback.format_exc()
-            _LOG.warn(
+            _LOG.warning(
                 "Push of collection {s} failed. Details: {m}".format(s=resource_id, m=m)
             )
             if os.path.exists(fail_file):
-                _LOG.warn(
+                _LOG.warning(
                     'push failure file "{f}" already exists. This event not logged there'.format(
                         f=fail_file
                     )
@@ -666,7 +653,7 @@ def push_docstore_changes(request):
                     "stacktrace": m,
                 }
                 api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
-                _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+                _LOG.warning('push failure file "{f}" created.'.format(f=fail_file))
             raise HTTPConflict(
                 body=json.dumps(
                     {
@@ -682,11 +669,11 @@ def push_docstore_changes(request):
             docstore.push_doc_to_remote("GitHubRemote", resource_id)
         except:
             m = traceback.format_exc()
-            _LOG.warn(
+            _LOG.warning(
                 "Push of amendment {s} failed. Details: {m}".format(s=resource_id, m=m)
             )
             if os.path.exists(fail_file):
-                _LOG.warn(
+                _LOG.warning(
                     'push failure file "{f}" already exists. This event not logged there'.format(
                         f=fail_file
                     )
@@ -712,7 +699,7 @@ def push_docstore_changes(request):
                     "stacktrace": m,
                 }
                 api_utils.atomic_write_json_if_not_found(obj, fail_file, request)
-                _LOG.warn('push failure file "{f}" created.'.format(f=fail_file))
+                _LOG.warning('push failure file "{f}" created.'.format(f=fail_file))
             raise HTTPConflict(
                 body=json.dumps(
                     {

@@ -1,25 +1,20 @@
-from pyramid.view import view_config
+import json
+import os
+
+import phylesystem_api.api_utils as api_utils
+from peyotl.api import OTI
+from peyotl.nexson_syntax import read_as_json
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
     HTTPError,
-    HTTPConflict,
-    HTTPNotFound,
-    HTTPBadRequest,
     HTTPInternalServerError,
-    HTTPNotImplemented,
 )
-from peyotl.nexson_syntax import read_as_json
-from peyotl.api import OTI
-import phylesystem_api.api_utils as api_utils
-from phylesystem_api.api_utils import find_in_request
-from peyotl.phylesystem.git_workflows import GitWorkflowError, merge_from_master
-import json
-import traceback
-import datetime
-import codecs
-import os
+from pyramid.view import view_config
+import logging
+
+_LOG = logging.getLogger("phylesystem_api")
 
 
 def _init(request, response):
@@ -97,9 +92,8 @@ def list_all(request):
 
 @view_config(route_name="get_amendments_config", renderer="json")
 def get_amendments_config(request):
+    _LOG.debug("get_amendments_config")
     api_utils.raise_on_CORS_preflight(request)
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
     docstore = api_utils.get_taxonomic_amendment_store(request)
     return docstore.get_configuration_dict()
 
