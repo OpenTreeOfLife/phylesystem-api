@@ -23,7 +23,6 @@ from pyramid.encode import quote_plus, urlencode
 from pyramid.httpexceptions import (
     HTTPNotFound,
     HTTPBadRequest,
-    HTTPInternalServerError,
 )
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
@@ -488,13 +487,7 @@ def create_study(request):
             )
         except Exception:
             msg = "Unexpected error parsing the file obtained from TreeBASE. Please report this bug to the Open Tree of Life developers."
-            bodys = json.dumps(
-                {
-                    "error": 1,
-                    "description": msg,
-                }
-            )
-            raise HTTPInternalServerError(bodys)
+            api_utils.raise_int_server_err(msg)
     elif importing_from_crossref_API:
         new_study_nexson = _new_nexson_with_crossref_metadata(
             doi=publication_doi_for_crossref,

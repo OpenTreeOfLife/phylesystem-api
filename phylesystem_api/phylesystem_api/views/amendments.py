@@ -8,7 +8,6 @@ from peyotl.nexson_syntax import read_as_json
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPInternalServerError,
 )
 from pyramid.view import view_config
 
@@ -64,15 +63,8 @@ def list_all(request):
     except HTTPException:
         raise
     except Exception as x:
-        msg = ",".join(x.args)
-        raise HTTPInternalServerError(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "Unexpected error calling oti: {}".format(msg),
-                }
-            )
-        )
+        msg = "Unexpected error calling oti: {}".format(",".join(x.args))
+        api_utils.raise_int_server_err(msg)
     return amendment_list
 
 

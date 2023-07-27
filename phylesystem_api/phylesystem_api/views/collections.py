@@ -7,7 +7,6 @@ from peyotl.nexson_syntax import read_as_json
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPInternalServerError,
     HTTPNotImplemented,
 )
 from pyramid.view import view_config
@@ -98,13 +97,5 @@ def find_collections(request):
     except HTTPException:
         raise
     except Exception as x:
-        msg = ",".join(x.args)
-        raise HTTPInternalServerError(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "Unexpected error calling oti: {}".format(msg),
-                }
-            )
-        )
+        api_utils.raise_int_server_err("Unexpected error gathering collections")
     return collection_list

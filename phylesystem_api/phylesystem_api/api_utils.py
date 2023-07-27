@@ -15,6 +15,7 @@ from pyramid.httpexceptions import (
     HTTPServerError,
     HTTPBadRequest,
     HTTPForbidden,
+    HTTPInternalServerError,
 )
 from beaker.cache import cache_managers
 import tempfile
@@ -36,6 +37,14 @@ _LOG.debug("start api_utils")
 
 # this will be updated by config below; start safe by default
 READ_ONLY_MODE = True
+
+
+def raise_int_server_err(msg):
+    body = {
+        "error": 1,
+        "description": msg,
+    }
+    raise HTTPInternalServerError(body=json.dumps(body))
 
 
 def get_private_dir(request):

@@ -4,11 +4,7 @@ import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import find_in_request
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
-from pyramid.httpexceptions import (
-    HTTPException,
-    HTTPBadRequest,
-    HTTPInternalServerError,
-)
+from pyramid.httpexceptions import HTTPException, HTTPBadRequest
 from pyramid.view import view_config
 
 
@@ -73,15 +69,8 @@ def find_studies(request):
     except HTTPException:
         raise
     except Exception as x:
-        msg = ",".join(x.args)
-        raise HTTPInternalServerError(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "Unexpected error calling oti: {}".format(msg),
-                }
-            )
-        )
+        msg = "Unexpected error calling oti: {}".format(",".join(x.args))
+        api_utils.raise_int_server_err(msg)
     _configure_response(request.response)
     return resp
 
@@ -114,13 +103,6 @@ def find_trees(request):
     except ValueError as x:
         _raise400(str(x))
     except Exception as x:
-        msg = ",".join(x.args)
-        raise HTTPInternalServerError(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "Unexpected error calling oti: {}".format(msg),
-                }
-            )
-        )
+        msg = "Unexpected error calling oti: {}".format(",".join(x.args))
+        api_utils.raise_int_server_err(msg)
     return resp
