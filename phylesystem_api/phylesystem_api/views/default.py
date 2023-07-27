@@ -204,7 +204,7 @@ def clear_cache_keys(request):
     """
     api_utils.raise_on_CORS_preflight(request)
     key_pattern = request.matchdict.get("key_pattern")
-    _LOG.warn(">> key_pattern: {}".format(key_pattern))
+    _LOG.warning(">> key_pattern: {}".format(key_pattern))
 
     """
     # TODO: decode this from URL-encoding??
@@ -465,7 +465,7 @@ def _get_synth_input_collection_ids():
         )
     cfg = ConfigParser()
     try:
-        cfg.readfp(conf_fo)
+        cfg.read_file(conf_fo)
     except:
         raise HTTPInternalServerError(
             body="Could not parse file from {}".format(url_of_synth_config)
@@ -528,7 +528,7 @@ def merge_docstore_changes(request):
         m = traceback.format_exc()
         raise HTTPConflict(
             detail=json.dumps(
-                {"error": 1, "description": "Could not merge! Details: %s" % (m)}
+                {"error": 1, "description": "Could not merge! Details: {}".format(m)}
             )
         )
 
