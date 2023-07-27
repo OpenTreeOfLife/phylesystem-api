@@ -5,7 +5,6 @@ from pyramid.view import view_config
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPNotFound,
     HTTPBadRequest,
 )
 from peyotl.phylesystem.git_workflows import GitWorkflowError
@@ -14,6 +13,7 @@ from phylesystem_api.api_utils import (
     find_in_request,
     extract_json_from_http_call,
     raise400,
+    raise404,
 )
 import json
 import logging
@@ -141,15 +141,7 @@ def fetch_amendment(request):
             amendment_id, commit_sha=parent_sha, return_WIP_map=True
         )
     except:
-        # _LOG.exception('GET failed')
-        raise HTTPNotFound(
-            json.dumps(
-                {
-                    "error": 1,
-                    "description": "Amendment '{}' GET failure".format(amendment_id),
-                }
-            )
-        )
+        raise404("Amendment '{}' GET failure".format(amendment_id))
     try:
         amendment_json, head_sha, wip_map = r
         ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
@@ -159,7 +151,7 @@ def fetch_amendment(request):
         e = sys.exc_info()[0]
         raise HTTPBadRequest(body=e)
     if not amendment_json:
-        raise HTTPNotFound("Amendment '{s}' has no JSON data!".format(s=amendment_id))
+        raise404("Amendment '{s}' has no JSON data!".format(s=amendment_id))
 
     try:
         external_url = amendments.get_public_url(amendment_id)

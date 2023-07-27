@@ -16,6 +16,7 @@ from pyramid.httpexceptions import (
     HTTPBadRequest,
     HTTPForbidden,
     HTTPInternalServerError,
+    HTTPNotFound,
 )
 from beaker.cache import cache_managers
 import tempfile
@@ -49,6 +50,10 @@ def raise_int_server_err(msg):
 
 def raise400(msg):
     raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
+
+
+def raise404(msg):
+    raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
 
 
 def get_private_dir(request):
@@ -410,29 +415,6 @@ def read_favorites_config(request):
     return favorites_repo_parent, favorites_repo_remote, git_ssh, pkey, git_hub_remote
 
 
-def read_logging_config(request):
-    conf = get_conf_object(request)
-    try:
-        level = conf.get("logging", "level")
-        if not level.strip():
-            level = "WARNING"
-    except:
-        level = "WARNING"
-    try:
-        logging_format_name = conf.get("logging", "formatter")
-        if not logging_format_name.strip():
-            logging_format_name = "NONE"
-    except:
-        logging_format_name = "NONE"
-    try:
-        logging_filepath = conf.get("logging", "filepath")
-        if not logging_filepath.strip():
-            logging_filepath = None
-    except:
-        logging_filepath = None
-    return level, logging_format_name, logging_filepath
-
-
 def _raise_missing_auth_token():
     raise HTTPBadRequest(
         json.dumps(
@@ -478,90 +460,6 @@ def authenticate(request):
     return auth_info
 
 
-''' ## using logging module directly
-_LOGGING_LEVEL_ENVAR="OT_API_LOGGING_LEVEL"
-_LOGGING_FORMAT_ENVAR="OT_API_LOGGING_FORMAT"
-_LOGGING_FILE_PATH_ENVAR = 'OT_API_LOG_FILE_PATH'
-
-def _get_logging_level(s=None):
-    if s is None:
-        return logging.NOTSET
-    supper = s.upper()
-    if supper == "NOTSET":
-        level = logging.NOTSET
-    elif supper == "DEBUG":
-        level = logging.DEBUG
-    elif supper == "INFO":
-        level = logging.INFO
-    elif supper == "WARNING":
-        level = logging.WARNING
-    elif supper == "ERROR":
-        level = logging.ERROR
-    elif supper == "CRITICAL":
-        level = logging.CRITICAL
-    else:
-        level = logging.NOTSET
-    return level
-
-def _get_logging_formatter(s=None):
-    if s is None:
-        s == 'NONE'
-    else:
-        s = s.upper()
-    rich_formatter = logging.Formatter("[%(asctime)s] %(filename)s (%(lineno)d): %(levelname) 8s: %(message)s")
-    simple_formatter = logging.Formatter("%(levelname) 8s: %(message)s")
-    raw_formatter = logging.Formatter("%(message)s")
-    default_formatter = None
-    logging_formatter = default_formatter
-    if s == "RICH":
-        logging_formatter = rich_formatter
-    elif s == "SIMPLE":
-        logging_formatter = simple_formatter
-    else:
-        logging_formatter = None
-    if logging_formatter is not None:
-        logging_formatter.datefmt='%H:%M:%S'
-    return logging_formatter
-
-def get_logger(request, name="ot_api"):
-    """
-    Returns a logger with name set as given, and configured
-    to the level given by the environment variable _LOGGING_LEVEL_ENVAR.
-    """
-#     package_dir = os.path.dirname(module_path)
-#     config_filepath = os.path.join(package_dir, _LOGGING_CONFIG_FILE)
-#     if os.path.exists(config_filepath):
-#         try:
-#             logging.config.fileConfig(config_filepath)
-#             logger_set = True
-#         except:
-#             logger_set = False
-    logger = logging.getLogger(name)
-    if len(logger.handlers) == 0:
-        if request is None:
-            level = _get_logging_level(os.environ.get(_LOGGING_LEVEL_ENVAR))
-            logging_formatter = _get_logging_formatter(os.environ.get(_LOGGING_FORMAT_ENVAR))
-            logging_filepath = os.environ.get(_LOGGING_FILE_PATH_ENVAR)
-        else:
-            level_str, logging_format_name, logging_filepath = read_logging_config(request)
-            logging_formatter = _get_logging_formatter(logging_format_name)
-            level = _get_logging_level(level_str)
-
-        logger.setLevel(level)
-        if logging_filepath is not None:
-            log_dir = os.path.split(logging_filepath)[0]
-            if log_dir and not os.path.exists(log_dir):
-                os.makedirs(log_dir)
-            ch = logging.FileHandler(logging_filepath)
-        else:
-            ch = logging.StreamHandler()
-        ch.setLevel(level)
-        ch.setFormatter(logging_formatter)
-        logger.addHandler(ch)
-    return logger
-'''
-
-
 def log_time_diff(log_obj, operation="", prev_time=None):
     """If prev_time is not None, logs (at debug level) to
     log_obj the difference between now and the naive datetime
@@ -583,12 +481,6 @@ def log_time_diff(log_obj, operation="", prev_time=None):
             'Timed operation "{o}" took {t:f} seconds'.format(o=operation, t=t)
         )
     return n
-
-
-def get_otindex_base_url(request):
-    conf = get_conf_object(request)
-    otindex_base_url = conf.get("apis", "otindex_base_url")
-    return otindex_base_url
 
 
 def get_oti_base_url(request):
@@ -613,24 +505,6 @@ def get_collections_api_base_url(request):
     if base_url.startswith("//"):
         # Prepend scheme to a scheme-relative URL
         base_url = "https:" + base_url
-    return base_url
-
-
-def get_amendments_api_base_url(request):
-    conf = get_conf_object(request)
-    base_url = conf.get("apis", "amendments_api_base_url")
-    if base_url.startswith("//"):
-        # Prepend scheme to a scheme-relative URL
-        base_url = "https:" + base_url
-    return base_url
-
-
-def get_favorites_api_base_url(request):
-    conf = get_conf_object(request)
-    base_url = conf.get("apis", "favorites_api_base_url")
-    if base_url.startswith("//"):
-        # Prepend scheme to a scheme-relative URL
-        base_url = "http:" + base_url
     return base_url
 
 

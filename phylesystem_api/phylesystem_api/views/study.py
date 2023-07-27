@@ -16,7 +16,7 @@ from peyotl.phylesystem.git_workflows import (
     GitWorkflowError,
     validate_and_convert_nexson,
 )
-from phylesystem_api.api_utils import find_in_request, raise400
+from phylesystem_api.api_utils import find_in_request, raise400, raise404
 from pyramid.encode import quote_plus, urlencode
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -242,12 +242,7 @@ def fetch_study(request):
             study_id, commit_sha=parent_sha, return_WIP_map=True
         )
     except:
-        # _LOG.exception('GET failed')
-        raise HTTPNotFound(
-            body=json.dumps(
-                {"error": 1, "description": "Study #%s GET failure" % study_id}
-            )
-        )
+        raise404("Study #{} GET failure".format(study_id))
     try:
         study_nexson, head_sha, wip_map = r
         blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
@@ -722,12 +717,7 @@ def get_study_file(request):
             study_id, commit_sha=parent_sha, return_WIP_map=True
         )
     except:
-        # _LOG.exception('GET failed')
-        raise HTTPNotFound(
-            body=json.dumps(
-                {"error": 1, "description": "Study #%s GET failure" % study_id}
-            )
-        )
+        raise404("Study #{} GET failure".format(study_id))
     study_nexson, head_sha, wip_map = r
     # TODO: return a description of the requested file, or a list of all files
     m_list = extract_supporting_file_messages(study_nexson)
@@ -754,11 +744,8 @@ def get_study_file(request):
                     matching = m
                     break
             if matching is None:
-                raise HTTPNotFound(
-                    body='No file with id="{f}" found in study="{s}"'.format(
-                        f=file_id, s=study_id
-                    )
-                )
+                msg = 'No file with id="{f}" found in study="{s}"'
+                raise404(msg.format(f=file_id, s=study_id))
             u = None
             files = m.get("data", {}).get("files", {}).get("file", [])
             for f in files:
@@ -766,11 +753,9 @@ def get_study_file(request):
                     u = f["@url"]
                     break
             if u is None:
-                raise HTTPNotFound(
-                    body='No @url found in the message with id="{f}" found in study="{s}"'.format(
-                        f=file_id, s=study_id
-                    )
-                )
+                msg = 'No @url found in the message with id="{f}" found in study="{s}"'
+                raise404(msg.format(f=file_id, s=study_id))
+
             # TEMPORARY HACK TODO
             u = u.replace("uploadid=", "uploadId=")
             # TODO: should not hard-code this, I suppose... (but not doing so requires more config...)
@@ -782,9 +767,7 @@ def get_study_file(request):
             return fetched.text
         except Exception as x:
             # _LOG.exception('file_get failed')
-            raise HTTPNotFound(
-                body='Could not retrieve file. Exception: "{}"'.format(str(x))
-            )
+            raise404('Could not retrieve file. Exception: "{}"'.format(str(x)))
 
 
 @view_config(route_name="get_study_external_url", renderer="json")
@@ -796,7 +779,7 @@ def get_study_external_url(request):
         u = phylesystem.get_public_url(study_id)
         return json.dumps({"url": u, "study_id": study_id})
     except:
-        raise HTTPNotFound(body='{"error": 1, "description": "study not found"}')
+        raise404("study not found")
 
 
 @view_config(route_name="get_study_tree", renderer=None)
@@ -861,13 +844,7 @@ def _fine_grained_get(request, subresource, content_id=None, file_ext=None):
             study_id, commit_sha=parent_sha, return_WIP_map=True
         )
     except:
-        # _LOG.exception('GET failed')
-        raise HTTPNotFound(
-            body=json.dumps(
-                {"error": 1, "description": "Study #%s GET failure" % study_id}
-            )
-        )
-
+        raise404("Study #{} GET failure".format(study_id))
     try:
         study_nexson, head_sha, wip_map = r
         blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)

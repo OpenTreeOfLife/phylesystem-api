@@ -10,7 +10,6 @@ from peyotl.phylesystem.git_workflows import GitWorkflowError
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPNotFound,
     HTTPBadRequest,
 )
 from pyramid.view import view_config
@@ -20,6 +19,7 @@ from phylesystem_api.api_utils import (
     find_in_request,
     extract_json_from_http_call,
     raise400,
+    raise404,
 )
 
 _LOG = logging.getLogger("phylesystem_api")
@@ -98,31 +98,12 @@ def create_collection(request):
     try:
         collection_id = url.split("/collection/")[1]
     except:
-        # _LOG.exception('{} failed'.format(request.env.request_method))
-        raise HTTPNotFound(
-            json.dumps(
-                {
-                    "error": 1,
-                    "description": "invalid URL, no collection id found: {}".format(
-                        url
-                    ),
-                }
-            )
-        )
+        raise404("invalid URL, no collection id found: {}".format(url))
     try:
         assert collection_id.split("/")[0] == owner_id
     except:
         # _LOG.exception('{} failed'.format(request.env.request_method))
-        raise HTTPNotFound(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "collection URL in JSON doesn't match logged-in user: {}".format(
-                        url
-                    ),
-                }
-            )
-        )
+        raise404("collection URL in JSON doesn't match logged-in user: {}".format(url))
 
     # Create a new collection with the data provided
     auth_info = auth_info or api_utils.authenticate(request)
@@ -170,15 +151,7 @@ def fetch_collection(request):
             collection_id, commit_sha=parent_sha, return_WIP_map=True
         )
     except:
-        # _LOG.exception('GET failed')
-        raise HTTPNotFound(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "Collection '{}' GET failure".format(collection_id),
-                }
-            )
-        )
+        raise404("Collection '{}' GET failure".format(collection_id))
     try:
         collection_json, head_sha, wip_map = r
         ## if returning_full_study:  # TODO: offer bare vs. full output (w/ history, etc)
@@ -195,9 +168,7 @@ def fetch_collection(request):
         e = sys.exc_info()[0]
         raise HTTPBadRequest(e)
     if not collection_json:
-        raise HTTPNotFound(
-            body="Collection '{s}' has no JSON data!".format(s=collection_id)
-        )
+        raise404("Collection '{s}' has no JSON data!".format(s=collection_id))
     # add/restore the url field (using the visible fetch URL)
     base_url = api_utils.get_collections_api_base_url(request)
     collection_json["url"] = "{b}/v2/collection/{i}".format(b=base_url, i=collection_id)
