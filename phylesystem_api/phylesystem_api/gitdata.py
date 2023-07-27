@@ -7,12 +7,6 @@ class GitData(PhylesystemGitAction):
     def __init__(self, repo, **kwargs):
         PhylesystemGitAction.__init__(self, repo, **kwargs)
 
-    def delete_remote_branch(self, remote, branch, env={}):
-        "Delete a remote branch"
-        # deleting a branch is the same as
-        # git push remote :branch
-        self.push(remote, env, ":%s" % branch)
-
     def pull(self, remote, env={}, branch=None):
         """
         Pull a branch from a given remote
