@@ -24,11 +24,6 @@ def _bool_arg(v):
     return v
 
 
-"""
-    raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
-"""
-
-
 @view_config(route_name="list_all_amendment_ids", renderer="json")
 def list_all_amendment_ids(request):
     docstore = api_utils.get_taxonomic_amendment_store(request)

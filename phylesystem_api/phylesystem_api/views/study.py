@@ -16,7 +16,7 @@ from peyotl.phylesystem.git_workflows import (
     GitWorkflowError,
     validate_and_convert_nexson,
 )
-from phylesystem_api.api_utils import find_in_request
+from phylesystem_api.api_utils import find_in_request, raise400
 from pyramid.encode import quote_plus, urlencode
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -45,9 +45,7 @@ def __extract_nexson_from_http_call(request, **kwargs):
     except:
         # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # _LOG.exception('Exception getting nexson content in __extract_nexson_from_http_call')
-        raise HTTPBadRequest(
-            json.dumps({"error": 1, "description": "NexSON must be valid JSON"})
-        )
+        raise400("NexSON must be valid JSON")
     return nexson
 
 
@@ -78,7 +76,7 @@ def __extract_and_validate_nexson(request, repo_nexml2json, kwargs):
     except GitWorkflowError as err:
         # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # _LOG.exception('PUT failed in validation')
-        raise HTTPBadRequest(err.msg or "No message found")
+        raise400(err.msg or "No message found")
     return nexson, annotation, nexson_adaptor
 
 
@@ -146,7 +144,7 @@ def __validate_output_nexml2json(
     if msg:
         # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # _LOG.debug('output sniffing err msg = ' + msg)
-        raise HTTPBadRequest(json.dumps({"error": 1, "description": msg}))
+        raise400(msg)
     return schema
 
 
@@ -276,11 +274,9 @@ def fetch_study(request):
                 study_nexson, serialize=serialize, src_schema=src_schema
             )
         except:
-            msg = (
-                "Exception in coercing to the required NexSON version for validation. "
+            raise400(
+                "Exception in coercing to the required NexSON version for validation."
             )
-            # _LOG.exception(msg)
-            raise HTTPBadRequest(msg)
 
     if out_schema.is_json():
         try:
@@ -479,8 +475,7 @@ def create_study(request):
             treebase_id = int(treebase_id)
         except ValueError as e:
             msg = "TreeBASE ID should be a simple integer, not '{}'! Details:\n{}"
-            msg = msg.format(treebase_id, str(e))
-            raise HTTPBadRequest(json.dumps({"error": 1, "description": msg}))
+            raise400(msg.format(treebase_id, str(e)))
         try:
             new_study_nexson = import_nexson_from_treebase(
                 treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH
@@ -703,9 +698,7 @@ def delete_study(request):
         _LOG.warning("some other kind of error")
         _LOG.warning(err)
         # _LOG.exception('Exception getting nexson content in phylesystem.delete_study')
-        raise HTTPBadRequest(
-            json.dumps({"error": 1, "description": "Unknown error in study deletion"})
-        )
+        raise400("Unknown error in study deletion")
 
 
 @view_config(route_name="get_study_file_list", renderer="json")

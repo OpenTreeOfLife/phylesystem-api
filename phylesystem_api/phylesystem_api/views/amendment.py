@@ -10,7 +10,11 @@ from pyramid.httpexceptions import (
 )
 from peyotl.phylesystem.git_workflows import GitWorkflowError
 import phylesystem_api.api_utils as api_utils
-from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
+from phylesystem_api.api_utils import (
+    find_in_request,
+    extract_json_from_http_call,
+    raise400,
+)
 import json
 import logging
 
@@ -83,16 +87,8 @@ def create_amendment(request, **kwargs):
         amendment_adapter,
     ) = __extract_and_validate_amendment(request, kwargs)
     if amendment_obj is None:
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "amendment JSON expected for HTTP method {}".format(
-                        request.method
-                    ),
-                }
-            )
-        )
+        msg = "amendment JSON expected for HTTP method {}".format(request.method)
+        raise400(msg)
 
     # Create a new amendment with the data provided
     # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
@@ -127,16 +123,8 @@ def fetch_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
     amendment_id = request.matchdict["amendment_id"]
     if not AMENDMENT_ID_PATTERN.match(amendment_id):
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "invalid amendment ID ({}) provided".format(
-                        amendment_id
-                    ),
-                }
-            )
-        )
+        msg = "invalid amendment ID ({}) provided".format(amendment_id)
+        raise400(msg)
 
     # fetch the current amendment JSON
     # _LOG.debug('GET /v2/amendment/{}'.format(str(amendment_id)))
@@ -195,16 +183,8 @@ def update_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
     amendment_id = request.matchdict["amendment_id"]
     if not AMENDMENT_ID_PATTERN.match(amendment_id):
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "invalid amendment ID ({}) provided".format(
-                        amendment_id
-                    ),
-                }
-            )
-        )
+        msg = "invalid amendment ID ({}) provided".format(amendment_id)
+        raise400(msg)
 
     # this method requires authentication
     auth_info = api_utils.authenticate(request)
@@ -225,16 +205,8 @@ def update_amendment(request):
         amendment_adapter,
     ) = __extract_and_validate_amendment(request, request.params)
     if amendment_obj is None:
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "amendment JSON expected for HTTP method {}".format(
-                        request.method
-                    ),
-                }
-            )
-        )
+        msg = "amendment JSON expected for HTTP method {}".format(request.method)
+        raise400(msg)
 
     api_utils.raise_if_read_only()
 

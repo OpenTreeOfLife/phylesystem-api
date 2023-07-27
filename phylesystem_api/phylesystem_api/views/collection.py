@@ -16,7 +16,11 @@ from pyramid.httpexceptions import (
 from pyramid.view import view_config
 
 import phylesystem_api.api_utils as api_utils
-from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
+from phylesystem_api.api_utils import (
+    find_in_request,
+    extract_json_from_http_call,
+    raise400,
+)
 
 _LOG = logging.getLogger("phylesystem_api")
 
@@ -76,42 +80,21 @@ def create_collection(request):
         collection_adapter,
     ) = __extract_and_validate_collection(request, request.params)
     if collection_obj is None:
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "collection JSON expected for HTTP method {}".format(
-                        request.method
-                    ),
-                }
-            )
-        )
+        msg = "collection JSON expected for HTTP method {}".format(request.method)
+        raise400(msg)
 
     auth_info = api_utils.authenticate(request)
     owner_id = auth_info.get("login", None)
     if owner_id is None:
-        raise HTTPBadRequest(
-            json.dumps(
-                {
-                    "error": 1,
-                    "description": "no GitHub userid found for HTTP method {}".format(
-                        request.env.request_method
-                    ),
-                }
-            )
+        msg = "no GitHub userid found for HTTP method {}".format(
+            request.env.request_method
         )
+        raise400(msg)
 
     # try to extract a usable collection ID from the JSON payload (confirm owner_id against above)
     url = collection_obj.get("url", None)
     if url is None:
-        raise HTTPBadRequest(
-            json.dumps(
-                {
-                    "error": 1,
-                    "description": "no collection URL provided in query string or JSON payload",
-                }
-            )
-        )
+        raise400("no collection URL provided in query string or JSON payload")
     try:
         collection_id = url.split("/collection/")[1]
     except:
@@ -153,7 +136,7 @@ def create_collection(request):
         )
         new_collection_id, commit_return = r
     except GitWorkflowError as err:
-        raise HTTPBadRequest(json.dumps({"error": 1, "description": str(err)}))
+        raise400(str(err))
     except:
         raise HTTPBadRequest(traceback.format_exc())
     if commit_return["error"] != 0:
@@ -174,16 +157,8 @@ def fetch_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     collection_id = request.matchdict["collection_id"]
     if not COLLECTION_ID_PATTERN.match(collection_id):
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "invalid collection ID ({}) provided".format(
-                        collection_id
-                    ),
-                }
-            )
-        )
+        msg = "invalid collection ID ({}) provided".format(collection_id)
+        raise400(msg)
 
     # gather details to return with the JSON core document
     parent_sha = find_in_request(request, "starting_commit_SHA", None)
@@ -266,17 +241,8 @@ def update_collection(request):
 
     collection_id = request.matchdict["collection_id"]
     if not COLLECTION_ID_PATTERN.match(collection_id):
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "invalid collection ID ({}) provided".format(
-                        collection_id
-                    ),
-                }
-            )
-        )
-
+        msg = "invalid collection ID ({}) provided".format(collection_id)
+        raise400(msg)
     try:
         commit_msg = find_in_request(request, "commit_msg", "")
         if commit_msg.strip() == "":
@@ -294,16 +260,8 @@ def update_collection(request):
         collection_adapter,
     ) = __extract_and_validate_collection(request, request.params)
     if collection_obj is None:
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "collection JSON expected for HTTP method {}".format(
-                        request.method
-                    ),
-                }
-            )
-        )
+        msg = "collection JSON expected for HTTP method {}".format(request.method)
+        raise400(msg)
 
     # submit new json for this id, and read the results
     parent_sha = find_in_request(request, "starting_commit_SHA", None)
@@ -349,16 +307,8 @@ def delete_collection(request):
 
     collection_id = request.matchdict["collection_id"]
     if not COLLECTION_ID_PATTERN.match(collection_id):
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "invalid collection ID ({}) provided".format(
-                        collection_id
-                    ),
-                }
-            )
-        )
+        msg = "invalid collection ID ({}) provided".format(collection_id)
+        raise400(msg)
 
     try:
         commit_msg = find_in_request(request, "commit_msg", "")
@@ -389,10 +339,4 @@ def delete_collection(request):
     except GitWorkflowError as err:
         raise HTTPBadRequest(err.msg)
     except:
-        # _LOG.exception('Unknown error in collection deletion')
-        # raise HTTPBadRequest(traceback.format_exc())
-        raise HTTPBadRequest(
-            json.dumps(
-                {"error": 1, "description": "Unknown error in collection deletion"}
-            )
-        )
+        raise400("Unknown error in collection deletion")

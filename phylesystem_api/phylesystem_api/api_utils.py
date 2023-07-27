@@ -47,6 +47,10 @@ def raise_int_server_err(msg):
     raise HTTPInternalServerError(body=json.dumps(body))
 
 
+def raise400(msg):
+    raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
+
+
 def get_private_dir(request):
     _LOG.debug("WHY PRIVATE DIR")
     return "~/private/"
@@ -307,14 +311,7 @@ def _read_phylesystem_from_conf_obj(conf):
     try:
         max_num_trees = int(max_num_trees)
     except ValueError:
-        raise HTTPBadRequest(
-            json.dumps(
-                {
-                    "error": 1,
-                    "description": "max number of trees per study in config is not an integer",
-                }
-            )
-        )
+        raise400("max number of trees per study in config is not an integer")
     try:
         read_only = conf.get("apis", "read_only") == "true"
     except:
@@ -471,14 +468,7 @@ def authenticate(request):
     try:
         auth_info["login"] = gh_user.login
     except BadCredentialsException:
-        raise HTTPBadRequest(
-            json.dumps(
-                {
-                    "error": 1,
-                    "description": "You have provided an invalid or expired authentication token",
-                }
-            )
-        )
+        raise400("You have provided an invalid or expired authentication token")
     # use the Github Oauth token to get a name/email if not specified
     # we don't provide these as default values above because they would
     # generate API calls regardless of author_name/author_email being specifed
@@ -897,11 +887,7 @@ def extract_json_from_http_call(request, data_field_name="data", request_params=
     except:
         # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # _LOG.exception('Exception getting JSON content in extract_json_from_http_call')
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {"error": 1, "description": "no collection JSON found in request"}
-            )
-        )
+        raise400("no collection JSON found in request")
     return json_obj
 
 

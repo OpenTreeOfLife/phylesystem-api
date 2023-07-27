@@ -14,6 +14,7 @@ from peyotl.phylesystem.git_workflows import (
     GitWorkflowError,
     merge_from_master,
 )
+from phylesystem_api.api_utils import raise400
 from pyramid.httpexceptions import (
     HTTPException,
     HTTPNotFound,
@@ -281,9 +282,7 @@ def include_tree_in_synth(request):
     tree_id = request.params.get("tree_id", "").strip()
     # check for empty/missing ids
     if (study_id == "") or (tree_id == ""):
-        raise HTTPBadRequest(
-            body='{"error": 1, "description": "Expecting study_id and tree_id arguments"}'
-        )
+        raise400("Expecting study_id and tree_id arguments")
     # examine this study and tree, to confirm it exists *and* to capture its name
     sds = api_utils.get_phylesystem(request)
     try:
@@ -387,9 +386,7 @@ def exclude_tree_from_synth(request):
     tree_id = request.params.get("tree_id", "").strip()
     # check for empty/missing ids
     if (study_id == "") or (tree_id == ""):
-        raise HTTPBadRequest(
-            body='{"error": 1, "description": "Expecting study_id and tree_id arguments"}'
-        )
+        raise400("Expecting study_id and tree_id arguments")
     # find this tree in ANY synth-input collection; if found, remove it and update the collection
     coll_id_list = _get_synth_input_collection_ids()
     cds = api_utils.get_tree_collection_store(request)
@@ -517,7 +514,7 @@ def merge_docstore_changes(request):
     try:
         return merge_from_master(gd, resource_id, auth_info, starting_commit_SHA)
     except GitWorkflowError as err:
-        raise HTTPBadRequest(body=json.dumps({"error": 1, "description": err.msg}))
+        raise400(err.msg)
     except:
         m = traceback.format_exc()
         raise HTTPConflict(
@@ -583,10 +580,7 @@ def push_docstore_changes(request):
                         'Could not create an adaptor for git actions on study ID "{}". '
                         "If you are confident that this is a valid study ID, please report this as a bug."
                     )
-                    m = m.format(resource_id)
-                    raise HTTPBadRequest(
-                        body=json.dumps({"error": 1, "description": m})
-                    )
+                    raise400(m.format(resource_id))
                 master_sha = ga.get_master_sha()
                 obj = {
                     "date": timestamp,
@@ -632,10 +626,7 @@ def push_docstore_changes(request):
                         'Could not create an adaptor for git actions on collection ID "{}". '
                         "If you are confident that this is a valid collection ID, please report this as a bug."
                     )
-                    m = m.format(resource_id)
-                    raise HTTPBadRequest(
-                        body=json.dumps({"error": 1, "description": m})
-                    )
+                    raise400(m.format(resource_id))
                 master_sha = ga.get_master_sha()
                 obj = {
                     "date": timestamp,
@@ -678,10 +669,7 @@ def push_docstore_changes(request):
                         'Could not create an adaptor for git actions on amendment ID "{}". '
                         "If you are confident that this is a valid amendment ID, please report this as a bug."
                     )
-                    m = m.format(resource_id)
-                    raise HTTPBadRequest(
-                        body=json.dumps({"error": 1, "description": m})
-                    )
+                    raise400(m.format(resource_id))
                 master_sha = ga.get_master_sha()
                 obj = {
                     "date": timestamp,
@@ -701,7 +689,7 @@ def push_docstore_changes(request):
             )
 
     else:
-        raise HTTPBadRequest(body="Can't push unknown doc_type '{}'".format(doc_type))
+        raise400("Can't push unknown doc_type '{}'".format(doc_type))
 
     if os.path.exists(fail_file):
         # log any old fail_file, and remove it because the pushes are working
