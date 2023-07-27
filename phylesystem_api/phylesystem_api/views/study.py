@@ -685,15 +685,15 @@ def update_study(request):
 @view_config(route_name="delete_study", renderer="json")
 def delete_study(request):
     # _LOG = api_utils.get_logger(request, 'delete_study')
-    _LOG.warn("delete_study STARTING...")
+    _LOG.warninging("delete_study STARTING...")
     api_version = request.matchdict["api_version"]
     study_id = request.matchdict["study_id"]
-    _LOG.warn("api_version={}".format(api_version))
-    _LOG.warn("study_id={}".format(study_id))
+    _LOG.warning("api_version={}".format(api_version))
+    _LOG.warning("study_id={}".format(study_id))
 
     # this method requires authentication
     auth_info = api_utils.authenticate(request)
-    _LOG.warn("auth_info={}".format(auth_info))
+    _LOG.warning("auth_info={}".format(auth_info))
 
     # gather any user-provided git-commit message
     try:
@@ -703,39 +703,39 @@ def delete_study(request):
             commit_msg = None
     except:
         commit_msg = None
-    _LOG.warn("commit_msg={}".format(commit_msg))
+    _LOG.warning("commit_msg={}".format(commit_msg))
 
     parent_sha = find_in_request(request, "starting_commit_SHA", None)
-    _LOG.warn("parent_sha={}".format(parent_sha))
+    _LOG.warning("parent_sha={}".format(parent_sha))
 
     phylesystem = api_utils.get_phylesystem(
         request
     )  # set READONLY flag before testing!
     api_utils.raise_if_read_only()
-    _LOG.warn("passed the read-only test")
+    _LOG.warning("passed the read-only test")
 
-    _LOG.warn("trying to delete now... via:")
-    _LOG.warn(phylesystem.delete_study)
+    _LOG.warning("trying to delete now... via:")
+    _LOG.warning(phylesystem.delete_study)
     try:
         x = phylesystem.delete_study(
             study_id, auth_info, parent_sha, commit_msg=commit_msg
         )
-        _LOG.warn("initial return x:")
-        _LOG.warn(x)
+        _LOG.warning("initial return x:")
+        _LOG.warning(x)
         if x.get("error") == 0:
-            _LOG.warn("calling deferred push...")
+            _LOG.warning("calling deferred push...")
             api_utils.deferred_push_to_gh_call(
                 request, None, doc_type="nexson", auth_token=auth_info["auth_token"]
             )
-            _LOG.warn("back from deferred push")
+            _LOG.warning("back from deferred push")
         return x
     except GitWorkflowError as err:
-        _LOG.warn("got a GitWorkflowError:")
-        _LOG.warn(err)
+        _LOG.warning("got a GitWorkflowError:")
+        _LOG.warning(err)
         raise HTTPBadRequest(err.msg)
     except Exception as err:
-        _LOG.warn("some other kind of error")
-        _LOG.warn(err)
+        _LOG.warning("some other kind of error")
+        _LOG.warning(err)
         # _LOG.exception('Exception getting nexson content in phylesystem.delete_study')
         raise HTTPBadRequest(
             json.dumps({"error": 1, "description": "Unknown error in study deletion"})
