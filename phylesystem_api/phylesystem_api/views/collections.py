@@ -2,25 +2,15 @@ import json
 import os
 
 import phylesystem_api.api_utils as api_utils
-from peyotl.api import OTI
 from peyotl.nexson_syntax import read_as_json
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPError,
     HTTPInternalServerError,
     HTTPNotImplemented,
 )
 from pyramid.view import view_config
-
-
-def _init(request, response):
-    response.view = "generic.json"
-    # CORS support for cross-domain API requests (from anywhere)
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    return OTI(oti=api_utils.get_oti_domain(request))
 
 
 def _bool_arg(v):
@@ -83,8 +73,6 @@ def find_trees_in_collections(request):
 @view_config(route_name="find_collections", renderer="json")
 def find_collections(request):
     api_utils.raise_on_CORS_preflight(request)
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
     # TODO: proxy to oti for a filtered list?
     # For now, let's just return all collections (complete JSON)
     try:
@@ -108,8 +96,6 @@ def find_collections(request):
             )
             collection_list.append(props)
     except HTTPException:
-        raise
-    except HTTPError:
         raise
     except Exception as x:
         msg = ",".join(x.args)

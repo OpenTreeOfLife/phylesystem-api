@@ -3,11 +3,9 @@ import logging
 import sys
 import traceback
 
-import phylesystem_api.api_utils as api_utils
 from peyotl.collections_store import COLLECTION_ID_PATTERN
 from peyotl.collections_store.validation import validate_collection
 from peyotl.phylesystem.git_workflows import GitWorkflowError
-from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
@@ -17,30 +15,29 @@ from pyramid.httpexceptions import (
 )
 from pyramid.view import view_config
 
+import phylesystem_api.api_utils as api_utils
+from phylesystem_api.api_utils import find_in_request, extract_json_from_http_call
+
 _LOG = logging.getLogger("phylesystem_api")
 
 
 def __extract_and_validate_collection(request, request_params):
-    from pprint import pprint
-
     try:
         collection_obj = extract_json_from_http_call(
             request, data_field_name="json", request_params=request_params
         )
-    except HTTPException as err:
+    except HTTPException:
         # payload not found
         return None, None, None
     try:
         errors, collection_adaptor = validate_collection(collection_obj)
-    except HTTPException as err:
-        # _LOG.exception('JSON payload failed validation (raising HTTP response)')
-        pprint(err)
-        raise err
+    except HTTPException:
+        _LOG.exception("JSON payload failed validation (raising HTTP response)")
+        raise
     except Exception as err:
-        # _LOG.exception('JSON payload failed validation (reporting err.msg)')
-        pprint(err)
+        _LOG.exception("JSON payload failed validation (reporting err.msg)")
         try:
-            msg = err.get("msg", "No message found")
+            msg = getattr(err, "msg", "No message found")
         except:
             msg = str(err)
         raise HTTPBadRequest(msg)
@@ -70,10 +67,6 @@ def create_collection(request):
             commit_msg = None
     except:
         commit_msg = None
-
-    phylesystem = api_utils.get_phylesystem(
-        request
-    )  # set READONLY flag before testing!
     api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
@@ -160,7 +153,7 @@ def create_collection(request):
         )
         new_collection_id, commit_return = r
     except GitWorkflowError as err:
-        raise HTTPBadRequest(anyjson.dumps({"error": 1, "description": msg}))
+        raise HTTPBadRequest(json.dumps({"error": 1, "description": str(err)}))
     except:
         raise HTTPBadRequest(traceback.format_exc())
     if commit_return["error"] != 0:
@@ -179,7 +172,6 @@ def create_collection(request):
 def fetch_collection(request):
     # NB - This method does not require authentication!
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
-    api_version = request.matchdict["api_version"]
     collection_id = request.matchdict["collection_id"]
     if not COLLECTION_ID_PATTERN.match(collection_id):
         raise HTTPBadRequest(
@@ -194,8 +186,6 @@ def fetch_collection(request):
         )
 
     # gather details to return with the JSON core document
-    version_history = None
-    comment_html = None
     parent_sha = find_in_request(request, "starting_commit_SHA", None)
     # _LOG.debug('parent_sha = {}'.format(parent_sha))
     # return the correct nexson of study_id, using the specified view
@@ -274,7 +264,6 @@ def update_collection(request):
     _LOG.debug("COLLECTION: auth_info {}".format(auth_info))
     owner_id = auth_info.get("login", None)
 
-    api_version = request.matchdict["api_version"]
     collection_id = request.matchdict["collection_id"]
     if not COLLECTION_ID_PATTERN.match(collection_id):
         raise HTTPBadRequest(
@@ -296,9 +285,6 @@ def update_collection(request):
     except:
         commit_msg = None
 
-    phylesystem = api_utils.get_phylesystem(
-        request
-    )  # set READONLY flag before testing!
     api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
@@ -361,7 +347,6 @@ def delete_collection(request):
     # NB - This method requires authentication!
     auth_info = api_utils.authenticate(request)
 
-    api_version = request.matchdict["api_version"]
     collection_id = request.matchdict["collection_id"]
     if not COLLECTION_ID_PATTERN.match(collection_id):
         raise HTTPBadRequest(
@@ -383,13 +368,9 @@ def delete_collection(request):
     except:
         commit_msg = None
 
-    phylesystem = api_utils.get_phylesystem(
-        request
-    )  # set READONLY flag before testing!
     api_utils.raise_if_read_only()
 
     # remove this collection from the docstore
-    owner_id = auth_info.get("login", None)
     docstore = api_utils.get_tree_collection_store(request)
     parent_sha = find_in_request(request, "starting_commit_SHA", None)
     if parent_sha is None:

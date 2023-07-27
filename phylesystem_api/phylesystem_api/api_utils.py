@@ -6,6 +6,7 @@ from peyotl.amendments import TaxonomicAmendmentStore
 from peyotl.utility import read_config as read_peyotl_config
 from configparser import ConfigParser
 from datetime import datetime
+from peyotl.api import OTI
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.request import Request
@@ -859,7 +860,7 @@ def remove_tags(markup):
     except (UnicodeDecodeError, AttributeError):
         pass
     try:
-        markup = u"".join(ElementTree.fromstring(markup).itertext())
+        markup = "".join(ElementTree.fromstring(markup).itertext())
     except ElementTree.ParseError:
         # if it won't parse (badly-formed XML/HTML, or plaintext), return unchanged
         pass
@@ -893,3 +894,7 @@ def extract_json_from_http_call(request, data_field_name="data", request_params=
             )
         )
     return json_obj
+
+
+def get_oti_wrapper(request):
+    return OTI(oti=get_oti_domain(request))

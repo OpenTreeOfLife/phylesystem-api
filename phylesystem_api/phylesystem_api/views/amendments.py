@@ -1,28 +1,18 @@
 import json
+import logging
 import os
 
 import phylesystem_api.api_utils as api_utils
-from peyotl.api import OTI
 from peyotl.nexson_syntax import read_as_json
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPError,
     HTTPInternalServerError,
 )
 from pyramid.view import view_config
-import logging
 
 _LOG = logging.getLogger("phylesystem_api")
-
-
-def _init(request, response):
-    response.view = "generic.json"
-    # CORS support for cross-domain API requests (from anywhere)
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    return OTI(oti=api_utils.get_oti_domain(request))
 
 
 def _bool_arg(v):
@@ -49,8 +39,6 @@ def list_all_amendment_ids(request):
 @view_config(route_name="list_all_amendments", renderer="json")
 def list_all(request):
     api_utils.raise_on_CORS_preflight(request)
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
     # TODO: proxy to oti for a filtered list?
     # For now, let's just return all collections (complete JSON)
     amendment_list = []
@@ -74,8 +62,6 @@ def list_all(request):
             )
             amendment_list.append(props)
     except HTTPException:
-        raise
-    except HTTPError:
         raise
     except Exception as x:
         msg = ",".join(x.args)
@@ -101,8 +87,6 @@ def get_amendments_config(request):
 @view_config(route_name="amendments_push_failure", renderer="json")
 def amendments_push_failure(request):
     api_utils.raise_on_CORS_preflight(request)
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
     # this should find a type-specific push_failure file
     request.matchdict["doc_type"] = "amendment"
     fail_file = api_utils.get_failed_push_filepath(request)

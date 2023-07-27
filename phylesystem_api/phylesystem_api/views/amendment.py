@@ -27,20 +27,18 @@ def __extract_and_validate_amendment(request, kwargs):
         amendment_obj = extract_json_from_http_call(
             request, data_field_name="json", request_params=kwargs
         )
-    except HTTPException as err:
+    except HTTPException:
         # payload not found
         return None, None, None
     try:
         errors, amendment_adaptor = validate_amendment(amendment_obj)
-    except HTTPException as err:
-        # _LOG.exception('JSON payload failed validation (raising HTTP response)')
-        # pprint(err)
-        raise err
+    except HTTPException:
+        raise
     except Exception as err:
         # _LOG.exception('JSON payload failed validation (reporting err.msg)')
         # pprint(err)
         try:
-            msg = err.get("msg", "No message found")
+            msg = getattr(err, "msg", "No message found")
         except:
             msg = str(err)
         raise HTTPBadRequest(body=msg)
@@ -77,9 +75,6 @@ def create_amendment(request, **kwargs):
     except:
         commit_msg = None
 
-    phylesystem = api_utils.get_phylesystem(
-        request
-    )  # set READONLY flag before testing!
     api_utils.raise_if_read_only()
     # fetch and parse the JSON payload, if any
     (
@@ -130,7 +125,6 @@ def create_amendment(request, **kwargs):
 def fetch_amendment(request):
     # NB - This method does not require authentication!
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-    api_version = request.matchdict["api_version"]
     amendment_id = request.matchdict["amendment_id"]
     if not AMENDMENT_ID_PATTERN.match(amendment_id):
         raise HTTPBadRequest(
@@ -146,8 +140,6 @@ def fetch_amendment(request):
 
     # fetch the current amendment JSON
     # _LOG.debug('GET /v2/amendment/{}'.format(str(amendment_id)))
-    version_history = None
-    comment_html = None
     try:
         parent_sha = find_in_request(request, "starting_commit_SHA", None)
     except:
@@ -201,7 +193,6 @@ def fetch_amendment(request):
 @view_config(route_name="update_amendment", renderer="json")
 def update_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-    api_version = request.matchdict["api_version"]
     amendment_id = request.matchdict["amendment_id"]
     if not AMENDMENT_ID_PATTERN.match(amendment_id):
         raise HTTPBadRequest(
@@ -283,19 +274,14 @@ def update_amendment(request):
 @view_config(route_name="delete_amendment", renderer="json")
 def delete_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-    api_version = request.matchdict["api_version"]
     amendment_id = request.matchdict.get["amendment_id"]
     if not AMENDMENT_ID_PATTERN.match(amendment_id):
-        raise HTTPBadRequest(
-            body=json.dumps(
-                {
-                    "error": 1,
-                    "description": "invalid amendment ID ({}) provided".format(
-                        amendment_id
-                    ),
-                }
-            )
-        )
+        msg = "invalid amendment ID ({}) provided".format(amendment_id)
+        body = {
+            "error": 1,
+            "description": msg,
+        }
+        raise HTTPBadRequest(body=json.dumps(body))
 
     # this method requires authentication
     auth_info = api_utils.authenticate(request)

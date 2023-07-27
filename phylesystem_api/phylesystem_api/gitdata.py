@@ -7,7 +7,7 @@ class GitData(PhylesystemGitAction):
     def __init__(self, repo, **kwargs):
         PhylesystemGitAction.__init__(self, repo, **kwargs)
 
-    def pull(self, remote, env={}, branch=None):
+    def pull(self, remote, env=None, branch=None):
         """
         Pull a branch from a given remote
 
@@ -23,11 +23,11 @@ class GitData(PhylesystemGitAction):
             branch_to_pull = branch
         else:
             branch_to_pull = self.current_branch()
-
+        env = {} if env is None else env
         # if there is no PKEY, we don't need to override env
         # We are explicit about what we are pushing, since the default behavior
         # is different in different versions of Git and/or by configuration
-        if env["PKEY"]:
+        if "PKEY" in env:
             new_env = os.environ.copy()
             new_env.update(env)
             git(

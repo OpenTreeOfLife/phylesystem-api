@@ -37,7 +37,7 @@ except:
     call_http_json = None
     _LOG.debug("call_http_json was not imported from api_utils")
 
-from beaker.cache import cache_region, region_invalidate
+from beaker.cache import cache_region
 
 
 @view_config(route_name="index", renderer="phylesystem_api:templates/home.jinja2")
@@ -154,9 +154,7 @@ def pull_through_cache(request):
             # _LOG.warning( dict(fetched.headers) )
 
             try:
-                test_for_json = (
-                    fetched.json()
-                )  # missing JSON payload will raise an error
+                fetched.json()  # missing JSON payload will raise an error
                 return Response(
                     headers=fetched.headers,
                     body=fetched.text,  # missing JSON payload will raise an error
@@ -288,7 +286,6 @@ def include_tree_in_synth(request):
         )
     # examine this study and tree, to confirm it exists *and* to capture its name
     sds = api_utils.get_phylesystem(request)
-    found_study = None
     try:
         found_study = sds.return_doc(study_id, commit_sha=None, return_WIP_map=False)[0]
         tree_collections_by_id = found_study.get("nexml").get("treesById")
@@ -381,7 +378,7 @@ def include_tree_in_synth(request):
             )
 
     # fetch and return the updated list of synth-input trees
-    return trees_in_synth(kwargs)
+    return trees_in_synth(request)
 
 
 @view_config(route_name="exclude_tree_from_synth", renderer="json")
@@ -445,9 +442,8 @@ def exclude_tree_from_synth(request):
                     doc_type="collection",
                     auth_token=auth_info["auth_token"],
                 )
-
     # fetch and return the updated list of synth-input trees
-    return trees_in_synth(kwargs)
+    return trees_in_synth(request)
 
 
 def _get_synth_input_collection_ids():
@@ -509,8 +505,6 @@ def merge_docstore_changes(request):
             "description": "Could not merge master into WIP! Details: ..."
         }
     """
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
     resource_id = request.matchdict["doc_id"]
     starting_commit_SHA = request.matchdict["starting_commit_SHA"]
     api_utils.raise_if_read_only()
@@ -538,14 +532,11 @@ def merge_docstore_changes(request):
 def push_docstore_changes(request):
     """OpenTree API method to update branch on master
 
-    curl -X POST http://devapi.opentreeoflife.org/v3/push_docstore_changes/nexson/ot_999
+    curl -X POST https://devapi.opentreeoflife.org/v3/push_docstore_changes/nexson/ot_999
     """
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
     _LOG.debug("push_docstore_changes")
     #    _LOG.debug(request.__dict__)
     _LOG.debug(request.matchdict)
-    api_version = request.matchdict["api_version"]
     doc_type = request.matchdict.get("doc_type", None)
     resource_id = request.matchdict.get("doc_id", None)  # Whyyyyy doc id here??
     #    resource_id = request.matchdict.get('resource_id', None)
@@ -553,7 +544,7 @@ def push_docstore_changes(request):
     data = request.json_body
     if doc_type is None:
         doc_type = data.get("doc_type")
-    if resource_id == None:
+    if resource_id is None:
         resource_id = data.get("resource_id")
 
     api_utils.raise_if_read_only()
@@ -564,7 +555,7 @@ def push_docstore_changes(request):
     _LOG.debug("Going to authenicateeee")
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(request)
+    api_utils.authenticate(request)
     _LOG.debug("Made it past auth")
 
     # TODO

@@ -186,26 +186,38 @@ def __finish_write_verb(
     return annotated_commit
 
 
+def _fetch_duplicate_study_ids(request, study_DOI=None, study_ID=None):
+    # Use the oti (docstore index) service to see if there are other studies in
+    # the collection with the same DOI; return the IDs of any duplicate studies
+    # found, or an empty list if there are no dupes.
+    if not study_DOI:
+        return []
+    oti = api_utils.get_oti_wrapper(request)
+    duplicate_study_ids = oti.find_studies(
+        {"ot:studyPublication": study_DOI}, verbose=False, exact=True
+    )
+    try:
+        duplicate_study_ids.remove(study_ID)
+    except ValueError:
+        # ignore error, if oti is lagging and doesn't have this study yet
+        pass
+        pass
+    return duplicate_study_ids
+
+
+def _fetch_shard_name(phylesystem, study_id):
+    try:
+        return phylesystem.get_repo_and_path_fragment(study_id)[0]
+    except:
+        _LOG.debug("_fetch_shard_name failed for study {}".format(study_id))
+        return None
+
+
 @view_config(route_name="fetch_study", renderer=None, request_method="GET")
 @view_config(route_name="fetch_study_label", renderer=None, request_method="GET")
 def fetch_study(request):
-    (
-        repo_parent,
-        repo_remote,
-        git_ssh,
-        pkey,
-        git_hub_remote,
-        max_filesize,
-        max_num_trees,
-        read_only_mode,
-    ) = api_utils.read_phylesystem_config(request)
-    # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-    _LOG.debug("Fetching study")
-    api_version = request.matchdict["api_version"]
     study_id = request.matchdict["study_id"]
     _LOG.debug("study_id = {}".format(study_id))
-    version_history = None
-    comment_html = None
     # does this look like a filename? if so, grab its extension
     request_extension = None
     fpps = study_id.split(".")
@@ -277,13 +289,15 @@ def fetch_study(request):
         except KeyError:
             study_DOI = None
         try:
-            duplicate_study_ids = _fetch_duplicate_study_ids(study_DOI, study_id)
+            duplicate_study_ids = _fetch_duplicate_study_ids(
+                request, study_DOI, study_id
+            )
         except:
             # _LOG.exception('call to OTI check for duplicate DOIs failed')
             duplicate_study_ids = None
 
         try:
-            shard_name = _fetch_shard_name(study_id)
+            shard_name = _fetch_shard_name(phylesystem, study_id)
         except:
             # _LOG.exception('check for shard name failed')
             shard_name = None
@@ -317,9 +331,8 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
     # N.B. The recommended API method is very different for DOI vs.
     # a reference string, but we can also use the filter option to get
     # consistent behavior and response.
-    best_match = None
     no_match_found = False
-    meta_publication_reference = u""
+    meta_publication_reference = ""
     try:
         if doi:
             # use the supplied DOI to fetch study metadata
@@ -335,10 +348,10 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
             ).text  # always Unicode
         try:
             response_json = json.loads(lookup_response)
-            response_status = response_json.get("status", u"")
+            response_status = response_json.get("status", "")
         except:
-            response_status = u"missing or malformed response text"
-        if response_status == u"ok":
+            response_status = "missing or malformed response text"
+        if response_status == "ok":
             matching_records = response_json.get("message", {}).get("items", [])
             if len(matching_records) == 0:
                 no_match_found = True
@@ -346,29 +359,29 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
             # Something went wrong (TODO: Capture and log any error message?)
             no_match_found = True
 
-    except requests.RequestException as e:
+    except requests.RequestException:
         # Both calls above should return a 200 status even if there's no match.
         # So apparently the CrossRef service is down for some reason.
         no_match_found = True
 
     if no_match_found:
         # Add a bogus reference string to signal the lack of results
-        meta_publication_url = u""
-        meta_year = u""
+        meta_publication_url = ""
+        meta_year = ""
         if doi:
-            meta_publication_reference = u"No matching publication found for this DOI!"
+            meta_publication_reference = "No matching publication found for this DOI!"
         else:
             meta_publication_reference = (
-                u"No matching publication found for this reference string"
+                "No matching publication found for this reference string"
             )
     else:
         # We got a match! These are sorted by score, so we should assume the
         # first (possibly only) record is the best match.
         # See https://github.com/CrossRef/rest-api-doc#sort-order
         match = matching_records[0]
-        meta_publication_url = match.get("URL", u"")  # should be its DOI in URL form
+        meta_publication_url = match.get("URL", "")  # should be its DOI in URL form
         # Try to capture the publication year (print first, or online)
-        meta_year = u""
+        meta_year = ""
         date_parts = match.get("published-print", {}).get("date-parts", [])
         if len(date_parts) == 0:
             # try again using online publication
@@ -381,7 +394,7 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
                 meta_year = inner_date_parts[0]
 
         # capture the raw DOI so we can try to retrieve a reference string below
-        doi = match.get("DOI", u"")
+        doi = match.get("DOI", "")
 
     # We need another API call to fetch a plain-text reference string.
     # NB - this is probabl APA style (based on conversation with CrossRef API team)
@@ -398,47 +411,30 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
         except requests.RequestException as e:
             # Any response but 200 means no match found, or the CrossRef
             # service is down for some reason.
-            _GLOG.debug("URLError fetching ref-text!!")
-            _GLOG.debug(e)
-            meta_publication_reference = u"No matching publication found for this DOI!"
+            _LOG.debug("URLError fetching ref-text!!")
+            _LOG.debug(e)
+            meta_publication_reference = "No matching publication found for this DOI!"
 
     # add any found values to a fresh NexSON template
     nexson = get_empty_nexson(BY_ID_HONEY_BADGERFISH, include_cc0=include_cc0)
     nexml_el = nexson["nexml"]
-    nexml_el[u"^ot:studyPublicationReference"] = meta_publication_reference
+    nexml_el["^ot:studyPublicationReference"] = meta_publication_reference
     if meta_publication_url:
-        nexml_el[u"^ot:studyPublication"] = {"@href": meta_publication_url}
+        nexml_el["^ot:studyPublication"] = {"@href": meta_publication_url}
     if meta_year:
-        nexml_el[u"^ot:studyYear"] = meta_year
+        nexml_el["^ot:studyYear"] = meta_year
     return nexson
 
 
 @view_config(route_name="create_study", renderer="json", request_method="POST")
 def create_study(request):
-    api_version = request.matchdict["api_version"]
-
     # this method requires authentication
     auth_info = api_utils.authenticate(request)
-
-    # gather any user-provided git-commit message
-    try:
-        commit_msg = find_in_request(request, "commit_msg", "")
-        if commit_msg.strip() == "":
-            # git rejects empty commit messages
-            commit_msg = None
-    except:
-        commit_msg = None
-
-    phylesystem = api_utils.get_phylesystem(
-        request
-    )  # set READONLY flag before testing!
+    phylesystem = api_utils.get_phylesystem(request)
     api_utils.raise_if_read_only()
 
     # we're creating a new study (possibly with import instructions in the payload)
-    import_from_location = find_in_request(request, "import_from_location", "")
     treebase_id = find_in_request(request, "treebase_id", "")
-    nexml_fetch_url = find_in_request(request, "nexml_fetch_url", "")
-    nexml_pasted_string = find_in_request(request, "nexml_pasted_string", "")
     publication_doi = find_in_request(request, "publication_DOI", "")
     # if a URL or something other than a valid DOI was entered, don't submit it to crossref API
     publication_doi_for_crossref = __make_valid_DOI(publication_doi) or None
@@ -461,13 +457,7 @@ def create_study(request):
     importing_from_treebase_id = (
         import_method == "import-method-TREEBASE_ID" and treebase_id != ""
     )
-    importing_from_nexml_fetch = (
-        import_method == "import-method-NEXML" and nexml_fetch_url
-    )
     importing_from_post_arg = import_method == "import-method-POST"
-    importing_from_nexml_string = (
-        import_method == "import-method-NEXML" and nexml_pasted_string
-    )
     importing_from_crossref_API = (
         import_method == "import-method-PUBLICATION_DOI"
         and publication_doi_for_crossref
@@ -489,28 +479,22 @@ def create_study(request):
         try:
             treebase_id = int(treebase_id)
         except ValueError as e:
-            raise HTTPBadRequest(
-                json.dumps(
-                    {
-                        "error": 1,
-                        "description": "TreeBASE ID should be a simple integer, not '%s'! Details:\n%s"
-                        % (treebase_id, e.message),
-                    }
-                )
-            )
+            msg = "TreeBASE ID should be a simple integer, not '{}'! Details:\n{}"
+            msg = msg.format(treebase_id, str(e))
+            raise HTTPBadRequest(json.dumps({"error": 1, "description": msg}))
         try:
             new_study_nexson = import_nexson_from_treebase(
                 treebase_id, nexson_syntax_version=BY_ID_HONEY_BADGERFISH
             )
-        except Exception as e:
-            raise HTTPInternalServerError(
-                json.dumps(
-                    {
-                        "error": 1,
-                        "description": "Unexpected error parsing the file obtained from TreeBASE. Please report this bug to the Open Tree of Life developers.",
-                    }
-                )
+        except Exception:
+            msg = "Unexpected error parsing the file obtained from TreeBASE. Please report this bug to the Open Tree of Life developers."
+            bodys = json.dumps(
+                {
+                    "error": 1,
+                    "description": msg,
+                }
             )
+            raise HTTPInternalServerError(bodys)
     elif importing_from_crossref_API:
         new_study_nexson = _new_nexson_with_crossref_metadata(
             doi=publication_doi_for_crossref,
@@ -529,7 +513,7 @@ def create_study(request):
         )
         if publication_doi:
             # submitter entered an invalid DOI (or other URL); add it now
-            new_study_nexson["nexml"][u"^ot:studyPublication"] = {
+            new_study_nexson["nexml"]["^ot:studyPublication"] = {
                 "@href": publication_doi
             }
 
@@ -539,32 +523,32 @@ def create_study(request):
         # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
         if cc0_agreement:
             nexml["^xhtml:license"] = {
-                "@href": "http://creativecommons.org/publicdomain/zero/1.0/"
+                "@href": "https://creativecommons.org/publicdomain/zero/1.0/"
             }
         elif using_existing_license:
             existing_license = find_in_request(request, "alternate_license", "")
             if existing_license == "CC-0":
                 nexml["^xhtml:license"] = {
                     "@name": "CC0",
-                    "@href": "http://creativecommons.org/publicdomain/zero/1.0/",
+                    "@href": "https://creativecommons.org/publicdomain/zero/1.0/",
                 }
                 pass
             elif existing_license == "CC-BY-2.0":
                 nexml["^xhtml:license"] = {
                     "@name": "CC-BY 2.0",
-                    "@href": "http://creativecommons.org/licenses/by/2.0/",
+                    "@href": "https://creativecommons.org/licenses/by/2.0/",
                 }
                 pass
             elif existing_license == "CC-BY-2.5":
                 nexml["^xhtml:license"] = {
                     "@name": "CC-BY 2.5",
-                    "@href": "http://creativecommons.org/licenses/by/2.5/",
+                    "@href": "https://creativecommons.org/licenses/by/2.5/",
                 }
                 pass
             elif existing_license == "CC-BY-3.0":
                 nexml["^xhtml:license"] = {
                     "@name": "CC-BY 3.0",
-                    "@href": "http://creativecommons.org/licenses/by/3.0/",
+                    "@href": "https://creativecommons.org/licenses/by/3.0/",
                 }
                 pass
             # NOTE that we don't offer CC-BY 4.0, which is problematic for data
@@ -572,7 +556,7 @@ def create_study(request):
                 # default to version 3, if not specified.
                 nexml["^xhtml:license"] = {
                     "@name": "CC-BY 3.0",
-                    "@href": "http://creativecommons.org/licenses/by/3.0/",
+                    "@href": "https://creativecommons.org/licenses/by/3.0/",
                 }
                 pass
             else:  # assume it's something else
@@ -608,7 +592,6 @@ def create_study(request):
 
 @view_config(route_name="update_study", renderer="json")
 def update_study(request):
-    api_version = request.matchdict["api_version"]
     study_id = request.matchdict["study_id"]
 
     # this method requires authentication
@@ -638,21 +621,11 @@ def update_study(request):
     api_utils.raise_if_read_only()
 
     repo_nexml2json = phylesystem.repo_nexml2json
-    (
-        repo_parent,
-        repo_remote,
-        git_ssh,
-        pkey,
-        git_hub_remote,
-        max_filesize,
-        max_num_trees,
-        read_only_mode,
-    ) = api_utils.read_phylesystem_config(request)
     bundle = __extract_and_validate_nexson(request, repo_nexml2json, request.json_body)
     nexson, annotation, nexson_adaptor = bundle
     try:
         gd = phylesystem.create_git_action(study_id)
-    except KeyError as err:
+    except KeyError:
         # _LOG.debug('PUT failed in create_git_action (probably a bad study ID)')
         raise HTTPBadRequest("invalid study ID, please check the URL")
     try:
@@ -685,7 +658,7 @@ def update_study(request):
 @view_config(route_name="delete_study", renderer="json")
 def delete_study(request):
     # _LOG = api_utils.get_logger(request, 'delete_study')
-    _LOG.warninging("delete_study STARTING...")
+    _LOG.warning("delete_study STARTING...")
     api_version = request.matchdict["api_version"]
     study_id = request.matchdict["study_id"]
     _LOG.warning("api_version={}".format(api_version))
@@ -746,15 +719,11 @@ def delete_study(request):
 @view_config(route_name="get_study_single_file", renderer="json")
 def get_study_file(request):
     api_utils.raise_on_CORS_preflight(request)
-
-    api_version = request.matchdict["api_version"]
     study_id = request.matchdict["study_id"]
     file_id = request.matchdict.get("file_id", None)
-
-    result_data = None
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
-    out_schema = __validate_output_nexml2json(
+    __validate_output_nexml2json(
         repo_nexml2json,
         request.params,  # combined GET and POST
         "file",
@@ -835,10 +804,7 @@ def get_study_file(request):
 @view_config(route_name="get_study_external_url", renderer="json")
 def get_study_external_url(request):
     api_utils.raise_on_CORS_preflight(request)
-
-    api_version = request.matchdict["api_version"]
     study_id = request.matchdict["study_id"]
-
     phylesystem = api_utils.get_phylesystem(request)
     try:
         u = phylesystem.get_public_url(study_id)
@@ -894,7 +860,6 @@ def get_study_ometa(request):
 def _fine_grained_get(request, subresource, content_id=None, file_ext=None):
     api_utils.raise_on_CORS_preflight(request)
     study_id = request.matchdict["study_id"]
-    result_data = None
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     out_schema = __validate_output_nexml2json(
@@ -921,13 +886,6 @@ def _fine_grained_get(request, subresource, content_id=None, file_ext=None):
         study_nexson, head_sha, wip_map = r
         blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
         phylesystem.add_validation_annotation(study_nexson, blob_sha)
-        version_history = phylesystem.get_version_history_for_study_id(study_id)
-        try:
-            comment_html = api_utils.markdown_to_html(
-                study_nexson["nexml"]["^ot:comment"], open_links_in_new_window=True
-            )
-        except:
-            comment_html = ""
     except:
         _LOG.exception("GET failed")
         e = sys.exc_info()[0]

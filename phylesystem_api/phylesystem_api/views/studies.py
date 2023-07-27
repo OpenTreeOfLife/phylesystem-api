@@ -1,13 +1,11 @@
 import json
 
 import phylesystem_api.api_utils as api_utils
-from peyotl.api import OTI
 from phylesystem_api.api_utils import find_in_request
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPError,
     HTTPBadRequest,
     HTTPInternalServerError,
 )
@@ -18,12 +16,11 @@ def _raise400(msg):
     raise HTTPBadRequest(body=json.dumps({"error": 1, "description": msg}))
 
 
-def _init(request, response):
+def _configure_response(response):
     response.view = "generic.json"
     # CORS support for cross-domain API requests (from anywhere)
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Credentials"] = "true"
-    return OTI(oti=api_utils.get_oti_domain(request))
 
 
 def _bool_arg(v):
@@ -38,7 +35,8 @@ def _bool_arg(v):
 
 @view_config(route_name="study_properties", renderer="json")
 def properties(request):
-    oti = _init(request, request.response)
+    _configure_response(request.response)
+    oti = api_utils.get_oti_wrapper(request)
     n = list(oti.node_search_term_set)
     n.sort()
     t = list(oti.tree_search_term_set)
@@ -50,9 +48,7 @@ def properties(request):
 
 @view_config(route_name="find_studies", renderer="json")
 def find_studies(request):
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
-    oti = _init(request, request.response)
+    oti = api_utils.get_oti_wrapper(request)
     verbose = _bool_arg(find_in_request(request, "verbose", False))
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
@@ -60,7 +56,6 @@ def find_studies(request):
     try:
         if field is None:
             match_list = oti.find_all_studies(verbose=verbose)
-            resp = {"matched_studies": match_list}
         else:
             value = find_in_request(request, "value", None)
             if value is None:
@@ -72,13 +67,10 @@ def find_studies(request):
                 match_list = oti.find_studies(
                     {field: value}, verbose=verbose, exact=exact
                 )
-                resp = {"matched_studies": match_list}
             except ValueError as x:
-                _raise400(x.message)
-
+                _raise400(str(x))
+        resp = {"matched_studies": match_list}
     except HTTPException:
-        raise
-    except HTTPError:
         raise
     except Exception as x:
         msg = ",".join(x.args)
@@ -90,18 +82,18 @@ def find_studies(request):
                 }
             )
         )
+    _configure_response(request.response)
     return resp
 
 
 @view_config(route_name="find_trees", renderer="json")
 def find_trees(request):
-    # if behavior varies based on /v1/, /v2/, ...
-    api_version = request.matchdict["api_version"]
     try:
         msg = request.json_body
     except:
         _raise400("missing or invalid request JSON")
-    oti = _init(request, request.response)
+    _configure_response(request.response)
+    oti = api_utils.get_oti_wrapper(request)
     verbose = _bool_arg(msg.get("verbose", False))
     if (verbose is not True) and (verbose is not False):
         _raise400('"verbose" setting must be a boolean')
@@ -120,7 +112,7 @@ def find_trees(request):
     except HTTPException:
         raise
     except ValueError as x:
-        _raise400(x.message)
+        _raise400(str(x))
     except Exception as x:
         msg = ",".join(x.args)
         raise HTTPInternalServerError(
