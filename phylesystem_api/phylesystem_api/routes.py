@@ -27,7 +27,7 @@ def includeme(config):
     )
     config.add_route(
         "push_docstore_changes_bare",
-        "/{api_version}/push_docstore_changes",
+        "/{api_version}/push_docstore_changes/{doc_type}",
         request_method="PUT",
     )
     #

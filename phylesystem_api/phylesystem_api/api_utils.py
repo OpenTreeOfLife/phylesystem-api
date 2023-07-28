@@ -88,19 +88,12 @@ def atomic_write_json_if_not_found(obj, dest, request):
 
 def compose_push_to_github_url(request, resource_id, doc_type):
     if resource_id is None:
-        call = "{p}://{d}/v3/push_docstore_changes".format(
-            p=request.environ["wsgi.url_scheme"], d=request.environ["HTTP_HOST"]
+        return request.route_url(
+            "push_docstore_changes_bare", api_version="v3", doc_type=doc_type
         )
-    else:
-        call = "{p}://{d}/v3/push_docstore_changes/{dt}/{r}".format(
-            p=request.environ["wsgi.url_scheme"],
-            d=request.environ["HTTP_HOST"],
-            dt=doc_type,
-            r=resource_id,
-        )
-    # _LOG.debug("Logging push to github call")
-    # _LOG.debug(call)
-    return call
+    return request.route_url(
+        "push_docstore_changes", api_version="v3", doc_type=doc_type, doc_id=resource_id
+    )
 
 
 # this allows us to raise HTTP(...)
@@ -598,6 +591,7 @@ def raise_if_read_only():
 
 
 def call_http_json(url, verb="GET", data=None, headers=None):
+    _LOG.debug("call_http_json data={}".format(str(data)))
     if headers is None:
         headers = {
             "content-type": "application/json",
@@ -622,12 +616,7 @@ def call_http_json(url, verb="GET", data=None, headers=None):
 def deferred_push_to_gh_call(request, resource_id, doc_type="nexson", auth_token=None):
     ##TODO Thius needs to create a bare URL for collections, and pass in the resource id etc as data
     # _LOG.debug("deferred_push_to_gh_call")
-    if READ_ONLY_MODE:
-        raise HTTPForbidden(
-            json.dumps(
-                {"error": 1, "description": "phylesystem-api running in read-only mode"}
-            )
-        )
+    raise_if_read_only()
     # Pass the resource_id in data, so that two-part collection IDs will be recognized
     # (else the second part will trigger an unwanted JSONP response from the push)
     if doc_type == "collection" or doc_type == "amendment":

@@ -514,8 +514,10 @@ def push_docstore_changes(request):
     curl -X POST https://devapi.opentreeoflife.org/v3/push_docstore_changes/nexson/ot_999
     """
     _LOG.debug("push_docstore_changes")
-    doc_type = find_in_request(request, "doc_type", None)
-    resource_id = find_in_request(request, "doc_id", None)
+    doc_type = request.matchdict["doc_type"]
+    resource_id = request.matchdict.get("doc_id")
+    if resource_id is None:
+        resource_id = find_in_request(request, "doc_id", None)
     api_utils.auth_and_not_read_only(request)
     fail_file = api_utils.get_failed_push_filepath(request, doc_type=doc_type)
     # TODO
