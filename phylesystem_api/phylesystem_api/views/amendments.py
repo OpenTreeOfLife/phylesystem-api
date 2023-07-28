@@ -14,16 +14,6 @@ from pyramid.view import view_config
 _LOG = logging.getLogger("phylesystem_api")
 
 
-def _bool_arg(v):
-    if isinstance(v, str):
-        u = v.upper()
-        if u in ["TRUE", "YES"]:
-            return True
-        if u in ["FALSE", "NO"]:
-            return False
-    return v
-
-
 @view_config(route_name="list_all_amendment_ids", renderer="json")
 def list_all_amendment_ids(request):
     docstore = api_utils.get_taxonomic_amendment_store(request)

@@ -40,6 +40,16 @@ _LOG.debug("start api_utils")
 READ_ONLY_MODE = True
 
 
+def bool_arg(v):
+    if isinstance(v, str):
+        u = v.upper()
+        if u in ["TRUE", "YES"]:
+            return True
+        if u in ["FALSE", "NO"]:
+            return False
+    return v
+
+
 def raise_int_server_err(msg):
     body = {
         "error": 1,
@@ -460,6 +470,11 @@ def authenticate(request):
     return auth_info
 
 
+def auth_and_not_read_only(request):
+    raise_if_read_only()
+    return authenticate(request)
+
+
 def log_time_diff(log_obj, operation="", prev_time=None):
     """If prev_time is not None, logs (at debug level) to
     log_obj the difference between now and the naive datetime
@@ -639,33 +654,25 @@ def find_in_request(
     request, property_name, default_value=None, return_all_values=False
 ):
     """Search JSON body (if any), then try GET/POST keys"""
-    try:
-        assert isinstance(request, Request)
-    except AssertionError:
-        raise HTTPServerError(
-            json.dumps(
-                {
-                    "error": 1,
-                    "description": "request not provided in call to api_utils.find_in_request!",
-                }
-            )
-        )
+    if not isinstance(request, Request):
+        msg = "request not provided in call to api_utils.find_in_request!"
+        raise_int_server_err(msg)
     try:
         # recommended practice is all vars in the JSON body
         found_value = request.json_body.get(property_name)
+        if found_value is not None:
+            return found_value
     except:
-        found_value = None
-    if found_value is None:
-        # sometimes we allow vars from the query-string or form values
-        if return_all_values:
-            # NB - request.params combines GET and POST into a shared MultiDict
-            found_value = request.params.getall(property_name)
-        else:
-            # NB this returns None if default not specified!
-            found_value = request.params.get(property_name, default_value)
-    if found_value is None:
-        return default_value
-    return found_value
+        pass  # happens if we have no json_body
+    # sometimes we allow vars from the query-string or form values
+    if return_all_values:
+        # NB - request.params combines GET and POST into a shared MultiDict
+        found_value = request.params.getall(property_name)
+        if found_value is None:
+            return default_value
+        return found_value
+    # NB this returns None if default not specified!
+    return request.params.get(property_name, default_value)
 
 
 # Define a consistent cleaner to sanitize user input. We need a few

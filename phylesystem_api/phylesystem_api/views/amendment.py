@@ -67,8 +67,7 @@ def create_amendment(request, **kwargs):
     _LOG.debug("Begin create ammendemt")
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
 
-    # this method requires authentication
-    auth_info = api_utils.authenticate(request)
+    auth_info = api_utils.auth_and_not_read_only(request)
 
     # gather any user-provided git-commit message
     try:
@@ -79,7 +78,6 @@ def create_amendment(request, **kwargs):
     except:
         commit_msg = None
 
-    api_utils.raise_if_read_only()
     # fetch and parse the JSON payload, if any
     (
         amendment_obj,
@@ -178,8 +176,7 @@ def update_amendment(request):
         msg = "invalid amendment ID ({}) provided".format(amendment_id)
         raise400(msg)
 
-    # this method requires authentication
-    auth_info = api_utils.authenticate(request)
+    auth_info = api_utils.auth_and_not_read_only(request)
 
     # gather any user-provided git-commit message
     try:
@@ -199,8 +196,6 @@ def update_amendment(request):
     if amendment_obj is None:
         msg = "amendment JSON expected for HTTP method {}".format(request.method)
         raise400(msg)
-
-    api_utils.raise_if_read_only()
 
     # update an existing amendment with the data provided
     # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.PUT')
@@ -247,8 +242,7 @@ def delete_amendment(request):
         }
         raise HTTPBadRequest(body=json.dumps(body))
 
-    # this method requires authentication
-    auth_info = api_utils.authenticate(request)
+    auth_info = api_utils.auth_and_not_read_only(request)
 
     # gather any user-provided git-commit message
     try:
@@ -258,8 +252,6 @@ def delete_amendment(request):
             commit_msg = None
     except:
         commit_msg = None
-
-    api_utils.raise_if_read_only()
 
     # remove this amendment from the docstore
     # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')

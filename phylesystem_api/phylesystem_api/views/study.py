@@ -419,9 +419,8 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
 @view_config(route_name="create_study", renderer="json", request_method="POST")
 def create_study(request):
     # this method requires authentication
-    auth_info = api_utils.authenticate(request)
+    auth_info = api_utils.auth_and_not_read_only(request)
     phylesystem = api_utils.get_phylesystem(request)
-    api_utils.raise_if_read_only()
 
     # we're creating a new study (possibly with import instructions in the payload)
     treebase_id = find_in_request(request, "treebase_id", "")
@@ -576,9 +575,7 @@ def create_study(request):
 @view_config(route_name="update_study", renderer="json")
 def update_study(request):
     study_id = request.matchdict["study_id"]
-
-    # this method requires authentication
-    auth_info = api_utils.authenticate(request)
+    auth_info = api_utils.auth_and_not_read_only(request)
     _LOG.debug("STUDY: update_study")
     # _LOG.debug("STUDY: auth_info {}".format(auth_info))
 
@@ -598,11 +595,7 @@ def update_study(request):
     except:
         commit_msg = None
 
-    phylesystem = api_utils.get_phylesystem(
-        request
-    )  # set READONLY flag before testing!
-    api_utils.raise_if_read_only()
-
+    phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     bundle = __extract_and_validate_nexson(request, repo_nexml2json, request.json_body)
     nexson, annotation, nexson_adaptor = bundle
@@ -641,15 +634,12 @@ def update_study(request):
 @view_config(route_name="delete_study", renderer="json")
 def delete_study(request):
     # _LOG = api_utils.get_logger(request, 'delete_study')
-    _LOG.warning("delete_study STARTING...")
-    api_version = request.matchdict["api_version"]
+    _LOG.debug("delete_study STARTING...")
     study_id = request.matchdict["study_id"]
-    _LOG.warning("api_version={}".format(api_version))
-    _LOG.warning("study_id={}".format(study_id))
+    _LOG.debug("study_id={}".format(study_id))
 
     # this method requires authentication
-    auth_info = api_utils.authenticate(request)
-    _LOG.warning("auth_info={}".format(auth_info))
+    auth_info = api_utils.auth_and_not_read_only(request)
 
     # gather any user-provided git-commit message
     try:
@@ -659,40 +649,33 @@ def delete_study(request):
             commit_msg = None
     except:
         commit_msg = None
-    _LOG.warning("commit_msg={}".format(commit_msg))
+    _LOG.debug("commit_msg={}".format(commit_msg))
 
     parent_sha = find_in_request(request, "starting_commit_SHA", None)
-    _LOG.warning("parent_sha={}".format(parent_sha))
+    _LOG.debug("parent_sha={}".format(parent_sha))
 
-    phylesystem = api_utils.get_phylesystem(
-        request
-    )  # set READONLY flag before testing!
-    api_utils.raise_if_read_only()
-    _LOG.warning("passed the read-only test")
+    phylesystem = api_utils.get_phylesystem(request)
 
-    _LOG.warning("trying to delete now... via:")
-    _LOG.warning(phylesystem.delete_study)
+    _LOG.debug("trying to delete now... via:")
+    _LOG.debug(phylesystem.delete_study)
     try:
         x = phylesystem.delete_study(
             study_id, auth_info, parent_sha, commit_msg=commit_msg
         )
-        _LOG.warning("initial return x:")
-        _LOG.warning(x)
+        _LOG.debug("initial return x:")
+        _LOG.debug(x)
         if x.get("error") == 0:
-            _LOG.warning("calling deferred push...")
+            _LOG.debug("calling deferred push...")
             api_utils.deferred_push_to_gh_call(
                 request, None, doc_type="nexson", auth_token=auth_info["auth_token"]
             )
-            _LOG.warning("back from deferred push")
+            _LOG.debug("back from deferred push")
         return x
     except GitWorkflowError as err:
-        _LOG.warning("got a GitWorkflowError:")
-        _LOG.warning(err)
+        _LOG.exception("got a GitWorkflowError:")
         raise HTTPBadRequest(err.msg)
     except Exception as err:
-        _LOG.warning("some other kind of error")
-        _LOG.warning(err)
-        # _LOG.exception('Exception getting nexson content in phylesystem.delete_study')
+        _LOG.exception("Exception getting nexson content in phylesystem.delete_study")
         raise400("Unknown error in study deletion")
 
 

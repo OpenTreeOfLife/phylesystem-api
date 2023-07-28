@@ -12,16 +12,6 @@ from pyramid.httpexceptions import (
 from pyramid.view import view_config
 
 
-def _bool_arg(v):
-    if isinstance(v, str):
-        u = v.upper()
-        if u in ["TRUE", "YES"]:
-            return True
-        if u in ["FALSE", "NO"]:
-            return False
-    return v
-
-
 @view_config(route_name="get_collections_config", renderer="json")
 def get_collections_config(request):
     api_utils.raise_on_CORS_preflight(request)

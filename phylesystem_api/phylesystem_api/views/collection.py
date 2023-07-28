@@ -71,7 +71,7 @@ def create_collection(request):
             commit_msg = None
     except:
         commit_msg = None
-    api_utils.raise_if_read_only()
+    auth_info = api_utils.auth_and_not_read_only(request)
 
     # fetch and parse the JSON payload, if any
     (
@@ -83,7 +83,6 @@ def create_collection(request):
         msg = "collection JSON expected for HTTP method {}".format(request.method)
         raise400(msg)
 
-    auth_info = api_utils.authenticate(request)
     owner_id = auth_info.get("login", None)
     if owner_id is None:
         msg = "no GitHub userid found for HTTP method {}".format(
@@ -106,9 +105,6 @@ def create_collection(request):
         raise404("collection URL in JSON doesn't match logged-in user: {}".format(url))
 
     # Create a new collection with the data provided
-    auth_info = auth_info or api_utils.authenticate(request)
-    _LOG.debug("COLLECTIONS: auth_info is {}".format(auth_info))
-
     # submit the json and proposed id (if any), and read the results
     docstore = api_utils.get_tree_collection_store(request)
     try:
@@ -205,7 +201,7 @@ def fetch_collection(request):
 def update_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
-    auth_info = api_utils.authenticate(request)
+    auth_info = api_utils.auth_and_not_read_only(request)
     _LOG.debug("COLLECTION: update_collection")
     _LOG.debug("COLLECTION: auth_info {}".format(auth_info))
     owner_id = auth_info.get("login", None)
@@ -221,8 +217,6 @@ def update_collection(request):
             commit_msg = None
     except:
         commit_msg = None
-
-    api_utils.raise_if_read_only()
 
     # fetch and parse the JSON payload, if any
     (
@@ -274,7 +268,7 @@ def update_collection(request):
 def delete_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
-    auth_info = api_utils.authenticate(request)
+    auth_info = api_utils.auth_and_not_read_only(request)
 
     collection_id = request.matchdict["collection_id"]
     if not COLLECTION_ID_PATTERN.match(collection_id):
@@ -288,8 +282,6 @@ def delete_collection(request):
             commit_msg = None
     except:
         commit_msg = None
-
-    api_utils.raise_if_read_only()
 
     # remove this collection from the docstore
     docstore = api_utils.get_tree_collection_store(request)

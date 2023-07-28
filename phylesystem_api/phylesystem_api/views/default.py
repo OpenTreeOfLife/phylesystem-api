@@ -24,6 +24,7 @@ from pyramid.httpexceptions import (
 )
 from pyramid.response import Response
 from pyramid.view import view_config
+from phylesystem_api.api_utils import raise_int_server_err, find_in_request
 
 import json
 
@@ -259,18 +260,16 @@ def trees_in_synth(request):
     cds = api_utils.get_tree_collection_store(request)
     for coll_id in coll_id_list:
         try:
-            coll_list.append(
-                cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
-            )
+            el = cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
         except:
             raise404("GET of collection {} failed".format(coll_id))
+        coll_list.append(el)
     try:
-        result = concatenate_collections(coll_list)
+        return concatenate_collections(coll_list)
     except:
         # _LOG.exception('concatenation of collections failed')
         e = sys.exc_info()[0]
         raise HTTPBadRequest(body=e)
-    return result
 
 
 @view_config(route_name="include_tree_in_synth", renderer="json")
@@ -281,23 +280,30 @@ def include_tree_in_synth(request):
     if (study_id == "") or (tree_id == ""):
         raise400("Expecting study_id and tree_id arguments")
     # examine this study and tree, to confirm it exists *and* to capture its name
+    auth_info = api_utils.auth_and_not_read_only(request)
+    owner_id = auth_info.get("login", None)
     sds = api_utils.get_phylesystem(request)
     try:
         found_study = sds.return_doc(study_id, commit_sha=None, return_WIP_map=False)[0]
-        tree_collections_by_id = found_study.get("nexml").get("treesById")
+    except:
+        raise404("Study {} not found".format(study_id))
+    found_tree = None
+    try:
+        tree_collections_by_id = found_study.get("nexml", {}).get("treesById", {})
         for trees_id, trees_collection in list(tree_collections_by_id.items()):
-            trees_by_id = trees_collection.get("treeById")
+            trees_by_id = trees_collection.get("treeById", {})
             if tree_id in list(trees_by_id.keys()):
-                # _LOG.exception('*** FOUND IT ***')
                 found_tree = trees_by_id.get(tree_id)
-        found_tree_name = found_tree["@label"] or tree_id
-        # _LOG.exception('*** FOUND IT: {}'.format(found_tree_name))
-    except:  # report a missing/misidentified tree
-        # _LOG.exception('problem finding tree')
+    except Exception as x:
+        raise_int_server_err(str(x))
+    if found_tree is None:
         msg = "Specified tree '{t}' in study '{s}' not found! Save this study and try again?"
         msg = msg.format(s=study_id, t=tree_id)
         raise404(msg)
-    already_included_in_synth_input_collections = False
+    try:
+        found_tree_name = found_tree.get("@label") or tree_id
+    except Exception as x:
+        raise_int_server_err(str(x))
     # Look ahead to see if it's already in an included collection; if so, skip
     # adding it again.
     coll_id_list = _get_synth_input_collection_ids()
@@ -308,65 +314,59 @@ def include_tree_in_synth(request):
         except:
             raise404("GET of collection {} failed".format(coll_id))
         if tree_is_in_collection(coll, study_id, tree_id):
-            already_included_in_synth_input_collections = True
-    if not already_included_in_synth_input_collections:
-        # find the default synth-input collection and parse its JSON
-        default_collection_id = coll_id_list[-1]
-        # N.B. For now, we assume that the last listed synth-input collection
-        # is the sensible default, so we already have it in coll
-        decision_list = coll.get("decisions", [])
-        # construct and add a sensible decision entry for this tree
-        decision_list.append(
-            {
-                "name": found_tree_name or "",
-                "treeID": tree_id,
-                "studyID": study_id,
-                "SHA": "",
-                "decision": "INCLUDED",
-                "comments": "Added via API (include_tree_in_synth) from {p}".format(
-                    p=found_study.get("nexml")["^ot:studyPublicationReference"]
-                ),
-            }
+            return trees_in_synth(request)
+
+    # find the default synth-input collection and parse its JSON
+    default_collection_id = coll_id_list[-1]
+    # N.B. For now, we assume that the last listed synth-input collection
+    # is the sensible default, so we already have it in coll
+    decision_list = coll.get("decisions", [])
+    # construct and add a sensible decision entry for this tree
+    decision_list.append(
+        {
+            "name": found_tree_name or "",
+            "treeID": tree_id,
+            "studyID": study_id,
+            "SHA": "",
+            "decision": "INCLUDED",
+            "comments": "Added via API (include_tree_in_synth) from {p}".format(
+                p=found_study.get("nexml")["^ot:studyPublicationReference"]
+            ),
+        }
+    )
+    # update (or add) the decision list for this collection
+    coll["decisions"] = decision_list
+    # update the default collection (forces re-indexing)
+    try:
+        parent_sha = request.params.get("starting_commit_SHA", None)
+        merged_sha = None  # TODO: request.params.get('???', None)
+    except:
+        raise404("include_tree_in_synth(): fetch of starting_commit_SHA failed")
+    try:
+        r = cds.update_existing_collection(
+            owner_id,
+            default_collection_id,
+            coll,
+            auth_info,
+            parent_sha,
+            merged_sha,
+            commit_msg="Updated via API (include_tree_in_synth)",
         )
-        # update (or add) the decision list for this collection
-        coll["decisions"] = decision_list
-        # update the default collection (forces re-indexing)
-        try:
-            auth_info = api_utils.authenticate(request)
-            owner_id = auth_info.get("login", None)
-        except:
-            raise404("include_tree_in_synth(): Authentication failed")
-        try:
-            parent_sha = request.params.get("starting_commit_SHA", None)
-            merged_sha = None  # TODO: request.params.get('???', None)
-        except:
-            raise404("include_tree_in_synth(): fetch of starting_commit_SHA failed")
-        try:
-            r = cds.update_existing_collection(
-                owner_id,
-                default_collection_id,
-                coll,
-                auth_info,
-                parent_sha,
-                merged_sha,
-                commit_msg="Updated via API (include_tree_in_synth)",
-            )
-            commit_return = r
-        except GitWorkflowError as err:
-            raise HTTPBadRequest(body=err.msg)
-        except:
-            raise HTTPBadRequest(body=traceback.format_exc())
+        commit_return = r
+    except GitWorkflowError as err:
+        raise HTTPBadRequest(body=err.msg)
+    except:
+        raise HTTPBadRequest(body=traceback.format_exc())
 
-        # check for 'merge needed'?
-        mn = commit_return.get("merge_needed")
-        if (mn is not None) and (not mn):
-            api_utils.deferred_push_to_gh_call(
-                request,
-                default_collection_id,
-                doc_type="collection",
-                auth_token=auth_info["auth_token"],
-            )
-
+    # check for 'merge needed'?
+    mn = commit_return.get("merge_needed")
+    if (mn is not None) and (not mn):
+        api_utils.deferred_push_to_gh_call(
+            request,
+            default_collection_id,
+            doc_type="collection",
+            auth_token=auth_info["auth_token"],
+        )
     # fetch and return the updated list of synth-input trees
     return trees_in_synth(request)
 
@@ -381,11 +381,8 @@ def exclude_tree_from_synth(request):
     # find this tree in ANY synth-input collection; if found, remove it and update the collection
     coll_id_list = _get_synth_input_collection_ids()
     cds = api_utils.get_tree_collection_store(request)
-    try:
-        auth_info = api_utils.authenticate(request)
-        owner_id = auth_info.get("login", None)
-    except:
-        raise404("include_tree_in_synth(): Authentication failed")
+    auth_info = api_utils.auth_and_not_read_only(request)
+    owner_id = auth_info.get("login", None)
     for coll_id in coll_id_list:
         try:
             coll = cds.return_doc(coll_id, commit_sha=None, return_WIP_map=False)[0]
@@ -493,11 +490,7 @@ def merge_docstore_changes(request):
     """
     resource_id = request.matchdict["doc_id"]
     starting_commit_SHA = request.matchdict["starting_commit_SHA"]
-    api_utils.raise_if_read_only()
-
-    # this method requires authentication
-    auth_info = api_utils.authenticate(request)
-
+    auth_info = api_utils.auth_and_not_read_only(request)
     phylesystem = api_utils.get_phylesystem(request)
     gd = phylesystem.create_git_action(resource_id)
     try:
@@ -521,29 +514,10 @@ def push_docstore_changes(request):
     curl -X POST https://devapi.opentreeoflife.org/v3/push_docstore_changes/nexson/ot_999
     """
     _LOG.debug("push_docstore_changes")
-    #    _LOG.debug(request.__dict__)
-    _LOG.debug(request.matchdict)
-    doc_type = request.matchdict.get("doc_type", None)
-    resource_id = request.matchdict.get("doc_id", None)  # Whyyyyy doc id here??
-    #    resource_id = request.matchdict.get('resource_id', None)
-
-    data = request.json_body
-    if doc_type is None:
-        doc_type = data.get("doc_type")
-    if resource_id is None:
-        resource_id = data.get("resource_id")
-
-    api_utils.raise_if_read_only()
-
-    #    _LOG = api_utils.get_logger(request, 'ot_api.push.v3.PUT')
+    doc_type = find_in_request(request, "doc_type", None)
+    resource_id = find_in_request(request, "doc_id", None)
+    api_utils.auth_and_not_read_only(request)
     fail_file = api_utils.get_failed_push_filepath(request, doc_type=doc_type)
-    _LOG.debug(">> fail_file for type '{t}': {f}".format(t=doc_type, f=fail_file))
-    _LOG.debug("Going to authenicateeee")
-
-    # this method requires authentication
-    api_utils.authenticate(request)
-    _LOG.debug("Made it past auth")
-
     # TODO
     if doc_type.lower() == "nexson":
         phylesystem = api_utils.get_phylesystem(request)
