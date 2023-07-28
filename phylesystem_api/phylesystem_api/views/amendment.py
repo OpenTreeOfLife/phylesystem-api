@@ -283,4 +283,3 @@ def delete_amendment(request):
     except:
         # _LOG.exception('Unknown error in amendment deletion')
         raise HTTPBadRequest(body=traceback.format_exc())
-        # raise HTTPBadRequest(body=json.dumps({"error": 1, "description": 'Unknown error in amendment deletion'}))
