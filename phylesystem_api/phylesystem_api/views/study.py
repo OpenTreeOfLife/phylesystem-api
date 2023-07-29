@@ -191,6 +191,12 @@ def _fetch_shard_name(phylesystem, study_id):
         return None
 
 
+@view_config(route_name="create_study", renderer="json", request_method="OPTIONS")
+@view_config(route_name="study_CORS_preflight", renderer="json")
+def study_CORS_preflight(request):
+    api_utils.raise_on_CORS_preflight(request)
+
+
 @view_config(route_name="fetch_study", renderer=None, request_method="GET")
 @view_config(route_name="fetch_study_label", renderer=None, request_method="GET")
 def fetch_study(request):
@@ -216,8 +222,6 @@ def fetch_study(request):
         content_id=None,
     )
     parent_sha = find_in_request(request, "starting_commit_SHA", None)
-    # _LOG.debug('parent_sha = {}'.format(parent_sha))
-    # return the correct nexson of study_id, using the specified view
     try:
         r = phylesystem.return_study(
             study_id, commit_sha=parent_sha, return_WIP_map=True
@@ -289,12 +293,6 @@ def fetch_study(request):
     else:
         # _LOG.debug(result_data)
         return render_to_response("string", result_data, request)
-
-
-@view_config(route_name="create_study", renderer="json", request_method="OPTIONS")
-@view_config(route_name="study_CORS_preflight", renderer="json")
-def study_CORS_preflight(request):
-    api_utils.raise_on_CORS_preflight(request)
 
 
 def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
@@ -397,6 +395,35 @@ def _new_nexson_with_crossref_metadata(doi, ref_string, include_cc0=False):
     return nexson
 
 
+# NOTE that we don't offer CC-BY 4.0, which is problematic for data
+_license2url = {
+    "CC=0": ("CC0", "https://creativecommons.org/publicdomain/zero/1.0/"),
+    "CC-BY-2.0": ("CC-BY 2.0", "https://creativecommons.org/licenses/by/2.0/"),
+    "CC-BY-2.5": ("CC-BY 2.5", "https://creativecommons.org/licenses/by/2.5/"),
+    "CC-BY-3.0": ("CC-BY 3.0", "https://creativecommons.org/licenses/by/3.0/"),
+    "CC-BY": ("CC-BY 3.0", "https://creativecommons.org/licenses/by/3.0/"),
+}
+
+
+def _add_license_info(cc0_agreement, nexml, request):
+    # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
+    if cc0_agreement:
+        existing_license = "CC-0"
+    else:
+        # Are they using an existing license or waiver (CC0, CC-BY, something else?)
+        chosen_license = find_in_request(request, "chosen_license", "")
+        if chosen_license != "study-data-has-existing-license":
+            return
+        existing_license = find_in_request(request, "alternate_license", "")
+    lic_name_url = _license2url.get(existing_license)
+    if lic_name_url is None:
+        license_name = find_in_request(request, "alt_license_name", "")
+        license_url = find_in_request(request, "alt_license_URL", "")
+    else:
+        license_name, license_url = lic_name_url
+    nexml["^xhtml:license"] = {"@name": license_name, "@href": license_url}
+
+
 @view_config(route_name="create_study", renderer="json", request_method="POST")
 def create_study(request):
     # this method requires authentication
@@ -432,12 +459,6 @@ def create_study(request):
         import_method == "import-method-PUBLICATION_DOI"
         and publication_doi_for_crossref
     ) or (import_method == "import-method-PUBLICATION_REFERENCE" and publication_ref)
-
-    # Are they using an existing license or waiver (CC0, CC-BY, something else?)
-    using_existing_license = (
-        find_in_request(request, "chosen_license", "")
-        == "study-data-has-existing-license"
-    )
 
     # any of these methods should returna parsed NexSON dict (vs. string)
     if importing_from_treebase_id:
@@ -483,54 +504,7 @@ def create_study(request):
     nexml = new_study_nexson["nexml"]
 
     if not importing_from_post_arg:
-        # If submitter requested the CC0 waiver or other waiver/license, make sure it's here
-        if cc0_agreement:
-            nexml["^xhtml:license"] = {
-                "@href": "https://creativecommons.org/publicdomain/zero/1.0/"
-            }
-        elif using_existing_license:
-            existing_license = find_in_request(request, "alternate_license", "")
-            if existing_license == "CC-0":
-                nexml["^xhtml:license"] = {
-                    "@name": "CC0",
-                    "@href": "https://creativecommons.org/publicdomain/zero/1.0/",
-                }
-                pass
-            elif existing_license == "CC-BY-2.0":
-                nexml["^xhtml:license"] = {
-                    "@name": "CC-BY 2.0",
-                    "@href": "https://creativecommons.org/licenses/by/2.0/",
-                }
-                pass
-            elif existing_license == "CC-BY-2.5":
-                nexml["^xhtml:license"] = {
-                    "@name": "CC-BY 2.5",
-                    "@href": "https://creativecommons.org/licenses/by/2.5/",
-                }
-                pass
-            elif existing_license == "CC-BY-3.0":
-                nexml["^xhtml:license"] = {
-                    "@name": "CC-BY 3.0",
-                    "@href": "https://creativecommons.org/licenses/by/3.0/",
-                }
-                pass
-            # NOTE that we don't offer CC-BY 4.0, which is problematic for data
-            elif existing_license == "CC-BY":
-                # default to version 3, if not specified.
-                nexml["^xhtml:license"] = {
-                    "@name": "CC-BY 3.0",
-                    "@href": "https://creativecommons.org/licenses/by/3.0/",
-                }
-                pass
-            else:  # assume it's something else
-                alt_license_name = find_in_request(request, "alt_license_name", "")
-                alt_license_url = find_in_request(request, "alt_license_URL", "")
-                # OK to add a name here? mainly to capture submitter's intent
-                nexml["^xhtml:license"] = {
-                    "@name": alt_license_name,
-                    "@href": alt_license_url,
-                }
-
+        _add_license_info(cc0_agreement, nexml, request)
     nexml["^ot:curatorName"] = auth_info.get("name", "")
 
     repo_nexml2json = phylesystem.repo_nexml2json
