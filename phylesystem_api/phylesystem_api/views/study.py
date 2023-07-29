@@ -42,42 +42,27 @@ def __extract_nexson_from_http_call(request, **kwargs):
             nexson = json.loads(nexson)
         if "nexson" in nexson:
             nexson = nexson["nexson"]
+        return nexson
     except:
-        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-        # _LOG.exception('Exception getting nexson content in __extract_nexson_from_http_call')
         raise400("NexSON must be valid JSON")
-    return nexson
 
 
 def __extract_and_validate_nexson(request, repo_nexml2json, kwargs):
     try:
         nexson = __extract_nexson_from_http_call(request, **kwargs)
-        # from peyotl.manip import count_num_trees
-        # numtrees=count_num_trees(nexson,repo_nexml2json)
-        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-        # _LOG.debug('number of trees in nexson is {}, max number of trees is {}'.format(numtrees,max_num_trees))
-        (
-            repo_parent,
-            repo_remote,
-            git_ssh,
-            pkey,
-            git_hub_remote,
-            max_filesize,
-            max_num_trees,
-            read_only_mode,
-        ) = api_utils.read_phylesystem_config(request)
+        pc = api_utils.read_phylesystem_config(request)
         bundle = validate_and_convert_nexson(
             nexson,
             repo_nexml2json,
             allow_invalid=False,
-            max_num_trees_per_study=max_num_trees,
+            max_num_trees_per_study=pc.max_num_trees,
         )
         nexson, annotation, validation_log, nexson_adaptor = bundle
+        return nexson, annotation, nexson_adaptor
     except GitWorkflowError as err:
         # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
         # _LOG.exception('PUT failed in validation')
         raise400(err.msg or "No message found")
-    return nexson, annotation, nexson_adaptor
 
 
 def __make_valid_DOI(candidate):
@@ -161,7 +146,6 @@ def __finish_write_verb(
     master_file_blob_included=None,
 ):
     """Called by PUT and POST handlers to avoid code repetition."""
-    # global TIMING
     # TODO, need to make this spawn a thread to do the second commit rather than block
     a = phylesystem.annotate_and_write(
         git_data,
@@ -175,10 +159,7 @@ def __finish_write_verb(
         master_file_blob_included,
     )
     annotated_commit = a
-    # TIMING = api_utils.log_time_diff(_LOG, 'annotated commit', TIMING)
     if annotated_commit["error"] != 0:
-        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-        # _LOG.debug('annotated_commit failed')
         raise HTTPBadRequest(body=json.dumps(annotated_commit))
     return annotated_commit
 

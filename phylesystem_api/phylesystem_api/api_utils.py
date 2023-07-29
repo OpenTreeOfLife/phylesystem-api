@@ -1,30 +1,30 @@
-from github import Github, BadCredentialsException
-from peyotl.nexson_syntax import write_as_json
-from peyotl.phylesystem import Phylesystem
-from peyotl.collections_store import TreeCollectionStore
-from peyotl.amendments import TaxonomicAmendmentStore
-from peyotl.utility import read_config as read_peyotl_config
+import json
+import logging
+import os
+import tempfile
+import threading
 from configparser import ConfigParser
 from datetime import datetime
-from peyotl.api import OTI
 
-# see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
-from pyramid.request import Request
+import requests
+from beaker.cache import cache_managers
+from github import Github, BadCredentialsException
+from peyotl.amendments import TaxonomicAmendmentStore
+from peyotl.api import OTI
+from peyotl.collections_store import TreeCollectionStore
+from peyotl.nexson_syntax import write_as_json
+from peyotl.phylesystem import Phylesystem
+from peyotl.utility import read_config as read_peyotl_config
 from pyramid.httpexceptions import (
     HTTPOk,
-    HTTPServerError,
     HTTPBadRequest,
     HTTPForbidden,
     HTTPInternalServerError,
     HTTPNotFound,
 )
-from beaker.cache import cache_managers
-import tempfile
-import logging
-import json
-import requests
-import os
-import threading
+
+# see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
+from pyramid.request import Request
 
 try:
     import xml.etree.cElementTree as ElementTree
@@ -112,27 +112,18 @@ def get_phylesystem(request, conf_obj=None):
 
     if conf_obj is None:
         conf_obj = get_conf_object(request)
-    (
-        repo_parent,
-        repo_remote,
-        git_ssh,
-        pkey,
-        git_hub_remote,
-        max_filesize,
-        max_num_trees,
-        READ_ONLY_MODE,
-    ) = read_phylesystem_config(request, conf_obj=conf_obj)
+    pc = read_phylesystem_config(request, conf_obj=conf_obj)
     peyotl_config, cfg_filename = read_peyotl_config()
     if "phylesystem" not in peyotl_config.sections():
         peyotl_config.add_section("phylesystem")
     peyotl_config.set(
-        "phylesystem", "max_file_size", max_filesize
+        "phylesystem", "max_file_size", pc.max_filesize
     )  # overrides peyotl config with max phylesytem-api filesize
-    push_mirror = os.path.join(repo_parent, "mirror")
+    push_mirror = os.path.join(pc.repo_parent, "mirror")
     pmi = {
         "parent_dir": push_mirror,
         "remote_map": {
-            "GitHubRemote": git_hub_remote,
+            "GitHubRemote": pc.git_hub_remote,
         },
     }
     mirror_info = {"push": pmi}
@@ -143,9 +134,9 @@ def get_phylesystem(request, conf_obj=None):
     except:
         pass
     _PHYLESYSTEM = Phylesystem(
-        repos_par=repo_parent,
-        git_ssh=git_ssh,
-        pkey=pkey,
+        repos_par=pc.repo_parent,
+        git_ssh=pc.git_ssh,
+        pkey=pc.pkey,
         git_action_class=GitData,
         mirror_info=mirror_info,
         **a
@@ -286,54 +277,86 @@ def get_conf_object(request=None, localconfig_filename=None):
     return conf
 
 
+_phylesystem_config = None
+_phylesystem_config_lock = threading.Lock()
+
+
 def read_phylesystem_config(request, conf_obj=None):
     """Load settings for managing the main Nexson docstore"""
-    if conf_obj is None:
-        conf_obj = get_conf_object(request)
-    return _read_phylesystem_from_conf_obj(conf_obj)
+    global _phylesystem_config
+    if _phylesystem_config is None:
+        if conf_obj is None:
+            conf_obj = get_conf_object(request)
+        with _phylesystem_config_lock:
+            if _phylesystem_config is None:
+                _phylesystem_config = PhylesystemConfig(conf_obj)
+    return _phylesystem_config
 
 
-def _read_phylesystem_from_conf_obj(conf):
-    repo_parent = conf.get("apis", "repo_parent")
-    repo_remote = conf.get("apis", "repo_remote")
-    try:
-        git_ssh = conf.get("apis", "git_ssh")
-    except:
-        git_ssh = "ssh"
-    try:
-        pkey = conf.get("apis", "pkey")
-    except:
-        pkey = None
-    try:
-        git_hub_remote = conf.get("apis", "git_hub_remote")
-    except:
-        git_hub_remote = "git@github.com:OpenTreeOfLife"
-    try:
-        max_filesize = conf.get("filesize", "peyotl_max_file_size")
-    except:
-        max_filesize = "20000000"
-    try:
-        max_num_trees = conf.get("filesize", "validation_max_num_trees")
-    except:
-        max_num_trees = 65
-    try:
-        max_num_trees = int(max_num_trees)
-    except ValueError:
-        raise400("max number of trees per study in config is not an integer")
-    try:
-        read_only = conf.get("apis", "read_only") == "true"
-    except:
-        read_only = False
-    return (
-        repo_parent,
-        repo_remote,
-        git_ssh,
-        pkey,
-        git_hub_remote,
-        max_filesize,
-        max_num_trees,
-        read_only,
-    )
+class PhylesystemConfig(object):
+    def __init__(self, conf):
+        self._repo_parent = conf.get("apis", "repo_parent")
+        self._repo_remote = conf.get("apis", "repo_remote")
+        try:
+            self._git_ssh = conf.get("apis", "git_ssh")
+        except:
+            self._git_ssh = "ssh"
+        try:
+            self._pkey = conf.get("apis", "pkey")
+        except:
+            self._pkey = None
+        try:
+            self._git_hub_remote = conf.get("apis", "git_hub_remote")
+        except:
+            self._git_hub_remote = "git@github.com:OpenTreeOfLife"
+        try:
+            self._max_filesize = conf.get("filesize", "peyotl_max_file_size")
+        except:
+            self._max_filesize = "20000000"
+        try:
+            self._max_num_trees = conf.get("filesize", "validation_max_num_trees")
+        except:
+            self._max_num_trees = 65
+        try:
+            self._max_num_trees = int(self._max_num_trees)
+        except ValueError:
+            raise400("max number of trees per study in config is not an integer")
+        try:
+            self._read_only = conf.get("apis", "read_only") == "true"
+        except:
+            self._read_only = False
+
+    @property
+    def repo_parent(self):
+        return self._repo_parent
+
+    @property
+    def repo_remote(self):
+        return self._repo_remote
+
+    @property
+    def git_ssh(self):
+        return self._git_ssh
+
+    @property
+    def pkey(self):
+        return self._pkey
+
+    @property
+    def git_hub_remote(self):
+        return self._git_hub_remote
+
+    @property
+    def max_filesize(self):
+        return self._max_filesize
+
+    @property
+    def max_num_trees(self):
+        return self._max_num_trees
+
+    @property
+    def read_only(self):
+        return self._read_only
 
 
 def read_collections_config(request):

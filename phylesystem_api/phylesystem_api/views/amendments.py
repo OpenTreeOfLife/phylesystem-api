@@ -1,8 +1,6 @@
-import json
 import logging
 import os
 
-import phylesystem_api.api_utils as api_utils
 from peyotl.nexson_syntax import read_as_json
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -10,6 +8,8 @@ from pyramid.httpexceptions import (
     HTTPException,
 )
 from pyramid.view import view_config
+
+import phylesystem_api.api_utils as api_utils
 
 _LOG = logging.getLogger("phylesystem_api")
 

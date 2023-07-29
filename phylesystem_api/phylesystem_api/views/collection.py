@@ -44,14 +44,11 @@ def __extract_and_validate_collection(request, request_params):
             msg = getattr(err, "msg", "No message found")
         except:
             msg = str(err)
-        raise HTTPBadRequest(msg)
+        raise400(msg)
     if len(errors) > 0:
-        # _LOG = api_utils.get_logger(request, 'ot_api.default.v1')
-        msg = "JSON payload failed validation with {nerrors} errors:\n{errors}".format(
-            nerrors=len(errors), errors="\n  ".join(errors)
-        )
-        # _LOG.exception(msg)
-        raise HTTPBadRequest(msg)
+        msg = "JSON payload failed validation with {nerrors} errors:\n{errors}"
+        msg = msg.format(nerrors=len(errors), errors="\n  ".join(errors))
+        raise400(msg)
     return collection_obj, errors, collection_adaptor
 
 

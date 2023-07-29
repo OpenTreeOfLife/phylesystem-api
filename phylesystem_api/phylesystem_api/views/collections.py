@@ -1,7 +1,5 @@
-import json
 import os
 
-import phylesystem_api.api_utils as api_utils
 from peyotl.nexson_syntax import read_as_json
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -10,6 +8,8 @@ from pyramid.httpexceptions import (
     HTTPNotImplemented,
 )
 from pyramid.view import view_config
+
+import phylesystem_api.api_utils as api_utils
 
 
 @view_config(route_name="get_collections_config", renderer="json")
