@@ -1,6 +1,5 @@
 import json
 import logging
-import sys
 import traceback
 
 from peyotl.collections_store import COLLECTION_ID_PATTERN
@@ -20,6 +19,7 @@ from phylesystem_api.api_utils import (
     extract_json_from_http_call,
     raise400,
     raise404,
+    fetch_doc,
 )
 
 _LOG = logging.getLogger("phylesystem_api")
@@ -58,56 +58,43 @@ def collection_CORS_preflight(request):
     api_utils.raise_on_CORS_preflight(request)
 
 
+def is_valid_collection_id(doc_id):
+    return bool(COLLECTION_ID_PATTERN.match(doc_id))
+
+
 @view_config(route_name="fetch_collection", renderer="json")
 def fetch_collection(request):
     # NB - This method does not require authentication!
-    # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     collection_id = request.matchdict["collection_id"]
-    if not COLLECTION_ID_PATTERN.match(collection_id):
-        msg = "invalid collection ID ({}) provided".format(collection_id)
-        raise400(msg)
+    result = fetch_doc(
+        request,
+        doc_id=collection_id,
+        doc_store=api_utils.get_tree_collection_store(request),
+        doc_type_name="collection",
+        doc_id_validator=is_valid_collection_id,
+        add_version_history=True,
+    )
+    return add_collection_specific_fields(request, collection_id, result)
 
-    # gather details to return with the JSON core document
-    parent_sha = find_in_request(request, "starting_commit_SHA", None)
-    collections = api_utils.get_tree_collection_store(request)
+
+def add_collection_specific_fields(request, collection_id, result):
+    collection_json = result["data"]
+    # Add commentHTML to result JSON
     try:
-        r = collections.return_doc(
-            collection_id, commit_sha=parent_sha, return_WIP_map=True
+        comment_html = api_utils.markdown_to_html(
+            collection_json["description"], open_links_in_new_window=True
         )
     except:
-        raise404("Collection '{}' GET failure".format(collection_id))
-    try:
-        collection_json, head_sha, wip_map = r
-        version_history = collections.get_version_history_for_doc_id(collection_id)
-        try:
-            # pre-render internal description (assumes markdown!)
-            comment_html = api_utils.markdown_to_html(
-                collection_json["description"], open_links_in_new_window=True
-            )
-        except:
-            comment_html = ""
-    except:
-        _LOG.exception("GET failed")
-        e = sys.exc_info()[0]
-        raise HTTPBadRequest(e)
-    if not collection_json:
-        raise404("Collection '{s}' has no JSON data!".format(s=collection_id))
-    # add/restore the url field (using the visible fetch URL)
+        comment_html = ""
+    result["commentHTML"] = comment_html
+
+    # Add the url field to the stored JSON
     base_url = api_utils.get_collections_api_base_url(request)
     collection_json["url"] = "{b}/v2/collection/{i}".format(b=base_url, i=collection_id)
-    try:
-        external_url = collections.get_public_url(collection_id)
-    except:
-        external_url = "NOT FOUND"
-    result = {
-        "sha": head_sha,
-        "data": collection_json,
-        "branch2sha": wip_map,
-        "commentHTML": comment_html,
-        "external_url": external_url,
-    }
+
+    # Add the lastModified field to the result JSON
+    version_history = result.get("versionHistory")
     if version_history:
-        result["versionHistory"] = version_history
         latest_commit = version_history[0]
         last_modified = {
             "author_name": latest_commit.get("author_name"),

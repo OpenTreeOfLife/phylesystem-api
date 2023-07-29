@@ -66,6 +66,48 @@ def raise404(msg):
     raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
 
 
+def fetch_doc(
+    request,
+    doc_id,
+    doc_store,
+    doc_type_name,
+    doc_id_validator=None,
+    add_version_history=True,
+):
+    if (doc_id_validator is not None) and (not doc_id_validator(doc_id)):
+        msg = "invalid {n} ID ({i}) provided".format(n=doc_type_name, i=doc_id)
+        raise400(msg)
+    parent_sha = find_in_request(request, "starting_commit_SHA", None)
+    try:
+        r = doc_store.return_doc(doc_id, commit_sha=parent_sha, return_WIP_map=True)
+    except:
+        raise404("{n} '{i}' GET failure".format(n=doc_type_name, i=doc_id))
+    document, head_sha, wip_map = r
+    if not document:
+        raise404("{n} '{i}' has no JSON data!".format(n=doc_type_name, i=doc_id))
+    version_history = None
+    if add_version_history:
+        try:
+            version_history = doc_store.get_version_history_for_doc_id(doc_id)
+        except:
+            m = "fetching version history failed"
+            _LOG.exception(m)
+            raise_int_server_err(m)
+    try:
+        external_url = doc_store.get_public_url(doc_id)
+    except:
+        external_url = "NOT FOUND"
+    result = {
+        "sha": head_sha,
+        "data": document,
+        "branch2sha": wip_map,
+        "external_url": external_url,
+    }
+    if version_history:
+        result["versionHistory"] = version_history
+    return result
+
+
 def get_private_dir(request):
     _LOG.debug("WHY PRIVATE DIR")
     return "~/private/"

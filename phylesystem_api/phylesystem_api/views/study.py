@@ -16,7 +16,7 @@ from peyotl.phylesystem.git_workflows import (
     GitWorkflowError,
     validate_and_convert_nexson,
 )
-from phylesystem_api.api_utils import find_in_request, raise400, raise404
+from phylesystem_api.api_utils import find_in_request, raise400, raise404, fetch_doc
 from pyramid.encode import quote_plus, urlencode
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -221,29 +221,33 @@ def fetch_study(request):
         type_ext=request_extension,
         content_id=None,
     )
-    parent_sha = find_in_request(request, "starting_commit_SHA", None)
+    result = fetch_doc(
+        request,
+        doc_id=study_id,
+        doc_store=phylesystem,
+        doc_type_name="study",
+        add_version_history=out_schema.is_json(),
+    )
+    return add_study_specific_fields(
+        request, study_id, out_schema, phylesystem, repo_nexml2json, result
+    )
+
+
+def add_study_specific_fields(
+    request, study_id, out_schema, phylesystem, repo_nexml2json, result
+):
+    # TODO: is phylesystem.return_study == doc_store.return_doc
+    head_sha = result["sha"]
+    study_nexson = result["data"]
+    blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
+    phylesystem.add_validation_annotation(study_nexson, blob_sha)
+
     try:
-        r = phylesystem.return_study(
-            study_id, commit_sha=parent_sha, return_WIP_map=True
+        comment_html = api_utils.markdown_to_html(
+            study_nexson["nexml"]["^ot:comment"], open_links_in_new_window=True
         )
     except:
-        raise404("Study #{} GET failure".format(study_id))
-    try:
-        study_nexson, head_sha, wip_map = r
-        blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
-        phylesystem.add_validation_annotation(study_nexson, blob_sha)
-        version_history = phylesystem.get_version_history_for_study_id(study_id)
-        try:
-            comment_html = api_utils.markdown_to_html(
-                study_nexson["nexml"]["^ot:comment"], open_links_in_new_window=True
-            )
-        except:
-            comment_html = ""
-    except:
-        _LOG.exception("GET failed")
-        e = sys.exc_info()[0]
-        raise HTTPBadRequest(e)
-
+        comment_html = ""
     if out_schema.format_str == "nexson" and out_schema.version == repo_nexml2json:
         result_data = study_nexson
     else:
@@ -254,10 +258,9 @@ def fetch_study(request):
                 study_nexson, serialize=serialize, src_schema=src_schema
             )
         except:
-            raise400(
-                "Exception in coercing to the required NexSON version for validation."
-            )
-
+            m = "Exception while coercing NexSON to output schema."
+            _LOG.exception(m)
+            raise400(m)
     if out_schema.is_json():
         try:
             study_DOI = study_nexson["nexml"]["^ot:studyPublication"]["@href"]
@@ -276,7 +279,8 @@ def fetch_study(request):
         except:
             # _LOG.exception('check for shard name failed')
             shard_name = None
-
+        wip_map = result["branch2sha"]
+        version_history = result.get("versionHistory")
         result = {
             "sha": head_sha,
             "data": result_data,
@@ -629,7 +633,7 @@ def delete_study(request):
     except GitWorkflowError as err:
         _LOG.exception("got a GitWorkflowError:")
         raise HTTPBadRequest(err.msg)
-    except Exception as err:
+    except Exception:
         _LOG.exception("Exception getting nexson content in phylesystem.delete_study")
         raise400("Unknown error in study deletion")
 
