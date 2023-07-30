@@ -155,6 +155,7 @@ def get_phylesystem(request, conf_obj=None):
     if conf_obj is None:
         conf_obj = get_conf_object(request)
     pc = read_phylesystem_config(request, conf_obj=conf_obj)
+    READ_ONLY_MODE = pc.read_only
     peyotl_config, cfg_filename = read_peyotl_config()
     if "phylesystem" not in peyotl_config.sections():
         peyotl_config.add_section("phylesystem")
