@@ -16,7 +16,15 @@ from peyotl.phylesystem.git_workflows import (
     GitWorkflowError,
     validate_and_convert_nexson,
 )
-from phylesystem_api.api_utils import find_in_request, raise400, raise404, fetch_doc
+from phylesystem_api.api_utils import (
+    find_in_request,
+    raise400,
+    raise404,
+    fetch_doc,
+    commit_doc_and_trigger_push,
+    get_parent_sha,
+    get_commit_message,
+)
 from pyramid.encode import quote_plus, urlencode
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -236,7 +244,6 @@ def fetch_study(request):
 def add_study_specific_fields(
     request, study_id, out_schema, phylesystem, repo_nexml2json, result
 ):
-    # TODO: is phylesystem.return_study == doc_store.return_doc
     head_sha = result["sha"]
     study_nexson = result["data"]
     blob_sha = phylesystem.get_blob_sha_for_study_id(study_id, head_sha)
@@ -431,7 +438,7 @@ def _add_license_info(cc0_agreement, nexml, request):
 @view_config(route_name="create_study", renderer="json", request_method="POST")
 def create_study(request):
     # this method requires authentication
-    auth_info = api_utils.auth_and_not_read_only(request)
+    r_auth_info = api_utils.auth_and_not_read_only(request)
     phylesystem = api_utils.get_phylesystem(request)
 
     # we're creating a new study (possibly with import instructions in the payload)
@@ -504,56 +511,32 @@ def create_study(request):
             new_study_nexson["nexml"]["^ot:studyPublication"] = {
                 "@href": publication_doi
             }
-
     nexml = new_study_nexson["nexml"]
-
     if not importing_from_post_arg:
         _add_license_info(cc0_agreement, nexml, request)
-    nexml["^ot:curatorName"] = auth_info.get("name", "")
+    nexml["^ot:curatorName"] = r_auth_info.get("name", "")
 
-    repo_nexml2json = phylesystem.repo_nexml2json
-    new_study_id = None  # TODO: should we ever specify an ID here?
-    try:
-        r = phylesystem.ingest_new_study(
-            new_study_nexson, repo_nexml2json, auth_info, new_study_id
+    def study_commit_fn(doc, doc_id, auth_info, **kwargs):
+        return phylesystem.ingest_new_study(
+            doc, phylesystem.repo_nexml2json, auth_info, doc_id
         )
-        new_resource_id, commit_return = r
-    except GitWorkflowError as err:
-        raise HTTPBadRequest(err.msg)
-    except:
-        raise HTTPBadRequest(traceback.format_exc())
-    if commit_return["error"] != 0:
-        # _LOG.debug('ingest_new_study failed with error code')
-        raise HTTPBadRequest(json.dumps(commit_return))
-    api_utils.deferred_push_to_gh_call(
-        request, new_resource_id, doc_type="nexson", auth_token=auth_info["auth_token"]
+
+    return commit_doc_and_trigger_push(
+        request,
+        commit_fn=study_commit_fn,
+        doc=new_study_nexson,
+        doc_id=None,
+        doc_type_name="nexson",
+        auth_info=r_auth_info,
+        commit_msg=None,
     )
-    return commit_return
 
 
 @view_config(route_name="update_study", renderer="json")
 def update_study(request):
     study_id = request.matchdict["study_id"]
-    auth_info = api_utils.auth_and_not_read_only(request)
+    r_auth_info = api_utils.auth_and_not_read_only(request)
     _LOG.debug("STUDY: update_study")
-    # _LOG.debug("STUDY: auth_info {}".format(auth_info))
-
-    parent_sha = find_in_request(request, "starting_commit_SHA")
-    if parent_sha is None:
-        raise HTTPBadRequest(
-            'Expecting a "starting_commit_SHA" argument with the SHA of the parent'
-        )
-    master_file_blob_included = find_in_request(request, "merged_SHA")
-
-    # gather any user-provided git-commit message
-    try:
-        commit_msg = find_in_request(request, "commit_msg", "")
-        if commit_msg.strip() == "":
-            # git rejects empty commit messages
-            commit_msg = None
-    except:
-        commit_msg = None
-
     phylesystem = api_utils.get_phylesystem(request)
     repo_nexml2json = phylesystem.repo_nexml2json
     bundle = __extract_and_validate_nexson(request, repo_nexml2json, request.json_body)
@@ -562,30 +545,37 @@ def update_study(request):
         gd = phylesystem.create_git_action(study_id)
     except KeyError:
         # _LOG.debug('PUT failed in create_git_action (probably a bad study ID)')
-        raise HTTPBadRequest("invalid study ID, please check the URL")
-    try:
-        blob = __finish_write_verb(
+        raise400("invalid study ID, please check the URL")
+
+    def update_study_fn(doc, doc_id, auth_info, parent_sha, merged_sha, commit_msg):
+        return doc_id, __finish_write_verb(
             phylesystem,
             gd,
-            nexson=nexson,
-            resource_id=study_id,
+            nexson=doc,
+            resource_id=doc_id,
             auth_info=auth_info,
             adaptor=nexson_adaptor,
             annotation=annotation,
             parent_sha=parent_sha,
             commit_msg=commit_msg,
-            master_file_blob_included=master_file_blob_included,
+            master_file_blob_included=merged_sha,
         )
-    except GitWorkflowError as err:
-        # _LOG.exception('PUT failed in __finish_write_verb')
-        raise HTTPBadRequest(err.msg)
-    # TIMING = api_utils.log_time_diff(_LOG, 'blob creation', TIMING)
-    mn = blob.get("merge_needed")
-    if (mn is not None) and (not mn):
-        api_utils.deferred_push_to_gh_call(
-            request, study_id, doc_type="nexson", auth_token=auth_info["auth_token"]
-        )
-    # Add updated commit history to the blob
+
+    r_parent_sha = get_parent_sha(request)
+    r_commit_msg = get_commit_message(request)
+    r_merged_sha = find_in_request(request, "merged_SHA")
+
+    blob = commit_doc_and_trigger_push(
+        request,
+        commit_fn=update_study_fn,
+        doc=nexson,
+        doc_id=study_id,
+        doc_type_name="nexson",
+        auth_info=r_auth_info,
+        parent_sha=r_parent_sha,
+        merged_sha=r_merged_sha,
+        commit_msg=r_commit_msg,
+    )
     blob["versionHistory"] = phylesystem.get_version_history_for_study_id(study_id)
     return blob
 

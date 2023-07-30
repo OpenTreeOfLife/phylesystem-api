@@ -19,6 +19,9 @@ from phylesystem_api.api_utils import (
     extract_json_from_http_call,
     raise400,
     fetch_doc,
+    commit_doc_and_trigger_push,
+    get_parent_sha,
+    get_commit_message,
 )
 
 _LOG = logging.getLogger("phylesystem_api")
@@ -82,19 +85,8 @@ def fetch_amendment(request):
 @view_config(route_name="create_amendment", renderer="json", request_method="POST")
 def create_amendment(request, **kwargs):
     _LOG.debug("Begin create ammendemt")
-    # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
-
     auth_info = api_utils.auth_and_not_read_only(request)
-
-    # gather any user-provided git-commit message
-    try:
-        commit_msg = find_in_request(request, "commit_msg", "")
-        if commit_msg.strip() == "":
-            # git rejects empty commit messages
-            commit_msg = None
-    except:
-        commit_msg = None
-
+    commit_msg = get_commit_message(request)
     # fetch and parse the JSON payload, if any
     (
         amendment_obj,
@@ -105,52 +97,35 @@ def create_amendment(request, **kwargs):
         msg = "amendment JSON expected for HTTP method {}".format(request.method)
         raise400(msg)
 
-    # Create a new amendment with the data provided
-    # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
-    # submit the json and proposed id (if any), and read the results
-    docstore = api_utils.get_taxonomic_amendment_store(request)
     # N.B. add_new_amendment below takes care of minting new ottids,
     # assigning them to new taxa, and returning a per-taxon mapping to the
     # caller. It will assign the new amendment id accordingly!
-    try:
-        r = docstore.add_new_amendment(amendment_obj, auth_info, commit_msg=commit_msg)
-        new_amendment_id, commit_return = r
-    except GitWorkflowError as err:
-        raise HTTPBadRequest(body=err.msg)
-    except:
-        raise HTTPBadRequest(body=traceback.format_exc())
-    if commit_return["error"] != 0:
-        # _LOG.debug('add_new_amendment failed with error code')
-        raise HTTPBadRequest(body=json.dumps(commit_return))
-    _LOG.debug("create ammendemt deferred_push_to_gh_call")
-    api_utils.deferred_push_to_gh_call(
+    docstore = api_utils.get_taxonomic_amendment_store(request)
+
+    def amend_commit_fn(doc, doc_id, auth_info, commit_msg):
+        return docstore.add_new_amendment(
+            doc, auth_info=auth_info, commit_msg=commit_msg
+        )
+
+    return commit_doc_and_trigger_push(
         request,
-        new_amendment_id,
-        doc_type="amendment",
-        auth_token=auth_info["auth_token"],
+        commit_fn=amend_commit_fn,
+        doc=amendment_obj,
+        doc_id=None,
+        doc_type_name="amendment",
+        auth_info=auth_info,
+        commit_msg=commit_msg,
     )
-    return commit_return
 
 
 @view_config(route_name="update_amendment", renderer="json")
 def update_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
     amendment_id = request.matchdict["amendment_id"]
-    if not AMENDMENT_ID_PATTERN.match(amendment_id):
-        msg = "invalid amendment ID ({}) provided".format(amendment_id)
-        raise400(msg)
-
-    auth_info = api_utils.auth_and_not_read_only(request)
-
-    # gather any user-provided git-commit message
-    try:
-        commit_msg = find_in_request(request, "commit_msg", "")
-        if commit_msg.strip() == "":
-            # git rejects empty commit messages
-            commit_msg = None
-    except:
-        commit_msg = None
-
+    if not is_valid_amendment_id(amendment_id):
+        raise400("invalid amendment ID ({}) provided".format(amendment_id))
+    r_auth_info = api_utils.auth_and_not_read_only(request)
+    r_commit_msg = get_commit_message(request)
     # fetch and parse the JSON payload, if any
     (
         amendment_obj,
@@ -164,67 +139,45 @@ def update_amendment(request):
     # update an existing amendment with the data provided
     # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.PUT')
     # submit new json for this id, and read the results
-    parent_sha = find_in_request(request, "starting_commit_SHA", None)
-    merged_sha = None  # TODO: find_in_request(request, '???', None)
+    r_parent_sha = get_parent_sha(request)
+    r_merged_sha = None  # TODO: find_in_request(request, '???', None)
     docstore = api_utils.get_taxonomic_amendment_store(request)
-    try:
-        r = docstore.update_existing_amendment(
-            amendment_id,
-            amendment_obj,
+
+    def update_amendment_fn(doc, doc_id, auth_info, parent_sha, merged_sha, commit_msg):
+        return doc_id, docstore.update_existing_amendment(
+            doc_id,
+            doc,
             auth_info,
             parent_sha,
             merged_sha,
             commit_msg=commit_msg,
         )
-        commit_return = r
-    except GitWorkflowError as err:
-        raise HTTPBadRequest(body=err.msg)
-    except:
-        raise HTTPBadRequest(body=traceback.format_exc())
 
-    # check for 'merge needed'?
-    mn = commit_return.get("merge_needed")
-    if (mn is not None) and (not mn):
-        api_utils.deferred_push_to_gh_call(
-            request,
-            amendment_id,
-            doc_type="amendment",
-            auth_token=auth_info["auth_token"],
-        )
-    return commit_return
+    blob = commit_doc_and_trigger_push(
+        request,
+        commit_fn=update_amendment_fn,
+        doc=amendment_obj,
+        doc_id=amendment_id,
+        doc_type_name="amendment",
+        auth_info=r_auth_info,
+        parent_sha=r_parent_sha,
+        merged_sha=r_merged_sha,
+        commit_msg=r_commit_msg,
+    )
+    return blob
 
 
 @view_config(route_name="delete_amendment", renderer="json")
 def delete_amendment(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.amendment')
     amendment_id = request.matchdict.get["amendment_id"]
-    if not AMENDMENT_ID_PATTERN.match(amendment_id):
-        msg = "invalid amendment ID ({}) provided".format(amendment_id)
-        body = {
-            "error": 1,
-            "description": msg,
-        }
-        raise HTTPBadRequest(body=json.dumps(body))
+    if not is_valid_amendment_id(amendment_id):
+        raise400("invalid amendment ID ({}) provided".format(amendment_id))
 
     auth_info = api_utils.auth_and_not_read_only(request)
-
-    # gather any user-provided git-commit message
-    try:
-        commit_msg = find_in_request(request, "commit_msg", "")
-        if commit_msg.strip() == "":
-            # git rejects empty commit messages
-            commit_msg = None
-    except:
-        commit_msg = None
-
-    # remove this amendment from the docstore
-    # _LOG = api_utils.get_logger(request, 'ot_api.default.amendments.POST')
+    parent_sha = get_parent_sha(request)
+    commit_msg = get_commit_message(request)
     docstore = api_utils.get_taxonomic_amendment_store(request)
-    parent_sha = find_in_request(request, "starting_commit_SHA")
-    if parent_sha is None:
-        raise HTTPBadRequest(
-            body='Expecting a "starting_commit_SHA" argument with the SHA of the parent'
-        )
     try:
         x = docstore.delete_amendment(
             amendment_id, auth_info, parent_sha, commit_msg=commit_msg

@@ -15,6 +15,7 @@ from peyotl.collections_store import TreeCollectionStore
 from peyotl.nexson_syntax import write_as_json
 from peyotl.phylesystem import Phylesystem
 from peyotl.utility import read_config as read_peyotl_config
+from peyotl.phylesystem.git_workflows import GitWorkflowError
 from pyramid.httpexceptions import (
     HTTPOk,
     HTTPBadRequest,
@@ -64,6 +65,83 @@ def raise400(msg):
 
 def raise404(msg):
     raise HTTPNotFound(body=json.dumps({"error": 1, "description": msg}))
+
+
+def get_owner_id(request, auth_info):
+    owner_id = auth_info.get("login")
+    if owner_id is None:
+        raise400("no GitHub userid obtained from auth token")
+    return owner_id
+
+
+def get_commit_message(request):
+    try:
+        commit_msg = find_in_request(request, "commit_msg", "")
+        if commit_msg.strip() == "":
+            return None
+        return commit_msg
+    except:
+        return None
+
+
+def get_parent_sha(request):
+    parent_sha = find_in_request(request, "starting_commit_SHA", None)
+    if parent_sha is None:
+        msg = 'Expecting a "starting_commit_SHA" argument with the SHA of the parent'
+        raise400(msg)
+    return parent_sha
+
+
+def commit_doc_and_trigger_push(
+    request,
+    commit_fn,
+    doc,
+    doc_id,
+    doc_type_name,
+    auth_info,
+    parent_sha=None,
+    merged_sha=None,
+    commit_msg=None,
+):
+    """Tries to commit doc, raises HTTP errors as needed. Triggers push thread.
+
+    `request` the Request obj,
+    `commit_fn` a function that takes (doc, doc_id, auth_inf, commit_msg)
+       and return the new_doc_id and a commit_return object.
+    `doc` the document as an object
+    `doc_id` or None if the docstore mints the ID.
+    `doc_type_name` "amendment", "nexson", or "collection"
+    `auth_info` dict
+    `commit_msg` string
+    """
+    try:
+        r = commit_fn(
+            doc,
+            doc_id,
+            auth_info,
+            parent_sha=parent_sha,
+            merged_sha=merged_sha,
+            commit_msg=commit_msg,
+        )
+        new_doc_id, commit_return = r
+    except GitWorkflowError as err:
+        raise400(err.msg)
+    except Exception as x:
+        raise400(str(x))
+    if commit_return["error"] != 0:
+        _LOG.debug("commit of {} failed with error code".format(doc_type_name))
+        raise HTTPBadRequest(body=json.dumps(commit_return))
+    # check for 'merge needed'
+    mn = commit_return.get("merge_needed")
+    if (mn is not None) and (not mn):
+        _LOG.debug("commit of {} deferred_push_to_gh_call".format(doc_type_name))
+        deferred_push_to_gh_call(
+            request,
+            new_doc_id,
+            doc_type=doc_type_name,
+            auth_token=auth_info["auth_token"],
+        )
+    return commit_return
 
 
 def fetch_doc(
