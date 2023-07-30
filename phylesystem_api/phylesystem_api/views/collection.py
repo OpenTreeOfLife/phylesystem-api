@@ -222,26 +222,31 @@ def update_collection(request):
 def delete_collection(request):
     # _LOG = api_utils.get_logger(request, 'ot_api.collection')
     # NB - This method requires authentication!
-    auth_info = api_utils.auth_and_not_read_only(request)
+    r_auth_info = api_utils.auth_and_not_read_only(request)
+    r_parent_sha = get_parent_sha(request)
     collection_id = request.matchdict["collection_id"]
     if not is_valid_collection_id(collection_id):
-        msg = "invalid collection ID ({}) provided".format(collection_id)
-        raise400(msg)
-    commit_msg = get_commit_message(request)
-
-    # remove this collection from the docstore
+        raise400("invalid collection ID ({}) provided".format(collection_id))
+    r_commit_msg = get_commit_message(request)
     docstore = api_utils.get_tree_collection_store(request)
-    parent_sha = get_parent_sha(request)
-    try:
-        x = docstore.delete_collection(
-            collection_id, auth_info, parent_sha, commit_msg=commit_msg
+
+    def del_collection_fn(doc, doc_id, auth_info, parent_sha, merged_sha, commit_msg):
+        return doc_id, docstore.delete_collection(
+            doc_id,
+            auth_info,
+            parent_sha,
+            commit_msg=commit_msg,
         )
-        if x.get("error") == 0:
-            api_utils.deferred_push_to_gh_call(
-                request, None, doc_type="collection", auth_token=auth_info["auth_token"]
-            )
-        return x
-    except GitWorkflowError as err:
-        raise HTTPBadRequest(err.msg)
-    except:
-        raise400("Unknown error in collection deletion")
+
+    blob = commit_doc_and_trigger_push(
+        request,
+        commit_fn=del_collection_fn,
+        doc=None,
+        doc_id=collection_id,
+        doc_type_name="collection",
+        auth_info=r_auth_info,
+        parent_sha=r_parent_sha,
+        merged_sha=None,
+        commit_msg=r_commit_msg,
+    )
+    return blob

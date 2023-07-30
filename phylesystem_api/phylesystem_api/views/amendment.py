@@ -173,22 +173,28 @@ def delete_amendment(request):
     amendment_id = request.matchdict.get["amendment_id"]
     if not is_valid_amendment_id(amendment_id):
         raise400("invalid amendment ID ({}) provided".format(amendment_id))
-
-    auth_info = api_utils.auth_and_not_read_only(request)
-    parent_sha = get_parent_sha(request)
-    commit_msg = get_commit_message(request)
+    r_auth_info = api_utils.auth_and_not_read_only(request)
+    r_parent_sha = get_parent_sha(request)
+    r_commit_msg = get_commit_message(request)
     docstore = api_utils.get_taxonomic_amendment_store(request)
-    try:
-        x = docstore.delete_amendment(
-            amendment_id, auth_info, parent_sha, commit_msg=commit_msg
+
+    def del_amendment_fn(doc, doc_id, auth_info, parent_sha, merged_sha, commit_msg):
+        return doc_id, docstore.delete_amendment(
+            doc_id,
+            auth_info,
+            parent_sha,
+            commit_msg=commit_msg,
         )
-        if x.get("error") == 0:
-            api_utils.deferred_push_to_gh_call(
-                request, None, doc_type="amendment", auth_token=auth_info["auth_token"]
-            )
-        return x
-    except GitWorkflowError as err:
-        raise HTTPBadRequest(body=err.msg)
-    except:
-        # _LOG.exception('Unknown error in amendment deletion')
-        raise HTTPBadRequest(body=traceback.format_exc())
+
+    blob = commit_doc_and_trigger_push(
+        request,
+        commit_fn=del_amendment_fn,
+        doc=None,
+        doc_id=amendment_id,
+        doc_type_name="amendment",
+        auth_info=r_auth_info,
+        parent_sha=r_parent_sha,
+        merged_sha=None,
+        commit_msg=r_commit_msg,
+    )
+    return blob

@@ -582,50 +582,32 @@ def update_study(request):
 
 @view_config(route_name="delete_study", renderer="json")
 def delete_study(request):
-    # _LOG = api_utils.get_logger(request, 'delete_study')
-    _LOG.debug("delete_study STARTING...")
     study_id = request.matchdict["study_id"]
-    _LOG.debug("study_id={}".format(study_id))
-
-    # this method requires authentication
-    auth_info = api_utils.auth_and_not_read_only(request)
-
-    # gather any user-provided git-commit message
-    try:
-        commit_msg = find_in_request(request, "commit_msg", "")
-        if commit_msg.strip() == "":
-            # git rejects empty commit messages
-            commit_msg = None
-    except:
-        commit_msg = None
-    _LOG.debug("commit_msg={}".format(commit_msg))
-
-    parent_sha = find_in_request(request, "starting_commit_SHA", None)
-    _LOG.debug("parent_sha={}".format(parent_sha))
+    _LOG.debug("delete study_id={}".format(study_id))
+    r_auth_info = api_utils.auth_and_not_read_only(request)
+    r_commit_msg = get_commit_message(request)
+    r_parent_sha = get_parent_sha(request)
+    _LOG.debug("parent_sha={}".format(r_parent_sha))
 
     phylesystem = api_utils.get_phylesystem(request)
 
-    _LOG.debug("trying to delete now... via:")
-    _LOG.debug(phylesystem.delete_study)
-    try:
-        x = phylesystem.delete_study(
-            study_id, auth_info, parent_sha, commit_msg=commit_msg
+    def del_study_fn(doc, doc_id, auth_info, parent_sha, merged_sha, commit_msg):
+        return doc_id, phylesystem.delete_study(
+            doc_id, auth_info, parent_sha, commit_msg=commit_msg
         )
-        _LOG.debug("initial return x:")
-        _LOG.debug(x)
-        if x.get("error") == 0:
-            _LOG.debug("calling deferred push...")
-            api_utils.deferred_push_to_gh_call(
-                request, None, doc_type="nexson", auth_token=auth_info["auth_token"]
-            )
-            _LOG.debug("back from deferred push")
-        return x
-    except GitWorkflowError as err:
-        _LOG.exception("got a GitWorkflowError:")
-        raise HTTPBadRequest(err.msg)
-    except Exception:
-        _LOG.exception("Exception getting nexson content in phylesystem.delete_study")
-        raise400("Unknown error in study deletion")
+
+    blob = commit_doc_and_trigger_push(
+        request,
+        commit_fn=del_study_fn,
+        doc=None,
+        doc_id=study_id,
+        doc_type_name="nexson",
+        auth_info=r_auth_info,
+        parent_sha=r_parent_sha,
+        merged_sha=None,
+        commit_msg=r_commit_msg,
+    )
+    return blob
 
 
 @view_config(route_name="get_study_file_list", renderer="json")
