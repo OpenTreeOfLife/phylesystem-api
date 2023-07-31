@@ -94,16 +94,20 @@ def includeme(config):
     config.add_route("get_study_meta", "/{api_version}/study/{study_id}/meta")
     config.add_route("get_study_meta_slash", "/{api_version}/study/{study_id}/meta/")
     #
+    # GENERIC routes
+    #
+    config.add_route(
+        "get_docstore_config", "/{api_version}/{doc_type_name}/store_config"
+    )
+    config.add_route(
+        "docstore_push_failure", "/{api_version}/{doc_type_name}/push_failure"
+    )
+
+    #
     # TREE COLLECTION ROUTES
     #
     config.add_route(
         "list_all_collection_ids", "/{api_version}/collections/collection_list"
-    )
-    config.add_route(
-        "get_collections_config", "/{api_version}/collections/store_config"
-    )
-    config.add_route(
-        "collections_push_failure", "/{api_version}/collections/push_failure"
     )
     config.add_route("collection_properties", "/{api_version}/collections/properties")
     config.add_route(
@@ -138,10 +142,6 @@ def includeme(config):
         "list_all_amendment_ids", "/{api_version}/amendments/amendment_list"
     )
     config.add_route("list_all_amendments", "/{api_version}/amendments/list_all")
-    config.add_route("get_amendments_config", "/{api_version}/amendments/store_config")
-    config.add_route(
-        "amendments_push_failure", "/{api_version}/amendments/push_failure"
-    )
     config.add_route("create_amendment", "/{api_version}/amendment/")
     config.add_route(
         "amendment_CORS_preflight",

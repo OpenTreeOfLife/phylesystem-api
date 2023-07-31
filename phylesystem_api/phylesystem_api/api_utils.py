@@ -92,6 +92,71 @@ def get_parent_sha(request):
     return parent_sha
 
 
+def get_last_modified_dict(docstore=None, doc_id=None, last_commit=None):
+    if last_commit is None:
+        commit_list = docstore.get_version_history_for_doc_id(doc_id)
+        if not commit_list:
+            return None
+        latest_commit = commit_list[0]
+    return {
+        "author_name": latest_commit.get("author_name"),
+        "relative_date": latest_commit.get("relative_date"),
+        "display_date": latest_commit.get("date"),
+        "ISO_date": latest_commit.get("date_ISO_8601"),
+        "sha": latest_commit.get("id"),  # this is the commit hash
+    }
+
+
+_doc_type2store = None
+
+
+def get_docstore_from_type(doc_type_name, request, conf_obj=None):
+    global _doc_type2store
+    if _doc_type2store is None:
+        p_s = get_phylesystem(request=request, conf_obj=conf_obj)
+        c_s = get_tree_collection_store(request=request, conf_obj=conf_obj)
+        a_s = get_taxonomic_amendment_store(request=request, conf_obj=conf_obj)
+        d = {
+            "nexson": p_s,
+            "study": p_s,
+            "studies": p_s,
+            "collection": c_s,
+            "collections": c_s,
+            "amendment": a_s,
+            "amendments": a_s,
+        }
+        _doc_type2store = d
+    try:
+        return _doc_type2store[doc_type_name]
+    except:
+        raise400("Unrecognized document type {}".format(doc_type_name))
+
+
+def get_config_impl(request, doc_type_name):
+    raise_on_CORS_preflight(request)
+    docstore = get_docstore_from_type(doc_type_name, request)
+    return docstore.get_configuration_dict()
+
+
+def get_update_coll_fn(docstore, owner_id):
+    """Returns a function to be a commit_fn for commit_doc_and_trigger_push."""
+
+    def update_collection_fn(
+        doc, doc_id, auth_info, parent_sha, merged_sha, commit_msg
+    ):
+        return doc_id, docstore.update_existing_collection(
+            owner_id,
+            doc_id,
+            doc,
+            auth_info,
+            parent_sha,
+            merged_sha,
+            commit_msg=commit_msg,
+        )
+
+    return update_collection_fn
+
+
 def commit_doc_and_trigger_push(
     request,
     commit_fn,
@@ -187,8 +252,10 @@ def fetch_doc(
 
 
 def get_private_dir(request):
-    _LOG.debug("WHY PRIVATE DIR")
-    return "~/private/"
+    pd = "scratch"
+    if not os.path.exists(pd):
+        os.makedirs(pd)
+    return pd
 
 
 def atomic_write_json_if_not_found(obj, dest, request):
@@ -223,11 +290,8 @@ _PHYLESYSTEM = None
 def get_phylesystem(request, conf_obj=None):
     global READ_ONLY_MODE
     global _PHYLESYSTEM
-    # _LOG.debug('@@@ checking for _PHYLESYSTEM singleton...READ_ONLY_MODE? {}'.format(READ_ONLY_MODE))
     if _PHYLESYSTEM is not None:
-        _LOG.debug("@@@ FOUND it, returning now")
         return _PHYLESYSTEM
-    # _LOG.debug('@@@ NOT FOUND, creating now')
     from phylesystem_api.gitdata import GitData
 
     if conf_obj is None:
@@ -240,14 +304,6 @@ def get_phylesystem(request, conf_obj=None):
     peyotl_config.set(
         "phylesystem", "max_file_size", pc.max_filesize
     )  # overrides peyotl config with max phylesytem-api filesize
-    push_mirror = os.path.join(pc.repo_parent, "mirror")
-    pmi = {
-        "parent_dir": push_mirror,
-        "remote_map": {
-            "GitHubRemote": pc.git_hub_remote,
-        },
-    }
-    mirror_info = {"push": pmi}
     a = {}
     try:
         new_study_prefix = conf_obj.get("apis", "new_study_prefix")
@@ -259,7 +315,7 @@ def get_phylesystem(request, conf_obj=None):
         git_ssh=pc.git_ssh,
         pkey=pc.pkey,
         git_action_class=GitData,
-        mirror_info=mirror_info,
+        mirror_info=pc.mirror_info,
         **a
     )
     # _LOG.debug('[[[[[[ repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
@@ -273,108 +329,80 @@ def get_phylesystem(request, conf_obj=None):
 _TREE_COLLECTION_STORE = None
 
 
-def get_tree_collection_store(request):
+def get_tree_collection_store(request, conf_obj=None):
     global _TREE_COLLECTION_STORE
     if _TREE_COLLECTION_STORE is not None:
         return _TREE_COLLECTION_STORE
-    #    _LOG = get_logger(request, 'ot_api')
     from phylesystem_api.gitdata import GitData
 
-    (
-        repo_parent,
-        repo_remote,
-        git_ssh,
-        pkey,
-        git_hub_remote,
-        max_filesize,
-    ) = read_collections_config(request)
-    push_mirror = os.path.join(repo_parent, "mirror")
-    pmi = {
-        "parent_dir": push_mirror,
-        "remote_map": {
-            "GitHubRemote": git_hub_remote,
-        },
-    }
-    mirror_info = {"push": pmi}
-    a = {}
-    try:
-        # any keyword args to pass along from config?
-        # new_study_prefix = conf.get('apis', 'new_study_prefix')
-        # a['new_study_prefix'] = new_study_prefix
-        pass
-    except:
-        pass
+    if conf_obj is None:
+        conf_obj = get_conf_object(request)
+    cc = read_collections_config(request, conf_obj)
     _TREE_COLLECTION_STORE = TreeCollectionStore(
-        repos_par=repo_parent,
-        git_ssh=git_ssh,
-        pkey=pkey,
+        repos_par=cc.repo_parent,
+        git_ssh=cc.git_ssh,
+        pkey=cc.pkey,
         git_action_class=GitData,  # TODO?
-        mirror_info=mirror_info,
-        **a
+        mirror_info=cc.mirror_info,
     )
-    # _LOG.debug('assumed_doc_version = {}'.format(_TREE_COLLECTION_STORE.assumed_doc_version))
     return _TREE_COLLECTION_STORE
 
 
 _TAXONOMIC_AMENDMENT_STORE = None
 
 
-def get_taxonomic_amendment_store(request):
+def get_taxonomic_amendment_store(request, conf_obj=None):
     global _TAXONOMIC_AMENDMENT_STORE
     if _TAXONOMIC_AMENDMENT_STORE is not None:
         return _TAXONOMIC_AMENDMENT_STORE
-    #    _LOG = get_logger(request, 'ot_api')
     from phylesystem_api.gitdata import GitData
 
-    (
-        repo_parent,
-        repo_remote,
-        git_ssh,
-        pkey,
-        git_hub_remote,
-        max_filesize,
-    ) = read_amendments_config(request)
-    push_mirror = os.path.join(repo_parent, "mirror")
-    pmi = {
-        "parent_dir": push_mirror,
-        "remote_map": {
-            "GitHubRemote": git_hub_remote,
-        },
-    }
-    mirror_info = {"push": pmi}
-    a = {}
-    try:
-        # any keyword args to pass along from config?
-        # new_study_prefix = conf.get('apis', 'new_study_prefix')
-        # a['new_study_prefix'] = new_study_prefix
-        pass
-    except:
-        pass
+    if conf_obj is None:
+        conf_obj = get_conf_object(request)
+    cc = read_amendments_config(request, conf_obj)
     _TAXONOMIC_AMENDMENT_STORE = TaxonomicAmendmentStore(
-        repos_par=repo_parent,
-        git_ssh=git_ssh,
-        pkey=pkey,
-        git_action_class=GitData,  # TODO?
-        mirror_info=mirror_info,
-        **a
+        repos_par=cc.repo_parent,
+        git_ssh=cc.git_ssh,
+        pkey=cc.pkey,
+        git_action_class=GitData,
+        mirror_info=cc.mirror_info,
     )
-    _LOG.debug(
-        "assumed_doc_version = {}".format(
-            _TAXONOMIC_AMENDMENT_STORE.assumed_doc_version
-        )
-    )
+    tas = _TAXONOMIC_AMENDMENT_STORE
+    msg = "assumed_doc_version = {}".format(tas.assumed_doc_version)
+    _LOG.debug(msg)
     return _TAXONOMIC_AMENDMENT_STORE
 
 
-def get_failed_push_filepath(request, doc_type=None):
-    filenames_by_content_type = {
-        "nexson": "PUSH_FAILURE_nexson.json",
-        "collection": "PUSH_FAILURE_collection.json",
-        "amendment": "PUSH_FAILURE_amendment.json",
-        "favorites": "PUSH_FAILURE_favorites.json",
-    }
-    content_type = doc_type or request.matchdict.get("doc_type", "nexson")
-    failure_filename = filenames_by_content_type[content_type]
+filenames_by_content_type = {
+    "nexson": "PUSH_FAILURE_nexson.json",
+    "collection": "PUSH_FAILURE_collection.json",
+    "amendment": "PUSH_FAILURE_amendment.json",
+    "favorites": "PUSH_FAILURE_favorites.json",
+}
+filenames_by_content_type["collections"] = filenames_by_content_type["collection"]
+filenames_by_content_type["amendments"] = filenames_by_content_type["amendment"]
+filenames_by_content_type["study"] = filenames_by_content_type["nexson"]
+filenames_by_content_type["studies"] = filenames_by_content_type["nexson"]
+normalized_doc_type_names = {
+    "nexson": "nexson",
+    "studies": "nexson",
+    "study": "nexson",
+    "collections": "collection",
+    "collection": "collection",
+    "amendment": "amendment",
+    "amendments": "amendment",
+}
+
+
+def normalize_synon_doc_types(doc_type):
+    return normalized_doc_type_names[doc_type]
+
+
+def get_failed_push_filepath(request, doc_type):
+    try:
+        failure_filename = filenames_by_content_type[doc_type]
+    except:
+        raise400("Unrecognized document type {}".format(doc_type))
     return os.path.join(get_private_dir(request), failure_filename)
 
 
@@ -398,26 +426,21 @@ def get_conf_object(request=None, localconfig_filename=None):
     return conf
 
 
-_phylesystem_config = None
-_phylesystem_config_lock = threading.Lock()
-
-
-def read_phylesystem_config(request, conf_obj=None):
-    """Load settings for managing the main Nexson docstore"""
-    global _phylesystem_config
-    if _phylesystem_config is None:
-        if conf_obj is None:
-            conf_obj = get_conf_object(request)
-        with _phylesystem_config_lock:
-            if _phylesystem_config is None:
-                _phylesystem_config = PhylesystemConfig(conf_obj)
-    return _phylesystem_config
-
-
-class PhylesystemConfig(object):
-    def __init__(self, conf):
-        self._repo_parent = conf.get("apis", "repo_parent")
-        self._repo_remote = conf.get("apis", "repo_remote")
+class DocstoreConfig(object):
+    def __init__(self, conf, doc_type="nexson"):
+        if doc_type == "nexson":
+            prefix = ""
+            mfs = "peyotl_max_file_size"
+        elif doc_type == "collection":
+            prefix = "collections_"
+            mfs = "collections_max_file_size"
+        elif doc_type == "amendment":
+            prefix = "amendments_"
+            mfs = "amendments_max_file_size"
+        else:
+            raise ValueError("Unrecognized doc_type {}".format(doc_type))
+        self._repo_parent = conf.get("apis", prefix + "repo_parent")
+        self._repo_remote = conf.get("apis", prefix + "repo_remote")
         try:
             self._git_ssh = conf.get("apis", "git_ssh")
         except:
@@ -431,17 +454,20 @@ class PhylesystemConfig(object):
         except:
             self._git_hub_remote = "git@github.com:OpenTreeOfLife"
         try:
-            self._max_filesize = conf.get("filesize", "peyotl_max_file_size")
+            self._max_filesize = conf.get("filesize", mfs)
         except:
             self._max_filesize = "20000000"
-        try:
-            self._max_num_trees = conf.get("filesize", "validation_max_num_trees")
-        except:
-            self._max_num_trees = 65
-        try:
-            self._max_num_trees = int(self._max_num_trees)
-        except ValueError:
-            raise400("max number of trees per study in config is not an integer")
+        if doc_type == "nexson":
+            try:
+                self._max_num_trees = conf.get("filesize", "validation_max_num_trees")
+            except:
+                self._max_num_trees = 65
+            try:
+                self._max_num_trees = int(self._max_num_trees)
+            except ValueError:
+                raise400("max number of trees per study in config is not an integer")
+        else:
+            self._max_num_trees = None
         try:
             self._read_only = conf.get("apis", "read_only") == "true"
         except:
@@ -479,67 +505,58 @@ class PhylesystemConfig(object):
     def read_only(self):
         return self._read_only
 
+    @property
+    def mirror_info(self):
+        push_mirror = os.path.join(self._repo_parent, "mirror")
+        pmi = {
+            "parent_dir": push_mirror,
+            "remote_map": {
+                "GitHubRemote": self._git_hub_remote,
+            },
+        }
+        return {"push": pmi}
 
-def read_collections_config(request):
+
+_phylesystem_config = None
+_collections_config = None
+_amendments_config = None
+_docstore_config_lock = threading.Lock()
+
+
+def read_phylesystem_config(request, conf_obj=None):
+    """Load settings for managing the main Nexson docstore"""
+    global _phylesystem_config
+    if _phylesystem_config is None:
+        if conf_obj is None:
+            conf_obj = get_conf_object(request)
+        with _docstore_config_lock:
+            if _phylesystem_config is None:
+                _phylesystem_config = DocstoreConfig(conf_obj)
+    return _phylesystem_config
+
+
+def read_collections_config(request, conf_obj=None):
     """Load settings for a minor repo with shared tree collections"""
-    conf = get_conf_object(request)
-    collections_repo_parent = conf.get("apis", "collections_repo_parent")
-    collections_repo_remote = conf.get("apis", "collections_repo_remote")
-    try:
-        git_ssh = conf.get("apis", "git_ssh")
-    except:
-        git_ssh = "ssh"
-    try:
-        pkey = conf.get("apis", "pkey")
-    except:
-        pkey = None
-    try:
-        git_hub_remote = conf.get("apis", "git_hub_remote")
-    except:
-        git_hub_remote = "git@github.com:OpenTreeOfLife"
-    try:
-        max_filesize = conf.get("filesize", "collections_max_file_size")
-    except:
-        max_filesize = "20000000"
-    return (
-        collections_repo_parent,
-        collections_repo_remote,
-        git_ssh,
-        pkey,
-        git_hub_remote,
-        max_filesize,
-    )
+    global _collections_config
+    if _collections_config is None:
+        if conf_obj is None:
+            conf_obj = get_conf_object(request)
+        with _docstore_config_lock:
+            if _collections_config is None:
+                _collections_config = DocstoreConfig(conf_obj, "collection")
+    return _collections_config
 
 
-def read_amendments_config(request):
+def read_amendments_config(request, conf_obj=None):
     """Load settings for a minor repo with shared taxonomic amendments"""
-    conf = get_conf_object(request)
-    amendments_repo_parent = conf.get("apis", "amendments_repo_parent")
-    amendments_repo_remote = conf.get("apis", "amendments_repo_remote")
-    try:
-        git_ssh = conf.get("apis", "git_ssh")
-    except:
-        git_ssh = "ssh"
-    try:
-        pkey = conf.get("apis", "pkey")
-    except:
-        pkey = None
-    try:
-        git_hub_remote = conf.get("apis", "git_hub_remote")
-    except:
-        git_hub_remote = "git@github.com:OpenTreeOfLife"
-    try:
-        max_filesize = conf.get("filesize", "amendments_max_file_size")
-    except:
-        max_filesize = "20000000"
-    return (
-        amendments_repo_parent,
-        amendments_repo_remote,
-        git_ssh,
-        pkey,
-        git_hub_remote,
-        max_filesize,
-    )
+    global _amendments_config
+    if _amendments_config is None:
+        if conf_obj is None:
+            conf_obj = get_conf_object(request)
+        with _docstore_config_lock:
+            if _amendments_config is None:
+                _amendments_config = DocstoreConfig(conf_obj, "amendment")
+    return _amendments_config
 
 
 def read_favorites_config(request):
@@ -563,28 +580,14 @@ def read_favorites_config(request):
 
 
 def _raise_missing_auth_token():
-    raise HTTPBadRequest(
-        json.dumps(
-            {
-                "error": 1,
-                "description": "You must provide an auth_token to authenticate to the OpenTree API",
-            }
-        )
-    )
+    raise400("You must provide an auth_token to authenticate to the OpenTree API")
 
 
 def authenticate(request):
-    """Verify that we received a valid Github authentication token
+    """Verify that we received a valid GitHub in the request's auth_token
 
-    This method takes a dict of keyword arguments and optionally
-    over-rides the author_name and author_email associated with the
-    given token, if they are present.
-
-    Returns a PyGithub object, author name and author email.
-
-    This method will return HTTP 400 if the auth token is not present
-    or if it is not valid, i.e. if PyGithub throws a BadCredentialsException.
-
+    This method will raise HTTP 400 if the auth token is not missing or invalid.
+    Returns dict with "login", "auth_token", and (possibly) "name" and "email" keys
     """
     # this is the GitHub API auth-token for a logged-in curator
     auth_token = find_in_request(request, "auth_token", "")
@@ -598,7 +601,7 @@ def authenticate(request):
         auth_info["login"] = gh_user.login
     except BadCredentialsException:
         raise400("You have provided an invalid or expired authentication token")
-    # use the Github Oauth token to get a name/email if not specified
+    # use the GitHub Oauth token to get a name/email if not specified
     # we don't provide these as default values above because they would
     # generate API calls regardless of author_name/author_email being specifed
     auth_info["name"] = find_in_request(request, "author_name", gh_user.name)

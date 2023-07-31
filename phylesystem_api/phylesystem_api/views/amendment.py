@@ -1,10 +1,7 @@
-import json
 import logging
-import traceback
 
 from peyotl.amendments import AMENDMENT_ID_PATTERN
 from peyotl.amendments.validation import validate_amendment
-from peyotl.phylesystem.git_workflows import GitWorkflowError
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
@@ -15,7 +12,6 @@ from pyramid.view import view_config
 
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import (
-    find_in_request,
     extract_json_from_http_call,
     raise400,
     fetch_doc,

@@ -1,9 +1,7 @@
 import json
 import logging
 import sys
-import traceback
 
-import phylesystem_api.api_utils as api_utils
 import requests
 from peyotl.external import import_nexson_from_treebase
 from peyotl.nexson_syntax import (
@@ -16,15 +14,6 @@ from peyotl.phylesystem.git_workflows import (
     GitWorkflowError,
     validate_and_convert_nexson,
 )
-from phylesystem_api.api_utils import (
-    find_in_request,
-    raise400,
-    raise404,
-    fetch_doc,
-    commit_doc_and_trigger_push,
-    get_parent_sha,
-    get_commit_message,
-)
 from pyramid.encode import quote_plus, urlencode
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -34,6 +23,17 @@ from pyramid.httpexceptions import (
 )
 from pyramid.renderers import render_to_response
 from pyramid.view import view_config
+
+import phylesystem_api.api_utils as api_utils
+from phylesystem_api.api_utils import (
+    find_in_request,
+    raise400,
+    raise404,
+    fetch_doc,
+    commit_doc_and_trigger_push,
+    get_parent_sha,
+    get_commit_message,
+)
 
 _LOG = logging.getLogger("phylesystem_api")
 

@@ -1,29 +1,27 @@
-import json
 import logging
-import traceback
 
 from peyotl.collections_store import COLLECTION_ID_PATTERN
 from peyotl.collections_store.validation import validate_collection
-from peyotl.phylesystem.git_workflows import GitWorkflowError
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.httpexceptions import (
     HTTPException,
-    HTTPBadRequest,
 )
 from pyramid.view import view_config
 
 import phylesystem_api.api_utils as api_utils
 from phylesystem_api.api_utils import (
-    find_in_request,
+    commit_doc_and_trigger_push,
     extract_json_from_http_call,
+    fetch_doc,
+    find_in_request,
+    get_commit_message,
+    get_last_modified_dict,
+    get_owner_id,
+    get_parent_sha,
+    get_update_coll_fn,
     raise400,
     raise404,
-    fetch_doc,
-    commit_doc_and_trigger_push,
-    get_parent_sha,
-    get_commit_message,
-    get_owner_id,
 )
 
 _LOG = logging.getLogger("phylesystem_api")
@@ -99,15 +97,9 @@ def add_collection_specific_fields(request, collection_id, result):
     # Add the lastModified field to the result JSON
     version_history = result.get("versionHistory")
     if version_history:
-        latest_commit = version_history[0]
-        last_modified = {
-            "author_name": latest_commit.get("author_name"),
-            "relative_date": latest_commit.get("relative_date"),
-            "display_date": latest_commit.get("date"),
-            "ISO_date": latest_commit.get("date_ISO_8601"),
-            "sha": latest_commit.get("id"),  # this is the commit hash
-        }
-        result["lastModified"] = last_modified
+        result["lastModified"] = get_last_modified_dict(
+            latest_commit=version_history[0]
+        )
     return result
 
 
@@ -187,25 +179,12 @@ def update_collection(request):
     # submit new json for this id, and read the results
     docstore = api_utils.get_tree_collection_store(request)
 
-    def update_collection_fn(
-        doc, doc_id, auth_info, parent_sha, merged_sha, commit_msg
-    ):
-        return doc_id, docstore.update_existing_collection(
-            owner_id,
-            doc_id,
-            doc,
-            auth_info,
-            parent_sha,
-            merged_sha,
-            commit_msg=commit_msg,
-        )
-
     r_parent_sha = find_in_request(request, "starting_commit_SHA", None)
     r_merged_sha = None  # TODO: find_in_request(request, '???', None)
     r_commit_msg = get_commit_message(request)
     blob = commit_doc_and_trigger_push(
         request,
-        commit_fn=update_collection_fn,
+        commit_fn=get_update_coll_fn(docstore, owner_id),
         doc=collection_obj,
         doc_id=collection_id,
         doc_type_name="collection",
