@@ -15,6 +15,9 @@ def includeme(config):
     # utilities (generally for internal use, not documented)
     config.add_route("render_markdown", "/v{api_version:[123]}/render_markdown")
     config.add_route("phylesystem_config", "/v{api_version:[123]}/phylesystem_config")
+    config.add_route("phylesystem_config_no_vers", "/phylesystem_config")
+    config.add_route("phylesystem_config_no_vers_slash", "/phylesystem_config/")
+
     config.add_route("raw_study_list", "/v{api_version:[123]}/study_list")
     config.add_route("pull_through_cache", "/cached/{target_url:.*}")
     config.add_route("clear_cache_keys", "/clear_cache_keys/{key_pattern:.*}")

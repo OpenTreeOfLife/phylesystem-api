@@ -287,10 +287,21 @@ def docstore_push_failure(request):
     return blob
 
 
+@view_config(route_name="get_docstore_config", renderer="json")
+def get_docstore_config(request):
+    return get_config_impl(request, request.matchdict["doc_type_name"])
+
+
+@view_config(route_name="phylesystem_config_no_vers", renderer="json")
+@view_config(route_name="phylesystem_config_no_vers_slash", renderer="json")
+def phylesystem_config_no_vers(request):
+    return get_config_impl(request, "studies")
+
+
 @view_config(route_name="phylesystem_config", renderer="json")
 def phylesystem_config(request):
     validate_api_version_number(request.matchdict["api_version"])
-    return get_docstore_config(request, "studies")
+    return get_config_impl(request, "studies")
 
 
 @view_config(route_name="trees_in_synth", renderer="json")
