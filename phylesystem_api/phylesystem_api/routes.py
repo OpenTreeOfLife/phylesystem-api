@@ -119,7 +119,8 @@ def includeme(config):
     # GENERIC routes
     #
     config.add_route(
-        "get_docstore_config", "/v{api_version:[123]}/{doc_type_name}/store_config"
+        "get_docstore_config",
+        "/v{api_version:[123]}/{doc_type_name}/store_config",
     )
     config.add_route(
         "docstore_push_failure", "/v{api_version:[123]}/{doc_type_name}/push_failure"

@@ -139,7 +139,6 @@ def pull_through_cache(request):
         fetch_url = base_url + root_relative_url
         _LOG.warning("NOT CACHED, FETCHING THIS URL: {}".format(fetch_url))
         _LOG.warning("  request.method = {}".format(request.method))
-
         # modify or discard "hop-by-hop" headers
         for bad_header in hop_by_hop_headers:
             request.headers.pop(bad_header, None)
@@ -165,37 +164,27 @@ def pull_through_cache(request):
                 _LOG.warning("  treating as GET")
                 fetched = requests.get(fetch_url)
             # TODO: For more flexibility, we might examine and mimic the original request (headers, etc)
-            _LOG.warning(
-                "... and now we're back with fetched, which is a {}".format(
-                    type(fetched)
-                )
-            )
+            msg = "... and now we're back with fetched, which is a {}"
+            msg = msg.format(type(fetched))
+            _LOG.warning(msg)
             fetched.raise_for_status()
             fetched.encoding = "utf-8"  # Optional: requests infers this internally
 
             # modify or discard "hop-by-hop" headers
             for bad_header in hop_by_hop_headers:
                 fetched.headers.pop(bad_header, None)
-            # _LOG.warning("  MODIFIED fetched.headers:")
-            # _LOG.warning( dict(fetched.headers) )
-
             try:
                 fetched.json()  # missing JSON payload will raise an error
-                return Response(
-                    headers=fetched.headers,
-                    body=fetched.text,  # missing JSON payload will raise an error
-                    status="200 OK",
-                    charset="UTF-8",
-                    content_type="application/json",
-                )
+                ct = "application/json"
             except requests.exceptions.JSONDecodeError:
-                return Response(
-                    headers=fetched.headers,
-                    body=fetched.text,
-                    status="200 OK",
-                    charset="UTF-8",
-                    content_type="text/plain",
-                )
+                ct = "text/plain"
+            return Response(
+                headers=fetched.headers,
+                body=fetched.text,  # missing JSON payload will raise an error
+                status="200 OK",
+                charset="UTF-8",
+                content_type=ct,
+            )
         except requests.RequestException as e:
             # throw an exception (hopefully copying its status code and message) so we don't poison the cache!
             # NB - We don't want to cache this response, but we DO want to return its payload
