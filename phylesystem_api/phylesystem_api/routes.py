@@ -4,7 +4,8 @@ def includeme(config):
     config.add_route("index", "/")
     # some (unused) URLs just show a tiny API description, with links to code + docs
     config.add_route("api_root", "/")
-    config.add_route("api_version_root", "/{api_version}/")
+    config.add_route("api_version_root", "/{api_version}")
+    config.add_route("api_version_root_slash", "/{api_version}/")
     config.add_route("studies_root", "/{api_version}/studies")
     config.add_route("studies_root_slash", "/{api_version}/studies/")
     config.add_route("collections_root", "/{api_version}/collections")
