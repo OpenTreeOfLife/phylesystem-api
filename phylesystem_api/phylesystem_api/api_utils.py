@@ -276,10 +276,10 @@ def atomic_write_json_if_not_found(obj, dest, request):
 def compose_push_to_github_url(request, resource_id, doc_type):
     if resource_id is None:
         return request.route_url(
-            "push_docstore_changes_bare", api_version="v3", doc_type=doc_type
+            "push_docstore_changes_bare", api_version="3", doc_type=doc_type
         )
     return request.route_url(
-        "push_docstore_changes", api_version="v3", doc_type=doc_type, doc_id=resource_id
+        "push_docstore_changes", api_version="3", doc_type=doc_type, doc_id=resource_id
     )
 
 
