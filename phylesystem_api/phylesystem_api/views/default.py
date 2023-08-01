@@ -242,7 +242,6 @@ def render_markdown(request):
         src = request.params.get("src", "")
     else:
         src = request.body
-    _LOG.debug("render_markdown src:\n{}".format(src))
     html = api_utils.markdown_to_html(src, open_links_in_new_window=True)
     return Response(body=html, content_type="text/html")
 
