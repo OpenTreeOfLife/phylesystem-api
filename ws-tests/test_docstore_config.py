@@ -3,7 +3,6 @@ import sys, os
 from opentreetesting import test_http_json_method, config
 
 DOMAIN = config("host", "apihost")
-SUBMIT_URI = DOMAIN + "/v3/amendments/store_config"
 frag_list = [
     "{d}/phylesystem_config",
     "{d}/v3/studies/store_config",

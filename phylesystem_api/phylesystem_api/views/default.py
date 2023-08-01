@@ -57,7 +57,26 @@ def home_view(request):
     return {"title": "phylesystem API"}
 
 
+_DOC_DICT = {
+    "description": "The Open Tree API",
+    "documentation_url": "https://github.com/OpenTreeOfLife/phylesystem-api/tree/master/docs",
+    "source_url": "https://github.com/OpenTreeOfLife/phylesystem-api",
+}
+
+
 @view_config(route_name="api_root", renderer="json", request_method="POST")
+def base_API_view(request):
+    return _DOC_DICT
+
+
+def validate_api_version_number(arg):
+    try:
+        iarg = int(arg)
+        assert 0 < iarg < 4
+    except:
+        raise404("Unrecognized API version v{}".format(arg))
+
+
 @view_config(route_name="api_version_root", renderer="json")
 @view_config(route_name="api_version_root_slash", renderer="json")
 @view_config(route_name="studies_root", renderer="json")
@@ -68,13 +87,8 @@ def home_view(request):
 @view_config(route_name="collections_root_slash", renderer="json")
 def base_API_view(request):
     # a tiny JSON description of the API and where to find documentation
-    api_version = request.matchdict["api_version"]
-    # TODO: Modify URLs if they differ across API versions
-    return {
-        "description": "The Open Tree API {}".format(api_version),
-        "documentation_url": "https://github.com/OpenTreeOfLife/phylesystem-api/tree/master/docs",
-        "source_url": "https://github.com/OpenTreeOfLife/phylesystem-api",
-    }
+    validate_api_version_number(request.matchdict["api_version"])
+    return _DOC_DICT
 
 
 # Create a unique cache key with the URL and any vars (GET *and* POST) to its "query string"
