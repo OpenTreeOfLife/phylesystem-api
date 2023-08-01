@@ -129,7 +129,7 @@ def get_docstore_from_type(doc_type_name, request, conf_obj=None):
     try:
         return _doc_type2store[doc_type_name]
     except:
-        raise400("Unrecognized document type {}".format(doc_type_name))
+        raise404("Unrecognized document type {}".format(doc_type_name))
 
 
 def get_config_impl(request, doc_type_name):
