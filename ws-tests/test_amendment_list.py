@@ -7,6 +7,10 @@ frag_list = [
     "{d}/v3/study_list",
     "{d}/v3/amendments/amendment_list",
     "{d}/v3/collections/collection_list",
+    "{d}/v3/studies/study_list",
+    "{d}/v3/amendments/doc_list",
+    "{d}/v3/collections/doc_list",
+    "{d}/v3/studies/doc_list",
 ]
 for frag in frag_list:
     SUBMIT_URI = frag.format(d=DOMAIN)

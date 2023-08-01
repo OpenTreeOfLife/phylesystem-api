@@ -267,9 +267,17 @@ def study_list(request):
     return studies
 
 
-@view_config(route_name="get_docstore_config", renderer="json")
-def get_docstore_config(request):
-    return get_config_impl(request, request.matchdict["doc_type_name"])
+@view_config(route_name="conventional_study_list", renderer="json")
+def conventional_study_list(request):
+    validate_api_version_number(request.matchdict["api_version"])
+    return study_list(request)
+
+
+@view_config(route_name="doc_list", renderer="json")
+def doc_list(request):
+    validate_api_version_number(request.matchdict["api_version"])
+    docstore = get_docstore_from_type(request.matchdict["doc_type_name"], request)
+    return docstore.get_doc_ids()
 
 
 @view_config(route_name="docstore_push_failure", renderer="json")
@@ -292,6 +300,7 @@ def docstore_push_failure(request):
 
 @view_config(route_name="phylesystem_config", renderer="json")
 def phylesystem_config(request):
+    validate_api_version_number(request.matchdict["api_version"])
     return get_docstore_config(request, "studies")
 
 
