@@ -527,6 +527,7 @@ def merge_docstore_changes(request):
 
 @view_config(route_name="push_docstore_changes", renderer="json")
 @view_config(route_name="push_docstore_changes_bare", renderer="json")
+@view_config(route_name="push_docstore_changes_slash", renderer="json")
 def push_docstore_changes(request):
     """OpenTree API method to update branch on master
 

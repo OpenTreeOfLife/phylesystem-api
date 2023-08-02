@@ -33,6 +33,12 @@ def includeme(config):
         "/v{api_version:[123]}/push_docstore_changes/{doc_type}",
         request_method="PUT",
     )
+    config.add_route(
+        "push_docstore_changes_slash",
+        "/v{api_version:[123]}/push_docstore_changes/{doc_type}/",
+        request_method="PUT",
+    )
+
     #
     # STUDY/TREE ROUTES
     #
