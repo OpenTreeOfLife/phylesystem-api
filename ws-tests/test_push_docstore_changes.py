@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from opentreetesting import test_http_json_method, writable_api_host_and_oauth_or_exit
-
+import sys
 
 DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 data = {"auth_token": auth_token}
