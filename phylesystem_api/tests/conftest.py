@@ -36,7 +36,6 @@ def testapp(app):
             "HTTP_HOST": "example.com",
         },
     )
-
     return testapp
 
 
