@@ -98,7 +98,9 @@ def create_amendment(request, **kwargs):
     # caller. It will assign the new amendment id accordingly!
     docstore = api_utils.get_taxonomic_amendment_store(request)
 
-    def amend_commit_fn(doc, doc_id, auth_info, commit_msg):
+    def amend_commit_fn(
+        doc, doc_id, auth_info, parent_sha=None, merged_sha=None, commit_msg=None
+    ):
         return docstore.add_new_amendment(
             doc, auth_info=auth_info, commit_msg=commit_msg
         )
