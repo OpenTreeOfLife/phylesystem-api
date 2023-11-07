@@ -279,8 +279,8 @@ def trees_in_synth(request):
 
 @view_config(route_name="include_tree_in_synth", renderer="json")
 def include_tree_in_synth(request):
-    study_id = request.params.get("study_id", "").strip()
-    tree_id = request.params.get("tree_id", "").strip()
+    study_id = request.json.get("study_id", "").strip()
+    tree_id = request.json.get("tree_id", "").strip()
     # check for empty/missing ids
     if (study_id == "") or (tree_id == ""):
         raise HTTPBadRequest(
@@ -386,8 +386,8 @@ def include_tree_in_synth(request):
 
 @view_config(route_name="exclude_tree_from_synth", renderer="json")
 def exclude_tree_from_synth(request):
-    study_id = request.params.get("study_id", "").strip()
-    tree_id = request.params.get("tree_id", "").strip()
+    study_id = request.json.get("study_id", "").strip()
+    tree_id = request.json.get("tree_id", "").strip()
     # check for empty/missing ids
     if (study_id == "") or (tree_id == ""):
         raise HTTPBadRequest(
