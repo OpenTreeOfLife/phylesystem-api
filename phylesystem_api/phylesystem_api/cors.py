@@ -4,7 +4,6 @@ from pyramid.security import NO_PERMISSION_REQUIRED
 def includeme(config):
     config.add_directive("add_cors_preflight_handler", add_cors_preflight_handler)
     config.add_route_predicate("cors_preflight", CorsPreflightPredicate)
-
     config.add_subscriber(add_cors_to_response, "pyramid.events.NewResponse")
 
 
