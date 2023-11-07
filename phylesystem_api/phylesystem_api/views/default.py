@@ -381,7 +381,7 @@ def include_tree_in_synth(request):
             )
 
     # fetch and return the updated list of synth-input trees
-    return trees_in_synth(kwargs)
+    return trees_in_synth(request)
 
 
 @view_config(route_name="exclude_tree_from_synth", renderer="json")
@@ -447,7 +447,7 @@ def exclude_tree_from_synth(request):
                 )
 
     # fetch and return the updated list of synth-input trees
-    return trees_in_synth(kwargs)
+    return trees_in_synth(request)
 
 
 def _get_synth_input_collection_ids():
