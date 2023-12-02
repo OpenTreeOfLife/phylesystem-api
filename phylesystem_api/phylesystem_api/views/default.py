@@ -180,7 +180,7 @@ def pull_through_cache(request):
             return Response(
                 headers=fetched.headers,
                 body=fetched.text,
-                status=fetched.status_code,  # keep the returned status code!
+                status_code=fetched.status_code,  # keep the returned status code!
                 charset="UTF-8",
                 content_type=ct,
             )
