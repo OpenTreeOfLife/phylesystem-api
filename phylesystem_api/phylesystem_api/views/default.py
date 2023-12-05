@@ -167,7 +167,6 @@ def pull_through_cache(request):
             msg = "... and now we're back with fetched, which is a {}"
             msg = msg.format(type(fetched))
             _LOG.warning(msg)
-            fetched.raise_for_status()
             fetched.encoding = "utf-8"  # Optional: requests infers this internally
 
             # modify or discard "hop-by-hop" headers
@@ -180,8 +179,8 @@ def pull_through_cache(request):
                 ct = "text/plain"
             return Response(
                 headers=fetched.headers,
-                body=fetched.text,  # missing JSON payload will raise an error
-                status="200 OK",
+                body=fetched.text,
+                status_code=fetched.status_code,  # keep the returned status code!
                 charset="UTF-8",
                 content_type=ct,
             )
@@ -192,7 +191,7 @@ def pull_through_cache(request):
             raise HTTPException(body=str(e))
         except Exception as e:
             _LOG.warning("  UNKNOWN request exception: {}".format(str(e)))
-            raise HTTPBadRequest(body="Unknown exception in cached call!")
+            raise HTTPBadRequest(body="Unknown exception in cached call! Check server log for details.")
 
     _LOG.warning("...trying to fetch-and-cache...")
     return fetch_and_cache(target_url)
