@@ -182,11 +182,12 @@ def _fetch_duplicate_study_ids(request, study_DOI=None, study_ID=None):
     duplicate_study_ids = oti.find_studies(
         {"ot:studyPublication": study_DOI}, verbose=False, exact=True
     )
+    # strip the list to just include bare study IDs
+    duplicate_study_ids = [x['ot:studyId'] for x in duplicate_study_ids]
     try:
         duplicate_study_ids.remove(study_ID)
     except ValueError:
         # ignore error, if oti is lagging and doesn't have this study yet
-        pass
         pass
     return duplicate_study_ids
 
