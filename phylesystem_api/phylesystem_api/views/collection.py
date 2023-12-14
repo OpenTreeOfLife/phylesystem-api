@@ -98,7 +98,7 @@ def add_collection_specific_fields(request, collection_id, result):
     version_history = result.get("versionHistory")
     if version_history:
         result["lastModified"] = get_last_modified_dict(
-            latest_commit=version_history[0]
+            last_commit=version_history[0]
         )
     return result
 
