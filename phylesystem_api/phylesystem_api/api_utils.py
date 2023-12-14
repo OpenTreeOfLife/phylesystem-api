@@ -97,13 +97,13 @@ def get_last_modified_dict(docstore=None, doc_id=None, last_commit=None):
         commit_list = docstore.get_version_history_for_doc_id(doc_id)
         if not commit_list:
             return None
-        latest_commit = commit_list[0]
+        last_commit = commit_list[0]
     return {
-        "author_name": latest_commit.get("author_name"),
-        "relative_date": latest_commit.get("relative_date"),
-        "display_date": latest_commit.get("date"),
-        "ISO_date": latest_commit.get("date_ISO_8601"),
-        "sha": latest_commit.get("id"),  # this is the commit hash
+        "author_name": last_commit.get("author_name"),
+        "relative_date": last_commit.get("relative_date"),
+        "display_date": last_commit.get("date"),
+        "ISO_date": last_commit.get("date_ISO_8601"),
+        "sha": last_commit.get("id"),  # this is the commit hash
     }
 
 
