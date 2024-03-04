@@ -74,7 +74,7 @@ def fetch_collection(request):
         # save this as a filename WITHOUT slashes
         preferred_filename = collection_id.replace('/','_')
         # ADD content-disposition header
-        Response.content_disposition('attachment; filename={}.json;'.format(preferred_filename))
+        request.response.content_disposition('attachment; filename={}.json;'.format(preferred_filename))
         collection_id = collection_id[0:-5]  # trim the '.json' extension and proceed w/ fetch
 
     result = fetch_doc(
