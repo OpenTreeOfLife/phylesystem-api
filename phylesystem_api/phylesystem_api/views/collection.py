@@ -69,14 +69,13 @@ def fetch_collection(request):
     # NB - This method does not require authentication!
     collection_id = request.matchdict["collection_id"]
 
-    """
+    # if '.json' was added to the URL, specify as download
     if collection_id.endswith('.json'):
-        collection_id = collection_id.substring()
+        # save this as a filename WITHOUT slashes
+        preferred_filename = collection_id.replace('/','_')
         # ADD content-disposition header
-    """
-    # specify as download for bare URL (not from webapp)
-    preferred_filename = collection_id.replace('/','_')
-    Response.content_disposition('attachment; filename={}.json;'.format(preferred_filename))
+        Response.content_disposition('attachment; filename={}.json;'.format(preferred_filename))
+        collection_id = collection_id[0:-5]  # trim the '.json' extension and proceed w/ fetch
 
     result = fetch_doc(
         request,
