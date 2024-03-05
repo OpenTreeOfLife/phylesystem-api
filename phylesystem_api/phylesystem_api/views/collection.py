@@ -76,9 +76,9 @@ def fetch_collection(request):
         # ADD content-disposition header
         response = request.response
         _LOG.debug("response? ", response)
-        _LOG.debug("response.content_disposition? ", response.content_disposition)
-        _LOG.debug("response.headers? ", response.headers)
-        _LOG.debug("OLD response.headers['Content-Disposition']? ", response.headers['Content-Disposition'])
+        #_LOG.debug("response.content_disposition? ", response.content_disposition)
+        #_LOG.debug("response.headers? ", response.headers)
+        #_LOG.debug("OLD response.headers['Content-Disposition']? ", response.headers['Content-Disposition'])
         #response.content_disposition('attachment; filename={}.json;'.format(preferred_filename))
         request.response.headers["Content-Disposition"] = "attachment; filename={}.json;".format(preferred_filename)
         _LOG.debug("NEW response.headers['Content-Disposition']? ", response.headers['Content-Disposition'])
