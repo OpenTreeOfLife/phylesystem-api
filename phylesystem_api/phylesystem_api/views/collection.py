@@ -68,6 +68,16 @@ def is_valid_collection_id(doc_id):
 def fetch_collection(request):
     # NB - This method does not require authentication!
     collection_id = request.matchdict["collection_id"]
+
+    # if '.json' was added to the URL, specify as download
+    if collection_id.endswith('.json'):
+        # save this as a filename WITHOUT slashes
+        preferred_filename = collection_id.replace('/','_')
+        # ADD content-disposition header
+        response = request.response
+        response.headers["Content-Disposition"] = "attachment; filename={};".format(preferred_filename)
+        collection_id = collection_id[0:-5]  # trim the '.json' extension and proceed w/ fetch
+
     result = fetch_doc(
         request,
         doc_id=collection_id,
