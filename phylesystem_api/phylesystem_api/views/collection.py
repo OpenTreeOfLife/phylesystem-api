@@ -75,15 +75,10 @@ def fetch_collection(request):
         preferred_filename = collection_id.replace('/','_')
         # ADD content-disposition header
         response = request.response
-        _LOG.debug("response? ", response)
-        #_LOG.debug("response.content_disposition? ", response.content_disposition)
-        #_LOG.debug("response.headers? ", response.headers)
-        #_LOG.debug("OLD response.headers['Content-Disposition']? ", response.headers['Content-Disposition'])
-        #response.content_disposition('attachment; filename={}.json;'.format(preferred_filename))
-        request.response.headers["Content-Disposition"] = "attachment; filename={};".format(preferred_filename)
+        response.headers["Content-Disposition"] = "attachment; filename={};".format(preferred_filename)
         _LOG.debug("NEW response.headers['Content-Disposition']? ", response.headers['Content-Disposition'])
         collection_id = collection_id[0:-5]  # trim the '.json' extension and proceed w/ fetch
-        _LOG.debug("NEW collection_id? ", collection_id)
+        _LOG.debug("SHORTENED collection_id? ", collection_id)
 
     result = fetch_doc(
         request,
