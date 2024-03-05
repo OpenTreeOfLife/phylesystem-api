@@ -91,7 +91,6 @@ def fetch_collection(request):
     return add_collection_specific_fields(request, collection_id, result)
 
 
-
 def add_collection_specific_fields(request, collection_id, result):
     collection_json = result["data"]
     # Add commentHTML to result JSON
