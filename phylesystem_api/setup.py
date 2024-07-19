@@ -13,10 +13,13 @@ requires = [
     "pyramid",
     "pyramid_jinja2",
     "pyramid_debugtoolbar",
+    "pyramid_beaker",
     "waitress",
     "requests",
     "beaker",
     "PyGithub",
+    "markdown",
+    "bleach",
 ]
 
 tests_require = [
