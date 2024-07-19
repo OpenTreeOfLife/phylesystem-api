@@ -9,6 +9,8 @@ SUBMIT_URI = DOMAIN + "/v3/studies/find_studies"
 # See this helpful issue from @jar398:
 #   https://github.com/OpenTreeOfLife/germinator/issues/94#issuecomment-227027174
 data = {"verbose": True}
-r = test_http_json_method(SUBMIT_URI, "GET", data=data, expected_status=200, return_bool_data=True)
+r = test_http_json_method(
+    SUBMIT_URI, "GET", data=data, expected_status=200, return_bool_data=True
+)
 if not r[0]:
     sys.exit(1)

@@ -8,21 +8,34 @@ this_script = sys.argv[0]
 if len(sys.argv) > 1:
     opentree_docstore_url = sys.argv[1]
 else:
-    print "Please specify the Open Tree doc-store URL as first argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    print(
+        "Please specify the Open Tree doc-store URL as first argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'"
+        % (this_script,)
+    )
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 2:
     amendments_repo_url = sys.argv[2]
 else:
-    print "Please specify the taxonomic-amendment repo URL as second argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    print(
+        "Please specify the taxonomic-amendment repo URL as second argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'"
+        % (this_script,)
+    )
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 3:
     opentree_api_base_url = sys.argv[3].rstrip("/")
-    nudge_study_index_url = "%s/phylesystem/search/nudgeStudyIndexOnUpdates" % opentree_api_base_url
-    nudge_taxon_index_url = "%s/phylesystem/search/nudgeTaxonIndexOnUpdates" % opentree_api_base_url
+    nudge_study_index_url = (
+        "%s/phylesystem/search/nudgeStudyIndexOnUpdates" % opentree_api_base_url
+    )
+    nudge_taxon_index_url = (
+        "%s/phylesystem/search/nudgeTaxonIndexOnUpdates" % opentree_api_base_url
+    )
 else:
-    print "Please specify the Open Tree API public URL as third argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'" % (this_script,)
+    print(
+        "Please specify the Open Tree API public URL as third argument: '%s <studies-repo-URL> <amendments-repo-URL> <public-API-URL> [<GitHub-OAuth-token-file>]'"
+        % (this_script,)
+    )
     sys.exit(1)  # signal to the caller that something went wrong
 
 if len(sys.argv) > 4:
@@ -41,17 +54,22 @@ else:
 
 # Alternately, we could prompt the user for their GitHub username and password...
 
+
 def install_webhook(repo_url, nudge_index_url):
-    docstore_repo_name = repo_url.rstrip('/').split('/').pop()
-    webhook_url = 'https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name
-    r = requests.get(webhook_url,
-                     headers={"Authorization": ("token %s" % auth_token)})
+    docstore_repo_name = repo_url.rstrip("/").split("/").pop()
+    webhook_url = (
+        "https://api.github.com/repos/OpenTreeOfLife/%s/hooks" % docstore_repo_name
+    )
+    r = requests.get(webhook_url, headers={"Authorization": ("token %s" % auth_token)})
     try:
         hooks_info = json.loads(r.text)
     except:
-        print '\nUnable to load webhook info (bad OAuth token?) [auth_token=%s]:' % auth_token 
-        print 'Webhook URL: [%s]' % webhook_url
-        print 'Webhook response:\n%s\n' % r.text.encode('utf-8')
+        print(
+            "\nUnable to load webhook info (bad OAuth token?) [auth_token=%s]:"
+            % auth_token
+        )
+        print("Webhook URL: [%s]" % webhook_url)
+        print("Webhook response:\n%s\n" % r.text.encode("utf-8"))
         prompt_for_manual_webhooks = True
         return
 
@@ -59,48 +77,51 @@ def install_webhook(repo_url, nudge_index_url):
     found_matching_webhook = False
     for hook in hooks_info:
         try:
-            if (hook.get('name') == "web" and 
-                hook.get('active') == True and
-                hook.get('events') and ("push" in hook['events']) and
-                hook.get('config') and (hook['config']['url'] == nudge_index_url)
+            if (
+                hook.get("name") == "web"
+                and hook.get("active") == True
+                and hook.get("events")
+                and ("push" in hook["events"])
+                and hook.get("config")
+                and (hook["config"]["url"] == nudge_index_url)
             ):
                 found_matching_webhook = True
         except:
-            print 'Unexpected webhook response: ', r.text
+            print("Unexpected webhook response: ", r.text)
             # Rather than failing outright, let's keep going with the manual prompt below
             prompt_for_manual_webhooks = True
             return
 
     if found_matching_webhook:
-        print "Found a matching webhook in the docstore repo!"
+        print("Found a matching webhook in the docstore repo!")
         return
     else:
-        print "Adding a webhook to the %s repo..." % docstore_repo_name
+        print("Adding a webhook to the %s repo..." % docstore_repo_name)
         hook_settings = {
             "name": "web",
             "active": True,
-            "events": [
-                "push"
-            ],
-            "config": {
-                "url": nudge_index_url,
-                "content_type": "json"
-            }
+            "events": ["push"],
+            "config": {"url": nudge_index_url, "content_type": "json"},
         }
 
-        r = requests.post('https://api.github.com/repos/OpenTreeOfLife/%s/hooks' % docstore_repo_name,
-                          headers={"Authorization": ("token %s" % auth_token), 
-                                   "Content-type": "aplication/json"}, 
-                          data=json.dumps(hook_settings))
+        r = requests.post(
+            "https://api.github.com/repos/OpenTreeOfLife/%s/hooks" % docstore_repo_name,
+            headers={
+                "Authorization": ("token %s" % auth_token),
+                "Content-type": "aplication/json",
+            },
+            data=json.dumps(hook_settings),
+        )
         if r.status_code == 201:  # 201=Created
-            print "Hook added successfully!"
+            print("Hook added successfully!")
         else:
-            print "Failed to add webhook! API sent this response:"
-            print r.url
-            print r.text
+            print("Failed to add webhook! API sent this response:")
+            print(r.url)
+            print(r.text)
             prompt_for_manual_webhooks = True
 
-if not(prompt_for_manual_webhooks):
+
+if not (prompt_for_manual_webhooks):
     # try to install webhooks via GitHub API
     # N.B. this might fail, flipping prompt_for_manual_webhooks!
     install_webhook(opentree_docstore_url, nudge_study_index_url)
@@ -108,7 +129,8 @@ if not(prompt_for_manual_webhooks):
 
 if prompt_for_manual_webhooks:
     # fall back to our prompts for manual action
-    print """
+    print(
+        """
     ***************************************************************
 
     Please ensure the required webhook for re-indexing studies is in place on
@@ -123,9 +145,12 @@ if prompt_for_manual_webhooks:
         Active: true
 
     ***************************************************************
-        """ %  (opentree_docstore_url, nudge_study_index_url)
+        """
+        % (opentree_docstore_url, nudge_study_index_url)
+    )
 
-    print """
+    print(
+        """
     Please ensure the required webhook for indexing new taxa (and other
     taxonomic amendments) is in place on GitHub. You can manage webhooks for
     this repo at:
@@ -139,6 +164,8 @@ if prompt_for_manual_webhooks:
         Active: true
 
     ***************************************************************
-        """ %  (amendments_repo_url, nudge_taxon_index_url)
+        """
+        % (amendments_repo_url, nudge_taxon_index_url)
+    )
 
 sys.exit(0)

@@ -327,7 +327,7 @@ translations = [
 
 def translate(s):
     if config("host", "translate", "false") == "true":
-        for (src, dst) in translations:
+        for src, dst in translations:
             if src in s:
                 return s.replace(src, dst)
     return s

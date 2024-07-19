@@ -2,6 +2,7 @@ from pyramid.response import Response
 from pyramid.view import notfound_view_config
 import json
 
+
 # most API pages should be JSON, so here's a suitable 404 response
 @notfound_view_config(renderer="json", accept="application/json", append_slash=True)
 def notfound(request):

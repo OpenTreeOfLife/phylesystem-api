@@ -70,13 +70,17 @@ def fetch_collection(request):
     collection_id = request.matchdict["collection_id"]
 
     # if '.json' was added to the URL, specify as download
-    if collection_id.endswith('.json'):
+    if collection_id.endswith(".json"):
         # save this as a filename WITHOUT slashes
-        preferred_filename = collection_id.replace('/','_')
+        preferred_filename = collection_id.replace("/", "_")
         # ADD content-disposition header
         response = request.response
-        response.headers["Content-Disposition"] = "attachment; filename={};".format(preferred_filename)
-        collection_id = collection_id[0:-5]  # trim the '.json' extension and proceed w/ fetch
+        response.headers["Content-Disposition"] = "attachment; filename={};".format(
+            preferred_filename
+        )
+        collection_id = collection_id[
+            0:-5
+        ]  # trim the '.json' extension and proceed w/ fetch
 
     result = fetch_doc(
         request,
@@ -107,9 +111,7 @@ def add_collection_specific_fields(request, collection_id, result):
     # Add the lastModified field to the result JSON
     version_history = result.get("versionHistory")
     if version_history:
-        result["lastModified"] = get_last_modified_dict(
-            last_commit=version_history[0]
-        )
+        result["lastModified"] = get_last_modified_dict(last_commit=version_history[0])
     return result
 
 
