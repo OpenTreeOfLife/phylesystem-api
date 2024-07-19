@@ -14,6 +14,9 @@ requires = [
     "pyramid_jinja2",
     "pyramid_debugtoolbar",
     "waitress",
+    "requests",
+    "beaker",
+    "PyGithub",
 ]
 
 tests_require = [
