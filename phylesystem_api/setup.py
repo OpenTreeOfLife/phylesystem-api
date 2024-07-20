@@ -19,6 +19,7 @@ requires = [
     "beaker",
     "PyGithub",
     "markdown",
+    "mdx_linkify",  # prereq of markdown, but not listed as such..
     "bleach",
 ]
 
