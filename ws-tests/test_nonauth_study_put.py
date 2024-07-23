@@ -10,7 +10,7 @@ DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 study_id = 12
 SUBMIT_URI = DOMAIN + "/v3/study/{s}".format(s=study_id)
 fn = "data/{s}.json".format(s=study_id)
-inpf = codecs.open(fn, "rU", encoding="utf-8")
+inpf = codecs.open(fn, "r", encoding="utf-8")
 n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
 m = n["nexml"]["meta"]
@@ -20,7 +20,7 @@ if short_list:
 else:
     el = {"@property": "bogus_timestamp", "@xsi:type": "nex:LiteralMeta"}
     m.append(el)
-el["$"] = datetime.datetime.utcnow().isoformat()
+el["$"] = datetime.datetime.now(datetime.UTC).isoformat()
 
 data = {"nexson": n, "auth_token": "bogus"}
 if test_http_json_method(SUBMIT_URI, "PUT", data=data, expected_status=400):

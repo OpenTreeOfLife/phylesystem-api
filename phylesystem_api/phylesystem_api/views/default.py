@@ -565,7 +565,7 @@ def push_docstore_changes(request):
             msg = '"{f}" already exists. This event not logged'.format(f=fail_file)
             _LOG.warning(msg)
         else:
-            timestamp = datetime.datetime.utcnow().isoformat()
+            timestamp = datetime.datetime.now(datetime.UTC).isoformat()
             try:
                 ga = docstore.create_git_action(resource_id)
             except:
@@ -605,7 +605,7 @@ def remove_fail_file(fail_file):
         if not os.path.exists(fail_file):
             return
 
-        with codecs.open(fail_file, "rU", encoding="utf-8") as inpf:
+        with codecs.open(fail_file, "r", encoding="utf-8") as inpf:
             prev_fail = json.load(inpf)
         os.unlink(fail_file)
         fail_log_file = codecs.open(fail_file + ".log", mode="a", encoding="utf-8")

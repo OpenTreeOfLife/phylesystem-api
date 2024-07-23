@@ -20,7 +20,7 @@ starting_commit_SHA = resp["sha"]
 SUBMIT_URI = DOMAIN + "/v3/study/{s}".format(s=study_id)
 n = resp["data"]
 # refresh a timestamp so that the test generates a commit
-m = n["nexml"]["^bogus_timestamp"] = datetime.datetime.utcnow().isoformat()
+m = n["nexml"]["^bogus_timestamp"] = datetime.datetime.now(datetime.UTC).isoformat()
 data = {
     "nexson": n,
     "auth_token": auth_token,

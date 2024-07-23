@@ -8,10 +8,10 @@ import os
 
 DOMAIN, auth_token = writable_api_host_and_oauth_or_exit(__file__)
 SUBMIT_URI = DOMAIN + "/v3/study/"
-inpf = codecs.open("data/10.json", "rU", encoding="utf-8")
+inpf = codecs.open("data/10.json", "r", encoding="utf-8")
 n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
-m = n["nexml"]["^bogus_timestamp"] = datetime.datetime.utcnow().isoformat()
+m = n["nexml"]["^bogus_timestamp"] = datetime.datetime.now(datetime.UTC).isoformat()
 data = {
     "nexson": n,
     "auth_token": auth_token,

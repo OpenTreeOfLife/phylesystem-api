@@ -23,7 +23,7 @@ if not r[0]:
 starting_commit_SHA = r[1]["branch2sha"]["master"]
 SUBMIT_URI = DOMAIN + "/v3/study/%s" % study_id
 fn = "data/{s}.json".format(s=study_id)
-inpf = codecs.open(fn, "rU", encoding="utf-8")
+inpf = codecs.open(fn, "r", encoding="utf-8")
 n = json.load(inpf)
 # refresh a timestamp so that the test generates a commit
 m = n["nexml"]["meta"]
@@ -33,7 +33,7 @@ if short_list:
 else:
     el = {"@property": "bogus_timestamp", "@xsi:type": "nex:LiteralMeta"}
     m.append(el)
-el["$"] = datetime.datetime.utcnow().isoformat()
+el["$"] = datetime.datetime.now(datetime.UTC).isoformat()
 n = convert_nexson_format(n, "1.2")
 data = {
     "nexson": n,
