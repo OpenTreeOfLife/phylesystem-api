@@ -1,7 +1,14 @@
 # .coveragerc to control coverage.py
 [run]
 branch = True
-include = phylesystem_api/*.py
+include =
+    phylesystem_api/*.py
+    peyotl/peyotl/*.py
+    peyotl/peyotl/**/*.py
+    peyutil/peyutil/*.py
+    peyutil/peyutil/**/*.py
+    nexson/nexson/*.py
+    nexson/nexson/**/*.py
 
 [report]
 # Regexes for lines to exclude from consideration
