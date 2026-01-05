@@ -916,7 +916,7 @@ def get_oti_wrapper(request):
 
 _all_coll_lock = threading.Lock()
 ALL_COLLECTIONS_LIST = None
-ALL_COLLECTIONS_DICT = None
+ALL_COLLECTIONS_DICT = {}
 
 
 def all_collections_list(request):
@@ -960,6 +960,8 @@ def _locked_update_coll_list():
     for k in ack:
         acl.append(ALL_COLLECTIONS_DICT[k])
     # In place swap
+    if ALL_COLLECTIONS_LIST is None:
+        ALL_COLLECTIONS_LIST = []
     del ALL_COLLECTIONS_LIST[:]
     ALL_COLLECTIONS_LIST.extend(acl)
     return ALL_COLLECTIONS_LIST
