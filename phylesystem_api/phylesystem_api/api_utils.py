@@ -951,7 +951,7 @@ class SharedColl:
             acl.append(self.all_coll_dict[k])
         # In place swap
         if self.all_coll_list is None:
-            self.LL_COLLECTIONS_LIST = []
+            self.all_coll_list = []
         del self.all_coll_list[:]
         self.all_coll_list.extend(acl)
         return self.all_coll_list
