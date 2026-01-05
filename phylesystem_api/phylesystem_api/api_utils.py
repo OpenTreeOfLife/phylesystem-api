@@ -959,7 +959,7 @@ class SharedColl:
 
 def all_collections_list(request):
     try:
-        coll_singleton = request.config.SHARED_COLL
+        coll_singleton = request.registry.settings["shared_coll"]
         assert coll_singleton is not None
     except:
         _LOG.exception("Getting coll_singleton in all_collections_list")
@@ -978,7 +978,7 @@ def all_collections_list(request):
 
 def coll_created_cb(request, blob):
     try:
-        coll_singleton = request.config.SHARED_COLL
+        coll_singleton = request.registry.settings["shared_coll"]
         assert coll_singleton is not None
     except:
         _LOG.exception("Getting coll_singleton in coll_created_cb")
@@ -1009,7 +1009,7 @@ def coll_updated_cb(request, blob):
 
 def coll_deleted_cb(request, blob):
     try:
-        coll_singleton = request.config.SHARED_COLL
+        coll_singleton = request.registry.settings["shared_coll"]
         assert coll_singleton is not None
     except:
         _LOG.exception("Getting coll_singleton in coll_deleted_cb")

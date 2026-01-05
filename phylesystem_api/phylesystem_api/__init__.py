@@ -10,10 +10,11 @@ def main(global_config, **settings):
         config.add_cors_preflight_handler()
         config.include(".routes")
         config.scan()
+        config.registry.settings["shared_coll"] = SharedColl()
     # for k, v in settings.items():
     #     print("{k}: {v}".format(k=k, v=repr(v)))
     localconfig_filename = settings["config_file_path"]
     conf_obj = get_conf_object(localconfig_filename=localconfig_filename)
     _ps = get_docstore_from_type("study", request=None, conf_obj=conf_obj)
-    config.SHARED_COLL = SharedColl()
+    # config.SHARED_COLL = SharedColl()
     return config.make_wsgi_app()
