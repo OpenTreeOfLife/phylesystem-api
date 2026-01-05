@@ -980,7 +980,20 @@ def all_collections_list(request):
     return alias
 
 
-def coll_created_cb(request, blob):
+def _last_mod_from_now(blob, auth_info):
+    ts = datetime.now()
+    # TODO we don't seem to have TZ set consisitently. hard-coding 0000
+    #   for this use
+    return {
+        "sha": blob["sha"],
+        "author_name": auth_info.get("name", "<unknown>"),
+        "relative_date": "moments ago",
+        "display_date": ts.strftime("%a, %d %b %Y %H:%M:%S +0000"),
+        "ISO_date": ts.strftime("%Y-%m-%d %H:%M:%S +0000"),
+    }
+
+
+def coll_created_cb(request, blob, new_obj, auth_info):
     try:
         coll_singleton = request.registry.settings["shared_coll"]
         assert coll_singleton is not None
@@ -992,10 +1005,9 @@ def coll_created_cb(request, blob):
     c_id = blob["resource_id"]
     mn = blob.get("merge_needed")
     if (mn is not None) and (not mn):
-        docstore = get_tree_collection_store(request)
-        coll = raw_collection_fetch(request, c_id)["data"]
+        coll = new_obj
         coll["id"] = c_id
-        coll["lastModified"] = get_last_modified_dict(docstore, c_id)
+        coll["lastModified"] = _last_mod_from_now(blob, auth_info)
         with _all_coll_lock:
             _LOG.debug(
                 f"Adding {c_id} to all_coll_dict of size {len(coll_singleton.all_coll_dict)}"
@@ -1008,8 +1020,8 @@ def coll_created_cb(request, blob):
     return blob
 
 
-def coll_updated_cb(request, blob):
-    return coll_created_cb(request, blob)
+def coll_updated_cb(request, blob, new_obj, auth_info):
+    return coll_created_cb(request, blob, new_obj, auth_info=auth_info)
 
 
 def coll_deleted_cb(request, blob):
