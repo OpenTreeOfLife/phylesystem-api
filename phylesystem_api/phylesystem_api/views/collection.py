@@ -243,7 +243,7 @@ def delete_collection(request):
         commit_msg=r_commit_msg,
     )
     try:
-        coll_deleted_cb(request, blob)
+        coll_deleted_cb(request, blob, collection_id)
     except:
         _LOG.exception("coll_deleted_cb exception")
     return blob

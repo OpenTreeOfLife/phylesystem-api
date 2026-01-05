@@ -1024,7 +1024,7 @@ def coll_updated_cb(request, blob, new_obj, auth_info):
     return coll_created_cb(request, blob, new_obj, auth_info=auth_info)
 
 
-def coll_deleted_cb(request, blob):
+def coll_deleted_cb(request, blob, collection_id):
     try:
         coll_singleton = request.registry.settings["shared_coll"]
         assert coll_singleton is not None
@@ -1032,7 +1032,7 @@ def coll_deleted_cb(request, blob):
     except:
         _LOG.exception("Getting coll_singleton in coll_deleted_cb")
         raise
-    c_id = blob["resource_id"]
+    c_id = collection_id
     mn = blob.get("merge_needed")
     if (mn is not None) and (not mn):
         with _all_coll_lock:
