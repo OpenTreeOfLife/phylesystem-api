@@ -318,7 +318,7 @@ def get_phylesystem(request, conf_obj=None):
         pkey=pc.pkey,
         git_action_class=GitData,
         mirror_info=pc.mirror_info,
-        **a
+        **a,
     )
     # _LOG.debug('[[[[[[ repo_nexml2json = {}'.format(_PHYLESYSTEM.repo_nexml2json))
     if READ_ONLY_MODE:
@@ -977,8 +977,14 @@ def coll_created_cb(request, blob):
         coll["id"] = c_id
         coll["lastModified"] = get_last_modified_dict(docstore, c_id)
         with _all_coll_lock:
+            _LOG.debug(
+                f"Adding {c_id} to ALL_COLLECTIONS_DICT of size {len(ALL_COLLECTIONS_DICT)}"
+            )
             ALL_COLLECTIONS_DICT[c_id] = coll
             _locked_update_coll_list()
+            _LOG.debug(
+                f"After adding {c_id} to ALL_COLLECTIONS_DICT of size {len(ALL_COLLECTIONS_DICT)}"
+            )
     return blob
 
 
@@ -987,6 +993,7 @@ def coll_updated_cb(request, blob):
 
 
 def coll_deleted_cb(request, blob):
+    global ALL_COLLECTIONS_DICT
     c_id = blob["resource_id"]
     mn = blob.get("merge_needed")
     if (mn is not None) and (not mn):
