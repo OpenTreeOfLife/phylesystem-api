@@ -926,6 +926,10 @@ class SharedColl:
         self._count = 1 + self._count
         assert self._count == 1
 
+    def init_if_needed(self, request):
+        if self.all_coll_list is None:
+            self._refresh_all_collections(request)
+
     def _refresh_all_collections(self, request):
         docstore = get_tree_collection_store(request)
         # Convert these to more closely resemble the output of find_all_studies
@@ -980,6 +984,7 @@ def coll_created_cb(request, blob):
     try:
         coll_singleton = request.registry.settings["shared_coll"]
         assert coll_singleton is not None
+        coll_singleton.init_if_needed(request)
     except:
         _LOG.exception("Getting coll_singleton in coll_created_cb")
         raise
@@ -988,7 +993,7 @@ def coll_created_cb(request, blob):
     mn = blob.get("merge_needed")
     if (mn is not None) and (not mn):
         docstore = get_tree_collection_store(request)
-        coll = raw_collection_fetch(request, c_id)
+        coll = raw_collection_fetch(request, c_id)["data"]
         coll["id"] = c_id
         coll["lastModified"] = get_last_modified_dict(docstore, c_id)
         with _all_coll_lock:
@@ -1011,6 +1016,7 @@ def coll_deleted_cb(request, blob):
     try:
         coll_singleton = request.registry.settings["shared_coll"]
         assert coll_singleton is not None
+        coll_singleton.init_if_needed(request)
     except:
         _LOG.exception("Getting coll_singleton in coll_deleted_cb")
         raise
