@@ -1,5 +1,5 @@
 from pyramid.config import Configurator
-from .api_utils import get_conf_object, get_docstore_from_type
+from .api_utils import get_conf_object, get_docstore_from_type, SharedColl
 
 
 def main(global_config, **settings):
@@ -15,4 +15,5 @@ def main(global_config, **settings):
     localconfig_filename = settings["config_file_path"]
     conf_obj = get_conf_object(localconfig_filename=localconfig_filename)
     _ps = get_docstore_from_type("study", request=None, conf_obj=conf_obj)
+    config.SHARED_COLL = SharedColl()
     return config.make_wsgi_app()

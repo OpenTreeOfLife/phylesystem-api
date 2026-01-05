@@ -915,60 +915,75 @@ def get_oti_wrapper(request):
 
 
 _all_coll_lock = threading.Lock()
-ALL_COLLECTIONS_LIST = None
-ALL_COLLECTIONS_DICT = {}
+
+
+class SharedColl:
+    _count = 0
+
+    def __init__(self):
+        self.all_coll_list = None
+        self.all_coll_dict = {}
+        self._count = 1 + self._count
+        assert self._count == 1
+
+    def _refresh_all_collections(self, request):
+        docstore = get_tree_collection_store(request)
+        # Convert these to more closely resemble the output of find_all_studies
+        acd = {}
+        for c_id, props in docstore.iter_doc_objs():
+            props["id"] = c_id
+            props["lastModified"] = get_last_modified_dict(docstore, c_id)
+            acd[c_id] = props
+        r = None
+        with _all_coll_lock:
+            # in place update then refresh list form
+            self.all_coll_dict.clear()
+            self.all_coll_dict.update(acd)
+            r = self._locked_update_coll_list()
+        return r
+
+    def _locked_update_coll_list(self):
+        """Assumes _all_coll_lock is held by caller!!!!"""
+        ack = list(self.all_coll_dict.keys())
+        ack.sort()
+        acl = []
+        for k in ack:
+            acl.append(self.all_coll_dict[k])
+        # In place swap
+        if self.all_coll_list is None:
+            self.LL_COLLECTIONS_LIST = []
+        del self.all_coll_list[:]
+        self.all_coll_list.extend(acl)
+        return self.all_coll_list
 
 
 def all_collections_list(request):
-    global ALL_COLLECTIONS_LIST
+    try:
+        coll_singleton = request.config.SHARED_COLL
+        assert coll_singleton is not None
+    except:
+        _LOG.exception("Getting coll_singleton in all_collections_list")
+        raise
+
     alias = None
     with _all_coll_lock:
-        if ALL_COLLECTIONS_LIST is not None:
-            alias = list(ALL_COLLECTIONS_LIST)
+        if coll_singleton.all_coll_list is not None:
+            alias = list(coll_singleton.all_coll_list)
     if alias is None:
-        alias = _refresh_all_collections(request)
+        alias = coll_singleton._refresh_all_collections(request)
         assert alias is not None
         alias = list(alias)
     return alias
 
 
-def _refresh_all_collections(request):
-    global ALL_COLLECTIONS_LIST, ALL_COLLECTIONS_DICT
-
-    docstore = get_tree_collection_store(request)
-    # Convert these to more closely resemble the output of find_all_studies
-    acd = {}
-    for c_id, props in docstore.iter_doc_objs():
-        props["id"] = c_id
-        props["lastModified"] = get_last_modified_dict(docstore, c_id)
-        acd[c_id] = props
-    r = None
-    with _all_coll_lock:
-        # in place update then refresh list form
-        ALL_COLLECTIONS_DICT.clear()
-        ALL_COLLECTIONS_DICT.update(acd)
-        r = _locked_update_coll_list()
-    return r
-
-
-def _locked_update_coll_list():
-    """Assumes _all_coll_lock is held by caller!!!!"""
-    global ALL_COLLECTIONS_LIST, ALL_COLLECTIONS_DICT
-    ack = list(ALL_COLLECTIONS_DICT.keys())
-    ack.sort()
-    acl = []
-    for k in ack:
-        acl.append(ALL_COLLECTIONS_DICT[k])
-    # In place swap
-    if ALL_COLLECTIONS_LIST is None:
-        ALL_COLLECTIONS_LIST = []
-    del ALL_COLLECTIONS_LIST[:]
-    ALL_COLLECTIONS_LIST.extend(acl)
-    return ALL_COLLECTIONS_LIST
-
-
 def coll_created_cb(request, blob):
-    global ALL_COLLECTIONS_DICT
+    try:
+        coll_singleton = request.config.SHARED_COLL
+        assert coll_singleton is not None
+    except:
+        _LOG.exception("Getting coll_singleton in coll_created_cb")
+        raise
+
     c_id = blob["resource_id"]
     mn = blob.get("merge_needed")
     if (mn is not None) and (not mn):
@@ -978,12 +993,12 @@ def coll_created_cb(request, blob):
         coll["lastModified"] = get_last_modified_dict(docstore, c_id)
         with _all_coll_lock:
             _LOG.debug(
-                f"Adding {c_id} to ALL_COLLECTIONS_DICT of size {len(ALL_COLLECTIONS_DICT)}"
+                f"Adding {c_id} to all_coll_dict of size {len(coll_singleton.all_coll_dict)}"
             )
-            ALL_COLLECTIONS_DICT[c_id] = coll
-            _locked_update_coll_list()
+            coll_singleton.all_coll_dict[c_id] = coll
+            coll_singleton._locked_update_coll_list()
             _LOG.debug(
-                f"After adding {c_id} to ALL_COLLECTIONS_DICT of size {len(ALL_COLLECTIONS_DICT)}"
+                f"After adding {c_id} to all_coll_dict of size {len(coll_singleton.all_coll_dict)}"
             )
     return blob
 
@@ -993,17 +1008,29 @@ def coll_updated_cb(request, blob):
 
 
 def coll_deleted_cb(request, blob):
-    global ALL_COLLECTIONS_DICT
+    try:
+        coll_singleton = request.config.SHARED_COLL
+        assert coll_singleton is not None
+    except:
+        _LOG.exception("Getting coll_singleton in coll_deleted_cb")
+        raise
     c_id = blob["resource_id"]
     mn = blob.get("merge_needed")
     if (mn is not None) and (not mn):
         with _all_coll_lock:
             try:
-                del ALL_COLLECTIONS_DICT[c_id]
+                _LOG.debug(
+                    f"Deleting {c_id} to all_coll_dict of size {len(coll_singleton.all_coll_dict)}"
+                )
+                del coll_singleton.all_coll_dict[c_id]
             except:
+                _LOG.exception(f"Error in del of {c_id} from all_coll_dict")
                 pass
             else:
-                _locked_update_coll_list()
+                coll_singleton._locked_update_coll_list()
+                _LOG.debug(
+                    f"After deleting {c_id} to all_coll_dict of size {len(coll_singleton.all_coll_dict)}"
+                )
     return blob
 
 
