@@ -926,7 +926,7 @@ def all_collections_list(request):
         if ALL_COLLECTIONS_LIST is not None:
             alias = list(ALL_COLLECTIONS_LIST)
     if alias is None:
-        alias = _refresh_all_collections()
+        alias = _refresh_all_collections(request)
         assert alias is not None
         alias = list(alias)
     return alias
