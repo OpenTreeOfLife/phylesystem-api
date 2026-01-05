@@ -191,7 +191,9 @@ def pull_through_cache(request):
             raise HTTPException(body=str(e))
         except Exception as e:
             _LOG.warning("  UNKNOWN request exception: {}".format(str(e)))
-            raise HTTPBadRequest(body="Unknown exception in cached call! Check server log for details.")
+            raise HTTPBadRequest(
+                body="Unknown exception in cached call! Check server log for details."
+            )
 
     _LOG.warning("...trying to fetch-and-cache...")
     return fetch_and_cache(target_url)

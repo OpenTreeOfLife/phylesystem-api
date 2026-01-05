@@ -14,6 +14,7 @@ from phylesystem_api.api_utils import (
     get_tree_collection_store,
     raise_on_CORS_preflight,
     raise_int_server_err,
+    all_collections_list,
 )
 
 
@@ -42,18 +43,9 @@ def find_trees_in_collections(request):
 @view_config(route_name="find_collections", renderer="json")
 def find_collections(request):
     raise_on_CORS_preflight(request)
-    # TODO: proxy to oti for a filtered list?
-    # For now, let's just return all collections (complete JSON)
-    docstore = get_tree_collection_store(request)
-    # Convert these to more closely resemble the output of find_all_studies
-    collection_list = []
     try:
-        for c_id, props in docstore.iter_doc_objs():
-            props["id"] = c_id
-            props["lastModified"] = get_last_modified_dict(docstore, c_id)
-            collection_list.append(props)
+        return all_collections_list(request)
     except HTTPException:
         raise
     except:
         raise_int_server_err("Unexpected error gathering collections")
-    return collection_list

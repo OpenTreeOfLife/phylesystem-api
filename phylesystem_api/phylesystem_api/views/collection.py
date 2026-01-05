@@ -1,6 +1,5 @@
 import logging
 
-from peyotl.collections_store import COLLECTION_ID_PATTERN
 from peyotl.collections_store.validation import validate_collection
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -22,6 +21,8 @@ from phylesystem_api.api_utils import (
     get_update_coll_fn,
     raise400,
     raise404,
+    raw_collection_fetch,
+    is_valid_collection_id,
 )
 
 _LOG = logging.getLogger("phylesystem_api")
@@ -60,32 +61,25 @@ def collection_CORS_preflight(request):
     api_utils.raise_on_CORS_preflight(request)
 
 
-def is_valid_collection_id(doc_id):
-    return bool(COLLECTION_ID_PATTERN.match(doc_id))
-
-
 @view_config(route_name="fetch_collection", renderer="json")
 def fetch_collection(request):
     # NB - This method does not require authentication!
     collection_id = request.matchdict["collection_id"]
 
     # if '.json' was added to the URL, specify as download
-    if collection_id.endswith('.json'):
+    if collection_id.endswith(".json"):
         # save this as a filename WITHOUT slashes
-        preferred_filename = collection_id.replace('/','_')
+        preferred_filename = collection_id.replace("/", "_")
         # ADD content-disposition header
         response = request.response
-        response.headers["Content-Disposition"] = "attachment; filename={};".format(preferred_filename)
-        collection_id = collection_id[0:-5]  # trim the '.json' extension and proceed w/ fetch
+        response.headers["Content-Disposition"] = "attachment; filename={};".format(
+            preferred_filename
+        )
+        collection_id = collection_id[
+            0:-5
+        ]  # trim the '.json' extension and proceed w/ fetch
 
-    result = fetch_doc(
-        request,
-        doc_id=collection_id,
-        doc_store=api_utils.get_tree_collection_store(request),
-        doc_type_name="collection",
-        doc_id_validator=is_valid_collection_id,
-        add_version_history=True,
-    )
+    result = raw_collection_fetch(request, collection_id)
     return add_collection_specific_fields(request, collection_id, result)
 
 
@@ -107,9 +101,7 @@ def add_collection_specific_fields(request, collection_id, result):
     # Add the lastModified field to the result JSON
     version_history = result.get("versionHistory")
     if version_history:
-        result["lastModified"] = get_last_modified_dict(
-            last_commit=version_history[0]
-        )
+        result["lastModified"] = get_last_modified_dict(last_commit=version_history[0])
     return result
 
 
@@ -152,7 +144,7 @@ def create_collection(request):
             owner_id, doc, auth_info, doc_id, commit_msg=commit_msg
         )
 
-    return commit_doc_and_trigger_push(
+    blob = commit_doc_and_trigger_push(
         request,
         commit_fn=coll_commit_fn,
         doc=collection_obj,
@@ -161,6 +153,8 @@ def create_collection(request):
         auth_info=auth_info,
         commit_msg=commit_msg,
     )
+    coll_created_cb(request, blob)
+    return blob
 
 
 @view_config(route_name="update_collection", renderer="json")
@@ -204,6 +198,7 @@ def update_collection(request):
         commit_msg=r_commit_msg,
     )
     blob["versionHistory"] = docstore.get_version_history_for_doc_id(collection_id)
+    coll_updated_cb(request, blob)
     return blob
 
 
@@ -238,4 +233,5 @@ def delete_collection(request):
         merged_sha=None,
         commit_msg=r_commit_msg,
     )
+    coll_deleted_cb(request, blob)
     return blob

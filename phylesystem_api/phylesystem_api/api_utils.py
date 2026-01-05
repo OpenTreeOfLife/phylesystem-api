@@ -23,6 +23,8 @@ from pyramid.httpexceptions import (
     HTTPInternalServerError,
     HTTPNotFound,
 )
+from peyotl.collections_store import COLLECTION_ID_PATTERN
+
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
 from pyramid.request import Request
@@ -910,3 +912,102 @@ def extract_json_from_http_call(request, data_field_name="data", request_params=
 
 def get_oti_wrapper(request):
     return OTI(oti=get_oti_domain(request))
+
+
+_all_coll_lock = threading.Lock()
+ALL_COLLECTIONS_LIST = None
+ALL_COLLECTIONS_DICT = None
+
+
+def all_collections_list(request):
+    global ALL_COLLECTIONS_LIST
+    alias = None
+    with _all_coll_lock:
+        if ALL_COLLECTIONS_LIST is not None:
+            alias = list(ALL_COLLECTIONS_LIST)
+    if alias is None:
+        alias = _refresh_all_collections()
+        assert alias is not None
+        alias = list(alias)
+    return alias
+
+
+def _refresh_all_collections(request):
+    global ALL_COLLECTIONS_LIST, ALL_COLLECTIONS_DICT
+
+    docstore = get_tree_collection_store(request)
+    # Convert these to more closely resemble the output of find_all_studies
+    acd = {}
+    for c_id, props in docstore.iter_doc_objs():
+        props["id"] = c_id
+        props["lastModified"] = get_last_modified_dict(docstore, c_id)
+        acd[c_id] = props
+    r = None
+    with _all_coll_lock:
+        # in place update then refresh list form
+        ALL_COLLECTIONS_DICT.clear()
+        ALL_COLLECTIONS_DICT.update(acd)
+        r = _locked_update_coll_list()
+    return r
+
+
+def _locked_update_coll_list():
+    """Assumes _all_coll_lock is held by caller!!!!"""
+    global ALL_COLLECTIONS_LIST, ALL_COLLECTIONS_DICT
+    ack = list(ALL_COLLECTIONS_DICT.keys())
+    ack.sort()
+    acl = []
+    for k in ack:
+        acl.append(ALL_COLLECTIONS_DICT[k])
+    # In place swap
+    del ALL_COLLECTIONS_LIST[:]
+    ALL_COLLECTIONS_LIST.extend(acl)
+    return ALL_COLLECTIONS_LIST
+
+
+def coll_created_cb(request, blob):
+    global ALL_COLLECTIONS_DICT
+    c_id = blob["resource_id"]
+    mn = blob.get("merge_needed")
+    if (mn is not None) and (not mn):
+        docstore = get_tree_collection_store(request)
+        coll = raw_collection_fetch(request, c_id)
+        coll["id"] = c_id
+        coll["lastModified"] = get_last_modified_dict(docstore, c_id)
+        with _all_coll_lock:
+            ALL_COLLECTIONS_DICT[c_id] = coll
+            _locked_update_coll_list()
+    return blob
+
+
+def coll_updated_cb(request, blob):
+    return coll_created_cb(request, blob)
+
+
+def coll_deleted_cb(request, blob):
+    c_id = blob["resource_id"]
+    mn = blob.get("merge_needed")
+    if (mn is not None) and (not mn):
+        with _all_coll_lock:
+            try:
+                del ALL_COLLECTIONS_DICT[c_id]
+            except:
+                pass
+            else:
+                _locked_update_coll_list()
+    return blob
+
+
+def is_valid_collection_id(doc_id):
+    return bool(COLLECTION_ID_PATTERN.match(doc_id))
+
+
+def raw_collection_fetch(request, collection_id):
+    return fetch_doc(
+        request,
+        doc_id=collection_id,
+        doc_store=get_tree_collection_store(request),
+        doc_type_name="collection",
+        doc_id_validator=is_valid_collection_id,
+        add_version_history=True,
+    )
