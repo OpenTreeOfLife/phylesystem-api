@@ -1,5 +1,5 @@
 import os
-
+import logging
 from peyotl.nexson_syntax import read_as_json
 
 # see exception subclasses at https://docs.pylonsproject.org/projects/pyramid/en/latest/api/httpexceptions.html
@@ -16,6 +16,9 @@ from phylesystem_api.api_utils import (
     raise_int_server_err,
     all_collections_list,
 )
+
+_LOG = logging.getLogger("phylesystem_api")
+_LOG.debug("start collections")
 
 
 @view_config(route_name="list_all_collection_ids", renderer="json")
@@ -48,4 +51,5 @@ def find_collections(request):
     except HTTPException:
         raise
     except:
+        _LOG.exception("top level find_collections... converting to http err...")
         raise_int_server_err("Unexpected error gathering collections")
