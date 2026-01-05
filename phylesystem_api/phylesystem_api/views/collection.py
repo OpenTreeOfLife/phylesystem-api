@@ -205,7 +205,7 @@ def update_collection(request):
     )
     blob["versionHistory"] = docstore.get_version_history_for_doc_id(collection_id)
     try:
-        coll_updated_cb(request, blob, collection_obj, auth_info=auth_info)
+        coll_updated_cb(request, blob, collection_obj, auth_info=r_auth_info)
     except:
         _LOG.exception("coll_updated_cb exception")
     return blob
