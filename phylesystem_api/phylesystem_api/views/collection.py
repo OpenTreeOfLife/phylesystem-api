@@ -153,7 +153,10 @@ def create_collection(request):
         auth_info=auth_info,
         commit_msg=commit_msg,
     )
-    coll_created_cb(request, blob)
+    try:
+        coll_created_cb(request, blob)
+    except:
+        _LOG.exception("coll_created_cb exception")
     return blob
 
 
@@ -198,7 +201,10 @@ def update_collection(request):
         commit_msg=r_commit_msg,
     )
     blob["versionHistory"] = docstore.get_version_history_for_doc_id(collection_id)
-    coll_updated_cb(request, blob)
+    try:
+        coll_updated_cb(request, blob)
+    except:
+        _LOG.exception("coll_updated_cb exception")
     return blob
 
 
@@ -233,5 +239,8 @@ def delete_collection(request):
         merged_sha=None,
         commit_msg=r_commit_msg,
     )
-    coll_deleted_cb(request, blob)
+    try:
+        coll_deleted_cb(request, blob)
+    except:
+        _LOG.exception("coll_deleted_cb exception")
     return blob
